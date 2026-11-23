@@ -1,0 +1,13 @@
+--- a/system/stack/l2cap/l2c_fcr.cc
++++ b/system/stack/l2cap/l2c_fcr.cc
+@@ -1606,7 +1606,9 @@
+       p_ccb->p_rcb->ertm_info.preferred_mode == L2CAP_FCR_ERTM_MODE) {
+     log::warn("L2CAP - Peer does not support our desired channel types");
+     p_ccb->p_rcb->ertm_info.preferred_mode = 0;
+-    return false;
++    // AACP PSM 0x1001 can fall back to basic mode when ERTM is not advertised.
++    // Keep all other PSM rejection decisions unchanged.
++    return p_ccb->p_rcb->real_psm == 0x1001;
+   }
+   return true;
+ }

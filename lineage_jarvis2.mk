@@ -5,6 +5,7 @@ PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/onn/jarvis2/device.mk)
+$(call inherit-product, device/onn/jarvis2/tv-controls.mk)
 $(call inherit-product, vendor/lineage/config/common_full_tv.mk)
 
 PRODUCT_NAME := lineage_jarvis2

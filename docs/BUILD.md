@@ -7,7 +7,7 @@ No build script here performs ADB, fastboot, a flash, a slot switch or a wipe.
 
 ## Host tests
 
-Python 3, Git and JDK 11+ are required:
+Python 3, Git, a C++17 compiler and JDK 11+ are required:
 
 ```sh
 ./tools/test-host.sh
@@ -49,10 +49,9 @@ platform signing configuration. They must agree for system privileges to work.
 4. Apply patches/TvSettings in order and build the candidate TvSettingsTwoPanel.
 5. Build the companion/overlay against that APK. Stage the generated overlay at
    overlays/TvControls/prebuilts/Jarvis2TvControlsOverlay.apk (ignored by Git).
-6. Inherit device/onn/jarvis2/tv-controls.mk after the existing device
-   configuration. Apps/overlays are already inside the device project and
-   visible to Soong. No full product integration/build has been certified yet;
-   follow the release ledger.
+6. lineage_jarvis2.mk inherits tv-controls.mk. Apps/overlays are inside the
+   device project and visible to Soong. The overlay prebuilt must exist before
+   invoking Soong. Follow the release ledger for full product build results.
 7. The preinstalled overlay is static and scoped to ro.lineage.device=jarvis2;
    fresh-image behavior still needs verification. It does not require an owner-
    specific cmd overlay enable command in the released product.
@@ -63,3 +62,15 @@ platform signing configuration. They must agree for system privileges to work.
 
 Do not use the older experimental image set as an installer for this source
 snapshot. It predates newer Settings, widget, voice and launcher changes.
+
+## Verify source patches without modifying the Android tree
+
+```sh
+python3 tools/verify-patches.py /path/to/built/android /outside/source/new-patch-check
+```
+
+This checks the pinned TvSettings revision, obtains original files through Git,
+applies the patch series to copies, and compiles the changed Java classes using
+the matching existing Android build classpath. It is not a full APK/product build.
+The Bluetooth patch is separately compiled/executed by host tests across 24
+channel combinations; actual native-stack integration still requires a build.

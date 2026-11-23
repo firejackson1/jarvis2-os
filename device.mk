@@ -16,7 +16,8 @@ PRODUCT_SYSTEM_PROPERTIES += persist.sys.usb.config=mtp,adb
 PRODUCT_PACKAGES += TvProvider
 
 # The stock audio policy XML selects the configurable engine and its plugin.
-PRODUCT_PACKAGES += libaudiopolicyengineconfigurable libpolicy-subsystem
+PRODUCT_PACKAGES += libaudiopolicyengineconfigurable libparameter \
+    libpolicy-subsystem libremote-processor
 
 PRODUCT_COPY_FILES += \
     device/onn/jarvis2/android.software.leanback.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.leanback.xml

@@ -60,3 +60,20 @@ runtime dependencies and pass a separately authorized installation/rollback test
   regression tests catch a secret staged before the working file is cleaned.
 - Added Matter/Thread roadmap after read-only vendor Thread interface discovery.
   No Thread network or radio state changed; operation is not yet verified.
+
+## Native patches and build isolation
+
+The TV Settings source patch verifier passed: two Java source files compiled to
+four class files against pinned upstream 26fd224082c96fa32e0bfe60b288093c6e7522f3.
+No source-tree or device writes were performed by that verifier.
+
+Added a native Bluetooth-source patch scoped to AACP PSM 0x1001. Host C++ tests
+execute the patched function for 24 combinations and confirm the original
+function fails the same fallback regression. This ports the previously verified
+RAM binary workaround to rebuildable source; it is not native on-device proof
+of the new compiled stack yet.
+
+The original build filesystem is read-only. A separate writable thin snapshot
+is used for integration; original filesystem stays read-only and the owner's
+desktop VM stays running. Thin pool utilization and build resource use must be
+monitored. No automatic reboot, flash or partition change is part of this work.
