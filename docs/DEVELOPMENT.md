@@ -121,3 +121,13 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - Native review confirmed the five earlier source-review findings are fixed.
   GitHub CI at e3ae5fb passed including full-history privacy scanning.
 - Full image generation is active; extracted-image results and AVB remain pending.
+
+## Reproducible launcher dependency sources
+
+- Replaced private source-collection-only provenance with a committed collector
+  that checks the exact launcher archive/lockfile and hosted source hashes.
+- A real cache verification exposed a valid leading-underscore Dart package;
+  added its regression and corrected name validation. All 137 hosted archives
+  now verify through the public-source helper with downloads disabled. Five SDK
+  dependencies are explicitly recorded separately, not falsely marked collected.
+- Full source/license assembly and public image redistribution review remain open.

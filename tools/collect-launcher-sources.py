@@ -11,7 +11,7 @@ def digest(path):
     return h.hexdigest()
 def collect_one(name,info,output,download=False):
     version=str(info['version']);source=info['source']
-    if not re.fullmatch(r'[a-z][a-z0-9_]*',name) or not re.fullmatch(r'[0-9A-Za-z.+_-]+',version):
+    if not re.fullmatch(r'[a-z_][a-z0-9_]*',name) or not re.fullmatch(r'[0-9A-Za-z.+_-]+',version):
         raise ValueError('Invalid dependency name or version')
     if source=='sdk':return {'name':name,'version':version,'source':'sdk','collected':False}
     if source!='hosted':raise ValueError('Unsupported dependency source: '+source)

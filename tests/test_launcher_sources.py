@@ -24,3 +24,8 @@ class LauncherSourceTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    result=module.collect_one('flutter',{'source':'sdk','version':'0.0.0'},Path(d),False)
    self.assertFalse(result['collected']);self.assertEqual('sdk',result['source'])
+ def test_leading_underscore_is_valid_for_dart_package(self):
+  with tempfile.TemporaryDirectory() as d:
+   out=Path(d);data=b'dart internal package';(out/'_internal-1.0.0.tar.gz').write_bytes(data)
+   info={'source':'hosted','version':'1.0.0','description':{'sha256':hashlib.sha256(data).hexdigest(),'url':'https://pub.dev'}}
+   self.assertTrue(module.collect_one('_internal',info,out,False)['collected'])
