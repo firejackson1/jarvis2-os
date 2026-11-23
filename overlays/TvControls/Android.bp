@@ -4,5 +4,6 @@ android_app_import {
     name: "Jarvis2TvControlsOverlay",
     apk: "prebuilts/Jarvis2TvControlsOverlay.apk",
     certificate: "platform",
+    dex_preopt: { enabled: false },
     system_ext_specific: true,
 }

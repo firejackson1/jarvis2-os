@@ -201,3 +201,18 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   remain false. Bridge inventory is simpler but its default has not been changed.
 - Added explicit modification/upstream provenance comments to the five adapted
   TV Settings XML files while retaining their original notices verbatim.
+
+## Full-image checkpoint and cached retry
+
+- The full image job reached 95% but stopped while dexpreopting the resource-only
+  Settings RRO: dex2oat could not find classes.dex. The manifest already declares
+  hasCode=false; the import now explicitly disables dex_preopt for this overlay.
+  This does not disable verification/optimization for the rest of the product.
+- The desktop restore guard restarted the VM after that failure; guest-agent
+  health will be verified again after the final build window.
+- New product staging lacks the onn-specific keylayout. Added an explicit source
+  mapping from observed codes/usages, keeping native Power/Voice and Settings F12.
+  No F10/F11 aliases are persisted. Physical validation and the framework remapping
+  fail-safe are still pending; the new mapping is not installed on the live box.
+- Cached retry will also include the previously compiled replay fix and validated
+  no-delay artwork. No device partition writes or slot changes are involved.

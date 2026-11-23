@@ -27,3 +27,7 @@ PRODUCT_PACKAGES += TvSystemUI
 
 # Skip the swipe lock on newly provisioned TV users.
 PRODUCT_SYSTEM_PROPERTIES += ro.lockscreen.disable.default=true
+
+# Native remote behavior; F10/F11 interception needs a separate framework fail-safe.
+PRODUCT_COPY_FILES += \
+    device/onn/jarvis2/keylayout/Vendor_0957_Product_0031.kl:$(TARGET_COPY_OUT_PRODUCT)/usr/keylayout/Vendor_0957_Product_0031.kl
