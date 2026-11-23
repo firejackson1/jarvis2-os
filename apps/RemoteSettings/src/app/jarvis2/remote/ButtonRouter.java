@@ -7,7 +7,7 @@ import android.view.*;
 import java.util.*;
 
 final class ButtonRouter {
-    private static final int FALLBACK=0x400;
+    private static final int FALLBACK=ReplayFlags.FALLBACK;
     private static ButtonRouter active;
     private static boolean configuring;
     static void configuring(boolean value){configuring=value;if(value&&active!=null)active.clear();}
@@ -68,7 +68,7 @@ final class ButtonRouter {
         try{
             Class<?> manager=Class.forName("android.hardware.input.InputManager");
             Object input=manager.getMethod("getInstance").invoke(null);
-            KeyEvent replay=KeyEvent.changeFlags(event,event.getFlags()|FALLBACK);
+            KeyEvent replay=KeyEvent.changeFlags(event,ReplayFlags.forKey(event.getKeyCode(),event.getFlags()));
             boolean ok=(Boolean)manager.getMethod("injectInputEvent",InputEvent.class,int.class).invoke(input,replay,0);
             if(!ok)Log.w("JarvisButtons","Input injection rejected");
         }catch(Exception e){Log.e("JarvisButtons","Cannot replay input",e);}

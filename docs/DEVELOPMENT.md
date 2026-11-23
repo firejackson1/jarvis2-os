@@ -174,3 +174,15 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - Re-ran the reusable tool against the complete captured slot-A development
   baseline: signatures, leaf descriptors and parent/child key bindings passed.
   Hardware root trust and restoration remain explicitly unverified in the report.
+
+## Native Power/Voice replay flags
+
+- Framework review confirmed FLAG_FALLBACK bypasses normal single-key gesture
+  handling. ButtonRouter now clears it only for replayed POWER/VOICE_ASSIST, which
+  native policy consumes before accessibility. Other keys retain their replay guard.
+- Added an eighth Java suite for native flags, canceled events and ordinary-key
+  recursion protection; all host suites pass. CI's pinned standalone AVB setup
+  also passed all five signed-image tests (34 total Python tests without skips).
+- This change is separate from the unimplemented alias fail-safe. No permanent
+  F10/F11 keylayout or live app update has been installed; native behavior still
+  needs a hardware test, including configured multi-press/long-press actions.
