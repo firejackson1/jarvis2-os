@@ -1,0 +1,53 @@
+--- a/Settings/src/com/android/tv/settings/accessories/ConnectedDevicesSliceProvider.java
++++ b/Settings/src/com/android/tv/settings/accessories/ConnectedDevicesSliceProvider.java
+@@ -240,9 +240,50 @@
+         updateBluetoothToggle(psb);
+         updatePairingButton(psb);
+         updateConnectedDevices(psb);
++        updateJarvisAirPods(psb);
+         updateOfficialRemoteSettings(psb);
+         updateFmr(psb);
+         return psb.build();
++    }
++
++    // Jarvis2-specific shortcut; no private device identity or account is embedded.
++    private void updateJarvisAirPods(PreferenceSliceBuilder psb) {
++        if (!"jarvis2".equals(android.os.Build.DEVICE)) {
++            return;
++        }
++        android.bluetooth.BluetoothAdapter adapter =
++                android.bluetooth.BluetoothAdapter.getDefaultAdapter();
++        if (adapter == null) {
++            return;
++        }
++        Set<BluetoothDevice> devices = adapter.getBondedDevices();
++        if (devices == null) {
++            return;
++        }
++        boolean hasAirPods = false;
++        for (BluetoothDevice device : devices) {
++            String name = device.getName();
++            if (name != null && name.toLowerCase(java.util.Locale.ROOT).contains("airpods")) {
++                hasAirPods = true;
++                break;
++            }
++        }
++        if (!hasAirPods) {
++            return;
++        }
++        Intent intent = new Intent()
++                .setClassName("app.jarvis2.remote", "app.jarvis2.remote.Panel")
++                .putExtra("page", "ears")
++                .putExtra("entry", "main-settings")
++                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
++        PendingIntent action = PendingIntent.getActivity(getContext(), 0x4a32, intent,
++                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
++        psb.addPreference(new RowBuilder()
++                .setKey("jarvis_airpods")
++                .setTitle("AirPods controls")
++                .setIcon(IconCompat.createWithResource(getContext(), R.drawable.ic_bluetooth))
++                .setIconNeedsToBeProcessed(true)
++                .setPendingIntent(action));
+     }
+ 
+     // The slice page that shows detail information of a particular device.

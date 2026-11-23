@@ -133,3 +133,10 @@ publication by this policy decision alone.
 - [x] Launch all three alternatives successfully; reselect current Android TV Home and verify Android role callback accepted=true and default resolver unchanged.
 - [ ] Test actual changes to each alternate default, remote Home behavior, reboot persistence and switching back.
 - [ ] Review corresponding-source and redistribution requirements before bundling downloaded APKs in public ROM artifacts.
+
+## Smart Home expansion — research, not release claims
+
+- [ ] Assess Matter controller and Thread border-router feasibility as separate features; see SMART_HOME_ROADMAP.md.
+- [x] Read-only evidence: vendor Thread HAL registered and configured for Spinel UART transport. No network commissioning/reset performed.
+- [ ] Verify actual Thread operation before advertising support.
+- [ ] Keep room-temperature features tied to a real external sensor, not the chip's thermal reading.

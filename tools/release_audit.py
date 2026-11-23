@@ -25,19 +25,32 @@ def check_file(path, data):
         if pattern.search(data): issues.append(name)
     return issues
 
-def audit(root):
+def audit(root, staged=False):
+    if staged:
+        result=subprocess.run(['git','-C',str(root),'ls-files','--stage','-z'],check=True,stdout=subprocess.PIPE)
+        problems=[]
+        for entry in result.stdout.split(b'\0'):
+            if not entry:continue
+            metadata,name=entry.split(b'\t',1);mode,oid,stage=metadata.split()
+            relative=Path(name.decode())
+            if mode not in (b'100644',b'100755') or stage!=b'0':
+                problems.append((str(relative),'unsupported-index-entry'));continue
+            data=subprocess.check_output(['git','-C',str(root),'cat-file','blob',oid.decode()])
+            for issue in check_file(relative,data):problems.append((str(relative),issue))
+        return problems
     result=subprocess.run(['git','-C',str(root),'ls-files','--cached','--others','--exclude-standard','-z'],check=True,stdout=subprocess.PIPE)
     problems=[]
     for raw in sorted(set(result.stdout.split(b'\0'))):
         if not raw:continue
         relative=Path(raw.decode());p=root/relative
         if p.is_symlink():problems.append((str(relative),'symlink'));continue
+        if not p.exists():continue
         for issue in check_file(relative,p.read_bytes()):problems.append((str(relative),issue))
     return problems
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('root',nargs='?',type=Path,default=ROOT)
-    args=parser.parse_args();problems=audit(args.root.resolve())
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('root',nargs='?',type=Path,default=ROOT);parser.add_argument('--staged',action='store_true')
+    args=parser.parse_args();problems=audit(args.root.resolve(),staged=args.staged)
     for name,issue in problems:print(f'{name}: {issue}')
     if problems:raise SystemExit(1)
     print('Source audit passed: no matching private identities, keys or forbidden binary artifacts.')

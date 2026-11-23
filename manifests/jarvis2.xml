@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="jarvis2" fetch="https://github.com/firejackson1/" />
+    <project name="jarvis2-os" path="device/onn/jarvis2" remote="jarvis2" revision="main" />
+</manifest>

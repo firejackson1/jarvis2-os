@@ -41,17 +41,18 @@ platform signing configuration. They must agree for system privileges to work.
 ## Product integration
 
 1. Populate a separate LineageOS 21 tree and its exact pinned manifest.
-2. Put device/onn/jarvis2 at device/onn/jarvis2 in that checkout.
+2. Clone this repository at device/onn/jarvis2 in that checkout. The root
+   AndroidProducts.mk and BoardConfig.mk are then in the expected AOSP location.
 3. Provide verified stock inputs locally using stage-stock.py; no stock firmware
    is distributed here. See stock-inputs.sha256. Distribution of any resulting
    stock kernel/vendor binaries requires an independently verified license route.
 4. Apply patches/TvSettings in order and build the candidate TvSettingsTwoPanel.
 5. Build the companion/overlay against that APK. Stage the generated overlay at
    overlays/TvControls/prebuilts/Jarvis2TvControlsOverlay.apk (ignored by Git).
-6. Put this repository's apps and overlays under a build-visible integration
-   path, then inherit device/onn/jarvis2/tv-controls.mk after the existing device
-   configuration. The two Android.bp modules must be visible to Soong. No full
-   product integration/build has been certified yet; follow the release ledger.
+6. Inherit device/onn/jarvis2/tv-controls.mk after the existing device
+   configuration. Apps/overlays are already inside the device project and
+   visible to Soong. No full product integration/build has been certified yet;
+   follow the release ledger.
 7. The preinstalled overlay is static and scoped to ro.lineage.device=jarvis2;
    fresh-image behavior still needs verification. It does not require an owner-
    specific cmd overlay enable command in the released product.

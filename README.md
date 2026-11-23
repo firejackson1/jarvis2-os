@@ -22,6 +22,7 @@ is not included as a publicly redistributable component.
 
 ## Development
 
+Clone this repository as `device/onn/jarvis2` in the Android checkout.
 Run `./tools/test-host.sh` with Python 3 and JDK 11 or newer. Read
 [Build](docs/BUILD.md), [Licensing](docs/LICENSING.md),
 [Release checklist](docs/RELEASE_CHECKLIST.md) and

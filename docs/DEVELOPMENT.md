@@ -40,3 +40,23 @@ runtime dependencies and pass a separately authorized installation/rollback test
    owner-specific debug trust. Audit release assets, sizes and AVB chains.
 5. Conduct authorized RAM/device tests and clean-install/recovery/rollback tests.
 6. Publish only the verified, properly licensed unofficial developer preview.
+
+## 2026-11-23 — reproducibility checkpoint
+
+- Initial commit 9a6948d passed the GitHub Source checks workflow.
+- Clean snapshot compiled both app and RRO offline with verified signatures.
+  Build identity: app SHA256 abeedc9f9ab72d62266b18fabc63cd28496eae2faaecf31153c26cd38e26000c;
+  RRO SHA256 3399d774df5dd1e10823b6c24282f612f072b62904195f3fa199577e65a71ab7.
+  These are private development/test-key artifacts, not publicly released APKs.
+- Flattened device configuration to the Git root so cloning at device/onn/jarvis2
+  gives AndroidProducts.mk/BoardConfig.mk the expected paths.
+- Exported 1507-line Android manifest of exact source revisions; replaced relative
+  GitHub fetch URL with an absolute public URL and dropped an unused SSH remote.
+- Imported existing pairing instructions patch and ported the live AirPods row
+  into a normal Java-source patch, preserving original upstream source headers.
+- Added patch application/changed-Java compilation verification using copies and
+  existing build classpaths. Original Android checkout remains read-only.
+- Expanded privacy scanner to audit staged blob content, not only working files;
+  regression tests catch a secret staged before the working file is cleaned.
+- Added Matter/Thread roadmap after read-only vendor Thread interface discovery.
+  No Thread network or radio state changed; operation is not yet verified.

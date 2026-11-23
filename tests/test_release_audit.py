@@ -10,3 +10,19 @@ class AuditTests(unittest.TestCase):
    with self.subTest(issue=issue):self.assertIn(issue,audit.check_file(Path(name),data))
  def test_documentation_and_public_urls_allowed(self):
   self.assertEqual([],audit.check_file(Path('README.md'),b'https://github.com/LineageOS/android\nhttps://ha.example.org\n192.0.2.10'))
+
+class GitCandidateTests(unittest.TestCase):
+ def test_deleted_working_file_is_not_a_read_failure(self):
+  import tempfile,subprocess
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);subprocess.run(['git','init','-q',d],check=True)
+   f=root/'a.txt';f.write_text('public text')
+   subprocess.run(['git','-C',d,'add','a.txt'],check=True);f.unlink()
+   self.assertEqual([],audit.audit(root))
+ def test_index_audit_checks_staged_content_not_worktree(self):
+  import tempfile,subprocess
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);subprocess.run(['git','init','-q',d],check=True)
+   f=root/'a.txt';f.write_bytes(b'-----BEGIN '+b'PRIVATE KEY-----')
+   subprocess.run(['git','-C',d,'add','a.txt'],check=True);f.write_text('public text')
+   self.assertIn(('a.txt','private-key'),audit.audit(root,staged=True))
