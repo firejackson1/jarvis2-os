@@ -145,3 +145,16 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   No artwork binary is committed and redistribution review remains pending.
 - The running image build has not been modified mid-build; the animation product
   change requires a later cached refresh and extracted-image/boot verification.
+
+## Read-only restore baseline and AVB audit
+
+- Captured sixteen current slot-A partitions privately, matching block sizes and
+  device hashes before/after each streamed read. Slot A remained active; no B,
+  userdata, bootloader or environment reads/writes were part of the capture.
+- All signatures and leaf descriptors passed offline verification for the root
+  and boot/oem/vbmeta_system children. Explicit child embedded-key comparison
+  against parent descriptors passed as well; follow-chain verification alone
+  in this avbtool version is insufficient to establish that key binding.
+- This is the existing development baseline, not stock firmware or the candidate.
+  Hardware trust for a new key and real restoration remain untested. Added the
+  restore evidence/requirements document without claiming an unbrick guarantee.
