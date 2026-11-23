@@ -1,0 +1,31 @@
+# Firmware, ROM outputs and binaries are not source imports.
+out/
+artifacts/
+private/
+.cache/
+__pycache__/
+*.pyc
+*.apk
+*.apex
+*.img
+*.so
+*.ko
+*.o
+*.class
+*.jar
+*.dex
+*.zip
+*.tar*
+# Never commit signing material, debugging identities or account data.
+*.pem
+*.pk8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pub
+adbkey*
+.env*
+
+# Locally generated integration prebuilt
+overlays/TvControls/prebuilts/

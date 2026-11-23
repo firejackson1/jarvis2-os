@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+prebuilt_etc {
+    name: "jarvis2_vndk_manifest",
+    src: "vndk-manifest.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    system_ext_specific: true,
+}

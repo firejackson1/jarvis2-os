@@ -1,0 +1,19 @@
+// SPDX-License-Identifier: Apache-2.0
+android_app {
+    name: "Jarvis2RemoteSettings",
+    manifest: "AndroidManifest.xml",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+    system_ext_specific: true,
+    optimize: { enabled: false },
+    required: ["jarvis2_remote_privapp_permissions"],
+}
+prebuilt_etc {
+    name: "jarvis2_remote_privapp_permissions",
+    src: "permissions/privapp-permissions-jarvis2-remote.xml",
+    sub_dir: "permissions",
+    system_ext_specific: true,
+}

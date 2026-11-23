@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+// Generate this APK first using tools/build-apps.sh against the matching Settings APK.
+android_app_import {
+    name: "Jarvis2TvControlsOverlay",
+    apk: "prebuilts/Jarvis2TvControlsOverlay.apk",
+    certificate: "platform",
+    system_ext_specific: true,
+}

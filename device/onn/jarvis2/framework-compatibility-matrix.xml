@@ -1,0 +1,42 @@
+<compatibility-matrix version="1.0" type="framework">
+    <hal format="hidl" optional="true">
+        <name>vendor.amlogic.display.meson_display_ipc</name>
+        <version>1.0</version>
+        <interface>
+            <name>IMesonDisplayIPC</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.amlogic.hardware.screencontrol</name>
+        <version>1.0</version>
+        <interface>
+            <name>IScreenControl</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.amlogic.hardware.systemcontrol</name>
+        <version>1.1</version>
+        <interface>
+            <name>ISystemControl</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.hardware.threadnetwork</name>
+        <version>1</version>
+        <interface>
+            <name>IThreadChip</name>
+            <instance>chip0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.ref.hardware.RefProvision</name>
+        <version>1.0</version>
+        <interface>
+            <name>IRefProvision</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>

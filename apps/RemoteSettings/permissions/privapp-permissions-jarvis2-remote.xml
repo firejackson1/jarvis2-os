@@ -1,0 +1,6 @@
+<permissions>
+    <privapp-permissions package="app.jarvis2.remote">
+        <permission name="android.permission.BLUETOOTH_PRIVILEGED"/>
+        <permission name="android.permission.MODIFY_AUDIO_ROUTING"/>
+    </privapp-permissions>
+</permissions>
