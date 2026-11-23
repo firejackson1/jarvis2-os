@@ -60,3 +60,16 @@ checksums outside Git. Five SDK dependencies require the matching Flutter SDK;
 Flutter 3.24.5 source commit dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
 and engine revision a18df97ca57a249df5d8d68cd0820600223ce262 are recorded.
 Final corresponding-source assembly and dependency license review remain pending.
+
+To reproduce the hosted dependency collection, install Python's PyYAML package
+on the build host and run:
+
+```sh
+python3 tools/collect-launcher-sources.py /outside/repo/launcher-materials --download
+```
+
+Omit `--download` to verify an existing cache without network access. The helper
+first verifies the pinned launcher source archive, then reads its exact lockfile
+without unpacking arbitrary paths. It validates hosted package archive checksums
+and records SDK dependencies as not collected. The resulting JSON deliberately
+does not claim complete corresponding source or completed license review.
