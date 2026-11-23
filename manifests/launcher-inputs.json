@@ -17,9 +17,36 @@
       "sha256": "7cb65fdcb8b10ef43f909c2de5ba6fc0d1c23fc1a1c43795c750efa129aed17e"
     }
   ],
-  "native_libraries": ["libapp.so", "libflutter.so", "libsqlite3.so"],
+  "native_libraries": [
+    "libapp.so",
+    "libflutter.so",
+    "libsqlite3.so"
+  ],
   "optional": [
-    {"name": "FLauncher", "package": "me.efesser.flauncher", "website": "https://gitlab.com/flauncher/flauncher/-/releases/0.18.0"},
-    {"name": "Bridge Console TV", "package": "lab.jackson.lcars", "website": "https://github.com/firejackson1/bridge-console-tv/releases"}
-  ]
+    {
+      "name": "FLauncher",
+      "package": "me.efesser.flauncher",
+      "website": "https://gitlab.com/flauncher/flauncher/-/releases/0.18.0"
+    },
+    {
+      "name": "Bridge Console TV",
+      "package": "lab.jackson.lcars",
+      "website": "https://github.com/firejackson1/bridge-console-tv/releases"
+    }
+  ],
+  "framework_source": {
+    "name": "Flutter-3.24.5-source.tar.gz",
+    "version": "3.24.5",
+    "source_commit": "dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668",
+    "prefix": "flutter-dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668",
+    "sha256": "28d3569ab71ebec3dfc5e764cc8a87af8204a0d31570fa7216d3cadeb86808dc",
+    "url": "https://codeload.github.com/flutter/flutter/tar.gz/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668",
+    "packages": [
+      "flutter",
+      "flutter_localizations",
+      "flutter_test",
+      "flutter_web_plugins"
+    ],
+    "engine_revision": "a18df97ca57a249df5d8d68cd0820600223ce262"
+  }
 }

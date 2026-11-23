@@ -43,6 +43,22 @@ def collect_one(name,info,output,download=False):
     if actual!=expected:raise ValueError('Locked source checksum mismatch: '+name)
     return {'name':name,'version':version,'source':source,'collected':True,
             'sha256':actual,'bytes':archive.stat().st_size,'url':url,'file':filename}
+def sdk_material(inputs,manifest):
+    spec=manifest.get('framework_source')
+    if not spec:return {}
+    archive=inputs/spec['name']
+    if not archive.is_file():return {}
+    if digest(archive)!=spec['sha256']:raise ValueError('Framework source checksum mismatch')
+    result={}
+    with tarfile.open(archive) as tf:
+        for name in spec['packages']:
+            path='packages/'+name
+            member=tf.getmember(spec['prefix']+'/'+path+'/pubspec.yaml')
+            if not member.isfile():raise ValueError('Missing SDK package source: '+name)
+            result[name]={'collected':True,'archive':spec['name'],'archive_sha256':spec['sha256'],
+                          'source_commit':spec['source_commit'],'path':path}
+    return result
+
 def collect(inputs,download=False):
     inputs=inputs.resolve()
     if inputs==ROOT or ROOT in inputs.parents:raise ValueError('Inputs must be outside the source repository')
@@ -59,11 +75,15 @@ def collect(inputs,download=False):
     output=inputs/'dependency-sources';output.mkdir(exist_ok=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
         results=list(pool.map(lambda item:collect_one(item[0],item[1],output,download),sorted(packages.items())))
+    framework=sdk_material(inputs,manifest)
+    for item in results:
+        if item['source']=='sdk' and item['name'] in framework:item.update(framework[item['name']])
     report={'format':1,'source_commit':manifest['source_commit'],'dependencies':results,
             'complete_corresponding_source':False,'license_review_complete':False}
     (inputs/'dependency-source-report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print('Verified hosted archives:',sum(item['collected'] for item in results))
-    print('SDK dependencies requiring separate material:',sum(not item['collected'] for item in results))
+    print('Verified hosted archives:',sum(item['source']=='hosted' and item['collected'] for item in results))
+    print('SDK packages covered by framework archive:',len(framework))
+    print('SDK dependencies requiring separate material:',sum(item['source']=='sdk' and not item['collected'] for item in results))
     print('Dependency collection does not establish complete source/license compliance.')
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('inputs',type=Path)

@@ -29,3 +29,23 @@ class LauncherSourceTests(unittest.TestCase):
    out=Path(d);data=b'dart internal package';(out/'_internal-1.0.0.tar.gz').write_bytes(data)
    info={'source':'hosted','version':'1.0.0','description':{'sha256':hashlib.sha256(data).hexdigest(),'url':'https://pub.dev'}}
    self.assertTrue(module.collect_one('_internal',info,out,False)['collected'])
+ def sdk_fixture(self,root):
+  import io,tarfile
+  archive=root/'framework.tar.gz'
+  with tarfile.open(archive,'w:gz') as t:
+   data=b'name: flutter\n';info=tarfile.TarInfo('framework-fixture/packages/flutter/pubspec.yaml');info.size=len(data);t.addfile(info,io.BytesIO(data))
+  return {'framework_source':{'name':archive.name,'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'prefix':'framework-fixture','source_commit':'fixture','packages':['flutter']}}
+ def test_sdk_package_is_covered_only_by_verified_archive_member(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);manifest=self.sdk_fixture(root)
+   result=module.sdk_material(root,manifest)
+   self.assertEqual('packages/flutter',result['flutter']['path']);self.assertTrue(result['flutter']['collected'])
+   self.assertNotIn('sky_engine',result)
+ def test_changed_sdk_archive_cannot_be_claimed_collected(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);manifest=self.sdk_fixture(root);(root/'framework.tar.gz').write_bytes(b'changed')
+   with self.assertRaisesRegex(ValueError,'checksum'):module.sdk_material(root,manifest)
+ def test_missing_sdk_archive_remains_uncollected(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);manifest=self.sdk_fixture(root);(root/'framework.tar.gz').unlink()
+   self.assertEqual({},module.sdk_material(root,manifest))

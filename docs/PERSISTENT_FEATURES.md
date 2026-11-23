@@ -27,8 +27,9 @@ not been substituted into that running job.
 Do not persist the live keylayout by itself. Native policy consumes POWER and
 VOICE_ASSIST before accessibility, which motivated the aliases. Accessibility
 failure passes F11/F10 through unchanged, and a foreground application may consume
-a KCM fallback before native handling. Existing injected events also carry
-FLAG_FALLBACK, which skips the native single-key gesture detector used by Power.
+a KCM fallback before native handling. The first image build also uses the old replay flags, which skip native Power
+gesture detection. Later app source clears FLAG_FALLBACK for POWER/VOICE_ASSIST;
+that app compiled offline but is not installed or in the first image job.
 
 A framework bridge must scope the remote by vendor/product/scan code, permit
 accessibility interception while interactive, and restore native policy before

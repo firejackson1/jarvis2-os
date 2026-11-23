@@ -73,3 +73,17 @@ first verifies the pinned launcher source archive, then reads its exact lockfile
 without unpacking arbitrary paths. It validates hosted package archive checksums
 and records SDK dependencies as not collected. The resulting JSON deliberately
 does not claim complete corresponding source or completed license review.
+
+The framework archive pin is now also recorded in launcher-inputs.json. If that
+verified archive is present, the collector maps flutter, flutter_localizations,
+flutter_test and flutter_web_plugins to their actual source package paths.
+`sky_engine` remains uncollected until matching engine material is provided.
+This package mapping is not a complete Flutter/engine dependency closure.
+
+The release runtime dependency inventory must also include Android/Maven code,
+not just pub archives. Concrete inputs found in plugin build files include
+`eu.simonbinder:sqlite3-native-library:3.50.3`, AndroidX DataStore 1.1.3,
+Preference 1.2.1, Core 1.13.1, ExifInterface 1.3.7 and Activity 1.9.3. Resolve the
+actual transitive runtime graph before assembling source/notices; plugin test or
+example dependencies should not be mistaken for shipped code. Verify the native
+SQLite build recipe/version for libsqlite3.so separately from its Dart wrapper.
