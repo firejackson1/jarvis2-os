@@ -121,3 +121,8 @@ These tests generate temporary RSA keys outside the repository and check a valid
 chain, corrupted signature, valid-but-wrong child signer, unsigned root and wrong
 root pin. They are explicitly skipped on hosts without the required build tools;
 the ordinary host test suite does not silently stand in for them.
+
+GitHub CI prepares a small fixture-tool layout from the exact pinned standalone
+avbtool.py source and runs these signed-image cases as part of host checks. The
+source SHA-256 is checked before execution; OpenSSL supplies fixture key generation.
+This fixture layout is not a full Android build or evidence of ROM bootability.
