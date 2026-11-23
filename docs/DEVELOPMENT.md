@@ -109,3 +109,15 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - The desktop VM restarted automatically after the failed build, and its guest
   agent responded. Image generation, final AVB verification and hardware release
   tests remain incomplete. No device partitions were changed.
+
+## Extracted-image verification preparation
+
+- Added a separate offline EROFS extraction/content inspector. It checks actual
+  image decoding, required/forbidden package filenames, known debug trust files
+  and the bundled launcher's pinned hash, recording before/after image hashes.
+- Four fixture regressions cover missing packages, leftover handset/debug-trust
+  files, changed launcher payload and a complete scoped fixture. All 21 Python
+  tests and seven Java suites pass. These are tool tests, not image results.
+- Native review confirmed the five earlier source-review findings are fixed.
+  GitHub CI at e3ae5fb passed including full-history privacy scanning.
+- Full image generation is active; extracted-image results and AVB remain pending.

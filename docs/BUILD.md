@@ -75,3 +75,20 @@ applies the patch series to copies, and compiles the changed Java classes using
 the matching existing Android build classpath. It is not a full APK/product build.
 The Bluetooth patch is separately compiled/executed by host tests across 24
 channel combinations; actual native-stack integration still requires a build.
+
+## Inspect the generated images themselves
+
+After image generation has completed, use the matching host `fsck.erofs` to
+extract the three EROFS files into a fresh output directory outside the inputs:
+
+```sh
+python3 tools/inspect-image-contents.py /path/to/product-output \
+  /outside/source/new-image-inspection /path/to/host/bin/fsck.erofs
+```
+
+This checks EROFS file decoding, hashes inputs before/after extraction, checks
+required/forbidden package filenames, verifies that the launcher payload matches
+its pinned upstream hash, and rejects known ADB trust filenames. The JSON report
+states this limited scope explicitly. It does not prove package behavior, native
+patch contents, a complete privacy audit, release signatures or the AVB chain.
+Run it after each image change; a staging-tree check cannot replace extraction.
