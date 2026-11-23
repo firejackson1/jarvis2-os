@@ -92,3 +92,32 @@ its pinned upstream hash, and rejects known ADB trust filenames. The JSON report
 states this limited scope explicitly. It does not prove package behavior, native
 patch contents, a complete privacy audit, release signatures or the AVB chain.
 Run it after each image change; a staging-tree check cannot replace extraction.
+
+## Audit a complete AVB image set
+
+All referenced image files must be present in one directory, named by the
+unsuffixed AVB partition names. Use the pinned Android checkout's avbtool:
+
+```sh
+python3 tools/audit-avb-chain.py /outside/source/complete-image-set \
+  /path/to/android /outside/source/new-avb-audit
+```
+
+The audit verifies every signed chain node and its leaf descriptors with upstream
+avbtool, and separately compares each child embedded public key to its parent's
+chain key. Unsigned chain nodes are rejected. It records flags/rollback indices
+without altering them. An optional `--root-public-key-sha256` can compare the
+AVB public-key blob against an independently established hash; without it the
+result is internal consistency only. Even a matching operator pin does not prove
+the physical bootloader accepts that key. No private key is needed or copied.
+
+Run real signed-image regression fixtures on a built Android host with OpenSSL:
+
+```sh
+JARVIS2_ANDROID_SOURCE=/path/to/android python3 -m unittest discover -s tests -p test_avb_chain.py -v
+```
+
+These tests generate temporary RSA keys outside the repository and check a valid
+chain, corrupted signature, valid-but-wrong child signer, unsigned root and wrong
+root pin. They are explicitly skipped on hosts without the required build tools;
+the ordinary host test suite does not silently stand in for them.

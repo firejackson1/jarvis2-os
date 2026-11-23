@@ -158,3 +158,19 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - This is the existing development baseline, not stock firmware or the candidate.
   Hardware trust for a new key and real restoration remain untested. Added the
   restore evidence/requirements document without claiming an unbrick guarantee.
+
+## Repeatable AVB verification
+
+- Ported the private current-backup audit into an offline source tool with generic
+  input paths. It checks full child key binding, native signatures/leaf descriptors,
+  fresh output boundaries, cycle detection and optional independent root pin.
+- Five integration regressions passed on the build host using real temporary
+  RSA-signed AVB fixtures, including a wrong child signer that upstream follow-chain
+  verification alone accepts, corrupted signatures and an unsigned root.
+- Ordinary host tests skip those integration cases explicitly when no built Android
+  checkout is provided. No test or source includes a private signing key.
+- The new image build remains in progress; these results do not certify the new
+  image set or authorize an installation.
+- Re-ran the reusable tool against the complete captured slot-A development
+  baseline: signatures, leaf descriptors and parent/child key bindings passed.
+  Hardware root trust and restoration remain explicitly unverified in the report.
