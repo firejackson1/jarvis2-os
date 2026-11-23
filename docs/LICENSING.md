@@ -40,3 +40,24 @@ for a complete public audio implementation. No third-party DTS source is include
 
 Audit performed 2026-11-23. This records the evidence and unresolved obligations;
 it is not a certification that a future artifact is legally distributable.
+
+## Additional launcher inventory
+
+The exact Bridge Console TV 0.61 preview APK contains owner application classes,
+ZXing 3.5.3 and NanoHTTPD 2.3.1, with no native libraries or Flutter assets found.
+Its packaged notices include Apache/BSD terms, Antonio OFL, and a jai-imageio BSD
+notice retained conservatively. Owner-authorized binary inclusion is distinct
+from a grant to label the whole application open source. Available historical
+0.38 build source is not exact provenance for the 0.61 release; preserve the
+actual APK hash/signature/notices and review later assets/code before bundling.
+No bundled-default change has been made on the basis of this inventory.
+
+LTv source collection now identifies four SDK packages inside the verified
+Flutter framework archive. Matching engine/sky_engine and Android/Maven runtime
+material remain open, as does inventory of generated Android userspace NOTICE
+and GPL/LGPL components. Kernel/vendor exclusion alone is not a userspace license
+audit. Keep both complete_corresponding_source and license_review_complete false.
+
+Modified Settings XML now retains its original notices and explicitly records
+local modification and the pinned upstream file/revision. This does not change
+upstream ownership or the license of bundled application payloads.

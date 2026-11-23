@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Modified 2026 by the Jarvis2 TV controls project to expose custom TV settings.
+     Upstream: LineageOS/android_packages_apps_TvSettings, commit
+     26fd224082c96fa32e0bfe60b288093c6e7522f3,
+     Settings/res/xml/device.xml. Original notices follow. -->
 <!--
     Copyright (C) 2018 The Android Open Source Project
 

@@ -190,3 +190,14 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   APK signatures and build-manifest generation passed. Artifacts remain private
   development/test-key outputs, not installed or released. The current heavy image
   job predates this source change; the next cached refresh will integrate it.
+
+## Source material and attribution follow-up
+
+- The source collector verified all 137 hosted archives plus four SDK package
+  paths in the exact Flutter framework archive; sky_engine remains uncollected.
+  Three added regressions cover valid, changed and absent framework material.
+- License review identified missing engine and transitive Android/Maven material
+  (including the native SQLite AAR/build recipe); complete source/license flags
+  remain false. Bridge inventory is simpler but its default has not been changed.
+- Added explicit modification/upstream provenance comments to the five adapted
+  TV Settings XML files while retaining their original notices verbatim.
