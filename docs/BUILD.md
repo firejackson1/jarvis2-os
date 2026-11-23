@@ -46,7 +46,7 @@ platform signing configuration. They must agree for system privileges to work.
 3. Provide verified stock inputs locally using stage-stock.py; no stock firmware
    is distributed here. See stock-inputs.sha256. Distribution of any resulting
    stock kernel/vendor binaries requires an independently verified license route.
-4. Apply patches/TvSettings in order and build the candidate TvSettingsTwoPanel.
+4. Apply both `patches/TvSettings/series` and `patches/Bluetooth/series` in their listed order to the pinned projects, then build `TvSettingsTwoPanel` and `com.android.btservices`.
 5. Prepare the pinned LTvLauncher inputs as documented in LAUNCHERS.md, then
    build the companion/overlay against that APK. Stage the generated overlay at
    overlays/TvControls/prebuilts/Jarvis2TvControlsOverlay.apk (ignored by Git).

@@ -96,3 +96,16 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - Owner authorized temporarily shutting down the desktop VM to accelerate builds,
   with a separate automatic restart guard. Restore and verify guest health after
   builds complete or fail. This supersedes the earlier always-running constraint.
+
+## Release review and image build retry
+
+- Native Settings, remote controls, overlay and Bluetooth APEX compilation passed.
+- Image packaging stopped at the launcher uses-library check. Its APK declares
+  optional AndroidX window libraries; the Make module now declares both explicitly.
+  No global check bypass was enabled.
+- Added regression tests for debug-trust filenames, deleted secrets in Git history,
+  output-directory containment and missing staging trees. All 16 Python tests and
+  seven Java host suites pass; the full current Git history passes the source audit.
+- The desktop VM restarted automatically after the failed build, and its guest
+  agent responded. Image generation, final AVB verification and hardware release
+  tests remain incomplete. No device partitions were changed.

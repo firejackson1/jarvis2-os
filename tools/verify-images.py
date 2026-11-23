@@ -5,6 +5,8 @@ import argparse,hashlib,json,subprocess
 from pathlib import Path
 
 def check(output,limits,avbtool):
+    missing=[part for part in ['root','system','system_ext','product'] if not (output/part).is_dir()]
+    if missing:raise ValueError('Missing staging directories: '+', '.join(missing))
     result={'format':1,'unofficial':True,'boot_tested':False,'flashed':False,'files':{},'errors':[]}
     for part,budget in limits.items():
         image=output/(part+'.img')

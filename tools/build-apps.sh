@@ -11,7 +11,7 @@ source_tree=$(realpath "$1")
 target_apk=$(realpath "$2")
 keys=$(realpath "$3")
 out=$(realpath -m "$4")
-case "$out/" in "$root/"|"$root/apps/"*|"$source_tree/"*) echo 'Output must be outside source directories' >&2; exit 2;; esac
+case "$out/" in "$root/"*|"$source_tree/"*) echo 'Output must be outside source directories' >&2; exit 2;; esac
 if [ -e "$out" ]; then echo 'Output already exists; choose a fresh output directory' >&2; exit 2; fi
 jdk="$source_tree/prebuilts/jdk/jdk17/linux-x86/bin"
 tools="$source_tree/out/host/linux-x86/bin"

@@ -26,3 +26,16 @@ class GitCandidateTests(unittest.TestCase):
    f=root/'a.txt';f.write_bytes(b'-----BEGIN '+b'PRIVATE KEY-----')
    subprocess.run(['git','-C',d,'add','a.txt'],check=True);f.write_text('public text')
    self.assertIn(('a.txt','private-key'),audit.audit(root,staged=True))
+
+class HistoricalAuditTests(unittest.TestCase):
+ def test_adb_trust_filename_rejected_even_without_private_key_header(self):
+  self.assertIn('forbidden-artifact',audit.check_file(Path('adb_keys'),b'base64_public_debug_identity'))
+ def test_removed_secret_is_still_detected_in_history(self):
+  import tempfile,subprocess
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d)
+   def git(*args):return subprocess.run(['git','-C',d,*args],check=True,stdout=subprocess.DEVNULL)
+   git('init','-q');git('config','user.name','Test Author');git('config','user.email','test@example.org')
+   f=root/'old.txt';f.write_bytes(b'-----BEGIN '+b'PRIVATE KEY-----')
+   git('add','.');git('commit','-qm','initial fixture');f.unlink();git('add','-u');git('commit','-qm','remove fixture')
+   self.assertTrue(any(issue=='private-key' for _,issue in audit.audit(root,history=True)))

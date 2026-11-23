@@ -10,6 +10,7 @@ LOCAL_PRODUCT_MODULE := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_MULTILIB := 32
 LOCAL_DEX_PREOPT := false
+LOCAL_OPTIONAL_USES_LIBRARIES := androidx.window.extensions androidx.window.sidecar
 LOCAL_OVERRIDES_PACKAGES := TVLauncherNoGMS TVRecommendationsNoGMS
 # Preserve upstream APK bytes/signature. prepare-launcher.py independently checks
 # hash, signer, ZIP alignment and ARM32 JNI libraries before staging these inputs.

@@ -11,6 +11,9 @@ import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 def run(command,**kwargs):return subprocess.check_output(list(map(str,command)),stderr=subprocess.STDOUT,**kwargs)
 def verify(source,out):
+    source=source.resolve();out=out.resolve()
+    if any(out==base or base in out.parents for base in (source,ROOT.resolve())):
+        raise ValueError('Output must be outside source directories')
     project=source/'packages/apps/TvSettings'
     manifest=ET.parse(ROOT/'manifests/lineage21-pinned.xml').getroot()
     expected=next(n.get('revision') for n in manifest.findall('project') if n.get('path')=='packages/apps/TvSettings')
