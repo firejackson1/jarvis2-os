@@ -31,3 +31,6 @@ adbkey*
 overlays/TvControls/prebuilts/
 
 apps/Launcher/prebuilts/
+
+# Owner-supplied artwork and local provenance
+/prebuilts/

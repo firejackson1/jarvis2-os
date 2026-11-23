@@ -131,3 +131,17 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   now verify through the public-source helper with downloads disabled. Five SDK
   dependencies are explicitly recorded separately, not falsely marked collected.
 - Full source/license assembly and public image redistribution review remain open.
+
+## Persistent feature gaps and local boot artwork
+
+- Read-only live checks confirm slot A, Android 14 userdebug and enforcing SELinux.
+  HAL/policy/config, Bluetooth JNI and remote keylayout still have RAM mounts.
+- Added a persistent integration ledger rather than treating those mounts as ROM
+  features. Framework review found no safe native fallback for F10/F11 aliases;
+  aliases have not been persisted. Native Power/Mic recovery is a release gate.
+- Added optional local custom-animation preparation and product selection. Exact
+  no-delay archive hash matches the running box; interruptible parts/stored ZIP
+  and PNG signatures validate. The older completion-required file is rejected.
+  No artwork binary is committed and redistribution review remains pending.
+- The running image build has not been modified mid-build; the animation product
+  change requires a later cached refresh and extracted-image/boot verification.
