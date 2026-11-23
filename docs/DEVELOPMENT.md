@@ -186,3 +186,7 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - This change is separate from the unimplemented alias fail-safe. No permanent
   F10/F11 keylayout or live app update has been installed; native behavior still
   needs a hardware test, including configured multi-press/long-press actions.
+- Clean source clone at 58dd0f0 compiled the updated app and matching RRO offline;
+  APK signatures and build-manifest generation passed. Artifacts remain private
+  development/test-key outputs, not installed or released. The current heavy image
+  job predates this source change; the next cached refresh will integrate it.

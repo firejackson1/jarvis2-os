@@ -40,7 +40,7 @@ publication by this policy decision alone.
 - [ ] Identify every feature supplied by app updates/RAM patches rather than the booted ROM.
 - [ ] Map installed features to source, dependencies, licenses and reproducible build commands.
 - [ ] Preserve a coherent baseline and rollback artifacts on the build host; verify backups by hash.
-- [ ] Choose the public source repository and exclude private/runtime/build artifacts before any publication.
+- [x] Choose the public source repository and exclude private/runtime/build artifacts before any publication. Private `firejackson1/jarvis2-os` is created; working tree/index/history audits pass. Repository visibility and binary publication remain pending.
 - [ ] Complete reboot/default-switch/stability testing for optional launchers on Jarvis2 (ARM32 compatibility, cold launch, D-pad/Home, Settings integration, stability). Prefer an existing open-source base over extending the proprietary launcher; retain current home until a replacement passes testing.
   References: https://gitlab.com/flauncher/flauncher and https://github.com/leanbitlab-org/LtvLauncher . LTvLauncher advertises GPL-3.0, widgets and an OLED-friendly screensaver; this is research, not a hardware compatibility claim.
 
@@ -48,7 +48,7 @@ publication by this policy decision alone.
 
 - [ ] Consolidate device-tree/product configuration and persistent fixes in source.
 - [ ] Include current TV controls app, Settings overlay and native Bluetooth Settings hook.
-- [ ] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; avoid relying on manual binary modification for release reproduction.
+- [x] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; source patch and rebuilt TvSettingsTwoPanel compile passed. Fresh-image behavior remains a separate test.
 - [ ] Include the required audio policy libraries, checked HAL/DTS/codec changes and Bluetooth compatibility patch.
 - [ ] Integrate verified USB/ADB defaults, remote keylayout, animation and TV UI changes; distinguish experiments from production fixes.
 - [ ] Fix launcher/lock-screen/notification behavior in product configuration rather than relying on leftover device state.
@@ -120,7 +120,7 @@ publication by this policy decision alone.
 - [x] User verified remote navigation/select, Settings tap/hold, and widget double-press on the development device.
 - [x] User verified AirPods removal pause and reinsertion resume after the duplicate-pause fix.
 - [x] User verified custom boot animation visually; it must not delay boot.
-- [x] Seven host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps and server URI validation.
+- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; CI also runs 34 Python tests including five signed AVB fixtures.
 - [x] Main Settings categories and the native Remotes & Accessories AirPods link were inspected live; link opens pause/resume and Back returns correctly.
 - [x] Smart Home provider configuration/shortcut UI installed; no provider account or voice conversation verified yet.
 - [x] Built-in microphone produced a one-second 16 kHz capture; samples discarded, not saved or transmitted.
