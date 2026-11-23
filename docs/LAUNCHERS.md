@@ -50,3 +50,13 @@ source/configuration/signing and dependency obligations need their own review.
 Bridge Console TV is owner-controlled; audit development dependencies and retain
 its Antonio font OFL and third-party notices before bundling. Neither optional
 APK is silently downloaded by the ROM at boot.
+
+The Make module identifies the launcher as GPL-3.0-only and includes its upstream
+license and expanded dependency notices in Android NOTICE generation. This metadata
+applies to the launcher payload; our packaging scripts retain their own licenses.
+
+Source collection has verified all 137 hosted archives against pubspec.lock
+checksums outside Git. Five SDK dependencies require the matching Flutter SDK;
+Flutter 3.24.5 source commit dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668
+and engine revision a18df97ca57a249df5d8d68cd0820600223ce262 are recorded.
+Final corresponding-source assembly and dependency license review remain pending.

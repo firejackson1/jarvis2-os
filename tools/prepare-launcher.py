@@ -8,6 +8,11 @@ ROOT=Path(__file__).resolve().parents[1]
 def verify_hash(path,expected):
     if hashlib.sha256(path.read_bytes()).hexdigest()!=expected:raise ValueError('Input checksum mismatch: '+path.name)
 
+def stage_notices(inputs,output):
+    output.mkdir(parents=True,exist_ok=True)
+    for name in ('LICENSE.txt','NOTICES.txt'):
+        shutil.copyfile(inputs/('LTvLauncher-'+name),output/name)
+
 def prepare(inputs,source,download=False):
     manifest=json.loads((ROOT/'manifests/launcher-inputs.json').read_text())
     inputs.mkdir(parents=True,exist_ok=True)
@@ -51,6 +56,7 @@ def prepare(inputs,source,download=False):
         try:notices=gzip.decompress(compressed)
         except gzip.BadGzipFile:notices=zlib.decompress(compressed)
         (inputs/'LTvLauncher-NOTICES.txt').write_bytes(notices)
+    stage_notices(inputs,output)
     shutil.copyfile(apk,output/'LTvLauncher.apk')
     (inputs/'launcher-provenance.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('Pinned APK signature, hash, ZIP alignment, ARM32 libraries and source material verified; no device operation.')

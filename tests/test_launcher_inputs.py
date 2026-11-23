@@ -12,3 +12,10 @@ class LauncherInputsTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'input';p.write_bytes(b'expected input')
    module.verify_hash(p,hashlib.sha256(p.read_bytes()).hexdigest())
+ def test_notices_are_preserved_for_android_license_packaging(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);inputs=root/'inputs';out=root/'stage';inputs.mkdir()
+   expected={'LICENSE.txt':b'upstream copyleft terms','NOTICES.txt':b'third party notices'}
+   for name,data in expected.items():(inputs/('LTvLauncher-'+name)).write_bytes(data)
+   module.stage_notices(inputs,out)
+   for name,data in expected.items():self.assertEqual(data,(out/name).read_bytes())
