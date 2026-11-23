@@ -5,7 +5,7 @@ Updated: 2026-11-23. Working checklist for continued development, not a claim of
 ## Operating rules
 
 - Keep slot B untouched. No partition flashing, slot switching, factory resets, or public release without the owner's authorization for that action.
-- Keep the owner’s desktop VM running; do not stop it to free build memory.
+- Temporary desktop-VM shutdown is owner-authorized for faster builds. Use graceful shutdown, an independent restart guard, and verify restoration after success or failure.
 - Prefer offline builds and reversible app/RAM tests. Explain any reboot or hardware interruption before testing.
 - Keep private signing keys, accounts, ADB keys, server addresses, paired-device IDs and runtime preferences out of public artifacts.
 - Preserve the owner's current development settings; secure defaults apply to release images, not silently to this device.

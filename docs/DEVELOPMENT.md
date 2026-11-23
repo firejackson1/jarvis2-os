@@ -77,3 +77,22 @@ The original build filesystem is read-only. A separate writable thin snapshot
 is used for integration; original filesystem stays read-only and the owner's
 desktop VM stays running. Thin pool utilization and build resource use must be
 monitored. No automatic reboot, flash or partition change is part of this work.
+
+## Public preview launcher/package preparation
+
+- Selected upstream-signed LTvLauncher v2026.11.23 as the bundled OSS candidate;
+  pinned exact APK/source hashes, signer and source commit in launcher-inputs.json.
+  FLauncher and Bridge remain installed optional choices on the development box.
+- Collected exact upstream source archive, GPL text and expanded dependency
+  notices outside Git. Further dependency-source inventory is pending.
+- Added a standard presigned Android Make module with APK-local native libraries,
+  preserving APK bytes and official update compatibility. All inputs are staged
+  only after checksum, signer, alignment and ARM32 validation.
+- This module overrides the unlicensed Google TV launcher/recommendation modules.
+  A source patch makes TV Settings replace the handset Settings package.
+- Added validated lz4hc12/64KiB EROFS settings. Image sizes still must be checked
+  against the actual slot-A budgets (system483131392, system_ext96161792,
+  product541949952 bytes); no repartitioning or slot-B modification is allowed.
+- Owner authorized temporarily shutting down the desktop VM to accelerate builds,
+  with a separate automatic restart guard. Restore and verify guest health after
+  builds complete or fail. This supersedes the earlier always-running constraint.

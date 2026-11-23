@@ -29,3 +29,5 @@ adbkey*
 
 # Locally generated integration prebuilt
 overlays/TvControls/prebuilts/
+
+apps/Launcher/prebuilts/

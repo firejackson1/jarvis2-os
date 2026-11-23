@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "default": "LTvLauncher",
+  "package": "com.leanbitlab.ltvL",
+  "version": "2026.11.23",
+  "source_commit": "f9db652edaac2da3ea2e6a1ed220d1396ccea82b",
+  "certificate_sha256": "df819e5940a514f3d2d5d19d852c18e4cbe2d1d636cb92011b8c101dac72aa9a",
+  "artifacts": [
+    {
+      "name": "LTvLauncher.apk",
+      "url": "https://github.com/leanbitlab-org/LtvLauncher/releases/download/v2026.11.23/LTvLauncher-armeabi-v7a-release.apk",
+      "sha256": "9a2fddc736dd1e5d651d6da879a9a8e8f75b36ca716bec6132ea34d1863c8d89"
+    },
+    {
+      "name": "LTvLauncher-source.tar.gz",
+      "url": "https://codeload.github.com/leanbitlab-org/LtvLauncher/tar.gz/f9db652edaac2da3ea2e6a1ed220d1396ccea82b",
+      "sha256": "7cb65fdcb8b10ef43f909c2de5ba6fc0d1c23fc1a1c43795c750efa129aed17e"
+    }
+  ],
+  "native_libraries": ["libapp.so", "libflutter.so", "libsqlite3.so"],
+  "optional": [
+    {"name": "FLauncher", "package": "me.efesser.flauncher", "website": "https://gitlab.com/flauncher/flauncher/-/releases/0.18.0"},
+    {"name": "Bridge Console TV", "package": "lab.jackson.lcars", "website": "https://github.com/firejackson1/bridge-console-tv/releases"}
+  ]
+}

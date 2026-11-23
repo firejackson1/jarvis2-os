@@ -1,0 +1,11 @@
+--- a/Android.bp
++++ b/Android.bp
+@@ -140,7 +140,7 @@
+         "Settings/res",
+         "Settings/res-twopanel",
+     ],
+-    overrides: ["TvSettings"],
++    overrides: ["TvSettings", "Settings"],
+     defaults: ["SettingsLibDefaults"],
+     platform_apis: true,
+     certificate: "platform",

@@ -45,3 +45,8 @@ BOARD_PREBUILT_DTBOIMAGE := $(JARVIS2_STOCK)/images/dtbo.img
 BOARD_PREBUILT_ODM_DLKMIMAGE := $(JARVIS2_STOCK)/images/odm_dlkm.img
 BOARD_PREBUILT_SYSTEM_DLKMIMAGE := $(JARVIS2_STOCK)/images/system_dlkm.img
 BOARD_PREBUILT_VENDOR_DLKMIMAGE := $(JARVIS2_STOCK)/images/vendor_dlkm.img
+
+# Use the compression settings validated during slot-A image fitting.
+BOARD_EROFS_COMPRESSOR := lz4hc,12
+BOARD_EROFS_PCLUSTER_SIZE := 65536
+TARGET_USERIMAGES_SPARSE_EROFS_DISABLED := true
