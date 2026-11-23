@@ -216,3 +216,24 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   fail-safe are still pending; the new mapping is not installed on the live box.
 - Cached retry will also include the previously compiled replay fix and validated
   no-delay artwork. No device partition writes or slot changes are involved.
+
+## First complete image set — source 73f62f6
+
+- Cached image generation completed successfully after disabling overlay dexpreopt.
+  Raw EROFS sizes: system 440750080, system_ext 66928640, product 122597376 bytes.
+  All fit their current slot-A budgets including reserved AVB overhead.
+- Extracted-image checks passed: filesystem decoding, required packages, pinned
+  launcher payload and known debug-trust filenames; forbidden handset/Google
+  package names were absent. This remains a scoped audit, not a complete license
+  or privacy certification.
+- Actual extracted product animation matches the verified no-delay archive;
+  native keylayout matches source and Android validatekeymaps reports Success.
+  Overlay XML entries and the updated replay class are present in the APKs.
+- Extracted Bluetooth APEX JNI matches the freshly compiled source artifact by
+  SHA-256. Native behavior on a newly booted image remains untested.
+- Desktop VM restored after completion; running state and guest-agent response
+  verified. No device partitions were written and slot B remains unchanged.
+- At the owner's request, packaged an unsigned/untested raw-image build archive
+  with SHA256SUMS, source manifest, checks and license-review material. It contains
+  no updater/flash script, boot/recovery/vendor image or complete AVB chain and
+  must not be treated as an installer. Private draft delivery is in progress.
