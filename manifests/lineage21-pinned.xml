@@ -10,9 +10,9 @@
   <remote name="aosp-shusky" fetch="https://android.googlesource.com" review="android-review.googlesource.com" revision="refs/tags/android-14.0.0_r67"/>
   <remote name="aosp-tangorpro" fetch="https://android.googlesource.com" review="android-review.googlesource.com" revision="refs/tags/android-14.0.0_r67"/>
   <remote name="github" fetch="https://github.com/" review="review.lineageos.org"/>
-  
+
   <default remote="github" revision="refs/heads/lineage-21.0" sync-j="4" sync-c="true"/>
-  
+
   <project name="LineageOS/android" path="android" revision="dd7d13a8be5166313673dfea10c94ddf7ba1ccb9" upstream="refs/heads/lineage-21.0" dest-branch="refs/heads/lineage-21.0"/>
   <project name="LineageOS/android_art" path="art" revision="0f65cd03a4178c592ee06fbe344b7f9a67160c49" upstream="refs/heads/lineage-21.0" dest-branch="refs/heads/lineage-21.0" groups="pdk"/>
   <project name="LineageOS/android_bionic" path="bionic" revision="442faf6e7583037dfffdd49425f8659f6a3e3694" upstream="refs/heads/lineage-21.0" dest-branch="refs/heads/lineage-21.0" groups="pdk"/>
@@ -1499,8 +1499,8 @@
   <project name="trusty/vendor/google/aosp" remote="aosp" revision="2edf8eb162934c428ffcbda2dcd91696e0bc1777" upstream="refs/tags/android-14.0.0_r67" dest-branch="refs/tags/android-14.0.0_r67" groups="trusty">
     <copyfile src="lk_inc.mk" dest="lk_inc.mk"/>
   </project>
-  
+
   <superproject name="platform/superproject" remote="aosp" revision="android-14.0.0_r67"/>
-  
+
   <contactinfo bugurl="go/repo-bug"/>
 </manifest>
