@@ -30,7 +30,7 @@ or qualification of every listed feature.
 | Sleep/wake | Earlier workaround prevented clicking but genuine wake failed. The clean trial had a 60-second idle timeout; a later live keep-awake setting prevents automatic sleep while powered | The live setting is not baked into f38 and does not fix intentional suspend. True suspend, box-button/remote wake and repeated-cycle validation remain open |
 | Lock screen and notifications | Product TV SystemUI, default lock-screen property | Clean-user behavior, no handset SystemUI and remote Settings behavior |
 | Recovery, installation and rollback | f38 retained stock bootstrap recovery. The separate ARM64 LCARS ramdisk rebuilt byte-identically; its first RAM launch stalled at the logo and Android returned after power-cycle | No new recovery was installed. Successful RAM operation, recovery-owned Bluetooth, complete AVB integration and normal-user install/restore tests remain required |
-| Music session cleanup | Current f38 APK has a one-instruction, empty onDestroy; later source patch and unsigned standalone APK are available | Integrate the cleanup in a new image, then test Android lifecycle, Bluetooth browsing and playback |
+| Music session cleanup | Current f38 APK has a one-instruction, empty onDestroy; later source patch and a signed standalone candidate are available, with [offline evidence](../manifests/music-cleanup-candidate.json) | Integrate the cleanup in a new image, then test Android lifecycle, Bluetooth browsing and playback |
 
 ## Clean-install remote-service activation gap
 

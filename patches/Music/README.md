@@ -18,3 +18,11 @@ no demonstrated causal connection to the separate suspend/speaker problem.
 
 This source patch has not been installed on the test device. Final-image
 lifecycle, browser reconnect and normal playback checks remain required.
+
+The [standalone candidate receipt](../../manifests/music-cleanup-candidate.json)
+records a private signed APK built from this patch. Signature verification
+matches the frozen Music app's project certificate, all 181 non-signature
+payload files survive signing unchanged, and DEX inspection confirms session
+release, reference clearing and superclass cleanup. This is an offline update
+candidate, not proof of Android installation, lifecycle behavior or integration
+in a native Soong-built product image.

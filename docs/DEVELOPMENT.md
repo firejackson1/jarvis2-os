@@ -1041,3 +1041,30 @@ without private scripts, server access or an AI operator.
   tests, eight Java suites and the source privacy audit passed. The receipt
   parses as JSON and `git diff --check` passed. Full release qualification
   remains open.
+
+### Signed Music cleanup candidate, 2026-11-24
+
+- Verified the actual frozen Music APK's signature across API 19 through 34.
+  It uses the project's release-app certificate, distinct from the controls
+  app's platform role. Matched that certificate to the existing role inventory
+  before signing the previously compiled standalone cleanup candidate. No key
+  was exported, generated, changed or added to source control.
+- The private signed candidate is 807,467 bytes, SHA256
+  `478c9776d4879ecdc28d5fa9c20404ecca79f1c89028a8bbfcf673a69e678a7b`.
+  Its v1/v2/v3 signatures verify across API 19 through 34 and its certificate
+  matches frozen Music. All 181 non-signature ZIP files remain byte-identical
+  to the unsigned input; four-byte alignment and package/version/SDK metadata
+  checks passed. DEX hash remains
+  `997233912011be31bf3a567f29270f006f02c245383dbe4654051eaac82208ca`.
+- Inspected the signed DEX callback: a null guard precedes MediaSession.release,
+  the session reference is cleared, and MediaBrowserService.onDestroy is called.
+  This does not establish Android lifecycle correctness or a sleep/audio fix.
+  Recorded scoped public evidence in `manifests/music-cleanup-candidate.json`;
+  the APK and detailed tool outputs remain private.
+- No APK was installed and no frozen archive, product image, original Music
+  source or original APK changed. Soong integration, installed-signer/update
+  checks, lifecycle, Bluetooth browsing and playback tests remain open.
+- Validation: the public receipt matches the private artifact report and the
+  tracked cleanup patch hash. JSON parsing, source privacy and whitespace checks
+  passed; the prior host-suite result is unchanged because this checkpoint adds
+  only documentation and a receipt.
