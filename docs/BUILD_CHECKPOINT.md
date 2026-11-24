@@ -68,5 +68,12 @@ exist; their runtime correctness remains unverified.
 - AVB integration, an explicitly authorized RAM launch, hardware diagnostics and
   return to Android remain unverified. No binary release is authorized here.
 
+A separate [diagnostic derivation](DIAGNOSTIC_FRAGMENT.md) now removes the
+reviewed unresolved trust placeholder, replaces the metadata fstab entry with a
+RAM-only entry, and controls the init import and Recovery arguments. It passed
+the strict archive audit with untouched records byte-identical. The original
+build above remains unchanged. The derived fragment still needs the guard and
+hardware overlay, and has not booted.
+
 Keep the original artifact and private audit receipts. This fragment is not a
 replacement for the working installed recovery.

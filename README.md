@@ -255,6 +255,24 @@ BCB change. The storage poll is bounded; kernel module loading itself has no
 userspace timeout. No complete RAM image or device launch is implied. Do not
 source its function libraries on a host with real privileged utilities.
 
+`tools/prepare_ramdisk.py` derives the diagnostic fragment from a checksum-bound
+native ARM64 newc archive. It changes only the reviewed init import, explicit
+Recovery arguments and RAM-only fstab, and removes the unresolved standard
+ADB-key placeholder symlink. All other records, including binaries, policy,
+properties and hard-link metadata, remain byte-identical. It does not waive the
+credential audit or change adbd authentication settings. See the
+[diagnostic preparation record](docs/DIAGNOSTIC_FRAGMENT.md) for the exact
+changes, executed artifact checks and remaining assembly requirements.
+
+```sh
+python3 tools/prepare_ramdisk.py --cpio /private/recovery.cpio \
+  --expected-input-sha256 EXACT_INPUT_SHA256 \
+  --output /private/fresh-diagnostic-output
+```
+
+The resulting fragment still requires the early guard, its private verified
+inputs and the owned hardware init profile. It is not a launchable boot image.
+
 ## License
 
 New source in this tree is Apache-2.0. Upstream headers are downloaded only into

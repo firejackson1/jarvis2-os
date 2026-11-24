@@ -121,6 +121,21 @@ of the saved older ARM32 archives preserved their entrypoint/ELF/init/policy
 inventory; this is not an audit of the pending Android 17 output. Original CPIO
 byte streams must remain intact when packaging; the report is not a serializer.
 
+Offline checkpoint: the full native ARM64 build completed. A checksum-bound
+diagnostic CPIO derivative changes only the reviewed init import/arguments,
+RAM-only fstab and unresolved standard ADB trust symlink. Original record spans
+allow surgical edits; all untouched records remain byte-identical. Seven new
+host tests reproduced the missing preparer and ambiguous import/service gates
+before passing; the complete suite passed 46 Python tests plus three native C++
+executables and pinned-header syntax checks. The actual derivative's strict
+credential audit is clean; it is not a complete guarded image. See
+`docs/DIAGNOSTIC_FRAGMENT.md` for hashes and open assembly requirements.
+
+The stock boot container now binds the actual kernel release independently of
+module vermagic. Their release prefixes differ. All 52 retained stock modules
+contain version-check sections; actual symbol compatibility/signature acceptance
+is still unproven. No kernel or module was altered to hide this mismatch.
+
 - [ ] Use the actual new recovery ramdisk and compatible verified kernel inputs.
 - [ ] Preserve archive metadata/overlays, validate effective entrypoints and
       utility dependencies, and reject oversized or mismatched inputs.

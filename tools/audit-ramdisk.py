@@ -58,6 +58,7 @@ def parse_cpio(data):
         raise ValueError('Ramdisk exceeds the inspection size limit')
     entries, offset = {}, 0
     while offset + 110 <= len(data):
+        record_start = offset
         magic = data[offset:offset + 6]
         if magic not in (b'070701', b'070702'):
             raise ValueError('Expected a newc/CRC archive header')
@@ -93,7 +94,8 @@ def parse_cpio(data):
             raise ValueError('CPIO checksum mismatch')
         entries[name] = {'mode': mode, 'uid': uid, 'gid': gid, 'data': payload,
                          'ino': fields[0], 'nlink': fields[4], 'mtime': fields[5],
-                         'dev': fields[7:9], 'rdev': fields[9:11]}
+                         'dev': fields[7:9], 'rdev': fields[9:11],
+                         'record_span': [record_start, offset]}
     raise ValueError('Archive is truncated or lacks a trailer')
 
 

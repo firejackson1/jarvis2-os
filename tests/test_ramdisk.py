@@ -7,16 +7,17 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def archive(entries):
+def archive(entries, crc=False):
     result = bytearray()
     for entry in [*entries, ('TRAILER!!!', 0, b'')]:
         name, mode, data, *metadata = entry
         attributes = metadata[0] if metadata else {}
         name = name.encode() + b'\0'
-        fields = [1, mode, 0, 0, 1, 0, len(data), 0, 0, 0, 0, len(name), 0]
+        fields = [1, mode, 0, 0, 1, 0, len(data), 0, 0, 0, 0, len(name),
+                  sum(data) & 0xffffffff if crc else 0]
         for index, value in attributes.items():
             fields[index] = value
-        result += b'070701' + ''.join(f'{v:08x}' for v in fields).encode() + name
+        result += (b'070702' if crc else b'070701') + ''.join(f'{v:08x}' for v in fields).encode() + name
         result += b'\0' * (-len(result) % 4)
         result += data
         result += b'\0' * (-len(result) % 4)
