@@ -825,3 +825,36 @@ without private scripts, server access or an AI operator.
   signer, both status states, another enabled service, no-controller behavior,
   the consent route and return navigation remain live tests. No partition
   flash, slot change, reboot, user-data wipe or binary publication occurred.
+
+### Bound sleep traces and temporary mixer experiment, 2026-11-24
+
+- Compared retained module files to current filesystem hashes and loaded GNU
+  build-ID notes. Three complete file hashes and all five selected notes match;
+  early-module live files remain unavailable after switch-root. See
+  SLEEP_AUDIO_INVESTIGATION.md for the identities and limits.
+- A 30-second isolated boot-clock trace captured five suspend/resume cycles with
+  speaker GPIO mute/unmute writes. A second 30-second capture with the standard
+  `SPK mute` control temporarily On captured five further cycles without the
+  card worker's unmute. The original Off value was restored and read back.
+  Neither trace lost events, and both private instances were removed with
+  global tracing unchanged. No kprobe, sleep/wake request or forced power action.
+- TinyALSA source was clean at `2ed34d52a7a7b83dba0d1c27d777f8eb70b3f3e9`.
+  The diagnostic ELF was 8,468 bytes, SHA256
+  `58797e91015f3af6e312d8bf18aa2d499899a3cff2a85ed2a0e2322b54752033`.
+  Its installed library hash matched. The temporary device copy was removed;
+  the newly created build-output install file was also removed after preserving
+  the diagnostic privately. Existing ROM images and frozen archives were not
+  rebuilt. Compilation caches were retained.
+- Operational error: a shell continued after a failed memory preflight and
+  launched the small native build. The stop request found it already completed
+  successfully. Actual runtime was 18.2 seconds, peak 4 GiB memory/2 GiB swap.
+  Bazzite stayed running; no VM action was taken. Future resource gates must
+  launch jobs from the checked control flow, never a following shell command.
+- REA recognized an input ELF but had no configured decompiler. Used LLVM
+  instruction/relocation inspection; no successful decompilation claim. Kept
+  vendor binaries, captures and runtime state out of the repository.
+- This is a narrowed mechanism, not a completed sleep fix. Audible confirmation,
+  the initiating wake trigger, normal audio and genuine wake remain open.
+- Validation: `tools/test-host.sh` ran 193 tests with five local AVB-tool skips;
+  all executed tests and eight Java suites passed. Source privacy audit and
+  `git diff --check` passed. No product source changed in this checkpoint.

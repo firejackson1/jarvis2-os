@@ -11,7 +11,7 @@ The development device has existing data and separately installed Google apps.
 | Settings controls | f38 system_ext companion and required grants verified live; enabling its disabled key service restored owner-verified Bluetooth hold and widget double-press after clean setup | First-run activation without ADB/AI, repeated binding/reboot and all custom actions |
 | AirPods | Owner verified removal pause and reinsertion resume | Final-image reconnect, competing sessions and other models |
 | Audio | Private HDMI/Bluetooth and dual-output tests | Receiver-based lossless passthrough proof; multi-headphone support is not established |
-| Sleep | A workaround stopped speaker clicking; a deeper wake test failed | Genuine suspend/wake fix and repeated hardware cycles |
+| Sleep | Matched-driver traces show unwanted speaker unmute during repeated suspend/resume; temporary mixer mute suppressed it across five cycles and was restored | Audible verification, correct amplifier lifetime, genuine suspend/wake fix and repeated hardware cycles; see [investigation](SLEEP_AUDIO_INVESTIGATION.md) |
 | Networking/USB | Development connections worked; USB detection has been intermittent | Final-image Wi-Fi/Ethernet reconnect, USB host/device and hub matrix |
 | Google apps | Play sign-in worked; VLC and YouTube TV installed after landscape feature correction | Separate supported installation route for EROFS; no certification or app-catalog guarantee |
 | Smart Home | Provider configuration/shortcuts and a brief built-in microphone test | Actual assistant conversation and independent remote microphone validation |
