@@ -27,5 +27,34 @@
     "maven_sources_jar_contains_native_source": false
   },
   "checksum_basis": "Observed pinned primary-source downloads; not independently signed publisher attestations",
-  "runtime_maven_graph_resolved": false
+  "runtime_maven_graph_resolved": true,
+  "runtime_maven_graph": {
+    "scope": "Resolved from isolated pinned launcher source/configuration; not an assertion about unpublished upstream APK build records",
+    "source_revision": "f9db652edaac2da3ea2e6a1ed220d1396ccea82b",
+    "gradle_version": "8.13",
+    "components": 93,
+    "dependency_edges": 467,
+    "unresolved": 0,
+    "selected_external_artifacts": 78,
+    "original_config_lock_hashes_unchanged": 8,
+    "graph_sha256": "411ee368eec46a3042981e97ed86d6c5aac100ef194411394e88fc42d9b7ded2",
+    "selected_artifact_manifest_sha256": "d519a6c6b9e1697724535db6964b45d187208d8222544bcd4b75c106d14541b4",
+    "kotlin_stdlib_version": "1.9.24"
+  },
+  "relocated_protobuf": {
+    "coordinate": "androidx.datastore:datastore-preferences-external-protobuf:1.1.3",
+    "artifact_type": "jar",
+    "runtime_sha256": "fcb3f373cf743426c85ebb0d3cc644aefaf26f39b7fa55bb90238d41b689eca7",
+    "official_sources_jar_is_empty": true,
+    "release_notes_url": "https://developer.android.com/jetpack/androidx/releases/datastore#1.1.3",
+    "declared_source_revision": "ae63f655454c1548483e3f34d8f47d98ae21119b",
+    "recipe_url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/datastore/datastore-preferences-external-protobuf/build.gradle",
+    "source_coordinate": "com.google.protobuf:protobuf-javalite:4.28.2",
+    "sources_jar_sha256": "2460a92938259e4441826e57638193d0bde9cb5cdd0dafd5367aacb833f9a971",
+    "relocation_from": "com.google.protobuf",
+    "relocation_to": "androidx.datastore.preferences.protobuf",
+    "shadow_version": "8.1.1",
+    "declared_release_recipe_verified": true,
+    "binary_rebuild_performed": false
+  }
 }

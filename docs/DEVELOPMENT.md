@@ -389,3 +389,22 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   v2 preparation retained 127 APK/31 APEX identities and added precisely that one
   misc line, independently compared with the original. A second private signing
   rehearsal is running; no completion or hardware claim follows from preparation.
+
+- The second private signing rehearsal completed. Independent API-34 checks
+  validated 103 re-signed standalone APKs, 21 embedded APKs, all 30 re-keyed APEX
+  payload signatures/hashtrees and intended keys, with preserved launcher/shim
+  bytes. Strict non-signature APK comparison includes LICENSE/NOTICE/services.
+  A separate native filesystem comparison covered 31 APEX images: 1,018 paths,
+  modes/UID/GID and raw xattrs/SELinux labels matched; 742 non-APK regular files
+  and 13 symlink targets matched. Only the 21 already-verified APKs changed.
+  Timestamps, inode flags/layout and hardlink topology were outside that proof.
+- The signer drops five prebuilt vendor/ODM/module reference images when their
+  trees/build flags are absent. The rehearsal target-files is therefore not a
+  complete OTA/full-image artifact. Preserve and verify those original reference
+  inputs separately. Raw-image AVB, OTA trust and hardware acceptance remain open.
+- Actual pinned-source launcher runtime resolution completed with 93 components,
+  467 edges and zero unresolved dependencies, while all eight original config/
+  lock hashes stayed unchanged. The relocated protobuf dependency's empty sources
+  JAR is supplemented by its official release-linked source recipe and original
+  4.28.2 sources. Evidence pins are in launcher-native-materials.json; complete
+  corresponding-source/notice assembly and the controlled APK build remain open.
