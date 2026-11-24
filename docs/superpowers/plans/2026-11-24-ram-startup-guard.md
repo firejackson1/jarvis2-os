@@ -220,3 +220,10 @@ with exactly the five expected patched projects. Use an owned 8 GiB swap file,
 and the existing 64 GiB thin-pool reserve. Scope the return watcher to the exact
 build invocation; after it exits, reclaim only this task's verified swap and
 restore Bazzite. This is an active reproduction check, not a completed result.
+
+Resource follow-up: active Soong graph analysis filled nearly all initial swap
+without an OOM. Preserve the same running build; add a second owned 8 GiB swap
+file, raise memory-high to 26 GiB and swap maximum to 24 GiB, retaining the
+28 GiB memory maximum and both storage reserves. Replace only the return watcher
+with a version that reclaims both identity-bound task files before Bazzite starts.
+Verify the replacement watcher is live against the unchanged build invocation.
