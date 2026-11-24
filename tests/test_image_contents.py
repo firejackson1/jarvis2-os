@@ -13,7 +13,24 @@ class ImageContentsTests(unittest.TestCase):
    ('product','app/Jarvis2LtvLauncher/Jarvis2LtvLauncher.apk')]
   for part,path in required:
    p=root/part/path;p.parent.mkdir(parents=True);p.write_bytes(b'fixture apk')
+  allowlist=root/'system_ext/etc/permissions/privapp-permissions-jarvis2-remote.xml'
+  allowlist.parent.mkdir(parents=True)
+  allowlist.write_text('<permissions><privapp-permissions package="app.jarvis2.remote"><permission name="android.permission.BLUETOOTH_PRIVILEGED"/><permission name="android.permission.MODIFY_AUDIO_ROUTING"/><permission name="android.permission.MEDIA_CONTENT_CONTROL"/></privapp-permissions></permissions>')
   return required
+ def test_extensionless_allowlist_is_not_a_loadable_permission_file(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);self.fixture(root)
+   xml=root/'system_ext/etc/permissions/privapp-permissions-jarvis2-remote.xml'
+   xml.rename(xml.with_name('jarvis2_remote_privapp_permissions'))
+   errors=module.inspect_trees(root,{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()})
+   self.assertTrue(any('remote privilege allowlist' in e for e in errors))
+ def test_allowlist_must_grant_remote_routing_permission(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);self.fixture(root)
+   xml=root/'system_ext/etc/permissions/privapp-permissions-jarvis2-remote.xml'
+   xml.write_text('<permissions><privapp-permissions package="another.app"><permission name="android.permission.MODIFY_AUDIO_ROUTING"/></privapp-permissions></permissions>')
+   errors=module.inspect_trees(root,{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()})
+   self.assertTrue(any('remote privilege allowlist' in e for e in errors))
  def test_missing_required_apps_rejected(self):
   with tempfile.TemporaryDirectory() as d:
    errors=module.inspect_trees(Path(d),{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()})

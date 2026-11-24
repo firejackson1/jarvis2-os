@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Extract offline EROFS images and inspect packaging; does not certify AVB or boot."""
 import argparse,hashlib,json,subprocess
+import xml.etree.ElementTree as ET
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 PARTS=('system','system_ext','product')
@@ -35,6 +36,17 @@ def inspect_trees(work,policy):
         elif len(paths)!=1:errors.append('Duplicate required package: '+name)
     for path in found['Jarvis2LtvLauncher.apk']:
         if sha(path)!=policy['launcher_sha256']:errors.append('Pinned launcher checksum mismatch')
+    allowlist=work/'system_ext/etc/permissions/privapp-permissions-jarvis2-remote.xml'
+    try:
+        if allowlist.is_symlink():raise ValueError('symlink')
+        xml=ET.parse(allowlist).getroot()
+        grants={p.get('name') for entry in xml.findall('privapp-permissions')
+                if entry.get('package')=='app.jarvis2.remote' for p in entry.findall('permission')}
+        required={'android.permission.BLUETOOTH_PRIVILEGED',
+                  'android.permission.MODIFY_AUDIO_ROUTING','android.permission.MEDIA_CONTENT_CONTROL'}
+        if xml.tag!='permissions' or not required<=grants:raise ValueError('missing grants')
+    except (OSError,ET.ParseError,ValueError):
+        errors.append('Missing or invalid remote privilege allowlist XML')
     return errors
 
 def inspect_images(images,work,fsck):
@@ -57,7 +69,7 @@ def inspect_images(images,work,fsck):
         files[image.name]={'sha256':before,'bytes':image.stat().st_size}
     errors=inspect_trees(work,{'launcher_sha256':expected})
     report={'format':1,'unofficial':True,'image_files':files,'errors':errors,
-            'scope':'EROFS integrity, required/forbidden package filenames, launcher payload hash, debug trust filenames',
+            'scope':'EROFS integrity, required/forbidden package filenames, launcher payload hash, debug trust filenames, remote privilege allowlist XML',
             'avb_chain_verified':False,'boot_tested':False,'complete_privacy_audit':False,'flashed':False}
     (work/'image-content-report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))

@@ -596,3 +596,19 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   Google payload redistribution is not authorized; public instructions use the
   upstream input and local composer. Exact seven-partition dependencies and
   interruption limits are recorded in RESTORE_PLAN.md.
+
+### Candidate held after static permission review — 2026-11-24
+
+The `1ac457e` ZIPs are retained as offline evidence and must not be installed or
+published. A subsequent static security review found that the RemoteSettings
+`prebuilt_etc` allowlist was installed under its extensionless module name.
+Android SystemConfig only loads `.xml` permission files. The XML also omitted
+`MEDIA_CONTENT_CONTROL`, a requested privileged permission under the enforced
+allowlist policy. Earlier scoped packaging/privacy/AVB checks did not cover this.
+
+The source fix preserves the XML source filename and adds the missing grant.
+Image inspection now requires the actual system_ext XML, correct package and all
+three required privileged grants; extensionless and wrong-package fixtures failed
+before the check was added and pass afterward. A clean offline rebuild and all
+candidate signing/content/AVB/package checks must run again before promotion.
+This is a packaging correction, not evidence of runtime permission success.
