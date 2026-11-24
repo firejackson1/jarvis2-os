@@ -791,3 +791,37 @@ without private scripts, server access or an AI operator.
 - Validation after these documentation updates: host suite ran 193 tests with
   five local AVB-tool skips; all executed tests and eight Java suites passed.
   Source privacy audit and `git diff --check` passed. No product source changed.
+
+### Discoverable shortcut activation candidate, 2026-11-24
+
+- Controls source now shows its own accessibility-service state and an
+  Enable/Manage button before controller selection, including with no paired
+  controller. Disabled state receives initial focus. Returning from Android
+  Settings re-renders the status. The app opens the standard Accessibility
+  action and never writes the enabled-service list; a missing handler gets a
+  visible explanation. Version code advances to 2, version name to 1.1.
+- Actual TV Settings source and a device-side intent-resolution query confirm
+  ACCESSIBILITY_SETTINGS resolves to its TV accessibility activity. A specific
+  service-details action was not registered, so the source uses the general
+  supported action. This is route availability, not a completed UI test.
+- Private app-only build from clean source
+  `46c1c1be8683aa919893ea7903c3e4e7d5ba4877` completed against public SDK 34,
+  with signing/verification and a clean Git-bound build manifest. Companion:
+  78,293 bytes, SHA256
+  `85c4e773a3665cc72f1f4fc0fa9827cf70e94ab6277aec66823f349ceda95da9`.
+  The unchanged Settings RRO is 25,277 bytes, SHA256
+  `0ff950ad737885c2d1cc288c4d56eae80655741804a4f0a5415dfb1fe56d44ef`.
+- An earlier source-archive attempt compiled/signed but failed the final
+  provenance step because the archive lacked Git metadata. It was retained as
+  failed, then replaced by an actual clone of a verified bundle. No checks were
+  disabled. Final bounded job completed in 7.9 seconds at 354.5 MiB peak with no
+  swap. Bazzite remained running throughout.
+- Host suite ran 193 tests with five local AVB-tool skips; all executed tests
+  and eight Java suites passed. These tests do not exercise the new Android UI.
+  Review was inline self-review, not an independent review.
+- UI hierarchy capture produced no XML; the screenshot was black. Power state
+  showed deliberate Power-button sleep, so the screen was left off. No RED UI
+  test, visual success or app installation is claimed. Matching the installed
+  signer, both status states, another enabled service, no-controller behavior,
+  the consent route and return navigation remain live tests. No partition
+  flash, slot change, reboot, user-data wipe or binary publication occurred.

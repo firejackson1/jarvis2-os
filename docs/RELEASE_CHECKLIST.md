@@ -64,6 +64,7 @@ publication by this policy decision alone.
 - [ ] Verify enforcing SELinux, app privilege allowlists, exported components and microphone permissions.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
 - [ ] Add and test remote-shortcut service activation in first-run/Settings without ADB or an AI. The clean f38 trial included the app but left its accessibility service disabled; owner-verified side panels returned after enabling it. Never bake in an owner's service list.
+- [x] Add exact-service status and Enable/Manage activation entry to controller-settings source; compile and verify the private signed 1.1 app. This does not complete the preceding installation and normal-user UI test.
 - [ ] Check update/install compatibility and document which data is shared between slots.
 
 ## 4. Stability and hardware validation

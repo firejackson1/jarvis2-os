@@ -34,7 +34,7 @@ visible state and explicit Android Settings launch; writes no secure settings.
   the expected failure before changing code.
 - [x] Add exact-component state detection and a setup button before the controller
   chooser, including the no-controller branch. Use ACCESSIBILITY_SETTINGS.
-- [ ] Compile the app against the actual public SDK and run tools/test-host.sh.
+- [x] Compile the app against the actual public SDK and run tools/test-host.sh.
 - [ ] Verify candidate signer against the installed app before any data-preserving
   app update. Exercise the UI route and inspect binding/crash state; no reboot.
 - [ ] Record checks, untested cases and rollback. Update release documentation.
@@ -57,3 +57,6 @@ than source-text or framework mock tests. Keep private captures out of Git.
   defer live UI/signature matching/installation checks until it is awake.
 - Self-review only; no independent reviewer. Disabled state, another enabled
   service, no controller and unavailable Settings handler remain runtime checks.
+- Final versioned candidate is 1.1/code2 from clean source 46c1c1b. App and RRO
+  signing, manifest/version inspection and bounded build completed successfully.
+  APKs remain private and uninstalled; the f38 ROM has not been rebuilt.

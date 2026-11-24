@@ -40,6 +40,13 @@ provide a visible way to enable the service through Android Accessibility
 settings, document the required access, and verify it without ADB or an AI.
 Do not import an owner's accessibility-service list or preferences into an image.
 
+Controls version 1.1 (version code 2) now adds enabled/disabled status and an
+Enable/Manage remote shortcuts button to the controller-settings source. It
+matches this app's exact service component, remains visible without a controller,
+refreshes on return and opens Android's own Accessibility page for consent. The
+private signed app build passed; it is not installed or included in the frozen
+f38 image. Visual, disabled-state and normal-user activation tests remain open.
+
 ## Remote alias blocker
 
 Do not persist the live keylayout by itself. Native policy consumes POWER and
