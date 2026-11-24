@@ -1,0 +1,13 @@
+{
+  "android": "913c6baa35ffa32be9ae33368cac69dbec6ead4b",
+  "android_bootable_recovery": "1cdebe4061372e9abb5dc738002ad6c707f7c534",
+  "android_build": "90d006387398ae6899145e6531a304500cfa0f70",
+  "base_recovery_patch": "6eb51fdeb08bd18520a0e93ec35edbd27dfc03ca",
+  "branch": "lineage-24.0",
+  "aosp_tag": "android-17.0.0_r1",
+  "headers_sha256": {
+    "ui.h": "6ad186775c5077cee9598d2d5658d893e3102397c39afb70fac7eea0b1019574",
+    "device.h": "350103bb57b138f8313298e043cf58a398f2d1b724e587d0a4b74c0c55f3425b",
+    "screen_ui.h": "a3638eb01fa7e2660fd250270f6e92cd4e9237d91e6d7eac04d7cf4a0f394b68"
+  }
+}

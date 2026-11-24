@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# Bring-up: no userdata entry, no formattable partitions, no automatic mounts.
+/dev/block/by-name/metadata /metadata ext4 ro,nosuid,nodev wait

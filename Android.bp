@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+cc_library_static {
+    name: "librecovery_ui_jarvis2",
+    recovery_available: true,
+    defaults: ["recovery_defaults"],
+    shared_libs: ["librecovery_ui"],
+    srcs: ["recovery/recovery_ui.cpp"],
+}
