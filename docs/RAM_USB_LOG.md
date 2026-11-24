@@ -27,12 +27,13 @@ not qualify the onn's UDC, PHY, endpoint resources or vendor-specific behavior.
 - A private configfs view refuses any existing gadget or an unexpected UDC.
   One ACM function must own port zero. Its tty major/minor come from sysfs;
   the device node is created only in private RAM state.
-- An owned background writer sets raw/no-echo mode and replays the small RAM log
-  every two seconds, reopening the port between finite snapshots. Duplicate
-  snapshots are intentional so an idle reconnect can retrieve the log.
-  The parent never waits for a serial host. Failed opens/writes are retried in
-  the child, whose stdin is a private RAM null node. There is no command reader,
-  shell, ADB, network or storage function.
+- An owned background writer holds a single terminal descriptor while setting
+  raw/no-echo mode and sending finite log snapshots every two seconds. A failed
+  connection is closed and retried. Duplicate snapshots let an idle reconnect
+  retrieve the log. The parent never waits for a serial host. Normal child
+  stdin is a private RAM null node; only stty uses terminal stdin for its ioctls.
+  Payload always comes from the named log file. There is no USB input reader,
+  command shell, ADB, network or storage function.
 - PID 1 waits on success or failure without requesting a reboot. It never
   calls Android init and never accesses Android block nodes or filesystems.
 
@@ -197,3 +198,39 @@ Power-cycled using the owner's mapped outlet, verified power restored ON, and
 requested the normal network-ADB re-enable flow. Android return and after-test
 partition comparisons are pending. No flash, wipe, slot change or saved
 bootloader setting was requested. Do not call this recovery ready.
+
+## Writer connection lifetime candidate
+
+The exact matching GKI source, common revision
+`3d26c188ef7e87e52ea1fa0092db760a55e2ae4c`, shows that the
+[last gadget-TTY close](https://android.googlesource.com/kernel/common/+/3d26c188ef7e87e52ea1fa0092db760a55e2ae4c/drivers/usb/gadget/function/u_serial.c)
+calls its disconnect callback. The
+[ACM callback](https://android.googlesource.com/kernel/common/+/3d26c188ef7e87e52ea1fa0092db760a55e2ae4c/drivers/usb/gadget/function/f_acm.c)
+clears DCD/DSR. The previous writer closed after stty and after every snapshot;
+that creates avoidable carrier transitions around output.
+
+The candidate keeps one owned descriptor open through configuration and repeated
+snapshots, closing/reopening after failure. Physical gadget disconnect calls
+tty_hangup in the same source, supporting eventual write-failure detection.
+This is a source-backed candidate mechanism, not a confirmed explanation or fix
+for the hardware's zero-byte reads. The image must be re-tested.
+
+Retained source file SHA256s, respectively:
+`e9ecc637809f0ff559b7b6814e446cf9593b8f235cf162bc2b22921533909159`,
+`43491ec36efdc13af690f7c21b512aecf5e5298a6a10a4ce3906261130473984`.
+Gitiles HTML access failed in the browser tool; the pinned TEXT endpoints were
+decoded and hashed directly. No vendor source equivalence is implied by this
+GKI-core source correspondence.
+
+The original writer failed a new safe fixture that models the last-close carrier
+transition using actual parent descriptor ownership. The held-descriptor writer
+passes that case, repeated snapshots, failed-write reopen/reconfiguration,
+failed-stty retries without payload and an absent host without blocking PID 1.
+Local host verification ran 82 tests with six native-tool skips, three C++
+suites and header syntax checks. The actual ARM64 BusyBox shell passed all 47
+startup/storage/USB checks with privileged operations substituted. A separate
+owned PTY received two frames from the actual ARM64 BusyBox writer and verified
+echo/canonical/output processing were disabled. Independent review found no
+blocking issue; its retry coverage suggestions were added and passed.
+These checks do not prove ACM bulk transfer, disconnect/reconnect or the
+zero-byte symptom is fixed on Jarvis2. No new device reboot was used for them.

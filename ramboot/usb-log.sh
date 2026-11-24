@@ -98,13 +98,19 @@ usb_log_setup() {
 }
 
 usb_log_start_writer() {
-    # All serial I/O belongs to this child. Finite snapshots reopen the port
-    # even when an idle disconnect provides no new log data to trigger EIO.
+    # Keep one open TTY across configuration and snapshots: the ACM kernel
+    # drops carrier on the last close. Periodic writes still detect an idle
+    # disconnect without waiting for new log data; failures reopen the port.
     (
         while :; do
-            if "$GUARD_BB" stty -F "$USB_LOG_TTY" raw -echo; then
-                "$GUARD_BB" cat "$GUARD_WORKDIR/startup.log" > "$USB_LOG_TTY"
-            fi
+            (
+                exec 3<> "$USB_LOG_TTY" || exit 1
+                "$GUARD_BB" stty raw -echo <&3 || exit 1
+                while :; do
+                    "$GUARD_BB" cat "$GUARD_WORKDIR/startup.log" >&3 || exit 1
+                    "$GUARD_BB" sleep 2 || exit 1
+                done
+            )
             "$GUARD_BB" sleep 2 || exit 1
         done
     ) < "$GUARD_WORKDIR/null" &

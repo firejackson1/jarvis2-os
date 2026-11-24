@@ -80,9 +80,17 @@ elif cmd=='mknod': Path(args[0]).write_text('substituted node '+':'.join(args[1:
 elif cmd=='sleep': time.sleep(.02)
 elif cmd=='stty':
  if os.environ.get('FAIL_STTY'): sys.exit(1)
+ if os.environ.get('MODEL_LAST_CLOSE'):
+  target=(root/'state/ttyGS0').stat(); held=False
+  for fd in Path('/proc',str(os.getppid()),'fd').iterdir():
+   try: st=fd.stat()
+   except FileNotFoundError: continue
+   if (st.st_dev,st.st_ino)==(target.st_dev,target.st_ino): held=True
+  if not held: (root/'carrier-dropped').touch()
 elif cmd=='cat' and Path(args[0]).name=='startup.log':
  p=root/'log-attempts'; n=int(p.read_text())+1 if p.exists() else 1; p.write_text(str(n))
  if n==1 and os.environ.get('FIRST_LOG_FAIL'): sys.exit(1)
+ if os.environ.get('MODEL_LAST_CLOSE') and (root/'carrier-dropped').exists(): sys.exit(1)
  os.execvp('cat',['cat',*args])
 elif cmd in ('cat','ls','ln','rmdir'): os.execvp(cmd,[cmd,*args])
 else: sys.exit('forbidden host operation '+cmd)
@@ -254,20 +262,67 @@ else: sys.exit('forbidden host operation '+cmd)
         try:
             deadline = time.monotonic() + 4
             while time.monotonic() < deadline:
-                if target.read_text() == 'RAM startup fixture\n':
+                if target.read_text().startswith('RAM startup fixture\n'):
                     break
                 time.sleep(.02)
-            self.assertEqual(target.read_text(), 'RAM startup fixture\n')
+            self.assertTrue(target.read_text().startswith('RAM startup fixture\n'))
             self.assertGreaterEqual(int((self.root / 'log-attempts').read_text()), 2)
             deadline = time.monotonic() + 1
             while time.monotonic() < deadline and int((self.root / 'log-attempts').read_text()) < 3:
                 time.sleep(.02)
             self.assertGreaterEqual(int((self.root / 'log-attempts').read_text()), 3,
-                                    'Idle log never reopened for a later host connection')
+                                    'Idle snapshot was not sent again')
             calls = (self.root / 'calls').read_text().splitlines()
+            self.assertGreaterEqual(sum(line.startswith('stty ') for line in calls), 2,
+                                    'Failed connection was not reopened and configured again')
             stty = next(i for i, line in enumerate(calls) if line.startswith('stty '))
             sent = next(i for i, line in enumerate(calls) if line.startswith('cat ') and 'startup.log' in line)
             self.assertLess(stty, sent)
+        finally:
+            os.killpg(process.pid, signal.SIGTERM)
+            process.wait(timeout=3)
+
+    def test_writer_retries_failed_configuration_without_sending_payload(self):
+        target = self.work / 'ttyGS0'
+        target.touch()
+        (self.work / 'null').touch()
+        process = subprocess.Popen([SHELL, '-c', '. "$USB_LOG_LIBRARY"\n'
+                                    'usb_log_start_writer\nwait "$USB_LOG_WRITER"'],
+                                   env={**self.env, 'FAIL_STTY': '1'},
+                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                   start_new_session=True)
+        try:
+            deadline = time.monotonic() + 2
+            calls = []
+            while time.monotonic() < deadline:
+                path = self.root / 'calls'
+                calls = path.read_text().splitlines() if path.exists() else []
+                if sum(line.startswith('stty ') for line in calls) >= 2:
+                    break
+                time.sleep(.02)
+            self.assertGreaterEqual(sum(line.startswith('stty ') for line in calls), 2)
+            self.assertEqual(target.read_bytes(), b'')
+            self.assertFalse((self.root / 'log-attempts').exists())
+        finally:
+            os.killpg(process.pid, signal.SIGTERM)
+            process.wait(timeout=3)
+
+    def test_writer_holds_terminal_open_across_configuration_and_snapshots(self):
+        target = self.work / 'ttyGS0'
+        target.touch()
+        (self.work / 'null').touch()
+        process = subprocess.Popen([SHELL, '-c', '. "$USB_LOG_LIBRARY"\n'
+                                    'usb_log_start_writer\nwait "$USB_LOG_WRITER"'],
+                                   env={**self.env, 'MODEL_LAST_CLOSE': '1'},
+                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                   start_new_session=True)
+        try:
+            deadline = time.monotonic() + 2
+            while time.monotonic() < deadline and not target.read_bytes():
+                time.sleep(.02)
+            self.assertIn('RAM startup fixture\n', target.read_text(),
+                          'Setup closed the last TTY descriptor before writing')
+            self.assertFalse((self.root / 'carrier-dropped').exists())
         finally:
             os.killpg(process.pid, signal.SIGTERM)
             process.wait(timeout=3)
