@@ -34,7 +34,8 @@ The supplied `rtk_btusb.ko` exports a vendor character-device interface
 (`alloc_chrdev_region`, `cdev_add`, `btchr_*`) and has no undefined
 `hci_register_dev` symbol. Standard Linux HCI/BlueZ compatibility must therefore
 be investigated rather than assumed. No firmware or pairing keys are copied
-into this source tree. Runtime controller identity and transport are unverified.
+into this source tree. A later review of the retained Android trace identifies RTL8852BS on UART/H5;
+see BLUETOOTH_RECOVERY.md. Recovery initialization and pairing remain unverified.
 
 Planned pairing screen: discover, select, pair, report failures and return to the
 menu. It must not report success from a simulated result. Keep single-button and
