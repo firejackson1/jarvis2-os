@@ -1,0 +1,294 @@
+{
+  "format_version": 1,
+  "purpose": "Scoped supplemental userspace notices and exact public source/build-recipe index. Not legal certification.",
+  "scope": "Earlier userspace baseline: system, system_ext and product. Verify final component versions, embedded Credits and source correspondence before public packaging. Stock kernel/vendor are outside this index.",
+  "pinned_manifest": {
+    "repository_file": "manifests/lineage21-pinned.xml",
+    "packet_file": "lineage21-pinned.xml",
+    "sha256": "5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7"
+  },
+  "components": [
+    {
+      "name": "rsync",
+      "version": "3.2.7",
+      "installed_paths": [
+        "system_ext/bin/rsync"
+      ],
+      "license": "GPL-3.0-or-later with sourceCOPYING OpenSSL/xxhash additionalpermission",
+      "source_project": "external/rsync",
+      "revision": "cdb7e988d31d769ecfc20633467952528e0e5707",
+      "source": "https://github.com/LineageOS/android_external_rsync/tree/cdb7e988d31d769ecfc20633467952528e0e5707",
+      "build_recipe": "https://github.com/LineageOS/android_external_rsync/blob/cdb7e988d31d769ecfc20633467952528e0e5707/Android.bp",
+      "version_source": "https://github.com/LineageOS/android_external_rsync/blob/cdb7e988d31d769ecfc20633467952528e0e5707/version.h",
+      "notices": [
+        "licenses/rsync-COPYING"
+      ],
+      "attribution_source": "https://github.com/LineageOS/android_external_rsync/blob/cdb7e988d31d769ecfc20633467952528e0e5707/main.c"
+    },
+    {
+      "name": "ntfs-3g",
+      "version": "2022.5.17",
+      "installed_paths": [
+        "system/bin/mount.ntfs",
+        "system/bin/mkfs.ntfs",
+        "system/bin/fsck.ntfs",
+        "system/lib/libntfs-3g.so",
+        "system/lib/libfuse-lite.so"
+      ],
+      "license": "GPL-2.0-or-later; libfuse-lite LGPL-2.0 under COPYING.LIB",
+      "source_project": "external/ntfs-3g",
+      "revision": "7471d6403640f1cd0878cc2c87279571a497bcb7",
+      "source": "https://github.com/LineageOS/android_external_ntfs-3g/tree/7471d6403640f1cd0878cc2c87279571a497bcb7",
+      "build_recipe": "https://github.com/LineageOS/android_external_ntfs-3g/blob/7471d6403640f1cd0878cc2c87279571a497bcb7/Android.bp",
+      "version_source": "https://github.com/LineageOS/android_external_ntfs-3g/blob/7471d6403640f1cd0878cc2c87279571a497bcb7/configure.ac",
+      "notices": [
+        "licenses/ntfs-3g-COPYING.LIB",
+        "licenses/ntfs-3g-AUTHORS"
+      ],
+      "attribution_source": "https://github.com/LineageOS/android_external_ntfs-3g/blob/7471d6403640f1cd0878cc2c87279571a497bcb7/libfuse-lite/fuse.c"
+    }
+  ],
+  "webview": {
+    "installed_path": "product/app/webview/webview.apk",
+    "package": "com.android.webview",
+    "version": "157.0.8103.78",
+    "version_code": 810307800,
+    "native_library": "lib/armeabi-v7a/libwebviewchromium.so",
+    "native_library_bytes": 83822388,
+    "chromium_tag": "157.0.8103.78",
+    "chromium_source": "https://chromium.googlesource.com/chromium/src/+/refs/tags/157.0.8103.78",
+    "DEPS": {
+      "file": "recipe/chromium-DEPS",
+      "url": "https://chromium.googlesource.com/chromium/src/+/refs/tags/157.0.8103.78/DEPS",
+      "sha256": "70f36c59069488921a7d83b5ad0dfb3d221211be2be966f28ed84ef6ceeb8daa"
+    },
+    "build_recipe": {
+      "file": "recipe/WebView-README",
+      "sha256": "e3a6d9c8fcc1bf54da4a1177f0dc9784b6142eb91cc6645475a6acea9a93d663",
+      "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/README",
+      "build_target": "system_webview_apk",
+      "primary_instructions": "https://chromium.googlesource.com/chromium/src/+/refs/tags/157.0.8103.78/android_webview/docs/build-instructions.md",
+      "integration_instructions": "https://chromium.googlesource.com/chromium/src/+/refs/tags/157.0.8103.78/android_webview/docs/aosp-system-integration.md"
+    },
+    "lineage_prebuilt_manifest_project": {
+      "name": "LineageOS/android_external_chromium-webview_prebuilt_arm",
+      "path": "external/chromium-webview/prebuilt/arm",
+      "revision": "1c11dffe87310d3c81e2ad93b9f0a7e8c09adfc0",
+      "upstream": "main",
+      "dest-branch": "main",
+      "groups": "pdk"
+    },
+    "lineage_patch_manifest_project": {
+      "name": "LineageOS/android_external_chromium-webview_patches",
+      "path": "external/chromium-webview/patches",
+      "revision": "544b12e3d42a02b4337f31819f6ba917187dcccf",
+      "upstream": "main",
+      "dest-branch": "main",
+      "groups": "pdk"
+    },
+    "patches": [
+      {
+        "file": "0001-Add-support-for-getting-updates-for-theme-color-chan.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0001-Add-support-for-getting-updates-for-theme-color-chan.patch",
+        "sha256": "385c5d3378701d8de69bb50cf3350e10a01551a350eba501961c19717d3b9a0c",
+        "bytes": 10228
+      },
+      {
+        "file": "0002-Add-xxxhdpi-icon_webview.png-to-BUILD.gn.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0002-Add-xxxhdpi-icon_webview.png-to-BUILD.gn.patch",
+        "sha256": "11e104bd1e5616cc618443243c41c5f7e8bc5d0dacb8875a6284f3ab3f104254",
+        "bytes": 821
+      },
+      {
+        "file": "0003-webview-Hard-no-to-persistent-histograms.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0003-webview-Hard-no-to-persistent-histograms.patch",
+        "sha256": "03648af9928eacaf5f9b04bd6fdb04698f3ebadf93e85fcf2ce0f197a4f372ed",
+        "bytes": 1455
+      },
+      {
+        "file": "0004-disable-autofill-server-communication-by-default.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0004-disable-autofill-server-communication-by-default.patch",
+        "sha256": "d280379a549cdafd735cae9da09262409183e6760e883267a3dc317d76215850",
+        "bytes": 1190
+      },
+      {
+        "file": "0005-webview-Disable-autofill-metadata-uploads-by-default.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0005-webview-Disable-autofill-metadata-uploads-by-default.patch",
+        "sha256": "98a9523645643e67983897a1efd3c4d6661d5854335575d1836022115a3ddee1",
+        "bytes": 1146
+      },
+      {
+        "file": "0006-disable-WebView-variations-support.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0006-disable-WebView-variations-support.patch",
+        "sha256": "f52259b171b1193d11f0974f43890ea363db476a57d70728f9d7d9b40b640ef9",
+        "bytes": 1380
+      },
+      {
+        "file": "0007-disable-component-updater-pings-by-default.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0007-disable-component-updater-pings-by-default.patch",
+        "sha256": "7884f275942ebca7b310f0ad1469a5f40102835cbae86e90801b1354104323bf",
+        "bytes": 1076
+      },
+      {
+        "file": "0008-Revert-Allow-uses-library-android.ext.adservices.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0008-Revert-Allow-uses-library-android.ext.adservices.patch",
+        "sha256": "9a0d48b0ac5c161575f8bf88c2eee7096c4ae63890db425980605f11260ef643",
+        "bytes": 6593
+      },
+      {
+        "file": "0009-bromite-build-utils.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0009-bromite-build-utils.patch",
+        "sha256": "d1b0cf4f17860e12e7bd5e65e5f716620a6f70ac13dd0b3861e8a47392021546",
+        "bytes": 33025
+      },
+      {
+        "file": "0010-Add-cromite-flags-support.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0010-Add-cromite-flags-support.patch",
+        "sha256": "b38a9d176179e455e7f67e26581cb4fdf97612b87952c965b041eb38ed2cbb21",
+        "bytes": 108657
+      },
+      {
+        "file": "0011-Add-flag-to-disable-external-intent-requests.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0011-Add-flag-to-disable-external-intent-requests.patch",
+        "sha256": "06d4474159e4e11fe25918e21d84ae5188a651b663e83c236239eb18ff2f4714",
+        "bytes": 16289
+      },
+      {
+        "file": "0012-Basic-py3.14-compat-for-jinja_template.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0012-Basic-py3.14-compat-for-jinja_template.patch",
+        "sha256": "96798097d9b13c275c4dd76605484e052598b9fe72736ac17884e3f5179b0256",
+        "bytes": 1610
+      },
+      {
+        "file": "0013-android-Don-t-unconditionally-include-dev_ui-in-chro.patch",
+        "url": "https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/0013-android-Don-t-unconditionally-include-dev_ui-in-chro.patch",
+        "sha256": "2a64a541eb068311eff180122b1e7500bc9693c2efa46e2e2769366aab550f6e",
+        "bytes": 1137
+      }
+    ],
+    "embedded_credits": {
+      "file": "licenses/webview-Credits.html.gz",
+      "gzip_mtime": 0,
+      "sha256": "e5bcae196261ca5196135b9f7960f667ce21e2e6220146ffe36bd6a4c6bc9c9d",
+      "decoded_bytes": 9316146,
+      "decoded_sha256": "62f3d14545ae237c97aa64876f9141fa4fd0ed9995666d4ac724b421ba15e2b3",
+      "origin_entry": "assets/resources.pak+com.android.webview+",
+      "datapack_version": 5,
+      "resource_id": 41071,
+      "compression": "8-byte ChromiumBrotli header + Brotli payload",
+      "note": "These notices already exist in the shipped APK. This packet makes an independently readable copy."
+    },
+    "ffmpeg": {
+      "DEPS_revision": "5c85ff666b3434d9323b83437f910ad8431ab7c9",
+      "source": "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/5c85ff666b3434d9323b83437f910ad8431ab7c9",
+      "license": "BSD/ISC/MIT and LGPL-2.1-or-later as documented by exact source CREDITS.chromium",
+      "credit_file_url": "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/5c85ff666b3434d9323b83437f910ad8431ab7c9/CREDITS.chromium",
+      "credit_sha256": "da59f1d15b847f3b3eb75e9a8bec427017ec5123591373f9109494a800556733",
+      "embedded_credit_matches_primary_source_exactly": true,
+      "build_config_url": "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/5c85ff666b3434d9323b83437f910ad8431ab7c9/chromium/config/Chrome/android/arm-neon/config.h",
+      "build_config": {
+        "CONFIG_STATIC": 1,
+        "CONFIG_SHARED": 0,
+        "CONFIG_GPL": 0,
+        "CONFIG_NONFREE": 0
+      },
+      "rebuild_relink_route": "Use exact Chromiumtag+DEPS with Lineagepatches and README GN arguments to rebuild system_webview_apk with modified FFmpeg; retain these source/build links and ordinary project release build instructions."
+    }
+  },
+  "extraction": {
+    "helper": "tools/extract-webview-credits.py",
+    "dependencies": [
+      "Python3 standard library",
+      "system libbrotlidec shared library (Brotli decoder C API); no Python Brotli package required"
+    ],
+    "command": "python3 tools/extract-webview-credits.py path/to/webview.apk credits.html",
+    "no_android_sdk_or_tool_cache_needed": true,
+    "sha256": "29d0969f685373ca3f4c2c02136e3f6716dec3ef87fb78e8d950e2f8d41e1bca"
+  },
+  "source_access": "Exact public upstream source servers are linked. Availability and corresponding local patches/build instructions must remain accessible with release downloads. No all-repository mirror or binary build attestation requirement is claimed.",
+  "files": [
+    {
+      "file": "licenses/chromium-LICENSE",
+      "bytes": 1536,
+      "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+    },
+    {
+      "file": "licenses/ntfs-3g-AUTHORS",
+      "bytes": 327,
+      "sha256": "d1b427a3310deeb09e7a10d5aea82af9a54508a2ac55ff71a65befbbb2620502"
+    },
+    {
+      "file": "licenses/ntfs-3g-COPYING.LIB",
+      "bytes": 25283,
+      "sha256": "d7bf9d064ac3e5840f9dd02422b7eeec4f1fd03f37fadbd043602be5e882304f"
+    },
+    {
+      "file": "licenses/rsync-COPYING",
+      "bytes": 35566,
+      "sha256": "85c19ea50a224c2d0067a69c083584e5717b40b76610ec1218f91385775067dd"
+    },
+    {
+      "file": "licenses/webview-Credits.html.gz",
+      "bytes": 816079,
+      "sha256": "e5bcae196261ca5196135b9f7960f667ce21e2e6220146ffe36bd6a4c6bc9c9d"
+    },
+    {
+      "file": "lineage21-pinned.xml",
+      "bytes": 358585,
+      "sha256": "5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7"
+    },
+    {
+      "file": "recipe/WebView-Android.mk",
+      "bytes": 1538,
+      "sha256": "8666c1e17d74b155f77e690e02aef562a126386ccdde3266fc023603565c376f"
+    },
+    {
+      "file": "recipe/WebView-README",
+      "bytes": 2062,
+      "sha256": "e3a6d9c8fcc1bf54da4a1177f0dc9784b6142eb91cc6645475a6acea9a93d663"
+    },
+    {
+      "file": "recipe/chromium-DEPS",
+      "bytes": 191215,
+      "sha256": "70f36c59069488921a7d83b5ad0dfb3d221211be2be966f28ed84ef6ceeb8daa"
+    }
+  ],
+  "final_image_checks_required": true,
+  "packet": {
+    "index_file": "source-index.json",
+    "generated_credits_file": "licenses/webview-Credits.html.gz",
+    "layout_note": "All packet_file/file fields in webview and files are relative to the supplemental release packet root. Repository notice copies are mapped separately below.",
+    "no_generated_credits_or_archives_in_git": true,
+    "deterministic_gzip": "Python gzip.compress(html_bytes, mtime=0)"
+  },
+  "repository_notices": [
+    {
+      "repository_file": "notices/userspace/rsync-COPYING",
+      "packet_file": "licenses/rsync-COPYING",
+      "bytes": 35566,
+      "sha256": "85c19ea50a224c2d0067a69c083584e5717b40b76610ec1218f91385775067dd",
+      "verbatim": true
+    },
+    {
+      "repository_file": "notices/userspace/ntfs-3g-COPYING.LIB",
+      "packet_file": "licenses/ntfs-3g-COPYING.LIB",
+      "bytes": 25283,
+      "sha256": "d7bf9d064ac3e5840f9dd02422b7eeec4f1fd03f37fadbd043602be5e882304f",
+      "verbatim": true
+    },
+    {
+      "repository_file": "notices/userspace/ntfs-3g-AUTHORS",
+      "packet_file": "licenses/ntfs-3g-AUTHORS",
+      "bytes": 327,
+      "sha256": "d1b427a3310deeb09e7a10d5aea82af9a54508a2ac55ff71a65befbbb2620502",
+      "verbatim": true
+    },
+    {
+      "repository_file": "notices/userspace/chromium-LICENSE",
+      "packet_file": "licenses/chromium-LICENSE",
+      "bytes": 1536,
+      "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b",
+      "verbatim": true
+    }
+  ]
+}

@@ -422,3 +422,11 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   signing, all 590 non-signature entries matched the unsigned build and v1/v2/v3
   signatures plus native alignment verified. It remains separate from the active
   ROM build: no launcher input pin or device installation changed yet.
+
+- Userspace notice review found existing GNU texts and embedded WebView Credits;
+  missing module associations alone were not treated as missing licenses. Added
+  verbatim supplemental texts, a source/recipe index and a bounded DataPack/Brotli
+  extractor. Actual baseline extraction matched the indexed Credits digest.
+  Ten real-decoder/malformed-input regressions joined the host checks. Generated
+  Credits, SDKs, caches and notice archives are not tracked. Final-image version
+  and notice-preservation checks remain separate.
