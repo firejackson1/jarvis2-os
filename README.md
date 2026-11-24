@@ -115,6 +115,8 @@ git -C external/skia apply \
   "$PWD/device/onn/jarvis2_recovery/patches/skia-skcms-vendor.patch"
 git -C external/google-highway apply \
   "$PWD/device/onn/jarvis2_recovery/patches/highway-vendor.patch"
+git -C external/XMP-Toolkit-SDK apply \
+  "$PWD/device/onn/jarvis2_recovery/patches/xmp-vendor.patch"
 source build/envsetup.sh
 export GOCACHE="$PWD/out/recovery-go-cache"
 lunch lineage_jarvis2_recovery trunk_staging userdebug
@@ -144,11 +146,15 @@ The ARM64-capable Lineage definitions remain in the global namespace. No binary
 is replaced, and the legacy namespace is not exported to this recovery product.
 
 The pinned Lineage `libjxl` exposes a vendor variant, but AOSP's `libskia_skcms`
-and `libhwy` dependencies do not. The other two patches add those variants;
+and `libhwy` dependencies do not. Their patches add those variants;
 Skia's generator is updated with its generated build file. They do not disable
 JPEG XL or remove its dependency checks. The base revisions are Skia
 `508606366e71a3daa933a4e08bc49b84e387ec18` and Google Highway
 `94b90ab8cb9df9b3719a64751ea2fcb62caa3391`.
+Lineage's DNG SDK also needs vendor variants of `xmp_toolkit_sdk` and its private
+`zuid_md5` dependency. `xmp-vendor.patch` adds both against XMP revision
+`45acb237cd13c19708f963247c732250cd43a4a5`. The remaining direct dependencies
+in this image-library chain already declare vendor availability.
 
 ## Offline packaging
 
