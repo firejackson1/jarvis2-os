@@ -19,3 +19,19 @@ class LauncherInputsTests(unittest.TestCase):
    for name,data in expected.items():(inputs/('LTvLauncher-'+name)).write_bytes(data)
    module.stage_notices(inputs,out)
    for name,data in expected.items():self.assertEqual(data,(out/name).read_bytes())
+
+ def test_local_only_input_never_attempts_download(self):
+  with tempfile.TemporaryDirectory() as d:
+   from unittest.mock import patch
+   with patch.object(module.urllib.request,'urlopen') as fetch:
+    with self.assertRaisesRegex(FileNotFoundError,'controlled.*local|local.*controlled'):
+     module.prepare(Path(d)/'inputs',Path(d)/'android',download=True)
+    fetch.assert_not_called()
+ def test_manifest_pins_controlled_source_candidate(self):
+  import json
+  manifest=json.loads((ROOT/'manifests/launcher-inputs.json').read_text())
+  candidate=json.loads((ROOT/'manifests/launcher-source-bundle.json').read_text())
+  apk=next(x for x in manifest['artifacts'] if x['name']=='LTvLauncher.apk')
+  self.assertEqual(candidate['signed_apk_sha256'],apk['sha256'])
+  self.assertIsNone(apk['url'])
+  self.assertEqual('controlled-project-build',manifest['build_origin'])

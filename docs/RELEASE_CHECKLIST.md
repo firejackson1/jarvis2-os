@@ -5,7 +5,7 @@ Updated: 2026-11-24. Working checklist for continued development, not a claim of
 ## Operating rules
 
 - Keep slot B untouched. No partition flashing, slot switching, factory resets, or public release without the owner's authorization for that action.
-- Temporary desktop-VM shutdown is owner-authorized for faster builds. Use graceful shutdown, an independent restart guard, and verify restoration after success or failure.
+- Keep Bazzite running under the current release goal. Use bounded build jobs and offload independent work; earlier temporary-shutdown permission does not override this current requirement.
 - Prefer offline builds and reversible app/RAM tests. Explain any reboot or hardware interruption before testing.
 - Keep private signing keys, accounts, ADB keys, server addresses, paired-device IDs and runtime preferences out of public artifacts.
 - Preserve the owner's current development settings; secure defaults apply to release images, not silently to this device.
@@ -59,7 +59,7 @@ publication by this policy decision alone.
 
 - [ ] Audit source and final extracted images for owner-specific values and unintended secrets.
 - [ ] Use private release signing keys with a tested backup process; do not publish keys or ship development keys unknowingly.
-- [x] Generate the private key set and verify an encrypted off-host backup, including archive identity and all 204 archived files. Keys are not yet used or hardware-accepted.
+- [x] Generate the private key set and verify an encrypted off-host backup, including archive identity and all 204 archived files. Keys have been used in private package/APEX and launcher signing rehearsals; final image signing and hardware acceptance remain open.
 - [ ] Make root debugging and unauthenticated network ADB opt-in in public builds; retain normal USB authorization by default.
 - [ ] Verify enforcing SELinux, app privilege allowlists, exported components and microphone permissions.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
@@ -113,7 +113,7 @@ publication by this policy decision alone.
 - [ ] Include versioned artifacts, checksums, signing details and accurate experimental labels.
 - [x] Add bug-report instructions covering firmware/build identity and useful redacted logs. See `.github/ISSUE_TEMPLATE/bug_report.md`; final binary build identity remains a packaging gate.
 - [ ] Review release contents for personal data and keys one last time.
-- [ ] Obtain explicit publication authorization and publish the developer preview.
+- [ ] Publish the developer preview under the owner’s existing release authorization after the required installation/recovery, rights and final-artifact gates pass.
 - [ ] Require repeatable installation/recovery and resolved critical stability issues before calling it stable.
 
 ## Evidence already available — re-test after integration
@@ -121,7 +121,7 @@ publication by this policy decision alone.
 - [x] User verified remote navigation/select, Settings tap/hold, and widget double-press on the development device.
 - [x] User verified AirPods removal pause and reinsertion resume after the duplicate-pause fix.
 - [x] User verified custom boot animation visually; it must not delay boot.
-- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 76 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
+- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 145 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
 - [x] Main Settings categories and the native Remotes & Accessories AirPods link were inspected live; link opens pause/resume and Back returns correctly.
 - [x] Smart Home provider configuration/shortcut UI installed; no provider account or voice conversation verified yet.
 - [x] Built-in microphone produced a one-second 16 kHz capture; samples discarded, not saved or transmitted.
@@ -141,3 +141,21 @@ publication by this policy decision alone.
 - [x] Read-only evidence: vendor Thread HAL registered and configured for Spinel UART transport. No network commissioning/reset performed.
 - [ ] Verify actual Thread operation before advertising support.
 - [ ] Keep room-temperature features tied to a real external sensor, not the chip's thermal reading.
+
+## Offline release checkpoint — 2026-11-24
+
+- [x] Assemble and independently reproduce the controlled launcher's 441-file
+  corresponding-source/notice bundle; see LAUNCHER_SOURCE_BUILD.md. This is
+  component source delivery, not proof of complete ROM release readiness.
+- [x] Verify production-key package/APEX signing in the private rehearsal with
+  pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
+  Whole-image AVB, OTA trust and hardware acceptance remain separate gates.
+- [x] Export and validate a Google-free composition profile and pinned 27-file
+  recipe; verify existing metadata, including labels/capabilities, and exact
+  expected additions against the tested private candidate.
+- [ ] Finish the deterministic local Google-app composer and coherent AVB rebuild
+  against the final published base, using separately obtained upstream inputs.
+- [ ] Complete the current bounded target-files build and then integrate the
+  controlled launcher pin incrementally; do not mutate a running build's inputs.
+- [ ] Re-run all final-image privacy, content, metadata, size and AVB checks on the
+  exact signed deliverables; old rehearsals are not final-image evidence.

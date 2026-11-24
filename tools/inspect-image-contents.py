@@ -33,7 +33,7 @@ def inspect_trees(work,policy):
         if not paths:errors.append('Missing required package: '+name)
         elif len(paths)!=1:errors.append('Duplicate required package: '+name)
     for path in found['Jarvis2LtvLauncher.apk']:
-        if sha(path)!=policy['launcher_sha256']:errors.append('Upstream launcher checksum mismatch')
+        if sha(path)!=policy['launcher_sha256']:errors.append('Pinned launcher checksum mismatch')
     return errors
 
 def inspect_images(images,work,fsck):

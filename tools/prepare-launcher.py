@@ -20,6 +20,8 @@ def prepare(inputs,source,download=False):
         p=inputs/item['name']
         if not p.exists():
             if not download:raise FileNotFoundError('Provide '+p.name+' or explicitly pass --download')
+            if item.get('url') is None:
+                raise FileNotFoundError('Provide the controlled launcher APK locally; release asset is not published yet')
             req=urllib.request.Request(item['url'],headers={'User-Agent':'Jarvis2-Source-Preparation'})
             tmp=p.with_suffix(p.suffix+'.partial')
             try:

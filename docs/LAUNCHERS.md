@@ -15,21 +15,23 @@ choices when installed. This does not change the owner's running default.
 - Source commit f9db652edaac2da3ea2e6a1ed220d1396ccea82b, GPLv3.
 - Build workflow: Flutter3.24.5, Java21, Android SDK35; pub get, build_runner,
   drift schema generation, then split-per-ABI Android APK build.
-- Exact APK/source download hashes and upstream signer are recorded in
+- Exact APK/source hashes and project signer are recorded in
   manifests/launcher-inputs.json. The input preparation tool checks these and
   ZIP alignment before staging anything.
 
 ```sh
+# First supply the pinned controlled APK as LTvLauncher.apk locally.
+# --download obtains available upstream source inputs, not an unpublished APK.
 python3 tools/prepare-launcher.py /outside/repo/launcher-materials /path/to/android --download
 ```
 
 The tool copies only verified build inputs under ignored apps/Launcher/prebuilts.
 It never installs or flashes. Upstream APK/native files are not in Git. All three
 ARM32 native libraries are extracted beside the system APK in lib/arm. This
-preserves the upstream signature and allows a bundled app to find its libraries.
+preserves the controlled APK signature and allows a bundled app to find its libraries.
 The standard Android Make prebuilt replacement path preserves APK bytes and
 installs the verified JNI libraries through LOCAL_PREBUILT_JNI_LIBS. This avoids
-rewriting compressed native payloads inside an upstream-signed APK. Independent
+rewriting compressed native payloads inside a signed APK. Independent
 hash, signature, ABI and ZIP alignment checks run before inputs are staged.
 
 ## GPL/source release materials
@@ -101,3 +103,24 @@ The recipe pins NDK 27.2.12479018. This establishes source availability and bina
 identity, not a reproduced build. The exact Flutter engine archive is collected,
 but its Dart/Skia and other DEPS checkouts remain outstanding. Maven declarations
 are not a resolved runtime dependency graph.
+
+## Controlled release input — 2026-11-24
+
+The default APK pin now selects our controlled source build and project signing
+certificate, rather than the earlier upstream prebuilt. Until a matching release
+asset exists, its URL is deliberately null: provide the verified signed APK
+locally as `LTvLauncher.apk`. Preparation fails before any download if it is
+missing, even with `--download`; it never substitutes the upstream binary.
+See [controlled build instructions](LAUNCHER_SOURCE_BUILD.md) and
+`manifests/launcher-source-bundle.json` for the completed 441-file source delivery,
+resolved runtime graph, native sources and cumulative notices. Earlier collection
+checkpoints above describe their original limited scope, not missing materials
+in this controlled source bundle. Recipient-built or differently signed APKs
+require an explicitly reviewed pin/certificate update. Switching from the
+upstream certificate is a package-signature migration; fresh-data testing and
+new-key hardware acceptance remain mandatory release gates.
+
+The running full build was started with the older upstream pin. Its inputs remain
+frozen until completion; this source change alone does not put the controlled
+launcher into that artifact. A subsequent incremental build and final-image
+inspection must establish integration.

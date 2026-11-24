@@ -448,3 +448,12 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   passed. No regular-file byte-equality, complete rebuild, AVB composition or
   hardware acceptance is claimed by this stage. Current host checks: 142 tests,
   five local AVB skips, privacy audit and Java checks passed.
+
+- Default source launcher pin now selects the controlled project-signed APK and
+  its verified certificate. Missing local APKs fail before network access; no
+  fake upstream URL is paired with the new digest. Two regressions first failed
+  against the old pin, then passed. Current suite: 145 tests, five local AVB
+  skips, privacy audit and Java checks passed. The active Android checkout was
+  not modified; integration waits for its running full build to finish.
+- Updated the release checklist to reflect current Bazzite-running policy, actual
+  private signing/source/profile evidence, and remaining final artifact gates.
