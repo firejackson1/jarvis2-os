@@ -1,0 +1,154 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Offline vanilla candidate packaging
+
+`tools/package-candidate.py` makes a deterministic developer-preview ZIP from
+five independently reviewed vanilla images and a small explicit metadata set.
+It never signs, rebuilds, flashes, selects slots, installs or runs payload code.
+It has no private-key inputs or Google-containing packaging mode. Python3.11+
+with its standard zlib support is required.
+
+The older `1ac457e` candidate is **held — do not install** after a privileged-permission allowlist
+bug was found. Its successful historical packaging checks do not make it public
+ready. Replacement product source `f38da52` is being rebuilt; authenticate and
+review its final images independently before packaging. This document authorizes
+no installation, publication or change to a working device.
+
+## Authenticate and stage inputs
+
+Supply a reviewed proof JSON and its SHA256 obtained through a trusted channel.
+A hash calculated from an otherwise untrusted proof does not authenticate it.
+The proof must have literal `passed:true` and exactly these five `files` records:
+
+```json
+{
+  "passed": true,
+  "files": {
+    "product.img": {"bytes": 541949952, "sha256": "<64 lowercase hex>"},
+    "system.img": {"bytes": 483131392, "sha256": "<64 lowercase hex>"},
+    "system_ext.img": {"bytes": 96161792, "sha256": "<64 lowercase hex>"},
+    "vbmeta.img": {"bytes": 2097152, "sha256": "<64 lowercase hex>"},
+    "vbmeta_system.img": {"bytes": 2097152, "sha256": "<64 lowercase hex>"}
+  }
+}
+```
+
+The sizes above describe the current layout, not a device measurement. The
+packager checks actual sizes/hashes against the supplied proof; it does not
+supply those checksums or independently repeat AVB/property/package audits.
+Additional proof evidence fields are retained outside the ZIP and not treated as
+certifications. Duplicate JSON keys, malformed records and an explicitly declared
+Google-containing proof are rejected. The caller must independently establish
+vanilla content, source identity, stock compatibility and intended metadata.
+`google_payload_included:false` is that caller-audited vanilla prerequisite; it
+is not a cryptographic package-content scan performed by this packager.
+
+The image directory must contain exactly those five regular files. Create a
+fresh separate metadata directory with only:
+
+```text
+LICENSE
+README.txt
+docs/BUILD.md
+docs/KNOWN_ISSUES.md
+docs/LAUNCHER_SOURCE_BUILD.md
+docs/LICENSING.md
+docs/RESTORE_PLAN.md
+docs/SLOT_INSTALLATION.md
+docs/USERSPACE_NOTICES.md
+manifests/avb-stock-15640252-profile.json
+manifests/avb-userspace-property-policy.json
+manifests/launcher-source-bundle.json
+manifests/lineage21-pinned.xml
+manifests/userspace-notices.json
+```
+
+Use the exact reviewed source revision for these source files. The following
+local staging example reads committed Git blobs and writes only to fresh external
+staging. Replace all placeholders, including the tool checkout and full40-hex
+product-source commit. Packaging tools may come from a later reviewed tools
+revision; record that revision separately from the product source.
+
+```sh
+python3 - <<'PY'
+import importlib.util, subprocess
+from pathlib import Path
+repo = Path('/path/to/source-repository')
+tool = Path('/path/to/tool-checkout/tools/package-candidate.py')
+revision = '<full-40-hex-product-source-commit>'
+staging = Path('/outside/source/fresh-candidate-metadata')
+spec = importlib.util.spec_from_file_location('packager', tool)
+m = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(m)
+staging.mkdir(mode=0o700)
+for name in m.METADATA_NAMES:
+    target = staging / name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    data = m.candidate_readme(revision).encode() if name == 'README.txt' else subprocess.run(
+        ['git', '-C', str(repo), 'show', revision + ':' + name],
+        check=True, capture_output=True).stdout
+    target.write_bytes(data)
+PY
+```
+
+The README must exactly equal the tool's canonical preview text for the supplied
+revision. It is included in the metadata whitelist and checked before any output
+is created. The tool rejects unknown/missing input files, unexpected directories,
+symlinks including ancestor paths, and metadata files larger than8MiB. No source
+correspondence claim is inferred merely from the caller's revision string.
+
+## Package and check
+
+Keep output fresh, outside the repository/tool checkout and both input trees:
+
+```sh
+python3 tools/package-candidate.py \
+  --images /outside/source/reviewed-five-images \
+  --metadata /outside/source/fresh-candidate-metadata \
+  --proof /outside/source/reviewed-image-proof.json \
+  --proof-sha256 <trusted-proof-sha256> \
+  --source-revision <full-40-hex-product-source-commit> \
+  --output /outside/source/fresh-candidate-package
+```
+
+A successful output has the ZIP, its generated `manifest.json`, and a separate
+`verification.json` receipt. The ZIP has exactly20 entries: five images,
+14 supplied metadata files, and its manifest. That manifest binds the proof pin
+and actual member hashes/sizes. Existing outputs are never overwritten.
+
+ZIP entry names are sorted, timestamps fixed at2026-11-24T00:00:00, Unix modes
+0644, compression DEFLATE level6 and writes streamed with ZIP64 support. All
+members are streamed back and compared with the reviewed inputs, then inputs
+and the proof are hashed again. Failed/partial output must not be promoted.
+Repeated runs with identical inputs and Python/zlib tooling produce identical
+ZIP bytes; the receipt records Python/zlib versions. Different zlib versions may
+change compressed bytes, so preserve tool versions for exact archive reproduction.
+Host tests verify two independent outputs and reject stale proofs before output.
+
+The packager always leaves hardware readiness, OTA/installability, source
+correspondence and release approval unverified/false. A successful receipt is a
+packaging check, not a substitute for the independent image audits.
+
+## Separate companion assets
+
+The ROM ZIP does not include the launcher's corresponding source archive,
+supplemental readable notice packet or public verification materials. Deliver
+those separately with a reviewed release-asset receipt containing filenames,
+bytes and SHA256. The launcher whitelist and source index included inside the ROM
+ZIP identify their contents; they are not the companion archives themselves.
+
+The following are verified **historical staged companion candidates**, not a
+promise of public availability or approval for the replacement build. Revalidate
+their correspondence to the final images and deliver them together with any
+future developer preview; the ROM archive alone is incomplete delivery.
+
+| Companion file | Bytes | SHA256 |
+|---|---:|---|
+| `LTvLauncher-2026.11.23-code8117-neutral-corresponding-sources.tar.gz` | 474377768 | `aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966` |
+| `supplemental-userspace-notices.tar.gz` | 904561 | `d59e01f2ca73a72e7eefeb23fb24a8f4f0fd03f2335b9eb7372f61d2e4d69878` |
+| `jarvis2-release-v1-public-signing-materials.zip` | 183211 | `5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8` |
+
+Also record the new ROM ZIP receipt, product-source revision, packaging-tool
+revision/hash, trusted image-proof pin, and any refreshed companion hashes.
+Public verification keys are not private keys and do not establish hardware trust.
+Private local GApps compositions remain separate; never relabel or feed them to
+this vanilla packaging route. No Google redistribution permission is inferred.

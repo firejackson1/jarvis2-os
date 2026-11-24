@@ -612,3 +612,12 @@ three required privileged grants; extensionless and wrong-package fixtures faile
 before the check was added and pass afterward. A clean offline rebuild and all
 candidate signing/content/AVB/package checks must run again before promotion.
 This is a packaging correction, not evidence of runtime permission success.
+
+- Added a portable vanilla five-image packager with caller-pinned proof binding,
+  explicit metadata whitelist, deterministic ZIP metadata, full streamed member
+  readback and input/proof rehash. Seven focused tests passed, including a real
+  CLI run and two independent byte-identical archives. Full host suite: 176 tests,
+  five local AVB skips, source audit and eight Java suites passed. Companion
+  source/notice/public-key assets are documented separately; packaging does not
+  establish hardware readiness, source correspondence or redistribution rights.
+  This tooling update does not alter the frozen `f38da52` product build.
