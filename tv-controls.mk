@@ -1,3 +1,3 @@
 # SPDX-License-Identifier: Apache-2.0
-# Import only after building/staging the matching RRO APK. See docs/BUILD.md.
+# Build the companion and overlay from source against this tree's Settings.
 PRODUCT_PACKAGES += Jarvis2RemoteSettings Jarvis2TvControlsOverlay

@@ -47,12 +47,14 @@ platform signing configuration. They must agree for system privileges to work.
    is distributed here. See stock-inputs.sha256. Distribution of any resulting
    stock kernel/vendor binaries requires an independently verified license route.
 4. Apply both `patches/TvSettings/series` and `patches/Bluetooth/series` in their listed order to the pinned projects, then build `TvSettingsTwoPanel` and `com.android.btservices`.
-5. Prepare the pinned LTvLauncher inputs as documented in LAUNCHERS.md, then
-   build the companion/overlay against that APK. Stage the generated overlay at
-   overlays/TvControls/prebuilts/Jarvis2TvControlsOverlay.apk (ignored by Git).
-6. lineage_jarvis2.mk inherits tv-controls.mk. Apps/overlays are inside the
-   device project and visible to Soong. The overlay prebuilt must exist before
-   invoking Soong. Follow the release ledger for full product build results.
+5. Prepare the pinned LTvLauncher inputs as documented in LAUNCHERS.md.
+6. lineage_jarvis2.mk inherits tv-controls.mk. Soong builds the Settings overlay
+   directly from source with `TvSettingsTwoPanel` as its resource dependency;
+   no staged overlay APK is required. The standalone APK command above remains
+   useful for separate compile checks. When migrating an existing output tree
+   from the old prebuilt module, run `m installclean` before rebuilding images
+   to remove its old system_ext/app installation. The native overlay installs
+   under system_ext/overlay; image inspection rejects duplicate packages.
 7. The preinstalled overlay is static and scoped to ro.lineage.device=jarvis2;
    fresh-image behavior still needs verification. It does not require an owner-
    specific cmd overlay enable command in the released product.

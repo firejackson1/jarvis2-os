@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-// Generate this APK first using tools/build-apps.sh against the matching Settings APK.
-android_app_import {
+// Link directly to the Settings resources from the same Android build.
+runtime_resource_overlay {
     name: "Jarvis2TvControlsOverlay",
-    apk: "prebuilts/Jarvis2TvControlsOverlay.apk",
+    manifest: "AndroidManifest.xml",
+    resource_dirs: ["res"],
+    resource_libs: ["TvSettingsTwoPanel"],
+    aaptflags: ["--package-id", "0x7e", "--allow-reserved-package-id"],
     certificate: "platform",
-    dex_preopt: { enabled: false },
     system_ext_specific: true,
 }
