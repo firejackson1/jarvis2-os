@@ -1,6 +1,6 @@
 # Jarvis2 public release checklist
 
-Updated: 2026-11-23. Working checklist for continued development, not a claim of release readiness.
+Updated: 2026-11-24. Working checklist for continued development, not a claim of release readiness.
 
 ## Operating rules
 
@@ -59,6 +59,7 @@ publication by this policy decision alone.
 
 - [ ] Audit source and final extracted images for owner-specific values and unintended secrets.
 - [ ] Use private release signing keys with a tested backup process; do not publish keys or ship development keys unknowingly.
+- [x] Generate the private key set and verify an encrypted off-host backup, including archive identity and all 204 archived files. Keys are not yet used or hardware-accepted.
 - [ ] Make root debugging and unauthenticated network ADB opt-in in public builds; retain normal USB authorization by default.
 - [ ] Verify enforcing SELinux, app privilege allowlists, exported components and microphone permissions.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
@@ -110,7 +111,7 @@ publication by this policy decision alone.
 - [ ] Publish buildable source, patch provenance, license notices and any required corresponding source; review redistribution rights for proprietary blobs.
 - [ ] Prepare installation/upgrade/rollback instructions, known issues and tested hardware matrix.
 - [ ] Include versioned artifacts, checksums, signing details and accurate experimental labels.
-- [ ] Add bug-report instructions covering firmware/build identity and useful redacted logs.
+- [x] Add bug-report instructions covering firmware/build identity and useful redacted logs. See `.github/ISSUE_TEMPLATE/bug_report.md`; final binary build identity remains a packaging gate.
 - [ ] Review release contents for personal data and keys one last time.
 - [ ] Obtain explicit publication authorization and publish the developer preview.
 - [ ] Require repeatable installation/recovery and resolved critical stability issues before calling it stable.
@@ -120,7 +121,7 @@ publication by this policy decision alone.
 - [x] User verified remote navigation/select, Settings tap/hold, and widget double-press on the development device.
 - [x] User verified AirPods removal pause and reinsertion resume after the duplicate-pause fix.
 - [x] User verified custom boot animation visually; it must not delay boot.
-- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 62 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
+- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 76 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
 - [x] Main Settings categories and the native Remotes & Accessories AirPods link were inspected live; link opens pause/resume and Back returns correctly.
 - [x] Smart Home provider configuration/shortcut UI installed; no provider account or voice conversation verified yet.
 - [x] Built-in microphone produced a one-second 16 kHz capture; samples discarded, not saved or transmitted.
