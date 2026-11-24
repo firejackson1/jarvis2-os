@@ -199,3 +199,27 @@ For assembling the three verified raw EROFS payloads into the existing AVB graph
 see [raw image assembly](AVB_IMAGE_ASSEMBLY.md). This does not inspect whether
 changed application content or filesystem metadata is intended; package,
 filesystem, privacy and privilege checks must establish that separately.
+
+## Current offline candidate — 2026-11-24
+
+For source `1ac457e`, independent package/APEX verification and native filesystem
+comparison passed. The final system OTA certificate archive contains only the
+project release certificate under a basename, with no leftover development trust
+or signing-host path. This is system trust replacement; it does not replace or
+prove stock recovery verification trust, and the output is not a complete OTA.
+The stock-template raw-image AVB graph passed separately with all verification
+flags zero and expected parent/child keys. Hardware acceptance remains untested.
+
+Public inventory SHA256:
+`045d814089a724256f788e01cd524d0ebbdcb8badb20c087d8bd2a3450319fb5`.
+Project release certificate DER SHA256:
+`121abf966a99cf77d1fc44ff725fb06cbb39d5e12bccd09d0b576566091bfe46`.
+Image AVB public-key blob SHA256:
+`82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df`.
+
+A staged public-only verification ZIP contains 78 public PEM keys, 47 X.509
+certificates, 31 AVB public blobs and the inventory (157 files total). Every member
+was read back and checked. Its SHA256 is
+`5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8`.
+It is not a private-key backup or hardware trust anchor installation. These
+materials are staged for the eventual release; no download is promised yet.

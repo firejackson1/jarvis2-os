@@ -153,8 +153,9 @@ publication by this policy decision alone.
 - [x] Export and validate a Google-free composition profile and pinned 27-file
   recipe; verify existing metadata, including labels/capabilities, and exact
   expected additions against the tested private candidate.
-- [ ] Finish the deterministic local Google-app composer and coherent AVB rebuild
-  against the final published base, using separately obtained upstream inputs.
+- [x] Finish the deterministic local Google-app composer and coherent AVB rebuild
+  against the exact `1ac457e` candidate: two actual runs produced identical five
+  images, all ten independently rehashed. Public binary installation is pending.
 - [x] Complete the bounded target-files build and integrate the neutral controlled
   launcher pin at source `1ac457e`; verify the exact signed launcher survives.
 - [x] Re-run final base-image privacy, content, metadata, size and AVB checks on

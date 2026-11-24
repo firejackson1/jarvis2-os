@@ -15,7 +15,7 @@ The development device has existing data and separately installed Google apps.
 | Networking/USB | Development connections worked; USB detection has been intermittent | Final-image Wi-Fi/Ethernet reconnect, USB host/device and hub matrix |
 | Google apps | Play sign-in worked; VLC and YouTube TV installed after landscape feature correction | Separate supported installation route for EROFS; no certification or app-catalog guarantee |
 | Smart Home | Provider configuration/shortcuts and a brief built-in microphone test | Actual assistant conversation and independent remote microphone validation |
-| Release signing | Encrypted key backup verified; private package/APEX signatures and APEX filesystem comparisons passed | Final candidate signing, OTA trust replacement, complete image AVB, hardware trust and migration tests |
+| Release signing | Encrypted key backup verified; exact `1ac457e` package/APEX, system OTA certificate, filesystem and complete stock-template AVB checks passed | Hardware acceptance, stock recovery trust and migration tests |
 | Installation/recovery | Earlier authorized slot-A image writes/readbacks and Android boot succeeded | Reusable interrupted-install restoration and clean-install instructions |
 
 Slot B is not a proven fallback. Current captured logical partitions for B have

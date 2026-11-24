@@ -580,3 +580,19 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   audit. No image is published or installed by this checkpoint. Hardware key
   acceptance, clean setup, full feature tests, installation and actual recovery
   remain open. Matching GApps composition is local-only and still in progress.
+
+- Matching GApps composition against the stock-based candidate passed twice; all
+  five outputs were identical and all ten actual files independently rehashed.
+  Determinism report SHA256
+  `d32b46b31361674dcde5dffbb9de902071280f943b57759489fa77e353674a23`.
+  This proves repeatability of composition from these inputs, not a second full
+  Android source rebuild or hardware behavior.
+- Google-free offline candidate ZIP: 560062731 bytes, SHA256
+  `553167d323e40946a50416767c3f3cab1ec124cfad9f4a7bf56748984fcf284d`.
+  Local-only GApps candidate ZIP: 777922581 bytes, SHA256
+  `01405a81f37024a419ba06fc79634c347dd0cf2c7fa6e7a2ecb8b0cef14ffc0e`.
+  Every ZIP member passed independent hash/length readback. Neither ZIP is an
+  installer or OTA; neither has been hardware qualified or publicly released.
+  Google payload redistribution is not authorized; public instructions use the
+  upstream input and local composer. Exact seven-partition dependencies and
+  interruption limits are recorded in RESTORE_PLAN.md.
