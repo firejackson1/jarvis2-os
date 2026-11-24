@@ -1,8 +1,9 @@
 # Private RAM boot-container checkpoint
 
 A complete legacy-v2 RAM candidate now packages the new guarded ARM64 recovery.
-It was built and unpacked twice with identical bytes. No boot, flash, wipe or
-slot operation was performed. This is not a signed installable recovery or a
+It was built and unpacked twice with identical bytes. The first authorized RAM
+launch was accepted by Fastboot but did not reach Recovery. No flash, wipe or
+slot-change command was issued. This is not a signed installable recovery or a
 public binary release.
 
 ## Placement review and corrected inference
@@ -57,8 +58,8 @@ The tool-source hashes were:
 - `mkbootimg.py`: `37d84b3d162e0bc62e36c1f4e1c63c85ea0caa9f29be023eb2f8efe006ad948c`.
 - `unpack_bootimg.py`: `06b54dd9a07c5281778e29e234e76f6e3faee8bf0c904a5ef88fdee30eeed12e`.
 
-The image fits the supplied historical 128 MiB download budget; current device
-limits are not freshly verified. Re-extracting its ramdisk reproduced the
+The image fits the 128 MiB download budget, freshly verified in the first
+hardware attempt below. Re-extracting its ramdisk reproduced the
 guarded CPIO hash from `GUARDED_RAMDISK.md`, with no credential findings or base
 record overwrites. The reference and unpacked input userspace stay private;
 they can contain earlier development state and are not release assets.
@@ -82,8 +83,8 @@ python3 tools/pack_ramboot.py \
 The host suite passed 61 Python tests plus three native executable tests and
 pinned-header syntax checks, including actual synthetic v2/v4 AOSP packing.
 The executed candidate was independently repacked twice, with identical output.
-That is packaging reproducibility; an independent clean platform rebuild is a
-separate check.
+That is packaging reproducibility. An independent empty-output platform rebuild
+also completed with a byte-identical native ramdisk; see BUILD_CHECKPOINT.md.
 
 ## Additional startup inspection
 
@@ -102,7 +103,31 @@ OS-specific IFUNC type; correcting that parser resolved its false missing-libc
 reports without changing any binary. This check does not qualify Android linker
 namespaces, dlopen behavior, CPU-specific IFUNC execution or runtime SELinux.
 
-## Concrete hardware test requirements — not executed
+## First hardware attempt
+
+The owner authorized a RAM test and manually entered bootloader Fastboot.
+Read-only queries identified the expected device/model, selected slot A,
+unlocked state, `is-userspace: no`, and `max-download-size: 0x08000000`.
+This bootloader returned “Variable not implemented” for both slots' successful,
+unbootable and retry fields and for snapshot status, despite returning process
+exit code zero. Those fields remain unknown; they were not treated as healthy
+or as “no snapshot.” No fresh partition-hash baseline was obtained.
+
+The exact image above was rehashed before `fastboot boot`. Transfer completed
+in 10.044 seconds and Fastboot acknowledged boot. The owner then reported the
+onn logo, with no recovery menu. USB disconnected and no ADB appeared. No UART
+adapter was available on the host, so there is no startup trace proving kernel
+entry, the guard stage, read-only protection or Android-init handoff. A visible
+logo and a successful Fastboot acknowledgement do not establish those results.
+
+The owner power-cycled with Reset released to discard the RAM image. Android
+subsequently returned: authenticated network ADB reported boot completion and
+slot suffix `_a`. Root debugging was available for read-only diagnostics, but
+`/sys/fs/pstore` contained no retained files. The failure stage remains unknown.
+No flashing, wipe, slot switch or saved environment change was requested.
+No partition-integrity claim is made without qualified before/after reads.
+
+## Hardware test requirements
 
 Before requesting a launch, bind this exact image to a current read-only
 preflight and explicit return plan:

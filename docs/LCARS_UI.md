@@ -2,8 +2,9 @@
 
 Owner-selected direction: LCARS / Bridge Commander style, with Bluetooth remote
 pairing requested. The native UI is now linked into the first ARM64 recovery
-ramdisk's extension library. It has not booted or replaced the installed
-recovery, and Bluetooth pairing is not implemented. See `BUILD_CHECKPOINT.md`.
+ramdisk's extension library. The first RAM launch remained at the boot logo;
+the UI has not appeared or replaced the installed recovery. Bluetooth pairing
+is not implemented. See `BUILD_CHECKPOINT.md`.
 
 ## Native interface implemented
 
@@ -47,13 +48,16 @@ need an explicit implementation and review.
 ## Validation so far
 
 Run `python3 tools/test-host.py` for the three C++ suites, exact pinned recovery
-interface syntax and Python ramdisk/packer tests. The six Python tests
-all execute when the pinned source fixture tools or built AOSP host tools are supplied; the two new C++
-suites execute drawing bounds, pagination, navigation, long-label and header
-fallback checks. Host DrawInterface tests use a recording renderer, not HDMI.
+interface syntax and Python ramdisk/packer tests. The current suite has 61 Python
+tests when the pinned source fixture tools or built AOSP host tools are supplied.
+The C++ suites include drawing bounds, pagination, navigation, long-label and
+header fallback checks. Host DrawInterface tests use a recording renderer,
+not HDMI. The separate guard suite passed 28 cases under ARM64 BusyBox/QEMU
+with privileged operations safely substituted.
 
 An actual AArch64 ELF relocatable object compiled with Android 14 compiler/Bionic
 inputs and pinned LineageOS 24 interface headers. SHA256:
 `103681b674a7b54a74d881fb94a89b4e4e538399a4c80673214f1f6cb2a0137e`.
-This checks compilation only. A full Android 17 link/build, HDMI, kernel input,
-Bluetooth pairing, AVB and restoration remain unverified.
+This older object checks compilation only. Full Android 17 linking and an
+independent byte-identical ramdisk rebuild subsequently completed. HDMI,
+kernel input, Bluetooth pairing, AVB and restoration remain unverified.

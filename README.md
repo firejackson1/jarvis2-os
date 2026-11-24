@@ -228,7 +228,7 @@ BCB, logging and userdata-key paths that run without selecting a destructive
 menu action. It also records the prototype metadata fstab mismatch and the
 remaining early write-guard requirements. It is not a completed RAM boot test.
 
-`ramboot/init` is an unbooted diagnostic PID 1 prelude, intended for
+`ramboot/init` is a diagnostic PID 1 prelude, intended for
 `rdinit=/ramboot-init` in a separately assembled RAM image. It refuses ordinary
 host execution, checks the RAM root, creates private RAM state, mounts only
 read-only proc/sys views and checks the board and exact kernel release before
@@ -246,14 +246,15 @@ partitions is insufficient; do not infer missing entries. Bind this file to the
 private image/preflight receipt. Whole-device read-only status alone is not used
 as proof that a partition appearing later is protected.
 
-This prelude is now assembled in a private CPIO, but has no boot container or
-hardware qualification. Its BusyBox/musl closure, kernel-release input and hashed
+This prelude is assembled in a private CPIO and legacy-v2 boot container, but
+has no successful hardware qualification. Its BusyBox/musl closure, kernel-release input and hashed
 stock modules are supplied privately and bound to that recovery ramdisk.
 Unsupported force-normal-boot or
 hibernation arguments stop the prelude. Failures leave it waiting with RAM logs
 and a UART/kernel-log stage marker; there is no automatic reboot or persistent
 BCB change. The storage poll is bounded; kernel module loading itself has no
-userspace timeout. No complete RAM image or device launch is implied. Do not
+userspace timeout. The first complete RAM launch stayed at the boot logo without
+ADB; its startup stage is unknown. Do not
 source its function libraries on a host with real privileged utilities.
 
 `tools/prepare_ramdisk.py` derives the diagnostic fragment from a checksum-bound
@@ -277,7 +278,7 @@ assembles that overlay offline; the [guarded ramdisk record](docs/GUARDED_RAMDIS
 documents inputs, artifact hashes and verification. The separate
 [RAM boot-container checkpoint](docs/RAM_BOOT_CONTAINER.md) records the executed
 legacy-v2 packaging and the corrected placement analysis. Neither CPIO alone is
-a launchable boot image; the private complete candidate has not booted.
+a launchable boot image; the private complete candidate has not reached Recovery.
 
 ## License
 
