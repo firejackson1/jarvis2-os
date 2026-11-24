@@ -3,6 +3,6 @@ cc_library_static {
     name: "librecovery_ui_jarvis2",
     recovery_available: true,
     defaults: ["recovery_defaults"],
-    shared_libs: ["librecovery_ui"],
+    shared_libs: ["librecovery_ui", "libminui"],
     srcs: ["recovery/recovery_ui.cpp"],
 }

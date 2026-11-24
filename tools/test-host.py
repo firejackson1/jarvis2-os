@@ -32,6 +32,12 @@ flags = ['c++', '-std=c++17', '-Wall', '-Wextra', '-Werror']
 subprocess.run(flags + ['-I.', 'tests/button_test.cpp', '-o', '.cache/button-test'],
                cwd=root, check=True)
 subprocess.run([str(root / '.cache/button-test')], check=True)
+for name in ('lcars_layout', 'lcars_menu'):
+    binary = root / ('.cache/' + name + '-test')
+    subprocess.run(flags + ['-include', 'tests/bionic_annotations.h', '-I.', '-I.cache/headers',
+                           'tests/' + name + '_test.cpp', '-o', str(binary)], cwd=root, check=True)
+    subprocess.run([str(binary)], check=True)
+
 subprocess.run(flags + ['-fsyntax-only', '-include', 'tests/bionic_annotations.h',
                         '-I.cache/headers', 'recovery/recovery_ui.cpp'], cwd=root, check=True)
 subprocess.run(['python3', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py', '-v'],
