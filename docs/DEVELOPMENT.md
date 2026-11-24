@@ -621,3 +621,25 @@ This is a packaging correction, not evidence of runtime permission success.
   source/notice/public-key assets are documented separately; packaging does not
   establish hardware readiness, source correspondence or redistribution rights.
   This tooling update does not alter the frozen `f38da52` product build.
+
+### Read-only recovery transport checkpoint — 2026-11-24
+
+On the working development installation, USB ADB entered recovery with UID 0,
+read the current super metadata prefix and boot-control record, entered userspace
+fastbootd, performed only getvar queries, and returned to a completed Android boot
+with USB ADB available. Initial and final active slot: A. No flash, wipe or slot
+selection command was issued. This does not test the new production-key candidate.
+
+Fastbootd reported `snapshot-update-status: none`; the valid version-2 misc
+Virtual A/B record also had raw merge status 0. Both fresh logical metadata views
+matched and passed the planner's extent/layout checks. A has an allocated
+foundation; B does not. Boot-control flags alone do not establish B bootability.
+Metadata's filesystem was not mounted; these are the fastbootd and raw-record
+observations at this checkpoint, not a promise about future snapshot state.
+
+Current recovery/fastbootd/Android round-trip transport is verified. Restoration
+after an interrupted multi-partition update, pre-recovery failure recovery, clean
+setup and new signing-key acceptance remain untested. Raw captures stay private.
+The first exec-out captures mixed dd diagnostics with binary stdout and are
+retained as non-authoritative; clean shell-v2 captures have exact expected lengths
+and the boot-control CRC validates.
