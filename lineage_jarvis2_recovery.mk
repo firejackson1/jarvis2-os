@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 PRODUCT_NAME := lineage_jarvis2_recovery
 PRODUCT_DEVICE := jarvis2_recovery
