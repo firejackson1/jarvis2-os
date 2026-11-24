@@ -10,7 +10,8 @@ PRODUCT_CHARACTERISTICS := tv
 PRODUCT_PACKAGES += recovery
 PRODUCT_BUILD_BOOT_IMAGE := false
 PRODUCT_BUILD_INIT_BOOT_IMAGE := false
-PRODUCT_BUILD_VENDOR_BOOT_IMAGE := false
+# Enable vendor_boot resource rules; build only the explicit recovery ramdisk target.
+PRODUCT_BUILD_VENDOR_BOOT_IMAGE := true
 PRODUCT_BUILD_USERDATA_IMAGE := false
 
 # Keep upstream recovery ADB policy: no owner keys, no blanket permissive policy.

@@ -101,7 +101,8 @@ checkout, and build the ramdisk target:
 
 ```sh
 source build/envsetup.sh
-lunch lineage_jarvis2_recovery-<release-config>-userdebug
+export GOCACHE="$PWD/out/recovery-go-cache"
+lunch lineage_jarvis2_recovery trunk_staging userdebug
 m out/target/product/jarvis2_recovery/ramdisk-recovery.img
 ```
 
@@ -110,6 +111,14 @@ No boot/kernel/DTB image is to be installed from this prototype configuration.
 The kernel is intentionally not rebuilt here. The minimal recovery fstab omits
 userdata and formattable entries; storage, encryption and update operations
 will need deliberate integration after the diagnostic build boots.
+
+The pinned checkout passed the actual `lunch` configuration step after selecting
+`core_64_bit_only.mk` before `core_minimal.mk` and enabling the vendor_boot
+resource rules. The explicit target above still requests only the recovery
+ramdisk; enabling those rules does not produce an installable vendor_boot image.
+An isolated Go cache also avoided a stale standard-library index in a cache
+shared with an older platform build. No global Go setting or older checkout was
+changed. Product configuration success is not a completed recovery link.
 
 ## Offline packaging
 
