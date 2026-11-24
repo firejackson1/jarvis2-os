@@ -71,6 +71,7 @@ publication by this policy decision alone.
 ## 4. Stability and hardware validation
 
 - [ ] Diagnose and fix genuine suspend/wake and repeated speaker clicking; test repeated sleep/wake cycles and recovery after failure.
+  Evidence and current limitations: [suspend/audio investigation](SUSPEND_AUDIO_INVESTIGATION.md).
 - [x] Bind the current drivers and document the unwanted speaker-unmute path with two controlled, loss-free traces and a restored temporary mixer test. This does not complete the genuine suspend/wake or audible validation gate.
 - [ ] Test Ethernet, Wi-Fi, Bluetooth reconnect and network transitions across reboot.
 - [ ] Test direct USB and hub: storage, keyboard, mouse, controller and device/host role changes.

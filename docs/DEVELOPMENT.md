@@ -944,3 +944,57 @@ without private scripts, server access or an AI operator.
 - Validation: `tools/test-host.sh` ran 194 tests with five local AVB-tool skips;
   all executed tests and eight Java suites passed. Source privacy audit and
   `git diff --check` passed. This documentation does not change ROM behavior.
+
+### Network debugging restored; complete Music compile, 2026-11-24
+
+- The owner subsequently confirmed Android Home and enabled ADB over network
+  through Developer options. The existing authorized connection returned;
+  boot completion, slot A, cold boot reason and port 5555 were read back.
+  Device uptime agreed with elapsed time since the authorized power cycle.
+  Root debugging was then verified under the owner's standing authorization.
+  No key was copied or release debugging default changed.
+- Built the complete Music application from pinned revision
+  `c119d5a52f80289c7f939746ddc31c8bcee2a3ca`, applying the previously documented
+  session-cleanup patch in a private extracted source directory. Compiled all
+  four Java sources, generated resources, dexed 19 classes and aligned the APK.
+  This was a standalone build against SDK 34, not a native Soong/ROM build.
+- The first build failed its package-metadata comparison: the SDK defaulted the
+  compile/platform version name to UpsideDownCake instead of the native APK's
+  14. Kept the comparison and supplied explicit compile SDK 34/name 14 values.
+  The second run completed in 6.668 seconds; two independent empty output
+  directories produced identical unsigned APKs, 778,619 bytes, SHA256
+  `88d3c095c5b3c6fd5cba1a4006cf532b947e707e649872221ab30823e18f4ea4`.
+  DEX SHA256 was
+  `997233912011be31bf3a567f29270f006f02c245383dbe4654051eaac82208ca`.
+- Package remained com.android.music, version 34/14, min API 19/target API 30.
+  Preserved the upstream source and original native APK byte-for-byte. The job
+  used a 768 MiB/no-swap limit; the desktop VM remained running. The candidate
+  is unsigned and uninstalled; native image integration, Android lifecycle,
+  Bluetooth browsing and playback tests remain open.
+
+### ADB observer check and audible sleep onset, 2026-11-24
+
+- Verified root ADB and the actual TCP peer; its socket had a roughly one-second
+  keepalive timer. Recorded three 35-second connected/disconnected/connected
+  sleep windows using a private tracefs instance and host wall-clock timing.
+  There were 6/3/6 machine-suspend entries and Ethernet wake-source activations.
+- The disconnected condition had three cycles before an unsolicited HDMI
+  framework wake about 21 seconds into the window. That wake confounds a
+  whole-window rate comparison. A header-only peer capture independently
+  established no target TCP traffic for 34.005 seconds between close/reconnect,
+  excluding an established ADB connection as a necessary cause of those cycles.
+  The capture-window parser initially selected unrelated probe connections;
+  preserved the bad summary and corrected it using exact phase receipts.
+- All trace buffers had zero loss. Removed only the owned instance, verified
+  global tracing unchanged/off/nop, restored Android awake with ADB connected.
+  Network wake stayed enabled. No flash, slot change, reboot, wipe or desktop
+  action occurred. The owner reports clicking immediately at sleep onset;
+  stopped further sleep requests rather than claiming the sound is fixed.
+- Added SUSPEND_AUDIO_INVESTIGATION.md with the evidence, confound and next
+  driver qualification. A related public GPL driver matches the broad mute
+  sequence, but is not verified source correspondence for the shipped module.
+  No module patch or release image change is claimed.
+- Validation: `tools/test-host.sh` ran 194 tests with five local AVB-tool skips;
+  all executed tests and eight Java suites passed. Source privacy audit and
+  `git diff --check` passed. Private captures and unsigned APKs remain outside
+  the tracked source tree.

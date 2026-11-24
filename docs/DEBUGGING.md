@@ -60,6 +60,9 @@ The [pinned TV Settings development fragment](https://github.com/LineageOS/andro
 implements the temporary property switch. Its XML makes the switch depend on
 the main ADB switch; its English summary explicitly says it resets on reboot.
 Those three files in the native build tree matched the pinned Git source.
-The post-power-cycle network port was observed closed, but that boot's property
-value, completed Home screen and this on-device re-enable flow have not yet been
-verified. Do not interpret source behavior as a completed hardware test.
+After a cold power cycle, the owner confirmed Android Home and enabled the
+network ADB switch through this UI. The existing authorized host then connected;
+read-only checks reported boot completion, slot A and the temporary port value
+5555. Device uptime agreed with the power-cycle interval. This verifies the
+re-enable route on the development unit; fresh-host authorization, recovery and
+rollback remain separate checks.
