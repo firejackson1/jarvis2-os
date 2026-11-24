@@ -28,7 +28,7 @@ class UsbLogTests(unittest.TestCase):
         (tty / 'dev').write_text('246:0\n')
         self.bb = self.root / 'safe operations'
         self.bb.write_text('''#!/usr/bin/env python3
-import os,sys,subprocess,time
+import os,sys,subprocess,time,shutil
 from pathlib import Path
 root=Path(os.environ['TESTROOT']).resolve()
 cmd,*args=sys.argv[1:]
@@ -49,9 +49,33 @@ if cmd=='mkdir':
   for n in ('MaxPower','bmAttributes'): (p/n).touch()
  if p.name=='acm.usb0': (p/'port_num').write_text(os.environ.get('ACM_PORT','0'))
 elif cmd=='mount':
- if os.environ.get('FAIL_MOUNT'): sys.exit(1)
- g=Path(args[-1])/'usb_gadget'; g.mkdir()
- if os.environ.get('EXISTING_GADGET'): (g/'owner_gadget').mkdir()
+ if os.environ.get('FAIL_MOUNT') or os.environ.get('FAIL_MOUNT_FS')==args[1]: sys.exit(1)
+ if args[1]=='configfs':
+  g=Path(args[-1])/'usb_gadget'; g.mkdir()
+  if os.environ.get('EXISTING_GADGET'): (g/'owner_gadget').mkdir()
+ elif args[1]=='debugfs':
+  mode=Path(args[-1])/'usb/amlogic/crg-drd-otg/mode'; mode.parent.mkdir(parents=True)
+  mode.write_text(os.environ.get('USB_ROLE','notg-host')+'\\n')
+ else: sys.exit('forbidden mount type')
+elif cmd=='umount':
+ if os.environ.get('FAIL_UMOUNT'): sys.exit(1)
+ shutil.rmtree(Path(args[0])/'usb')
+elif cmd=='cat' and Path(args[0]).name=='mode':
+ p=Path(args[0])
+ if p.read_text()=='device\\n' and not os.environ.get('FAIL_ROLE_SWITCH'):
+  p.write_text('notg-device\\n')
+  if not os.environ.get('FAIL_UDC_REGISTER'):
+   name='unexpected' if os.environ.get('WRONG_UDC') else 'fe350000.crgudc'
+   if os.environ.get('UDC_DELAY_READS'): (root/'udc-delay').write_text('0')
+   else: (root/'sys/class/udc'/name).mkdir()
+ os.execvp('cat',['cat',*args])
+elif cmd=='ls' and Path(args[-1])==root/'sys/class/udc':
+ p=root/'udc-delay'
+ if p.exists():
+  n=int(p.read_text())+1; p.write_text(str(n))
+  if n>=int(os.environ['UDC_DELAY_READS']):
+   (root/'sys/class/udc/fe350000.crgudc').mkdir(); p.unlink()
+ os.execvp('ls',['ls',*args])
 elif cmd=='mknod': Path(args[0]).write_text('substituted node '+':'.join(args[1:]))
 elif cmd=='sleep': time.sleep(.02)
 elif cmd=='stty':
@@ -60,7 +84,7 @@ elif cmd=='cat' and Path(args[0]).name=='startup.log':
  p=root/'log-attempts'; n=int(p.read_text())+1 if p.exists() else 1; p.write_text(str(n))
  if n==1 and os.environ.get('FIRST_LOG_FAIL'): sys.exit(1)
  os.execvp('cat',['cat',*args])
-elif cmd in ('cat','ls','ln'): os.execvp(cmd,[cmd,*args])
+elif cmd in ('cat','ls','ln','rmdir'): os.execvp(cmd,[cmd,*args])
 else: sys.exit('forbidden host operation '+cmd)
 ''')
         self.bb.chmod(0o755)
@@ -97,11 +121,13 @@ else: sys.exit('forbidden host operation '+cmd)
         self.assertEqual((self.work / 'null').read_text(), 'substituted node c:1:3')
 
     def test_preexisting_gadget_is_preserved_and_never_bound(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
         result = self.run_library('usb_log_setup', EXISTING_GADGET='1')
         self.assertNotEqual(result.returncode, 0)
         g = self.work / 'config/usb_gadget'
         self.assertTrue((g / 'owner_gadget').is_dir())
         self.assertFalse((g / 'jarvis2_ram_log').exists())
+        self.assertNotIn('debugfs', (self.root / 'calls').read_text())
 
     def test_acm_must_own_the_selected_tty(self):
         result = self.run_library('usb_log_setup', ACM_PORT='1')
@@ -109,17 +135,72 @@ else: sys.exit('forbidden host operation '+cmd)
         self.assertFalse((self.work / 'ttyGS0').exists())
         self.assertEqual((self.work / 'config/usb_gadget/jarvis2_ram_log/UDC').read_text(), '')
 
-    def test_missing_or_additional_controller_is_rejected(self):
+    def test_unexpected_or_additional_controller_is_rejected(self):
         controller = self.sys / 'class/udc/fe350000.crgudc'
         controller.rmdir()
-        result = self.run_library('usb_log_setup')
-        self.assertNotEqual(result.returncode, 0)
-        self.assertFalse((self.work / 'config').exists())
-        controller.mkdir()
         (controller.parent / 'another-controller').mkdir()
         result = self.run_library('usb_log_setup')
         self.assertNotEqual(result.returncode, 0)
-        self.assertFalse((self.work / 'config').exists())
+        self.assertFalse((self.work / 'config/usb_gadget/jarvis2_ram_log').exists())
+        controller.mkdir()
+        result = self.run_library('usb_log_require_udc')
+        self.assertNotEqual(result.returncode, 0)
+
+    def test_missing_udc_switches_known_host_role_and_cleans_private_debugfs(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
+        result = self.run_library('usb_log_setup')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual((self.work / 'config/usb_gadget/jarvis2_ram_log/UDC').read_text().strip(),
+                         'fe350000.crgudc')
+        self.assertFalse((self.work / 'usb-debug').exists())
+        self.assertIn('debugfs', (self.root / 'calls').read_text())
+
+    def test_role_switch_failure_and_unknown_role_stop_and_clean_debugfs(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
+        for extra in ({'USB_ROLE': 'otg-host'}, {'FAIL_ROLE_SWITCH': '1'},
+                      {'FAIL_MOUNT_FS': 'debugfs'}):
+            with self.subTest(extra=extra):
+                result = self.run_library('usb_log_require_udc', **extra)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertFalse((self.work / 'usb-debug').exists())
+                self.assertFalse((self.work / 'config/usb_gadget/jarvis2_ram_log').exists())
+
+    def test_preexisting_debug_path_is_preserved_and_not_mounted(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
+        debug = self.work / 'usb-debug'
+        debug.mkdir()
+        (debug / 'owner-file').write_text('keep')
+        result = self.run_library('usb_log_require_udc')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual((debug / 'owner-file').read_text(), 'keep')
+        calls = self.root / 'calls'
+        self.assertNotIn('mount', calls.read_text() if calls.exists() else '')
+
+    def test_missing_udc_registration_is_bounded_and_unexpected_udc_stops(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
+        result = self.run_library('usb_log_require_udc', FAIL_UDC_REGISTER='1')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse((self.work / 'usb-debug').exists())
+        self.assertEqual((self.root / 'calls').read_text().count('sleep '), 4)
+        result = self.run_library('usb_log_require_udc', WRONG_UDC='1')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse((self.work / 'usb-debug').exists())
+
+    def test_delayed_udc_registration_succeeds_after_bounded_wait(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
+        result = self.run_library('usb_log_setup', UDC_DELAY_READS='3')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse((self.work / 'usb-debug').exists())
+        self.assertEqual((self.root / 'calls').read_text().count('sleep '), 2)
+        self.assertEqual((self.work / 'config/usb_gadget/jarvis2_ram_log/UDC').read_text().strip(),
+                         'fe350000.crgudc')
+
+    def test_debugfs_cleanup_failure_prevents_gadget_creation(self):
+        (self.sys / 'class/udc/fe350000.crgudc').rmdir()
+        result = self.run_library('usb_log_setup', FAIL_UMOUNT='1')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertTrue((self.work / 'usb-debug').exists())
+        self.assertFalse((self.work / 'config/usb_gadget/jarvis2_ram_log').exists())
 
     def test_mount_failure_and_preexisting_mount_path_stop(self):
         result = self.run_library('usb_log_setup', FAIL_MOUNT='1')

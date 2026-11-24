@@ -19,6 +19,11 @@ not qualify the onn's UDC, PHY, endpoint resources or vendor-specific behavior.
 - Only the 25 reviewed modules through amlogic-usb are loaded, after complete
   ordered hash/dependency validation. cqhci, amlogic-mmc and the later display/
   input/storage sequence are absent from this overlay.
+- After verifying an empty gadget configuration, this mode checks for its UDC.
+  If none exists, it uses a private RAM debugfs mount and the verified vendor
+  role control to request device mode. Only the observed notg-host role is
+  accepted for switching; the resulting role and exact UDC must be verified.
+  The private debugfs view is removed before constructing the ACM gadget.
 - A private configfs view refuses any existing gadget or an unexpected UDC.
   One ACM function must own port zero. Its tty major/minor come from sysfs;
   the device node is created only in private RAM state.
@@ -98,3 +103,49 @@ The exact BusyBox binary reproduced it after its output reader closed without
 new log data. Failing idle-reopen/private-null tests were then made green by
 finite snapshots and explicit child stdin. This review and these fixtures do
 not qualify the real UDC, USB reconnect or normal recovery boot.
+
+## USB role finding and correction, 2026-11-24
+
+Read-only live Android checks found an empty UDC class, an xHCI child under
+the dual-role controller and an unbound gadget despite `sys.usb.config=mtp,adb`.
+The vendor USB parameter was false; the DT controller type was 1. This is a
+kernel role issue before ADB authorization, rather than evidence of a bad cable.
+
+The retained amlogic-usb.ko is 1,576,016 bytes, SHA256
+`f077029f83dab546f13882e4e7aaf344f71d2597277119003894f4ba4eabbd98`.
+Its build-ID note matched the loaded note (SHA256
+`d1ba3d73ebbe9c6186bafda0c7d443e32c3a51c64a8e9af78e04012dba96fb44`).
+This binds the loaded build ID to the retained analysis input; it is not a
+new full-file hash of a loaded kernel module.
+
+LLVM disassembly of that module establishes:
+
+- get_otg_mode reads force_device_mode; the module has the otg_device parameter.
+- The probe's branch at 0x9274 selects gadget initialization when that flag is
+  true, or when controller type is 2. False plus type 1 selects host setup.
+- A built-in debugfs mode handler selects host/device without unloading the
+  module. The driver remove callback simply returns zero, so unbind/rebind was
+  deliberately avoided rather than assumed safe.
+
+A bounded runtime test changed only that existing mode control from notg-host
+to notg-device. USB ADB immediately appeared on the actual computer over the
+already-connected cable and the UDC reported configured. Restored notg-host and
+removed the private debugfs mount. Android stayed awake on slot A with Ethernet
+ADB; no module reload, sleep request, reboot, flash, slot switch or wipe occurred.
+This qualifies that runtime switch on the current Android session. It does not
+qualify the separate diagnostic image, Fastboot, or a persistent automatic policy.
+
+An initial offline approach passed a module insertion parameter. Further
+inspection found init_module calls __module_init_hook before usb_main_init;
+the related [GKI module hook](https://github.com/khadas/common_drivers/blob/3a11a86a02e759fc57fc79410215f7c0c3a0d8e0/drivers/gki_tool/gki_module.c#L64)
+replays boot-argument setup callbacks. That can overwrite the parameter before
+the probe, so that approach was withdrawn before building an image.
+
+Instead, the diagnostic now uses the runtime role control only when no UDC is
+registered. It rejects unexpected controllers, unknown roles, existing gadget
+configuration or a preexisting private debug path. It verifies the changed role,
+waits at most four one-second intervals for the exact controller, and cleans its
+owned debugfs view on success or failure. All module hashes still validate
+before insertion; the shared loader and default recovery entrypoint are unchanged.
+The first candidate's RAM launch arguments remain unknown; this is a correction
+for an identified role-selection failure mode, not proof of its earlier stall.

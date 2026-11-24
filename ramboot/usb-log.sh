@@ -6,9 +6,44 @@ usb_log_write() {
     printf '%s\n' "$2" > "$1"
 }
 
-usb_log_setup() {
+usb_log_require_udc() (
     _controllers=$("$GUARD_BB" ls -A "$GUARD_SYSROOT/class/udc") || return 1
+    [ "$_controllers" = fe350000.crgudc ] && return 0
+    [ -z "$_controllers" ] || return 1
+    _debug=$GUARD_WORKDIR/usb-debug
+    [ ! -e "$_debug" ] && [ ! -L "$_debug" ] || return 1
+    "$GUARD_BB" mkdir -m 700 "$_debug" || return 1
+    _debug_mounted=0
+    usb_log_debug_cleanup() {
+        if [ "$_debug_mounted" = 1 ]; then
+            "$GUARD_BB" umount "$_debug" || return 1
+            _debug_mounted=0
+        fi
+        "$GUARD_BB" rmdir "$_debug"
+    }
+    trap usb_log_debug_cleanup EXIT
+    "$GUARD_BB" mount -t debugfs -o nosuid,nodev,noexec debugfs "$_debug" || return 1
+    _debug_mounted=1
+    _mode=$_debug/usb/amlogic/crg-drd-otg/mode
+    [ -f "$_mode" ] && [ ! -L "$_mode" ] || return 1
+    _role=$("$GUARD_BB" cat "$_mode") || return 1
+    [ "$_role" = notg-host ] || return 1
+    printf '%s\n' 'USB controller absent; requesting device role through vendor control'
+    usb_log_write "$_mode" device || return 1
+    _role=$("$GUARD_BB" cat "$_mode") || return 1
+    [ "$_role" = notg-device ] || return 1
+    for _attempt in 1 2 3 4 5; do
+        _controllers=$("$GUARD_BB" ls -A "$GUARD_SYSROOT/class/udc") || return 1
+        [ "$_controllers" = fe350000.crgudc ] && break
+        [ -z "$_controllers" ] && [ "$_attempt" -lt 5 ] || return 1
+        "$GUARD_BB" sleep 1 || return 1
+    done
     [ "$_controllers" = fe350000.crgudc ] || return 1
+    usb_log_debug_cleanup || return 1
+    trap - EXIT
+)
+
+usb_log_setup() {
     _config=$GUARD_WORKDIR/config
     [ ! -e "$_config" ] && [ ! -L "$_config" ] || return 1
     "$GUARD_BB" mkdir -m 700 "$_config" || return 1
@@ -16,6 +51,7 @@ usb_log_setup() {
     [ -d "$_config/usb_gadget" ] && [ ! -L "$_config/usb_gadget" ] || return 1
     _existing=$("$GUARD_BB" ls -A "$_config/usb_gadget") || return 1
     [ -z "$_existing" ] || return 1
+    usb_log_require_udc || return 1
     _gadget=$_config/usb_gadget/jarvis2_ram_log
     "$GUARD_BB" mkdir "$_gadget" || return 1
     # Conventional Linux development gadget IDs, not an assigned product ID.
