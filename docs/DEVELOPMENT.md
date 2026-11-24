@@ -683,3 +683,16 @@ and the boot-control CRC validates.
   Full host suite: 193 tests passed, five local signed-AVB skips, source audit and
   eight Java suites passed. Actual recovery ABI, read-only metadata setup,
   installation, fresh boot and interruption restoration remain unqualified.
+
+### Frozen candidate source closure, 2026-11-24
+
+- Audited all 1,430 pinned project HEADs and reconstructed eleven changed/new
+  files across five upstream projects. Published the previously missing
+  SetupWizard Bluetooth permission patch as a separate supplement; frozen product
+  commit and images remain unchanged.
+- Exercised frozen launcher and animation preparation in a fresh sparse workspace
+  using pinned SDK/JDK inputs. APK, three libraries, license, notices and animation
+  matched staged inputs byte-for-byte; temporary bootstrap link was removed.
+  This verifies input preparation, not a complete clean rebuild or hardware boot.
+- Full host checks passed: 193 Python tests, five local signed-AVB skips,
+  source privacy audit and eight Java suites. No device writes or slot changes.

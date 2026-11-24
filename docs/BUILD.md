@@ -49,6 +49,8 @@ platform signing configuration. They must agree for system privileges to work.
 4. Apply `patches/TvSettings/series`, `patches/Bluetooth/series` and
    `patches/Adb/series` in their listed order to their pinned projects, then
    build `TvSettingsTwoPanel`, `com.android.btservices` and `com.android.adbd`.
+   Also apply `patches/SetupWizard/series` to pinned `packages/apps/SetupWizard`
+   and build `LineageSetupWizard`; see patches/SetupWizard/README.md.
    The ADB patch is required with the product negative-port default: unpatched
    adbd can otherwise fall back to network listening when USB is absent. See
    patches/Adb/README.md for scope and the mandatory launcher Updater exclusion.
@@ -72,6 +74,11 @@ platform signing configuration. They must agree for system privileges to work.
 
 Do not use the older experimental image set as an installer for this source
 snapshot. It predates newer Settings, widget, voice and launcher changes.
+
+To reproduce the frozen `f38da52` source state, use
+[its separate recipe](FROZEN_F38_REPRODUCTION.md). The newer SetupWizard source
+supplement must stay outside that candidate's device checkout so its original
+commit and build identity remain intact.
 
 ## Pin release build identity
 

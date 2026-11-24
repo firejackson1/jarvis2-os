@@ -1,0 +1,10 @@
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -9,6 +9,7 @@
+     android:versionCode="5"
+     android:sharedUserId="android.uid.system">
+ 
++    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+     <uses-permission android:name="android.permission.STATUS_BAR" />
+     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
