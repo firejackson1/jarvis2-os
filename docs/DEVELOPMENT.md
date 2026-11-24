@@ -262,3 +262,20 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - Added read-only explicit-slot planning with seven regression cases and native
   layout checks. Actual A planning succeeds; actual B planning refuses its empty
   foundation. Provisioning/writer support remains incomplete; see SLOT_INSTALLATION.
+
+## Optional Google apps private test
+
+- Target-files packaging completed, but META/ab_partitions.txt is absent;
+  misc_info contains virtual_ab=true and allow_non_ab=true without ab_update.
+  The artifact is not a configured A/B OTA installer.
+- Owner requested GApps. Verified the upstream Android 14 ARM ATV minimal archive,
+  rebuilt the exact tested filesystem checkpoint with only expected additions,
+  checked APK signatures/content/ownership/modes and signed the matching AVB chain.
+- Installed five A images from recovery through temporary linear mappings of
+  validated extents. Full readback matched; captured super metadata and protected
+  A/B boot/recovery hashes remained unchanged. No slot switch or userdata wipe.
+- Android booted enforcing; Play Store reached Google sign-in. Existing-user
+  Bluetooth runtime defaults needed explicit grants. Account login and app
+  downloads remain untested; Google APKs are not added to public source/artifacts.
+- Bazzite was stopped under renewed owner authorization for build acceleration,
+  then automatically restarted after the heavy jobs completed. Trace continues.
