@@ -238,3 +238,27 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   no updater/flash script, boot/recovery/vendor image or complete AVB chain and
   must not be treated as an installer. Private draft delivery completed; GitHub
   reports the ZIP uploaded and its SHA-256 matches the local archive.
+
+## First slot-A hardware test and shared-metadata correction
+
+- Owner requested the test. Built a private AVB set from the exact raw images and
+  captured A baseline, reusing the existing root key. Filesystem payload bytes,
+  descriptor lists, signatures, chain links, verification flags and rollback
+  indices passed offline checks; metadata reports actual build properties.
+- Read-only preflight confirmed baseline hashes, no snapshot state and linear
+  mappings. Saved controls APK/data backups. Fastbootd reported slot A/unlocked
+  and matching sizes; only system_a/system_ext_a/product_a/vbmeta_system_a/vbmeta_a
+  were explicitly flashed. No wipe or slot switch was performed.
+- New ROM booted A with SELinux enforcing and boot_completed=1. Owner confirmed
+  LTv Home and remote navigation/Select. Replaced an older data-installed controls
+  update with the exact candidate APK while retaining app data.
+- All five installed partitions match full-image hashes. Eleven unchanged A
+  boot/recovery/vendor-related partitions match backups. Crash buffer empty.
+  This was an existing-data upgrade, not a clean-install test.
+- Correction: stock fastboot sent automatic resize commands, and fastbootd writes
+  shared metadata views. We cannot claim untouched B metadata from suffixes alone.
+  Current B logical entries are unallocated; B is not a verified fallback. Owner
+  explicitly chose keeping B unchanged while either-slot support is developed.
+- Added read-only explicit-slot planning with seven regression cases and native
+  layout checks. Actual A planning succeeds; actual B planning refuses its empty
+  foundation. Provisioning/writer support remains incomplete; see SLOT_INSTALLATION.

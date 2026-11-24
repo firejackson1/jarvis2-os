@@ -1,0 +1,71 @@
+# Explicit A/B installation support — in development
+
+The release must allow an explicit `a` or `b` target; slot names do not designate
+an Android-versus-custom-ROM format. Each target still needs a complete compatible
+firmware foundation, sufficient allocated logical partitions and matching AVB
+metadata. Android userdata is shared between slots.
+
+## Important Virtual A/B metadata behavior
+
+The first private A test used only five `_a` image flash commands. All five later
+matched device readback, and unchanged boot/recovery/vendor partitions matched
+their saved hashes. The system booted with SELinux enforcing; the owner verified
+Home and remote navigation.
+
+However, ordinary fastboot automatically sent same-size logical resize commands.
+The pinned fastbootd implementation's `PartitionBuilder::Write()` calls
+`UpdateAllPartitionMetadata()`, which updates both boot-slot metadata views.
+`FlashHandler()` also calls `CancelPartitionSnapshot()` for logical partitions.
+Therefore selecting an `_a` image name alone does not prove that B's shared
+metadata was untouched. Complete pre-test metadata views were not captured for
+that test, so previous claims of untouched shared metadata were too broad.
+No B image flash command was sent; B is not a verified fallback.
+
+Current read-only dumps show allocated A logical partitions and empty B entries
+in both metadata views. An older saved view includes B/snapshot-COW mappings;
+that old snapshot view must not be restored blindly. The owner's current choice
+is to keep B unchanged while support is developed. No B provisioning or slot
+switch has been authorized.
+
+## Read-only preflight tool
+
+`tools/slot-install-plan.py` accepts an explicit target and never writes a device:
+
+```sh
+python3 tools/slot-install-plan.py --slot a \
+  --manifest /private/test-set/manifest.json --images /private/test-set/images \
+  --super-metadata /private/capture/super-metadata.img \
+  --physical-sizes /private/capture/physical-sizes.json \
+  --lpdump /path/to/built/host/bin/lpdump
+```
+
+The physical-sizes JSON must contain independently checked integer byte sizes for
+vbmeta_a, vbmeta_system_a, vbmeta_b and vbmeta_system_b. The native lpdump verifies
+and reads both metadata views; complete textual layout comparisons cover extents
+and groups as well as sizes. The plan requires matching metadata views, a fully
+allocated target foundation, offline-verified AVB metadata and exact image sizes.
+It checks local image hashes and reports whether the other slot even has a
+complete allocated foundation. This does not establish that it can boot.
+
+The tool rejects unsigned raw build archives, implicit/all-slot targets,
+unallocated foundations, differing metadata views and size mismatches. It does
+not resize, flash, activate a slot or wipe data. Firmware compatibility, trusted
+release keys and recovery transport remain separate gates.
+
+Host regressions cover allocated A and B targets, a B-active/A-empty layout,
+unsigned images, empty target foundations, mismatched sizes and differing views.
+A real read-only run against the current device's captured metadata planned A
+and correctly refused B. This is not a B installation or boot test.
+
+## Remaining installer work
+
+An empty inactive slot requires full foundation provisioning, not just the three
+rebuilt userspace images and two vbmeta files. A tested provisioning path must
+allocate the target's vendor/ODM/module partitions too, preserve every protected
+extent, detect cross-view overlap and snapshot state, verify backups of both
+metadata views and all required content, and prove recovery after interruption.
+It must not silently copy one metadata view over a different protected view.
+
+Either-slot release support remains incomplete until that path and the actual
+writer are verified. Do not present this planning tool or the private raw ZIP as
+a universal installer.

@@ -4,9 +4,10 @@ An **unofficial LineageOS 21 / Android 14** TV build for the 2026 onn 4K Pro
 (`jarvis2`). This project is independent of LineageOS, onn, Google and Amlogic.
 
 **Not a public ROM release yet. No files in this repository are an installer.**
-The working development device currently depends on RAM overlays and separately
-installed applications. A booting device does not establish that a new image
-contains all its fixes. Clean boot, installation and restoration remain gates.
+The first private source build has booted slot A with existing data; Home and
+remote navigation were human-verified and image readback matched. Advanced
+integration, clean-install behavior and restoration remain open gates. Shared
+Virtual A/B metadata needs special handling; B is not a verified fallback.
 
 ## Current work
 
@@ -25,7 +26,8 @@ is not included as a publicly redistributable component.
 Clone this repository as `device/onn/jarvis2` in the Android checkout.
 Run `./tools/test-host.sh` with Python 3 and JDK 11 or newer. Read
 [Build](docs/BUILD.md), [Licensing](docs/LICENSING.md),
-[Release checklist](docs/RELEASE_CHECKLIST.md) and
+[Release checklist](docs/RELEASE_CHECKLIST.md),
+[Slot installation status](docs/SLOT_INSTALLATION.md) and
 [Development ledger](docs/DEVELOPMENT.md) before assembling images.
 
 Private keys, pre-authorized debugging identities, owner settings, firmware,
