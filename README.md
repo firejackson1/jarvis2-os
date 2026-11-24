@@ -32,6 +32,7 @@ Brotli decoder library (`libbrotli1` on Debian/Ubuntu). Read
 [Optional Google apps](docs/GOOGLE_APPS.md),
 [Local GApps composition](docs/GAPPS_COMPOSITION.md),
 [Release signing](docs/RELEASE_SIGNING.md),
+[Raw image AVB assembly](docs/AVB_IMAGE_ASSEMBLY.md),
 [Known issues and validation limits](docs/KNOWN_ISSUES.md) and
 [Development ledger](docs/DEVELOPMENT.md) before assembling images.
 

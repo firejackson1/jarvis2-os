@@ -509,3 +509,16 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   passed 157 tests with five local AVB skips, privacy and Java suites. This
   archive still contains the old launcher; controlled integration/signing and
   final extracted-image verification remain pending.
+
+- Current signing v1 completed and independent package checks passed 78 public
+  key records, 103 standalone APKs, 31 APEX and 23 embedded APKs. OTA archive
+  inspection nevertheless rejected it: the command selected a stale Soong-copy
+  signer rather than the rebuilt installed executable, retaining a host path.
+  Preserved that rejected output and started v2 with the exact installed binary
+  hash and host-first tool path. No artifact from v1 was installed or published.
+- Added the separate raw-EROFS AVB assembler, leaving the Google composer intact.
+  Six regressions and two actual native runs passed on synthetic references and
+  disposable keys; root independently rehashed all ten output files and verified
+  identical five-image results. Full host checks passed 163 tests, five local
+  AVB skips, source audit and Java checks. Final payload content/metadata intent,
+  actual firmware/key acceptance, installation and restore remain separate gates.

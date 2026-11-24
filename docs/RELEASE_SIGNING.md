@@ -185,3 +185,17 @@ SYSTEM/etc/security/otacerts.zip contained exactly the project certificate under
 No recovery trust archive was present in that input, so this proves neither
 recovery trust replacement nor a rebuilt final image. Inventory the new input
 again rather than assuming its trust paths/metadata match this old rehearsal.
+
+Use the freshly installed `out/host/linux-x86/bin/sign_target_files_apks` after
+building the tool, and record its exact executable hash. A historical executable
+under `out/soong/host/linux-x86/bin` can remain stale even when the installed
+copy was rebuilt. The first current-candidate run selected that stale path: its
+package signatures passed independent checks, but a certificate ZIP retained a
+host path, so the artifact was rejected. The corrected run pins the installed
+executable and prioritizes its host directory. Do not promote any output until
+its actual certificate archives and final image contents pass independent checks.
+
+For assembling the three verified raw EROFS payloads into the existing AVB graph,
+see [raw image assembly](AVB_IMAGE_ASSEMBLY.md). This does not inspect whether
+changed application content or filesystem metadata is intended; package,
+filesystem, privacy and privilege checks must establish that separately.
