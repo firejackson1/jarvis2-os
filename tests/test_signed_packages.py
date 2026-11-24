@@ -89,4 +89,13 @@ class PayloadOutputTests(unittest.TestCase):
   module.require_payload_content_verification(': Successfully verified sha256 hashtree of /temporary/payload.img for image of 4096 bytes\n',path)
   with self.assertRaises(ValueError):module.require_payload_content_verification(': Successfully verified sha256 hash of /different/payload.img for image of 4096 bytes\n',path)
 
+class InventoryProfileTests(unittest.TestCase):
+ def test_release_and_legacy_rehearsal_have_explicit_different_counts(self):
+  release=module.expected_package_counts({'PRODUCT/app/Launcher/Launcher.apk'},78)
+  legacy=module.expected_package_counts({'SYSTEM_EXT/priv-app/Updater/Updater.apk'},78)
+  self.assertEqual((103,102),(release['standalone_apks'],release['standalone_resigned']))
+  self.assertEqual((104,103),(legacy['standalone_apks'],legacy['standalone_resigned']))
+  for counts in [release,legacy]:
+   self.assertEqual((31,30,23,21,2),(counts['apexes'],counts['apex_payloads_verified'],counts['embedded_apks'],counts['embedded_resigned'],counts['embedded_shim_preserved']))
+
 if __name__=='__main__':unittest.main()

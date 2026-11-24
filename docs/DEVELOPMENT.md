@@ -498,3 +498,14 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   firmware, device or slot was used. Full checks passed 156 tests, five local
   AVB skips, source audit and eight Java suites. Final signed-ROM composition,
   hardware trust, installation and restoration remain open.
+
+- Full bounded policy target-files build completed successfully (2h40m13s) with
+  Bazzite running. Preliminary archive inspection found 103 standalone APKs,
+  31 APEX packages, the single native system_ext overlay, no official Updater,
+  authenticated USB defaults, product network-port -1 and generic build identity.
+  The package verifier now distinguishes the observed 104-APK legacy rehearsal
+  from the 103-APK no-Updater input while keeping APEX/embedded counts strict;
+  the regression failed before this update and passes afterward. Host checks
+  passed 157 tests with five local AVB skips, privacy and Java suites. This
+  archive still contains the old launcher; controlled integration/signing and
+  final extracted-image verification remain pending.

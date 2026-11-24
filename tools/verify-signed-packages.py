@@ -118,6 +118,15 @@ def require_payload_content_verification(output,path):
 def verification_environment(jdk,host,soong_host,tmpdir):
  return dict(os.environ,JAVA_HOME=str(jdk),PATH=str(jdk/'bin')+':'+str(soong_host/'bin')+':'+str(host/'bin')+':'+os.environ['PATH'],TMPDIR=str(tmpdir))
 
+def expected_package_counts(original_names, public_count):
+ # Two observed Jarvis2 inputs: old signing rehearsal and no-Updater release.
+ standalone = 104 if any(Path(name).name == 'Updater.apk' for name in original_names) else 103
+ return {'public_keys':public_count,'standalone_apks':standalone,
+         'standalone_resigned':standalone-1,'apexes':31,
+         'apex_payloads_verified':30,'embedded_apks':23,
+         'embedded_resigned':21,'embedded_shim_preserved':2}
+
+
 def main():
  os.umask(0o077)
  parser=argparse.ArgumentParser(description=__doc__)
@@ -268,7 +277,8 @@ def main():
      result['embedded_apk_count']=len(paths);report['apexes'].append(result);save()
     print('Verified APEX '+identity,flush=True)
   counts={'public_keys':len(report['public_keys']),'standalone_apks':len(report['standalone_apks']),'standalone_resigned':sum(r['expected_certificate_sha256'] is not None for r in report['standalone_apks']),'apexes':len(report['apexes']),'apex_payloads_verified':sum(r.get('payload_signature_and_hashtree_verified',False) for r in report['apexes']),'embedded_apks':len(report['embedded_apks']),'embedded_resigned':sum(not r['preserved_in_shim'] for r in report['embedded_apks']),'embedded_shim_preserved':sum(r['preserved_in_shim'] for r in report['embedded_apks'])}
-  if counts!={'public_keys':len(inventory['keys']),'standalone_apks':104,'standalone_resigned':103,'apexes':31,'apex_payloads_verified':30,'embedded_apks':23,'embedded_resigned':21,'embedded_shim_preserved':2}:raise ValueError('Package inventory count mismatch: '+str(counts))
+  report['package_inventory_profile']='legacy-updater-rehearsal' if any(Path(n).name=='Updater.apk' for n in old_names) else 'release-no-updater'
+  if counts!=expected_package_counts(old_names,len(inventory['keys'])):raise ValueError('Package inventory count mismatch: '+str(counts))
   report.update(status='passed',counts=counts,finished_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()));save();print(json.dumps(counts),flush=True)
  except BaseException as error:
   report.update(status='failed',error=str(error),traceback=traceback.format_exc());save();raise
