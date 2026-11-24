@@ -457,3 +457,13 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   not modified; integration waits for its running full build to finish.
 - Updated the release checklist to reflect current Bazzite-running policy, actual
   private signing/source/profile evidence, and remaining final artifact gates.
+
+- Exercising the pinned native OTA-key replacement exposed a Python 3 bytes/text
+  TypeError and nested certificate ZIPs retaining host paths. A two-line source
+  patch decodes the metadata and uses certificate basenames. Clean application
+  to the exact pinned source and isolated execution of both actual native
+  functions passed explicit/empty-key-list and system/recovery cases. No real
+  certificate signing or active Android source change occurred. CI now repeats
+  the source-hash-pinned native regression; full host suite still passes 145
+  tests with five local AVB skips, privacy and Java checks. Actual final-image
+  trust replacement/verification remains pending.

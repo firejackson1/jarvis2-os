@@ -52,6 +52,8 @@ platform signing configuration. They must agree for system privileges to work.
    The ADB patch is required with the product negative-port default: unpatched
    adbd can otherwise fall back to network listening when USB is absent. See
    patches/Adb/README.md for scope and the mandatory launcher Updater exclusion.
+   Release signing additionally requires `patches/ReleaseTools/series` on the
+   pinned `build/make` project; rebuild `sign_target_files_apks` afterward.
 5. Prepare the pinned LTvLauncher inputs as documented in LAUNCHERS.md.
 6. lineage_jarvis2.mk inherits tv-controls.mk. Soong builds the Settings overlay
    directly from source with `TvSettingsTwoPanel` as its resource dependency;

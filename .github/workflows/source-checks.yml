@@ -33,3 +33,22 @@ jobs:
         env:
           JARVIS2_ANDROID_SOURCE: ${{ runner.temp }}/jarvis2-avb-fixture-tools
         run: ./tools/test-host.sh
+      - name: Pinned native OTA key replacement regression
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib,json,os,subprocess,urllib.request
+          from pathlib import Path
+          pin=json.loads(Path('manifests/releasetools-test-source.json').read_text())
+          url='https://raw.githubusercontent.com/'+pin['project']+'/'+pin['revision']+'/'+pin['path']
+          with urllib.request.urlopen(url,timeout=60) as response:
+              data=response.read(1024*1024+1)
+          if len(data)>1024*1024 or hashlib.sha256(data).hexdigest()!=pin['sha256']:
+              raise ValueError('Pinned releasetools source checksum mismatch')
+          root=Path(os.environ['RUNNER_TEMP'])/'jarvis2-ota-key-fixture'
+          source=root/pin['path'];source.parent.mkdir(parents=True)
+          source.write_bytes(data)
+          patch=Path('patches/ReleaseTools/0001-python3-ota-key-replacement.patch').resolve()
+          subprocess.run(['git','-C',str(root),'apply','--check',str(patch)],check=True)
+          subprocess.run(['git','-C',str(root),'apply',str(patch)],check=True)
+          subprocess.run(['python3','tools/test-ota-key-replacement.py','--source',str(source)],check=True)
+          PYCODE

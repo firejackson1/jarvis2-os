@@ -1,0 +1,6 @@
+{
+  "project": "LineageOS/android_build",
+  "revision": "bc95152efc6a43f3b103b1848c946e9bf8d4e493",
+  "path": "tools/releasetools/sign_target_files_apks.py",
+  "sha256": "bff7a4ae0f868921ae26a1092c5585e13aeaf94aff4fe7b47e66e0c7daf2749a"
+}

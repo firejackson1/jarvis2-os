@@ -17,8 +17,8 @@ keys. Record public certificate/key fingerprints, input hashes and signing-tool
 revisions with the candidate. Private keys, unlock secrets and backup archives
 must never enter Git, release assets, logs or bug reports.
 
-The first private release key set has a verified encrypted backup, but has not
-signed a release or been tested for hardware acceptance. Key backup verification
+The first private release key set has a verified encrypted backup, and has signed private package/APEX and launcher rehearsals, but has not
+signed a public release or been tested for hardware acceptance. Key backup verification
 alone does not complete the release-signing checklist.
 
 ## Input and output checks
@@ -156,3 +156,21 @@ unchanged reference inputs for subsequent complete-chain/image validation.
 Both promoted commands were executed against the private rehearsal under 1 GiB
 RAM, 3 GiB swap and one CPU. The package command also passed with an invalid
 inherited JAVA_HOME. No private key or device operation was required.
+
+## Replace development OTA trust
+
+Apply `patches/ReleaseTools/series` to the pinned build/make project and rebuild
+its host signer. Use `--replace_ota_keys` with an explicit reviewed key mapping
+for every identity in META/otakeys.txt and every extra_ota_keys/extra_recovery_keys
+entry. Do not assume APK signing alone changes recovery or system OTA trust.
+The source patch fixes Python 3 decoding and strips host paths from nested
+certificate ZIP member names; the native isolated regression passes with both
+explicit and empty key lists.
+
+After signing, independently inspect every system/recovery/boot otacerts.zip:
+verify actual certificate fingerprints against approved public materials,
+reject leftover development/extra trust, and check that the final image contains
+the rewritten archives. Check any recovery verification key representation too.
+The earlier successful package/APEX rehearsal did not request OTA trust
+replacement, so it does not satisfy this gate. Replacement is pending against
+the final candidate and does not itself make the target-files an A/B OTA.
