@@ -9,8 +9,8 @@
     {
       "name": "LTvLauncher.apk",
       "url": null,
-      "sha256": "b1aa61fc4a624e7ec0772a52178789c9e0377ee223812534c16991772c2e9c71",
-      "availability": "Provide the controlled signed candidate locally; public asset publication is pending."
+      "sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+      "availability": "Provide the neutral-workspace controlled signed candidate locally; public asset publication is pending."
     },
     {
       "name": "LTvLauncher-source.tar.gz",
@@ -60,5 +60,6 @@
     "engine_dependency_closure_complete": false
   },
   "build_origin": "controlled-project-build",
-  "corresponding_source_manifest": "manifests/launcher-source-bundle.json"
+  "corresponding_source_manifest": "manifests/launcher-source-bundle.json",
+  "build_workspace_policy": "Use the documented neutral canonical workspace to avoid embedding private generated Dart source URIs."
 }

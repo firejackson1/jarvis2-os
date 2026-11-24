@@ -7,8 +7,9 @@ baseline, references, new payloads and tools independently. Root pins do not
 prove hardware acceptance. Payload content/metadata intent is NOT verified.
 Requires companion composer/auditor helpers; only explicitly supplied user keys.
 """
-import argparse,copy,hashlib,importlib.util,json,os,re,shutil,struct,subprocess,sys,traceback
+import argparse,copy,hashlib,importlib.util,json,os,re,shutil,struct,subprocess,sys,tempfile,traceback
 from pathlib import Path
+from types import SimpleNamespace
 spec=importlib.util.spec_from_file_location('jarvis2_assembler_composer',Path(__file__).with_name('compose-gapps.py'))
 C=importlib.util.module_from_spec(spec);old=sys.dont_write_bytecode;sys.dont_write_bytecode=True
 try:spec.loader.exec_module(C)
@@ -51,9 +52,121 @@ def footer_command(tool,target,part,budget,header,tree,descs,avbtool):
  return command
 
 
+PROPERTY_POLICY={'format':1,'build_prop_paths':{'system':'system/build.prop','system_ext':'etc/build.prop','product':'etc/build.prop'},'fingerprint_source':'ro.{partition}.build.fingerprint','os_version_source':'ro.{partition}.build.version.release','security_patch_source':{'partition':'system','path':'system/build.prop','key':'ro.build.version.security_patch'}}
+
+
+def validate_stock_profile(profile):
+ if not isinstance(profile,dict) or set(profile)!={'format','templates','references','output_bytes','leaf_release_string','unbound_references'} or type(profile['format']) is not int or profile['format']!=1:raise ValueError('Unsupported stock profile schema')
+ if not isinstance(profile['templates'],dict) or set(profile['templates'])!={'vbmeta','vbmeta_system'} or not isinstance(profile['references'],dict) or not profile['references']:raise ValueError('Missing stock templates/references')
+ for name,item in list(profile['templates'].items())+list(profile['references'].items()):
+  if not isinstance(name,str) or not re.fullmatch(r'[A-Za-z0-9_]+',name) or not isinstance(item,dict) or set(item)!={'sha256','bytes'} or type(item['bytes']) is not int or item['bytes']<=0:raise ValueError('Invalid stock input identity')
+  PROFILE.sha256_value(item['sha256'])
+ if not isinstance(profile['unbound_references'],list) or any(not isinstance(n,str) for n in profile['unbound_references']) or len(profile['unbound_references'])!=len(set(profile['unbound_references'])) or not set(profile['unbound_references'])<=set(profile['references']):raise ValueError('Invalid explicit unbound references')
+ if set(profile['references'])&set((*PARTS,'vbmeta','vbmeta_system')):raise ValueError('Stock references overlap changed images/templates')
+ if not isinstance(profile['output_bytes'],dict) or set(profile['output_bytes'])!=set((*PARTS,'vbmeta','vbmeta_system')):raise ValueError('Missing explicit output budgets')
+ for name,size in profile['output_bytes'].items():
+  if type(size) is not int or size<=0 or size%4096 or (name.startswith('vbmeta') and size>16*1024*1024):raise ValueError('Invalid output budget')
+ release=profile['leaf_release_string']
+ if not isinstance(release,str) or not re.fullmatch(r'[ -~]{1,47}',release):raise ValueError('Invalid fresh leaf release string')
+
+
+def parse_build_properties(text):
+ result={}
+ for line in text.splitlines():
+  line=line.strip()
+  if not line or line.startswith('#'):continue
+  if '=' not in line or '\x00' in line:raise ValueError('Malformed canonical build.prop')
+  key,value=line.split('=',1)
+  if not re.fullmatch(r'[A-Za-z0-9_.-]+',key) or key in result:raise ValueError('Duplicate/malformed canonical property')
+  result[key]=value
+ return result
+
+
+def desired_properties(values):
+ result={}
+ try:
+  patch=values['system']['ro.build.version.security_patch']
+  if not re.fullmatch(r'\d{4}-\d{2}-\d{2}',patch):raise ValueError('Invalid global system security patch')
+  for part in PARTS:
+   for key,value in [('fingerprint',values[part]['ro.'+part+'.build.fingerprint']),('os_version',values[part]['ro.'+part+'.build.version.release']),('security_patch',patch)]:
+    if not value or len(value)>1024 or any(ord(c)<32 or ord(c)>126 for c in value):raise ValueError('Invalid desired userspace property')
+    result['com.android.build.'+part+'.'+key]=value.encode('ascii')
+ except KeyError as e:raise ValueError('Missing canonical raw build property: '+str(e)) from None
+ return result
+
+
+def rewrite_properties(descriptors,values,parts,avbtool):
+ result=[];seen=set()
+ for descriptor in descriptors:
+  value=copy.deepcopy(descriptor)
+  if isinstance(value,avbtool.AvbPropertyDescriptor) and value.key in values:
+   if value.key in seen or not any(value.key.startswith('com.android.build.'+part+'.') for part in parts):raise ValueError('Duplicate/misplaced userspace AVB property')
+   seen.add(value.key);value.value=values[value.key]
+  result.append(value)
+ for key in sorted(values):
+  if key not in seen and any(key.startswith('com.android.build.'+part+'.') for part in parts):
+   value=avbtool.AvbPropertyDescriptor();value.key=key;value.value=values[key];result.append(value)
+ return result
+
+
+def validate_reference_coverage(used,references,unbound):
+ unbound=set(unbound)
+ if used&unbound or used|unbound!=set(references):raise ValueError('Stock profile reference set differs from signed graph and explicit unbound set')
+
+
+def verify_stock_templates(images,templates,profile,avbtool,avb,root_pin):
+ """Verify signed templates and every unchanged reference, excluding only 3 replacements."""
+ validate_stock_profile(profile)
+ for part,item in dict(profile['templates'],**profile['references']).items():
+  path=strict_file(images[part])
+  if path.stat().st_size!=item['bytes'] or PROFILE.digest(path)!=item['sha256']:raise ValueError('Stock template/reference pin mismatch')
+ checked=set();active=set();leaves=set()
+ def verify(part,expected=None):
+  if part in active:raise ValueError('Stock AVB reference cycle')
+  image=avbtool.ImageHandler(str(images[part]),read_only=True)
+  try:
+   footer,header,descs,_=avb._parse_image(image)
+   if part in ('vbmeta','vbmeta_system') and footer is not None:raise ValueError('Stock templates must be bare vbmeta images')
+   offset=footer.vbmeta_offset if footer else 0;image.seek(offset);blob=image.read(header.SIZE+header.authentication_data_block_size+header.auxiliary_data_block_size)
+   start=header.SIZE+header.authentication_data_block_size+header.public_key_offset;public=blob[start:start+header.public_key_size]
+   if header.flags or header.public_key_metadata_size or header.algorithm_type==0 or not avbtool.verify_vbmeta_signature(header,blob):raise ValueError('Invalid stock template/chain signature or flags')
+   if expected is not None and public!=expected:raise ValueError('Stock parent/child key mismatch')
+   if part=='vbmeta' and hashlib.sha256(public).hexdigest()!=root_pin:raise ValueError('Stock root key pin mismatch')
+   if part in checked:return
+   active.add(part)
+   for descriptor in descs:
+    if isinstance(descriptor,avbtool.AvbChainPartitionDescriptor):verify(descriptor.partition_name,descriptor.public_key)
+    elif isinstance(descriptor,(avbtool.AvbHashDescriptor,avbtool.AvbHashtreeDescriptor)):
+     if descriptor.partition_name in PARTS:continue
+     if not descriptor.verify(str(images[descriptor.partition_name].parent),'.img',{},image,False):raise ValueError('Stock unchanged reference descriptor verification failed')
+     leaves.add(descriptor.partition_name)
+    elif not isinstance(descriptor,avbtool.AvbPropertyDescriptor):raise ValueError('Unsupported stock template descriptor')
+   active.remove(part);checked.add(part)
+  finally:image._image.close()
+ verify('vbmeta')
+ used=(checked|leaves)-{'vbmeta','vbmeta_system'}
+ unbound=set(profile['unbound_references'])
+ validate_reference_coverage(used,profile['references'],unbound)
+ return {'template_signatures_verified':True,'parent_child_public_keys_match':True,'unchanged_reference_descriptors_verified':True,'avb_covered_references':sorted(used),'pinned_but_not_avb_covered_references':sorted(unbound),'full_reference_file_pins_verified':sorted(profile['references']),'operator_root_key_pin_checked':True,'replaced_baseline_leaf_bytes_verified':False,'hardware_root_trust_verified':False,'nodes':sorted(checked)}
+
+
 def assemble(args):
  for pin in [args.baseline_root_sha256,args.output_root_sha256,args.avbtool_source_sha256]:PROFILE.sha256_value(pin)
- output=C.check_output(args.output,[args.base_images,args.payloads,args.references,args.tool_tree])
+ stock_mode=getattr(args,'stock_templates',None) is not None
+ policy_path=getattr(args,'userspace_policy',None);policy_pin=getattr(args,'userspace_policy_sha256',None)
+ if bool(policy_path)!=bool(policy_pin):raise ValueError('Userspace policy and SHA256 pin are both required')
+ if stock_mode and not policy_path:raise ValueError('Stock-template mode requires explicit dynamic userspace policy')
+ policy=None
+ if policy_path:
+  policy=C.pinned_json(strict_file(policy_path),policy_pin)
+  if not isinstance(policy,dict) or type(policy.get('format')) is not int or policy!=PROPERTY_POLICY:raise ValueError('Unsupported dynamic userspace property policy')
+ stock_profile=None
+ if stock_mode:
+  if not getattr(args,'stock_profile',None) or not getattr(args,'stock_profile_sha256',None):raise ValueError('Stock profile and SHA256 pin required')
+  stock_profile=C.pinned_json(strict_file(args.stock_profile),args.stock_profile_sha256);validate_stock_profile(stock_profile)
+ elif getattr(args,'stock_profile',None) or getattr(args,'stock_profile_sha256',None):raise ValueError('Stock profile requires stock-template mode')
+ baseline_dir=args.stock_templates if stock_mode else args.base_images
+ output=C.check_output(args.output,[baseline_dir,args.payloads,args.references,args.tool_tree]+([Path(policy_path).parent] if policy_path else [])+([args.stock_profile.parent] if stock_mode else []))
  keys=[strict_file(args.root_key),strict_file(args.system_key)]
  if any(ROOT.resolve()==p or ROOT.resolve() in p.parents or output==p or output in p.parents for p in keys):raise ValueError('User keys must stay outside repository/tool bundle and output')
  source=strict_file(args.tool_tree/'external/avb/avbtool.py')
@@ -62,7 +175,11 @@ def assemble(args):
  tools=args.tool_tree/'out/host/linux-x86/bin'
  required={name:C.regular((tools/name).resolve()) for name in ['fsck.erofs','avbtool']}
  env=dict(os.environ,PATH=str(tools)+':'+os.environ['PATH'])
- images={part:strict_file(args.base_images/(part+'.img')) for part in (*PARTS,'vbmeta','vbmeta_system')}
+ images={part:strict_file(baseline_dir/(part+'.img')) for part in (('vbmeta','vbmeta_system') if stock_mode else (*PARTS,'vbmeta','vbmeta_system'))}
+ if stock_mode:
+  for part in stock_profile['references']:images[part]=strict_file(args.references/(part+'.img'))
+  for part,item in dict(stock_profile['templates'],**stock_profile['references']).items():
+   if images[part].stat().st_size!=item['bytes'] or PROFILE.digest(images[part])!=item['sha256']:raise ValueError('Stock template/reference does not match pinned profile')
  payloads={part:strict_file(args.payloads/(part+'.img')) for part in PARTS}
  baseline_hashes={part:PROFILE.digest(path) for part,path in images.items()}
  payload_hashes={part:PROFILE.digest(path) for part,path in payloads.items()}
@@ -80,7 +197,7 @@ def assemble(args):
  def header_policy(header):
   if header.flags or header.public_key_metadata_size:raise ValueError('Disabled verification or unsupported vbmeta flags/public-key metadata')
  # Validate descriptor paths before the existing auditor resolves any references.
- seen=set();active=set();reference_hashes={}
+ seen=set();active=set();reference_hashes={part:baseline_hashes[part] for part in stock_profile['references']} if stock_mode else {}
  def collect(part):
   if part in active:raise ValueError('AVB reference cycle')
   if part in seen:return
@@ -92,7 +209,10 @@ def assemble(args):
    if isinstance(descriptor,(avbtool.AvbChainPartitionDescriptor,avbtool.AvbHashDescriptor,avbtool.AvbHashtreeDescriptor)):
     name=descriptor.partition_name
     if not re.fullmatch(r'[A-Za-z0-9_]+',name):raise ValueError('Unsafe AVB leaf name')
-    if name not in images:images[name]=strict_file(args.references/(name+'.img'));reference_hashes[name]=PROFILE.digest(images[name])
+    if stock_mode and name in PARTS:continue
+    if name not in images:
+     if stock_mode:raise ValueError('Signed graph references an unlisted stock input')
+     images[name]=strict_file(args.references/(name+'.img'));reference_hashes[name]=PROFILE.digest(images[name])
     if isinstance(descriptor,avbtool.AvbChainPartitionDescriptor):collect(name)
    elif not isinstance(descriptor,(avbtool.AvbPropertyDescriptor,avbtool.AvbKernelCmdlineDescriptor)):
     raise ValueError('Unsupported AVB descriptor type')
@@ -112,7 +232,7 @@ def assemble(args):
  chains=[d for d in templates['vbmeta'][1] if isinstance(d,avbtool.AvbChainPartitionDescriptor) and d.partition_name=='vbmeta_system']
  if len(chains)!=1:raise ValueError('Exactly one root-bound vbmeta_system child is required')
  leaves={}
- for part in PARTS:
+ for part in (() if stock_mode else PARTS):
   footer,header,descs,_=parse(images[part]);trees=[d for d in descs if isinstance(d,avbtool.AvbHashtreeDescriptor)]
   if header.algorithm_type!=0 or header.rollback_index_location or header.flags or len(trees)!=1 or trees[0].partition_name!=part or trees[0].flags or trees[0].hash_algorithm not in ('sha256','sha512') or any(not isinstance(d,(avbtool.AvbHashtreeDescriptor,avbtool.AvbPropertyDescriptor)) for d in descs):raise ValueError('Unsupported leaf AVB footer policy')
   C.require_tree_geometry(trees[0])
@@ -120,9 +240,15 @@ def assemble(args):
   with PROFILE.ErofsMetadata(images[part]) as reader:
    if reader.geometry['filesystem_bytes']!=footer.original_image_size:raise ValueError('Baseline EROFS/footer geometry mismatch')
   leaves[part]=(header,trees[0],descs)
- distinct_files(dict(images,**{'payload_'+k:v for k,v in payloads.items()}))
+ if stock_mode:
+  for parent,parts in expected.items():
+   for part in parts:
+    tree=next(d for d in templates[parent][1] if isinstance(d,avbtool.AvbHashtreeDescriptor) and d.partition_name==part);C.require_tree_geometry(tree)
+    if tree.flags or tree.hash_algorithm not in ('sha256','sha512'):raise ValueError('Unsupported stock replacement hashtree policy')
+    leaves[part]=(SimpleNamespace(algorithm_type=0,flags=0,rollback_index=0,rollback_index_location=0,release_string=stock_profile['leaf_release_string']),tree,[])
+ distinct_files({str(i):p for i,p in enumerate([*images.values(),*payloads.values()])})
  output.mkdir(mode=0o700);(output/'images').mkdir();(output/'logs').mkdir()
- report={'status':'running','format':1,'device_modified':False,'hardware_root_trust_verified':False,'restore_tested':False,'ota_installer':False,'full_target_files_complete':False,'payload_content_intent_verified':False,'payload_metadata_intent_verified':False,'baseline_root_sha256':args.baseline_root_sha256,'output_root_sha256':args.output_root_sha256,'root_key_changed':args.baseline_root_sha256!=args.output_root_sha256,'baseline_image_sha256':baseline_hashes,'unchanged_reference_image_sha256':reference_hashes,'payload_image_sha256':payload_hashes,'partitions':{},'files':{},'tool_hashes':{name:PROFILE.digest(path) for name,path in dict(required,avbtool_python=source).items()},'limitations':['Caller must independently authenticate baseline, references, payloads and tools.','EROFS structure is checked; intended changed content and metadata are caller responsibilities.','Output root pin is not hardware trust, OTA or installation qualification.']}
+ report={'status':'running','format':1,'mode':'stock-templates' if stock_mode else 'coherent-baseline','replaced_baseline_leaf_bytes_verified':not stock_mode,'userspace_property_policy_sha256':policy_pin,'stock_profile_sha256':getattr(args,'stock_profile_sha256',None),'device_modified':False,'hardware_root_trust_verified':False,'restore_tested':False,'ota_installer':False,'full_target_files_complete':False,'payload_content_intent_verified':False,'payload_metadata_intent_verified':False,'baseline_root_sha256':args.baseline_root_sha256,'output_root_sha256':args.output_root_sha256,'root_key_changed':args.baseline_root_sha256!=args.output_root_sha256,'baseline_image_sha256':baseline_hashes,'unchanged_reference_image_sha256':reference_hashes,'payload_image_sha256':payload_hashes,'partitions':{},'files':{},'tool_hashes':{name:PROFILE.digest(path) for name,path in dict(required,avbtool_python=source).items()},'limitations':['Caller must independently authenticate baseline, references, payloads and tools.','EROFS structure is checked; intended changed content and metadata are caller responsibilities.','Output root pin is not hardware trust, OTA or installation qualification.']}
  redactions={str(keys[0]):'<user-root-key>',str(keys[1]):'<user-system-key>'}
  def redact(text):
   for path,label in redactions.items():text=text.replace(path,label)
@@ -143,14 +269,27 @@ def assemble(args):
   # Trusted baseline audit precedes key use, staging and signing.
   baseline=output/'baseline-reference-tree';baseline.mkdir()
   for part,path in images.items():(baseline/(part+'.img')).symlink_to(path)
-  report['baseline_audit']=audit(baseline,output/'baseline-audit',args.baseline_root_sha256)
+  report['baseline_audit']=verify_stock_templates(images,templates,stock_profile,avbtool,avb,args.baseline_root_sha256) if stock_mode else audit(baseline,output/'baseline-audit',args.baseline_root_sha256)
+  values={}
+  if policy:
+   props={}
+   for part,path in payloads.items():
+    with tempfile.TemporaryDirectory(prefix='properties-',dir=output) as work:
+     run([required['fsck.erofs'],'--no-preserve','--extract='+work,path],'extract-properties-'+part+'.log')
+     prop_path=strict_file(Path(work)/policy['build_prop_paths'][part])
+     if prop_path.stat().st_size>1048576:raise ValueError('Canonical build.prop too large')
+     props[part]=parse_build_properties(prop_path.read_text(encoding='utf-8'))
+   values=desired_properties(props);report['desired_userspace_properties']={key:value.decode() for key,value in values.items()}
+   for part,(header,tree,descs) in leaves.items():leaves[part]=(header,tree,rewrite_properties(descs,values,{part},avbtool))
+   for part,(header,descs) in templates.items():templates[part]=(header,rewrite_properties(descs,values,expected[part],avbtool))
+   save()
   root_public=avbtool.RSAPublicKey(str(keys[0])).encode();child_public=avbtool.RSAPublicKey(str(keys[1])).encode()
   root_sha=hashlib.sha256(root_public).hexdigest();C.validate_root_policy(args.baseline_root_sha256,root_sha,args.output_root_sha256,args.allow_root_key_change)
   report['system_public_key_sha256']=hashlib.sha256(child_public).hexdigest();save()
   for part in PARTS:
    target=output/'images'/(part+'.img');shutil.copyfile(payloads[part],target)
    run([required['fsck.erofs'],target],'fsck-'+part+'.log')
-   raw_bytes=target.stat().st_size;raw_sha=PROFILE.digest(target);header,tree,descs=leaves[part];budget=images[part].stat().st_size
+   raw_bytes=target.stat().st_size;raw_sha=PROFILE.digest(target);header,tree,descs=leaves[part];budget=stock_profile['output_bytes'][part] if stock_mode else images[part].stat().st_size
    run(footer_command(required['avbtool'],target,part,budget,header,tree,descs,avbtool),'footer-'+part+'.log')
    if C.prefix_digest(target,raw_bytes)!=raw_sha or target.stat().st_size!=budget:raise ValueError('AVB append changed payload bytes or exact image size')
    _,new_header,new_descs,_=parse(target)
@@ -170,15 +309,18 @@ def assemble(args):
     if part=='vbmeta' and isinstance(value,avbtool.AvbChainPartitionDescriptor) and value.partition_name=='vbmeta_system':value.public_key=child_public
     new.append(value)
    blob=avb._generate_vbmeta_blob(algorithm_name=algorithm(header),key_path=str(key),public_key_metadata_path=None,descriptors=new,chain_partitions_use_ab=None,chain_partitions_do_not_use_ab=None,rollback_index=header.rollback_index,flags=header.flags,rollback_index_location=header.rollback_index_location,props=None,props_from_file=None,kernel_cmdlines=None,setup_rootfs_from_kernel=None,ht_desc_to_setup=None,include_descriptors_from_image=None,signing_helper=None,signing_helper_with_files=None,release_string=header.release_string,append_to_release_string=None,required_libavb_version_minor=header.required_libavb_version_minor)
-   size=images[part].stat().st_size
+   size=stock_profile['output_bytes'][part] if stock_mode else images[part].stat().st_size
    if len(blob)>size:raise ValueError('Signed vbmeta exceeds baseline physical size')
    target=output/'images'/(part+'.img');target.write_bytes(blob+b'\0'*(size-len(blob)));_,actual,actual_descs,_=parse(target)
    if (actual.flags,actual.rollback_index,actual.rollback_index_location,actual.algorithm_type,actual.required_libavb_version_minor,actual.release_string)!=(header.flags,header.rollback_index,header.rollback_index_location,header.algorithm_type,header.required_libavb_version_minor,header.release_string) or [d.encode() for d in actual_descs]!=[d.encode() for d in new]:raise ValueError('Signed descriptor/rollback/flag preservation failed')
   final=output/'final-reference-tree';final.mkdir()
-  for part,path in images.items():(final/(part+'.img')).symlink_to((output/'images'/(part+'.img')) if part in (*PARTS,'vbmeta','vbmeta_system') else path)
+  for part in set(images)|set(PARTS):
+   (final/(part+'.img')).symlink_to((output/'images'/(part+'.img')) if part in (*PARTS,'vbmeta','vbmeta_system') else images[part])
   report['final_audit']=audit(final,output/'final-audit',args.output_root_sha256)
   C.verify_input_hashes(images,dict(baseline_hashes,**reference_hashes))
   C.verify_input_hashes(payloads,payload_hashes)
+  if policy_path:C.pinned_json(strict_file(policy_path),policy_pin)
+  if stock_mode:C.pinned_json(strict_file(args.stock_profile),args.stock_profile_sha256)
   report['files']={p.name:{'bytes':p.stat().st_size,'sha256':PROFILE.digest(p)} for p in sorted((output/'images').glob('*.img'))};report['status']='passed';save();return report
  except BaseException as error:
   report.update(status='failed',error=redact(str(error)),traceback=redact(traceback.format_exc()));save();raise RuntimeError(report['error']) from None
@@ -186,8 +328,11 @@ def assemble(args):
 
 def main():
  os.umask(0o077);parser=argparse.ArgumentParser(description=__doc__)
- for flag in ['base-images','payloads','references','tool-tree','root-key','system-key','output']:parser.add_argument('--'+flag,type=Path,required=True)
+ group=parser.add_mutually_exclusive_group(required=True);group.add_argument('--base-images',type=Path);group.add_argument('--stock-templates',type=Path)
+ for flag in ['payloads','references','tool-tree','root-key','system-key','output']:parser.add_argument('--'+flag,type=Path,required=True)
  for flag in ['baseline-root-sha256','output-root-sha256','avbtool-source-sha256']:parser.add_argument('--'+flag,required=True)
+ for flag in ['stock-profile','userspace-policy']:parser.add_argument('--'+flag,type=Path)
+ for flag in ['stock-profile-sha256','userspace-policy-sha256']:parser.add_argument('--'+flag)
  parser.add_argument('--allow-root-key-change',action='store_true');args=parser.parse_args();result=assemble(args);print(json.dumps({'status':result['status'],'files':result['files'],'hardware_root_trust_verified':False},indent=2))
 
 if __name__=='__main__':main()

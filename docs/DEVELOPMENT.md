@@ -522,3 +522,30 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   identical five-image results. Full host checks passed 163 tests, five local
   AVB skips, source audit and Java checks. Final payload content/metadata intent,
   actual firmware/key acceptance, installation and restore remain separate gates.
+
+- Neutral launcher replacement is signed and independently verified: unsigned
+  `8d68a7b83a56a5759ef3bf9a06b026e6b153795ad2fb9c1750bd75b36c102e25`,
+  signed `ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347`.
+  All 590 non-signature entries survived signing. Original 298 source files,
+  93 runtime components/78 selected artifacts, DEX/engine/SQLite and other assets
+  match the earlier controlled build; only libapp.so changed. Its generated Dart
+  URI now uses the documented neutral workspace. The first neutral build was
+  rejected for missing native plugin metadata; explicit offline Flutter pub-get
+  preparation restored the verified plugin/dependency set before rebuilding.
+- Refreshed 445-member corresponding-source bundle reproduced independently:
+  SHA256 `aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966`,
+  474377768 bytes. All members passed hash/size readback; 179 textual records
+  have no matching private paths/key markers. Prior source bundle is preserved.
+- Added stock-template AVB mode without requiring private owner bootstrap or old
+  replaced userspace images. Actual stock template signatures/chain binding and
+  all 11 reference file pins passed; ten references are AVB-covered, odm_ext is
+  explicitly pinned but unbound in the stock graph. Dynamic policy derives all
+  nine userspace fingerprint/version/patch properties from canonical payload
+  build.props; security patch explicitly uses the system-global value. Synthetic
+  stock-mode runs were deterministic, coherent-mode property update passed, and
+  root rehashed all 15 actual proof images. No production key/device was used by
+  those proofs. New final payload integration/signing/hardware tests remain open.
+- Documented explicit source-revision build number and commit-time build date,
+  supported by the pinned Soong frontend, to remove default host/time identity
+  variability. Current full host suite: 167 tests, five local AVB skips, privacy
+  audit and Java checks passed. Final-image properties must be inspected again.

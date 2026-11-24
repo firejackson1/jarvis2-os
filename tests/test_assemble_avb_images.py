@@ -42,4 +42,35 @@ class RawPayloadTests(unittest.TestCase):
   cmd=m.footer_command(Path('/tool'),Path('/image'),'system',100000,h,tree,[],object())
   for pair in [('--partition_size','100000'),('--salt','ab'),('--hash_algorithm','sha512'),('--rollback_index','7'),('--internal_release_string','keep'),('--fec_num_roots','2'),('--block_size','4096')]:self.assertEqual(pair[1],cmd[cmd.index(pair[0])+1])
 
+class StockPolicyTests(unittest.TestCase):
+ def test_profile_rejects_bool_sizes_extra_keys_and_wrong_digest(self):
+  import copy
+  profile={'format':1,'templates':{p:{'sha256':'a'*64,'bytes':65536} for p in ['vbmeta','vbmeta_system']},'references':{'boot':{'sha256':'b'*64,'bytes':131072}},'output_bytes':{p:33554432 for p in ['system','system_ext','product'] } | {'vbmeta':65536,'vbmeta_system':65536},'leaf_release_string':'fixture-reviewed','unbound_references':[]}
+  m.validate_stock_profile(profile)
+  for mutate in [lambda p:p['output_bytes'].update(system=True),lambda p:p['templates']['vbmeta'].update(sha256='z'*64),lambda p:p.update(extra=True),lambda p:p.update(unbound_references=['boot','boot']),lambda p:p.update(unbound_references=['unknown']),lambda p:p['references'].update({'../bad':{'sha256':'a'*64,'bytes':1}})]:
+   bad=copy.deepcopy(profile);mutate(bad)
+   with self.assertRaises(ValueError):m.validate_stock_profile(bad)
+ def test_reference_coverage_accepts_only_explicit_unbound(self):
+  m.validate_reference_coverage({'boot'},{'boot','unused'},['unused'])
+  for used,refs,unbound in [({'boot'},{'boot','extra'},[]),({'boot'},{'boot'},['boot']),({'boot','unknown'},{'boot'},[])]:
+   with self.subTest(used=used),self.assertRaises(ValueError):m.validate_reference_coverage(used,refs,unbound)
+ def test_build_properties_duplicates_and_missing_source_fail_closed(self):
+  self.assertEqual({'a':'b'},m.parse_build_properties('#comment\na=b\n'))
+  for text in ['a=b\na=c\n','bad line','a=x\x00']:
+   with self.assertRaises(ValueError):m.parse_build_properties(text)
+  values={p:{'ro.'+p+'.build.fingerprint':'new/'+p+':release-keys','ro.'+p+'.build.version.release':'14'} for p in m.PARTS};values['system']['ro.build.version.security_patch']='2026-11-01'
+  result=m.desired_properties(values);self.assertEqual(9,len(result));self.assertEqual(b'2026-11-01',result['com.android.build.product.security_patch'])
+  del values['system_ext']['ro.system_ext.build.fingerprint']
+  with self.assertRaises(ValueError):m.desired_properties(values)
+ def test_rewrite_changes_only_allowed_properties_and_rejects_duplicates(self):
+  from types import SimpleNamespace
+  class Property:
+   def __init__(self,key=None,value=None):self.key=key;self.value=value
+  avb=SimpleNamespace(AvbPropertyDescriptor=Property)
+  values={'com.android.build.system.'+k:v for k,v in [('fingerprint',b'new'),('os_version',b'14'),('security_patch',b'2026-11-01')]}
+  original=[Property('bootstrap',b'unchanged'),Property('com.android.build.system.fingerprint',b'old')]
+  new=m.rewrite_properties(original,values,{'system'},avb);self.assertEqual(b'unchanged',new[0].value);self.assertEqual(b'new',new[1].value);self.assertEqual(b'old',original[1].value);self.assertEqual(4,len(new))
+  with self.assertRaises(ValueError):m.rewrite_properties(original+[original[1]],values,{'system'},avb)
+  with self.assertRaises(ValueError):m.rewrite_properties(original,values,{'product'},avb)
+
 if __name__=='__main__':unittest.main()

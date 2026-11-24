@@ -1,9 +1,9 @@
 {
   "format": 1,
-  "subject": "LTvLauncher controlled ARMv7 source candidate 2026.11.23 code8117",
+  "subject": "LTvLauncher controlled neutral-workspace ARMv7 source candidate 2026.11.23 code8117",
   "source_commit": "f9db652edaac2da3ea2e6a1ed220d1396ccea82b",
-  "unsigned_apk_sha256": "f365c6a5f947d0475406ad655b2d273d0839085e451a458f6d6578b380e822d4",
-  "signed_apk_sha256": "b1aa61fc4a624e7ec0772a52178789c9e0377ee223812534c16991772c2e9c71",
+  "unsigned_apk_sha256": "8d68a7b83a56a5759ef3bf9a06b026e6b153795ad2fb9c1750bd75b36c102e25",
+  "signed_apk_sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
   "coverage": {
     "locked_hosted_pub_packages": 137,
     "framework_sdk_packages": 5,
@@ -24,8 +24,15 @@
       "root": "staged",
       "path": "CONTROLLED-CANDIDATE.json",
       "destination": "build-records/CONTROLLED-CANDIDATE.json",
-      "bytes": 831,
-      "sha256": "99d75772ec4e0a9a2c4389c11a53375884897bea3972a925b062525dab27843a"
+      "bytes": 1064,
+      "sha256": "2422b0f030ae1b533b6735c4dbcceb859aa933d2d6a085277c51f770a045cead"
+    },
+    {
+      "root": "staged",
+      "path": "SIGNED-CANDIDATE-RECEIPT.json",
+      "destination": "build-records/SIGNED-CANDIDATE-RECEIPT.json",
+      "bytes": 640,
+      "sha256": "8178b0376d278d41beed8a9a15dc6626103d356d75762941d8f6b4e29ba6040c"
     },
     {
       "root": "staged",
@@ -51,10 +58,31 @@
     },
     {
       "root": "staged",
+      "path": "neutral-candidate-inspection.json",
+      "destination": "build-records/neutral-candidate-inspection.json",
+      "bytes": 116635,
+      "sha256": "09f06a86814ec7e7e4902f1c4591e2d6260e9367fa94667207e73745563dc0dc"
+    },
+    {
+      "root": "staged",
+      "path": "neutral-path-source-fix.json",
+      "destination": "build-records/neutral-path-source-fix.json",
+      "bytes": 1044,
+      "sha256": "58b737bf403af7158e434d403ddf707aff7921be4d02fd25c04048be3d07804e"
+    },
+    {
+      "root": "staged",
+      "path": "neutral-runtime-comparison.json",
+      "destination": "build-records/neutral-runtime-comparison.json",
+      "bytes": 2658,
+      "sha256": "306015d3fc80ae0180b4fe8d8eb1ecf7ca547d183800e442ec3d96dc0e88ada7"
+    },
+    {
+      "root": "staged",
       "path": "r8/configuration.txt",
       "destination": "build-records/r8/configuration.txt",
-      "bytes": 34674,
-      "sha256": "d8669bfd309b13658a6106056581934e68247f87dcfc3bf828f85ccaf12a05a3"
+      "bytes": 33786,
+      "sha256": "18d16c4567e4cfe17767503c58b3e4f877b9850562c8ab777a4f7b5fea775c2d"
     },
     {
       "root": "staged",
@@ -67,15 +95,15 @@
       "root": "staged",
       "path": "r8/resources.txt",
       "destination": "build-records/r8/resources.txt",
-      "bytes": 289880,
-      "sha256": "6197f4360dd903b117634227369fb550987bad5859e80e25ca805305cc9118c6"
+      "bytes": 69521,
+      "sha256": "bf84b19ca79391fca559f98b6595ece83d2127e69f2b7bfef48b1a77fcbc0478"
     },
     {
       "root": "staged",
       "path": "r8/seeds.txt",
       "destination": "build-records/r8/seeds.txt",
       "bytes": 1061384,
-      "sha256": "2e8acdda4d332e0d30515d175cf07f17527eb3d3e2fe32ab9615a8926131194a"
+      "sha256": "37636a4ea325a7e29952957e531ab73e65a69b3ec582228eb48143bd8cd4aaec"
     },
     {
       "root": "staged",
@@ -263,8 +291,8 @@
       "root": "repository",
       "path": "docs/LAUNCHER_SOURCE_BUILD.md",
       "destination": "docs/LAUNCHER_SOURCE_BUILD.md",
-      "bytes": 11725,
-      "sha256": "e468315789c87bb08cf6e4a78d1bd373044eb2572f76102fd76c3b184f01d15d"
+      "bytes": 14002,
+      "sha256": "1d1c392d29d8853028f9f1add03b25a7531d7ed987c826e198f2d6e42bdc9396"
     },
     {
       "root": "staged",
@@ -3775,5 +3803,7 @@
       "bytes": 7202,
       "sha256": "a05601d11e1813a86a19f29937b2f457306efc9992e7c0aef043a29319470e69"
     }
-  ]
+  ],
+  "neutral_build_workspace": "/build/jarvis2-launcher",
+  "privacy_fix": "Regenerated Flutter plugin metadata/package configs/codegen in actual neutral source/tool/cache directories; no binary patch or original source changes"
 }

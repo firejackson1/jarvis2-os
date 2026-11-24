@@ -2,10 +2,17 @@
 
 This source set identifies the controlled ARMv7 candidate built from LTvLauncher
 `f9db652edaac2da3ea2e6a1ed220d1396ccea82b`, version `2026.11.23`, code `8117`.
-The original 298 application source files were unchanged. The unsigned candidate
-SHA256 is `f365c6a5f947d0475406ad655b2d273d0839085e451a458f6d6578b380e822d4`.
+The original 298 application source files were unchanged. This candidate uses
+the canonical neutral workspace `/build/jarvis2-launcher` to prevent embedding
+private owner/build paths in Dart generated-plugin source URIs. The resulting
+URI is `file:///build/jarvis2-launcher/app/.dart_tool/flutter_build/dart_plugin_registrant.dart`.
+This is a source/build environment fix, with no binary patching. Every one of
+the 590 APK entries matches the previous controlled candidate except libapp.so;
+the actual 93-component/78-artifact runtime graph, original dependency locks and
+strict verification metadata remain unchanged. The unsigned candidate
+SHA256 is `8d68a7b83a56a5759ef3bf9a06b026e6b153795ad2fb9c1750bd75b36c102e25`.
 The separately signed project candidate SHA256 is
-`b1aa61fc4a624e7ec0772a52178789c9e0377ee223812534c16991772c2e9c71`.
+`ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347`.
 The signing key is not distributed. This document does not change a ROM artifact
 pin or authorize installation on hardware.
 
@@ -60,7 +67,8 @@ not a claim of complete legal clearance for an entire ROM.
 
 ## Recipient tools
 
-Use your own Linux x86-64 build directory, Java 21 (the controlled build used
+Use your own Linux x86-64 machine and the canonical neutral directory
+`/build/jarvis2-launcher`, with Java 21 (the controlled build used
 Android_PDK OpenJDK 21.0.1), Gradle 8.13, and Flutter **3.24.5**, framework commit
 `dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668`, engine
 `a18df97ca57a249df5d8d68cd0820600223ce262`, Dart 3.5.4 source revision
@@ -80,16 +88,22 @@ license-acceptance command are supplied. Source redistribution does not grant
 rights to redistribute Google's SDK archives. Host SQLite 3.46.1 was used by
 Drift schema generation. The app's shipped native SQLite remains 3.50.3.
 
-Set paths for your own installations, for example:
+Install or copy the tools and caches into actual directories below that neutral
+root. Avoid symlinks that resolve into an owner home or private host path. Start
+from a fresh application source directory; regenerate package configurations,
+Flutter plugin metadata, codegen and build outputs there. Do not copy old
+`.dart_tool`, `.gradle`, local.properties or build outputs into the app. The
+canonical neutral prefix matters: Dart can retain the generated plugin
+registrant source URI in libapp.so even in a release build. Set:
 
 ```sh
-export JAVA_HOME=/your/jdk21
-export FLUTTER_ROOT=/your/flutter-3.24.5
-export ANDROID_HOME=/your/android-sdk
+export JAVA_HOME=/build/jarvis2-launcher/jdk21
+export FLUTTER_ROOT=/build/jarvis2-launcher/flutter
+export ANDROID_HOME=/build/jarvis2-launcher/android-sdk
 export ANDROID_SDK_ROOT="$ANDROID_HOME"
-export PUB_CACHE=/your/isolated-pub-cache
-export GRADLE_USER_HOME=/your/isolated-gradle-cache
-export PATH="$JAVA_HOME/bin:$FLUTTER_ROOT/bin:/your/gradle-8.13/bin:$PATH"
+export PUB_CACHE=/build/jarvis2-launcher/pub-cache
+export GRADLE_USER_HOME=/build/jarvis2-launcher/gradle-cache
+export PATH="$JAVA_HOME/bin:$FLUTTER_ROOT/bin:/build/jarvis2-launcher/gradle-8.13/bin:$PATH"
 export CI=true FLUTTER_SUPPRESS_ANALYTICS=true DART_SUPPRESS_ANALYTICS=true
 flutter --version
 flutter precache --android
@@ -105,8 +119,10 @@ application's locked source set, not every executable tool dependency.
 
 ## Application and generator commands
 
-Extract `sources/application/LTvLauncher-source.tar.gz` into your workspace and
-enter its `LtvLauncher-f9db652edaac2da3ea2e6a1ed220d1396ccea82b` directory.
+Extract `sources/application/LTvLauncher-source.tar.gz` into a fresh directory,
+then move its `LtvLauncher-f9db652edaac2da3ea2e6a1ed220d1396ccea82b` directory to
+**`/build/jarvis2-launcher/app`** and enter that directory. Do not compile it
+under your owner-specific home or private host workspace.
 To hydrate the application pub cache without changing dependency versions, use
 the bundled `catalogs/dependency-source-index.json`: for each hosted entry,
 verify its archive SHA256, extract the matching `sources/pub/<file>` into
@@ -127,12 +143,19 @@ Gradle 8.13 binary distribution in your own wrapper cache if working offline.
 The official Gradle 8.13 binary ZIP SHA256 is
 `20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78`.
 
-The controlled workflow executed these exact pinned generators directly, after
-explicit offline Pub resolution. This avoids Flutter pub-run implicitly fetching
+First explicitly run Flutter's offline package/platform preparation. This
+refreshes the native plugin lists required by Android settings.gradle. Plain
+Dart pub get alone does not create them: omitting this step can yield a
+successful APK missing native plugins, including SQLite. The verified metadata
+contains eight Android plugins and all plugin paths use the neutral root.
+Then run explicit offline Dart resolution and the pinned generators directly. This avoids Flutter pub-run implicitly fetching
 because of a synthetic flutter_gen mapping with no generated pubspec:
 
 ```sh
 DART="$FLUTTER_ROOT/bin/cache/dart-sdk/bin/dart"
+flutter --no-version-check --suppress-analytics pub get --offline --no-precompile
+test -s .flutter-plugins-dependencies
+test -s .flutter-plugins
 "$DART" pub get --offline --no-precompile
 "$DART" --packages=.dart_tool/package_config.json \
   "$PUB_CACHE/hosted/pub.dev/build_runner-2.4.13/bin/build_runner.dart" \
@@ -175,6 +198,12 @@ The controlled build used an 8 GiB memory / 2 GiB swap / four-CPU process-tree
 limit and completed with a 2.8 GiB peak. Expected output is
 `build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk`. Inspect package,
 version, ARMv7 ABI, signature absence and 16 KiB alignment with your SDK tools.
+Verify that libapp.so, libflutter.so and libsqlite3.so are all present and
+compare the selected runtime artifact hashes with the retained graph. Scan all
+decompressed APK entries, native files and inflated Flutter NOTICES for your
+private workspace/home prefixes, including UTF-16 forms. The controlled neutral
+candidate passed this scan across all 590 entries. Its only native file URI is
+the generic neutral registrant URI shown above; no private prefix was retained.
 Exact byte identity can vary with build metadata; retained R8 records and
 selected-artifact hashes make the actual produced candidate inspectable.
 

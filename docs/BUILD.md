@@ -73,6 +73,31 @@ platform signing configuration. They must agree for system privileges to work.
 Do not use the older experimental image set as an installer for this source
 snapshot. It predates newer Settings, widget, voice and launcher changes.
 
+## Pin release build identity
+
+Run from the Android source root after staging all reviewed inputs. Use the
+exact device-source revision and its commit time, rather than an automatically
+generated engineering username/time build number:
+
+```sh
+release_revision=$(git -C device/onn/jarvis2 rev-parse HEAD)
+export BUILD_NUMBER="jarvis2.${release_revision:0:12}"
+export BUILD_DATETIME=$(git -C device/onn/jarvis2 show -s --format=%ct "$release_revision")
+export SOURCE_DATE_EPOCH="$BUILD_DATETIME"
+export BUILD_USERNAME=jarvis2 BUILD_HOSTNAME=builder LINEAGE_BUILDTYPE=UNOFFICIAL
+source build/envsetup.sh
+lunch lineage_jarvis2-ap2a-userdebug
+m -j4 sign_target_files_apks target-files-package
+```
+
+The pinned Soong frontend reads BUILD_NUMBER and BUILD_DATETIME explicitly.
+Record these values, tool revisions and exact staged input hashes with the
+artifact. Stable identity removes known host/time variability; it does not alone
+prove byte-identical whole-ROM output. Inspect the resulting build.prop files,
+and derive AVB userspace properties from those exact final payloads rather than
+retaining stock or earlier-development fingerprints. Keep firmware properties
+and security rollback counters separate from the new userspace build identity.
+
 ## Verify source patches without modifying the Android tree
 
 ```sh
@@ -97,7 +122,7 @@ python3 tools/inspect-image-contents.py /path/to/product-output \
 
 This checks EROFS file decoding, hashes inputs before/after extraction, checks
 required/forbidden package filenames, verifies that the launcher payload matches
-its pinned upstream hash, and rejects known ADB trust filenames. The JSON report
+its pinned controlled-build hash, and rejects known ADB trust filenames. The JSON report
 states this limited scope explicitly. It does not prove package behavior, native
 patch contents, a complete privacy audit, release signatures or the AVB chain.
 Run it after each image change; a staging-tree check cannot replace extraction.

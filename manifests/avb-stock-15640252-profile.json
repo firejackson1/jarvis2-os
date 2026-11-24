@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "templates": {
+    "vbmeta": {
+      "sha256": "a067d7e55a35d5d517af1e48a364b1b6dd483466fb499c36c1ac2cf5fba35d04",
+      "bytes": 2097152
+    },
+    "vbmeta_system": {
+      "sha256": "0d307c751d959322557a832471ddac47857c91ab9365d628238cc17a47babe83",
+      "bytes": 2097152
+    }
+  },
+  "references": {
+    "boot": {
+      "sha256": "3019140bb97cc167d244b72d9d048a21f5b06876ad2a8f39c755198259bf29f2",
+      "bytes": 67108864
+    },
+    "dtbo": {
+      "sha256": "20c0de71706c4549430d146af81118d39a776e407ea3d7e006965b8df3b55f99",
+      "bytes": 2097152
+    },
+    "init_boot": {
+      "sha256": "2bda4f31dd2fae6afef022e845c3e0ac0ac99a0dbccba78a00735b1a3986bf30",
+      "bytes": 8388608
+    },
+    "odm": {
+      "sha256": "94cdfd27e14f3662f96217f127206e0bb44ec8f3e33e4a7943916c6a8c91712f",
+      "bytes": 512000
+    },
+    "odm_dlkm": {
+      "sha256": "0080ce969cbc049126ba152bf149a049c72169de7fe52db63c557e9681dcb8ad",
+      "bytes": 348160
+    },
+    "odm_ext": {
+      "sha256": "5798508d9d81ce5dc1d9758ad2c322beac1b5cb1aef69544a50e3b26541a49c4",
+      "bytes": 16777216
+    },
+    "oem": {
+      "sha256": "1b4dfd61d0a6c99ef6ba8514c66a6faee7d56e554f1569050ce9c98e63999823",
+      "bytes": 33554432
+    },
+    "system_dlkm": {
+      "sha256": "b03ab6a657562aaace24842fd0b9b6c85481e80bf04de102d5862d0350ef3ea7",
+      "bytes": 757760
+    },
+    "vendor": {
+      "sha256": "852f34c0aafaf28b4d56c39f715fa553bdd9a05ad487446c9e38d9e9318f0562",
+      "bytes": 81158144
+    },
+    "vendor_boot": {
+      "sha256": "c017791c8e52678595a03b902237dcb15a4e8adeb3d35fdb2232838750e4233a",
+      "bytes": 67108864
+    },
+    "vendor_dlkm": {
+      "sha256": "0cea6c50a18794ae6aa8c97d84ee73aee90c5d39de5a532879b869bdd5e45f96",
+      "bytes": 18874368
+    }
+  },
+  "output_bytes": {
+    "system": 483131392,
+    "system_ext": 96161792,
+    "product": 541949952,
+    "vbmeta": 2097152,
+    "vbmeta_system": 2097152
+  },
+  "leaf_release_string": "avbtool 1.3.0",
+  "unbound_references": [
+    "odm_ext"
+  ]
+}

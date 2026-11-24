@@ -1,0 +1,15 @@
+{
+  "format": 1,
+  "build_prop_paths": {
+    "system": "system/build.prop",
+    "system_ext": "etc/build.prop",
+    "product": "etc/build.prop"
+  },
+  "fingerprint_source": "ro.{partition}.build.fingerprint",
+  "os_version_source": "ro.{partition}.build.version.release",
+  "security_patch_source": {
+    "partition": "system",
+    "path": "system/build.prop",
+    "key": "ro.build.version.security_patch"
+  }
+}
