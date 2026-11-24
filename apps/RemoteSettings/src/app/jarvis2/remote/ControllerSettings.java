@@ -1,16 +1,20 @@
 package app.jarvis2.remote;
 import android.app.*;
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.*;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.input.InputManager;
 import android.os.*;
+import android.provider.Settings;
 import android.view.*;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.*;
 import java.util.*;
 
 public class ControllerSettings extends Activity implements InputManager.InputDeviceListener {
     private LinearLayout body,diagram,side;private String selected;private InputDevice device;
+    private boolean setupNeeded;
     private final Set<Integer> placed=new HashSet<>();private InputManager manager;
     private int dp(int v){return Math.round(v*getResources().getDisplayMetrics().density);}
     @Override public void onCreate(Bundle s){super.onCreate(s);manager=(InputManager)getSystemService(INPUT_SERVICE);manager.registerInputDeviceListener(this,new Handler());render();}
@@ -21,7 +25,17 @@ public class ControllerSettings extends Activity implements InputManager.InputDe
         for(InputDevice d:devices)if(d.getDescriptor().equals(selected))device=d;
         if(device==null&&!devices.isEmpty()){device=devices.get(0);selected=device.getDescriptor();}
         ScrollView scroll=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(1);body.setGravity(Gravity.CENTER_HORIZONTAL);body.setPadding(dp(24),dp(16),dp(24),dp(24));scroll.addView(body);setContentView(scroll);
-        text("Remote & controller buttons",22);text("Select a button to change its press, double-press and hold actions",13);
+        text("Remote & controller buttons",22);
+        setupNeeded=!shortcutsEnabled();
+        text(setupNeeded?"Remote shortcuts are off":"Remote shortcuts are enabled",16);
+        text("Hold Settings for Bluetooth; double-press for widgets. Enable Jarvis2 Remote Settings in Accessibility to use these shortcuts.",13);
+        Button setup=new Button(this);setup.setText(setupNeeded?"Enable remote shortcuts":"Manage remote shortcuts");
+        setup.setOnClickListener(v->{
+            try{startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));}
+            catch(ActivityNotFoundException e){Toast.makeText(this,"Open Android Settings > Accessibility and enable Jarvis2 Remote Settings.",Toast.LENGTH_LONG).show();}
+        });
+        body.addView(setup);if(setupNeeded)setup.post(setup::requestFocus);
+        text("Select a button to change its press, double-press and hold actions",13);
         LinearLayout chooser=new LinearLayout(this);chooser.setGravity(Gravity.CENTER);body.addView(chooser);
         for(InputDevice d:devices){Button b=new Button(this);b.setText(d.getName());b.setOnClickListener(v->{selected=d.getDescriptor();render();});chooser.addView(b);}
         if(device==null){text("Connect an onn remote or Xbox controller to configure its buttons.",18);return;}
@@ -56,6 +70,14 @@ public class ControllerSettings extends Activity implements InputManager.InputDe
         Button settings=new Button(this);settings.setText("Widget and shortcut settings");settings.setOnClickListener(v->startActivity(new Intent(this,RemotePreferences.class)));side.addView(settings);
         Button reset=new Button(this);reset.setText("Reset all button actions");reset.setOnClickListener(v->new AlertDialog.Builder(this).setMessage("Restore normal button behavior and the standard Settings shortcuts?").setNegativeButton("Cancel",null).setPositiveButton("Reset",(d,w)->{new ButtonBindings(this).resetAll();render();}).show());side.addView(reset);
     }
+    private boolean shortcutsEnabled(){
+        AccessibilityManager access=(AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE);
+        if(access==null)return false;
+        ComponentName own=new ComponentName(this,Keys.class);
+        for(AccessibilityServiceInfo service:access.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK))
+            if(own.equals(ComponentName.unflattenFromString(service.getId())))return true;
+        return false;
+    }
     private void edit(int code){startActivity(new Intent(this,ButtonEditor.class).putExtra("device",device.getDescriptor()).putExtra("code",code).putExtra("name",device.getName()));}
     private void textIn(LinearLayout parent,String value,int size){TextView t=new TextView(this);t.setText(value);t.setTextSize(size);t.setTextColor(Color.WHITE);t.setPadding(0,dp(5),0,dp(9));parent.addView(t);}
     private int code(String name){return KeyEvent.keyCodeFromString("KEYCODE_"+name);}
@@ -69,7 +91,7 @@ public class ControllerSettings extends Activity implements InputManager.InputDe
             GradientDrawable background=new GradientDrawable();background.setColor(0xff292c30);background.setCornerRadius(dp(16));background.setStroke(dp(1),0xff66696d);b.setBackground(background);
             b.setOnFocusChangeListener((v,focus)->{background.setStroke(dp(focus?3:1),focus?Color.WHITE:0xff66696d);b.setScaleX(focus?1.05f:1);b.setScaleY(focus?1.05f:1);});
             b.setContentDescription(name+(available?" · configure button":" · not reported"));
-            b.setOnClickListener(v->edit(c));b.setFocusableInTouchMode(true);if(c==23&&available)b.post(b::requestFocus);
+            b.setOnClickListener(v->edit(c));b.setFocusableInTouchMode(true);if(c==23&&available&&!setupNeeded)b.post(b::requestFocus);
             LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(dp(76),dp(34));p.setMargins(dp(4),dp(3),dp(4),dp(3));row.addView(b,p);
         }diagram.addView(row);
     }
