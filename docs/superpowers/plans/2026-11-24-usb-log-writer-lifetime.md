@@ -26,8 +26,10 @@ mechanism for the zero-byte hardware result, not a confirmed hardware cause.
   a failed connection and keep the parent asynchronous.
 - [x] Run all host checks and actual ARM64 BusyBox guard tests with privileged
   commands substituted; use a private PTY to verify real stty descriptor setup.
-- [ ] Obtain a fresh read-only review, document actual evidence and limitations,
-  commit/publish source and build deterministic private artifacts if qualified.
+- [x] Obtain a fresh read-only review, document actual evidence and limitations,
+  commit source and build deterministic private artifacts after offline checks.
+- [ ] Publish the source checkpoint; leave hardware retest and the preceding
+  Android-return/partition comparison explicitly unqualified.
 
 **Source reference:** kernel/common 3d26c188ef7e87e52ea1fa0092db760a55e2ae4c,
 drivers/usb/gadget/function/{u_serial.c,f_acm.c}. The public GKI/kernel payload

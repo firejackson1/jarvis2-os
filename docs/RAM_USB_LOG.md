@@ -234,3 +234,18 @@ echo/canonical/output processing were disabled. Independent review found no
 blocking issue; its retry coverage suggestions were added and passed.
 These checks do not prove ACM bulk transfer, disconnect/reconnect or the
 zero-byte symptom is fixed on Jarvis2. No new device reboot was used for them.
+
+Built source `c0a98bbad55b3e89b05bca425afdaef882a44939` from a clean private
+clone. Native verification ran all 82 tests without skips plus the C++/header
+checks. Two independent output directories reproduced identical archives:
+
+| Writer candidate | Bytes | SHA256 |
+| --- | ---: | --- |
+| CPIO | 38,307,604 | `b01d058122a3ba435f9b40aaa294d54ce56f1b9d32cae93f8413dd63b389d13d` |
+| Gzip | 14,682,976 | `6e8ebf3520b7822968d6b5513c3b41d8d02130432ec279d963f315b9ee7b688d` |
+| Unsigned RAM image | 35,520,512 | `a61020e929f896b14d82447ab5c463558bc4318924944475fc9d9d2c02d1f5ac` |
+
+The bounded job completed in 15.925 seconds, peak 344 MiB/no swap. The desktop
+VM stayed running. Kernel/DTB payloads, the original full-recovery candidate and
+both earlier USB candidates remained unchanged. This writer image has not been
+booted; prior Android return and after-test partition checks are still pending.
