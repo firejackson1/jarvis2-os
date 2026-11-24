@@ -696,3 +696,16 @@ and the boot-control CRC validates.
   This verifies input preparation, not a complete clean rebuild or hardware boot.
 - Full host checks passed: 193 Python tests, five local signed-AVB skips,
   source privacy audit and eight Java suites. No device writes or slot changes.
+
+### Recovery helper hardware check, 2026-11-24
+
+- Authorized read-only check on the current development slot A recovery: the
+  pinned ARM32 dmctl executable ran from tmpfs RAM and listed device-mapper
+  devices/targets successfully. No existing mapper devices were present.
+- Mounted metadata as F2FS read-only with recovery replay disabled; OTA state
+  was absent and the snapshots directory empty. Unmounted it afterward; full
+  metadata hashes before and after matched. No persistent payload writes,
+  installer execution or slot activation occurred.
+- This qualifies the helper and read-only inspection setup on the existing
+  recovery only. Raw-writer dry-run, candidate recovery, installation and actual
+  restoration are still separate hardware gates.

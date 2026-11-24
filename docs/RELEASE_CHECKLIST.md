@@ -189,8 +189,11 @@ publication by this policy decision alone.
 - [x] Complete the authorized read-only Android A → Recovery → fastbootd → Android A
   roundtrip over USB. This verifies the existing installed development recovery,
   not the candidate's stock bootstrap or production signing key acceptance.
-- [ ] Qualify the recovery RAM helper, read-only metadata setup and raw-writer
-  dry-run against actual hardware. File-backed tests alone do not qualify them.
+- [x] Qualify the pinned recovery RAM helper and read-only metadata inspection
+  on the existing development recovery: native execution passed; metadata
+  remained byte-identical before/after mounting with replay disabled.
+- [ ] Qualify the raw-writer dry-run against actual hardware. File-backed tests
+  alone do not qualify it; the previous helper test did not execute the writer.
 - [ ] Obtain approval for the exact candidate transition, including its stock
   init_boot/vendor_boot foundation and shared-data signing-key migration plan.
 - [ ] Complete installation, clean setup, recovery and rollback tests of the exact
