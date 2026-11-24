@@ -138,6 +138,11 @@ The tool has no ADB, fastboot, block-device write or slot-switch operation.
 
 No installation or slot B modification is authorized by these build instructions.
 
+The [RAM startup audit](docs/RAM_STARTUP_AUDIT.md) records the pinned upstream
+BCB, logging and userdata-key paths that run without selecting a destructive
+menu action. It also records the prototype metadata fstab mismatch and the
+remaining early write-guard requirements. It is not a completed RAM boot test.
+
 ## License
 
 New source in this tree is Apache-2.0. Upstream headers are downloaded only into
