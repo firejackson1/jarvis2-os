@@ -1,0 +1,3779 @@
+{
+  "format": 1,
+  "subject": "LTvLauncher controlled ARMv7 source candidate 2026.11.23 code8117",
+  "source_commit": "f9db652edaac2da3ea2e6a1ed220d1396ccea82b",
+  "unsigned_apk_sha256": "f365c6a5f947d0475406ad655b2d273d0839085e451a458f6d6578b380e822d4",
+  "signed_apk_sha256": "b1aa61fc4a624e7ec0772a52178789c9e0377ee223812534c16991772c2e9c71",
+  "coverage": {
+    "locked_hosted_pub_packages": 137,
+    "framework_sdk_packages": 5,
+    "selected_maven_coordinates": 74,
+    "selected_external_artifacts": 78,
+    "native_source_header_build_input_superset_archives": 43
+  },
+  "exclusions": [
+    "SDK and tool executable archives",
+    "build caches",
+    "private logs and absolute host paths",
+    "signing keys and owner state",
+    "APK/ROM binaries and Google APKs"
+  ],
+  "scope": "Source delivery assembly; optional native platform/test/tool inputs are not all asserted to ship. Device-specific ROM delivery/install validation remains separate.",
+  "files": [
+    {
+      "root": "staged",
+      "path": "CONTROLLED-CANDIDATE.json",
+      "destination": "build-records/CONTROLLED-CANDIDATE.json",
+      "bytes": 831,
+      "sha256": "99d75772ec4e0a9a2c4389c11a53375884897bea3972a925b062525dab27843a"
+    },
+    {
+      "root": "staged",
+      "path": "generated-codegen-source.tar.gz",
+      "destination": "build-records/generated-codegen-source.tar.gz",
+      "bytes": 13426,
+      "sha256": "4291a570a9bc5d6f333aaa022dec0e5b35acd8b26a051b5da34accfe3948dd2d",
+      "archive": "tar"
+    },
+    {
+      "root": "staged",
+      "path": "gradle/gradle.lockfile",
+      "destination": "build-records/gradle/gradle.lockfile",
+      "bytes": 27101,
+      "sha256": "83a33fe64732587b3a8f78e46b80aaa3487c31627ce98e1aeadbfba35c26cbdd"
+    },
+    {
+      "root": "staged",
+      "path": "gradle/verification-metadata.xml",
+      "destination": "build-records/gradle/verification-metadata.xml",
+      "bytes": 451337,
+      "sha256": "48f33ed7b049c1f3114d4a3990154e1ac726d030b4cfff5d3026b14141e54324"
+    },
+    {
+      "root": "staged",
+      "path": "r8/configuration.txt",
+      "destination": "build-records/r8/configuration.txt",
+      "bytes": 34674,
+      "sha256": "d8669bfd309b13658a6106056581934e68247f87dcfc3bf828f85ccaf12a05a3"
+    },
+    {
+      "root": "staged",
+      "path": "r8/mapping.txt",
+      "destination": "build-records/r8/mapping.txt",
+      "bytes": 1938099,
+      "sha256": "adc4b1ff540c50ad7a0399ee85ecba3d0f958ae00cbf14497e54118091d48693"
+    },
+    {
+      "root": "staged",
+      "path": "r8/resources.txt",
+      "destination": "build-records/r8/resources.txt",
+      "bytes": 289880,
+      "sha256": "6197f4360dd903b117634227369fb550987bad5859e80e25ca805305cc9118c6"
+    },
+    {
+      "root": "staged",
+      "path": "r8/seeds.txt",
+      "destination": "build-records/r8/seeds.txt",
+      "bytes": 1061384,
+      "sha256": "2e8acdda4d332e0d30515d175cf07f17527eb3d3e2fe32ab9615a8926131194a"
+    },
+    {
+      "root": "staged",
+      "path": "r8/usage.txt",
+      "destination": "build-records/r8/usage.txt",
+      "bytes": 1142864,
+      "sha256": "2c0a471238147361ff465572ad68201edb2b6d14486c48ddfe3cd295d8c64633"
+    },
+    {
+      "root": "staged",
+      "path": "runtime/release-external-artifacts.json",
+      "destination": "build-records/runtime/release-external-artifacts.json",
+      "bytes": 45924,
+      "sha256": "0a9fb957b675ed8614022514ab9bc31df2f8ee87fd23d4af7378521c20cd83d4"
+    },
+    {
+      "root": "staged",
+      "path": "runtime/release-runtime-graph.json",
+      "destination": "build-records/runtime/release-runtime-graph.json",
+      "bytes": 153656,
+      "sha256": "73e9319030cf527bd4497e44042c7db4c66a7e5a1d0eae4aee05691153b88c98"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/additional-native-source-materials.json",
+      "destination": "catalogs/additional-native-source-materials.json",
+      "bytes": 10858,
+      "sha256": "4c786e97211aa74b4624564cdbfc76c3d5842116f9776726c339b438e6a1a8af"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/angle-source-material.json",
+      "destination": "catalogs/angle-source-material.json",
+      "bytes": 587,
+      "sha256": "0670c3fc5d491e02b4e8942d5eed35856fe89936d140008bc297d0333fdd124b"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/buildroot-cxx-materials.json",
+      "destination": "catalogs/buildroot-cxx-materials.json",
+      "bytes": 2379,
+      "sha256": "f42df2f63203db703b40144171200bfd37f65cad8778bc15527ce23840321d01"
+    },
+    {
+      "root": "closure",
+      "path": "dart-DEPS.txt",
+      "destination": "catalogs/dart-DEPS.txt",
+      "bytes": 35157,
+      "sha256": "fc5a7eb0ef2fa84a116d6218db98bb0dd128f07cedfcba91b766ec1579525c63"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/dart-skia-materials.json",
+      "destination": "catalogs/dart-skia-materials.json",
+      "bytes": 695,
+      "sha256": "4f4ccceeb27ef6a4f03822dab67f223982b44ae38edda856dc2641f899ae0fae"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-source-index.json",
+      "destination": "catalogs/dependency-source-index.json",
+      "bytes": 41873,
+      "sha256": "ca7896f069c20492ecf6872d9c0e8359305f3c829ac611dbed2a977d302544bc"
+    },
+    {
+      "root": "closure",
+      "path": "engine-DEPS.txt",
+      "destination": "catalogs/engine-DEPS.txt",
+      "bytes": 47013,
+      "sha256": "ae9f2300acd2d6e733b5171e0566cae9fdfe126147ed92988835862bf53fe642"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/engine-header-scene-source-materials.json",
+      "destination": "catalogs/engine-header-scene-source-materials.json",
+      "bytes": 5116,
+      "sha256": "de5a7145af5c4785f51eeae0907d72463e54b82c3437b3ca90e3f479eab95cfe"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/engine-materials.json",
+      "destination": "catalogs/engine-materials.json",
+      "bytes": 13153,
+      "sha256": "19b39d86a3316b8fd58a93ce05181127388ef943344ebac8cb789e64f2961126"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/material-icons-provenance.json",
+      "destination": "catalogs/material-icons-provenance.json",
+      "bytes": 2605,
+      "sha256": "0af570672b70c04bd49f6862465a837a9fb31a4d3ef07a4c8f7ee87a33d50a43"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/native-source-archive-catalog.json",
+      "destination": "catalogs/native-source-archive-catalog.json",
+      "bytes": 17327,
+      "sha256": "6da77e656ce70bea17575766900702065bc20ecca1b4fdeba8ed8d85aa5bf302"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/native-vulkan-source-materials.json",
+      "destination": "catalogs/native-vulkan-source-materials.json",
+      "bytes": 1152,
+      "sha256": "689c50a9fe192cef73cd9790a5e9416db7e07dc55456366e2ea541385b11aeec"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/runtime-third-party-materials.json",
+      "destination": "catalogs/runtime-third-party-materials.json",
+      "bytes": 9338,
+      "sha256": "28e406af84d9ff6ad492051596330ab09c42b1da275f90fb572a119dcead6402"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/selected-license-text-materials.json",
+      "destination": "catalogs/selected-license-text-materials.json",
+      "bytes": 361,
+      "sha256": "5f4c2d70dd32811d7050fc3508bac2c5e2b36e21120fc39b093d06a5dc8108f4"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/selected-protobuf-source-provenance.json",
+      "destination": "catalogs/selected-protobuf-source-provenance.json",
+      "bytes": 47908,
+      "sha256": "08004d48116a7f5bcc3505f6f3ed201c0321ca4a41dd8702525bcf3e4c82e407"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/selected-protobuf-upstream-source.json",
+      "destination": "catalogs/selected-protobuf-upstream-source.json",
+      "bytes": 824,
+      "sha256": "f67803ce2e3e4e311bf7bcd87e8b07cac316e35d1512742d50b9fb46349286a7"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/selected-runtime-notices.json",
+      "destination": "catalogs/selected-runtime-notices.json",
+      "bytes": 96445,
+      "sha256": "013c7466d5fac89b50f1ae494bd3647c97eab0c8e3c0079d28d23dec5fc6c341"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/selected-runtime-source-report.json",
+      "destination": "catalogs/selected-runtime-source-report.json",
+      "bytes": 271122,
+      "sha256": "21e7e1c2018d613b5d8c4d307297006047afed7a57e54a72ecb9382b9303e032"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/selected-source-coverage-summary.json",
+      "destination": "catalogs/selected-source-coverage-summary.json",
+      "bytes": 23371,
+      "sha256": "2b3af381318af19982dc7b59fc51bdd1f54ffddb7db44ff7b86963dbebbab149"
+    },
+    {
+      "root": "closure",
+      "path": "skia-DEPS.txt",
+      "destination": "catalogs/skia-DEPS.txt",
+      "bytes": 8993,
+      "sha256": "439b60dcd662fa0cfe3544cdae293f6135b7003793c9d7649b2d9e1e2cac9b89"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/sqlite-materials.json",
+      "destination": "catalogs/sqlite-materials.json",
+      "bytes": 1824,
+      "sha256": "bd78916fa03b3839dca21dd16fdfd93876341103ecf1a2422b7e5746137f9238"
+    },
+    {
+      "root": "staged",
+      "path": "catalogs/sqlite-source-materials.json",
+      "destination": "catalogs/sqlite-source-materials.json",
+      "bytes": 550,
+      "sha256": "b0a06f9a8d1c0c89c378ca389899f57ba7b07fb79f6ad5014a4ae7645ac2f48e"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-DEPS.txt",
+      "destination": "catalogs/vulkan-deps-DEPS.txt",
+      "bytes": 2722,
+      "sha256": "bb6ebb1a4fd5621ced278ed8566be91146e6156784b334801f03203aa4f096c2"
+    },
+    {
+      "root": "repository",
+      "path": "docs/LAUNCHER_SOURCE_BUILD.md",
+      "destination": "docs/LAUNCHER_SOURCE_BUILD.md",
+      "bytes": 11725,
+      "sha256": "e468315789c87bb08cf6e4a78d1bd373044eb2572f76102fd76c3b184f01d15d"
+    },
+    {
+      "root": "staged",
+      "path": "notices/Flutter-NOTICES.txt",
+      "destination": "notices/Flutter-NOTICES.txt",
+      "bytes": 1855708,
+      "sha256": "cf8a94018b718b563d2ffed39dfb4e3b60634e475419fa8568ccd928802bdaeb"
+    },
+    {
+      "root": "inputs",
+      "path": "LTvLauncher-LICENSE.txt",
+      "destination": "notices/LTvLauncher-LICENSE.txt",
+      "bytes": 32473,
+      "sha256": "1b3782ccad7b8614100cda30d3faf42fc39f2e97932908c543005053b654ca68"
+    },
+    {
+      "root": "inputs",
+      "path": "LTvLauncher-NOTICES.txt",
+      "destination": "notices/LTvLauncher-NOTICES.txt",
+      "bytes": 1855708,
+      "sha256": "cf8a94018b718b563d2ffed39dfb4e3b60634e475419fa8568ccd928802bdaeb"
+    },
+    {
+      "root": "staged",
+      "path": "notices/THIRD-PARTY-NOTICES.txt",
+      "destination": "notices/THIRD-PARTY-NOTICES.txt",
+      "bytes": 76818,
+      "sha256": "2d3ce5c072d17afaee90d42a1cf2fcd62e1ddc0720670d9a0682ee9fad9191ff"
+    },
+    {
+      "root": "staged",
+      "path": "notices/apk/META-INF/androidx/annotation/annotation/LICENSE.txt",
+      "destination": "notices/apk/META-INF/androidx/annotation/annotation/LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+    },
+    {
+      "root": "closure",
+      "path": "dart-LICENSE.txt",
+      "destination": "notices/dart-LICENSE.txt",
+      "bytes": 1502,
+      "sha256": "2cfa3ee8e7512e6d44c854b986510810fadc815f93f890373b3a81c1b6ccd256"
+    },
+    {
+      "root": "closure",
+      "path": "skia-LICENSE.txt",
+      "destination": "notices/skia-LICENSE.txt",
+      "bytes": 1507,
+      "sha256": "5f787c1dee3c56547f09ccc2906ab5f5293c4d8dd6c8654e573216c38e908dbd"
+    },
+    {
+      "root": "inputs",
+      "path": "LTvLauncher-source.tar.gz",
+      "destination": "sources/application/LTvLauncher-source.tar.gz",
+      "bytes": 1773811,
+      "sha256": "7cb65fdcb8b10ef43f909c2de5ba6fc0d1c23fc1a1c43795c750efa129aed17e",
+      "archive": "tar",
+      "url": "https://codeload.github.com/leanbitlab-org/LtvLauncher/tar.gz/f9db652edaac2da3ea2e6a1ed220d1396ccea82b"
+    },
+    {
+      "root": "staged",
+      "path": "assets/material-icons/MaterialIcons-Regular.otf",
+      "destination": "sources/assets/material-icons/MaterialIcons-Regular.otf",
+      "bytes": 1645184,
+      "sha256": "d9865b671a09d683d13a863089d8825e0f61a37696ce5d7d448bc8023aa62453",
+      "upstream_archive": {
+        "url": "https://storage.googleapis.com/flutter_infra_release/flutter/fonts/3012db47f3130e62f7cc0beabff968a33cbec8d8/fonts.zip",
+        "sha256": "e56fa8e9bb4589fde964be3de451f3e5b251e4a1eafb1dc98d94add034dd5a86",
+        "member": "MaterialIcons-Regular.otf"
+      }
+    },
+    {
+      "root": "staged",
+      "path": "assets/material-icons/MaterialIcons_LICENSE.txt",
+      "destination": "sources/assets/material-icons/MaterialIcons_LICENSE.txt",
+      "bytes": 18531,
+      "sha256": "be698262aecd042c0de6f886cc0af622f8def446462026992cc530275d8a9e74",
+      "upstream_archive": {
+        "url": "https://storage.googleapis.com/flutter_infra_release/flutter/fonts/3012db47f3130e62f7cc0beabff968a33cbec8d8/fonts.zip",
+        "sha256": "e56fa8e9bb4589fde964be3de451f3e5b251e4a1eafb1dc98d94add034dd5a86",
+        "member": "MaterialIcons_LICENSE.txt"
+      }
+    },
+    {
+      "root": "staged",
+      "path": "assets/material-icons/codepoints",
+      "destination": "sources/assets/material-icons/codepoints",
+      "bytes": 228708,
+      "sha256": "e9b6f6afe11baf536baedc5fac5d30e6e45f5fc25bdb12f9f2f4bc27c4db2ae3",
+      "upstream_archive": {
+        "url": "https://storage.googleapis.com/flutter_infra_release/flutter/fonts/3012db47f3130e62f7cc0beabff968a33cbec8d8/fonts.zip",
+        "sha256": "e56fa8e9bb4589fde964be3de451f3e5b251e4a1eafb1dc98d94add034dd5a86",
+        "member": "codepoints"
+      }
+    },
+    {
+      "root": "inputs",
+      "path": "Flutter-3.24.5-source.tar.gz",
+      "destination": "sources/flutter/Flutter-3.24.5-source.tar.gz",
+      "bytes": 14196706,
+      "sha256": "28d3569ab71ebec3dfc5e764cc8a87af8204a0d31570fa7216d3cadeb86808dc",
+      "archive": "tar",
+      "url": "https://codeload.github.com/flutter/flutter/tar.gz/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668"
+    },
+    {
+      "root": "inputs",
+      "path": "sky_engine-a18df97ca57a249df5d8d68cd0820600223ce262.zip",
+      "destination": "sources/flutter/sky_engine-a18df97ca57a249df5d8d68cd0820600223ce262.zip",
+      "bytes": 1349921,
+      "sha256": "0ee0af6df98d7218c787c57087b36d57cb162d789c656b54a4c0f40a2fc4d4f1",
+      "archive": "zip",
+      "url": "https://storage.googleapis.com/flutter_infra_release/flutter/a18df97ca57a249df5d8d68cd0820600223ce262/sky_engine.zip"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/Apache-2.0.txt",
+      "destination": "sources/maven/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/Protobuf-LICENSE.txt",
+      "destination": "sources/maven/Protobuf-LICENSE.txt",
+      "bytes": 1732,
+      "sha256": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/fetch-index.json",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/fetch-index.json",
+      "bytes": 10410,
+      "sha256": "490160e4e07e919e2ae4d177d08d50ed6f25093254e8d78505dc646077603fcc"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/findings.json",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/findings.json",
+      "bytes": 3575,
+      "sha256": "fcbb43ce57fe575b27cd42b8c7ba92bf89f1a02452188b564ca19175c481534c"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-buildSrc__apply__applyAndroidXRepackageImplPlugin.gradle",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-buildSrc__apply__applyAndroidXRepackageImplPlugin.gradle",
+      "bytes": 236,
+      "sha256": "b9857e9f456486dbaddf6e7ab7bf6d3d906a4f9e204fd0dee6bede70c8388562",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/buildSrc/apply/applyAndroidXRepackageImplPlugin.gradle?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-buildSrc__plugins__src__main__kotlin__androidx__build__AndroidXRepackagePlugin.kt",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-buildSrc__plugins__src__main__kotlin__androidx__build__AndroidXRepackagePlugin.kt",
+      "bytes": 1377,
+      "sha256": "51c618dfca8174cece25407b2efc53cc4f690fbaf31eaacf8e17b33a16288932",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/buildSrc/plugins/src/main/kotlin/androidx/build/AndroidXRepackagePlugin.kt?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-buildSrc__private__src__main__kotlin__androidx__build__AndroidXRepackageImplPlugin.kt",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-buildSrc__private__src__main__kotlin__androidx__build__AndroidXRepackageImplPlugin.kt",
+      "bytes": 5972,
+      "sha256": "729c094e60ee179bbc0dda2d2689daef1c3ceac85ac6107d097f1200adc1f886",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/buildSrc/private/src/main/kotlin/androidx/build/AndroidXRepackageImplPlugin.kt?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-commit.json",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-commit.json",
+      "bytes": 794,
+      "sha256": "eb6883b549214e0ba72fd0ce83dafa558f2627ee1430ad7dfa980cd01ad68066",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b?format=JSON"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-datastore__datastore-preferences-external-protobuf__build.gradle",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-datastore__datastore-preferences-external-protobuf__build.gradle",
+      "bytes": 1644,
+      "sha256": "f6fb9eb6494c226a441df60dab9457dfc7b0495d43d6dfbac74bc1a23df395cb",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/datastore/datastore-preferences-external-protobuf/build.gradle?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-gradle__libs.versions.toml",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-gradle__libs.versions.toml",
+      "bytes": 22551,
+      "sha256": "e209be20526438e6610cf8c0c648d176ae1cd2c72efc322645f9a38d42a4486b",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/gradle/libs.versions.toml?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-gradle__wrapper__gradle-wrapper.properties",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-gradle__wrapper__gradle-wrapper.properties",
+      "bytes": 283,
+      "sha256": "572f4f06812478293915549f21a9ae760ec1f8a48b53734c43579a7fa46d0669",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/gradle/wrapper/gradle-wrapper.properties?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/release-libraryversions.toml",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/release-libraryversions.toml",
+      "bytes": 18174,
+      "sha256": "486b822c9f7fd5244593f683a580d8dd9c194288e38a9132ed9b6e7b9f6c4cc4",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/libraryversions.toml?format=TEXT"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx-protobuf-relocation-recipe/shadow-8.1.1-ShadowCopyAction.groovy",
+      "destination": "sources/maven/androidx-protobuf-relocation-recipe/shadow-8.1.1-ShadowCopyAction.groovy",
+      "bytes": 20777,
+      "sha256": "3f508740d063abf4df6cdc8ff8964864f288b4fac8dfcd987ef372f783a4c3ce",
+      "url": "https://raw.githubusercontent.com/johnrengelman/shadow/8.1.1/src/main/groovy/com/github/jengelman/gradle/plugins/shadow/tasks/ShadowCopyAction.groovy"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.activity--activity-1.9.3-sources.jar",
+      "destination": "sources/maven/androidx.activity--activity-1.9.3-sources.jar",
+      "bytes": 56999,
+      "sha256": "3b95a45ba13704e4872ba0f2755b13ab7013e7f7c08bb8a208417a2b66622e74",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity/1.9.3/activity-1.9.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.activity--activity-1.9.3.module",
+      "destination": "sources/maven/androidx.activity--activity-1.9.3.module",
+      "bytes": 8376,
+      "sha256": "7e6a24dda205e1cb1e9c96fa35ff6f261608087f31d323d4cff42b9716d7ed57",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity/1.9.3/activity-1.9.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.activity--activity-1.9.3.pom",
+      "destination": "sources/maven/androidx.activity--activity-1.9.3.pom",
+      "bytes": 4086,
+      "sha256": "3f3e08e17dab5f074fa81db978bda56261fb97cf9e192f3337898cfd801a6a34",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity/1.9.3/activity-1.9.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.activity--activity-ktx-1.9.3-sources.jar",
+      "destination": "sources/maven/androidx.activity--activity-ktx-1.9.3-sources.jar",
+      "bytes": 261,
+      "sha256": "c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-ktx/1.9.3/activity-ktx-1.9.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.activity--activity-ktx-1.9.3.module",
+      "destination": "sources/maven/androidx.activity--activity-ktx-1.9.3.module",
+      "bytes": 8031,
+      "sha256": "31d0dab663d04d911a67588931f86b101131e11696bb72895a7e5603717ac241",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-ktx/1.9.3/activity-ktx-1.9.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.activity--activity-ktx-1.9.3.pom",
+      "destination": "sources/maven/androidx.activity--activity-ktx-1.9.3.pom",
+      "bytes": 3285,
+      "sha256": "3c8c78c6abb9d2f6885ed81f2a1d857b014b19a6a9a22f49d9420502bfda2a53",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-ktx/1.9.3/activity-ktx-1.9.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.annotation--annotation-experimental-1.4.0-sources.jar",
+      "destination": "sources/maven/androidx.annotation--annotation-experimental-1.4.0-sources.jar",
+      "bytes": 5257,
+      "sha256": "783a221a7c1093ff8932053998a69a24489f7930806a32b55366108146d29c1d",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.4.0/annotation-experimental-1.4.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.annotation--annotation-experimental-1.4.0.module",
+      "destination": "sources/maven/androidx.annotation--annotation-experimental-1.4.0.module",
+      "bytes": 3950,
+      "sha256": "5930ea7f21fcb6d0deb2ba32748a0ef7c8fd2c42384860582ba7cd20deb90379",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.4.0/annotation-experimental-1.4.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.annotation--annotation-experimental-1.4.0.pom",
+      "destination": "sources/maven/androidx.annotation--annotation-experimental-1.4.0.pom",
+      "bytes": 2031,
+      "sha256": "41d2b9d879fc9221acda8e873ec7d26b153b9b8e04770ac79491e0576baef038",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.4.0/annotation-experimental-1.4.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.annotation--annotation-jvm-1.9.1-sources.jar",
+      "destination": "sources/maven/androidx.annotation--annotation-jvm-1.9.1-sources.jar",
+      "bytes": 71470,
+      "sha256": "c6ae897fbfb73ca09d4ae31a24bfff85c652097ad10644cdbb738488728cb39b",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.annotation--annotation-jvm-1.9.1.module",
+      "destination": "sources/maven/androidx.annotation--annotation-jvm-1.9.1.module",
+      "bytes": 3388,
+      "sha256": "03fb659177c8618e47425925c11bc91f384703ea26c265be9b25cd79292b511c",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.annotation--annotation-jvm-1.9.1.pom",
+      "destination": "sources/maven/androidx.annotation--annotation-jvm-1.9.1.pom",
+      "bytes": 1826,
+      "sha256": "89b99c218d60019316b50aab79816707bc21696c896a030e1b1ae038961bcb8e",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.appcompat--appcompat-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.appcompat--appcompat-1.1.0-sources.jar",
+      "bytes": 446167,
+      "sha256": "6d86c69d9c8d853772b1cc851d0aed112deba1ecd3b40b6a39eec84b69f80769",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat/1.1.0/appcompat-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.appcompat--appcompat-1.1.0.pom",
+      "destination": "sources/maven/androidx.appcompat--appcompat-1.1.0.pom",
+      "bytes": 2786,
+      "sha256": "340d617121f8ef8e02a6680c8f357aa3e542276d0c8a1cdcb6fd98984b2cb7b9",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat/1.1.0/appcompat-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.appcompat--appcompat-resources-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.appcompat--appcompat-resources-1.1.0-sources.jar",
+      "bytes": 39338,
+      "sha256": "d5b641a3df82df177add93944cc38f0009841237760d2f034169251888ebde0b",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat-resources/1.1.0/appcompat-resources-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.appcompat--appcompat-resources-1.1.0.pom",
+      "destination": "sources/maven/androidx.appcompat--appcompat-resources-1.1.0.pom",
+      "bytes": 2354,
+      "sha256": "046011e16cb01b6f14842565661551110ef1b6427483f5d9068493f4c49690f2",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat-resources/1.1.0/appcompat-resources-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.arch.core--core-common-2.2.0-sources.jar",
+      "destination": "sources/maven/androidx.arch.core--core-common-2.2.0-sources.jar",
+      "bytes": 5684,
+      "sha256": "563d430880d847890029234386ef03adb95403c34f3c9dec3a7002e2f4007ae4",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.arch.core--core-common-2.2.0.module",
+      "destination": "sources/maven/androidx.arch.core--core-common-2.2.0.module",
+      "bytes": 3079,
+      "sha256": "edf4200cfdc2d946232252c99e5dcb9c61bb909eb5450b2613d1d4fdc974b981",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.arch.core--core-common-2.2.0.pom",
+      "destination": "sources/maven/androidx.arch.core--core-common-2.2.0.pom",
+      "bytes": 1704,
+      "sha256": "1e17d4af8d6425be2a69f8af4d654a87e0456259a9eef1542869bcb023547e28",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.arch.core--core-runtime-2.2.0-sources.jar",
+      "destination": "sources/maven/androidx.arch.core--core-runtime-2.2.0-sources.jar",
+      "bytes": 4715,
+      "sha256": "4adaab3a8ab711634d566d2e239e199af8b5ac92c1de85540dc34c7040754e96",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.2.0/core-runtime-2.2.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.arch.core--core-runtime-2.2.0.module",
+      "destination": "sources/maven/androidx.arch.core--core-runtime-2.2.0.module",
+      "bytes": 3386,
+      "sha256": "a8b17513949e5db6c9601c30be19df953762dd877512f1e2cfcfae81d2440944",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.2.0/core-runtime-2.2.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.arch.core--core-runtime-2.2.0.pom",
+      "destination": "sources/maven/androidx.arch.core--core-runtime-2.2.0.pom",
+      "bytes": 1920,
+      "sha256": "0f953706598140d9d8735cdd5aeb1fa35933f4e2f31c0bf3eb81a053a4c8c1a5",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.2.0/core-runtime-2.2.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.asynclayoutinflater--asynclayoutinflater-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.asynclayoutinflater--asynclayoutinflater-1.0.0-sources.jar",
+      "bytes": 3437,
+      "sha256": "a4686cc131c54a6f3e868c8de2afb3ae8d239e2556c1d9d61f5ce4a3455d0cc4",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/asynclayoutinflater/asynclayoutinflater/1.0.0/asynclayoutinflater-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.asynclayoutinflater--asynclayoutinflater-1.0.0.pom",
+      "destination": "sources/maven/androidx.asynclayoutinflater--asynclayoutinflater-1.0.0.pom",
+      "bytes": 1823,
+      "sha256": "48167eeedc8da79c4d29deaf0d0cd9b5d8fedcae01f1a6efb3f28f08e8982f71",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/asynclayoutinflater/asynclayoutinflater/1.0.0/asynclayoutinflater-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.collection--collection-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.collection--collection-1.1.0-sources.jar",
+      "bytes": 35345,
+      "sha256": "158ae7efee9c7394a241139ebf220751f8b812eda40269a38ef725dbe784b98d",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection/1.1.0/collection-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.collection--collection-1.1.0.pom",
+      "destination": "sources/maven/androidx.collection--collection-1.1.0.pom",
+      "bytes": 1338,
+      "sha256": "67e9066ca4acfdc6e3cc508293c31ba0398057ff118e4f70b1e1813c9a3456d1",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection/1.1.0/collection-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.collection--collection-ktx-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.collection--collection-ktx-1.1.0-sources.jar",
+      "bytes": 5884,
+      "sha256": "83c5fac4f2327663aa25bcbb0cbf4b1a724100b3d4c54580bafd526603aab87c",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection-ktx/1.1.0/collection-ktx-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.collection--collection-ktx-1.1.0.pom",
+      "destination": "sources/maven/androidx.collection--collection-ktx-1.1.0.pom",
+      "bytes": 1533,
+      "sha256": "721e76e74ee4158d3fe9759074b7eceed4ff7d84ed34a3faca5843fb874ac946",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection-ktx/1.1.0/collection-ktx-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.concurrent--concurrent-futures-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.concurrent--concurrent-futures-1.1.0-sources.jar",
+      "bytes": 19716,
+      "sha256": "cc06fb6045a6c066f50e237a3c2126bc88c16d358a57b3612ba633c9f530b0a0",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.1.0/concurrent-futures-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.concurrent--concurrent-futures-1.1.0.module",
+      "destination": "sources/maven/androidx.concurrent--concurrent-futures-1.1.0.module",
+      "bytes": 3485,
+      "sha256": "77639a0b051e22510bad93affcea0ebd781ef124bf9b7621a95749937bcfcdfd",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.1.0/concurrent-futures-1.1.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.concurrent--concurrent-futures-1.1.0.pom",
+      "destination": "sources/maven/androidx.concurrent--concurrent-futures-1.1.0.pom",
+      "bytes": 1888,
+      "sha256": "748a34eb5d13d19d187adecaea82667fded5f1b0b98a655e13ed2e4a8b3d8ae6",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.1.0/concurrent-futures-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.coordinatorlayout--coordinatorlayout-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.coordinatorlayout--coordinatorlayout-1.0.0-sources.jar",
+      "bytes": 30016,
+      "sha256": "4381bcad818975abb0e74af1b313744067f3742da179223c8e633e6821c8f7a8",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/coordinatorlayout/coordinatorlayout/1.0.0/coordinatorlayout-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.coordinatorlayout--coordinatorlayout-1.0.0.pom",
+      "destination": "sources/maven/androidx.coordinatorlayout--coordinatorlayout-1.0.0.pom",
+      "bytes": 2021,
+      "sha256": "3e44e4de2fee6debc33d23626ee906e54e1bb3c1749b19e02bb667b614ab9392",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/coordinatorlayout/coordinatorlayout/1.0.0/coordinatorlayout-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.core--core-1.13.1-sources.jar",
+      "destination": "sources/maven/androidx.core--core-1.13.1-sources.jar",
+      "bytes": 932053,
+      "sha256": "947cc4b95df57d5d2ed16149458f4d3757da63a019d2d55a740db625bb3efcd6",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/core/core/1.13.1/core-1.13.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.core--core-1.13.1.module",
+      "destination": "sources/maven/androidx.core--core-1.13.1.module",
+      "bytes": 6044,
+      "sha256": "2a10979bbb3bcd7b25b7f664ab4e9b016fabf2174a26768b677e12e4bea4c7c4",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/core/core/1.13.1/core-1.13.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.core--core-1.13.1.pom",
+      "destination": "sources/maven/androidx.core--core-1.13.1.pom",
+      "bytes": 3654,
+      "sha256": "527abfa5a8d6af748b37e1c0162d1633a2d5ea4387b0205a8b436b6214ba1cf6",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/core/core/1.13.1/core-1.13.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.core--core-ktx-1.13.1-sources.jar",
+      "destination": "sources/maven/androidx.core--core-ktx-1.13.1-sources.jar",
+      "bytes": 69704,
+      "sha256": "b6646f76cd2d59210561dffb16b32a4e5fcca6de37ca027f1dae82bfb0cf6493",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.13.1/core-ktx-1.13.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.core--core-ktx-1.13.1.module",
+      "destination": "sources/maven/androidx.core--core-ktx-1.13.1.module",
+      "bytes": 4655,
+      "sha256": "ab530b04e2fbe73205484899a3be56c90968873eb496fc52e5ea7596d91035d1",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.13.1/core-ktx-1.13.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.core--core-ktx-1.13.1.pom",
+      "destination": "sources/maven/androidx.core--core-ktx-1.13.1.pom",
+      "bytes": 2450,
+      "sha256": "31cc345b8c6cdd2046dcf67872df8a8cb4f44ea0cade4df80002caa7e3b71809",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.13.1/core-ktx-1.13.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.cursoradapter--cursoradapter-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.cursoradapter--cursoradapter-1.0.0-sources.jar",
+      "bytes": 11882,
+      "sha256": "99b72a3aec8c9edfd9de20f5913ce4c413bca2f0cf9877b504e26aa03ef50323",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/cursoradapter/cursoradapter/1.0.0/cursoradapter-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.cursoradapter--cursoradapter-1.0.0.pom",
+      "destination": "sources/maven/androidx.cursoradapter--cursoradapter-1.0.0.pom",
+      "bytes": 1611,
+      "sha256": "62d95c89850af21030b19f14d5f7ecd6d8bcc9a3014c59002ec99624caac8100",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/cursoradapter/cursoradapter/1.0.0/cursoradapter-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.customview--customview-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.customview--customview-1.1.0-sources.jar",
+      "bytes": 30221,
+      "sha256": "0f119c77c7613881901cbcd149e718409480c08c39661737750a35f5d6b5dfd2",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/customview/customview/1.1.0/customview-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.customview--customview-1.1.0.pom",
+      "destination": "sources/maven/androidx.customview--customview-1.1.0.pom",
+      "bytes": 1957,
+      "sha256": "c814d435f73e9e6d169886d0eb96b5c5361feb48449fbbb315c908c03c588c94",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/customview/customview/1.1.0/customview-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-core-jvm-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-core-jvm-1.1.3-sources.jar",
+      "bytes": 41909,
+      "sha256": "f3f678c8d2af5edc017868058842a7a78abfaee22edc8257a19c60d6b331f50e",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-core-jvm/1.1.3/datastore-core-jvm-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-core-jvm-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-core-jvm-1.1.3.module",
+      "bytes": 11645,
+      "sha256": "5261997a12b6d607a82517e7612233722dd255e415ace6a7af523322d4f59f39",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-core-jvm/1.1.3/datastore-core-jvm-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-core-jvm-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-core-jvm-1.1.3.pom",
+      "bytes": 4090,
+      "sha256": "3e3cf157b64184ef1af36f45beefc9e0d4b14176e8963a43a1bbccea65085312",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-core-jvm/1.1.3/datastore-core-jvm-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-core-okio-jvm-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-core-okio-jvm-1.1.3-sources.jar",
+      "bytes": 6831,
+      "sha256": "779bb1b6960be085987dbc68bafb117d4719c9930d447397d36baaa52278853b",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-core-okio-jvm/1.1.3/datastore-core-okio-jvm-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-core-okio-jvm-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-core-okio-jvm-1.1.3.module",
+      "bytes": 12140,
+      "sha256": "cd598ab8980114fb24add5f27cac5595dc311b6822ee3527542dc5c05716735b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-core-okio-jvm/1.1.3/datastore-core-okio-jvm-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-core-okio-jvm-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-core-okio-jvm-1.1.3.pom",
+      "bytes": 4280,
+      "sha256": "03a6d8aec66d48ea6fd554bfa74bf1efba4e048900d568a9340a14f2a572dd1c",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-core-okio-jvm/1.1.3/datastore-core-okio-jvm-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-jvm-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-jvm-1.1.3-sources.jar",
+      "bytes": 1341,
+      "sha256": "7a24c7744ca68ec6743a8c4eeae576a882f4f0cd5f4aef8e9d9a1aad4b513521",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-jvm/1.1.3/datastore-jvm-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-jvm-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-jvm-1.1.3.module",
+      "bytes": 12138,
+      "sha256": "42b6ab4ce072eac4a967a8de907c56471e307c7bd09691a13f1aa47e9ae3e059",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-jvm/1.1.3/datastore-jvm-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-jvm-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-jvm-1.1.3.pom",
+      "bytes": 4520,
+      "sha256": "d78ab283bfd0b4fe6d6f828a7af020db5bff4fb42fcf7c281bc88db12b49742f",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-jvm/1.1.3/datastore-jvm-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-core-jvm-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-core-jvm-1.1.3-sources.jar",
+      "bytes": 15514,
+      "sha256": "365f8ce322087ef0fa80d8554f7681df150839176cf88113c9e979d80b154756",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-core-jvm/1.1.3/datastore-preferences-core-jvm-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-core-jvm-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-core-jvm-1.1.3.module",
+      "bytes": 12559,
+      "sha256": "8d4baec72dd700355c4adff7353f7574c94729ad28a15fd9e1508f62596c48ba",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-core-jvm/1.1.3/datastore-preferences-core-jvm-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-core-jvm-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-core-jvm-1.1.3.pom",
+      "bytes": 4458,
+      "sha256": "40f77b99ca431d359e6b91b51606fc12295aa8e266b1082ed19a540a2128bc08",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-core-jvm/1.1.3/datastore-preferences-core-jvm-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-external-protobuf-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-external-protobuf-1.1.3-sources.jar",
+      "bytes": 261,
+      "sha256": "c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-external-protobuf/1.1.3/datastore-preferences-external-protobuf-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-external-protobuf-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-external-protobuf-1.1.3.module",
+      "bytes": 14878,
+      "sha256": "04dfdd602d8301c1bf22237e9f120ef9226fbc02a2fce51219fb31986ae30080",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-external-protobuf/1.1.3/datastore-preferences-external-protobuf-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-external-protobuf-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-external-protobuf-1.1.3.pom",
+      "bytes": 3443,
+      "sha256": "0cc951e64389d0c7910c26b7d978307aa3c88cc0cbb63e6bdddf29b8d1fa31e1",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-external-protobuf/1.1.3/datastore-preferences-external-protobuf-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-jvm-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-jvm-1.1.3-sources.jar",
+      "bytes": 1561,
+      "sha256": "5c6f68568cbaf8afcf0e319f6b1af41c72eff34d4613ff926f842e19176a0ff0",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-jvm/1.1.3/datastore-preferences-jvm-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-jvm-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-jvm-1.1.3.module",
+      "bytes": 12246,
+      "sha256": "2733bafe8106ed87642ad87c912bc7445bbcb3b1264e2d58e09a99b279f60099",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-jvm/1.1.3/datastore-preferences-jvm-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-jvm-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-jvm-1.1.3.pom",
+      "bytes": 4241,
+      "sha256": "f882316258753132b468021014216e5ff41f4ec92130d01493c57e15d6d0ae78",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-jvm/1.1.3/datastore-preferences-jvm-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-proto-1.1.3-sources.jar",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-proto-1.1.3-sources.jar",
+      "bytes": 7437,
+      "sha256": "3fdbe97382d8360355fe77b8b73c047535dc5e900f5c2e3400fc877fdc8644c7",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-proto/1.1.3/datastore-preferences-proto-1.1.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-proto-1.1.3.module",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-proto-1.1.3.module",
+      "bytes": 11504,
+      "sha256": "94e74db44f8bd58990a49104facb84eea78e43fc5d606dce5852781033b4278b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-proto/1.1.3/datastore-preferences-proto-1.1.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.datastore--datastore-preferences-proto-1.1.3.pom",
+      "destination": "sources/maven/androidx.datastore--datastore-preferences-proto-1.1.3.pom",
+      "bytes": 3713,
+      "sha256": "ff8596d18f5d7d856ff40b6f1b984244dcc861d736f20c9d6ad17847223ac1a2",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-proto/1.1.3/datastore-preferences-proto-1.1.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.documentfile--documentfile-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.documentfile--documentfile-1.0.0-sources.jar",
+      "bytes": 10935,
+      "sha256": "79c2424477565d0500b47c8288fb8e6dd9c8306984e8dbd38d576f013873b410",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/documentfile/documentfile/1.0.0/documentfile-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.documentfile--documentfile-1.0.0.pom",
+      "destination": "sources/maven/androidx.documentfile--documentfile-1.0.0.pom",
+      "bytes": 1608,
+      "sha256": "013288a9317a552706ce625fb24493e8223288529223ec578cf855a5ae9c16e5",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/documentfile/documentfile/1.0.0/documentfile-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.drawerlayout--drawerlayout-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.drawerlayout--drawerlayout-1.0.0-sources.jar",
+      "bytes": 20020,
+      "sha256": "3702e90acc99c16d192eada8467aea9595d1c3fff3e2155ffe66e5f31e334513",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/drawerlayout/drawerlayout/1.0.0/drawerlayout-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.drawerlayout--drawerlayout-1.0.0.pom",
+      "destination": "sources/maven/androidx.drawerlayout--drawerlayout-1.0.0.pom",
+      "bytes": 2006,
+      "sha256": "da6733425a83f5ce850878fa7201082345fed7c668dd58550fdd19c0396c6fa4",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/drawerlayout/drawerlayout/1.0.0/drawerlayout-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.exifinterface--exifinterface-1.3.7-sources.jar",
+      "destination": "sources/maven/androidx.exifinterface--exifinterface-1.3.7-sources.jar",
+      "bytes": 64785,
+      "sha256": "04c0a6d2ff9745ab9946ebcdd2cf35889e05c79e5218e8b59a57a98a2670dc74",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/exifinterface/exifinterface/1.3.7/exifinterface-1.3.7-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.exifinterface--exifinterface-1.3.7.module",
+      "destination": "sources/maven/androidx.exifinterface--exifinterface-1.3.7.module",
+      "bytes": 2876,
+      "sha256": "f70819519ecc320028345c7c0c318d8157055e83fc466c899cd344dd4f630a31",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/exifinterface/exifinterface/1.3.7/exifinterface-1.3.7.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.exifinterface--exifinterface-1.3.7.pom",
+      "destination": "sources/maven/androidx.exifinterface--exifinterface-1.3.7.pom",
+      "bytes": 1763,
+      "sha256": "37dbc6b87a2409cea5588d58c8f3acab9ea82cc688ee57a201a210450ff30e0e",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/exifinterface/exifinterface/1.3.7/exifinterface-1.3.7.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.fragment--fragment-1.7.1-sources.jar",
+      "destination": "sources/maven/androidx.fragment--fragment-1.7.1-sources.jar",
+      "bytes": 199032,
+      "sha256": "e1f221e82d5d549dfc50151b5f80aab86dd62a3db71a5ca0b0a3bbabf91765df",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment/1.7.1/fragment-1.7.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.fragment--fragment-1.7.1.module",
+      "destination": "sources/maven/androidx.fragment--fragment-1.7.1.module",
+      "bytes": 11983,
+      "sha256": "d6aea759c6903c44da1cbe5f770d5ed3cad0b38945535089bcfacfe705f57841",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment/1.7.1/fragment-1.7.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.fragment--fragment-1.7.1.pom",
+      "destination": "sources/maven/androidx.fragment--fragment-1.7.1.pom",
+      "bytes": 5439,
+      "sha256": "18bbbd3a53f8c1f026be496a847d9607ae06da9cb0f85f47f702fd27e2bd3906",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment/1.7.1/fragment-1.7.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.fragment--fragment-ktx-1.7.1-sources.jar",
+      "destination": "sources/maven/androidx.fragment--fragment-ktx-1.7.1-sources.jar",
+      "bytes": 6463,
+      "sha256": "6c9da4629e5057aa9f7caf9c2f6f77da387b0dec681d3dd65662d33c0871f7ca",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment-ktx/1.7.1/fragment-ktx-1.7.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.fragment--fragment-ktx-1.7.1.module",
+      "destination": "sources/maven/androidx.fragment--fragment-ktx-1.7.1.module",
+      "bytes": 10972,
+      "sha256": "8cc96d948489f9411c91796e5c7332ecfb070c2d0f4d65b7dc3e7978fa255bbd",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment-ktx/1.7.1/fragment-ktx-1.7.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.fragment--fragment-ktx-1.7.1.pom",
+      "destination": "sources/maven/androidx.fragment--fragment-ktx-1.7.1.pom",
+      "bytes": 4047,
+      "sha256": "73933a7263ebd917b787327683e8fbde6f5e441a7492afdb164d58fa361d6987",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment-ktx/1.7.1/fragment-ktx-1.7.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.interpolator--interpolator-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.interpolator--interpolator-1.0.0-sources.jar",
+      "bytes": 6655,
+      "sha256": "fa13ada71fe7bd9461f622f418e7c16a18e85da7708fb505c75229a9b8830345",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/interpolator/interpolator/1.0.0/interpolator-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.interpolator--interpolator-1.0.0.pom",
+      "destination": "sources/maven/androidx.interpolator--interpolator-1.0.0.pom",
+      "bytes": 1608,
+      "sha256": "0ddc07cc39699f48ecd9ec894b5830c0f09e22e82959294edf37217224c88b7b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/interpolator/interpolator/1.0.0/interpolator-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.legacy--legacy-support-core-ui-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.legacy--legacy-support-core-ui-1.0.0-sources.jar",
+      "bytes": 7522,
+      "sha256": "7dea025e3ced475e79e2c32841b778418b3ebc198e2bb5dd9c5c65653dd45872",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/legacy/legacy-support-core-ui/1.0.0/legacy-support-core-ui-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.legacy--legacy-support-core-ui-1.0.0.pom",
+      "destination": "sources/maven/androidx.legacy--legacy-support-core-ui-1.0.0.pom",
+      "bytes": 3934,
+      "sha256": "2baaf7f17551765524bd1e4d2f954a2a0178a112039cf549ba8b7d4b41e66931",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/legacy/legacy-support-core-ui/1.0.0/legacy-support-core-ui-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.legacy--legacy-support-core-utils-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.legacy--legacy-support-core-utils-1.0.0-sources.jar",
+      "bytes": 3201,
+      "sha256": "dff5a95a7a706957b16edbf5b36c619fc869742bdf18845520d0cf71748c8070",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/legacy/legacy-support-core-utils/1.0.0/legacy-support-core-utils-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.legacy--legacy-support-core-utils-1.0.0.pom",
+      "destination": "sources/maven/androidx.legacy--legacy-support-core-utils-1.0.0.pom",
+      "bytes": 2633,
+      "sha256": "8fd093008b3ee7c06e52c78da2af980a7b47b69b967fa91dad7af466f7a00a38",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/legacy/legacy-support-core-utils/1.0.0/legacy-support-core-utils-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-common-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-common-2.7.0-sources.jar",
+      "bytes": 24946,
+      "sha256": "eea037c7fe165a0bd493d7e7c872d8e7da4c42623fcd356e12ede42e288c4c75",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.7.0/lifecycle-common-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-common-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-common-2.7.0.module",
+      "bytes": 24149,
+      "sha256": "421fdbd504097803f3a8df81c3e5d50a5be48965032b1389325f7e659d27fac8",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.7.0/lifecycle-common-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-common-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-common-2.7.0.pom",
+      "bytes": 5939,
+      "sha256": "8a7c2448917f84fa6793dfe8563b49c96562d6e86eed19c642ef300d5cd16bc0",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.7.0/lifecycle-common-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-common-java8-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-common-java8-2.7.0-sources.jar",
+      "bytes": 261,
+      "sha256": "c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common-java8/2.7.0/lifecycle-common-java8-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-common-java8-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-common-java8-2.7.0.module",
+      "bytes": 23112,
+      "sha256": "ab1607cd887584d7ec2d88b3023a1934834874baf045da0974fa705aadc9ef14",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common-java8/2.7.0/lifecycle-common-java8-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-common-java8-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-common-java8-2.7.0.pom",
+      "bytes": 5246,
+      "sha256": "c29de269fca03230d0fb5ebf9c9560950b9f9bcd540ed7fcf85c08beca1afddb",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common-java8/2.7.0/lifecycle-common-java8-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-2.7.0-sources.jar",
+      "bytes": 13402,
+      "sha256": "e1cd9061e43922cd9715feafb518d3a3d1c649a177a7b5ef71e6d0b4491609ad",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata/2.7.0/lifecycle-livedata-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-2.7.0.module",
+      "bytes": 24021,
+      "sha256": "a4ae3edfee3d53b41d235f9be30606f07f6ac01f0e2ab7a19170d7a359b61bc9",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata/2.7.0/lifecycle-livedata-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-2.7.0.pom",
+      "bytes": 6091,
+      "sha256": "69885fd126b6866da760421636cb31cbf0fc5195f9962f45b9775c2d18496fc8",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata/2.7.0/lifecycle-livedata-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-core-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-core-2.7.0-sources.jar",
+      "bytes": 6941,
+      "sha256": "5ed0b2f1e01bed494c9d70558a6b1fca295c32f47e5d9e652b316e8989d9689c",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.7.0/lifecycle-livedata-core-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-core-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-core-2.7.0.module",
+      "bytes": 23508,
+      "sha256": "8a08ed5f9717a3541231164336000a08c3911f8e186bc76cd526b2a822d6464d",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.7.0/lifecycle-livedata-core-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-core-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-core-2.7.0.pom",
+      "bytes": 5651,
+      "sha256": "d8e8a0ccedc798db560c637df432159cb05ec3ad18f9b8f6648f59bd4580acd6",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.7.0/lifecycle-livedata-core-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-core-ktx-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-core-ktx-2.7.0-sources.jar",
+      "bytes": 1631,
+      "sha256": "52aebe57b7619530d5d762671262a6be54972c7ab64e41a330d81ab21adfcba9",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core-ktx/2.7.0/lifecycle-livedata-core-ktx-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-core-ktx-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-core-ktx-2.7.0.module",
+      "bytes": 23500,
+      "sha256": "a61a7ab2f0b483e141a5925fc487c5eafb6588761d6e118ca607ce0618d72108",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core-ktx/2.7.0/lifecycle-livedata-core-ktx-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-livedata-core-ktx-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-livedata-core-ktx-2.7.0.pom",
+      "bytes": 5316,
+      "sha256": "67502b56b0695b2c2a1c8ff2b93ebd23b6c3d0c214f1ea3b96211eca98960fc4",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core-ktx/2.7.0/lifecycle-livedata-core-ktx-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-process-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-process-2.7.0-sources.jar",
+      "bytes": 5601,
+      "sha256": "ddbe8ab100f081cd8b899404183e0a0818436e64f1a9a7e56e2323bf28d31900",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-process/2.7.0/lifecycle-process-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-process-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-process-2.7.0.module",
+      "bytes": 23378,
+      "sha256": "e9370cae02e170f51f2affb34e41a062d3bee5e5270ec112ac8523b6ca6de96f",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-process/2.7.0/lifecycle-process-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-process-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-process-2.7.0.pom",
+      "bytes": 5664,
+      "sha256": "7b07a80cb709396b69b071ea1a9177846ed699b4b44bebb1f9bad8bbbf21a23d",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-process/2.7.0/lifecycle-process-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-runtime-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-runtime-2.7.0-sources.jar",
+      "bytes": 8675,
+      "sha256": "ee988b3f96c8252e50b4a9eb823ba0f472a46f54f33f1b59f1149eb4c7a14c6d",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.7.0/lifecycle-runtime-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-runtime-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-runtime-2.7.0.module",
+      "bytes": 23714,
+      "sha256": "2efb0fbe1c2fe6e683f715655b8b3eaf9a54e679c37e92616ec1ada30337d613",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.7.0/lifecycle-runtime-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-runtime-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-runtime-2.7.0.pom",
+      "bytes": 6038,
+      "sha256": "fec5849eef5069ae19f0c6270d76421485f461f1025c90277b05ddd713c7e365",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.7.0/lifecycle-runtime-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-runtime-ktx-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-runtime-ktx-2.7.0-sources.jar",
+      "bytes": 7212,
+      "sha256": "ec5ea7c2ee6a6af3c6a53a0380b843418d05c58e1f2fdc18bd5cd7f7d9158bdb",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.7.0/lifecycle-runtime-ktx-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-runtime-ktx-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-runtime-ktx-2.7.0.module",
+      "bytes": 23719,
+      "sha256": "ebc28fc834248353425a95b35a10e8a0edb112deacdc8cc03c3a37d8167f178d",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.7.0/lifecycle-runtime-ktx-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-runtime-ktx-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-runtime-ktx-2.7.0.pom",
+      "bytes": 5684,
+      "sha256": "a3c506eb9cd17e53729e45008a8af51b5e557b9b5c3c37fbb66715b4c181db08",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.7.0/lifecycle-runtime-ktx-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-2.7.0-sources.jar",
+      "bytes": 17068,
+      "sha256": "9a128207cd40986aaec6354b7e88f5b8ef865d31b1195e71990784940bdeb33d",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.7.0/lifecycle-viewmodel-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-2.7.0.module",
+      "bytes": 22862,
+      "sha256": "f49b02d47a1a1867f9a325ea5b884fdc7ee6b02d538d016b201d33e00d30c5e1",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.7.0/lifecycle-viewmodel-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-2.7.0.pom",
+      "bytes": 5248,
+      "sha256": "700f289173adcd0c6144da0c692c4e40b0a83af5a1392c544da982f4aabbd48e",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.7.0/lifecycle-viewmodel-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-ktx-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-ktx-2.7.0-sources.jar",
+      "bytes": 1409,
+      "sha256": "dac89499d320e57461070aae82af14e7cf269990588fdea6465853a38e7f2262",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.7.0/lifecycle-viewmodel-ktx-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-ktx-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-ktx-2.7.0.module",
+      "bytes": 23547,
+      "sha256": "412cfafe3050b0161a645f45d1be5e623d28ffbedc71581232cab45a3f54400d",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.7.0/lifecycle-viewmodel-ktx-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-ktx-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-ktx-2.7.0.pom",
+      "bytes": 5514,
+      "sha256": "47efe5b29b99dfe7462c2943dc0f405875881df3d815157435a8b133a41a73ad",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.7.0/lifecycle-viewmodel-ktx-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-savedstate-2.7.0-sources.jar",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-savedstate-2.7.0-sources.jar",
+      "bytes": 16109,
+      "sha256": "046a6aadc758c45be321e804daae8686fff374d42e9291a2fbf2612183fa6533",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.7.0/lifecycle-viewmodel-savedstate-2.7.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-savedstate-2.7.0.module",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-savedstate-2.7.0.module",
+      "bytes": 25409,
+      "sha256": "cf6e60bc3beb4a46373e09d86ebd9ba290ac51b41cd1c20ed27d7aaaaacab188",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.7.0/lifecycle-viewmodel-savedstate-2.7.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.lifecycle--lifecycle-viewmodel-savedstate-2.7.0.pom",
+      "destination": "sources/maven/androidx.lifecycle--lifecycle-viewmodel-savedstate-2.7.0.pom",
+      "bytes": 6300,
+      "sha256": "df0107a734b53080a2847bfabbf8e127958b765f6d5a0d5e028281af3964623f",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.7.0/lifecycle-viewmodel-savedstate-2.7.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.loader--loader-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.loader--loader-1.0.0-sources.jar",
+      "bytes": 25417,
+      "sha256": "efcbafaac8fc06bd5b162b57ac1e146d11919b79dea2202339470c931cecdc67",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/loader/loader/1.0.0/loader-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.loader--loader-1.0.0.pom",
+      "destination": "sources/maven/androidx.loader--loader-1.0.0.pom",
+      "bytes": 2207,
+      "sha256": "c978d550808b47434aa49a63164110a50b55b0bcc6160a93a2e37d5110df8c5e",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/loader/loader/1.0.0/loader-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.localbroadcastmanager--localbroadcastmanager-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.localbroadcastmanager--localbroadcastmanager-1.0.0-sources.jar",
+      "bytes": 4073,
+      "sha256": "952b8567a76d6484aa96f9712b9dc90f21b83a73e2496daf243e2e1adfb65dd4",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/localbroadcastmanager/localbroadcastmanager/1.0.0/localbroadcastmanager-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.localbroadcastmanager--localbroadcastmanager-1.0.0.pom",
+      "destination": "sources/maven/androidx.localbroadcastmanager--localbroadcastmanager-1.0.0.pom",
+      "bytes": 1636,
+      "sha256": "a000041f5a1f79283c5175e1bb60cf3683780f401c6a9d34fbe9751253fa6ff9",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/localbroadcastmanager/localbroadcastmanager/1.0.0/localbroadcastmanager-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.preference--preference-1.2.1-sources.jar",
+      "destination": "sources/maven/androidx.preference--preference-1.2.1-sources.jar",
+      "bytes": 114097,
+      "sha256": "e5c16f4ce8afacb66bbbb34837cc070a5c6a7ca07ae1a8ff9c4c80c8e6edbf1f",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/preference/preference/1.2.1/preference-1.2.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.preference--preference-1.2.1.module",
+      "destination": "sources/maven/androidx.preference--preference-1.2.1.module",
+      "bytes": 5187,
+      "sha256": "b9a4dc6d8d232878f717dfac00c77bf384bbb52c26e4064f7bcaa966c10a2629",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/preference/preference/1.2.1/preference-1.2.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.preference--preference-1.2.1.pom",
+      "destination": "sources/maven/androidx.preference--preference-1.2.1.pom",
+      "bytes": 3151,
+      "sha256": "0157b052e8433a6bab5df7ffe4fbf01bd10a55f18f111b37faf7dfafe14c7923",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/preference/preference/1.2.1/preference-1.2.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.print--print-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.print--print-1.0.0-sources.jar",
+      "bytes": 7099,
+      "sha256": "659b6e2047484dbae409b9b49c19f9ebd9540bb7ef3610438e2c2b15064fc217",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/print/print/1.0.0/print-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.print--print-1.0.0.pom",
+      "destination": "sources/maven/androidx.print--print-1.0.0.pom",
+      "bytes": 1586,
+      "sha256": "62482c0594841bee24bb996abb6cb7b320a6a3b77dca9f0a0ba4fe3be5530aa7",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/print/print/1.0.0/print-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.profileinstaller--profileinstaller-1.3.1-sources.jar",
+      "destination": "sources/maven/androidx.profileinstaller--profileinstaller-1.3.1-sources.jar",
+      "bytes": 38842,
+      "sha256": "0ff5f58d8df11e5f8254013b04386789bdb1367288e9eb74433198261fb14d95",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/profileinstaller/profileinstaller/1.3.1/profileinstaller-1.3.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.profileinstaller--profileinstaller-1.3.1.module",
+      "destination": "sources/maven/androidx.profileinstaller--profileinstaller-1.3.1.module",
+      "bytes": 3761,
+      "sha256": "cc7eed0ed4b669de84b852f78797a50018a4f30002e1e38aaa668af22ca5b460",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/profileinstaller/profileinstaller/1.3.1/profileinstaller-1.3.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.profileinstaller--profileinstaller-1.3.1.pom",
+      "destination": "sources/maven/androidx.profileinstaller--profileinstaller-1.3.1.pom",
+      "bytes": 2418,
+      "sha256": "08263eb70a814a7cb26d11d3a83825f84c29f3e4b59f9134724e0e02e2bbd768",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/profileinstaller/profileinstaller/1.3.1/profileinstaller-1.3.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.recyclerview--recyclerview-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.recyclerview--recyclerview-1.0.0-sources.jar",
+      "bytes": 293485,
+      "sha256": "777ff6aaeb4c5fd8613c81320073d4e87e1e14067927fbf9633acfb62c7a9146",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.0.0/recyclerview-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.recyclerview--recyclerview-1.0.0.pom",
+      "destination": "sources/maven/androidx.recyclerview--recyclerview-1.0.0.pom",
+      "bytes": 1771,
+      "sha256": "8831c06417fab6a9690c25f6e4b347b2e8c03cf6d47337be9c57e75b7fb23e6a",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/recyclerview/recyclerview/1.0.0/recyclerview-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.savedstate--savedstate-1.2.1-sources.jar",
+      "destination": "sources/maven/androidx.savedstate--savedstate-1.2.1-sources.jar",
+      "bytes": 8863,
+      "sha256": "fd201fb9ea2d3e66262cb09bf1e33cbbe41050fcfcb96c9ce197f1780b614a73",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.2.1/savedstate-1.2.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.savedstate--savedstate-1.2.1.module",
+      "destination": "sources/maven/androidx.savedstate--savedstate-1.2.1.module",
+      "bytes": 4340,
+      "sha256": "5bb656fc760d9e3996b535160cbb4106033c9f736e9089e6ef4eb0c669785066",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.2.1/savedstate-1.2.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.savedstate--savedstate-1.2.1.pom",
+      "destination": "sources/maven/androidx.savedstate--savedstate-1.2.1.pom",
+      "bytes": 2549,
+      "sha256": "0d33bc285df1e12f22780f1624a6f0b38ea2a6181b0955ec6641caf620c50cbf",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.2.1/savedstate-1.2.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.savedstate--savedstate-ktx-1.2.1-sources.jar",
+      "destination": "sources/maven/androidx.savedstate--savedstate-ktx-1.2.1-sources.jar",
+      "bytes": 1225,
+      "sha256": "45f49fe9075235c62d409f2d11d795b3c7308bccb475ed43ed8312638119cc27",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.2.1/savedstate-ktx-1.2.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.savedstate--savedstate-ktx-1.2.1.module",
+      "destination": "sources/maven/androidx.savedstate--savedstate-ktx-1.2.1.module",
+      "bytes": 4021,
+      "sha256": "94359184b2ba51c0f498a2b9055d37b372231ef9bcc54a4972ac99f0303afff1",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.2.1/savedstate-ktx-1.2.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.savedstate--savedstate-ktx-1.2.1.pom",
+      "destination": "sources/maven/androidx.savedstate--savedstate-ktx-1.2.1.pom",
+      "bytes": 2236,
+      "sha256": "d09553211f6703b19aefd608d6007c77132d27a281556a8e689d92764ec27d3b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.2.1/savedstate-ktx-1.2.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.slidingpanelayout--slidingpanelayout-1.2.0-sources.jar",
+      "destination": "sources/maven/androidx.slidingpanelayout--slidingpanelayout-1.2.0-sources.jar",
+      "bytes": 17923,
+      "sha256": "2c231f1699eaba44f6ff27b4906df51e5df22ee169569f05891e34fe2b97e50e",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/slidingpanelayout/slidingpanelayout/1.2.0/slidingpanelayout-1.2.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.slidingpanelayout--slidingpanelayout-1.2.0.module",
+      "destination": "sources/maven/androidx.slidingpanelayout--slidingpanelayout-1.2.0.module",
+      "bytes": 3900,
+      "sha256": "3531bf0081b78538589f7e840fc0f7c70a45c4d8a2d17fb2f0eaceee2a99b59b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/slidingpanelayout/slidingpanelayout/1.2.0/slidingpanelayout-1.2.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.slidingpanelayout--slidingpanelayout-1.2.0.pom",
+      "destination": "sources/maven/androidx.slidingpanelayout--slidingpanelayout-1.2.0.pom",
+      "bytes": 2730,
+      "sha256": "283f5eaa6becd4842c65176b6c9de96bb284250fb9fbd78b4717fac1ac5357ef",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/slidingpanelayout/slidingpanelayout/1.2.0/slidingpanelayout-1.2.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.startup--startup-runtime-1.1.1-sources.jar",
+      "destination": "sources/maven/androidx.startup--startup-runtime-1.1.1-sources.jar",
+      "bytes": 6839,
+      "sha256": "53e03bc065b26b2227b5fdca6776cbfa0d1a69afb8f3c1e96c1743fa54320196",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/startup/startup-runtime/1.1.1/startup-runtime-1.1.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.startup--startup-runtime-1.1.1.module",
+      "destination": "sources/maven/androidx.startup--startup-runtime-1.1.1.module",
+      "bytes": 3039,
+      "sha256": "cfd96cf6450c6e2b697598924729ad9a0495c5a4fcf4ebee7e2f81b07e415865",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/startup/startup-runtime/1.1.1/startup-runtime-1.1.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.startup--startup-runtime-1.1.1.pom",
+      "destination": "sources/maven/androidx.startup--startup-runtime-1.1.1.pom",
+      "bytes": 1949,
+      "sha256": "f4114b5c6859bb1bc3caf281cb6d6f25998fa7f7292c64ceaea74a93210e746b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/startup/startup-runtime/1.1.1/startup-runtime-1.1.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.swiperefreshlayout--swiperefreshlayout-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.swiperefreshlayout--swiperefreshlayout-1.0.0-sources.jar",
+      "bytes": 19815,
+      "sha256": "c63fdf41a4cfd9ae1f17a619951f395432af43842f684eaadbc2584df4a048d5",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/swiperefreshlayout/swiperefreshlayout/1.0.0/swiperefreshlayout-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.swiperefreshlayout--swiperefreshlayout-1.0.0.pom",
+      "destination": "sources/maven/androidx.swiperefreshlayout--swiperefreshlayout-1.0.0.pom",
+      "bytes": 2020,
+      "sha256": "8fe4b5db332af33cde899ba571ee866ad977be38114d3ab600edaca454ea8299",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/swiperefreshlayout/swiperefreshlayout/1.0.0/swiperefreshlayout-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.tracing--tracing-1.2.0-sources.jar",
+      "destination": "sources/maven/androidx.tracing--tracing-1.2.0-sources.jar",
+      "bytes": 6669,
+      "sha256": "3daf3a210e213f1675e6ea9ae2a9c0b9c837b42805835b65d999eca58fbddc90",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/tracing/tracing/1.2.0/tracing-1.2.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.tracing--tracing-1.2.0.module",
+      "destination": "sources/maven/androidx.tracing--tracing-1.2.0.module",
+      "bytes": 3429,
+      "sha256": "d0d8d486b6bd33206dbf3f1a6d167e9b43c268ea63c3321c886b1543ad05ece3",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/tracing/tracing/1.2.0/tracing-1.2.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.tracing--tracing-1.2.0.pom",
+      "destination": "sources/maven/androidx.tracing--tracing-1.2.0.pom",
+      "bytes": 1968,
+      "sha256": "f34bec4eb58871d31002901377108aaa1ebfe77fa6d882b8b86200b158e26ea1",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/tracing/tracing/1.2.0/tracing-1.2.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.transition--transition-1.4.1-sources.jar",
+      "destination": "sources/maven/androidx.transition--transition-1.4.1-sources.jar",
+      "bytes": 132917,
+      "sha256": "e641fdf5c71eef8c63054e9d41052eb8a39f316797b2c436d778824fc74f07af",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/transition/transition/1.4.1/transition-1.4.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.transition--transition-1.4.1.module",
+      "destination": "sources/maven/androidx.transition--transition-1.4.1.module",
+      "bytes": 3516,
+      "sha256": "dec13dbe9ab525bcb115b47b4f219ce262c4892859c653912f898964eccf79ae",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/transition/transition/1.4.1/transition-1.4.1.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.transition--transition-1.4.1.pom",
+      "destination": "sources/maven/androidx.transition--transition-1.4.1.pom",
+      "bytes": 2139,
+      "sha256": "742263f7b85bfcc2d16a1eb744bfbdf97e0fdab5b1e946645e67d5b3e64a4e7e",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/transition/transition/1.4.1/transition-1.4.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.vectordrawable--vectordrawable-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.vectordrawable--vectordrawable-1.1.0-sources.jar",
+      "bytes": 19475,
+      "sha256": "a1ae4fccc4ab76a734c10f79adf39262517658a79084bad467c4c6f41c478187",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/vectordrawable/vectordrawable/1.1.0/vectordrawable-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.vectordrawable--vectordrawable-1.1.0.pom",
+      "destination": "sources/maven/androidx.vectordrawable--vectordrawable-1.1.0.pom",
+      "bytes": 1726,
+      "sha256": "5b0e2d5b2179e54804785cbc21ce5f473b5e1ddd55a57da482e94dcd39492bb2",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/vectordrawable/vectordrawable/1.1.0/vectordrawable-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.vectordrawable--vectordrawable-animated-1.1.0-sources.jar",
+      "destination": "sources/maven/androidx.vectordrawable--vectordrawable-animated-1.1.0-sources.jar",
+      "bytes": 24016,
+      "sha256": "a3880c595965c55fd1bdee0554b99c66e9c28d3311b7ce6242189fc1f554fcf1",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/vectordrawable/vectordrawable-animated/1.1.0/vectordrawable-animated-1.1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.vectordrawable--vectordrawable-animated-1.1.0.pom",
+      "destination": "sources/maven/androidx.vectordrawable--vectordrawable-animated-1.1.0.pom",
+      "bytes": 1798,
+      "sha256": "276a20116b705fb75b9003ee9496c56f6fd3b32375fb232472811eba60a040bd",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/vectordrawable/vectordrawable-animated/1.1.0/vectordrawable-animated-1.1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.versionedparcelable--versionedparcelable-1.1.1-sources.jar",
+      "destination": "sources/maven/androidx.versionedparcelable--versionedparcelable-1.1.1-sources.jar",
+      "bytes": 21164,
+      "sha256": "135016af471acf4cd9583d36ceb779710c6b46812ccaaef7c526d5d60eae6b0b",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.versionedparcelable--versionedparcelable-1.1.1.pom",
+      "destination": "sources/maven/androidx.versionedparcelable--versionedparcelable-1.1.1.pom",
+      "bytes": 1643,
+      "sha256": "5f51e65873ca612de3838fa90d2ee95b8d040efd31b9c390a19bf94d615cdb2f",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.viewpager--viewpager-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.viewpager--viewpager-1.0.0-sources.jar",
+      "bytes": 38376,
+      "sha256": "d4f9a044ab8c23392b12a3f2930d5fd6b5982421a746f2f2a812e9619431fbfd",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/viewpager/viewpager/1.0.0/viewpager-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.viewpager--viewpager-1.0.0.pom",
+      "destination": "sources/maven/androidx.viewpager--viewpager-1.0.0.pom",
+      "bytes": 1997,
+      "sha256": "1f72f836339d03c6eb013f65075e76ca87075a577578eb4f95f74a3a5d253128",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/viewpager/viewpager/1.0.0/viewpager-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window--window-1.2.0-sources.jar",
+      "destination": "sources/maven/androidx.window--window-1.2.0-sources.jar",
+      "bytes": 146340,
+      "sha256": "9c4df6e9fc5f3edb3afa4cba0a720c707f4aa6979d5e6c626ae0596296e307d0",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.2.0/window-1.2.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window--window-1.2.0.module",
+      "destination": "sources/maven/androidx.window--window-1.2.0.module",
+      "bytes": 9532,
+      "sha256": "ab489e9702a8e1ce32b3a7940cb8ed969e2bc1280333a736eb1e3f026b4c60c3",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.2.0/window-1.2.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window--window-1.2.0.pom",
+      "destination": "sources/maven/androidx.window--window-1.2.0.pom",
+      "bytes": 3753,
+      "sha256": "280c00e2495e1d5749b1c0ab59fc728a2964ccb33f5e11880857ee2efe4ec15b",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.2.0/window-1.2.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window--window-java-1.2.0-sources.jar",
+      "destination": "sources/maven/androidx.window--window-java-1.2.0-sources.jar",
+      "bytes": 6191,
+      "sha256": "b257a29441778b87c704f39b2abb957d6a82ff639dec45f51811f69627576d1b",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window-java/1.2.0/window-java-1.2.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window--window-java-1.2.0.module",
+      "destination": "sources/maven/androidx.window--window-java-1.2.0.module",
+      "bytes": 9460,
+      "sha256": "d9d1641ebb4b3c0fe3410dfdf5aeaabb46e2cc5768c460ad79e212c8419ae043",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window-java/1.2.0/window-java-1.2.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window--window-java-1.2.0.pom",
+      "destination": "sources/maven/androidx.window--window-java-1.2.0.pom",
+      "bytes": 3305,
+      "sha256": "73570afdc9db596396a92beefe4de5d22afac7eab112c4ab30737bb7f884a1fd",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window-java/1.2.0/window-java-1.2.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window.extensions.core--core-1.0.0-sources.jar",
+      "destination": "sources/maven/androidx.window.extensions.core--core-1.0.0-sources.jar",
+      "bytes": 3620,
+      "sha256": "95d5005752d513694d7922553af4249855f05a358fff7b2016686c1f3828ebcb",
+      "archive": "zip",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/extensions/core/core/1.0.0/core-1.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window.extensions.core--core-1.0.0.module",
+      "destination": "sources/maven/androidx.window.extensions.core--core-1.0.0.module",
+      "bytes": 3184,
+      "sha256": "4721ffffb15570edbf26c824098255a262d0231594b0ceba99efa096c72b7297",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/extensions/core/core/1.0.0/core-1.0.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/androidx.window.extensions.core--core-1.0.0.pom",
+      "destination": "sources/maven/androidx.window.extensions.core--core-1.0.0.pom",
+      "bytes": 1997,
+      "sha256": "ec7573c61c1f9f510f6e5bcad2683b4dcb401fee75426c0f57b41490836791c8",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/extensions/core/core/1.0.0/core-1.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/com.google.guava--listenablefuture-1.0-sources.jar",
+      "destination": "sources/maven/com.google.guava--listenablefuture-1.0-sources.jar",
+      "bytes": 4021,
+      "sha256": "3d1bd8d4a39b293612a40e547ec51d9ce34fa638d7adeae83871cdbe2923b161",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/1.0/listenablefuture-1.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/com.google.guava--listenablefuture-1.0.pom",
+      "destination": "sources/maven/com.google.guava--listenablefuture-1.0.pom",
+      "bytes": 2226,
+      "sha256": "53873caf26bc1ed8a567ea6c939ab2aaa3f47a5e32d5cade95ddf5080d23238a",
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/1.0/listenablefuture-1.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/com.squareup.okio--okio-jvm-3.4.0-sources.jar",
+      "destination": "sources/maven/com.squareup.okio--okio-jvm-3.4.0-sources.jar",
+      "bytes": 168616,
+      "sha256": "724af2ce287bf9b101194df419ebbe3765debf516c6a2e26b9d67c168d902778",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/com/squareup/okio/okio-jvm/3.4.0/okio-jvm-3.4.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/com.squareup.okio--okio-jvm-3.4.0.module",
+      "destination": "sources/maven/com.squareup.okio--okio-jvm-3.4.0.module",
+      "bytes": 2636,
+      "sha256": "6fec13cf3361600364bfcc68004af7c760ceaf1fc1bbcc958742ae4d61db1512",
+      "url": "https://repo.maven.apache.org/maven2/com/squareup/okio/okio-jvm/3.4.0/okio-jvm-3.4.0.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/com.squareup.okio--okio-jvm-3.4.0.pom",
+      "destination": "sources/maven/com.squareup.okio--okio-jvm-3.4.0.pom",
+      "bytes": 1895,
+      "sha256": "66a8857981ea6c3ec8b8613a409bf12f147965ef9498cb7a8f371728c4e2da4d",
+      "url": "https://repo.maven.apache.org/maven2/com/squareup/okio/okio-jvm/3.4.0/okio-jvm-3.4.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/eu.simonbinder--sqlite3-native-library-3.50.3-sources.jar",
+      "destination": "sources/maven/eu.simonbinder--sqlite3-native-library-3.50.3-sources.jar",
+      "bytes": 261,
+      "sha256": "c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/eu/simonbinder/sqlite3-native-library/3.50.3/sqlite3-native-library-3.50.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/eu.simonbinder--sqlite3-native-library-3.50.3.module",
+      "destination": "sources/maven/eu.simonbinder--sqlite3-native-library-3.50.3.module",
+      "bytes": 2766,
+      "sha256": "42246740bf4065a6597089286ee16cd2f9ce3e585a43edc967b9376f8f68045f",
+      "url": "https://repo.maven.apache.org/maven2/eu/simonbinder/sqlite3-native-library/3.50.3/sqlite3-native-library-3.50.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/eu.simonbinder--sqlite3-native-library-3.50.3.pom",
+      "destination": "sources/maven/eu.simonbinder--sqlite3-native-library-3.50.3.pom",
+      "bytes": 1570,
+      "sha256": "e2941606b8ec2e4e5664e692580e7cb21cf412d7aabcbf4d30bbbdd00458ab98",
+      "url": "https://repo.maven.apache.org/maven2/eu/simonbinder/sqlite3-native-library/3.50.3/sqlite3-native-library-3.50.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/flutter_embedding_release-1.0.0-a18df97ca57a249df5d8d68cd0820600223ce262-sources.jar",
+      "destination": "sources/maven/flutter_embedding_release-1.0.0-a18df97ca57a249df5d8d68cd0820600223ce262-sources.jar",
+      "bytes": 1636905,
+      "sha256": "c4e75970a16410b292d9eb46af1f4a46016f89daa45f255c2941d8a6347c02dc",
+      "archive": "zip",
+      "url": "https://storage.googleapis.com/download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-a18df97ca57a249df5d8d68cd0820600223ce262/flutter_embedding_release-1.0.0-a18df97ca57a249df5d8d68cd0820600223ce262-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains--annotations-23.0.0-sources.jar",
+      "destination": "sources/maven/org.jetbrains--annotations-23.0.0-sources.jar",
+      "bytes": 37462,
+      "sha256": "ff2309b42f7584520497bb48bc609aca04c9886cf48708f14be83f00423ec144",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains--annotations-23.0.0.pom",
+      "destination": "sources/maven/org.jetbrains--annotations-23.0.0.pom",
+      "bytes": 1354,
+      "sha256": "c9490f655132328df2cfbcfdf743f53fc3916d6c1d10437175a6ca6e3a67771c",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-1.9.24-sources.jar",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-1.9.24-sources.jar",
+      "bytes": 605562,
+      "sha256": "e749e084569407e41085f51aa917ecc1b8185730ff49eb01986062753c45cf53",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.24/kotlin-stdlib-1.9.24-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-1.9.24.module",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-1.9.24.module",
+      "bytes": 14078,
+      "sha256": "f2e2a6573b5b5265c412d5c581fbf8ea00c62b10b9c92d5674c9e97f2f3335b3",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.24/kotlin-stdlib-1.9.24.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-1.9.24.pom",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-1.9.24.pom",
+      "bytes": 2847,
+      "sha256": "b9cead4c222dee90c74f6f013d316a9e50f811a0293313c3351aecb2f7cced5f",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.24/kotlin-stdlib-1.9.24.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-jdk7-1.8.20-sources.jar",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-jdk7-1.8.20-sources.jar",
+      "bytes": 580,
+      "sha256": "ea10d3e5e6e695d8a5283cbf116321acae6ba42d0bdd3eda50f7c34a26fa25cb",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.20/kotlin-stdlib-jdk7-1.8.20-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-jdk7-1.8.20.pom",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-jdk7-1.8.20.pom",
+      "bytes": 1389,
+      "sha256": "3622d106578cddcc0a9ec20f8ce815f7f49ff542f640228d2141fcaf80616b06",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.20/kotlin-stdlib-jdk7-1.8.20.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-jdk8-1.8.20-sources.jar",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-jdk8-1.8.20-sources.jar",
+      "bytes": 556,
+      "sha256": "40e9a80f6b953d12389623760d438e69914098d0c4d7053f70f90533ec041259",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.20/kotlin-stdlib-jdk8-1.8.20-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlin--kotlin-stdlib-jdk8-1.8.20.pom",
+      "destination": "sources/maven/org.jetbrains.kotlin--kotlin-stdlib-jdk8-1.8.20.pom",
+      "bytes": 1581,
+      "sha256": "3a462214a336e995687769531b1e37b0c81d8e10c9949cd5ea7ae1d7803a0232",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.20/kotlin-stdlib-jdk8-1.8.20.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlinx--kotlinx-coroutines-android-1.7.3-sources.jar",
+      "destination": "sources/maven/org.jetbrains.kotlinx--kotlinx-coroutines-android-1.7.3-sources.jar",
+      "bytes": 7871,
+      "sha256": "b190455e69fb1b60b009835298e91c6eff6d86d13f8e8cf396d0b17ac7a94e43",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.7.3/kotlinx-coroutines-android-1.7.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlinx--kotlinx-coroutines-android-1.7.3.module",
+      "destination": "sources/maven/org.jetbrains.kotlinx--kotlinx-coroutines-android-1.7.3.module",
+      "bytes": 3567,
+      "sha256": "48dfd8139edee5481bcc8b25e24d7586aca615f0d1ed2beb242dc7478ed4cee0",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.7.3/kotlinx-coroutines-android-1.7.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlinx--kotlinx-coroutines-android-1.7.3.pom",
+      "destination": "sources/maven/org.jetbrains.kotlinx--kotlinx-coroutines-android-1.7.3.pom",
+      "bytes": 2226,
+      "sha256": "020515246d19e176d5626eb118f80f97f7876d1accd8cec15b1a4159257d5054",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.7.3/kotlinx-coroutines-android-1.7.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlinx--kotlinx-coroutines-core-jvm-1.7.3-sources.jar",
+      "destination": "sources/maven/org.jetbrains.kotlinx--kotlinx-coroutines-core-jvm-1.7.3-sources.jar",
+      "bytes": 399503,
+      "sha256": "efabad4b6a46957325d956487a226234f26c2f519cddfcb7480c61c79e3ad95b",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlinx--kotlinx-coroutines-core-jvm-1.7.3.module",
+      "destination": "sources/maven/org.jetbrains.kotlinx--kotlinx-coroutines-core-jvm-1.7.3.module",
+      "bytes": 4642,
+      "sha256": "34d6ee99b76ac062b51555b4a70be18349fe5566da79a190614f171c80b6538e",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.module"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/org.jetbrains.kotlinx--kotlinx-coroutines-core-jvm-1.7.3.pom",
+      "destination": "sources/maven/org.jetbrains.kotlinx--kotlinx-coroutines-core-jvm-1.7.3.pom",
+      "bytes": 2395,
+      "sha256": "753858753decbbb2397343e2b871f062f697812e9422e41c9ee46a66b93eee30",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.3/kotlinx-coroutines-core-jvm-1.7.3.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/protobuf-javalite-4.28.2-sources.jar",
+      "destination": "sources/maven/protobuf-javalite-4.28.2-sources.jar",
+      "bytes": 453804,
+      "sha256": "2460a92938259e4441826e57638193d0bde9cb5cdd0dafd5367aacb833f9a971",
+      "archive": "zip",
+      "url": "https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-javalite/4.28.2/protobuf-javalite-4.28.2-sources.jar"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/protobuf-javalite-4.28.2.pom",
+      "destination": "sources/maven/protobuf-javalite-4.28.2.pom",
+      "bytes": 1561,
+      "sha256": "84266af59ff800beffffaf3edc0d1b646ab1ccaf3699b9588ff9c3a10d6f1ed5",
+      "url": "https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-javalite/4.28.2/protobuf-javalite-4.28.2.pom"
+    },
+    {
+      "root": "closure",
+      "path": "selected-runtime-materials/protobuf-v28.2-9fff46d7327c699ef970769d5c9fd0e44df08fc7.tar.gz",
+      "destination": "sources/maven/protobuf-v28.2-9fff46d7327c699ef970769d5c9fd0e44df08fc7.tar.gz",
+      "bytes": 9262385,
+      "sha256": "a0b6b02197b4df8d55492841b605295e187a3c45dad7ec187a668d396e48bb75",
+      "archive": "tar",
+      "url": "https://codeload.github.com/protocolbuffers/protobuf/tar.gz/9fff46d7327c699ef970769d5c9fd0e44df08fc7"
+    },
+    {
+      "root": "closure",
+      "path": "abseil-cpp-ff6504dc527b25fef0f3c531e7dba0ed6b69c162.tar.gz",
+      "destination": "sources/native/abseil-cpp-ff6504dc527b25fef0f3c531e7dba0ed6b69c162.tar.gz",
+      "bytes": 2491966,
+      "sha256": "89817e5a30b133b6dc3c17a7ed7faf312dbebd848d028728f19d14f7028305c9",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/abseil-cpp.git/+archive/ff6504dc527b25fef0f3c531e7dba0ed6b69c162.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "angle-6a09e41ce6ea8c93524faae1a925eb01562f53b1.tar.gz",
+      "destination": "sources/native/angle-6a09e41ce6ea8c93524faae1a925eb01562f53b1.tar.gz",
+      "bytes": 11293344,
+      "sha256": "0cdd1cc91fbafd2968a496510ed6d91f2763e53cc2fc7c3af16002998f535057",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/angle/angle.git/+archive/6a09e41ce6ea8c93524faae1a925eb01562f53b1.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "boringssl-9c7294fd58261a79794f5afaa26598cf1442ad20.tar.gz",
+      "destination": "sources/native/boringssl-9c7294fd58261a79794f5afaa26598cf1442ad20.tar.gz",
+      "bytes": 13768944,
+      "sha256": "f92f5b21952b0e199133ecdfaf1bd8621f044d36200496fb03f409abe1ad12fc",
+      "archive": "tar",
+      "url": "https://dart.googlesource.com/boringssl_gen.git/+archive/9c7294fd58261a79794f5afaa26598cf1442ad20.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "boringssl-src-d24a38200fef19150eef00cad35b138936c08767.tar.gz",
+      "destination": "sources/native/boringssl-src-d24a38200fef19150eef00cad35b138936c08767.tar.gz",
+      "bytes": 35955551,
+      "sha256": "3a7ab1ee8fc27e4cb6cb68b2ba66ab74fe83851df03ac5ae7089e5c42718aa44",
+      "archive": "tar",
+      "url": "https://boringssl.googlesource.com/boringssl.git/+archive/d24a38200fef19150eef00cad35b138936c08767.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "buildroot-e265c359126b24351f534080fb22edaa159f2215.tar.gz",
+      "destination": "sources/native/buildroot-e265c359126b24351f534080fb22edaa159f2215.tar.gz",
+      "bytes": 125099,
+      "sha256": "6424ec5f6faa5989d566e6a8a51dc31663cb2ded196db843c7d481a45c6f2c38",
+      "archive": "tar",
+      "url": "https://codeload.github.com/flutter/buildroot/tar.gz/e265c359126b24351f534080fb22edaa159f2215"
+    },
+    {
+      "root": "closure",
+      "path": "cpu_features-src-936b9ab5515dead115606559502e3864958f7f6e.tar.gz",
+      "destination": "sources/native/cpu_features-src-936b9ab5515dead115606559502e3864958f7f6e.tar.gz",
+      "bytes": 106093,
+      "sha256": "ca3295be5e2867b59418d878b3a387762c61e2d64a7f3c29ad0c95e84d8623fd",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/google/cpu_features.git/+archive/936b9ab5515dead115606559502e3864958f7f6e.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "dart-sdk-88c9758ef131d430d8ce595c6bfb4c90574d3ddd.tar.gz",
+      "destination": "sources/native/dart-sdk-88c9758ef131d430d8ce595c6bfb4c90574d3ddd.tar.gz",
+      "bytes": 34574261,
+      "sha256": "fc29fb346312961c21a8fb05ce170256000f32977dc9037c0ea8164d0b62b71d",
+      "archive": "tar",
+      "url": "https://codeload.github.com/dart-lang/sdk/tar.gz/88c9758ef131d430d8ce595c6bfb4c90574d3ddd"
+    },
+    {
+      "root": "closure",
+      "path": "expat-654d2de0da85662fcc7644a7acd7c2dd2cfb21f0.tar.gz",
+      "destination": "sources/native/expat-654d2de0da85662fcc7644a7acd7c2dd2cfb21f0.tar.gz",
+      "bytes": 8308823,
+      "sha256": "09bb8d0a6133506ff01b35a4e6d7d5c51028e49bd6b349816a881525dd17a750",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git/+archive/654d2de0da85662fcc7644a7acd7c2dd2cfb21f0.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "flatbuffers-0a80646371179f8a7a5c1f42c31ee1d44dcf6709.tar.gz",
+      "destination": "sources/native/flatbuffers-0a80646371179f8a7a5c1f42c31ee1d44dcf6709.tar.gz",
+      "bytes": 2000355,
+      "sha256": "bd841c5653cad7b2e32e51f76299f79ba8ea1d3f4de341854493eaf1d275a268",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/google/flatbuffers/+archive/0a80646371179f8a7a5c1f42c31ee1d44dcf6709.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "flutter-engine-a18df97ca57a249df5d8d68cd0820600223ce262.tar.gz",
+      "destination": "sources/native/flutter-engine-a18df97ca57a249df5d8d68cd0820600223ce262.tar.gz",
+      "bytes": 45099958,
+      "sha256": "99cc3ef570b02ec5597b7c6218ee5aff87f9dc583b1d8385131da88b2065365b",
+      "archive": "tar",
+      "url": "https://codeload.github.com/flutter/engine/tar.gz/a18df97ca57a249df5d8d68cd0820600223ce262"
+    },
+    {
+      "root": "closure",
+      "path": "freetype2-bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a.tar.gz",
+      "destination": "sources/native/freetype2-bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a.tar.gz",
+      "bytes": 2307728,
+      "sha256": "4a87978d108b81d505ac5343d14788c9acff450128006485ae678695b4ca0403",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/freetype2/+archive/bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "harfbuzz-ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2.tar.gz",
+      "destination": "sources/native/harfbuzz-ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2.tar.gz",
+      "bytes": 35994581,
+      "sha256": "8fb450da0e18d0d298969b64e857545d07a1ad3c7b3ebccbc9782ec792c9d7c7",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/harfbuzz/+archive/ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "icu-43953f57b037778a1b8005564afabe214834f7bd.tar.gz",
+      "destination": "sources/native/icu-43953f57b037778a1b8005564afabe214834f7bd.tar.gz",
+      "bytes": 51754121,
+      "sha256": "1719c9b8e5499b39be86dcad9a2f520e9888a53fdbba9fa61955fb9ef12bb0a5",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/chromium/deps/icu.git/+archive/43953f57b037778a1b8005564afabe214834f7bd.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "imgui-3ea0fad204e994d669f79ed29dcaf61cd5cb571d.tar.gz",
+      "destination": "sources/native/imgui-3ea0fad204e994d669f79ed29dcaf61cd5cb571d.tar.gz",
+      "bytes": 1700096,
+      "sha256": "ac468666a259088ca0a7aa62e61e85ce87febd44802c28d7fc12c481b4fd4cd5",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/imgui.git/+archive/3ea0fad204e994d669f79ed29dcaf61cd5cb571d.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "inja-88bd6112575a80d004e551c98cf956f88ff4d445.tar.gz",
+      "destination": "sources/native/inja-88bd6112575a80d004e551c98cf956f88ff4d445.tar.gz",
+      "bytes": 394983,
+      "sha256": "d9e74bba58974580ec4628d7b7d9707b416a16f70e052ee921ad68dab20ecc43",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/inja/+archive/88bd6112575a80d004e551c98cf956f88ff4d445.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "json-17d9eacd248f58b73f4d1be518ef649fe2295642.tar.gz",
+      "destination": "sources/native/json-17d9eacd248f58b73f4d1be518ef649fe2295642.tar.gz",
+      "bytes": 8074813,
+      "sha256": "bd9ff89b382dffef9447c9ef70f9745df191d2e4d9a6e5fed546f649bcbc0abe",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/json.git/+archive/17d9eacd248f58b73f4d1be518ef649fe2295642.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "libcxx-44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0.tar.gz",
+      "destination": "sources/native/libcxx-44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0.tar.gz",
+      "bytes": 5805943,
+      "sha256": "5bb91bc2186f88d7ae367e34ec6bc1ebe978d8dde586add8bd99b1e7043a0f1e",
+      "archive": "tar",
+      "external_source_links": {
+        "test/std/pstl": "../../../pstl/test/std"
+      },
+      "url": "https://llvm.googlesource.com/llvm-project/libcxx/+archive/44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "libcxxabi-2ce528fb5e0f92e57c97ec3ff53b75359d33af12.tar.gz",
+      "destination": "sources/native/libcxxabi-2ce528fb5e0f92e57c97ec3ff53b75359d33af12.tar.gz",
+      "bytes": 781106,
+      "sha256": "e7277d6c16488be756cdbfdf13e224ef7c621191248e07dce833a26482779358",
+      "archive": "tar",
+      "url": "https://llvm.googlesource.com/llvm-project/libcxxabi/+archive/2ce528fb5e0f92e57c97ec3ff53b75359d33af12.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "libjpeg-turbo-src-0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f.tar.gz",
+      "destination": "sources/native/libjpeg-turbo-src-0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f.tar.gz",
+      "bytes": 794778,
+      "sha256": "e809073decbd2e8e8887cc347bd3dcf3e5897a9bdeab2ee4749256daebd3c7dc",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/libjpeg-turbo/+archive/0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "libpng-de36b892e921c684ef718fec24739ae9bb49c977.tar.gz",
+      "destination": "sources/native/libpng-de36b892e921c684ef718fec24739ae9bb49c977.tar.gz",
+      "bytes": 1573171,
+      "sha256": "680788bd0e41a1f40e20f1abde514799b9f1497d9b6cc72672adda61386293bd",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/libpng/+archive/de36b892e921c684ef718fec24739ae9bb49c977.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "libtess2-725e5e08ec8751477565f1d603fd7eb9058c277c.tar.gz",
+      "destination": "sources/native/libtess2-725e5e08ec8751477565f1d603fd7eb9058c277c.tar.gz",
+      "bytes": 60810,
+      "sha256": "41fbc36ed65c2f61480018ef25bc0cbe6d8b6401ebd4f71217a56560ed4c6dfd",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/libtess2/+archive/725e5e08ec8751477565f1d603fd7eb9058c277c.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "libwebp-ca332209cb5567c9b249c86788cb2dbf8847e760.tar.gz",
+      "destination": "sources/native/libwebp-ca332209cb5567c9b249c86788cb2dbf8847e760.tar.gz",
+      "bytes": 3698338,
+      "sha256": "b89e11cb832d8375c15e2c3780b51e8cc3392794390b07d0e355dd96823f8c50",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/webm/libwebp.git/+archive/ca332209cb5567c9b249c86788cb2dbf8847e760.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "rapidjson-ef3564c5c8824989393b87df25355baf35ff544b.tar.gz",
+      "destination": "sources/native/rapidjson-ef3564c5c8824989393b87df25355baf35ff544b.tar.gz",
+      "bytes": 869356,
+      "sha256": "f2068d6ea893fc1170d199530ef303dfea82ede96636c2135f494de90ca1cb33",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/rapidjson/+archive/ef3564c5c8824989393b87df25355baf35ff544b.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "skia-93461bed7394e3c554125b0c50b00fb81eea42c6.tar.gz",
+      "destination": "sources/native/skia-93461bed7394e3c554125b0c50b00fb81eea42c6.tar.gz",
+      "bytes": 67721207,
+      "sha256": "8f910245a33296ecf7b2460337f4da2b5f7acd89abb4bffbcf1ce238fd3eb4a6",
+      "archive": "tar",
+      "url": "https://codeload.github.com/google/skia/tar.gz/93461bed7394e3c554125b0c50b00fb81eea42c6"
+    },
+    {
+      "root": "closure",
+      "path": "sqlite-0f61bd2023ba94423b4e4c8cfb1a23de1fe6a21c.tar.gz",
+      "destination": "sources/native/sqlite-0f61bd2023ba94423b4e4c8cfb1a23de1fe6a21c.tar.gz",
+      "bytes": 2320353,
+      "sha256": "2e75700e58003909e038f82ea56a86cd02e5cc076ab870f19af3423ca8b0637d",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/sqlite/+archive/0f61bd2023ba94423b4e4c8cfb1a23de1fe6a21c.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "src-flutter-third_party-perfetto-13ce0c9e13b0940d2476cd0cff2301708a9a2e2b.tar.gz",
+      "destination": "sources/native/src-flutter-third_party-perfetto-13ce0c9e13b0940d2476cd0cff2301708a9a2e2b.tar.gz",
+      "bytes": 20212853,
+      "sha256": "81136c35526dd45ab4eedb57ecdd9c0440485d8bd411eab46b7862e3b6523ebc",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/perfetto/+archive/13ce0c9e13b0940d2476cd0cff2301708a9a2e2b.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "src-flutter-third_party-protobuf-24487dd1045c7f3d64a21f38a3f0c06cc4cf2edb.tar.gz",
+      "destination": "sources/native/src-flutter-third_party-protobuf-24487dd1045c7f3d64a21f38a3f0c06cc4cf2edb.tar.gz",
+      "bytes": 5224561,
+      "sha256": "e4e2ed9aa07c565b9a4f382080f57b2b21684189e18b3f086107d5e27e79c8da",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/protobuf/+archive/24487dd1045c7f3d64a21f38a3f0c06cc4cf2edb.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "src-flutter-third_party-shaderc-37e25539ce199ecaf19fb7f7d27818716d36686d.tar.gz",
+      "destination": "sources/native/src-flutter-third_party-shaderc-37e25539ce199ecaf19fb7f7d27818716d36686d.tar.gz",
+      "bytes": 236983,
+      "sha256": "2376c5cbc827cd1e6e49e8f42d75557b7d10e6b27f990fca25103400aad85e00",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/google/shaderc/+archive/37e25539ce199ecaf19fb7f7d27818716d36686d.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "stb-5736b15f7ea0ffb08dd38af21067c314d6a3aae9.tar.gz",
+      "destination": "sources/native/stb-5736b15f7ea0ffb08dd38af21067c314d6a3aae9.tar.gz",
+      "bytes": 1409801,
+      "sha256": "a09382107b8d911e7f7eaaf3e9d7e718d64ec1d5a7a570d2ce4a177d35d50a99",
+      "archive": "tar",
+      "url": "https://flutter.googlesource.com/third_party/stb.git/+archive/5736b15f7ea0ffb08dd38af21067c314d6a3aae9.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "tinygltf-9bb5806df4055ac973b970ba5b3e27ce27d98148.tar.gz",
+      "destination": "sources/native/tinygltf-9bb5806df4055ac973b970ba5b3e27ce27d98148.tar.gz",
+      "bytes": 5889315,
+      "sha256": "f604303a8601c7ab7d3b5e3f8875f0dde4e79b808a39e35ad50ffc8887394bbe",
+      "archive": "tar",
+      "url": "https://codeload.github.com/syoyo/tinygltf/tar.gz/9bb5806df4055ac973b970ba5b3e27ce27d98148"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-014f44e134a1de387791bffacc32ff9d8db71176.tar.gz",
+      "destination": "sources/native/vulkan-deps-014f44e134a1de387791bffacc32ff9d8db71176.tar.gz",
+      "bytes": 12814,
+      "sha256": "c86c45991dfe2d1e5c27ff28e121ee29a8bf12994de860bde977f7c394ccb265",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/vulkan-deps/+archive/014f44e134a1de387791bffacc32ff9d8db71176.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-glslang-src-b1f7affe94ea108de7e38ee764f855a2130da398.tar.gz",
+      "destination": "sources/native/vulkan-deps-glslang-src-b1f7affe94ea108de7e38ee764f855a2130da398.tar.gz",
+      "bytes": 3900388,
+      "sha256": "5bb3901ac5798be53a562b2b419954cba02abb5c9b43eae170d7a869e1f25d2b",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/glslang/+archive/b1f7affe94ea108de7e38ee764f855a2130da398.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-spirv-cross-src-b8fcf307f1f347089e3c46eb4451d27f32ebc8d3.tar.gz",
+      "destination": "sources/native/vulkan-deps-spirv-cross-src-b8fcf307f1f347089e3c46eb4451d27f32ebc8d3.tar.gz",
+      "bytes": 1923867,
+      "sha256": "d56c53d10f4871082e064d50279622751c7759a4c7b0282ee01819781b292d05",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Cross/+archive/b8fcf307f1f347089e3c46eb4451d27f32ebc8d3.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-spirv-headers-src-e77d03080b90c5d361663a67834c57bb1fddaec2.tar.gz",
+      "destination": "sources/native/vulkan-deps-spirv-headers-src-e77d03080b90c5d361663a67834c57bb1fddaec2.tar.gz",
+      "bytes": 482803,
+      "sha256": "5fa1633d22dc88a1313ddf6d4546b4638117672b75498d291ab05d05f4c9be85",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Headers/+archive/e77d03080b90c5d361663a67834c57bb1fddaec2.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-spirv-tools-src-80926d97aba8d1b1162448713ca4825d4c816226.tar.gz",
+      "destination": "sources/native/vulkan-deps-spirv-tools-src-80926d97aba8d1b1162448713ca4825d4c816226.tar.gz",
+      "bytes": 3239506,
+      "sha256": "b5d1a547023c2da0778d032fcc7d6a47e239ea27fa599ed451712e6ae05e004c",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Tools/+archive/80926d97aba8d1b1162448713ca4825d4c816226.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-vulkan-headers-src-5a5c9a643484d888873e32c5d7d484fae8e71d3d.tar.gz",
+      "destination": "sources/native/vulkan-deps-vulkan-headers-src-5a5c9a643484d888873e32c5d7d484fae8e71d3d.tar.gz",
+      "bytes": 2239536,
+      "sha256": "9de7fb0a8e7b2c72c5d0e7fa9642c04fafb3cb66345d149b84f0a27681e05073",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Headers/+archive/5a5c9a643484d888873e32c5d7d484fae8e71d3d.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-vulkan-loader-src-e0d594e05b194597bacda68e9a9279d12905f89b.tar.gz",
+      "destination": "sources/native/vulkan-deps-vulkan-loader-src-e0d594e05b194597bacda68e9a9279d12905f89b.tar.gz",
+      "bytes": 1715361,
+      "sha256": "1d31c104b870d45a5399493e42dec4cf000af7e9cb33897d529b794bfe257002",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Loader/+archive/e0d594e05b194597bacda68e9a9279d12905f89b.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-vulkan-tools-src-f24bab1ea1c521cd77991260cad1b11384eec5f0.tar.gz",
+      "destination": "sources/native/vulkan-deps-vulkan-tools-src-f24bab1ea1c521cd77991260cad1b11384eec5f0.tar.gz",
+      "bytes": 759098,
+      "sha256": "aa1f300c57c4cc3bba5fd9aa141888355c3d416b478d7bd73517f6eeb3684d1f",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Tools/+archive/f24bab1ea1c521cd77991260cad1b11384eec5f0.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-vulkan-utility-libraries-src-86de0a0a9dc09520644bfb6b2f49e919134fe86d.tar.gz",
+      "destination": "sources/native/vulkan-deps-vulkan-utility-libraries-src-86de0a0a9dc09520644bfb6b2f49e919134fe86d.tar.gz",
+      "bytes": 169959,
+      "sha256": "8d90cb2fb7a442f471e919781146f5da66c71d210183331176ffb2b759dc53b8",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Utility-Libraries/+archive/86de0a0a9dc09520644bfb6b2f49e919134fe86d.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan-deps-vulkan-validation-layers-src-7266a470cfab228a98d238d7c53367640034546d.tar.gz",
+      "destination": "sources/native/vulkan-deps-vulkan-validation-layers-src-7266a470cfab228a98d238d7c53367640034546d.tar.gz",
+      "bytes": 5442777,
+      "sha256": "011009ca2b903dfeabbbc35527450ba2ee1a6757a5ded10edf3d2c00788488e6",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-ValidationLayers/+archive/7266a470cfab228a98d238d7c53367640034546d.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "vulkan_memory_allocator-7de5cc00de50e71a3aab22dea52fbb7ff4efceb6.tar.gz",
+      "destination": "sources/native/vulkan_memory_allocator-7de5cc00de50e71a3aab22dea52fbb7ff4efceb6.tar.gz",
+      "bytes": 885211,
+      "sha256": "a027d654477f103b90a662482f410220cdfb9867a8f50824d9e59be73b791df5",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/+archive/7de5cc00de50e71a3aab22dea52fbb7ff4efceb6.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "wuffs-600cd96cf47788ee3a74b40a6028b035c9fd6a61.tar.gz",
+      "destination": "sources/native/wuffs-600cd96cf47788ee3a74b40a6028b035c9fd6a61.tar.gz",
+      "bytes": 289923,
+      "sha256": "028459db633e0c039dd8a92f0409fadd7339acb2d31b467a78f0ad8c5d8952d5",
+      "archive": "tar",
+      "url": "https://skia.googlesource.com/external/github.com/google/wuffs-mirror-release-c.git/+archive/600cd96cf47788ee3a74b40a6028b035c9fd6a61.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "zlib-7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df.tar.gz",
+      "destination": "sources/native/zlib-7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df.tar.gz",
+      "bytes": 596954,
+      "sha256": "9402e497a41042911a98910507f7d603350038e73afbfa78efa2cfd7dccecd60",
+      "archive": "tar",
+      "url": "https://chromium.googlesource.com/chromium/src/third_party/zlib.git/+archive/7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/_fe_analyzer_shared-67.0.0.tar.gz",
+      "destination": "sources/pub/_fe_analyzer_shared-67.0.0.tar.gz",
+      "bytes": 704664,
+      "sha256": "0b2f2bd91ba804e53a61d757b986f89f1f9eaed5b11e4b2f5a2468d86d6c9fc7",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/_fe_analyzer_shared-67.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/analyzer-6.4.1.tar.gz",
+      "destination": "sources/pub/analyzer-6.4.1.tar.gz",
+      "bytes": 8197892,
+      "sha256": "37577842a27e4338429a1cbc32679d508836510b056f1eedf0c8d20e39c1383d",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/analyzer-6.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/analyzer_plugin-0.11.3.tar.gz",
+      "destination": "sources/pub/analyzer_plugin-0.11.3.tar.gz",
+      "bytes": 285569,
+      "sha256": "9661b30b13a685efaee9f02e5d01ed9f2b423bd889d28a304d02d704aee69161",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/analyzer_plugin-0.11.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/archive-4.0.7.tar.gz",
+      "destination": "sources/pub/archive-4.0.7.tar.gz",
+      "bytes": 116194,
+      "sha256": "2fde1607386ab523f7a36bb3e7edb43bd58e6edaf2ffb29d8a6d578b297fdbbd",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/archive-4.0.7.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/args-2.7.0.tar.gz",
+      "destination": "sources/pub/args-2.7.0.tar.gz",
+      "bytes": 46690,
+      "sha256": "d0481093c50b1da8910eb0bb301626d4d8eb7284aa739614d2b394ee09e3ea04",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/args-2.7.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/async-2.11.0.tar.gz",
+      "destination": "sources/pub/async-2.11.0.tar.gz",
+      "bytes": 83213,
+      "sha256": "947bfcf187f74dbc5e146c9eb9c0f10c9f8b30743e341481c1e2ed3ecc18c20c",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/async-2.11.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/boolean_selector-2.1.1.tar.gz",
+      "destination": "sources/pub/boolean_selector-2.1.1.tar.gz",
+      "bytes": 13433,
+      "sha256": "6cfb5af12253eaf2b368f07bacc5a80d1301a071c73360d746b7f2e32d762c66",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/boolean_selector-2.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/build-2.4.1.tar.gz",
+      "destination": "sources/pub/build-2.4.1.tar.gz",
+      "bytes": 35391,
+      "sha256": "80184af8b6cb3e5c1c4ec6d8544d27711700bc3e6d2efad04238c7b5290889f0",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/build-2.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/build_config-1.1.1.tar.gz",
+      "destination": "sources/pub/build_config-1.1.1.tar.gz",
+      "bytes": 18472,
+      "sha256": "bf80fcfb46a29945b423bd9aad884590fb1dc69b330a4d4700cac476af1708d1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/build_config-1.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/build_daemon-4.0.2.tar.gz",
+      "destination": "sources/pub/build_daemon-4.0.2.tar.gz",
+      "bytes": 23997,
+      "sha256": "79b2aef6ac2ed00046867ed354c88778c9c0f029df8a20fe10b5436826721ef9",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/build_daemon-4.0.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/build_resolvers-2.4.2.tar.gz",
+      "destination": "sources/pub/build_resolvers-2.4.2.tar.gz",
+      "bytes": 22971,
+      "sha256": "339086358431fa15d7eca8b6a36e5d783728cf025e559b834f4609a1fcfb7b0a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/build_resolvers-2.4.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/build_runner-2.4.13.tar.gz",
+      "destination": "sources/pub/build_runner-2.4.13.tar.gz",
+      "bytes": 135540,
+      "sha256": "028819cfb90051c6b5440c7e574d1896f8037e3c96cf17aaeb054c9311cfbf4d",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/build_runner-2.4.13.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/build_runner_core-7.3.2.tar.gz",
+      "destination": "sources/pub/build_runner_core-7.3.2.tar.gz",
+      "bytes": 106552,
+      "sha256": "f8126682b87a7282a339b871298cc12009cb67109cfa1614d6436fb0289193e0",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/build_runner_core-7.3.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/built_collection-5.1.1.tar.gz",
+      "destination": "sources/pub/built_collection-5.1.1.tar.gz",
+      "bytes": 42062,
+      "sha256": "376e3dd27b51ea877c28d525560790aee2e6fbb5f20e2f85d5081027d94e2100",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/built_collection-5.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/built_value-8.11.0.tar.gz",
+      "destination": "sources/pub/built_value-8.11.0.tar.gz",
+      "bytes": 40932,
+      "sha256": "0b1b12a0a549605e5f04476031cd0bc91ead1d7c8e830773a18ee54179b3cb62",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/built_value-8.11.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/characters-1.3.0.tar.gz",
+      "destination": "sources/pub/characters-1.3.0.tar.gz",
+      "bytes": 271979,
+      "sha256": "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/characters-1.3.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/charcode-1.4.0.tar.gz",
+      "destination": "sources/pub/charcode-1.4.0.tar.gz",
+      "bytes": 28417,
+      "sha256": "fb0f1107cac15a5ea6ef0a6ef71a807b9e4267c713bb93e00e92d737cc8dbd8a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/charcode-1.4.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/checked_yaml-2.0.3.tar.gz",
+      "destination": "sources/pub/checked_yaml-2.0.3.tar.gz",
+      "bytes": 6178,
+      "sha256": "feb6bed21949061731a7a75fc5d2aa727cf160b91af9a3e464c5e3a32e28b5ff",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/checked_yaml-2.0.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/cli_util-0.4.2.tar.gz",
+      "destination": "sources/pub/cli_util-0.4.2.tar.gz",
+      "bytes": 7245,
+      "sha256": "ff6785f7e9e3c38ac98b2fb035701789de90154024a75b6cb926445e83197d1c",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/cli_util-0.4.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/clock-1.1.1.tar.gz",
+      "destination": "sources/pub/clock-1.1.1.tar.gz",
+      "bytes": 12602,
+      "sha256": "cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/clock-1.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/code_builder-4.10.1.tar.gz",
+      "destination": "sources/pub/code_builder-4.10.1.tar.gz",
+      "bytes": 59999,
+      "sha256": "0ec10bf4a89e4c613960bf1e8b42c64127021740fb21640c29c909826a5eea3e",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/code_builder-4.10.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/collection-1.18.0.tar.gz",
+      "destination": "sources/pub/collection-1.18.0.tar.gz",
+      "bytes": 76681,
+      "sha256": "ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/collection-1.18.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/convert-3.1.2.tar.gz",
+      "destination": "sources/pub/convert-3.1.2.tar.gz",
+      "bytes": 23145,
+      "sha256": "b30acd5944035672bc15c6b7a8b47d773e41e2f17de064350988c5d02adb1c68",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/convert-3.1.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/cross_file-0.3.4+2.tar.gz",
+      "destination": "sources/pub/cross_file-0.3.4+2.tar.gz",
+      "bytes": 10626,
+      "sha256": "7caf6a750a0c04effbb52a676dce9a4a592e10ad35c34d6d2d0e4811160d5670",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/cross_file-0.3.4+2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/crypto-3.0.6.tar.gz",
+      "destination": "sources/pub/crypto-3.0.6.tar.gz",
+      "bytes": 612122,
+      "sha256": "1e445881f28f22d6140f181e07737b22f1e099a5e1ff94b0af2f9e4a463f4855",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/crypto-3.0.6.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/dart_style-2.3.6.tar.gz",
+      "destination": "sources/pub/dart_style-2.3.6.tar.gz",
+      "bytes": 454468,
+      "sha256": "99e066ce75c89d6b29903d788a7bb9369cf754f7b24bf70bf4b6d6d6b26853b9",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/dart_style-2.3.6.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/drift-2.19.1+1.tar.gz",
+      "destination": "sources/pub/drift-2.19.1+1.tar.gz",
+      "bytes": 9864365,
+      "sha256": "4e0ffee40d23f0b809e6cff1ad202886f51d629649073ed42d9cd1d194ea943e",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/drift-2.19.1+1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/drift_dev-2.19.1.tar.gz",
+      "destination": "sources/pub/drift_dev-2.19.1.tar.gz",
+      "bytes": 256420,
+      "sha256": "ac7647c6cedca99724ca300cff9181f6dd799428f8ed71f94159ed0528eaec26",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/drift_dev-2.19.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/fake_async-1.3.1.tar.gz",
+      "destination": "sources/pub/fake_async-1.3.1.tar.gz",
+      "bytes": 14883,
+      "sha256": "511392330127add0b769b75a987850d136345d9227c6b94c96a04cf4a391bf78",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/fake_async-1.3.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/ffi-2.1.3.tar.gz",
+      "destination": "sources/pub/ffi-2.1.3.tar.gz",
+      "bytes": 10780,
+      "sha256": "16ed7b077ef01ad6170a3d0c57caa4a112a38d7a2ed5602e0aca9ca6f3d98da6",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/ffi-2.1.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/file-7.0.1.tar.gz",
+      "destination": "sources/pub/file-7.0.1.tar.gz",
+      "bytes": 56783,
+      "sha256": "a3b4f84adafef897088c160faf7dfffb7696046cb13ae90b508c2cbc95d3b8d4",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/file-7.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/file_selector_linux-0.9.3+2.tar.gz",
+      "destination": "sources/pub/file_selector_linux-0.9.3+2.tar.gz",
+      "bytes": 22973,
+      "sha256": "54cbbd957e1156d29548c7d9b9ec0c0ebb6de0a90452198683a7d23aed617a33",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/file_selector_linux-0.9.3+2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/file_selector_macos-0.9.4+2.tar.gz",
+      "destination": "sources/pub/file_selector_macos-0.9.4+2.tar.gz",
+      "bytes": 102996,
+      "sha256": "271ab9986df0c135d45c3cdb6bd0faa5db6f4976d3e4b437cf7d0f258d941bfc",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/file_selector_macos-0.9.4+2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/file_selector_platform_interface-2.6.2.tar.gz",
+      "destination": "sources/pub/file_selector_platform_interface-2.6.2.tar.gz",
+      "bytes": 9053,
+      "sha256": "a3994c26f10378a039faa11de174d7b78eb8f79e4dd0af2a451410c1a5c3f66b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/file_selector_platform_interface-2.6.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/file_selector_windows-0.9.3+4.tar.gz",
+      "destination": "sources/pub/file_selector_windows-0.9.3+4.tar.gz",
+      "bytes": 51795,
+      "sha256": "320fcfb6f33caa90f0b58380489fc5ac05d99ee94b61aa96ec2bff0ba81d3c2b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/file_selector_windows-0.9.3+4.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/fixnum-1.1.1.tar.gz",
+      "destination": "sources/pub/fixnum-1.1.1.tar.gz",
+      "bytes": 24416,
+      "sha256": "b6dc7065e46c974bc7c5f143080a6764ec7a4be6da1285ececdc37be96de53be",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/fixnum-1.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/flutter_launcher_icons-0.13.1.tar.gz",
+      "destination": "sources/pub/flutter_launcher_icons-0.13.1.tar.gz",
+      "bytes": 1262484,
+      "sha256": "526faf84284b86a4cb36d20a5e45147747b7563d921373d4ee0559c54fcdbcea",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/flutter_launcher_icons-0.13.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/flutter_lints-5.0.0.tar.gz",
+      "destination": "sources/pub/flutter_lints-5.0.0.tar.gz",
+      "bytes": 4945,
+      "sha256": "5398f14efa795ffb7a33e9b6a08798b26a180edac4ad7db3f231e40f82ce11e1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/flutter_lints-5.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/flutter_plugin_android_lifecycle-2.0.26.tar.gz",
+      "destination": "sources/pub/flutter_plugin_android_lifecycle-2.0.26.tar.gz",
+      "bytes": 15579,
+      "sha256": "1c2b787f99bdca1f3718543f81d38aa1b124817dfeb9fb196201bea85b6134bf",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/flutter_plugin_android_lifecycle-2.0.26.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/frontend_server_client-4.0.0.tar.gz",
+      "destination": "sources/pub/frontend_server_client-4.0.0.tar.gz",
+      "bytes": 14419,
+      "sha256": "f64a0333a82f30b0cca061bc3d143813a486dc086b574bfb233b7c1372427694",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/frontend_server_client-4.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/glob-2.1.3.tar.gz",
+      "destination": "sources/pub/glob-2.1.3.tar.gz",
+      "bytes": 22395,
+      "sha256": "c3f1ee72c96f8f78935e18aa8cecced9ab132419e8625dc187e1c2408efc20de",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/glob-2.1.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/graphs-2.3.2.tar.gz",
+      "destination": "sources/pub/graphs-2.3.2.tar.gz",
+      "bytes": 16263,
+      "sha256": "741bbf84165310a68ff28fe9e727332eef1407342fca52759cb21ad8177bb8d0",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/graphs-2.3.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/http-1.4.0.tar.gz",
+      "destination": "sources/pub/http-1.4.0.tar.gz",
+      "bytes": 40998,
+      "sha256": "2c11f3f94c687ee9bad77c171151672986360b2b001d109814ee7140b2cf261b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/http-1.4.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/http_multi_server-3.2.2.tar.gz",
+      "destination": "sources/pub/http_multi_server-3.2.2.tar.gz",
+      "bytes": 11690,
+      "sha256": "aa6199f908078bb1c5efb8d8638d4ae191aac11b311132c3ef48ce352fb52ef8",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/http_multi_server-3.2.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/http_parser-4.0.2.tar.gz",
+      "destination": "sources/pub/http_parser-4.0.2.tar.gz",
+      "bytes": 16878,
+      "sha256": "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/http_parser-4.0.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image-4.7.2.tar.gz",
+      "destination": "sources/pub/image-4.7.2.tar.gz",
+      "bytes": 326190,
+      "sha256": "492bd52f6c4fbb6ee41f781ff27765ce5f627910e1e0cbecfa3d9add5562604c",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image-4.7.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker-1.1.2.tar.gz",
+      "destination": "sources/pub/image_picker-1.1.2.tar.gz",
+      "bytes": 282142,
+      "sha256": "021834d9c0c3de46bf0fe40341fa07168407f694d9b2bb18d532dc1261867f7a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker-1.1.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_android-0.8.12+21.tar.gz",
+      "destination": "sources/pub/image_picker_android-0.8.12+21.tar.gz",
+      "bytes": 67941,
+      "sha256": "82652a75e3dd667a91187769a6a2cc81bd8c111bbead698d8e938d2b63e5e89a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_android-0.8.12+21.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_for_web-3.0.6.tar.gz",
+      "destination": "sources/pub/image_picker_for_web-3.0.6.tar.gz",
+      "bytes": 15230,
+      "sha256": "717eb042ab08c40767684327be06a5d8dbb341fe791d514e4b92c7bbe1b7bb83",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_for_web-3.0.6.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_ios-0.8.12+2.tar.gz",
+      "destination": "sources/pub/image_picker_ios-0.8.12+2.tar.gz",
+      "bytes": 100127,
+      "sha256": "05da758e67bc7839e886b3959848aa6b44ff123ab4b28f67891008afe8ef9100",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_ios-0.8.12+2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_linux-0.2.1+2.tar.gz",
+      "destination": "sources/pub/image_picker_linux-0.2.1+2.tar.gz",
+      "bytes": 13231,
+      "sha256": "34a65f6740df08bbbeb0a1abd8e6d32107941fd4868f67a507b25601651022c9",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_linux-0.2.1+2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_macos-0.2.1+2.tar.gz",
+      "destination": "sources/pub/image_picker_macos-0.2.1+2.tar.gz",
+      "bytes": 176454,
+      "sha256": "1b90ebbd9dcf98fb6c1d01427e49a55bd96b5d67b8c67cf955d60a5de74207c1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_macos-0.2.1+2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_platform_interface-2.10.1.tar.gz",
+      "destination": "sources/pub/image_picker_platform_interface-2.10.1.tar.gz",
+      "bytes": 18328,
+      "sha256": "886d57f0be73c4b140004e78b9f28a8914a09e50c2d816bdd0520051a71236a0",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_platform_interface-2.10.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/image_picker_windows-0.2.1+1.tar.gz",
+      "destination": "sources/pub/image_picker_windows-0.2.1+1.tar.gz",
+      "bytes": 32329,
+      "sha256": "6ad07afc4eb1bc25f3a01084d28520496c4a3bb0cb13685435838167c9dcedeb",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/image_picker_windows-0.2.1+1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/intl-0.19.0.tar.gz",
+      "destination": "sources/pub/intl-0.19.0.tar.gz",
+      "bytes": 302030,
+      "sha256": "d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/intl-0.19.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/io-1.0.5.tar.gz",
+      "destination": "sources/pub/io-1.0.5.tar.gz",
+      "bytes": 17975,
+      "sha256": "dfd5a80599cf0165756e3181807ed3e77daf6dd4137caaad72d0b7931597650b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/io-1.0.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/js-0.7.1.tar.gz",
+      "destination": "sources/pub/js-0.7.1.tar.gz",
+      "bytes": 9838,
+      "sha256": "c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/js-0.7.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/json_annotation-4.9.0.tar.gz",
+      "destination": "sources/pub/json_annotation-4.9.0.tar.gz",
+      "bytes": 13148,
+      "sha256": "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/json_annotation-4.9.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/leak_tracker-10.0.5.tar.gz",
+      "destination": "sources/pub/leak_tracker-10.0.5.tar.gz",
+      "bytes": 38226,
+      "sha256": "3f87a60e8c63aecc975dda1ceedbc8f24de75f09e4856ea27daf8958f2f0ce05",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/leak_tracker-10.0.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/leak_tracker_flutter_testing-3.0.5.tar.gz",
+      "destination": "sources/pub/leak_tracker_flutter_testing-3.0.5.tar.gz",
+      "bytes": 11012,
+      "sha256": "932549fb305594d82d7183ecd9fa93463e9914e1b67cacc34bc40906594a1806",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/leak_tracker_flutter_testing-3.0.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/leak_tracker_testing-3.0.1.tar.gz",
+      "destination": "sources/pub/leak_tracker_testing-3.0.1.tar.gz",
+      "bytes": 7150,
+      "sha256": "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/leak_tracker_testing-3.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/lints-5.0.0.tar.gz",
+      "destination": "sources/pub/lints-5.0.0.tar.gz",
+      "bytes": 16866,
+      "sha256": "3315600f3fb3b135be672bf4a178c55f274bebe368325ae18462c89ac1e3b413",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/lints-5.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/logging-1.3.0.tar.gz",
+      "destination": "sources/pub/logging-1.3.0.tar.gz",
+      "bytes": 12198,
+      "sha256": "c8245ada5f1717ed44271ed1c26b8ce85ca3228fd2ffdb75468ab01979309d61",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/logging-1.3.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/matcher-0.12.16+1.tar.gz",
+      "destination": "sources/pub/matcher-0.12.16+1.tar.gz",
+      "bytes": 56967,
+      "sha256": "d2323aa2060500f906aa31a895b4030b6da3ebdcc5619d14ce1aada65cd161cb",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/matcher-0.12.16+1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/material_color_utilities-0.11.1.tar.gz",
+      "destination": "sources/pub/material_color_utilities-0.11.1.tar.gz",
+      "bytes": 2113373,
+      "sha256": "f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/material_color_utilities-0.11.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/meta-1.15.0.tar.gz",
+      "destination": "sources/pub/meta-1.15.0.tar.gz",
+      "bytes": 14456,
+      "sha256": "bdb68674043280c3428e9ec998512fb681678676b3c54e773629ffe74419f8c7",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/meta-1.15.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/mime-1.0.6.tar.gz",
+      "destination": "sources/pub/mime-1.0.6.tar.gz",
+      "bytes": 23997,
+      "sha256": "801fd0b26f14a4a58ccb09d5892c3fbdeff209594300a542492cf13fba9d247a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/mime-1.0.6.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/mockito-5.4.4.tar.gz",
+      "destination": "sources/pub/mockito-5.4.4.tar.gz",
+      "bytes": 98964,
+      "sha256": "6841eed20a7befac0ce07df8116c8b8233ed1f4486a7647c7fc5a02ae6163917",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/mockito-5.4.4.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/nested-1.0.0.tar.gz",
+      "destination": "sources/pub/nested-1.0.0.tar.gz",
+      "bytes": 10240,
+      "sha256": "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/nested-1.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/network_image_mock-2.1.1.tar.gz",
+      "destination": "sources/pub/network_image_mock-2.1.1.tar.gz",
+      "bytes": 4822,
+      "sha256": "855cdd01d42440e0cffee0d6c2370909fc31b3bcba308a59829f24f64be42db7",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/network_image_mock-2.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/package_config-2.2.0.tar.gz",
+      "destination": "sources/pub/package_config-2.2.0.tar.gz",
+      "bytes": 33690,
+      "sha256": "f096c55ebb7deb7e384101542bfba8c52696c1b56fca2eb62827989ef2353bbc",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/package_config-2.2.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/package_info_plus-7.0.0.tar.gz",
+      "destination": "sources/pub/package_info_plus-7.0.0.tar.gz",
+      "bytes": 285567,
+      "sha256": "2c582551839386fa7ddbc7770658be7c0f87f388a4bff72066478f597c34d17f",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/package_info_plus-7.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/package_info_plus_platform_interface-3.2.0.tar.gz",
+      "destination": "sources/pub/package_info_plus_platform_interface-3.2.0.tar.gz",
+      "bytes": 4576,
+      "sha256": "6c935fb612dff8e3cc9632c2b301720c77450a126114126ffaafe28d2e87956c",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/package_info_plus_platform_interface-3.2.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path-1.9.0.tar.gz",
+      "destination": "sources/pub/path-1.9.0.tar.gz",
+      "bytes": 44792,
+      "sha256": "087ce49c3f0dc39180befefc60fdb4acd8f8620e5682fe2476afd0b3688bb4af",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path-1.9.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path_provider-2.1.5.tar.gz",
+      "destination": "sources/pub/path_provider-2.1.5.tar.gz",
+      "bytes": 164271,
+      "sha256": "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path_provider-2.1.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path_provider_android-2.2.15.tar.gz",
+      "destination": "sources/pub/path_provider_android-2.2.15.tar.gz",
+      "bytes": 20948,
+      "sha256": "4adf4fd5423ec60a29506c76581bc05854c55e3a0b72d35bb28d661c9686edf2",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path_provider_android-2.2.15.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path_provider_foundation-2.4.1.tar.gz",
+      "destination": "sources/pub/path_provider_foundation-2.4.1.tar.gz",
+      "bytes": 141250,
+      "sha256": "4843174df4d288f5e29185bd6e72a6fbdf5a4a4602717eed565497429f179942",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path_provider_foundation-2.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path_provider_linux-2.2.1.tar.gz",
+      "destination": "sources/pub/path_provider_linux-2.2.1.tar.gz",
+      "bytes": 11801,
+      "sha256": "f7a1fe3a634fe7734c8d3f2766ad746ae2a2884abe22e241a8b301bf5cac3279",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path_provider_linux-2.2.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path_provider_platform_interface-2.1.2.tar.gz",
+      "destination": "sources/pub/path_provider_platform_interface-2.1.2.tar.gz",
+      "bytes": 7121,
+      "sha256": "88f5779f72ba699763fa3a3b06aa4bf6de76c8e5de842cf6f29e2e06476c2334",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path_provider_platform_interface-2.1.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/path_provider_windows-2.3.0.tar.gz",
+      "destination": "sources/pub/path_provider_windows-2.3.0.tar.gz",
+      "bytes": 41061,
+      "sha256": "bd6f00dbd873bfb70d0761682da2b3a2c2fccc2b9e84c495821639601d81afe7",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/path_provider_windows-2.3.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/petitparser-6.0.2.tar.gz",
+      "destination": "sources/pub/petitparser-6.0.2.tar.gz",
+      "bytes": 117690,
+      "sha256": "c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/petitparser-6.0.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/platform-3.1.6.tar.gz",
+      "destination": "sources/pub/platform-3.1.6.tar.gz",
+      "bytes": 8453,
+      "sha256": "5d6b1b0036a5f331ebc77c850ebc8506cbc1e9416c27e59b439f917a902a4984",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/platform-3.1.6.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/plugin_platform_interface-2.1.8.tar.gz",
+      "destination": "sources/pub/plugin_platform_interface-2.1.8.tar.gz",
+      "bytes": 7084,
+      "sha256": "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/plugin_platform_interface-2.1.8.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/pool-1.5.2.tar.gz",
+      "destination": "sources/pub/pool-1.5.2.tar.gz",
+      "bytes": 11161,
+      "sha256": "978783255c543aa3586a1b3c21f6e9d720eb315376a915872c61ef8b5c20177d",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/pool-1.5.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/posix-6.0.3.tar.gz",
+      "destination": "sources/pub/posix-6.0.3.tar.gz",
+      "bytes": 183225,
+      "sha256": "6323a5b0fa688b6a010df4905a56b00181479e6d10534cecfecede2aa55add61",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/posix-6.0.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/provider-6.1.5.tar.gz",
+      "destination": "sources/pub/provider-6.1.5.tar.gz",
+      "bytes": 9236847,
+      "sha256": "4abbd070a04e9ddc287673bf5a030c7ca8b685ff70218720abab8b092f53dd84",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/provider-6.1.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/pub_semver-2.2.0.tar.gz",
+      "destination": "sources/pub/pub_semver-2.2.0.tar.gz",
+      "bytes": 25661,
+      "sha256": "5bfcf68ca79ef689f8990d1160781b4bad40a3bd5e5218ad4076ddb7f4081585",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/pub_semver-2.2.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/pubspec_parse-1.4.0.tar.gz",
+      "destination": "sources/pub/pubspec_parse-1.4.0.tar.gz",
+      "bytes": 15083,
+      "sha256": "81876843eb50dc2e1e5b151792c9a985c5ed2536914115ed04e9c8528f6647b0",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/pubspec_parse-1.4.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/qr-3.0.2.tar.gz",
+      "destination": "sources/pub/qr-3.0.2.tar.gz",
+      "bytes": 336627,
+      "sha256": "5a1d2586170e172b8a8c8470bbbffd5eb0cd38a66c0d77155ea138d3af3a4445",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/qr-3.0.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/qr_flutter-4.1.0.tar.gz",
+      "destination": "sources/pub/qr_flutter-4.1.0.tar.gz",
+      "bytes": 78086,
+      "sha256": "5095f0fc6e3f71d08adef8feccc8cea4f12eec18a2e31c2e8d82cb6019f4b097",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/qr_flutter-4.1.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/recase-4.1.0.tar.gz",
+      "destination": "sources/pub/recase-4.1.0.tar.gz",
+      "bytes": 3250,
+      "sha256": "e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/recase-4.1.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/screen_brightness-1.0.1.tar.gz",
+      "destination": "sources/pub/screen_brightness-1.0.1.tar.gz",
+      "bytes": 162390,
+      "sha256": "7d4ac84ae26b37c01d6f5db7123a72db7933e1f2a2a8c369a51e08f81b3178d8",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/screen_brightness-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/screen_brightness_android-1.0.1.tar.gz",
+      "destination": "sources/pub/screen_brightness_android-1.0.1.tar.gz",
+      "bytes": 15961,
+      "sha256": "8c69d3ac475e4d625e7fa682a3a51a69ff59abe5b4a9e57f6ec7d830a6c69bd6",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/screen_brightness_android-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/screen_brightness_ios-1.0.1.tar.gz",
+      "destination": "sources/pub/screen_brightness_ios-1.0.1.tar.gz",
+      "bytes": 50246,
+      "sha256": "f08f70ca1ac3e30719764b5cfb8b3fe1e28163065018a41b3e6f243ab146c2f1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/screen_brightness_ios-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/screen_brightness_macos-1.0.1.tar.gz",
+      "destination": "sources/pub/screen_brightness_macos-1.0.1.tar.gz",
+      "bytes": 89722,
+      "sha256": "70c2efa4534e22b927e82693488f127dd4a0f008469fccf4f0eefe9061bbdd6a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/screen_brightness_macos-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/screen_brightness_platform_interface-1.0.1.tar.gz",
+      "destination": "sources/pub/screen_brightness_platform_interface-1.0.1.tar.gz",
+      "bytes": 5602,
+      "sha256": "9f3ebf7f22d5487e7676fe9ddaf3fc55b6ff8057707cf6dc0121c7dfda346a16",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/screen_brightness_platform_interface-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/screen_brightness_windows-1.0.1.tar.gz",
+      "destination": "sources/pub/screen_brightness_windows-1.0.1.tar.gz",
+      "bytes": 33490,
+      "sha256": "c8e12a91cf6dd912a48bd41fcf749282a51afa17f536c3460d8d05702fb89ffa",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/screen_brightness_windows-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/share_plus-10.0.0.tar.gz",
+      "destination": "sources/pub/share_plus-10.0.0.tar.gz",
+      "bytes": 285038,
+      "sha256": "59dfd53f497340a0c3a81909b220cfdb9b8973a91055c4e5ab9b9b9ad7c513c0",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/share_plus-10.0.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/share_plus_platform_interface-5.0.2.tar.gz",
+      "destination": "sources/pub/share_plus_platform_interface-5.0.2.tar.gz",
+      "bytes": 7084,
+      "sha256": "cc012a23fc2d479854e6c80150696c4a5f5bb62cb89af4de1c505cf78d0a5d0b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/share_plus_platform_interface-5.0.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences-2.5.3.tar.gz",
+      "destination": "sources/pub/shared_preferences-2.5.3.tar.gz",
+      "bytes": 9343264,
+      "sha256": "6e8bf70b7fef813df4e9a36f658ac46d107db4b4cfe1048b477d4e453a8159f5",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences-2.5.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences_android-2.4.7.tar.gz",
+      "destination": "sources/pub/shared_preferences_android-2.4.7.tar.gz",
+      "bytes": 41767,
+      "sha256": "9f9f3d372d4304723e6136663bb291c0b93f5e4c8a4a6314347f481a33bda2b1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences_android-2.4.7.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences_foundation-2.5.4.tar.gz",
+      "destination": "sources/pub/shared_preferences_foundation-2.5.4.tar.gz",
+      "bytes": 132412,
+      "sha256": "6a52cfcdaeac77cad8c97b539ff688ccfc458c007b4db12be584fbe5c0e49e03",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences_foundation-2.5.4.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences_linux-2.4.1.tar.gz",
+      "destination": "sources/pub/shared_preferences_linux-2.4.1.tar.gz",
+      "bytes": 14666,
+      "sha256": "580abfd40f415611503cae30adf626e6656dfb2f0cee8f465ece7b6defb40f2f",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences_linux-2.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences_platform_interface-2.4.1.tar.gz",
+      "destination": "sources/pub/shared_preferences_platform_interface-2.4.1.tar.gz",
+      "bytes": 9101,
+      "sha256": "57cbf196c486bc2cf1f02b85784932c6094376284b3ad5779d1b1c6c6a816b80",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences_platform_interface-2.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences_web-2.4.3.tar.gz",
+      "destination": "sources/pub/shared_preferences_web-2.4.3.tar.gz",
+      "bytes": 9449,
+      "sha256": "c49bd060261c9a3f0ff445892695d6212ff603ef3115edbb448509d407600019",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences_web-2.4.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shared_preferences_windows-2.4.1.tar.gz",
+      "destination": "sources/pub/shared_preferences_windows-2.4.1.tar.gz",
+      "bytes": 37821,
+      "sha256": "94ef0f72b2d71bc3e700e025db3710911bd51a71cefb65cc609dd0d9a982e3c1",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shared_preferences_windows-2.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shelf-1.4.1.tar.gz",
+      "destination": "sources/pub/shelf-1.4.1.tar.gz",
+      "bytes": 46618,
+      "sha256": "ad29c505aee705f41a4d8963641f91ac4cee3c8fad5947e033390a7bd8180fa4",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shelf-1.4.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/shelf_web_socket-2.0.1.tar.gz",
+      "destination": "sources/pub/shelf_web_socket-2.0.1.tar.gz",
+      "bytes": 6842,
+      "sha256": "cc36c297b52866d203dbf9332263c94becc2fe0ceaa9681d07b6ef9807023b67",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/shelf_web_socket-2.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/source_gen-1.5.0.tar.gz",
+      "destination": "sources/pub/source_gen-1.5.0.tar.gz",
+      "bytes": 47278,
+      "sha256": "14658ba5f669685cd3d63701d01b31ea748310f7ab854e471962670abcf57832",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/source_gen-1.5.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/source_span-1.10.0.tar.gz",
+      "destination": "sources/pub/source_span-1.10.0.tar.gz",
+      "bytes": 29487,
+      "sha256": "53e943d4206a5e30df338fd4c6e7a077e02254531b138a15aec3bd143c1a8b3c",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/source_span-1.10.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/sqlite3-2.4.5.tar.gz",
+      "destination": "sources/pub/sqlite3-2.4.5.tar.gz",
+      "bytes": 112403,
+      "sha256": "fde692580bee3379374af1f624eb3e113ab2865ecb161dbe2d8ac2de9735dbdb",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/sqlite3-2.4.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/sqlite3_flutter_libs-0.5.37.tar.gz",
+      "destination": "sources/pub/sqlite3_flutter_libs-0.5.37.tar.gz",
+      "bytes": 11302,
+      "sha256": "60464aa06f3f6f6fba9abd7564e315526c1fee6d6a77d6ee52a1f7f48a9107f6",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/sqlite3_flutter_libs-0.5.37.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/sqlparser-0.37.1.tar.gz",
+      "destination": "sources/pub/sqlparser-0.37.1.tar.gz",
+      "bytes": 172853,
+      "sha256": "3be52b4968fc2f098ba735863404756d2fe3ea0729cf006a5b5612618f74ca04",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/sqlparser-0.37.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/stack_trace-1.11.1.tar.gz",
+      "destination": "sources/pub/stack_trace-1.11.1.tar.gz",
+      "bytes": 31920,
+      "sha256": "73713990125a6d93122541237550ee3352a2d84baad52d375a4cad2eb9b7ce0b",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/stack_trace-1.11.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/stream_channel-2.1.2.tar.gz",
+      "destination": "sources/pub/stream_channel-2.1.2.tar.gz",
+      "bytes": 23527,
+      "sha256": "ba2aa5d8cc609d96bbb2899c28934f9e1af5cddbd60a827822ea467161eb54e7",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/stream_channel-2.1.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/stream_transform-2.1.1.tar.gz",
+      "destination": "sources/pub/stream_transform-2.1.1.tar.gz",
+      "bytes": 31612,
+      "sha256": "ad47125e588cfd37a9a7f86c7d6356dde8dfe89d071d293f80ca9e9273a33871",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/stream_transform-2.1.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/string_scanner-1.2.0.tar.gz",
+      "destination": "sources/pub/string_scanner-1.2.0.tar.gz",
+      "bytes": 14925,
+      "sha256": "556692adab6cfa87322a115640c11f13cb77b3f076ddcc5d6ae3c20242bedcde",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/string_scanner-1.2.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/term_glyph-1.2.1.tar.gz",
+      "destination": "sources/pub/term_glyph-1.2.1.tar.gz",
+      "bytes": 9836,
+      "sha256": "a29248a84fbb7c79282b40b8c72a1209db169a2e0542bce341da992fe1bc7e84",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/term_glyph-1.2.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/test_api-0.7.2.tar.gz",
+      "destination": "sources/pub/test_api-0.7.2.tar.gz",
+      "bytes": 58375,
+      "sha256": "5b8a98dafc4d5c4c9c72d8b31ab2b23fc13422348d2997120294d3bac86b4ddb",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/test_api-0.7.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/timing-1.0.2.tar.gz",
+      "destination": "sources/pub/timing-1.0.2.tar.gz",
+      "bytes": 6629,
+      "sha256": "62ee18aca144e4a9f29d212f5a4c6a053be252b895ab14b5821996cff4ed90fe",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/timing-1.0.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/transparent_image-2.0.1.tar.gz",
+      "destination": "sources/pub/transparent_image-2.0.1.tar.gz",
+      "bytes": 2020,
+      "sha256": "e8991d955a2094e197ca24c645efec2faf4285772a4746126ca12875e54ca02f",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/transparent_image-2.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/typed_data-1.4.0.tar.gz",
+      "destination": "sources/pub/typed_data-1.4.0.tar.gz",
+      "bytes": 15910,
+      "sha256": "f9049c039ebfeb4cf7a7104a675823cd72dba8297f264b6637062516699fa006",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/typed_data-1.4.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/url_launcher_linux-3.2.1.tar.gz",
+      "destination": "sources/pub/url_launcher_linux-3.2.1.tar.gz",
+      "bytes": 16489,
+      "sha256": "4e9ba368772369e3e08f231d2301b4ef72b9ff87c31192ef471b380ef29a4935",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/url_launcher_linux-3.2.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/url_launcher_platform_interface-2.3.2.tar.gz",
+      "destination": "sources/pub/url_launcher_platform_interface-2.3.2.tar.gz",
+      "bytes": 10662,
+      "sha256": "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/url_launcher_platform_interface-2.3.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/url_launcher_web-2.3.3.tar.gz",
+      "destination": "sources/pub/url_launcher_web-2.3.3.tar.gz",
+      "bytes": 19376,
+      "sha256": "772638d3b34c779ede05ba3d38af34657a05ac55b06279ea6edd409e323dca8e",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/url_launcher_web-2.3.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/url_launcher_windows-3.1.4.tar.gz",
+      "destination": "sources/pub/url_launcher_windows-3.1.4.tar.gz",
+      "bytes": 39790,
+      "sha256": "3284b6d2ac454cf34f114e1d3319866fdd1e19cdc329999057e44ffe936cfa77",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/url_launcher_windows-3.1.4.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/uuid-4.5.3.tar.gz",
+      "destination": "sources/pub/uuid-4.5.3.tar.gz",
+      "bytes": 237574,
+      "sha256": "1fef9e8e11e2991bb773070d4656b7bd5d850967a2456cfc83cf47925ba79489",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/uuid-4.5.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/vector_math-2.1.4.tar.gz",
+      "destination": "sources/pub/vector_math-2.1.4.tar.gz",
+      "bytes": 178431,
+      "sha256": "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/vector_math-2.1.4.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/vm_service-14.2.5.tar.gz",
+      "destination": "sources/pub/vm_service-14.2.5.tar.gz",
+      "bytes": 287497,
+      "sha256": "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/vm_service-14.2.5.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/watcher-1.1.2.tar.gz",
+      "destination": "sources/pub/watcher-1.1.2.tar.gz",
+      "bytes": 30678,
+      "sha256": "0b7fd4a0bbc4b92641dbf20adfd7e3fd1398fe17102d94b674234563e110088a",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/watcher-1.1.2.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/web-0.5.1.tar.gz",
+      "destination": "sources/pub/web-0.5.1.tar.gz",
+      "bytes": 879054,
+      "sha256": "97da13628db363c635202ad97068d47c5b8aa555808e7a9411963c533b449b27",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/web-0.5.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/web_socket-1.0.1.tar.gz",
+      "destination": "sources/pub/web_socket-1.0.1.tar.gz",
+      "bytes": 9038,
+      "sha256": "34d64019aa8e36bf9842ac014bb5d2f5586ca73df5e4d9bf5c936975cae6982c",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/web_socket-1.0.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/web_socket_channel-3.0.3.tar.gz",
+      "destination": "sources/pub/web_socket_channel-3.0.3.tar.gz",
+      "bytes": 14525,
+      "sha256": "d645757fb0f4773d602444000a8131ff5d48c9e47adfe9772652dd1a4f2d45c8",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/web_socket_channel-3.0.3.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/win32-5.10.1.tar.gz",
+      "destination": "sources/pub/win32-5.10.1.tar.gz",
+      "bytes": 1078275,
+      "sha256": "daf97c9d80197ed7b619040e86c8ab9a9dad285e7671ee7390f9180cc828a51e",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/win32-5.10.1.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/xdg_directories-1.1.0.tar.gz",
+      "destination": "sources/pub/xdg_directories-1.1.0.tar.gz",
+      "bytes": 11600,
+      "sha256": "7a3f37b05d989967cdddcbb571f1ea834867ae2faa29725fd085180e0883aa15",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/xdg_directories-1.1.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/xml-6.5.0.tar.gz",
+      "destination": "sources/pub/xml-6.5.0.tar.gz",
+      "bytes": 197760,
+      "sha256": "b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/xml-6.5.0.tar.gz"
+    },
+    {
+      "root": "inputs",
+      "path": "dependency-sources/yaml-3.1.3.tar.gz",
+      "destination": "sources/pub/yaml-3.1.3.tar.gz",
+      "bytes": 46513,
+      "sha256": "b9da305ac7c39faa3f030eccd175340f968459dae4af175130b3fc47e40d76ce",
+      "archive": "tar",
+      "url": "https://pub.dev/api/archives/yaml-3.1.3.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "sqlite-CMakeLists.txt",
+      "destination": "sources/supplements/sqlite-CMakeLists.txt",
+      "bytes": 1077,
+      "sha256": "b8c5dbf58f0e7b1e3a5b5824e445dd4194b06df8f1aea06a3aa75e44c4913f90"
+    },
+    {
+      "root": "closure",
+      "path": "sqlite-autoconf-3500300.tar.gz",
+      "destination": "sources/supplements/sqlite-autoconf-3500300.tar.gz",
+      "bytes": 3172782,
+      "sha256": "ec5496cdffbc2a4adb59317fd2bf0e582bf0e6acd8f4aae7e97bc723ddba7233",
+      "archive": "tar",
+      "url": "https://sqlite.org/2025/sqlite-autoconf-3500300.tar.gz"
+    },
+    {
+      "root": "closure",
+      "path": "sqlite-build.gradle.kts",
+      "destination": "sources/supplements/sqlite-build.gradle.kts",
+      "bytes": 5356,
+      "sha256": "e0d21249b47b32890d6da0b2dca249b200e92bb4d10704b6b751cf78f582e4a8"
+    },
+    {
+      "root": "closure",
+      "path": "sqlite-native-libraries-91884ccbe1f58edca999d94aa3b8bef33f176ddf.tar.gz",
+      "destination": "sources/supplements/sqlite-native-libraries-91884ccbe1f58edca999d94aa3b8bef33f176ddf.tar.gz",
+      "bytes": 56802,
+      "sha256": "9faf47af779da8c279c5985c614d3d661fa7170c0e2cb7a4416ce2899447c04c",
+      "archive": "tar",
+      "url": "https://codeload.github.com/simolus3/sqlite-native-libraries/tar.gz/91884ccbe1f58edca999d94aa3b8bef33f176ddf"
+    },
+    {
+      "root": "repository",
+      "path": "tests/test_launcher_source_bundle.py",
+      "destination": "tests/test_launcher_source_bundle.py",
+      "bytes": 5888,
+      "sha256": "6da05cacba4b0c6b934ec30bae382dc739d90d3293f952f0c9edce2ddf15d441"
+    },
+    {
+      "root": "repository",
+      "path": "tools/assemble-launcher-sources.py",
+      "destination": "tools/assemble-launcher-sources.py",
+      "bytes": 7202,
+      "sha256": "a05601d11e1813a86a19f29937b2f457306efc9992e7c0aef043a29319470e69"
+    }
+  ]
+}

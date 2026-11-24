@@ -1,0 +1,211 @@
+# LTvLauncher controlled source candidate
+
+This source set identifies the controlled ARMv7 candidate built from LTvLauncher
+`f9db652edaac2da3ea2e6a1ed220d1396ccea82b`, version `2026.11.23`, code `8117`.
+The original 298 application source files were unchanged. The unsigned candidate
+SHA256 is `f365c6a5f947d0475406ad655b2d273d0839085e451a458f6d6578b380e822d4`.
+The separately signed project candidate SHA256 is
+`b1aa61fc4a624e7ec0772a52178789c9e0377ee223812534c16991772c2e9c71`.
+The signing key is not distributed. This document does not change a ROM artifact
+pin or authorize installation on hardware.
+
+## Source layout and verification
+
+`SOURCE-BUNDLE.json` is the exact file whitelist, SHA256/size map and upstream
+source URL index. Verify every file against it before extracting nested archives. A few exact
+upstream source archives have relative test symlinks to sibling checkouts; the
+manifest explicitly records each such external source link. They remain inert
+metadata inside the bundled archive. Extract source archives only into a fresh
+isolated source workspace using a safe extractor that rejects traversal and
+external links, or provision the expected upstream sibling layout after review.
+Do not blindly follow links or extract over existing files.
+Sources remain byte-for-byte upstream archives, preserving copyright, license,
+NOTICE and build files. `sources/application/` contains the original application;
+`sources/flutter/` the framework and generated sky_engine package (five SDK
+packages in total); `sources/pub/` all 137 locked hosted packages;
+`sources/maven/` the selected published source jars, POMs and module metadata;
+`sources/native/` the 43 pinned engine/Dart/Skia/native/header source archives;
+`sources/supplements/` the SQLite recipe/amalgamation and protobuf/AndroidX recipe.
+`sources/assets/material-icons/` supplies the exact Material Icons font,
+codepoints and its upstream CC BY 4.0 license. Its provenance identifies the
+official Flutter font ZIP/member, not framework Git. Copyright 2019 Google LLC.
+All Rights Reserved. The original font is unchanged here; Flutter icon tree
+shaking subsets it in the APK. Attribution and the CC BY 4.0 link are retained
+in cumulative notices and `catalogs/material-icons-provenance.json`.
+The native set is a source/header/build-input superset. Optional platform, test
+and tool targets are not all asserted to ship.
+
+`catalogs/selected-source-coverage-summary.json` explains all 74 selected Maven
+coordinates/78 external artifacts: 69 source-bearing published jars, two
+zero-class compatibility placeholders, native SQLite, native Flutter, and the
+AndroidX relocated protobuf supplement. Empty source classifiers are retained
+as evidence and are not substituted for the supplemental actual source.
+The AndroidX 1.1.3 release recipe pins protobuf 4.28.2 and its namespace
+relocation; full protobuf source and BSD license are supplied. SQLite 3.50.3
+source and the exact native build recipe are supplied separately.
+
+`build-records/` contains sanitized actual dependency locks, strict verification
+metadata, runtime graph/artifact hashes, generated test sources and R8 records.
+Absolute build/cache locations in text records are replaced with generic
+variables; raw private logs are excluded. These records describe the controlled
+build, not an upstream signed build attestation. No byte-identical rebuild of the
+original third-party APK is claimed or required to identify these source inputs.
+
+`notices/` delivers the actual Flutter APK notices, retained APK notice files,
+selected Maven copyright/license statements and supplemental license texts.
+Per-file source headers and upstream license/NOTICE files remain in each source
+archive. These notices must accompany redistribution; do not discard source
+copyright/license files when modifying or repackaging. This archive assembly is
+not a claim of complete legal clearance for an entire ROM.
+
+## Recipient tools
+
+Use your own Linux x86-64 build directory, Java 21 (the controlled build used
+Android_PDK OpenJDK 21.0.1), Gradle 8.13, and Flutter **3.24.5**, framework commit
+`dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668`, engine
+`a18df97ca57a249df5d8d68cd0820600223ce262`, Dart 3.5.4 source revision
+`88c9758ef131d430d8ce595c6bfb4c90574d3ddd`.
+Obtain tools from their official distributions or provision the exact framework
+Git checkout and engine assets. The Flutter checkout must have the official
+3.24.5 tag/revision metadata so Flutter reports 3.24.5, not an unknown version.
+Framework source is supplied; a runnable Flutter SDK additionally needs official
+Dart/engine/gen_snapshot/font/tool artifacts. This bundle contains source, not
+those executable SDK/tool distributions.
+
+Obtain Android SDK command-line tools and platforms 31/34/35, build-tools 34/35,
+and platform-tools through Google's supported SDK setup. The controlled build
+used cmdline-tools 13.0 and platform-tools 37.0.3. Read the applicable SDK terms
+and decide whether to accept them yourself. No acceptance records or automatic
+license-acceptance command are supplied. Source redistribution does not grant
+rights to redistribute Google's SDK archives. Host SQLite 3.46.1 was used by
+Drift schema generation. The app's shipped native SQLite remains 3.50.3.
+
+Set paths for your own installations, for example:
+
+```sh
+export JAVA_HOME=/your/jdk21
+export FLUTTER_ROOT=/your/flutter-3.24.5
+export ANDROID_HOME=/your/android-sdk
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
+export PUB_CACHE=/your/isolated-pub-cache
+export GRADLE_USER_HOME=/your/isolated-gradle-cache
+export PATH="$JAVA_HOME/bin:$FLUTTER_ROOT/bin:/your/gradle-8.13/bin:$PATH"
+export CI=true FLUTTER_SUPPRESS_ANALYTICS=true DART_SUPPRESS_ANALYTICS=true
+flutter --version
+flutter precache --android
+```
+
+Flutter tooling bootstrap and Maven/tool resolution may need network access.
+Use the pinned SDK and retained verification metadata; do not disable dependency
+verification or silently upgrade application locks. Missing host-specific tool
+checksums must be checked against primary upstream artifacts before narrowly
+adding entries. Flutter's tool-only package dependencies are described by the
+pinned framework's own lockfile; the 137 bundled hosted packages are the
+application's locked source set, not every executable tool dependency.
+
+## Application and generator commands
+
+Extract `sources/application/LTvLauncher-source.tar.gz` into your workspace and
+enter its `LtvLauncher-f9db652edaac2da3ea2e6a1ed220d1396ccea82b` directory.
+To hydrate the application pub cache without changing dependency versions, use
+the bundled `catalogs/dependency-source-index.json`: for each hosted entry,
+verify its archive SHA256, extract the matching `sources/pub/<file>` into
+`$PUB_CACHE/hosted/pub.dev/<name>-<version>`, and write its 64-character SHA256
+**without a newline** to
+`$PUB_CACHE/hosted-hashes/pub.dev/<name>-<version>.sha256`.
+Do not merge arbitrary caches or overwrite versions from a different lock.
+Standard `dart pub get` can alternatively download these exact locked versions;
+compare the resulting original pubspec.lock before continuing.
+
+Copy `build-records/gradle/gradle.lockfile` to `android/app/gradle.lockfile` and
+`build-records/gradle/verification-metadata.xml` to
+`android/gradle/verification-metadata.xml`. Keep the original app Gradle files
+and pubspec.lock unchanged. The original source archive omits gradlew and its
+wrapper jar. Flutter's normal project setup generates the standard wrapper
+files while retaining the original Gradle 8.13 distribution URL. Provision the
+Gradle 8.13 binary distribution in your own wrapper cache if working offline.
+The official Gradle 8.13 binary ZIP SHA256 is
+`20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78`.
+
+The controlled workflow executed these exact pinned generators directly, after
+explicit offline Pub resolution. This avoids Flutter pub-run implicitly fetching
+because of a synthetic flutter_gen mapping with no generated pubspec:
+
+```sh
+DART="$FLUTTER_ROOT/bin/cache/dart-sdk/bin/dart"
+"$DART" pub get --offline --no-precompile
+"$DART" --packages=.dart_tool/package_config.json \
+  "$PUB_CACHE/hosted/pub.dev/build_runner-2.4.13/bin/build_runner.dart" \
+  build --delete-conflicting-outputs
+"$DART" --packages=.dart_tool/package_config.json \
+  "$PUB_CACHE/hosted/pub.dev/drift_dev-2.19.1/bin/drift_dev.dart" \
+  schema generate drift_schemas/ test/generated_migrations/
+```
+
+Retained source changes from generation are eight added test/migration files,
+provided in `build-records/generated-codegen-source.tar.gz`. No original source
+file was modified. Compare regeneration with that archive; generated paths and
+local.properties are environment-specific and are not application source edits.
+
+## Unsigned ARMv7 release and recipient signing
+
+Use an isolated environment without existing signing configuration. Set
+`KEYSTORE_FILE` to a path that does not exist; do not point it at a project key.
+For a bounded build, write a private Gradle user properties file:
+
+```properties
+org.gradle.jvmargs=-Xmx3g -XX:MaxMetaspaceSize=768m
+org.gradle.workers.max=2
+org.gradle.daemon=false
+kotlin.compiler.execution.strategy=in-process
+android.builder.sdkDownload=false
+```
+
+Then run the actual controlled APK command:
+
+```sh
+export KEYSTORE_FILE="$PWD/recipient-unsigned-no-keystore"
+test ! -e "$KEYSTORE_FILE"
+flutter --no-version-check --suppress-analytics build apk \
+  --release --target-platform=android-arm --split-per-abi \
+  --build-name=2026.11.23 --build-number=8117 --no-pub
+```
+
+The controlled build used an 8 GiB memory / 2 GiB swap / four-CPU process-tree
+limit and completed with a 2.8 GiB peak. Expected output is
+`build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk`. Inspect package,
+version, ARMv7 ABI, signature absence and 16 KiB alignment with your SDK tools.
+Exact byte identity can vary with build metadata; retained R8 records and
+selected-artifact hashes make the actual produced candidate inspectable.
+
+For installation in your own unlocked developer-preview ROM, align and sign
+your APK using **your own** signing key and the supported Android build-tools.
+Do not reuse or request the project's private signing key. Set the launcher APK
+hash and signing-certificate pin in your own ROM input manifest to the resulting
+artifact/certificate, then rebuild the ROM through its documented workflow.
+A differently signed APK cannot update the installed package in place under the
+original certificate. Review the ROM's installation, recovery, launcher HOME
+selection and rollback instructions for your own device before installing;
+this source recipe performs no flashing, rebooting, slot switching or data wipe.
+
+## Reassembling the source delivery
+
+The repository's `tools/assemble-launcher-sources.py` uses only the explicit
+`manifests/launcher-source-bundle.json` whitelist. Supply named input roots of
+your choosing; root names are logical, not fixed private paths:
+
+```sh
+python3 tools/assemble-launcher-sources.py \
+  --manifest manifests/launcher-source-bundle.json \
+  --root inputs=/your/verified-launcher-inputs \
+  --root closure=/your/verified-source-materials \
+  --root staged=/your/sanitized-build-records \
+  --root repository="$PWD" --output /your/fresh/launcher-sources.tar.gz
+```
+
+Source URLs and SHA256 values in the manifest identify externally obtained
+inputs. Sanitized staged build records are supplied by this source bundle,
+not inferred from upstream POMs. Reassemble twice to different fresh paths and
+compare SHA256. The assembler does not download, execute or recursively include
+unlisted inputs. It rejects changed hashes/sizes, duplicate destinations, unsafe
+paths and unsafe nested archive members, and normalizes outer archive metadata.

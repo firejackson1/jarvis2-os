@@ -430,3 +430,14 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   Ten real-decoder/malformed-input regressions joined the host checks. Generated
   Credits, SDKs, caches and notice archives are not tracked. Final-image version
   and notice-preservation checks remain separate.
+
+- Controlled launcher corresponding-source delivery is now assembled from an
+  explicit 441-file whitelist, with sources, build records and cumulative notices.
+  Two independent assemblies produced SHA256
+  `6d3a8f5ec402a895987769ba22bbfe9925f32893301a61615143f6e640749e94`;
+  all members passed hash/size readback. Material Icons attribution correctly
+  preserves CC BY 4.0 and identifies the APK's font subsetting. SDK executables,
+  caches, private logs and signing keys are excluded. Twelve assembler regression
+  tests pass; current full host suite passes 142 tests with five local AVB skips,
+  source privacy audit and Java checks. This source delivery does not change the
+  active ROM's launcher pin or establish hardware acceptance.
