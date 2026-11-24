@@ -236,4 +236,5 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - At the owner's request, packaged an unsigned/untested raw-image build archive
   with SHA256SUMS, source manifest, checks and license-review material. It contains
   no updater/flash script, boot/recovery/vendor image or complete AVB chain and
-  must not be treated as an installer. Private draft delivery is in progress.
+  must not be treated as an installer. Private draft delivery completed; GitHub
+  reports the ZIP uploaded and its SHA-256 matches the local archive.
