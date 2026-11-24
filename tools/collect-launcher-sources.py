@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 """Collect locked hosted launcher dependencies; SDK/legal review remain separate."""
-import argparse,concurrent.futures,hashlib,json,re,tarfile,urllib.request
+import argparse,concurrent.futures,hashlib,json,re,tarfile,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def digest(path):
@@ -43,7 +43,7 @@ def collect_one(name,info,output,download=False):
     if actual!=expected:raise ValueError('Locked source checksum mismatch: '+name)
     return {'name':name,'version':version,'source':source,'collected':True,
             'sha256':actual,'bytes':archive.stat().st_size,'url':url,'file':filename}
-def sdk_material(inputs,manifest):
+def framework_material(inputs,manifest):
     spec=manifest.get('framework_source')
     if not spec:return {}
     archive=inputs/spec['name']
@@ -57,6 +57,40 @@ def sdk_material(inputs,manifest):
             if not member.isfile():raise ValueError('Missing SDK package source: '+name)
             result[name]={'collected':True,'archive':spec['name'],'archive_sha256':spec['sha256'],
                           'source_commit':spec['source_commit'],'path':path}
+    return result
+
+def sdk_material(inputs,manifest):
+    result=framework_material(inputs,manifest)
+    spec=manifest.get('sky_engine_source')
+    if not spec:return result
+    revision=spec['engine_revision']
+    if revision!=manifest.get('framework_source',{}).get('engine_revision'):
+        raise ValueError('Sky engine revision mismatch')
+    archive=inputs/spec['name']
+    if archive.is_symlink():raise ValueError('Sky engine archive must not be a symlink')
+    if not archive.is_file():return result
+    if digest(archive)!=spec['sha256']:raise ValueError('Sky engine source checksum mismatch')
+    with zipfile.ZipFile(archive) as z:
+        names=set()
+        for member in z.infolist():
+            name=member.filename
+            if (name.startswith('/') or '\\' in name or
+                any(part in ('.','..','') for part in name.rstrip('/').split('/')) or
+                (name.split('/')[0]!='sky_engine' and name!='LICENSE.zip_old_location.md') or name in names or
+                (member.external_attr>>16)&0o170000==0o120000):
+                raise ValueError('Unsafe sky engine ZIP member: '+name)
+            names.add(name)
+        for name in ('sky_engine/pubspec.yaml','sky_engine/LICENSE','sky_engine/lib/ui/ui.dart'):
+            if name not in names or not 0<z.getinfo(name).file_size<=4*1024*1024:
+                raise ValueError('Missing or invalid sky engine package member: '+name)
+        marker=z.read('sky_engine/pubspec.yaml').decode('utf-8')
+        if not re.search(r'^name: sky_engine\s*$',marker,re.M) or not re.search(
+                r'^version: '+re.escape(spec['version'])+r'\s*$',marker,re.M):
+            raise ValueError('Sky engine package identity mismatch')
+    result['sky_engine']={'collected':True,'archive':spec['name'],
+        'archive_sha256':spec['sha256'],'engine_revision':revision,'path':'sky_engine',
+        'version':spec['version'],'material_kind':'generated_sdk_package',
+        'engine_dependency_closure_complete':False}
     return result
 
 def collect(inputs,download=False):
@@ -79,10 +113,11 @@ def collect(inputs,download=False):
     for item in results:
         if item['source']=='sdk' and item['name'] in framework:item.update(framework[item['name']])
     report={'format':1,'source_commit':manifest['source_commit'],'dependencies':results,
-            'complete_corresponding_source':False,'license_review_complete':False}
+            'complete_corresponding_source':False,'license_review_complete':False,
+            'engine_dependency_closure_complete':False}
     (inputs/'dependency-source-report.json').write_text(json.dumps(report,indent=2)+'\n')
     print('Verified hosted archives:',sum(item['source']=='hosted' and item['collected'] for item in results))
-    print('SDK packages covered by framework archive:',len(framework))
+    print('SDK packages with verified source material:',len(framework))
     print('SDK dependencies requiring separate material:',sum(item['source']=='sdk' and not item['collected'] for item in results))
     print('Dependency collection does not establish complete source/license compliance.')
 if __name__=='__main__':

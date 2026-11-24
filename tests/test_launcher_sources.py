@@ -49,3 +49,50 @@ class LauncherSourceTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);manifest=self.sdk_fixture(root);(root/'framework.tar.gz').unlink()
    self.assertEqual({},module.sdk_material(root,manifest))
+
+ def sky_fixture(self,root,omit=None,extra=None):
+  import zipfile
+  archive=root/'sky.zip'
+  members={'sky_engine/pubspec.yaml':b'name: sky_engine\nversion: 0.0.99\n','LICENSE.zip_old_location.md':b'License moved into sky_engine', 'sky_engine/LICENSE':b'L'*1690268,'sky_engine/lib/ui/ui.dart':b'library dart.ui;'}
+  if omit:members.pop(omit)
+  if extra:members[extra]=b'unsafe'
+  with zipfile.ZipFile(archive,'w') as z:
+   for name,data in members.items():z.writestr(name,data)
+  manifest=self.sdk_fixture(root);manifest['framework_source']['engine_revision']='a'*40
+  manifest['sky_engine_source']={'name':archive.name,'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'engine_revision':'a'*40,'version':'0.0.99'}
+  return manifest
+ def test_generated_sky_package_is_verified_separately_from_engine_closure(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);manifest=self.sky_fixture(root);result=module.sdk_material(root,manifest)['sky_engine']
+   self.assertTrue(result['collected']);self.assertEqual('sky_engine',result['path'])
+   self.assertEqual('generated_sdk_package',result['material_kind']);self.assertFalse(result['engine_dependency_closure_complete'])
+ def test_sky_checksum_and_revision_mismatch_are_rejected(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);manifest=self.sky_fixture(root);manifest['sky_engine_source']['engine_revision']='b'*40
+   with self.assertRaisesRegex(ValueError,'revision'):module.sdk_material(root,manifest)
+   manifest['sky_engine_source']['engine_revision']='a'*40;manifest['sky_engine_source']['sha256']='0'*64
+   with self.assertRaisesRegex(ValueError,'checksum'):module.sdk_material(root,manifest)
+ def test_sky_requires_package_license_and_generated_ui_members(self):
+  for missing in ['sky_engine/pubspec.yaml','sky_engine/LICENSE','sky_engine/lib/ui/ui.dart']:
+   with self.subTest(missing=missing),tempfile.TemporaryDirectory() as d:
+    root=Path(d);manifest=self.sky_fixture(root,omit=missing)
+    with self.assertRaisesRegex(ValueError,'Missing'):module.sdk_material(root,manifest)
+ def test_sky_rejects_unsafe_zip_members(self):
+  for unsafe in ['../escape','/escape','sky_engine/../escape',r'sky_engine\escape']:
+   with self.subTest(unsafe=unsafe),tempfile.TemporaryDirectory() as d:
+    root=Path(d);manifest=self.sky_fixture(root,extra=unsafe)
+    with self.assertRaisesRegex(ValueError,'Unsafe'):module.sdk_material(root,manifest)
+ def test_missing_sky_archive_remains_uncollected(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);manifest=self.sky_fixture(root);(root/'sky.zip').unlink()
+   self.assertNotIn('sky_engine',module.sdk_material(root,manifest))
+
+ def test_sky_package_identity_must_match(self):
+  import zipfile
+  for marker in [b'name: other\nversion: 0.0.99\n',b'name: sky_engine\nversion: 1.0.0\n']:
+   with self.subTest(marker=marker),tempfile.TemporaryDirectory() as d:
+    root=Path(d);manifest=self.sky_fixture(root)
+    with zipfile.ZipFile(root/'sky.zip','w') as z:
+     z.writestr('sky_engine/pubspec.yaml',marker);z.writestr('sky_engine/LICENSE',b'license');z.writestr('sky_engine/lib/ui/ui.dart',b'library dart.ui;')
+    manifest['sky_engine_source']['sha256']=hashlib.sha256((root/'sky.zip').read_bytes()).hexdigest()
+    with self.assertRaisesRegex(ValueError,'identity'):module.sdk_material(root,manifest)

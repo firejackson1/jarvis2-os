@@ -48,5 +48,14 @@
       "flutter_web_plugins"
     ],
     "engine_revision": "a18df97ca57a249df5d8d68cd0820600223ce262"
+  },
+  "sky_engine_source": {
+    "name": "sky_engine-a18df97ca57a249df5d8d68cd0820600223ce262.zip",
+    "version": "0.0.99",
+    "engine_revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+    "sha256": "0ee0af6df98d7218c787c57087b36d57cb162d789c656b54a4c0f40a2fc4d4f1",
+    "url": "https://storage.googleapis.com/flutter_infra_release/flutter/a18df97ca57a249df5d8d68cd0820600223ce262/sky_engine.zip",
+    "material_kind": "generated_sdk_package",
+    "engine_dependency_closure_complete": false
   }
 }

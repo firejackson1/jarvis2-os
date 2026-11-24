@@ -53,9 +53,11 @@ actual APK hash/signature/notices and review later assets/code before bundling.
 No bundled-default change has been made on the basis of this inventory.
 
 LTv source collection now identifies four SDK packages inside the verified
-Flutter framework archive. Matching engine/sky_engine and Android/Maven runtime
-material remain open, as does inventory of generated Android userspace NOTICE
-and GPL/LGPL components. Kernel/vendor exclusion alone is not a userspace license
+Flutter framework archive and a fifth in the pinned generated sky_engine ZIP.
+The exact engine archive, matching SQLite binary, native build recipe and SQLite
+source were collected separately. Full engine DEPS, resolved Android/Maven runtime
+sources/notices, rebuild provenance, and generated Android userspace NOTICE/GPL
+inventory remain open. Kernel/vendor exclusion alone is not a userspace license
 audit. Keep both complete_corresponding_source and license_review_complete false.
 
 Modified Settings XML now retains its original notices and explicitly records

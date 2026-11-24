@@ -14,6 +14,25 @@ SHA-256: `e36bc0dbbf8e0b592cd09ed52893712819616398307045dd5cf6fb8dfb62a652`.
 Its package metadata specifies ARM/API 34; all APK native libraries are ARMv7.
 The minimal package does not replace LTv with Google's TV launcher.
 
+The exact upstream download, byte length and checksum are machine-readable in
+`manifests/gapps-input.json`. Obtain the ZIP directly from that upstream URL and
+verify its SHA-256 before using it. A checksum establishes exact bytes, not a
+redistribution grant or compatibility with an arbitrary ROM.
+
+## Public delivery gate
+
+The pinned upstream [license](https://gitlab.com/MindTheGapps/vendor_gapps_tv/-/raw/40b7bab4cd0afd8fe38d6dfc7e71cc3ae12d0514/LICENSE)
+excludes proprietary APK inputs from the maintainer's GPL grant and refers their
+licensing to their authors. No affirmative grant to mirror those Google APKs has
+been established. Preserve access to the exact ZIP through its upstream download
+link; keep our local copy and GApps-integrated images private pending permission.
+LineageOS likewise documents Google apps as proprietary and separately obtained.
+The installer scripts' license does not license the complete binary ZIP.
+
+Separate delivery also needs an EROFS-compatible, verified composition/install
+procedure against the published base ROM and its AVB chain. The successful
+private repack is evidence for that candidate, not support for arbitrary sideload.
+
 ## EROFS and upgrade limits
 
 The upstream recovery installer expects writable system/product/system_ext

@@ -1,0 +1,31 @@
+{
+  "format": 1,
+  "complete_corresponding_source": false,
+  "license_review_complete": false,
+  "engine_dependency_closure_complete": false,
+  "engine": {
+    "revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+    "archive_url": "https://codeload.github.com/flutter/engine/tar.gz/a18df97ca57a249df5d8d68cd0820600223ce262",
+    "archive_sha256": "99cc3ef570b02ec5597b7c6218ee5aff87f9dc583b1d8385131da88b2065365b",
+    "dart_revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+    "skia_revision": "93461bed7394e3c554125b0c50b00fb81eea42c6",
+    "deps_checkout_collected": false
+  },
+  "sqlite": {
+    "maven_coordinate": "eu.simonbinder:sqlite3-native-library:3.50.3",
+    "aar_url": "https://repo.maven.apache.org/maven2/eu/simonbinder/sqlite3-native-library/3.50.3/sqlite3-native-library-3.50.3.aar",
+    "aar_sha256": "44db490b372aaf76d980efee3a2195cd15435efdde12efb4fda394430de5ec13",
+    "armv7_library_sha256": "4659622c40e9e1ea5f24fb29f7be1eb85ef21bdf3f7eb1cfe883b037d04e3058",
+    "apk_library_byte_match_verified": true,
+    "recipe_revision": "91884ccbe1f58edca999d94aa3b8bef33f176ddf",
+    "recipe_url": "https://codeload.github.com/simolus3/sqlite-native-libraries/tar.gz/91884ccbe1f58edca999d94aa3b8bef33f176ddf",
+    "recipe_sha256": "9faf47af779da8c279c5985c614d3d661fa7170c0e2cb7a4416ce2899447c04c",
+    "source_url": "https://sqlite.org/2025/sqlite-autoconf-3500300.tar.gz",
+    "source_sha256": "ec5496cdffbc2a4adb59317fd2bf0e582bf0e6acd8f4aae7e97bc723ddba7233",
+    "ndk_version": "27.2.12479018",
+    "build_reproduced": false,
+    "maven_sources_jar_contains_native_source": false
+  },
+  "checksum_basis": "Observed pinned primary-source downloads; not independently signed publisher attestations",
+  "runtime_maven_graph_resolved": false
+}

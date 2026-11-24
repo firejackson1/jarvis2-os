@@ -47,6 +47,18 @@ allocated target foundation, offline-verified AVB metadata and exact image sizes
 It checks local image hashes and reports whether the other slot even has a
 complete allocated foundation. This does not establish that it can boot.
 
+Manifest booleans and integer sizes are checked strictly, and actual regular-file
+length must match both the manifest and partition. Digests must be valid SHA-256;
+Android sparse images are rejected because this scope requires exact-size raw
+images. Tests cover misleading truthy values and short/long files even when
+their hashes match a deceptive manifest.
+
+The manifest's AVB field is still a claimed prerequisite, not authenticated
+release trust or an independent chain audit. Native layout equality/size checks
+do not yet validate extent bounds, overlap, snapshot state or capture freshness.
+Those checks and an authenticated baseline are mandatory before implementing any
+writer; do not execute the emitted plan automatically.
+
 The tool rejects unsigned raw build archives, implicit/all-slot targets,
 unallocated foundations, differing metadata views and size mismatches. It does
 not resize, flash, activate a slot or wipe data. Firmware compatibility, trusted

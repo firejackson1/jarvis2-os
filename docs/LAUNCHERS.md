@@ -77,8 +77,13 @@ does not claim complete corresponding source or completed license review.
 The framework archive pin is now also recorded in launcher-inputs.json. If that
 verified archive is present, the collector maps flutter, flutter_localizations,
 flutter_test and flutter_web_plugins to their actual source package paths.
-`sky_engine` remains uncollected until matching engine material is provided.
-This package mapping is not a complete Flutter/engine dependency closure.
+The exact engine-addressed generated `sky_engine` 0.0.99 ZIP is now pinned in the
+same manifest. Place it beside the other verified inputs to map the fifth SDK
+package. The collector checks its checksum, revision, package identity, required
+license/UI sources and ZIP member safety. The real cached run verifies 137 hosted
+archives and all five SDK packages. Generated package availability is separate
+from the native Flutter engine's full DEPS closure; all complete-source/license
+flags remain false.
 
 The release runtime dependency inventory must also include Android/Maven code,
 not just pub archives. Concrete inputs found in plugin build files include
@@ -87,3 +92,12 @@ Preference 1.2.1, Core 1.13.1, ExifInterface 1.3.7 and Activity 1.9.3. Resolve t
 actual transitive runtime graph before assembling source/notices; plugin test or
 example dependencies should not be mistaken for shipped code. Verify the native
 SQLite build recipe/version for libsqlite3.so separately from its Dart wrapper.
+
+Additional pinned native materials are recorded in
+`manifests/launcher-native-materials.json`. The Maven 3.50.3 ARMv7 SQLite library
+matches the shipped APK byte-for-byte. Its sources JAR contains only a manifest;
+the actual native build recipe and SQLite source archive were collected separately.
+The recipe pins NDK 27.2.12479018. This establishes source availability and binary
+identity, not a reproduced build. The exact Flutter engine archive is collected,
+but its Dart/Skia and other DEPS checkouts remain outstanding. Maven declarations
+are not a resolved runtime dependency graph.

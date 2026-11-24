@@ -1,0 +1,17 @@
+{
+  "format": 1,
+  "provider": "MindTheGapps",
+  "android_api": 34,
+  "architecture": "arm",
+  "variant": "ATV-minimal",
+  "release": "MindTheGapps-14.0.0-arm-ATV-20240523_192108",
+  "source_revision": "40b7bab4cd0afd8fe38d6dfc7e71cc3ae12d0514",
+  "filename": "MindTheGapps-14.0.0-arm-ATV-minimal-20240523_192108.zip",
+  "bytes": 212818421,
+  "sha256": "e36bc0dbbf8e0b592cd09ed52893712819616398307045dd5cf6fb8dfb62a652",
+  "url": "https://github.com/MindTheGapps/14.0.0-arm-ATV/releases/download/MindTheGapps-14.0.0-arm-ATV-20240523_192108/MindTheGapps-14.0.0-arm-ATV-minimal-20240523_192108.zip",
+  "delivery": "upstream-download",
+  "redistribution_permission_verified": false,
+  "bundled_in_public_rom": false,
+  "ordinary_erofs_recovery_sideload_supported": false
+}
