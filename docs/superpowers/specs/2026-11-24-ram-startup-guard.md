@@ -40,8 +40,10 @@ dependencies before selecting runtime inputs.
 
 ## Required behavior
 
-1. Refuse ordinary host execution. Validate PID 1, a RAM-backed root and the
-   exact board compatible value before privileged setup.
+1. Refuse ordinary host execution. Validate PID 1 and a RAM-backed root before
+   creating private RAM state. Mount only read-only proc/sys views needed to
+   inspect the board and kernel, then validate their exact identities before
+   loading modules or accessing storage. No Android filesystem is mounted.
 2. Load only the reviewed, hashed, known-kernel module sequence needed to expose
    eMMC. No Android init/service may run before protection succeeds.
 3. Identify internal MMC through sysfs device type and identity. Protect the

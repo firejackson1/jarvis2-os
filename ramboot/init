@@ -1,0 +1,46 @@
+#!/bin/busybox sh
+# SPDX-License-Identifier: Apache-2.0
+# Diagnostic RAM entrypoint. Not a standalone boot image or an installed init.
+if [ "$$" != 1 ]; then
+    printf '%s\n' 'Jarvis2 RAM guard requires PID 1; refusing host execution.' >&2
+    exit 1
+fi
+GUARD_BB=/bin/busybox
+guard_stop() {
+    printf '%s\n' 'RAM startup guard stopped; Android init was not started.' >&2
+    while :; do "$GUARD_BB" sleep 60; done
+}
+trap guard_stop EXIT
+case $("$GUARD_BB" stat -f -c '%T' /) in
+    tmpfs|ramfs) ;;
+    *) guard_stop;;
+esac
+umask 077
+set -f
+unset IFS
+export PATH=/bin LC_ALL=C
+GUARD_RUNTIME=/ramboot
+GUARD_WORKDIR=/ramboot/state
+GUARD_DEVROOT=$GUARD_WORKDIR/dev
+GUARD_PROCROOT=/proc
+GUARD_SYSROOT=/sys
+GUARD_SYSFS=/sys/class/block
+GUARD_MODULE_DIR=/ramboot/modules
+GUARD_MODULE_MANIFEST=/ramboot/modules.sha256
+cd / || guard_stop
+"$GUARD_BB" mkdir -m 700 "$GUARD_WORKDIR" || guard_stop
+exec >> "$GUARD_WORKDIR/startup.log" 2>&1
+"$GUARD_BB" mkdir -m 700 "$GUARD_DEVROOT" || guard_stop
+"$GUARD_BB" mknod "$GUARD_WORKDIR/kmsg" c 1 11 || guard_stop
+printf '<6>Jarvis2 RAM storage guard starting\n' > "$GUARD_WORKDIR/kmsg" || guard_stop
+. /ramboot/storage-guard.sh || guard_stop
+. /ramboot/startup-guard.sh || guard_stop
+if ! guard_startup; then
+    printf '<3>Jarvis2 RAM guard failed at %s; no Android-init handoff\n' "$GUARD_STAGE" > "$GUARD_WORKDIR/kmsg"
+    guard_stop
+fi
+printf '%s\n' verified > "$GUARD_WORKDIR/storage-readonly" || guard_stop
+printf '<6>Jarvis2 internal storage read-only; starting Android init\n' > "$GUARD_WORKDIR/kmsg" || guard_stop
+[ -f /init ] && [ -x /init ] || guard_stop
+exec /init
+guard_stop

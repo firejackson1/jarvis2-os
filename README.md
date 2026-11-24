@@ -220,13 +220,24 @@ BCB, logging and userdata-key paths that run without selecting a destructive
 menu action. It also records the prototype metadata fstab mismatch and the
 remaining early write-guard requirements. It is not a completed RAM boot test.
 
-`ramboot/storage-guard.sh` is a tested function library for the planned early
-storage guard. It identifies internal MMC, checks the whole device, boot devices
-and partitions, requires successful read-only readback and rejects an inventory
-that changes during protection. Its caller must first validate the board,
-PID 1 and RAM root and provide private RAM-backed directories. That launcher,
-module loading and Android-init handoff are not implemented yet; do not source
-this library on a host or treat it as a bootable recovery.
+`ramboot/init` is an unbooted diagnostic PID 1 prelude, intended for
+`rdinit=/ramboot-init` in a separately assembled RAM image. It refuses ordinary
+host execution, checks the RAM root, creates private RAM state, mounts only
+read-only proc/sys views and checks the board and exact kernel release before
+loading any module. It verifies every hash and name in the reviewed 27-module
+sequence before the first load. The storage library checks internal MMC, its
+boot devices and partitions, requires read-only readback and rejects a changing
+inventory. Discovery is bounded; any failed gate prevents Android-init handoff.
+The temporary proc/sys mounts must be removed before `/init` starts.
+
+This prelude is not packaged or hardware-qualified. Its BusyBox/musl closure,
+kernel-release input and hashed stock modules must be supplied privately and
+bound to the actual recovery ramdisk. Unsupported force-normal-boot or
+hibernation arguments stop the prelude. Failures leave it waiting with RAM logs
+and a UART/kernel-log stage marker; there is no automatic reboot or persistent
+BCB change. The storage poll is bounded; kernel module loading itself has no
+userspace timeout. No complete RAM image or device launch is implied. Do not
+source its function libraries on a host with real privileged utilities.
 
 ## License
 

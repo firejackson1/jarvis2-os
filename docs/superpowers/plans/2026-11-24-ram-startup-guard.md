@@ -67,7 +67,7 @@ corresponding source obligations remain uncleared.
 Expected: tests fail for the actual missing behavior, then pass with the guard;
 no hardware-safe claim or new image installation is implied.
 
-Partial implementation: `ramboot/storage-guard.sh` provides only internal MMC
+`ramboot/storage-guard.sh` provides internal MMC
 enumeration, verified read-only block operations and a second inventory check.
 Its initial host tests failed before the library existed; an additional test
 failed before exact read-only readback handling was added. Tests use temporary
@@ -75,11 +75,31 @@ sysfs fixtures and safe command substitutes. Additional regression cases cover
 removed/renumbered nodes and symlink rejection. The suite also runs under the
 inspected ARM64 BusyBox shell through QEMU.
 
-This library is not an executable PID 1 launcher and is not in the running
-platform build. Board/PID/root validation, module loading, private RAM-backed
-directory setup, bounded discovery and Android-init handoff are still missing.
-The task remains incomplete until those parts and the generated ramdisk audit
-are implemented and checked.
+`ramboot/init` now provides the PID 1 entrypoint and private RAM state setup;
+`startup-guard.sh` supplies minimal proc/sys views, board/kernel checks, the
+reviewed hashed module sequence, bounded storage discovery and mount cleanup.
+All hashes and ordered names are checked before the first `insmod`. No later
+gate or Android handoff is reached after a failure. Ordinary host execution is
+rejected before using BusyBox; failure in PID 1 waits with RAM diagnostics.
+An EXIT trap also prevents a failed Android-init exec from simply exiting PID 1.
+
+Ruling: board identity needs sysfs to be visible. Only read-only proc/sys views
+are mounted after PID/RAM-root checks and before board/kernel checks. Module
+loading and storage access remain behind the identity checks. The pinned
+Android first stage mounts proc/sys itself, so the prelude unmounts its views
+before handoff. This is a source-based preparation, not a hardware validation.
+
+Ten startup tests cover host refusal, ordered hash verification, missing/changed/
+reordered/extra module inputs, load failure, board/kernel/boot-mode rejection,
+mount failures, bounded discovery, cleanup failure and success/failure workflow
+gates. They use safe command substitutes and also pass under the inspected
+ARM64 BusyBox shell through QEMU. No host module or mount operation is executed.
+
+The prelude is not included in the frozen platform build or an assembled RAM
+image yet. Its exact kernel-release input, proc/bootconfig behavior, init
+dependency closure, diagnostic arguments/fstab and complete ramdisk still need
+binding and inspection. Kernel module loading is not itself time-bounded.
+Task completion and hardware safety remain unproven until those checks pass.
 
 ## Task 3: Package and qualify the RAM image
 
