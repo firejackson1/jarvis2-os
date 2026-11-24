@@ -99,9 +99,22 @@ Do not replace or resync the working LineageOS 21 checkout. Place this tree at
 `device/onn/jarvis2_recovery`, select the release configuration supported by that
 checkout, and build the ramdisk target:
 
+`platform-manifest.xml` freezes all 1,240 platform project revisions from the
+audited checkout. It can be selected with `repo init -m platform-manifest.xml`
+when this recovery source repository and an exact source revision are used as
+the manifest repository. Its GitHub fetch URL is absolute and the unused private
+remote was removed; project revisions, paths and link/copy rules are unchanged.
+The device tree itself is supplied separately at the path above. Do not use a
+moving `lineage-24.0` branch as a substitute for this manifest when reproducing
+the build.
+
 ```sh
 git -C prebuilts/misc apply \
   "$PWD/device/onn/jarvis2_recovery/patches/prebuilts-misc-protobuf-namespace.patch"
+git -C external/skia apply \
+  "$PWD/device/onn/jarvis2_recovery/patches/skia-skcms-vendor.patch"
+git -C external/google-highway apply \
+  "$PWD/device/onn/jarvis2_recovery/patches/highway-vendor.patch"
 source build/envsetup.sh
 export GOCACHE="$PWD/out/recovery-go-cache"
 lunch lineage_jarvis2_recovery trunk_staging userdebug
@@ -129,6 +142,13 @@ compatibility modules. The patch gives only the legacy ARM32 AOSP package its
 own Soong namespace; it preserves both definitions and their license records.
 The ARM64-capable Lineage definitions remain in the global namespace. No binary
 is replaced, and the legacy namespace is not exported to this recovery product.
+
+The pinned Lineage `libjxl` exposes a vendor variant, but AOSP's `libskia_skcms`
+and `libhwy` dependencies do not. The other two patches add those variants;
+Skia's generator is updated with its generated build file. They do not disable
+JPEG XL or remove its dependency checks. The base revisions are Skia
+`508606366e71a3daa933a4e08bc49b84e387ec18` and Google Highway
+`94b90ab8cb9df9b3719a64751ea2fcb62caa3391`.
 
 ## Offline packaging
 

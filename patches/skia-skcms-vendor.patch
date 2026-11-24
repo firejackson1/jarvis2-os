@@ -1,0 +1,22 @@
+diff --git a/Android.bp b/Android.bp
+--- a/Android.bp
++++ b/Android.bp
+@@ -1158,6 +1158,7 @@
+ cc_library_static {
+     name: "libskia_skcms",
+     host_supported: true,
++    vendor_available: true,
+     sdk_version: "current",
+     srcs: [
+         "modules/skcms/skcms.cc",
+diff --git a/gn/gn_to_bp.py b/gn/gn_to_bp.py
+--- a/gn/gn_to_bp.py
++++ b/gn/gn_to_bp.py
+@@ -210,6 +210,7 @@
+ cc_library_static {
+     name: "libskia_skcms",
+     host_supported: true,
++    vendor_available: true,
+     sdk_version: "current",
+     srcs: [
+         $skcms_srcs
