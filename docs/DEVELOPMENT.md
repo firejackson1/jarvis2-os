@@ -709,3 +709,21 @@ and the boot-control CRC validates.
 - This qualifies the helper and read-only inspection setup on the existing
   recovery only. Raw-writer dry-run, candidate recovery, installation and actual
   restoration are still separate hardware gates.
+
+### Recovery installer dry-run, 2026-11-24
+
+- The exact committed raw writer completed its first authorized native Recovery
+  dry-run using the corrected f38 production-key candidate and explicit stock
+  init_boot/vendor_boot transition inputs. Twenty physical and eight allocated
+  logical partitions were captured; both native LP views agreed, and all seven
+  targets matched their pinned old restore images. No --execute was supplied.
+- The writer created read-only RAM mappings and a durable host journal containing
+  only its header. Result: executed=false, final_set=not_written. All physical
+  partition hashes and the protected super prefix matched after the check.
+  Android returned fully booted on slot A; Bazzite remained running.
+- An initial host-only staging attempt stopped at an EXDEV hard-link error before
+  invoking the installer. Moving staging to the same build volume resolved it;
+  that failed capture and its logs remain intact. Both attempts returned Android.
+- This qualifies this dry-run and existing Recovery transport only. Persistent
+  installation, replacement stock recovery, data/signing-key migration, rollback
+  and interruption restoration remain untested; no installation approval follows.

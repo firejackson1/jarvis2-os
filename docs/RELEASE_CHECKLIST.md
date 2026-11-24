@@ -192,8 +192,10 @@ publication by this policy decision alone.
 - [x] Qualify the pinned recovery RAM helper and read-only metadata inspection
   on the existing development recovery: native execution passed; metadata
   remained byte-identical before/after mounting with replay disabled.
-- [ ] Qualify the raw-writer dry-run against actual hardware. File-backed tests
-  alone do not qualify it; the previous helper test did not execute the writer.
+- [x] Complete the native Recovery raw-writer dry-run for the exact corrected
+  candidate and seven-target transition: all targets classified old, no writes
+  requested, protected physical/prefix hashes unchanged, Android A returned.
+  This does not qualify persistent execution or replacement recovery.
 - [ ] Obtain approval for the exact candidate transition, including its stock
   init_boot/vendor_boot foundation and shared-data signing-key migration plan.
 - [ ] Complete installation, clean setup, recovery and rollback tests of the exact
