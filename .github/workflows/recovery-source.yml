@@ -1,0 +1,31 @@
+name: Recovery source checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  host:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Prepare pinned source tools for synthetic packing fixtures
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib,json,os,urllib.request
+          from pathlib import Path
+          pin=json.loads(Path('fixture-tool-pins.json').read_text())
+          root=Path(os.environ['RUNNER_TEMP'])/'jarvis2-fixture-tools'
+          out=root/'out/host/linux-x86/bin'
+          base='https://raw.githubusercontent.com/'+pin['repository']+'/'+pin['revision']+'/'
+          for name,record in pin['files'].items():
+              data=urllib.request.urlopen(base+name,timeout=30).read()
+              if hashlib.sha256(data).hexdigest()!=record['sha256']:
+                  raise SystemExit('Fixture source hash mismatch: '+name)
+              target=out/record['destination']
+              target.parent.mkdir(parents=True,exist_ok=True)
+              target.write_bytes(data)
+              target.chmod(0o755)
+          with open(os.environ['GITHUB_ENV'],'a') as env:
+              env.write('JARVIS_ANDROID_TREE='+str(root)+'\n')
+          PYCODE
+      - name: Native menu, pinned interfaces and ramdisk packing tests
+        run: python3 tools/test-host.py --fetch-headers

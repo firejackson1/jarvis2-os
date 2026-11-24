@@ -1,0 +1,19 @@
+{
+  "purpose": "source-only synthetic v4 packing fixtures, not Android recovery build qualification",
+  "repository": "LineageOS/android_system_tools_mkbootimg",
+  "revision": "90054adc0017398ae868e990e85fd8dc58020c75",
+  "files": {
+    "mkbootimg.py": {
+      "destination": "mkbootimg",
+      "sha256": "021f2d960b2d3158a9df2ff6255f1140cebb09bc09f4886373438f2919559cd9"
+    },
+    "unpack_bootimg.py": {
+      "destination": "unpack_bootimg",
+      "sha256": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308"
+    },
+    "gki/generate_gki_certificate.py": {
+      "destination": "gki/generate_gki_certificate.py",
+      "sha256": "6ee0b2e3c3323ae8fccf326bf9a526451eac977005efabf7d129b3063bcfb945"
+    }
+  }
+}

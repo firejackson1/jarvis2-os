@@ -46,8 +46,8 @@ need an explicit implementation and review.
 ## Validation so far
 
 Run `python3 tools/test-host.py` for the three C++ suites, exact pinned recovery
-interface syntax and Python ramdisk/packer tests. Locally the six Python tests
-include one packaging test skipped without AOSP host tools; the two new C++
+interface syntax and Python ramdisk/packer tests. The six Python tests
+all execute when the pinned source fixture tools or built AOSP host tools are supplied; the two new C++
 suites execute drawing bounds, pagination, navigation, long-label and header
 fallback checks. Host DrawInterface tests use a recording renderer, not HDMI.
 

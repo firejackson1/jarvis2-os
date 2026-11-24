@@ -151,3 +151,9 @@ The native LCARS renderer and input-selection tests are implemented; see
 recovery-owned Bluetooth service work are recorded in
 [Bluetooth investigation](docs/BLUETOOTH_RECOVERY.md). This is experimental
 source, not a downloadable recovery image or a claim that pairing works.
+
+The recovery branch's GitHub workflow also runs the synthetic v4 packing test
+without a private Android build checkout. It downloads only the three
+checksum-pinned Python fixture tools recorded in `fixture-tool-pins.json`.
+Those source tools exercise container packing; they do not compile Android,
+validate a recovery binary or establish boot safety.

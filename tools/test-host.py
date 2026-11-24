@@ -42,5 +42,5 @@ subprocess.run(flags + ['-fsyntax-only', '-include', 'tests/bionic_annotations.h
                         '-I.cache/headers', 'recovery/recovery_ui.cpp'], cwd=root, check=True)
 subprocess.run(['python3', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py', '-v'],
                cwd=root, check=True)
-print('Button behavior and real LineageOS 24 recovery-header syntax checks passed.')
+print('Button/LCARS menu behavior and real LineageOS 24 recovery-header syntax checks passed.')
 print('This is not an Android link, image build, AVB acceptance or hardware boot test.')
