@@ -43,10 +43,11 @@ class SigningMetadataTests(unittest.TestCase):
         self.input = Path(self.temp.name) / 'input.zip'
         self.output = Path(self.temp.name) / 'output.zip'
 
-    def archive(self, apkrows=None, apexrows=None, entries=None):
+    def archive(self, apkrows=None, apexrows=None, entries=None, misc=b'system_fs_type=erofs\n'):
         with zipfile.ZipFile(self.input, 'w') as z:
             z.writestr('META/apkcerts.txt', '\n'.join(apkrows or [apk('App.apk')]) + '\n')
             z.writestr('META/apexkeys.txt', '\n'.join(apexrows or []) + '\n')
+            z.writestr('META/misc_info.txt', misc)
             for name, data in (entries or {'SYSTEM/app/App/App.apk': b'unchanged apk'}).items():
                 z.writestr(name, data)
 
@@ -169,6 +170,53 @@ class SigningMetadataTests(unittest.TestCase):
             info.external_attr = 0o120777 << 16
             z.writestr(info, apk('App.apk'))
             z.writestr('META/apexkeys.txt', '')
+            z.writestr('SYSTEM/app/App.apk', b'apk')
+        with self.assertRaisesRegex(ValueError, 'regular'):
+            self.prepare()
+
+    def test_missing_avbtool_is_defaulted_without_enabling_image_avb(self):
+        original = b'# captured target-files config\nsystem_fs_type=erofs\nvirtual_ab=true'
+        self.archive([apk('Nested.apk')], [apex()], {'SYSTEM/apex/com.test.apex': apex_bytes()}, misc=original)
+        summary, _ = self.prepare('./app/Nested.apk')
+        with zipfile.ZipFile(self.output) as z:
+            misc = z.read('META/misc_info.txt')
+            self.assertEqual(original + b'\navb_avbtool=avbtool\n', misc)
+            self.assertNotIn(b'avb_enable=', misc)
+            self.assertEqual(apex_bytes(), z.read('SYSTEM/apex/com.test.apex'))
+        self.assertTrue(summary['avb_avbtool_defaulted'])
+        self.assertIn('META/misc_info.txt', summary['metadata_entries_changed'])
+
+    def test_existing_valid_avbtool_and_misc_bytes_are_preserved(self):
+        for tool in ['avbtool', '/offline/tools/avbtool', 'out/host/linux-x86/bin/avbtool']:
+            with self.subTest(tool=tool):
+                original = f'# retain exact config\r\navb_avbtool={tool}\r\nargs=one=two\r\n'.encode()
+                self.archive(misc=original)
+                summary, _ = self.prepare()
+                with zipfile.ZipFile(self.output) as z:
+                    self.assertEqual(original, z.read('META/misc_info.txt'))
+                self.assertFalse(summary['avb_avbtool_defaulted'])
+                self.assertNotIn('META/misc_info.txt', summary['metadata_entries_changed'])
+                self.output.unlink()
+
+    def test_malformed_or_duplicate_misc_keys_fail_without_output(self):
+        for misc in [b'garbage\n', b'=emptykey\n', b'bad key=value\n',
+                     b'avb_avbtool=avbtool\navb_avbtool=avbtool\n',
+                     b'system_fs_type=erofs\nsystem_fs_type=ext4\n',
+                     b'avb_avbtool=\n', b'avb_avbtool= avbtool\n',
+                     b'avb_avbtool=avbtool --flag\n', b'avb_avbtool=avbtool\x00\n']:
+            with self.subTest(misc=misc):
+                self.archive(misc=misc)
+                with self.assertRaisesRegex(ValueError, 'misc|avb_avbtool'):
+                    self.prepare()
+                self.assertFalse(self.output.exists())
+
+    def test_misc_metadata_symlink_entry_is_rejected(self):
+        with zipfile.ZipFile(self.input, 'w') as z:
+            z.writestr('META/apkcerts.txt', apk('App.apk'))
+            z.writestr('META/apexkeys.txt', '')
+            info = zipfile.ZipInfo('META/misc_info.txt')
+            info.external_attr = 0o120777 << 16
+            z.writestr(info, b'avb_avbtool=avbtool\n')
             z.writestr('SYSTEM/app/App.apk', b'apk')
         with self.assertRaisesRegex(ValueError, 'regular'):
             self.prepare()

@@ -381,3 +381,11 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   APEX or image signing, hardware trust or migration compatibility. Key bytes and
   the verified backup remain unchanged; generation-time inventory flags are not
   current key-use status. Required metadata preparation is being corrected.
+
+- The signing preparer now supplies only the missing avb_avbtool lookup required
+  by the pinned APEX signer. Strict misc metadata regressions reject malformed or
+  duplicate keys and preserve valid existing settings. Fresh local checks passed
+  94 Python cases (five AVB skips), privacy audit and eight Java suites. Actual
+  v2 preparation retained 127 APK/31 APEX identities and added precisely that one
+  misc line, independently compared with the original. A second private signing
+  rehearsal is running; no completion or hardware claim follows from preparation.

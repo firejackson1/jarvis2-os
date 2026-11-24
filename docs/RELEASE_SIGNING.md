@@ -80,8 +80,13 @@ python3 tools/prepare-signing-metadata.py \
 ```
 
 This creates a separate ZIP and refuses to overwrite an output. It discovers
-embedded APKs through the pinned native APEX inspection tools and filters only
-META/apkcerts.txt and META/apexkeys.txt. It does not sign, read private keys,
+embedded APKs through the pinned native APEX inspection tools and filters
+META/apkcerts.txt and META/apexkeys.txt. It also supplies an absent
+avb_avbtool=avbtool in META/misc_info.txt: the pinned APEX signer requires the
+tool lookup even when image AVB is configured separately. It preserves valid
+existing values, rejects malformed/duplicate misc keys and reports the exact
+metadata entries changed. This does not enable AVB or alter verification flags.
+It does not sign, read private keys,
 validate package signatures, rebuild images, or contact a device. An unchanged
 ZIP entry means its uncompressed content is identical; ZIP compression bytes
 can differ. The output is private preparation material, not a public ROM ZIP.

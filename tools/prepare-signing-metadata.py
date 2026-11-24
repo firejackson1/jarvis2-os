@@ -3,8 +3,10 @@
 """Prepare a separate target-files ZIP with signing metadata for shipped files only.
 
 No signing, key reads, image generation or device operations. Native deapexer
-must inspect every shipped APEX, including PRESIGNED packages. Package bytes and
-all other archive entries are copied unchanged; this does not verify signatures.
+must inspect every shipped APEX, including PRESIGNED packages. Only APK/APEX
+signing metadata and a missing avb_avbtool default in META/misc_info.txt may
+change. Package bytes stay unchanged; this does not enable image AVB or verify
+signatures or release trust.
 """
 import argparse
 import io
@@ -82,6 +84,26 @@ def certificate_pair(certificate, private_key):
             certificate[:-9] == private_key[:-4] and bool(private_key[:-4]))
 
 
+def prepare_misc_info(data):
+    """Supply the APEX signer's tool lookup without enabling image AVB."""
+    values = {}
+    for line in data.decode('utf-8').splitlines():
+        if not line.strip() or line.lstrip().startswith('#'):
+            continue
+        key, separator, value = line.partition('=')
+        if (not separator or not re.fullmatch(r'[A-Za-z0-9_]+', key) or
+                key in values or any(ord(char) < 32 and char != '\t' for char in value)):
+            raise ValueError('Malformed or duplicate misc_info key: ' + key)
+        values[key] = value
+    if 'avb_avbtool' in values:
+        # One bare executable name or POSIX path, with no arguments or controls.
+        if not re.fullmatch(r'/?[A-Za-z0-9_.+-]+(?:/[A-Za-z0-9_.+-]+)*', values['avb_avbtool']):
+            raise ValueError('Malformed avb_avbtool executable path in misc_info')
+        return data, False
+    separator = b'' if not data or data.endswith(b'\n') else b'\n'
+    return data + separator + b'avb_avbtool=avbtool\n', True
+
+
 def inspect_apex(data, compressed, tools):
     """List actual payload entries; never accept a caller-supplied inventory."""
     with tempfile.TemporaryDirectory(prefix='signing-metadata-') as temp:
@@ -127,7 +149,7 @@ def validate_archive(z):
         names.add(info.filename)
         if info.flag_bits & 1:
             raise ValueError('Encrypted archive entries are unsupported')
-        if (info.filename in ('META/apkcerts.txt', 'META/apexkeys.txt') or
+        if (info.filename in ('META/apkcerts.txt', 'META/apexkeys.txt', 'META/misc_info.txt') or
                 info.filename.endswith(('.apk', '.apk.gz', '.apex', '.capex'))):
             mode = info.external_attr >> 16
             if info.is_dir() or stat.S_IFMT(mode) not in (0, stat.S_IFREG):
@@ -146,6 +168,9 @@ def prepare(input_path, output_path, tools):
         validate_archive(source)
         apk_rows = parse_metadata(source.read('META/apkcerts.txt'))
         apex_rows = parse_metadata(source.read('META/apexkeys.txt'), apex=True)
+        if 'META/misc_info.txt' not in source.namelist():
+            raise ValueError('Required META/misc_info.txt is missing')
+        misc_info, avbtool_defaulted = prepare_misc_info(source.read('META/misc_info.txt'))
 
         def select_apk(partition, name, compressed=None):
             identity = (partition, name)
@@ -192,11 +217,12 @@ def prepare(input_path, output_path, tools):
         extensions = {row['compressed'] for row in selected_apks.values() if row.get('compressed')}
         if len(extensions) > 1:
             raise ValueError('Multiple APK compression extensions are unsupported')
-        replacements = {}
+        replacements = {'META/misc_info.txt': misc_info}
         for path, rows, fields in [('META/apkcerts.txt', selected_apks, APK_FIELDS),
                                    ('META/apexkeys.txt', selected_apexes, APEX_FIELDS)]:
             replacements[path] = ''.join(' '.join(f'{key}="{row[key]}"' for key in fields if key in row) + '\n'
                                          for _, row in sorted(rows.items())).encode()
+        changed_metadata = [path for path, data in replacements.items() if data != source.read(path)]
         # Publish atomically without replacing an existing output, including races.
         with tempfile.TemporaryDirectory(prefix='.signing-metadata-', dir=output_path.parent) as temp:
             staged = Path(temp) / 'prepared.zip'
@@ -212,7 +238,8 @@ def prepare(input_path, output_path, tools):
                                 shutil.copyfileobj(reader, writer, length=1024 * 1024)
             os.link(staged, output_path)
     return dict(counts, apk_metadata_rows=len(selected_apks), apex_metadata_rows=len(selected_apexes),
-                signed=False, package_bytes_changed=False)
+                signed=False, package_bytes_changed=False,
+                avb_avbtool_defaulted=avbtool_defaulted, metadata_entries_changed=sorted(changed_metadata))
 
 
 if __name__ == '__main__':
