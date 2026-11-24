@@ -87,3 +87,38 @@ hashes passed. After reboot, PackageManager reported landscape support without a
 RAM bind mount, SELinux was enforcing, and both Play-installed apps launched.
 Userdata was not wiped and the temporary stay-awake setting was restored.
 This does not establish compatibility with ARM64-only apps or Google certification.
+
+## Local composition metadata
+
+`tools/gapps-profile.py` exports a Google-free profile from a trusted target-files
+archive and the exact three base images. Supply a JSON object containing the
+actual positive byte budgets for `system`, `system_ext` and `product`; this tool
+does not query a device or assume a slot layout. For example:
+
+```sh
+python3 tools/gapps-profile.py export \
+  --target-files /your/base-target-files.zip \
+  --base-images /your/base-images \
+  --partition-limits /your/partition-limits.json \
+  --fsck-erofs /your/fsck.erofs --output /your/new-profile
+python3 tools/gapps-profile.py validate --profile /your/new-profile
+```
+
+The profile binds sanitized filesystem metadata and compiled SELinux contexts to
+the supplied inputs by SHA256. It records UID/GID, modes, capabilities and raw
+SELinux labels directly from EROFS. Canned fs_config alone does **not** apply
+SELinux labels. Unsupported filesystem layouts fail rather than losing metadata.
+Authenticate the base archive and profile independently; hashes do not establish
+who produced them. Run native work under external resource limits.
+
+`manifests/gapps-recipe.json` pins the 27 selected upstream payload files and
+their intended metadata without containing Google payload bytes. An offline
+comparison against the previously tested private images preserved metadata for
+all 6,039 existing paths and found precisely the 27 files plus 15 parent
+directories expected by the recipe. Native fixtures independently cross-checked
+ownership/mode and detected changed SELinux labels and capabilities.
+
+This metadata stage does not rebuild or sign an image, verify regular-file byte
+equality, prove deterministic composition, or establish hardware key acceptance.
+The profile deliberately reports `composition_ready: false`; the complete local
+composer and final-base validation remain release work.

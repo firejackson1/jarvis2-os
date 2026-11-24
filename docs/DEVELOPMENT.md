@@ -441,3 +441,10 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   tests pass; current full host suite passes 142 tests with five local AVB skips,
   source privacy audit and Java checks. This source delivery does not change the
   active ROM's launcher pin or establish hardware acceptance.
+
+- Added a Google-free 27-file composition recipe and strict profile exporter.
+  Native proof preserved metadata on 6,039 base paths and accepted exactly 42
+  new paths; UID/GID/mode cross-checks and label/capability tampering fixtures
+  passed. No regular-file byte-equality, complete rebuild, AVB composition or
+  hardware acceptance is claimed by this stage. Current host checks: 142 tests,
+  five local AVB skips, privacy audit and Java checks passed.
