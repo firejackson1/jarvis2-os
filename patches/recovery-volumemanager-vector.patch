@@ -1,0 +1,11 @@
+diff --git a/volume_manager/include/volume_manager/VolumeManager.h b/volume_manager/include/volume_manager/VolumeManager.h
+--- a/volume_manager/include/volume_manager/VolumeManager.h
++++ b/volume_manager/include/volume_manager/VolumeManager.h
+@@ -26,6 +26,7 @@
+ #include <list>
+ #include <mutex>
+ #include <string>
++#include <vector>
+
+ struct selabel_handle;
+ class NetlinkManager;

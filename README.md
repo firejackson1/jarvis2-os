@@ -134,6 +134,8 @@ git -C external/XMP-Toolkit-SDK apply \
   "$PWD/device/onn/jarvis2_recovery/patches/xmp-vendor.patch"
 git -C bootable/recovery apply \
   "$PWD/device/onn/jarvis2_recovery/patches/recovery-publicvolume-algorithm.patch"
+git -C bootable/recovery apply \
+  "$PWD/device/onn/jarvis2_recovery/patches/recovery-volumemanager-vector.patch"
 source build/envsetup.sh
 export GOCACHE="$PWD/out/recovery-go-cache"
 lunch lineage_jarvis2_recovery trunk_staging userdebug
@@ -187,6 +189,11 @@ without its `<algorithm>` header. `recovery-publicvolume-algorithm.patch` adds
 that include against recovery revision `1cdebe4061372e9abb5dc738002ad6c707f7c534`.
 The actual ARM64 recovery compile of that source now passes; the complete image
 still requires the remaining build and verification gates.
+
+`recovery-volumemanager-vector.patch` likewise makes `VolumeManager.h` include
+the `<vector>` type used in its public declarations. The new libc++ headers
+do not supply these standard-library declarations indirectly. Both patches
+retain the original interfaces and compiler diagnostics.
 
 ## Offline packaging
 
