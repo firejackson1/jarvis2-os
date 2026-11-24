@@ -1,6 +1,7 @@
 # One-way USB RAM startup log
 
-Status: offline diagnostic candidate, not hardware-qualified recovery. The
+Status: private diagnostic bring-up; USB enumeration succeeds but log transfer
+still fails on hardware. This is not hardware-qualified recovery. The
 ordinary full-recovery RAM test stalled without a retained log. This separate
 mode tests the USB/runtime path and reports relevant boot flags. It does not
 start the recovery menu or establish where the earlier image actually failed.
@@ -195,8 +196,9 @@ The log writer/data-transfer stage and the actual reported boot flags remain
 unverified; enumeration alone is not a successful log capture.
 
 Power-cycled using the owner's mapped outlet, verified power restored ON, and
-requested the normal network-ADB re-enable flow. Android return and after-test
-partition comparisons are pending. No flash, wipe, slot change or saved
+requested the normal network-ADB re-enable flow. That return was subsequently
+verified: Android completed boot on the original slot and all five protected
+partition hashes matched the pre-test values. No flash, wipe, slot change or saved
 bootloader setting was requested. Do not call this recovery ready.
 
 ## Writer connection lifetime candidate
@@ -213,7 +215,7 @@ The candidate keeps one owned descriptor open through configuration and repeated
 snapshots, closing/reopening after failure. Physical gadget disconnect calls
 tty_hangup in the same source, supporting eventual write-failure detection.
 This is a source-backed candidate mechanism, not a confirmed explanation or fix
-for the hardware's zero-byte reads. The image must be re-tested.
+for the hardware's zero-byte reads. Its later hardware test is recorded below.
 
 Retained source file SHA256s, respectively:
 `e9ecc637809f0ff559b7b6814e446cf9593b8f235cf162bc2b22921533909159`,
@@ -247,5 +249,41 @@ checks. Two independent output directories reproduced identical archives:
 
 The bounded job completed in 15.925 seconds, peak 344 MiB/no swap. The desktop
 VM stayed running. Kernel/DTB payloads, the original full-recovery candidate and
-both earlier USB candidates remained unchanged. This writer image has not been
-booted; prior Android return and after-test partition checks are still pending.
+both earlier USB candidates remained unchanged. This was initially an unbooted
+candidate; its later hardware test is recorded below.
+
+## Held-descriptor hardware result, 2026-11-24
+
+With UART readable, verified two-way Android shell access and completed boot on
+slot A. Network ADB returned and root debugging was available under the owner's
+existing authorization. The five protected slot A hashes matched the earlier
+pre-test capture. A temporary runtime controller-role switch again exposed USB
+ADB over the same cable; no persistent policy or partition change was made.
+
+Verified the known device, unlocked bootloader, slot A, non-userspace Fastboot
+and 128 MiB download budget. Rehashed the exact `a61020e9...` image above before
+`fastboot boot`; transfer/start succeeded in 8.699 seconds. UART recorded the
+stock bootloader sequence and a kernel message, and the expected development
+CDC ACM gadget enumerated.
+
+The held-descriptor image still produced zero bytes during a 20-second USB
+read and a second 12-second read. In the second window the host reported DTR
+and RTS asserted throughout, but no DCD or DSR. These are host-observed modem
+status bits, not proof of the writer's process or descriptor state. No USB
+application payload or command was transmitted. The earlier last-close fixture
+identified a real ownership problem; fixing it has not resolved this hardware
+failure. More init-side evidence is needed before attributing a cause.
+
+Power-cycled to discard the diagnostic. UART subsequently confirmed the known
+device, slot A and completed Android boot. Used the normal Developer options
+UI through the console to re-enable network ADB; the existing authorized host
+reconnected. Root debugging and all five protected slot A hashes were verified
+again, matching the pre-launch values. The independent
+host-side UART recorder survives the controlling SSH connection; private serial
+captures and screenshots are not part of the public repository. No flash,
+wipe, slot switch or recovery installation was performed.
+
+The next diagnostic needs an init-side log sink independent of ACM and positive
+writer-stage observations. DCD/DSR alone cannot distinguish an unopened port,
+rapid failure/retry or a controller/notification problem. Full Recovery startup
+and its Android-init handoff remain unqualified.
