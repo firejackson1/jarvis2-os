@@ -9,7 +9,9 @@ It does not change the existing ROM project or device partitions.
 The earlier [Jarvis2 recovery](https://github.com/firejackson1/jarvis2-recovery)
 patches the OEM Android 14 recovery binary/ramdisk. Repacking that image alone
 would not make it Android 17. This port instead builds new recovery userspace
-from LineageOS 24, initially using ARM32 to match the existing recovery stack.
+from LineageOS 24. The target is now ARM64, following the owner's request to
+move toward 64-bit Android. The existing recovery was independently confirmed
+ARM32; its 64-bit kernel modules do not make its userspace 64-bit.
 
 Keep the working stock kernel, DTB, bootconfig and all normal-boot vendor ramdisk
 fragments. Replace only the named recovery fragment of header-v4 vendor_boot,
@@ -55,6 +57,40 @@ JARVIS_ANDROID_TREE=/path/to/android python3 tools/test-host.py
 ```
 
 Those fixtures test packaging only. A fixture ramdisk is not bootable.
+
+## Architecture and ramdisk checks
+
+`tools/cross-check.py` compiles an AArch64 object by default and rejects the wrong
+ELF class/machine. It can also check ARM32 with `--arch arm`. An executed local
+check used a copied Android 14 compiler/Bionic header set with the exact LineageOS
+24 recovery interfaces. That checks source/target ABI compilation, not linking
+against a complete Android 17 platform. The generated report records this limit.
+
+```sh
+python3 tools/cross-check.py --clang /private/clang/bin/clang-18 \
+  --cxx-headers /private/clang/include/c++/v1 \
+  --bionic /private/bionic/libc --arch arm64 \
+  --headers-origin 'Describe the actual compiler/platform inputs' \
+  --output out/fresh-arm64-check
+```
+
+`tools/audit-ramdisk.py` reads raw/gzip newc archives without extracting paths or
+executing programs. Supply separate archives in the kernel's overlay order;
+decode LZ4 archives with a trusted host tool first. It checks native entrypoints,
+identifies kernel versus userspace ELF architectures, flags private keys/owner
+ADB trust files and records policy/init-script inventory. It rejects unsafe paths,
+duplicates, truncation and symlink loops. Runtime dependency linking, SELinux
+correctness and startup-write behavior remain separate verification tasks.
+
+```sh
+python3 tools/audit-ramdisk.py --cpio /private/platform.cpio \
+  --cpio /private/recovery.cpio --expected-recovery-arch arm64 \
+  --output out/fresh-ramdisk-report.json
+```
+
+The 64-bit Android migration has additional vendor-library requirements, recorded
+in [ARM64 assessment](docs/ARM64.md). A 64-bit recovery does not convert the
+installed Android system by itself.
 
 ## Android build checkpoint — not yet validated
 
@@ -107,3 +143,11 @@ No installation or slot B modification is authorized by these build instructions
 New source in this tree is Apache-2.0. Upstream headers are downloaded only into
 the ignored cache and retain their upstream notices. OEM inputs are not licensed
 or redistributed by this project.
+
+## LCARS interface and remote pairing work
+
+The native LCARS renderer and input-selection tests are implemented; see
+[LCARS UI](docs/LCARS_UI.md). Actual radio identification and the remaining
+recovery-owned Bluetooth service work are recorded in
+[Bluetooth investigation](docs/BLUETOOTH_RECOVERY.md). This is experimental
+source, not a downloadable recovery image or a claim that pairing works.
