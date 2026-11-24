@@ -174,3 +174,14 @@ the rewritten archives. Check any recovery verification key representation too.
 The earlier successful package/APEX rehearsal did not request OTA trust
 replacement, so it does not satisfy this gate. Replacement is pending against
 the final candidate and does not itself make the target-files an A/B OTA.
+
+The preserved rehearsal input has an empty META/otakeys.txt, a default Android
+test certificate, and `extra_recovery_keys` naming Lineage's public recovery key.
+An APK-role mapping alone does not cover that extra identity: explicitly map it
+to an approved project certificate too. An isolated native replacement against
+that archive succeeded using only the project's public export. Its sole
+SYSTEM/etc/security/otacerts.zip contained exactly the project certificate under
+`releasekey.x509.pem`, with the expected DER fingerprint and no host path.
+No recovery trust archive was present in that input, so this proves neither
+recovery trust replacement nor a rebuilt final image. Inventory the new input
+again rather than assuming its trust paths/metadata match this old rehearsal.

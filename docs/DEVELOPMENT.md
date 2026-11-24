@@ -472,3 +472,11 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   releasetools patch application/native OTA-key fixtures and signed AVB tests.
   Reconciled stale license/signing matrix text with completed component source
   and private rehearsal evidence; final-image and hardware gates remain open.
+
+- Read-only OTA trust inventory of the preserved target-files found one system
+  otacerts.zip, an empty META/otakeys.txt and an extra Lineage recovery identity.
+  Isolated actual native replacement with public-only project material passed:
+  exact approved certificate, basename-only ZIP member and no old system test
+  certificate. No recovery trust archive exists in that input; full target-files
+  signing/final-image/recovery trust remain unproved. Explicit mapping of the
+  extra recovery identity is required in the final signing plan.
