@@ -246,9 +246,10 @@ partitions is insufficient; do not infer missing entries. Bind this file to the
 private image/preflight receipt. Whole-device read-only status alone is not used
 as proof that a partition appearing later is protected.
 
-This prelude is not packaged or hardware-qualified. Its BusyBox/musl closure,
-kernel-release input and hashed stock modules must be supplied privately and
-bound to the actual recovery ramdisk. Unsupported force-normal-boot or
+This prelude is now assembled in a private CPIO, but has no boot container or
+hardware qualification. Its BusyBox/musl closure, kernel-release input and hashed
+stock modules are supplied privately and bound to that recovery ramdisk.
+Unsupported force-normal-boot or
 hibernation arguments stop the prelude. Failures leave it waiting with RAM logs
 and a UART/kernel-log stage marker; there is no automatic reboot or persistent
 BCB change. The storage poll is bounded; kernel module loading itself has no
@@ -271,7 +272,10 @@ python3 tools/prepare_ramdisk.py --cpio /private/recovery.cpio \
 ```
 
 The resulting fragment still requires the early guard, its private verified
-inputs and the owned hardware init profile. It is not a launchable boot image.
+inputs and the owned hardware init profile. `tools/assemble_ramdisk.py` now
+assembles that overlay offline; the [guarded ramdisk record](docs/GUARDED_RAMDISK.md)
+documents inputs, artifact hashes, verification and the boot-container memory
+layout hold. Neither CPIO is a launchable boot image.
 
 ## License
 

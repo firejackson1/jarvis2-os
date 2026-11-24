@@ -72,3 +72,5 @@ execute Android init or privileged operations.
 
 The derived archive is private diagnostic preparation. It is not the final
 install-capable custom recovery, an AVB-signed image or public binary release.
+The subsequently assembled [guarded CPIO](GUARDED_RAMDISK.md) retains those limits
+and records the boot-container layout work still needed.

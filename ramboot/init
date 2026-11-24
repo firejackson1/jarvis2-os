@@ -27,6 +27,7 @@ GUARD_SYSROOT=/sys
 GUARD_SYSFS=/sys/class/block
 GUARD_MODULE_DIR=/ramboot/modules
 GUARD_MODULE_MANIFEST=/ramboot/modules.sha256
+GUARD_HARDWARE_MANIFEST=/ramboot/hardware.sha256
 GUARD_EXPECTED_PARTITIONS=/ramboot/mmc.partitions
 cd / || guard_stop
 "$GUARD_BB" mkdir -m 700 "$GUARD_WORKDIR" || guard_stop

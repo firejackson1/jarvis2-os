@@ -12,10 +12,18 @@ guard_module_sequence() {
         amlogic-thermal.ko amlogic-usb.ko cqhci.ko amlogic-mmc.ko
 }
 
-guard_load_storage_modules() (
-    [ -f "$GUARD_MODULE_MANIFEST" ] && [ ! -L "$GUARD_MODULE_MANIFEST" ] || return 1
-    _sequence=$(guard_module_sequence) || return 1
-    exec 3< "$GUARD_MODULE_MANIFEST" || return 1
+guard_hardware_sequence() {
+    # Remaining stock dependency closure of amlogic-input and aml_drm. Load only
+    # after internal MMC is protected; no camera, watchdog or external PHY roots.
+    printf '%s\n' amlogic-efuse-unifykey.ko tee.ko amlogic-tee.ko videobuf-core.ko \
+        dvb-core.ko amlogic-pm.ko amlogic-input.ko amlogic-dvb.ko aml_media.ko aml_drm.ko
+}
+
+guard_load_modules() (
+    _sequence=$1
+    _manifest=$2
+    [ -f "$_manifest" ] && [ ! -L "$_manifest" ] || return 1
+    exec 3< "$_manifest" || return 1
     # Validate the complete ordered input set before loading even its first module.
     for _expected in $_sequence; do
         read -r _hash _name _extra <&3 || return 1
@@ -33,6 +41,14 @@ guard_load_storage_modules() (
         "$GUARD_BB" insmod "$GUARD_MODULE_DIR/$_name" || return 1
     done
 )
+
+guard_load_storage_modules() {
+    guard_load_modules "$(guard_module_sequence)" "$GUARD_MODULE_MANIFEST"
+}
+
+guard_load_hardware_modules() {
+    guard_load_modules "$(guard_hardware_sequence)" "$GUARD_HARDWARE_MANIFEST"
+}
 
 guard_prepare_views() {
     for _path in "$GUARD_PROCROOT" "$GUARD_SYSROOT"; do
@@ -88,6 +104,10 @@ guard_startup() {
     guard_load_storage_modules || return 1
     GUARD_STAGE=storage
     guard_wait_storage || return 1
+    GUARD_STAGE=hardware
+    guard_load_hardware_modules || return 1
+    GUARD_STAGE=storage-recheck
+    guard_protect_storage || return 1
     GUARD_STAGE=cleanup
     guard_cleanup_views || return 1
     GUARD_STAGE=ready

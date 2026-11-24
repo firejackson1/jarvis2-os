@@ -143,3 +143,42 @@ is still unproven. No kernel or module was altered to hide this mismatch.
 - [ ] Obtain authorization for that concrete RAM launch before any device action.
 - [ ] Record actual display/input/ADB, storage protection and Android return
       evidence; keep public binary release held until its other gates pass.
+
+Ruling: the native fragment also needs display/input drivers after MMC protection.
+Use the remaining dependency closure of the saved `amlogic-input` and `aml_drm`
+modules, in stock recovery load order: ten modules. Verify their complete ordered
+hash manifest before loading any of them, then recheck storage protection before
+Android init. This preserves the original 27-module pre-MMC sequence; it does not
+load camera/watchdog modules or run the stock hardware script's closed services.
+Loading kernel drivers is not claimed free of all device side effects; block
+protection and hardware verification remain required.
+
+Assembly uses a separate deterministic newc overlay after the preserved native
+CPIO. Place BusyBox at canonical `system/bin/busybox`, its existing inspected musl
+closure at root `lib`, and all modules under `ramboot/modules`, not `/lib/modules`.
+The pinned first-stage init skips automatic module loading when `/lib/modules`
+is absent and recognizes recovery by `/system/bin/recovery`. The owned USB profile
+sets configfs/controller before `fs` and selects ADB at `boot`; generic upstream
+rules own the gadget. Controller `fe350000.crgudc` is supported by the retained
+working recovery properties and matching DTB; do not copy the stale stock role
+path `ffe09000.usb-role-switch`. No new authentication property is introduced.
+
+The offline assembler must bind every private input by SHA256, reject path/type
+collisions in the effective overlay, check both module sequences against stock
+dependencies, audit the combined CPIO and preserve its base bytes exactly.
+Its report must leave runtime dependency/SELinux/hardware qualification open.
+
+Executed checkpoint: the private native guarded CPIO is assembled, 60,512,820
+bytes, SHA256 `4155440d652f8a2691a416ad4293839394321d35f1ec3888b599e52fea3b8c26`.
+The complete source suite passed 56 Python tests, three native executables and
+pinned-header syntax; 28 guard tests passed under the actual ARM64 BusyBox/QEMU.
+Safe substitutes were used for all privileged operations. The new assembler and
+hardware workflow gates were reproduced failing first. Actual stock module
+dependencies satisfy the two ordered lists. Private inputs/report and the
+unmodified base bytes were verified. No hardware action or flash occurred.
+
+Ruling: the earlier legacy-v2 header's declared ramdisk-to-DTB gap is only
+15,728,640 bytes; the new gzip payload is 20,299,793 bytes. Do not copy that load
+layout into a candidate hardware launch. Check actual bootloader relocation and
+nonoverlapping RAM regions first. A valid CPIO and total download-size check alone
+do not establish a valid boot-container memory layout.

@@ -80,7 +80,11 @@ extra, malformed or duplicate entries prevent protection/handoff. Only after
 the entire expected set appears does it set and verify every current block flag
 and rescan identities. This file must be bound to the private image and capture;
 a partial installer backup is not sufficient evidence of the full GPT layout.
-A complete matching inventory has not yet been obtained for this new image.
+A retained full kernel enumeration now supplies partitions 1 through 31 and both
+boot devices, cross-checked against a recent same-device by-name inventory and
+the same saved kernel payload. This is historical evidence, not a current GPT
+capture. The [guarded assembly record](GUARDED_RAMDISK.md) binds the resulting
+manifest and retains the runtime exact-set/stable-node check.
 
 ## Remaining verification
 

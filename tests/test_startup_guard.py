@@ -17,6 +17,8 @@ amlogic-clk-soc-s7d.ko amlogic-aoclk-soc-t5w.ko amlogic-gpio.ko
 amlogic-pinctrl-soc-s7d.ko amlogic-mailbox.ko amlogic-pwm.ko pwm-regulator.ko
 gpio-regulator.ko amlogic-reset.ko amlogic-power.ko amlogic-cpufreq.ko
 amlogic-thermal.ko amlogic-usb.ko cqhci.ko amlogic-mmc.ko'''.split()
+HARDWARE = '''amlogic-efuse-unifykey.ko tee.ko amlogic-tee.ko videobuf-core.ko
+dvb-core.ko amlogic-pm.ko amlogic-input.ko amlogic-dvb.ko aml_media.ko aml_drm.ko'''.split()
 
 
 class StartupGuardTests(unittest.TestCase):
@@ -26,11 +28,15 @@ class StartupGuardTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.calls = self.root / 'calls'
         self.manifest = self.root / 'modules.sha256'
-        for module in MODULES:
+        for module in MODULES + HARDWARE:
             (self.root / module).write_bytes(b'fixture module ' + module.encode())
         self.manifest.write_text(''.join(
             hashlib.sha256((self.root / name).read_bytes()).hexdigest() + '  ' + name + '\n'
             for name in MODULES))
+        self.hardware_manifest = self.root / 'hardware.sha256'
+        self.hardware_manifest.write_text(''.join(
+            hashlib.sha256((self.root / name).read_bytes()).hexdigest() + '  ' + name + '\n'
+            for name in HARDWARE))
         self.proc = self.root / 'proc'
         self.sys = self.root / 'sys'
         self.proc.mkdir()
@@ -59,6 +65,7 @@ esac
         self.assertTrue(LIB.is_file(), 'Startup guard implementation is missing')
         env = dict(os.environ, GUARD_LIBRARY=str(LIB), GUARD_BB=str(self.bb),
                    GUARD_MODULE_DIR=str(self.root), GUARD_MODULE_MANIFEST=str(self.manifest),
+                   GUARD_HARDWARE_MANIFEST=str(self.hardware_manifest),
                    GUARD_RUNTIME=str(self.root), GUARD_WORKDIR=str(self.root),
                    GUARD_PROCROOT=str(self.proc), GUARD_SYSROOT=str(self.sys),
                    KERNEL_RELEASE='fixture-release', FILESYSTEM='tmpfs',
@@ -106,6 +113,34 @@ esac
         result, calls = self.run_library('guard_load_storage_modules', FAIL_MODULE=MODULES[1])
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(calls, MODULES[:2])
+
+    def test_hardware_modules_have_a_separate_verified_sequence(self):
+        result, calls = self.run_library('guard_load_hardware_modules')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(calls, HARDWARE)
+        self.calls.unlink()
+        original = self.hardware_manifest.read_text()
+        self.hardware_manifest.write_text(original.replace(HARDWARE[-1], '../' + HARDWARE[-1]))
+        result, calls = self.run_library('guard_load_hardware_modules')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+
+    def test_missing_or_changed_hardware_input_prevents_all_hardware_loading(self):
+        original = self.hardware_manifest.read_text()
+        self.hardware_manifest.unlink()
+        result, calls = self.run_library('guard_load_hardware_modules')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+        self.hardware_manifest.write_text(original)
+        (self.root / HARDWARE[-1]).write_bytes(b'changed module')
+        result, calls = self.run_library('guard_load_hardware_modules')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+
+    def test_hardware_module_failure_stops_before_later_modules(self):
+        result, calls = self.run_library('guard_load_hardware_modules', FAIL_MODULE=HARDWARE[1])
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, HARDWARE[:2])
 
     def test_board_kernel_and_boot_mode_are_checked_before_modules(self):
         result, calls = self.run_library('guard_validate_boot')
@@ -163,7 +198,7 @@ guard_wait_storage
         self.assertEqual(calls, ['umount:sys'])
 
     def test_startup_failure_never_reaches_ready_state(self):
-        for failed in ('views', 'board', 'modules', 'storage', 'cleanup'):
+        for failed in ('views', 'board', 'modules', 'storage', 'hardware', 'recheck', 'cleanup'):
             with self.subTest(failed=failed):
                 script = '''
 record() { printf '%s\\n' "$1" >> "$CALLS"; [ "$1" != "$FAIL_STEP" ]; }
@@ -171,6 +206,8 @@ guard_prepare_views() { record views; }
 guard_validate_boot() { record board; }
 guard_load_storage_modules() { record modules; }
 guard_wait_storage() { record storage; }
+guard_load_hardware_modules() { record hardware; }
+guard_protect_storage() { record recheck; }
 guard_cleanup_views() { record cleanup; }
 guard_startup && printf 'ready\\n' >> "$CALLS"
 '''
@@ -187,12 +224,15 @@ guard_prepare_views() { record views; }
 guard_validate_boot() { record board; }
 guard_load_storage_modules() { record modules; }
 guard_wait_storage() { record storage; }
+guard_load_hardware_modules() { record hardware; }
+guard_protect_storage() { record recheck; }
 guard_cleanup_views() { record cleanup; }
 guard_startup && printf 'ready\\n' >> "$CALLS"
 '''
         result, calls = self.run_library(script)
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(calls, ['views', 'board', 'modules', 'storage', 'cleanup', 'ready'])
+        self.assertEqual(calls, ['views', 'board', 'modules', 'storage', 'hardware',
+                                 'recheck', 'cleanup', 'ready'])
 
 
 if __name__ == '__main__':

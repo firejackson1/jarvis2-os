@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Diagnostic RAM recovery only. Generic upstream init owns the USB gadget.
+# Controller name is from the retained working recovery and matching stock DTB.
+on early-init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller fe350000.crgudc
+
+on boot
+    setprop sys.usb.config adb

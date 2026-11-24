@@ -24,10 +24,10 @@ def archive(entries, crc=False):
     return bytes(result)
 
 
-def elf(bits, machine):
+def elf(bits, machine, kind=3):
     data = bytearray(64 if bits == 64 else 52)
     data[:7] = b'\x7fELF' + bytes([2 if bits == 64 else 1, 1, 1])
-    struct.pack_into('<HH', data, 16, 3, machine)
+    struct.pack_into('<HH', data, 16, kind, machine)
     return bytes(data)
 
 

@@ -75,5 +75,11 @@ the strict archive audit with untouched records byte-identical. The original
 build above remains unchanged. The derived fragment still needs the guard and
 hardware overlay, and has not booted.
 
+The separate [guarded CPIO assembly](GUARDED_RAMDISK.md) now supplies that overlay
+privately, including verified ordered storage/hardware module inputs and the
+historical complete partition-number manifest. Boot-container packaging is held
+because the larger compressed ramdisk does not fit the prior declared load-address
+spacing. None of these offline results establish a successful device boot.
+
 Keep the original artifact and private audit receipts. This fragment is not a
 replacement for the working installed recovery.
