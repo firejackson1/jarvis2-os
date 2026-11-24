@@ -188,6 +188,14 @@ BCB, logging and userdata-key paths that run without selecting a destructive
 menu action. It also records the prototype metadata fstab mismatch and the
 remaining early write-guard requirements. It is not a completed RAM boot test.
 
+`ramboot/storage-guard.sh` is a tested function library for the planned early
+storage guard. It identifies internal MMC, checks the whole device, boot devices
+and partitions, requires successful read-only readback and rejects an inventory
+that changes during protection. Its caller must first validate the board,
+PID 1 and RAM root and provide private RAM-backed directories. That launcher,
+module loading and Android-init handoff are not implemented yet; do not source
+this library on a host or treat it as a bootable recovery.
+
 ## License
 
 New source in this tree is Apache-2.0. Upstream headers are downloaded only into
