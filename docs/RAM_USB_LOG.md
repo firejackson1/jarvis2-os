@@ -149,3 +149,51 @@ owned debugfs view on success or failure. All module hashes still validate
 before insertion; the shared loader and default recovery entrypoint are unchanged.
 The first candidate's RAM launch arguments remain unknown; this is a correction
 for an identified role-selection failure mode, not proof of its earlier stall.
+
+## Corrected build and first hardware result
+
+Built source `54163ad8cff91bf9a7814982f15b060b1e3f54db` from a clean private
+clone. Two empty output directories produced identical CPIO and gzip bytes;
+the legacy-v2 packer verified unchanged kernel/DTB and a matching round trip.
+
+| Artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| Corrected CPIO | 38,307,376 | `c7920e3ee437d69430440820970d8d40c509bc32823452bc5f91633c28e651c2` |
+| Gzip ramdisk | 14,682,939 | `15fa2801559976e8f6c0c4e838afde8d472ebee0b1ef7167daa3a8bb556d69b9` |
+| Unsigned RAM image | 35,520,512 | `1f8ee62040f622f2cc25af62fc7f61bf3f14efc90f779fe3e7e67eb4f203c138` |
+
+The bounded native job completed in 15.932 seconds, with 344.2 MiB peak memory
+and no swap; the desktop VM stayed running. All 80 native host tests ran without
+skips, plus three C++ suites and pinned recovery-header checks. Local tests ran
+80 cases with six missing-native-tool skips. Prior full-recovery and first USB
+diagnostic artifacts remained byte-unchanged. The default loader and both
+entrypoints are unchanged from the preceding source.
+The final ARM64 BusyBox shell ran all 45 startup/storage/USB guard tests under
+QEMU with privileged operations substituted. Independent source review found
+no blocking issue; added delayed-registration and cleanup-failure checks from
+its feedback. These are not kernel, controller or serial-transfer tests.
+
+With the owner present for a return check, read-only Android preflight reported
+boot completion and slot A. Captured complete hashes of boot_a, vendor_boot_a,
+dtbo_a, vbmeta_a and vbmeta_system_a; no vbmeta_vendor_a node existed. bootctl
+was absent, so bootable/successful/retry metadata was not obtained. snapshotctl
+reported state none but also missing-state-file warnings; this is not proof of
+a healthy merge or a fully qualified installation preflight.
+
+Verified the bootloader device/model, selected slot A, unlocked state,
+is-userspace no and the 128 MiB download budget. Rehashed the image immediately
+before Fastboot boot; transfer and boot returned OKAY in 8.696 seconds.
+
+The exact generic USB gadget enumerated at high speed with two CDC ACM
+interfaces and an ACM tty. That establishes startup through gadget bind for
+this image, not full Recovery startup. A 12-second reader received zero bytes;
+a second 12-second read with explicit carrier/read settings and DTR/RTS also
+received zero bytes. No serial command or application payload was sent. The
+host modem manager was inactive and no competing tty reader was found.
+The log writer/data-transfer stage and the actual reported boot flags remain
+unverified; enumeration alone is not a successful log capture.
+
+Power-cycled using the owner's mapped outlet, verified power restored ON, and
+requested the normal network-ADB re-enable flow. Android return and after-test
+partition comparisons are pending. No flash, wipe, slot change or saved
+bootloader setting was requested. Do not call this recovery ready.

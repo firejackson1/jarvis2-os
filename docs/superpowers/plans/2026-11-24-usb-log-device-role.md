@@ -32,9 +32,9 @@ file bytes and the failed RAM launch arguments have not been newly measured.
   and no mutation of an existing gadget/configuration or private path.
 - [x] Implement the narrow runtime role selection; retain the default recovery
   loader and entrypoint, ordered module checks and one-way writer behavior.
-- [ ] Run host tests and ARM64 BusyBox checks with privileged commands safely
+- [x] Run host tests and ARM64 BusyBox checks with privileged commands safely
   substituted. Review policy scope and negative paths.
-- [ ] Build two fresh deterministic private diagnostic images; verify unchanged
+- [x] Build two fresh deterministic private diagnostic images; verify unchanged
   kernel, DTB, module bytes and previous candidates, and document exact evidence.
 - [ ] Commit/publish source; leave hardware enumeration and recovery qualification
   open until a separately authorized test with a return path.
