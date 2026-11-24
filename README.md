@@ -31,6 +31,7 @@ Brotli decoder library (`libbrotli1` on Debian/Ubuntu). Read
 [Build](docs/BUILD.md), [Licensing](docs/LICENSING.md),
 [Release checklist](docs/RELEASE_CHECKLIST.md),
 [Slot installation status](docs/SLOT_INSTALLATION.md),
+[Developer-tool connections](docs/DEBUGGING.md),
 [Optional Google apps](docs/GOOGLE_APPS.md),
 [Local GApps composition](docs/GAPPS_COMPOSITION.md),
 [Release signing](docs/RELEASE_SIGNING.md),

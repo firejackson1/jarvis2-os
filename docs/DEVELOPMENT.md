@@ -920,3 +920,27 @@ without private scripts, server access or an AI operator.
   host suite ran 194 tests with five local AVB-tool skips, all executed tests
   and eight Java suites passed. Source privacy audit and diff checks passed.
   No product source or ROM image changed.
+
+### Network ADB reset source audit, 2026-11-24
+
+- After the authorized power cycle, the known device answered Ethernet probes,
+  but TCP 5555 refused connections, ADB listed no device and no target wireless
+  debugging service was advertised. No new Android boot-completion, uptime or
+  slot evidence was obtained. Power was restored; the desktop VM stayed running.
+- Native TV Settings project HEAD matches pinned
+  `26fd224082c96fa32e0bfe60b288093c6e7522f3`. Its DevelopmentFragment, development
+  XML and English Lineage strings each matched their pinned Git contents.
+  The first writes temporary `service.adb.tcp.port` values 5555/-1; the XML
+  requires main ADB enabled; the summary explicitly says reset on reboot.
+- Added the normal-user reconnect route in DEBUGGING.md. This source finding
+  identifies the intended reset behavior and next action; it does not prove
+  the current device property value or a successfully completed UI flow.
+- Source SHA256s, in that order:
+  `70ba2d2967640bac5b25fac77d58fcfd9dc4c440c35c25fbcc0a1ba4dde2dc05`,
+  `d130d8448c0d34a2406ddc812a184d8c5e4c334a19297fc060278ae50e4aa8f9`,
+  `60fb37c61f9f66839e60f2042c9cc94b8e66cd1d731b87169d853bd51a251da4`.
+  No persistent network listener, key copy, authentication change, flash, slot
+  change, wipe or further reboot was performed.
+- Validation: `tools/test-host.sh` ran 194 tests with five local AVB-tool skips;
+  all executed tests and eight Java suites passed. Source privacy audit and
+  `git diff --check` passed. This documentation does not change ROM behavior.

@@ -14,6 +14,8 @@ stock-inputs.sha256 and stages them in a caller-owned Android checkout.
 
 No personal ADB identity is authorized by this device configuration. USB ADB
 requires normal user authorization. No network ADB listener is configured here.
+The developer-options network switch is temporary and resets on reboot; see
+[connecting developer tools](DEBUGGING.md) for the normal user route.
 
 Public system-image integration, private release signing, exact partition
 budgets, clean installation and rollback remain release gates. Do not flash
