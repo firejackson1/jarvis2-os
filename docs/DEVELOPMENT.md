@@ -408,3 +408,17 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   JAR is supplemented by its official release-linked source recipe and original
   4.28.2 sources. Evidence pins are in launcher-native-materials.json; complete
   corresponding-source/notice assembly and the controlled APK build remain open.
+
+- Portable public package/filesystem verifier commands and a 77-role template
+  are now available. Actual execution of the promoted code passed with a pinned
+  78-record public inventory and pinned prior report; the optional extra record
+  was only an image-key inventory check, not image AVB verification. Independent
+  baseline/role-policy authentication limits remain explicit. Focused regressions
+  cover META-INF integrity, native directory parsing, public-path/JSON boundaries
+  and JDK environment selection. No keys or certificates are tracked here.
+- A controlled ARMv7 launcher APK was built from the pinned source on PVE. Its
+  classes.dex, Flutter runtime and SQLite library match upstream bytes; its Dart
+  AOT library differs, so whole-APK upstream identity is not claimed. After project
+  signing, all 590 non-signature entries matched the unsigned build and v1/v2/v3
+  signatures plus native alignment verified. It remains separate from the active
+  ROM build: no launcher input pin or device installation changed yet.

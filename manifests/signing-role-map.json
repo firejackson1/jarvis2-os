@@ -1,0 +1,391 @@
+{
+  "format": 1,
+  "scope": "Jarvis2 package signing role template only:77 package roles, no keys or trust anchors. Optional image-AVB inventory material is checked only for internal public-material consistency.",
+  "keys": [
+    {
+      "role": "apex-payload",
+      "identity": "com.android.adbd.apex",
+      "key_base": "jarvis2/apex/com.android.adbd"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.adbd.apex",
+      "key_base": "jarvis2/apex/com.android.adbd.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.adservices.apex",
+      "key_base": "jarvis2/apex/com.android.adservices"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.adservices.apex",
+      "key_base": "jarvis2/apex/com.android.adservices.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.appsearch.apex",
+      "key_base": "jarvis2/apex/com.android.appsearch"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.appsearch.apex",
+      "key_base": "jarvis2/apex/com.android.appsearch.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.art.apex",
+      "key_base": "jarvis2/apex/com.android.art"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.art.apex",
+      "key_base": "jarvis2/apex/com.android.art.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.btservices.apex",
+      "key_base": "jarvis2/apex/com.android.btservices"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.btservices.apex",
+      "key_base": "jarvis2/apex/com.android.btservices.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.configinfrastructure.apex",
+      "key_base": "jarvis2/apex/com.android.configinfrastructure"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.configinfrastructure.apex",
+      "key_base": "jarvis2/apex/com.android.configinfrastructure.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.conscrypt.apex",
+      "key_base": "jarvis2/apex/com.android.conscrypt"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.conscrypt.apex",
+      "key_base": "jarvis2/apex/com.android.conscrypt.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.devicelock.apex",
+      "key_base": "jarvis2/apex/com.android.devicelock"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.devicelock.apex",
+      "key_base": "jarvis2/apex/com.android.devicelock.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.extservices.apex",
+      "key_base": "jarvis2/apex/com.android.extservices"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.extservices.apex",
+      "key_base": "jarvis2/apex/com.android.extservices.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.healthfitness.apex",
+      "key_base": "jarvis2/apex/com.android.healthfitness"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.healthfitness.apex",
+      "key_base": "jarvis2/apex/com.android.healthfitness.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.i18n.apex",
+      "key_base": "jarvis2/apex/com.android.i18n"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.i18n.apex",
+      "key_base": "jarvis2/apex/com.android.i18n.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.ipsec.apex",
+      "key_base": "jarvis2/apex/com.android.ipsec"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.ipsec.apex",
+      "key_base": "jarvis2/apex/com.android.ipsec.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.media.apex",
+      "key_base": "jarvis2/apex/com.android.media"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.media.apex",
+      "key_base": "jarvis2/apex/com.android.media.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.media.swcodec.apex",
+      "key_base": "jarvis2/apex/com.android.media.swcodec"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.media.swcodec.apex",
+      "key_base": "jarvis2/apex/com.android.media.swcodec.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.mediaprovider.apex",
+      "key_base": "jarvis2/apex/com.android.mediaprovider"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.mediaprovider.apex",
+      "key_base": "jarvis2/apex/com.android.mediaprovider.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.neuralnetworks.apex",
+      "key_base": "jarvis2/apex/com.android.neuralnetworks"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.neuralnetworks.apex",
+      "key_base": "jarvis2/apex/com.android.neuralnetworks.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.ondevicepersonalization.apex",
+      "key_base": "jarvis2/apex/com.android.ondevicepersonalization"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.ondevicepersonalization.apex",
+      "key_base": "jarvis2/apex/com.android.ondevicepersonalization.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.os.statsd.apex",
+      "key_base": "jarvis2/apex/com.android.os.statsd"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.os.statsd.apex",
+      "key_base": "jarvis2/apex/com.android.os.statsd.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.permission.apex",
+      "key_base": "jarvis2/apex/com.android.permission"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.permission.apex",
+      "key_base": "jarvis2/apex/com.android.permission.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.resolv.apex",
+      "key_base": "jarvis2/apex/com.android.resolv"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.resolv.apex",
+      "key_base": "jarvis2/apex/com.android.resolv.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.rkpd.apex",
+      "key_base": "jarvis2/apex/com.android.rkpd"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.rkpd.apex",
+      "key_base": "jarvis2/apex/com.android.rkpd.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.runtime.apex",
+      "key_base": "jarvis2/apex/com.android.runtime"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.runtime.apex",
+      "key_base": "jarvis2/apex/com.android.runtime.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.scheduling.apex",
+      "key_base": "jarvis2/apex/com.android.scheduling"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.scheduling.apex",
+      "key_base": "jarvis2/apex/com.android.scheduling.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.sdkext.apex",
+      "key_base": "jarvis2/apex/com.android.sdkext"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.sdkext.apex",
+      "key_base": "jarvis2/apex/com.android.sdkext.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.tethering.apex",
+      "key_base": "jarvis2/apex/com.android.tethering"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.tethering.apex",
+      "key_base": "jarvis2/apex/com.android.tethering.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.tzdata.apex",
+      "key_base": "jarvis2/apex/com.android.tzdata"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.tzdata.apex",
+      "key_base": "jarvis2/apex/com.android.tzdata.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.uwb.apex",
+      "key_base": "jarvis2/apex/com.android.uwb"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.uwb.apex",
+      "key_base": "jarvis2/apex/com.android.uwb.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.virt.apex",
+      "key_base": "jarvis2/apex/com.android.virt"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.virt.apex",
+      "key_base": "jarvis2/apex/com.android.virt.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.vndk.v34.apex",
+      "key_base": "jarvis2/apex/com.android.vndk.v34"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.vndk.v34.apex",
+      "key_base": "jarvis2/apex/com.android.vndk.v34.container"
+    },
+    {
+      "role": "apex-payload",
+      "identity": "com.android.wifi.apex",
+      "key_base": "jarvis2/apex/com.android.wifi"
+    },
+    {
+      "role": "apex-container",
+      "identity": "com.android.wifi.apex",
+      "key_base": "jarvis2/apex/com.android.wifi.container"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/bluetooth",
+      "key_base": "jarvis2/bluetooth"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/media",
+      "key_base": "jarvis2/media"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/AdServices/adservices/apk/com.android.adservices.api",
+      "key_base": "jarvis2/modules/com.android.adservices.api"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/Connectivity/service/ServiceConnectivityResources/resources-certs/com.android.connectivity.resources",
+      "key_base": "jarvis2/modules/com.android.connectivity.resources"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/OnDevicePersonalization/federatedcompute/apk/com.android.federatedcompute",
+      "key_base": "jarvis2/modules/com.android.federatedcompute"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/HealthFitness/backuprestore/com.android.health.connect.backuprestore",
+      "key_base": "jarvis2/modules/com.android.health.connect.backuprestore"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/HealthFitness/apk/com.android.healthconnect.controller",
+      "key_base": "jarvis2/modules/com.android.healthconnect.controller"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/Wifi/OsuLogin/certs/com.android.hotspot2.osulogin",
+      "key_base": "jarvis2/modules/com.android.hotspot2.osulogin"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/Permission/SafetyCenter/Resources/com.android.safetycenter.resources",
+      "key_base": "jarvis2/modules/com.android.safetycenter.resources"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/Uwb/service/ServiceUwbResources/resources-certs/com.android.uwb.resources",
+      "key_base": "jarvis2/modules/com.android.uwb.resources"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/Wifi/WifiDialog/certs/com.android.wifi.dialog",
+      "key_base": "jarvis2/modules/com.android.wifi.dialog"
+    },
+    {
+      "role": "apk",
+      "identity": "packages/modules/Wifi/service/ServiceWifiResources/resources-certs/com.android.wifi.resources",
+      "key_base": "jarvis2/modules/com.android.wifi.resources"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/networkstack",
+      "key_base": "jarvis2/networkstack"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/platform",
+      "key_base": "jarvis2/platform"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/testkey",
+      "key_base": "jarvis2/releasekey"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/sdk_sandbox",
+      "key_base": "jarvis2/sdk_sandbox"
+    },
+    {
+      "role": "apk",
+      "identity": "build/make/target/product/security/shared",
+      "key_base": "jarvis2/shared"
+    }
+  ]
+}

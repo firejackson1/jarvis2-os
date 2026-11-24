@@ -97,3 +97,62 @@ entries matched their original content hashes. The pinned signing tool accepted
 127 APK metadata identities and 31 APEX metadata entries, including the preserved
 launcher and CTS shim. Repeat this check against every new target-files build;
 these counts do not inventory a future build automatically.
+
+## Independently verify packages and APEX filesystems
+
+Use the original trusted build archive, its signed output, matching pinned host
+executables and a **public-only** key export. That export contains inventory.json,
+public certificates, public PEMs and AVB public-key blobs, never private keys.
+The inventory hash must come from your independently trusted release/build
+record. A key-inventory pin does not authenticate the original archive or role
+policy: establish those inputs separately.
+
+```sh
+python3 tools/verify-signed-packages.py \
+  --original /outside/source/original-target-files.zip \
+  --signed /outside/source/signed-target-files.zip \
+  --public-materials /outside/source/public-key-export \
+  --role-map manifests/signing-role-map.json \
+  --trusted-public-inventory-sha256 TRUSTED_INVENTORY_SHA256 \
+  --host /path/to/android/out/host/linux-x86 \
+  --soong-host /path/to/android/out/soong/host/linux-x86 \
+  --jdk /path/to/android/prebuilts/jdk/jdk17/linux-x86 \
+  --report-dir /outside/source/new-package-report
+```
+
+It checks intended API-34 APK certificates, APEX container/payload signatures,
+embedded payload keys and content hashes/hashtrees, preserved packages and
+non-signature APK entry contents, including licenses and services metadata.
+Only reserved top-level JAR signing files are excluded from that comparison.
+The supplied JDK takes precedence over an inherited JAVA_HOME.
+
+After verifying and preserving that report, compute its SHA-256 and use it as
+PACKAGE_REPORT_SHA256 below. Do not treat an untrusted downloaded report's own
+hash as independent trust.
+
+```sh
+python3 tools/verify-apex-filesystems.py \
+  --original /outside/source/original-target-files.zip \
+  --signed /outside/source/signed-target-files.zip \
+  --package-proof /outside/source/new-package-report/report.json \
+  --trusted-package-proof-sha256 PACKAGE_REPORT_SHA256 \
+  --debugfs /path/to/android/out/host/linux-x86/bin/debugfs_static \
+  --report-dir /outside/source/new-filesystem-report
+```
+
+This compares paths, ordinary file contents, symlink targets, modes, UID/GID and
+raw extended attributes from the ext4 payload images, without following symlinks.
+Only embedded APK changes already covered by the package proof are allowed.
+Timestamps, inode flags/layout and hardlink topology remain outside the proof.
+Both tools label unpinned inputs as internal consistency only, and neither proves
+hardware acceptance, raw-image AVB, installation or restoration. They implement
+the current bounded Jarvis2 artifact layout, not a universal untrusted-image API.
+
+The supported rehearsal profile explicitly records the five prebuilt vendor/ODM/
+module reference images dropped by the pinned signing tool; unexpected archive
+changes fail. Its output is not a complete target-files/OTA artifact. Preserve
+unchanged reference inputs for subsequent complete-chain/image validation.
+
+Both promoted commands were executed against the private rehearsal under 1 GiB
+RAM, 3 GiB swap and one CPU. The package command also passed with an invalid
+inherited JAVA_HOME. No private key or device operation was required.
