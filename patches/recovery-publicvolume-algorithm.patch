@@ -1,0 +1,8 @@
+diff --git a/volume_manager/PublicVolume.cpp b/volume_manager/PublicVolume.cpp
+--- a/volume_manager/PublicVolume.cpp
++++ b/volume_manager/PublicVolume.cpp
+@@ -29,3 +29,4 @@
++#include <algorithm>
+ #include <android-base/logging.h>
+ #include <android-base/stringprintf.h>
+ #include <cutils/fs.h>

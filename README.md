@@ -132,6 +132,8 @@ git -C external/google-highway apply \
   "$PWD/device/onn/jarvis2_recovery/patches/highway-vendor.patch"
 git -C external/XMP-Toolkit-SDK apply \
   "$PWD/device/onn/jarvis2_recovery/patches/xmp-vendor.patch"
+git -C bootable/recovery apply \
+  "$PWD/device/onn/jarvis2_recovery/patches/recovery-publicvolume-algorithm.patch"
 source build/envsetup.sh
 export GOCACHE="$PWD/out/recovery-go-cache"
 lunch lineage_jarvis2_recovery trunk_staging userdebug
@@ -179,6 +181,12 @@ on the system-server classpath; omitting its matching packages causes the Make
 dexpreopt consistency check to fail before the requested ramdisk can compile.
 The check remains enabled. These product dependencies do not mean that a full
 normal-boot Android system is included in the recovery ramdisk.
+
+The pinned recovery's `volume_manager/PublicVolume.cpp` uses `std::replace`
+without its `<algorithm>` header. `recovery-publicvolume-algorithm.patch` adds
+that include against recovery revision `1cdebe4061372e9abb5dc738002ad6c707f7c534`.
+The actual ARM64 recovery compile of that source now passes; the complete image
+still requires the remaining build and verification gates.
 
 ## Offline packaging
 
