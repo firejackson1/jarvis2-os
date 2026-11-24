@@ -52,13 +52,23 @@ from a grant to label the whole application open source. Available historical
 actual APK hash/signature/notices and review later assets/code before bundling.
 No bundled-default change has been made on the basis of this inventory.
 
-LTv source collection now identifies four SDK packages inside the verified
-Flutter framework archive and a fifth in the pinned generated sky_engine ZIP.
-The exact engine archive, matching SQLite binary, native build recipe and SQLite
-source were collected separately. Full engine DEPS, resolved Android/Maven runtime
-sources/notices, rebuild provenance, and generated Android userspace NOTICE/GPL
-inventory remain open. Kernel/vendor exclusion alone is not a userspace license
-audit. Keep both complete_corresponding_source and license_review_complete false.
+The controlled LTv candidate now has a reproducible 441-file corresponding-source
+bundle: original application, 137 locked hosted packages, five framework SDK
+source packages, the resolved 74-coordinate Maven source set and supplements,
+43 native source/header/build-input archives, exact SQLite/protobuf recipes,
+build records and cumulative notices. Material Icons attribution preserves its
+CC BY 4.0 license and identifies APK font subsetting. See LAUNCHER_SOURCE_BUILD.md
+and the exact source-bundle whitelist; no required preferred-source collection
+gap was identified for this controlled component candidate. This does not prove
+whole-ROM clearance or that the controlled APK is already in a built ROM.
+
+Userspace review located embedded WebView Credits and existing GNU license texts.
+The supplemental notice packet preserves component-specific license texts,
+source/recipe links and reproducibly extracted Credits. See USERSPACE_NOTICES.md.
+Recheck actual final-image versions, notice preservation and complete image
+contents before publication. Kernel/vendor exclusion alone is not a userspace
+license audit; historical broad collection flags do not substitute for this
+component-level evidence or final-artifact review.
 
 Modified Settings XML now retains its original notices and explicitly records
 local modification and the pinned upstream file/revision. This does not change

@@ -467,3 +467,8 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   the source-hash-pinned native regression; full host suite still passes 145
   tests with five local AVB skips, privacy and Java checks. Actual final-image
   trust replacement/verification remains pending.
+
+- GitHub source checks passed at 741b02b, including actual checksum-pinned
+  releasetools patch application/native OTA-key fixtures and signed AVB tests.
+  Reconciled stale license/signing matrix text with completed component source
+  and private rehearsal evidence; final-image and hardware gates remain open.
