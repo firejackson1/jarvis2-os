@@ -8,7 +8,10 @@ class SlotPlanTests(unittest.TestCase):
   parts=['system','system_ext','product','vendor','odm','system_dlkm','vendor_dlkm','odm_dlkm']
   sizes={p+'_'+slot:4096 for p in parts for slot in 'ab'}
   sizes.update({p+'_'+slot:8192 for p in ['vbmeta','vbmeta_system'] for slot in 'ab'})
-  view={'canonical':'identical metadata views','sizes':sizes}
+  layout={'sector_size':512,'metadata_max_size':65536,'metadata_slot_count':3,
+          'block_devices':[{'name':'super','size':2097152,'block_size':4096,'alignment':512,'alignment_offset':0,'first_logical_sector':2048}],
+          'partitions':{name:[{'logical_sector':0,'num_sectors':8,'target_type':'linear','target_source':0,'target_name':'super','target_data':2048+8*i}] for i,name in enumerate(sizes) if not name.startswith('vbmeta')}}
+  view={'canonical':'identical metadata views','sizes':sizes,'layout':layout}
   manifest={'avb_offline_verified':True,'files':{p+'.img':{'bytes':4096 if p in ['system','system_ext','product'] else 8192,'sha256':'0'*64} for p in ['system','system_ext','product','vbmeta_system','vbmeta']}}
   return manifest,[view,copy.deepcopy(view)]
  def test_either_explicit_slot_targets_only_that_slot(self):
@@ -22,7 +25,8 @@ class SlotPlanTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'metadata views'):module.plan('a',manifest,views)
  def test_unallocated_other_slot_needs_full_provisioning(self):
   manifest,views=self.fixtures()
-  for v in views:v['sizes']['vendor_b']=0
+  for v in views:
+   v['sizes']['vendor_b']=0;v['layout']['partitions']['vendor_b']=[]
   with self.assertRaisesRegex(ValueError,'foundation'):module.plan('b',manifest,views)
  def test_size_mismatch_never_requests_automatic_resize(self):
   manifest,views=self.fixtures()
@@ -39,7 +43,8 @@ class SlotPlanTests(unittest.TestCase):
   manifest,views=self.fixtures()
   for v in views:
    for name in list(v['sizes']):
-    if name.endswith('_a') and not name.startswith('vbmeta'):v['sizes'][name]=0
+    if name.endswith('_a') and not name.startswith('vbmeta'):
+     v['sizes'][name]=0;v['layout']['partitions'][name]=[]
   result=module.plan('b',manifest,views)
   self.assertTrue(all(x['partition'].endswith('_b') for x in result['writes']))
   self.assertFalse(result['other_slot_foundation_allocated'])
@@ -99,13 +104,19 @@ class SlotPlanTests(unittest.TestCase):
    folder=Path(temp);manifest,views=self.image_fixture(folder)
    (folder/'system.img').write_bytes(b'x'*4096)
    with self.assertRaisesRegex(ValueError,'checksum'):module.validate_images(folder,module.plan('a',manifest,views))
- def native_views(self,size):
+ def native_views(self,size,transform=None):
   import json
   from unittest.mock import patch
   physical={part+'_'+slot:8192 for part in ['vbmeta','vbmeta_system'] for slot in 'ab'}
   outputs=[]
   for slot in [0,1]:
-   outputs.extend([json.dumps({'partitions':[{'name':'system_a','size':size}]}),f'Slot {slot}:\nidentical layout\n'])
+   data={'partitions':[{'name':'system_a','size':size,'group_name':'default'}],
+         'block_devices':[{'name':'super','size':'2097152','block_size':'4096','alignment':'512'}]}
+   allocated=size in ['4096',4096]
+   extent='    0 .. 7 linear super 2048\n' if allocated else ''
+   text=f'Slot {slot}:\nMetadata max size: 65536 bytes\nMetadata slot count: 3\nPartition table:\n------------------------\n  Name: system_a\n  Group: default\n  Attributes: readonly\n  Extents:\n{extent}------------------------\nSuper partition layout:\n------------------------\nBlock device table:\n------------------------\n  Partition name: super\n  First sector: 2048\n  Size: 2097152 bytes\n  Flags: none\n------------------------\nGroup table:\n'
+   if transform is not None:data,text=transform(data,text)
+   outputs.extend([json.dumps(data),text])
   with patch.object(module.subprocess,'check_output',side_effect=outputs):
    return module.load_views('/native/lpdump','/captured/metadata',physical)
  def test_native_json_uint64_decimal_strings_are_normalized(self):
@@ -118,3 +129,82 @@ class SlotPlanTests(unittest.TestCase):
  def test_native_json_rejects_noncanonical_sizes(self):
   for value in [True,False,4096.0,-1,'-1','+1',' 1','1 ','1.0','1e3','','01','00','1x',None]:
    with self.subTest(value=value),self.assertRaises(ValueError):self.native_views(value)
+
+ def test_layout_is_required_not_inferred_from_positive_sizes(self):
+  manifest,views=self.fixtures()
+  for view in views:del view['layout']
+  with self.assertRaisesRegex(ValueError,'layout'):module.plan('a',manifest,views)
+ def test_extent_end_cannot_cross_capacity(self):
+  manifest,views=self.fixtures()
+  for view in views:view['layout']['partitions']['system_a'][0]['target_data']=4096
+  with self.assertRaisesRegex(ValueError,'bounds'):module.plan('a',manifest,views)
+ def test_extent_crossing_end_rejected_even_when_start_is_inside_device(self):
+  manifest,views=self.fixtures()
+  for view in views:
+   view['layout']['partitions']['system_a'][0].update(target_data=4088,num_sectors=16)
+   view['sizes']['system_a']=8192
+  manifest['files']['system.img']['bytes']=8192
+  with self.assertRaisesRegex(ValueError,'bounds'):module.plan('a',manifest,views)
+ def test_target_cannot_overlap_other_slot_or_protected_foundation(self):
+  for protected in ['system_b','vendor_a']:
+   manifest,views=self.fixtures()
+   for view in views:
+    view['layout']['partitions']['system_a'][0]['target_data']=view['layout']['partitions'][protected][0]['target_data']
+   with self.subTest(protected=protected),self.assertRaisesRegex(ValueError,'overlap'):module.plan('a',manifest,views)
+ def test_target_cannot_enter_reserved_metadata_prefix(self):
+  manifest,views=self.fixtures()
+  for view in views:view['layout']['partitions']['system_a'][0]['target_data']=2040
+  with self.assertRaisesRegex(ValueError,'bounds'):module.plan('a',manifest,views)
+ def test_unsupported_types_and_source_indexes_are_rejected(self):
+  for key,value in [('target_type','zero'),('target_type','striped'),('target_source',1),('target_source',True),('target_name','vendor'),('num_sectors',True),('num_sectors',0),('logical_sector',8)]:
+   manifest,views=self.fixtures()
+   for view in views:view['layout']['partitions']['system_a'][0][key]=value
+   with self.subTest(key=key,value=value),self.assertRaises(ValueError):module.plan('a',manifest,views)
+ def test_single_super_identity_and_sector_geometry_are_required(self):
+  for key,value in [('name','vendor'),('size',2097153),('block_size',513),('block_size',True),('first_logical_sector',0),('alignment_offset',512)]:
+   manifest,views=self.fixtures()
+   for view in views:view['layout']['block_devices'][0][key]=value
+   with self.subTest(key=key,value=value),self.assertRaises(ValueError):module.plan('a',manifest,views)
+ def test_logical_block_alignment_and_extent_byte_totals_are_checked(self):
+  for key,value in [('target_data',2049),('num_sectors',7)]:
+   manifest,views=self.fixtures()
+   for view in views:view['layout']['partitions']['system_a'][0][key]=value
+   with self.subTest(key=key),self.assertRaises(ValueError):module.plan('a',manifest,views)
+ def test_multibacking_and_unexplained_layout_changes_are_rejected(self):
+  manifest,views=self.fixtures()
+  for view in views:view['layout']['block_devices'].append(copy.deepcopy(view['layout']['block_devices'][0]))
+  with self.assertRaises(ValueError):module.plan('a',manifest,views)
+  manifest,views=self.fixtures();views[1]['layout']['partitions']['system_a'][0]['target_data']=3000
+  with self.assertRaises(ValueError):module.plan('a',manifest,views)
+ def test_fragmented_adjacent_extents_and_1000_sector_odm_are_valid(self):
+  manifest,views=self.fixtures()
+  for view in views:
+   view['layout']['partitions']['system_a']=[dict(view['layout']['partitions']['system_a'][0],num_sectors=8),dict(view['layout']['partitions']['system_a'][0],logical_sector=8,num_sectors=8,target_data=3000)]
+   view['sizes']['system_a']=8192
+   view['layout']['partitions']['odm_a'][0].update(num_sectors=1000,target_data=3072)
+   view['sizes']['odm_a']=512000
+  manifest['files']['system.img']['bytes']=8192
+  self.assertEqual('a',module.plan('a',manifest,views)['target_slot'])
+
+ def test_native_json_text_backing_identity_and_sizes_must_match(self):
+  def wrong_device(data,text):
+   data['block_devices'][0]['name']='vendor'
+   return data,text
+  transforms=[wrong_device,
+              lambda data,text:(data,text.replace('Size: 2097152 bytes','Size: 2097664 bytes')),
+              lambda data,text:(data,text.replace('linear super 2048','linear vendor 2048')),
+              lambda data,text:(data,text.replace('0 .. 7 linear super 2048','0 .. 7 zero')),
+              lambda data,text:(data,text.replace('0 .. 7 linear super 2048','0 .. 15 linear super 2048')),
+              lambda data,text:(data,text.replace('0 .. 7 linear super 2048','0 .. 7 linear super 4096'))]
+  for index,transform in enumerate(transforms):
+   with self.subTest(case=index),self.assertRaises(ValueError):self.native_views('4096',transform)
+ def test_native_parser_keeps_other_slot_protected_extents_in_overlap_checks(self):
+  def overlap(data,text):
+   data['partitions'].append({'name':'vendor_b','size':'4096','group_name':'default'})
+   record='  Name: vendor_b\n  Group: default\n  Attributes: readonly\n  Extents:\n    0 .. 7 linear super 2048\n------------------------\n'
+   return data,text.replace('Super partition layout:',record+'Super partition layout:')
+  with self.assertRaisesRegex(ValueError,'overlap'):self.native_views('4096',overlap)
+ def test_explicit_extent_sector_size_cannot_be_confused_with_block_size(self):
+  manifest,views=self.fixtures()
+  for view in views:view['layout']['sector_size']=4096
+  with self.assertRaisesRegex(ValueError,'512'):module.plan('a',manifest,views)

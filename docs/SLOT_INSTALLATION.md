@@ -54,10 +54,15 @@ images. Tests cover misleading truthy values and short/long files even when
 their hashes match a deceptive manifest.
 
 The manifest's AVB field is still a claimed prerequisite, not authenticated
-release trust or an independent chain audit. Native layout equality/size checks
-do not yet validate extent bounds, overlap, snapshot state or capture freshness.
-Those checks and an authenticated baseline are mandatory before implementing any
-writer; do not execute the emitted plan automatically.
+release trust or an independent chain audit. The pinned native JSON omits extent
+ranges, so its text tables are parsed and cross-checked against JSON identities,
+groups and sizes. For this model the planner accepts only one super backing
+device, fixed 512-byte sectors and linear extents. It verifies logical continuity,
+byte totals, alignment, backing capacity, the reserved metadata prefix and overlap
+across every logical partition in both matching views. Unsupported layouts fail
+closed. Live physical identity/capacity, snapshot state, capture freshness and an
+authenticated baseline remain mandatory writer gates; do not execute the emitted
+plan automatically.
 
 The tool rejects unsigned raw build archives, implicit/all-slot targets,
 unallocated foundations, differing metadata views and size mismatches. It does
