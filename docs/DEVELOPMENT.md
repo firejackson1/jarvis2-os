@@ -998,3 +998,46 @@ without private scripts, server access or an AI operator.
   all executed tests and eight Java suites passed. Source privacy audit and
   `git diff --check` passed. Private captures and unsigned APKs remain outside
   the tracked source tree.
+
+### Frozen image feature correspondence audit, 2026-11-24
+
+- Root network ADB remained unavailable after the preceding diagnostic return
+  request. Used the retained frozen vanilla build instead of claiming a fresh
+  device inventory. Matched 15 selected files to signed target-files archive
+  `b16c9d3bfbe0539dae01f328554718225525abeb43a2c238c9f16259bc92295f`,
+  freshly rehashed that archive, and verified the three extracted filesystem
+  data prefixes against the final delivery images. All five final image hashes
+  matched the recorded packaging proof. This did not repeat complete AVB crypto,
+  full image privacy, installation, hardware or rollback tests.
+- Recorded file hashes, versions and these limited observations in the frozen
+  feature receipt. Controls is 1.0/code 1; its ReplayFlags DEX method already
+  branches on 26/231 and clears mask 1024 there. Corrected ledger wording that
+  could imply that replay fix was still missing from f38. The separate native
+  Power/Voice interception/fallback bridge remains unimplemented.
+- Product keylayout bytes contain native Power/Voice mappings. The pinned
+  frameworks/native source is unchanged at
+  `9cb036fcafd5cf46ccafbb642f967993ad39393c`; its lookup checks product before
+  system for the same basename. Both product and system mappings are present;
+  this does not identify the live selected file or exclude version-specific
+  configuration and vendor/odm candidates.
+- Music's current DEX onDestroy is only return-void, so the later session-release
+  candidate is not included. LineageSetupWizard requests BLUETOOTH_CONNECT;
+  all four audio-policy engine libraries, TV SystemUI, the pinned animation and
+  controlled launcher are present. Every animation part is interruptible `p`;
+  no new boot-time measurement was made.
+- The compiled 1.1 controls candidate has the same project signer as f38.
+  Compared all DEX class names: generated R/R$xml exist only in f38 and a new
+  controller-settings lambda only in the candidate; no other class is missing.
+  This supports a future app-update test, not an install/behavior claim. Initial
+  tool checks assumed SetupWizard.apk rather than LineageSetupWizard.apk, a host
+  apksigner executable rather than the SDK JAR, and UTF-8-only dexdump output.
+  Corrected those assumptions, retained the initial record and verified actual
+  paths/raw output before drawing conclusions. No package was rebuilt, installed
+  or re-signed in this audit; the desktop VM stayed running.
+- Pinned the existing source supplement
+  `225a2828d025ea9967d27ed2d0ee6455d555d395` in the frozen reproduction recipe,
+  keeping it distinct from the frozen product-source commit.
+- Validation: 194 host tests ran with five local AVB-tool skips; all executed
+  tests, eight Java suites and the source privacy audit passed. The receipt
+  parses as JSON and `git diff --check` passed. Full release qualification
+  remains open.

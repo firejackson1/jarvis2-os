@@ -1,0 +1,229 @@
+{
+  "frozen_product_source": "f38da52af274a0e50c92a10cf279e62f44125358",
+  "files": [
+    {
+      "path": "product/app/Jarvis2LtvLauncher/Jarvis2LtvLauncher.apk",
+      "sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+      "bytes": 10024443,
+      "package": "com.leanbitlab.ltvL",
+      "version_code": "8117",
+      "version_name": "2026.11.23",
+      "signed_target_files_member": "PRODUCT/app/Jarvis2LtvLauncher/Jarvis2LtvLauncher.apk",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system_ext/priv-app/Jarvis2RemoteSettings/Jarvis2RemoteSettings.apk",
+      "sha256": "5333c870c8754e264fbd633e41db47fc0d7bd2cda8ef8363ea4d3ae8a9621b30",
+      "bytes": 160220,
+      "package": "app.jarvis2.remote",
+      "version_code": "1",
+      "version_name": "1.0",
+      "signed_target_files_member": "SYSTEM_EXT/priv-app/Jarvis2RemoteSettings/Jarvis2RemoteSettings.apk",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system_ext/overlay/Jarvis2TvControlsOverlay.apk",
+      "sha256": "041ebab5c9e4f8aebf8aba23716671764e992344882cc3866d73b4c89485a36c",
+      "bytes": 25277,
+      "package": "app.jarvis2.controls.overlay",
+      "version_code": "1",
+      "version_name": "1.0",
+      "signed_target_files_member": "SYSTEM_EXT/overlay/Jarvis2TvControlsOverlay.apk",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "product/app/Music/Music.apk",
+      "sha256": "d7408f7be674b5f5cdfd8eb1635844296427e9679a8ca1d84ac014cb68a4208c",
+      "bytes": 792406,
+      "package": "com.android.music",
+      "version_code": "34",
+      "version_name": "14",
+      "signed_target_files_member": "PRODUCT/app/Music/Music.apk",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system_ext/priv-app/TvSettingsTwoPanel/TvSettingsTwoPanel.apk",
+      "sha256": "4e264cc9d09882df995177da98608b3002fdccfd90b3823eae04991c287bc5af",
+      "bytes": 23572321,
+      "package": "com.android.tv.settings",
+      "version_code": "1",
+      "version_name": "1.0",
+      "signed_target_files_member": "SYSTEM_EXT/priv-app/TvSettingsTwoPanel/TvSettingsTwoPanel.apk",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system_ext/priv-app/TvSystemUI/TvSystemUI.apk",
+      "sha256": "3e43e56916482f2483842b6d7392a2b68a9ef4d1c487294bd9c2bea3f98a2e72",
+      "bytes": 21570787,
+      "package": "com.android.systemui",
+      "version_code": "34",
+      "version_name": "14",
+      "signed_target_files_member": "SYSTEM_EXT/priv-app/TvSystemUI/TvSystemUI.apk",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system/system/usr/keylayout/Vendor_0957_Product_0031.kl",
+      "sha256": "0dffe1b7134eae27a61daf41a379c70577ab154dbac39738595d8d42b11ca264",
+      "bytes": 2130,
+      "signed_target_files_member": "SYSTEM/usr/keylayout/Vendor_0957_Product_0031.kl",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "product/usr/keylayout/Vendor_0957_Product_0031.kl",
+      "sha256": "31642edb5566766b0685e34e6cc14e243316ffeb76d6db840ca039dbcbd70d08",
+      "bytes": 852,
+      "signed_target_files_member": "PRODUCT/usr/keylayout/Vendor_0957_Product_0031.kl",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "product/media/bootanimation.zip",
+      "sha256": "87e2aa9ceda3fc1fdbf787dad06687eedc12efeca6a0046d3a76a68f6d03ad50",
+      "bytes": 13482326,
+      "signed_target_files_member": "PRODUCT/media/bootanimation.zip",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system/system/apex/com.android.btservices.apex",
+      "sha256": "bf45bc6064eac46d3b6c4ed81363caa565322a34ea778b3190fbce19f097110b",
+      "bytes": 18628608,
+      "signed_target_files_member": "SYSTEM/apex/com.android.btservices.apex",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system/system/lib/libaudiopolicyengineconfigurable.so",
+      "sha256": "e92d1deae20e96605c7ad4f7f2027b9972859fe6e6ab56d63409c6ce8396b96b",
+      "bytes": 210456,
+      "signed_target_files_member": "SYSTEM/lib/libaudiopolicyengineconfigurable.so",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system/system/lib/libparameter.so",
+      "sha256": "7e344c31606e1b2684964775f708ae44f35ef06c88bcf1c8e381715e382f5c1a",
+      "bytes": 518412,
+      "signed_target_files_member": "SYSTEM/lib/libparameter.so",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system/system/lib/libpolicy-subsystem.so",
+      "sha256": "8517d49cae77c81c5bd69ececf490448129ebddcdd259fba4b594820db06ccd2",
+      "bytes": 20980,
+      "signed_target_files_member": "SYSTEM/lib/libpolicy-subsystem.so",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system/system/lib/libremote-processor.so",
+      "sha256": "52bebb1496e8c86b735f90e8ae9eeb3f04215dcd5999f474155cc6dacfa40bba",
+      "bytes": 84232,
+      "signed_target_files_member": "SYSTEM/lib/libremote-processor.so",
+      "signed_archive_payload_matches": true
+    },
+    {
+      "path": "system_ext/priv-app/LineageSetupWizard/LineageSetupWizard.apk",
+      "sha256": "58bc26cec1b8e65ac460a9c63421a7679aab5246dd504c41fd2ffa273f3d12d7",
+      "bytes": 10817184,
+      "package": "org.lineageos.setupwizard",
+      "version_code": "5",
+      "version_name": "14",
+      "signed_target_files_member": "SYSTEM_EXT/priv-app/LineageSetupWizard/LineageSetupWizard.apk",
+      "signed_archive_payload_matches": true
+    }
+  ],
+  "source_report_sha256": "f7812023f4618b0a05f79c85d959ad410ec942e1132e08546ee99c2d34f88b8c",
+  "scope": "Selected frozen f38 image payloads matched to the pinned signed target-files archive and final delivery filesystem prefixes; source and bytecode observations, not hardware feature qualification or a fresh complete AVB/privacy audit.",
+  "signed_target_files_sha256": "b16c9d3bfbe0539dae01f328554718225525abeb43a2c238c9f16259bc92295f",
+  "image_files": {
+    "system.img": {
+      "sha256": "15928f53a96b4c23c2f63eaf6cf286f3477a11e101d91f3ab8d26290d0b047e5",
+      "bytes": 440803328
+    },
+    "system_ext.img": {
+      "sha256": "e9a536c063a91d2fab64ac09a118deb174707bf73ab27a1b93d62ad1b6e66d5f",
+      "bytes": 62009344
+    },
+    "product.img": {
+      "sha256": "62ccad0a1ab6d340dab144cab53330d3e7538a5d33d06a2ee4c1e5500fefcb04",
+      "bytes": 122630144
+    }
+  },
+  "input_lookup_source": {
+    "project_revision": "9cb036fcafd5cf46ccafbb642f967993ad39393c",
+    "file": "libs/input/InputDevice.cpp",
+    "sha256": "08c90b98b36f79e408b00ef34c652af450cf8fd5778cb1719177de2329ce9fb1",
+    "unchanged_from_project_head": true,
+    "product_before_system_for_same_basename": true,
+    "runtime_selected_file_verified": false
+  },
+  "checks": {
+    "replay_flags_bytecode": "key 26 or 231 uses flags AND -1025; other keys use flags OR 1024",
+    "music_onDestroy_bytecode": "single return-void, no cleanup calls",
+    "setupwizard_bluetooth_connect_requested": true,
+    "animation_all_parts_interruptible": true,
+    "hardware_feature_qualified": false,
+    "animation_canvas": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 60
+    }
+  },
+  "final_delivery_images": {
+    "product.img": {
+      "bytes": 541949952,
+      "sha256": "ac246e6b350ceed990cf29d25c85483d9bafed96452f3534c8310ce9f1f4dbec",
+      "filesystem_prefix_bytes": 122630144,
+      "filesystem_prefix_sha256": "62ccad0a1ab6d340dab144cab53330d3e7538a5d33d06a2ee4c1e5500fefcb04",
+      "raw_to_final_filesystem_prefix_identical": true
+    },
+    "system.img": {
+      "bytes": 483131392,
+      "sha256": "40535133b2cbb2d3f438f3ff2507fdeedf8b0fafeb0591eb54e5a6510218fbd9",
+      "filesystem_prefix_bytes": 440803328,
+      "filesystem_prefix_sha256": "15928f53a96b4c23c2f63eaf6cf286f3477a11e101d91f3ab8d26290d0b047e5",
+      "raw_to_final_filesystem_prefix_identical": true
+    },
+    "system_ext.img": {
+      "bytes": 96161792,
+      "sha256": "bab2b972bbb7865e93fa5fc4087c7ad17f3f43fc6d1da16792bbd0d4be57880a",
+      "filesystem_prefix_bytes": 62009344,
+      "filesystem_prefix_sha256": "e9a536c063a91d2fab64ac09a118deb174707bf73ab27a1b93d62ad1b6e66d5f",
+      "raw_to_final_filesystem_prefix_identical": true
+    },
+    "vbmeta.img": {
+      "bytes": 2097152,
+      "sha256": "4fa64d79174302ff6e2c4fb0f48380b089f413dae92767e53b8799f0c1254cf2"
+    },
+    "vbmeta_system.img": {
+      "bytes": 2097152,
+      "sha256": "dd8c661a1c19128d53908b48324ea77543dfadce11cc33c858fe650dfa080d7b"
+    }
+  },
+  "final_delivery_crypto_reverified_in_this_audit": false,
+  "prior_avb_report_sha256": "7ec4dbf3b9934fdd8d75e8dc54fbc41a19f6e51a1461b403fc6e19c25e4dfe52",
+  "format": 1,
+  "controls_update_candidate": {
+    "source_revision": "46c1c1be8683aa919893ea7903c3e4e7d5ba4877",
+    "version_code": 2,
+    "version_name": "1.1",
+    "apk_sha256": "85c4e773a3665cc72f1f4fc0fa9827cf70e94ab6277aec66823f349ceda95da9",
+    "installed_in_frozen_image": false,
+    "signer_matches_frozen": true,
+    "runtime_update_verified": false,
+    "class_inventory_comparison": {
+      "frozen_count": 150,
+      "candidate_count": 149,
+      "frozen_only": [
+        "Lapp/jarvis2/remote/R$xml;",
+        "Lapp/jarvis2/remote/R;"
+      ],
+      "candidate_only": [
+        "Lapp/jarvis2/remote/ControllerSettings$$ExternalSyntheticLambda11;"
+      ]
+    }
+  },
+  "controls_signer_certificate_sha256": "9af68fa2d543d27eb07d35163916ff898d5712337cb44aa7c30297d8c8cf9038",
+  "flavor": "vanilla",
+  "fresh_device_installation_or_rollback_verified_by_this_receipt": false,
+  "tools_sha256": {
+    "aapt2": "241ce216eaa2547b7104f26007ac5cf00fac4c12dee832455341619c0f2843db",
+    "dexdump": "35a815a529880dbe62642f78be55f840f0c0404e0da27c2d62511695ad8e0273"
+  }
+}

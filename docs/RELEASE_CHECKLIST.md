@@ -55,6 +55,7 @@ publication by this policy decision alone.
 - [ ] Fix launcher/lock-screen/notification behavior in product configuration rather than relying on leftover device state.
 - [ ] Rebuild the complete slot A candidate; compare all partition budgets, EROFS metadata, AVB descriptors, keys and rollback indexes offline.
 - [ ] Produce artifact hashes and a feature-to-image manifest. Older offline image sets do not contain every current app update.
+- [x] Bind 15 selected frozen-f38 feature payloads to the pinned signed archive and final filesystem data, recording versions and later update gaps in `manifests/frozen-f38-feature-evidence.json`. This receipt covers the older vanilla baseline, not a newly integrated candidate or every release feature.
 
 ## 3. Release security and privacy
 

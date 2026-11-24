@@ -31,11 +31,11 @@ image behavior. The ten files in the other four projects reconstructed exactly
 from their frozen public patches. The SetupWizard patch must likewise reconstruct
 the existing manifest, including its unchanged upstream content.
 
-Obtain the source supplement from the accompanying source-supplement archive or
-a separate checkout of the supplement commit identified by the release receipt.
-Verify that archive's published checksum or that exact commit before use. Keep it
-outside the Android device checkout. No future supplement commit ID is asserted
-here; the receipt must supply the actual identity after it exists. Apply each
+The source supplement is this repository at commit
+`225a2828d025ea9967d27ed2d0ee6455d555d395`. Obtain it through a separate checkout
+of that exact commit, or a source-supplement archive with a published verified
+checksum. Keep it outside the frozen Android device checkout; use only its
+listed supplementary patch rather than advancing the product source. Apply each
 series to its project in listed order, for example from the Android source root:
 
 ```sh
@@ -117,6 +117,12 @@ The resulting APK, three native libraries, license and expanded notices matched
 the frozen staged inputs byte-for-byte; the animation helper reproduced the
 exact pinned archive too. This preparation check used no existing host output
 or private build cache. It does not establish a clean full-ROM rebuild.
+
+The later [selected feature receipt](../manifests/frozen-f38-feature-evidence.json)
+binds 15 extracted payloads back to the exact signed target-files archive and
+the final delivery filesystem prefixes. It records package versions, selected
+source/bytecode observations and the remaining controls/Music update gaps.
+It is not a new build, complete image privacy/AVB audit or hardware qualification.
 
 The launcher helper extracts all three native libraries and notices from that
 exact APK. The optional animation must be explicitly staged: omitting it selects
