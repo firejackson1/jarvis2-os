@@ -9,8 +9,9 @@ is explicitly disabled. An unset port retains upstream fallback; positive ports,
 USB behavior, authentication and host adbd behavior stay intact. Existing
 `service.adb.listen_addrs` precedence is unchanged.
 
-The pure helper is exercised by both upstream `adb_test` / `adbd_test` GTests
-and the repository's lightweight C++ compilation test. No device is required
+The pure helper regression is registered in upstream `adb_test` / `adbd_test`
+and exercised by the repository's lightweight C++ compilation test. The host
+GTests were also executed; a native Android GTest run remains unverified. No device is required
 for the latter. Product builds must verify the final adbd payload and product
 property; host checks do not establish runtime port state.
 
