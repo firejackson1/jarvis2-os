@@ -338,3 +338,16 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   cases (five AVB cases skipped without build tools), privacy audit and eight
   Java suites. A fresh full target-files build is separately in progress under
   bounded memory/CPU with temporary swap and Bazzite kept running.
+
+- Read-only installation planning now cross-checks native JSON/text metadata and
+  validates every logical extent against the reserved prefix, backing capacity,
+  alignment and all other partition ranges. Only single-super linear layouts are
+  supported. Fresh local checks passed 89 Python cases (five AVB cases skipped),
+  privacy audit and eight Java suites. The preserved actual metadata/image set
+  still plans A with executed=false and live_physical_identity_verified=false;
+  B remains an unallocated foundation. This is not a writer or restore test.
+- A bounded userspace artifact audit confirmed development APK/OTA trust remains
+  in the earlier private candidate. The preserved launcher is separately signed.
+  No preauthorized-key filenames or private-key headers were found in the scoped
+  text scan, but binary privacy and vendor/ODM coverage were not established.
+  Release signing and network-ADB/updater default policy remain open work.
