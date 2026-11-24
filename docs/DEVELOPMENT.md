@@ -643,3 +643,43 @@ setup and new signing-key acceptance remain untested. Raw captures stay private.
 The first exec-out captures mixed dd diagnostics with binary stdout and are
 retained as non-authoritative; clean shell-v2 captures have exact expected lengths
 and the boot-control CRC validates.
+
+### Corrected candidate and installer checkpoint — 2026-11-24
+
+- Product source `f38da52af274a0e50c92a10cf279e62f44125358` completed a clean
+  offline build. Frozen original target-files SHA256
+  `bf6fa729cbc4df1d03fbe1eeb27f8abf861a00c01d38a6c780cf47b600845a2f`;
+  project-signed archive `b16c9d3bfbe0539dae01f328554718225525abeb43a2c238c9f16259bc92295f`.
+  Staging initially expected a versioned filename and verification initially
+  supplied a duplicated bin path; both wrappers stopped before promotion and
+  were corrected without rebuilding or re-signing. Rejected logs are retained.
+- Package/APEX signatures, native filesystem comparisons, system OTA certificate
+  replacement, image contents and complete stock-template AVB passed. Independent
+  fresh audit summary `774a819f5b13f6634bab41f603b610be72bc65e8a63b53262f08c4007de3f1a5`
+  has no open scoped findings. Actual loadable XML, all three grants, APK requests,
+  intended signer, native metadata and enforced allowlisting passed; runtime grants
+  remain untested. Whole-image AVB report
+  `8cee26a88cb20c97b282152ebf831412cba530784be23200a67171508f592f72`.
+- Portable vanilla ZIP: 560062457 bytes, SHA256
+  `870fce6c604b144f0a5eeeedb7b9208efa76a8aa98e51d961b52b683b2e0077f`.
+  Local-only GApps ZIP: 777922321 bytes, SHA256
+  `f48dbde4381e9c146fdb68a51fd14f5eeaa74445ec8742943d6ded5e0540541b`.
+  Both passed full member readback. Two actual GApps compositions produced
+  identical five-image sets, all ten files independently rehashed. No hardware
+  install or public binary publication follows from these checks.
+- Current device hashes differ from the older restore set in five partitions,
+  exactly explained by the recorded Google-app and landscape installations. A
+  separate current sixteen-partition private restore set now matches live hashes
+  before/after capture and passes AVB signature/leaf/key-binding consistency.
+  Old backups remain intact. This is verified backup consistency, not an actual
+  restoration or external hardware root-of-trust proof.
+- Added a recovery-only raw writer with pinned inputs, RAM linear mappings,
+  protected-byte checks and durable before-write/readback journals. Seventeen
+  file-backed flow tests cover partial writes, resume/restore, seven-target
+  transitions and distinct protected A/B data. Review fixed hidden metadata
+  mounts, unsafe staging, stale post-transfer targets/maps, completed-journal
+  misuse, mixed transition proofs and Recovery ADB state. Surviving dd processes
+  block resume; no automatic kill, boot, wipe, activation or LP writer exists.
+  Full host suite: 193 tests passed, five local signed-AVB skips, source audit and
+  eight Java suites passed. Actual recovery ABI, read-only metadata setup,
+  installation, fresh boot and interruption restoration remain unqualified.

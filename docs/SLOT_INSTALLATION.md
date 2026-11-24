@@ -86,3 +86,21 @@ It must not silently copy one metadata view over a different protected view.
 Either-slot release support remains incomplete until that path and the actual
 writer are verified. Do not present this planning tool or the private raw ZIP as
 a universal installer.
+
+## Experimental raw writer checkpoint
+
+[Recovery raw writer](CANDIDATE_INSTALLATION.md) documents the new offline-only
+implementation and its explicit operator prerequisites. It uses validated RAM
+linear maps and exact bounded writes; it does not invoke fastboot flashing,
+resize, snapshot cancellation or an LP metadata writer. File-backed simulations
+and independent code review passed; actual recovery execution remains unqualified.
+It refuses an empty target foundation and performs no automatic activation/wipe.
+
+For the pinned product `system/core` revision
+`ec299bf6da55702b7b9675d60a0faf2815f0dc6d`, skipping a same-size host resize is
+insufficient: fastbootd's logical flash path calls `CancelPartitionSnapshot()`,
+which writes through `PartitionBuilder::Write()` and updates both LP metadata
+views even when the UPDATED attribute was already clear. Debuggable flashing can
+also trigger overlay/scratch cleanup. The installed custom recovery's exact
+source binding is not established by this product-source inspection. Read-only
+getvar success and snapshot status None do not qualify either write path.

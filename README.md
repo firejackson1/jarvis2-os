@@ -3,7 +3,9 @@
 An **unofficial LineageOS 21 / Android 14** TV build for the 2026 onn 4K Pro
 (`jarvis2`). This project is independent of LineageOS, onn, Google and Amlogic.
 
-**Not a public ROM release yet. No files in this repository are an installer.**
+**Not a public ROM release yet. Candidate ZIPs are raw images, not OTA installers.**
+The experimental [recovery raw writer](docs/CANDIDATE_INSTALLATION.md) is under
+offline qualification; do not execute it on hardware without a reviewed test plan.
 The first private source build has booted slot A with existing data; Home and
 remote navigation were human-verified and image readback matched. Advanced
 integration, clean-install behavior and restoration remain open gates. Shared
@@ -34,6 +36,7 @@ Brotli decoder library (`libbrotli1` on Debian/Ubuntu). Read
 [Release signing](docs/RELEASE_SIGNING.md),
 [Raw image AVB assembly](docs/AVB_IMAGE_ASSEMBLY.md),
 [Offline candidate packaging](docs/CANDIDATE_PACKAGING.md),
+[Experimental recovery writer](docs/CANDIDATE_INSTALLATION.md),
 [Known issues and validation limits](docs/KNOWN_ISSUES.md) and
 [Development ledger](docs/DEVELOPMENT.md) before assembling images.
 
