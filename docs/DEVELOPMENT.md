@@ -770,3 +770,24 @@ interface and requested onn Bluetooth remote pairing/navigation. A separate
 recovery-only project is implementing that interface offline; no replacement
 recovery has been flashed. The public installation rehearsal must still work
 without private scripts, server access or an AI operator.
+
+### Clean-install side-panel activation, 2026-11-24
+
+- Read-only inspection found the companion installed at its system_ext
+  privileged path, with injection, audio-routing, media-control and privileged
+  Bluetooth permissions granted. Its accessibility setting was off and no key
+  service was enabled. This was missing activation, not missing side-panel code.
+- Saved the previous settings privately, enabled only the companion's key
+  service while preserving any existing service entries, and verified it bound
+  with no pending or crashed accessibility services. Direct Bluetooth activity
+  launch succeeded. The owner then verified both Bluetooth on Settings hold and
+  left widgets on double-press. No APK install, partition write, wipe, slot
+  operation or reboot was needed.
+- This live setting does not change the frozen f38 images. Added a release
+  gate for visible normal-user activation without ADB/AI and updated the
+  integration ledger. No personal service lists/preferences were added to source.
+- The later powered keep-awake setting is also device configuration, not part
+  of the frozen ROM. It does not qualify the unresolved genuine suspend fix.
+- Validation after these documentation updates: host suite ran 193 tests with
+  five local AVB-tool skips; all executed tests and eight Java suites passed.
+  Source privacy audit and `git diff --check` passed. No product source changed.

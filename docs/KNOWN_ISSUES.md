@@ -8,7 +8,7 @@ The development device has existing data and separately installed Google apps.
 |---|---|---|
 | Model/architecture | 2026 onn 4K Pro jarvis2; ARM32 Android 14 on stock ARM64 kernel | Other models and 64-bit Android are unsupported |
 | Home and remote | Owner verified home, focus and Select on a private slot-A build | Fresh pairing/defaults, repeated reboot and alternate-launcher tests |
-| Settings controls | Tap/hold/double actions verified during development; native overlay compiles | Exact final-image behavior after clean setup |
+| Settings controls | f38 system_ext companion and required grants verified live; enabling its disabled key service restored owner-verified Bluetooth hold and widget double-press after clean setup | First-run activation without ADB/AI, repeated binding/reboot and all custom actions |
 | AirPods | Owner verified removal pause and reinsertion resume | Final-image reconnect, competing sessions and other models |
 | Audio | Private HDMI/Bluetooth and dual-output tests | Receiver-based lossless passthrough proof; multi-headphone support is not established |
 | Sleep | A workaround stopped speaker clicking; a deeper wake test failed | Genuine suspend/wake fix and repeated hardware cycles |
@@ -27,6 +27,13 @@ See [slot installation](SLOT_INSTALLATION.md) and [restore evidence](RESTORE_PLA
 Production-key preserved-data upgrades from development-key builds are not
 supported. See [release signing](RELEASE_SIGNING.md). No document here authorizes
 a wipe or installation on the owner's development device.
+
+After a clean reset, remote side-panel shortcuts require the **Jarvis2 Remote
+Settings** accessibility service to be enabled. The app can already be present
+in the ROM while this service is off; reinstalling the ROM is not the remedy.
+Enable its service in Android Accessibility settings. This normal-user setup
+route still needs a recorded navigation test and clearer onboarding before
+public release. See [the integration ledger](PERSISTENT_FEATURES.md).
 
 For reproducible bugs, open an issue in this project's repository using the
 Developer preview bug template. Report the exact build, firmware base, steps and

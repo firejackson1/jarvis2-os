@@ -63,6 +63,7 @@ publication by this policy decision alone.
 - [ ] Make root debugging and unauthenticated network ADB opt-in in public builds; retain normal USB authorization by default.
 - [ ] Verify enforcing SELinux, app privilege allowlists, exported components and microphone permissions.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
+- [ ] Add and test remote-shortcut service activation in first-run/Settings without ADB or an AI. The clean f38 trial included the app but left its accessibility service disabled; owner-verified side panels returned after enabling it. Never bake in an owner's service list.
 - [ ] Check update/install compatibility and document which data is shared between slots.
 
 ## 4. Stability and hardware validation
