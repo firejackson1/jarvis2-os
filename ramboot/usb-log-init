@@ -1,0 +1,52 @@
+#!/bin/busybox sh
+# SPDX-License-Identifier: Apache-2.0
+if [ "$$" != 1 ]; then
+    printf '%s\n' 'Jarvis2 USB RAM diagnostic requires PID 1; refusing host execution.' >&2
+    exit 1
+fi
+GUARD_BB=/bin/busybox
+GUARD_STAGE=ram-root
+usb_log_stop() {
+    printf 'USB RAM diagnostic waiting at %s; no Android-init handoff.\n' "$GUARD_STAGE"
+    while :; do "$GUARD_BB" sleep 60; done
+}
+trap usb_log_stop EXIT
+case $("$GUARD_BB" stat -f -c '%T' /) in tmpfs|ramfs) ;; *) usb_log_stop;; esac
+umask 077
+set -f
+unset IFS
+export PATH=/bin LC_ALL=C
+GUARD_RUNTIME=/ramboot
+GUARD_WORKDIR=/ramboot/state
+GUARD_PROCROOT=/proc
+GUARD_SYSROOT=/sys
+cd / || usb_log_stop
+"$GUARD_BB" mkdir -m 700 "$GUARD_WORKDIR" || usb_log_stop
+exec >> "$GUARD_WORKDIR/startup.log" 2>&1
+printf '%s\n' 'Jarvis2 one-way USB RAM startup diagnostic'
+. /ramboot/startup-guard.sh || usb_log_stop
+. /ramboot/usb-log.sh || usb_log_stop
+GUARD_STAGE=views
+guard_prepare_views || usb_log_stop
+GUARD_STAGE=identity
+guard_validate_identity || usb_log_stop
+printf '%s\n' 'Board and kernel identity verified'
+_cmdline=$("$GUARD_BB" cat "$GUARD_PROCROOT/cmdline") || usb_log_stop
+_bootconfig=$("$GUARD_BB" cat "$GUARD_PROCROOT/bootconfig") || usb_log_stop
+case $_cmdline in *androidboot.force_normal_boot=1*) printf 'cmdline_force_normal_boot=1\n';;
+    *) printf 'cmdline_force_normal_boot=0\n';; esac
+case $_bootconfig in *'androidboot.force_normal_boot = "1"'*) printf 'bootconfig_force_normal_boot=1\n';;
+    *) printf 'bootconfig_force_normal_boot=0\n';; esac
+case "$_cmdline $_bootconfig" in *hibernation_resume_device*|*resume=*) printf 'resume_flag_present=1\n';;
+    *) printf 'resume_flag_present=0\n';; esac
+GUARD_STAGE=usb-modules
+GUARD_MODULE_DIR=/ramboot/modules
+guard_load_modules "$(guard_usb_module_sequence)" /ramboot/usb-modules.sha256 || usb_log_stop
+printf '%s\n' 'USB dependency prefix loaded; internal-storage driver not loaded'
+GUARD_STAGE=usb-gadget
+usb_log_setup || usb_log_stop
+printf '%s\n' 'ACM gadget bound; no shell, storage function, ADB or Android init'
+GUARD_STAGE=log-writer
+usb_log_start_writer || usb_log_stop
+GUARD_STAGE=ready
+usb_log_stop

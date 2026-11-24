@@ -39,6 +39,11 @@ The repacker produces an **unsigned** image, not a ready-to-install recovery.
 It cannot establish the Android version or validity of a supplied ramdisk.
 Its JSON report explicitly leaves signing and boot testing unverified.
 
+A separate [one-way USB RAM log mode](docs/RAM_USB_LOG.md) is being prepared to
+diagnose the stalled launch. It uses only the USB module prefix and never starts
+Android init or the internal-storage driver. It is not the recovery menu and
+has not been hardware-tested. Ordinary recovery assembly remains the default.
+
 ## Host verification
 
 ```sh

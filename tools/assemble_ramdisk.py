@@ -70,7 +70,9 @@ def module_sequence(function):
     return names
 
 
-def assemble(base, expected_sha256, inputs):
+def assemble(base, expected_sha256, inputs, *, mode='recovery'):
+    if mode not in ('recovery', 'usb-log-only'):
+        raise ValueError('Unknown RAM diagnostic mode')
     checked(base, expected_sha256)
     if len(base) % 4:
         raise ValueError('Base CPIO must end on a newc alignment boundary')
@@ -86,17 +88,21 @@ def assemble(base, expected_sha256, inputs):
             not in parsed[PREPARE.INIT]['data']):
         raise ValueError('Input is not the prepared diagnostic fragment')
     private = {}
-    for name in ('busybox', 'musl_loader', 'mmc_partitions', 'platform_cpio'):
+    names = ['busybox', 'musl_loader', 'platform_cpio']
+    if mode == 'recovery':
+        names.append('mmc_partitions')
+    for name in names:
         item = inputs[name]
         private[name] = checked(bounded_file(item['path']), item['sha256'])
     release = inputs['kernel_release']
     if not isinstance(release, str) or not re.fullmatch(r'[A-Za-z0-9_.+\-]{1,200}', release):
         raise ValueError('An exact kernel release is required')
-    numbers = private['mmc_partitions'].decode('ascii').splitlines()
-    if (not numbers or len(set(numbers)) != len(numbers)
-            or any(not re.fullmatch('[1-9][0-9]{0,7}', n) for n in numbers)
-            or not private['mmc_partitions'].endswith(b'\n')):
-        raise ValueError('Invalid physical partition inventory')
+    if mode == 'recovery':
+        numbers = private['mmc_partitions'].decode('ascii').splitlines()
+        if (not numbers or len(set(numbers)) != len(numbers)
+                or any(not re.fullmatch('[1-9][0-9]{0,7}', n) for n in numbers)
+                or not private['mmc_partitions'].endswith(b'\n')):
+            raise ValueError('Invalid physical partition inventory')
     for name in ('busybox', 'musl_loader'):
         info = AUDIT.elf_info(private[name])
         if not info or (info['bits'], info['machine']) != (64, 'AArch64') or info['elf_type'] not in (2,3):
@@ -110,8 +116,9 @@ def assemble(base, expected_sha256, inputs):
         if key in dependencies:
             raise ValueError('Duplicate stock module dependency record')
         dependencies[key] = [PurePosixPath(d).name for d in deps.split()]
-    storage = module_sequence('guard_module_sequence')
-    hardware = module_sequence('guard_hardware_sequence')
+    usb = module_sequence('guard_usb_module_sequence') if mode == 'usb-log-only' else []
+    storage = module_sequence('guard_module_sequence') if mode == 'recovery' else []
+    hardware = module_sequence('guard_hardware_sequence') if mode == 'recovery' else []
     if set(storage) & set(hardware):
         raise ValueError('Storage and hardware sequences overlap')
     entries = {}
@@ -131,10 +138,14 @@ def assemble(base, expected_sha256, inputs):
         entries[name] = (mode, payload)
 
     source_payloads = {
-        'ramboot-init': 'init', 'ramboot/storage-guard.sh': 'storage-guard.sh',
+        'ramboot-init': 'usb-log-init' if mode == 'usb-log-only' else 'init',
         'ramboot/startup-guard.sh': 'startup-guard.sh',
         'ramboot/init.hardware.rc': 'init.hardware.rc',
     }
+    if mode == 'usb-log-only':
+        source_payloads['ramboot/usb-log.sh'] = 'usb-log.sh'
+    else:
+        source_payloads['ramboot/storage-guard.sh'] = 'storage-guard.sh'
     for dest, source in source_payloads.items():
         add(dest, (ROOT / 'ramboot' / source).read_bytes(),
             stat.S_IFREG | (0o755 if dest == 'ramboot-init' else 0o644))
@@ -142,9 +153,12 @@ def assemble(base, expected_sha256, inputs):
     add('lib/ld-musl-aarch64.so.1', private['musl_loader'], stat.S_IFREG | 0o755)
     add('lib/libc.musl-aarch64.so.1', b'ld-musl-aarch64.so.1', stat.S_IFLNK | 0o777)
     add('ramboot/kernel.release', release.encode() + b'\n')
-    add('ramboot/mmc.partitions', private['mmc_partitions'])
+    if mode == 'recovery':
+        add('ramboot/mmc.partitions', private['mmc_partitions'])
     loaded = set()
-    for sequence, manifest in ((storage, 'modules.sha256'), (hardware, 'hardware.sha256')):
+    manifests = ((usb, 'usb-modules.sha256'),) if mode == 'usb-log-only' else (
+        (storage, 'modules.sha256'), (hardware, 'hardware.sha256'))
+    for sequence, manifest in manifests:
         lines = []
         for name in sequence:
             if name not in dependencies or not set(dependencies[name]) <= loaded:
@@ -173,6 +187,7 @@ def assemble(base, expected_sha256, inputs):
         'source_files_sha256': {dest: hashlib.sha256(entries[dest][1]).hexdigest()
                                 for dest in source_payloads},
         'storage_modules': storage, 'hardware_modules': hardware,
+        'usb_modules': usb, 'mode': mode, 'android_init_handoff': mode == 'recovery',
         'kernel_release': release, 'archive_audit': final,
         'runtime_dependencies_verified': False, 'selinux_qualified': False,
         'boot_tested': False, 'device_contacted': False,
@@ -184,12 +199,13 @@ if __name__ == '__main__':
     parser.add_argument('--diagnostic-cpio', type=Path, required=True)
     parser.add_argument('--expected-input-sha256', required=True)
     parser.add_argument('--inputs', type=Path, required=True)
+    parser.add_argument('--mode', choices=('recovery', 'usb-log-only'), default='recovery')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
         parser.error('Choose a fresh private output directory')
     result, report = assemble(bounded_file(args.diagnostic_cpio), args.expected_input_sha256,
-                              json.loads(bounded_file(args.inputs)))
+                              json.loads(bounded_file(args.inputs)), mode=args.mode)
     args.output.mkdir(parents=True, mode=0o700)
     (args.output / 'guarded.cpio').write_bytes(result)
     (args.output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')

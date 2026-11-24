@@ -2,14 +2,19 @@
 # Function library for the guarded PID 1 entrypoint. Never source on a host
 # with a real BusyBox unless every privileged operation is safely substituted.
 
-guard_module_sequence() {
+guard_usb_module_sequence() {
     printf '%s\n' amlogic-gkitool.ko amlogic-debug-iotrace.ko amlogic-uart.ko \
         amlogic-hwspinlock.ko amlogic-debug.ko amlogic-secmon.ko amlogic-cpuinfo.ko \
         page_trace.ko amlogic-memory-debug.ko aml_cma.ko clk-scmi.ko amlogic-clk.ko \
         amlogic-clk-soc-s7d.ko amlogic-aoclk-soc-t5w.ko amlogic-gpio.ko \
         amlogic-pinctrl-soc-s7d.ko amlogic-mailbox.ko amlogic-pwm.ko pwm-regulator.ko \
         gpio-regulator.ko amlogic-reset.ko amlogic-power.ko amlogic-cpufreq.ko \
-        amlogic-thermal.ko amlogic-usb.ko cqhci.ko amlogic-mmc.ko
+        amlogic-thermal.ko amlogic-usb.ko
+}
+
+guard_module_sequence() {
+    guard_usb_module_sequence
+    printf '%s\n' cqhci.ko amlogic-mmc.ko
 }
 
 guard_hardware_sequence() {
@@ -63,7 +68,7 @@ guard_prepare_views() {
     "$GUARD_BB" mount -t sysfs -o ro,nosuid,nodev,noexec sysfs "$GUARD_SYSROOT" || return 1
 }
 
-guard_validate_boot() (
+guard_validate_identity() (
     _expected=$("$GUARD_BB" cat "$GUARD_RUNTIME/kernel.release") || return 1
     [ -n "$_expected" ] || return 1
     _running=$("$GUARD_BB" uname -r) || return 1
@@ -71,6 +76,10 @@ guard_validate_boot() (
     printf '%s\0' s7d_s905x5m_bm201-3g > "$GUARD_WORKDIR/expected-board" || return 1
     "$GUARD_BB" cmp -s "$GUARD_WORKDIR/expected-board" \
         "$GUARD_SYSROOT/firmware/devicetree/base/compatible" || return 1
+)
+
+guard_validate_boot() (
+    guard_validate_identity || return 1
     _cmdline=$("$GUARD_BB" cat "$GUARD_PROCROOT/cmdline") || return 1
     _bootconfig=$("$GUARD_BB" cat "$GUARD_PROCROOT/bootconfig") || return 1
     # Match the pinned Android init's force-normal-boot detection. Do not hand

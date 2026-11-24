@@ -80,6 +80,35 @@ class AssembleRamdiskTests(unittest.TestCase):
         again, _ = self.assemble()
         self.assertEqual(result, again)
 
+    def test_explicit_usb_log_mode_has_no_storage_modules_or_android_handoff(self):
+        inputs = {k: v for k, v in self.inputs.items() if k != 'mmc_partitions'}
+        args = (self.base, hashlib.sha256(self.base).hexdigest(), inputs)
+        result, report = self.tool.assemble(*args, mode='usb-log-only')
+        overlay = self.tool.AUDIT.parse_cpio(result[len(self.base):])
+        self.assertEqual(report['mode'], 'usb-log-only')
+        self.assertFalse(report['android_init_handoff'])
+        self.assertEqual(report['usb_modules'], MODULES[:-2])
+        self.assertEqual(report['storage_modules'], [])
+        self.assertEqual(report['hardware_modules'], [])
+        self.assertEqual(overlay['ramboot-init']['data'], (ROOT / 'ramboot/usb-log-init').read_bytes())
+        self.assertIn('ramboot/usb-log.sh', overlay)
+        for path in ('ramboot/mmc.partitions', 'ramboot/modules.sha256',
+                     'ramboot/hardware.sha256', 'ramboot/storage-guard.sh',
+                     'ramboot/modules/amlogic-mmc.ko', 'ramboot/modules/cqhci.ko'):
+            self.assertNotIn(path, overlay)
+        self.assertEqual(self.tool.assemble(*args, mode='usb-log-only')[0], result)
+        default, normal = self.assemble()
+        default_overlay = self.tool.AUDIT.parse_cpio(default[len(self.base):])
+        self.assertEqual(normal['mode'], 'recovery')
+        self.assertTrue(normal['android_init_handoff'])
+        self.assertEqual(default_overlay['ramboot-init']['data'], (ROOT / 'ramboot/init').read_bytes())
+        self.assertNotIn('ramboot/usb-log.sh', default_overlay)
+
+    def test_unrecognized_mode_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, 'mode'):
+            self.tool.assemble(self.base, hashlib.sha256(self.base).hexdigest(),
+                               self.inputs, mode='auto')
+
     def test_changed_private_input_or_base_hash_is_rejected(self):
         (self.root / 'busybox').write_bytes(b'changed')
         with self.assertRaises(ValueError): self.assemble()

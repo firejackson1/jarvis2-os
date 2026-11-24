@@ -89,6 +89,24 @@ esac
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(calls, MODULES)
 
+    def test_usb_only_prefix_excludes_both_storage_roots(self):
+        result, calls = self.run_library('guard_usb_module_sequence')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.splitlines(), MODULES[:-2])
+        self.assertEqual(calls, [])
+
+    def test_identity_only_check_does_not_weaken_normal_boot_validation(self):
+        (self.proc / 'bootconfig').write_text('androidboot.force_normal_boot = "1"')
+        result, calls = self.run_library('guard_validate_identity')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(calls, [])
+        result, calls = self.run_library('guard_validate_boot')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+        (self.root / 'kernel.release').write_text('wrong-kernel\n')
+        result, calls = self.run_library('guard_validate_identity')
+        self.assertNotEqual(result.returncode, 0)
+
     def test_changed_missing_reordered_or_extra_module_prevents_all_loading(self):
         original = self.manifest.read_text()
         for change in ('hash', 'missing', 'reorder', 'extra', 'path'):
