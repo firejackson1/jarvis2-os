@@ -13,6 +13,46 @@ import struct
 LIMIT = 256 * 1024 * 1024
 
 
+def overlay_layers(layers):
+    """Replay file data/links in archive order; each trailer resets link IDs."""
+    entries, originals, overwritten = {}, {}, []
+    linkable = (stat.S_IFREG, stat.S_IFBLK, stat.S_IFCHR, stat.S_IFIFO, stat.S_IFSOCK)
+    for layer in layers:
+        links = {}
+        overwritten.extend(sorted(set(entries) & set(layer)))
+        for name, entry in layer.items():
+            raw = entry.get('archive', entry)
+            mode = raw['mode']
+            kind = stat.S_IFMT(mode)
+            key = None
+            if kind in linkable and raw.get('nlink', 1) > 1:
+                key = (*raw['dev'], raw['ino'], kind)
+            linked = key is not None and key in links
+            previous = entries.get(name)
+            if linked:
+                node = links[key]
+            elif stat.S_ISREG(mode) and previous and stat.S_ISREG(previous['mode']):
+                node = previous
+            else:
+                node = {}
+            if stat.S_ISREG(mode):
+                # A nonempty later link replaces the shared contents. An empty
+                # link retains them; an ordinary file open truncates even empty.
+                data = node.get('data', b'') if linked and not raw['data'] else raw['data']
+                node.update(raw)
+                node['data'] = data
+            elif not linked:
+                node.update(raw)
+            entries[name] = node
+            originals[name] = raw
+            if key is not None:
+                links.setdefault(key, node)
+    # Preserve each original header/payload for replay by a later layer audit.
+    # Views are separate dictionaries; auditing never mutates caller inputs.
+    return ({name: {**node, 'archive': originals[name]} for name, node in entries.items()},
+            overwritten)
+
+
 def parse_cpio(data):
     if len(data) > LIMIT:
         raise ValueError('Ramdisk exceeds the inspection size limit')
@@ -41,7 +81,7 @@ def parse_cpio(data):
         if name == 'TRAILER!!!':
             if size or any(data[offset:]):
                 raise ValueError('Unexpected data after archive trailer; supply layers separately')
-            return entries
+            return overlay_layers([entries])[0]
         if name.startswith('/') or '..' in PurePosixPath(name).parts or any(ord(c) < 32 for c in name):
             raise ValueError('Unsafe archive path')
         name = str(PurePosixPath(name))
@@ -51,7 +91,9 @@ def parse_cpio(data):
             raise ValueError('Duplicate archive path: ' + name)
         if magic == b'070702' and sum(payload) & 0xffffffff != fields[12]:
             raise ValueError('CPIO checksum mismatch')
-        entries[name] = {'mode': mode, 'uid': uid, 'gid': gid, 'data': payload}
+        entries[name] = {'mode': mode, 'uid': uid, 'gid': gid, 'data': payload,
+                         'ino': fields[0], 'nlink': fields[4], 'mtime': fields[5],
+                         'dev': fields[7:9], 'rdev': fields[9:11]}
     raise ValueError('Archive is truncated or lacks a trailer')
 
 
@@ -97,13 +139,13 @@ def elf_info(data):
 
 
 def audit_layers(layers, expected_recovery_arch=None):
-    entries, overwritten = {}, []
-    for layer in layers:
-        overwritten.extend(sorted(set(entries) & set(layer)))
-        entries.update(layer)
+    layers = list(layers)
+    entries, overwritten = overlay_layers(layers)
     required = {}
     for name in ('init', 'system/bin/recovery'):
         entry = resolve(entries, name)
+        if entry and (not stat.S_ISREG(entry['mode']) or not entry['mode'] & 0o111):
+            raise ValueError('Entrypoint is not an executable regular file: ' + name)
         info = elf_info(entry['data']) if entry else None
         if info is None or info['elf_type'] not in (2, 3):
             raise ValueError('Missing native executable in effective ramdisk: ' + name)
@@ -113,14 +155,26 @@ def audit_layers(layers, expected_recovery_arch=None):
         if required['system/bin/recovery']['machine'] != machine:
             raise ValueError('Recovery executable does not match requested architecture')
     private_key = re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH |ENCRYPTED )?PRIVATE KEY-----')
-    blocked, elf_counts, executable_counts, init_scripts, policy_files = [], Counter(), Counter(), [], []
+    def blocked_payload(name, payload):
+        return (PurePosixPath(name).name in ('adb_keys', 'default_adb_keys')
+                or name.endswith('.pk8') or private_key.search(payload))
+
+    # An overwritten key still exists in the supplied archive bytes. Inspect
+    # original payloads as well as the effective filesystem; never print them.
+    blocked_archive = []
+    for index, layer in enumerate(layers):
+        for name, entry in sorted(layer.items()):
+            raw = entry.get('archive', entry)
+            if blocked_payload(name, raw['data']):
+                blocked_archive.append({'layer': index, 'path': name})
+    blocked = {item['path'] for item in blocked_archive}
+    elf_counts, executable_counts, init_scripts, policy_files = Counter(), Counter(), [], []
     for name, entry in entries.items():
+        payload = entry['data']
+        if blocked_payload(name, payload):
+            blocked.add(name)
         if not stat.S_ISREG(entry['mode']):
             continue
-        payload = entry['data']
-        if (PurePosixPath(name).name in ('adb_keys', 'default_adb_keys') or name.endswith('.pk8')
-                or private_key.search(payload)):
-            blocked.append(name)
         info = elf_info(payload)
         if info:
             elf_counts[info['machine'] + '/' + str(info['bits'])] += 1
@@ -132,7 +186,8 @@ def audit_layers(layers, expected_recovery_arch=None):
             policy_files.append(name)
     return {'entries': len(entries), 'required': required, 'elf_counts': dict(elf_counts),
             'userspace_elf_counts': dict(executable_counts),
-            'blocked_artifacts': sorted(blocked), 'overwritten_layer_entries': overwritten,
+            'blocked_artifacts': sorted(blocked), 'blocked_archive_artifacts': blocked_archive,
+            'overwritten_layer_entries': overwritten,
             'init_scripts': sorted(init_scripts), 'policy_files': sorted(policy_files),
             'boot_tested': False, 'linked_dependencies_verified': False,
             'startup_writes_reviewed': False, 'device_contacted': False}

@@ -83,6 +83,15 @@ are implemented and checked.
 
 ## Task 3: Package and qualify the RAM image
 
+Preparation: the archive inspector now retains original entry payloads and
+newc link identity, resolves regular-file hard links and models ordinary-file
+updates versus link replacement across layers. Credential checks inspect all
+input payloads, including data overwritten by another entry or layer. Host
+tests passed after reproducing the missing behavior first. A regression audit
+of the saved older ARM32 archives preserved their entrypoint/ELF/init/policy
+inventory; this is not an audit of the pending Android 17 output. Original CPIO
+byte streams must remain intact when packaging; the report is not a serializer.
+
 - [ ] Use the actual new recovery ramdisk and compatible verified kernel inputs.
 - [ ] Preserve archive metadata/overlays, validate effective entrypoints and
       utility dependencies, and reject oversized or mismatched inputs.

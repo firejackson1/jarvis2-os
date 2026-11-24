@@ -82,6 +82,21 @@ ADB trust files and records policy/init-script inventory. It rejects unsafe path
 duplicates, truncation and symlink loops. Runtime dependency linking, SELinux
 correctness and startup-write behavior remain separate verification tasks.
 
+The inspector retains newc inode/device/link metadata and original entry data,
+resolves regular-file hard links in either payload order and tracks shared-file
+updates across archive layers. Credential scanning includes every original
+payload, even if later entries replace it. Required native entrypoints must be
+executable regular files. Keep the original CPIO byte streams for packaging;
+the effective-file report is not an archive serializer or a full kernel
+filesystem emulator.
+
+Hard-link behavior follows the kernel's
+[initramfs format](https://www.kernel.org/doc/Documentation/early-userspace/buffer-format.txt)
+and the Linux 5.15
+[unpacker](https://github.com/torvalds/linux/blob/v5.15/init/initramfs.c).
+Synthetic tests cover link identity, payload placement, metadata updates,
+ordinary-file overlays and replacing a single alias with a new link or symlink.
+
 ```sh
 python3 tools/audit-ramdisk.py --cpio /private/platform.cpio \
   --cpio /private/recovery.cpio --expected-recovery-arch arm64 \
@@ -123,7 +138,9 @@ lunch lineage_jarvis2_recovery trunk_staging userdebug
 m out/target/product/jarvis2_recovery/ramdisk-recovery.img
 ```
 
-The product and dependency graph still require a full Android 17 build test.
+The pinned product now passes full Soong analysis and Make rule generation and
+has entered platform compilation. The complete Android 17 link and ramdisk
+artifact remain unverified.
 No boot/kernel/DTB image is to be installed from this prototype configuration.
 The kernel is intentionally not rebuilt here. The minimal recovery fstab omits
 userdata and formattable entries; storage, encryption and update operations
