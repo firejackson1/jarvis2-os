@@ -279,3 +279,22 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   downloads remain untested; Google APKs are not added to public source/artifacts.
 - Bazzite was stopped under renewed owner authorization for build acceleration,
   then automatically restarted after the heavy jobs completed. Trace continues.
+
+## Play Store app compatibility correction
+
+- Actual VLC ARMv7 APK badging reports an implied landscape feature requirement;
+  the device did not report that feature. Added the truthful landscape declaration
+  and a regression that fails against the previous XML.
+- RAM verification plus device check-in/Play Store data refresh enabled both VLC
+  and YouTube TV installation through Play Store, including their ARMv7 splits.
+- Persisted only system_a and vbmeta_system_a from the checked image set. Full
+  readback hashes matched; shared metadata and protected A/B boot/recovery hashes
+  stayed unchanged. Booted A enforcing; the feature persisted without a RAM mount
+  and both applications launched. No slot switch or userdata wipe.
+- Source fix is 0311433. Local checks: 45 Python cases (five signed AVB integration
+  cases explicitly skipped without the Android tree), source privacy audit and
+  eight Java suites passed. The private candidate separately passed the complete
+  AVB signature/descriptor/key-binding audit.
+- Clean-checkout native overlay work is still unverified and separate from this
+  fix. Its resource-bounded compile was stopped to prioritize the live regression;
+  do not infer a successful native overlay build from these compatibility results.

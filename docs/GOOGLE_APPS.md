@@ -36,11 +36,35 @@ layout, not a general installer or proof that B is bootable.
 
 Android completed boot on A with SELinux enforcing and userdata retained. Google
 Play services, Play Store and Services Framework resolved to their system image
-paths. Play Store launched and the Google sign-in screen rendered. Account login,
-downloads, certification, Cast and voice operation remain unverified.
+paths. Play Store launched and the Google sign-in screen rendered. Account login
+and Play Store downloads were subsequently verified; certification, Cast, voice
+and media playback remain unverified.
 
 An existing provisioned user did not automatically receive all newly installed
 Google TV Bluetooth defaults. The remote and firmware-update services crashed
 without BLUETOOTH_CONNECT. Applied only requested Bluetooth grants listed in the
 upstream default-permissions XML; no location grant or account setup was automated.
 Fresh-user/default-permission behavior needs separate testing.
+
+## Landscape feature correction
+
+Play Store initially marked both VLC and YouTube for Android TV incompatible.
+The device declared Leanback but omitted `android.hardware.screen.landscape`.
+VideoLAN's official ARMv7 APK explicitly reports an implied landscape requirement
+because its manifest contains landscape activities. Android's
+[Play filtering documentation](https://developer.android.com/google/play/filters)
+describes feature-based filtering.
+
+Added the actual landscape capability to the device permission XML. A regression
+fails with the old declaration and passes with the correction. A RAM test made
+the feature visible to PackageManager; a successful Google device check-in and
+reset of Play Store's local data refreshed the server/catalog view. The Google
+account was retained. Both apps then installed directly from Play Store with
+ARMv7 splits, demonstrating that these rejections were not an ARM32 limitation.
+
+The persistent private A patch changed only system_a and vbmeta_system_a. Exact
+readback hashes, unchanged captured super metadata and protected A/B boot/recovery
+hashes passed. After reboot, PackageManager reported landscape support without a
+RAM bind mount, SELinux was enforcing, and both Play-installed apps launched.
+Userdata was not wiped and the temporary stay-awake setting was restored.
+This does not establish compatibility with ARM64-only apps or Google certification.
