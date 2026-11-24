@@ -858,3 +858,41 @@ without private scripts, server access or an AI operator.
 - Validation: `tools/test-host.sh` ran 193 tests with five local AVB-tool skips;
   all executed tests and eight Java suites passed. Source privacy audit and
   `git diff --check` passed. No product source changed in this checkpoint.
+
+### Music session cleanup candidate, 2026-11-24
+
+- Read-only source inspection at pinned Music revision
+  `c119d5a52f80289c7f939746ddc31c8bcee2a3ca` found a MediaSession created in
+  onCreate and an empty onDestroy. A live service start/stop left additional
+  inactive sessions (20 before, 22 afterward), with no service running at the
+  end. Bluetooth browsing can concurrently recreate this service, so this is
+  not an isolated per-cycle leak measurement or a demonstrated sleep cause.
+- The diagnostic script stopped after one cycle because it required exit zero:
+  this Android shell's successful `am stopservice` prints "Service stopped"
+  but returns -1 (255). Inspected its pinned implementation and independently
+  confirmed that the service was absent afterward. No force-stop, UI launch,
+  sleep/wake request, reboot, APK update or slot action was used.
+- Added a future-build Music patch to release/null its session and call the
+  superclass. A pinned-source fixture regression first failed for the missing
+  patch; after implementation the patched callback passed normal, repeated
+  and null-session cleanup, while the original failed its resource-leak
+  assertion. This exercises actual callback statements with instrumented
+  ownership/superclass counters, not an Android framework simulation.
+- Compiled the complete changed class against SDK 34 and the existing matching
+  Music javac jar in a fresh private directory. Javac exited zero in 1.7 seconds,
+  capped at 256 MiB heap/512 MiB cgroup/no swap. Bazzite stayed running. The
+  original Android project remained clean and byte-unchanged; no Soong graph,
+  APK, ROM image or frozen archive was rebuilt.
+- Original source SHA256
+  `f1c30950182cd36f08ff8dfede5ff9f31815ac77524f22c8081d7ec7b9a8bf14`;
+  patched source `9683f799b48024f953fd28eaf3224f1670c158fde6a1439e91f0a879d17a0a13`;
+  patch `7987a702175bffbec5c4f17b5a27b792ff65f0457c68bea2873448aa445a4911`.
+  SDK hash `802de40af3f2967e56c4d1e9b75a19963815bf4b6c73ce2bbd24ecd9f7561e10`;
+  matching classpath `3e2235e65429097a78e8408df4a3bf6867951cf47b20ae3f60c24d2bb51022df`.
+- The patch is not installed. Future-image integration, an on-device lifecycle
+  check, browser reconnect and normal playback remain open. Speaker/suspend
+  qualification is unchanged.
+- Validation: host suite ran 194 tests with five local AVB-tool skips; all
+  executed tests and eight Java suites passed. Source privacy audit and diff
+  checks passed. A separate read-only reviewer found no actionable code issue
+  and confirmed the callback regression's framework-testing limits.

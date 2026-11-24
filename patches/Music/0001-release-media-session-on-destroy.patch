@@ -1,0 +1,24 @@
+From: Jarvis2 OS contributors
+Subject: [PATCH] Music: release the owned session when the browser service stops
+
+An exported MediaBrowserService may be created repeatedly by browsing clients
+even when no music is playing. Destroying the service must release its session
+and the superclass state. Clear the reference to tolerate repeated cleanup.
+
+--- a/src/com/android/music/MediaPlaybackService.java
++++ b/src/com/android/music/MediaPlaybackService.java
+@@ -65,7 +65,13 @@ public class MediaPlaybackService extends MediaBrowserService {
+     }
+ 
+     @Override
+-    public void onDestroy() {}
++    public void onDestroy() {
++        if (mSession != null) {
++            mSession.release();
++            mSession = null;
++        }
++        super.onDestroy();
++    }
+ 
+     @Override
+     public BrowserRoot onGetRoot(String clientPackageName, int clientUid, Bundle rootHints) {

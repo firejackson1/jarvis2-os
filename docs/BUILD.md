@@ -51,6 +51,9 @@ platform signing configuration. They must agree for system privileges to work.
    build `TvSettingsTwoPanel`, `com.android.btservices` and `com.android.adbd`.
    Also apply `patches/SetupWizard/series` to pinned `packages/apps/SetupWizard`
    and build `LineageSetupWizard`; see patches/SetupWizard/README.md.
+   For new builds, apply `patches/Music/series` to pinned `packages/apps/Music`
+   and rebuild `Music`; its service cleanup patch is not in the frozen f38
+   images. See patches/Music/README.md for the remaining live checks.
    The ADB patch is required with the product negative-port default: unpatched
    adbd can otherwise fall back to network listening when USB is absent. See
    patches/Adb/README.md for scope and the mandatory launcher Updater exclusion.
