@@ -120,7 +120,7 @@ publication by this policy decision alone.
 - [x] User verified remote navigation/select, Settings tap/hold, and widget double-press on the development device.
 - [x] User verified AirPods removal pause and reinsertion resume after the duplicate-pause fix.
 - [x] User verified custom boot animation visually; it must not delay boot.
-- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; CI also runs 34 Python tests including five signed AVB fixtures.
+- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 62 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
 - [x] Main Settings categories and the native Remotes & Accessories AirPods link were inspected live; link opens pause/resume and Back returns correctly.
 - [x] Smart Home provider configuration/shortcut UI installed; no provider account or voice conversation verified yet.
 - [x] Built-in microphone produced a one-second 16 kHz capture; samples discarded, not saved or transmitted.

@@ -298,3 +298,34 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - Clean-checkout native overlay work is still unverified and separate from this
   fix. Its resource-bounded compile was stopped to prioritize the live regression;
   do not infer a successful native overlay build from these compatibility results.
+
+## Release preparation checkpoint — 2026-11-24
+
+- Native Settings overlay now builds directly from source against the actual
+  TvSettingsTwoPanel resource library, with no staged overlay APK. The native
+  build completed 1003 actions. APK v3 signature verification passed and matched
+  the build's platform certificate; static overlay target/property scope was
+  checked. This remains a development-key compile, not production signing or a
+  fresh full-image hardware test. Existing product outputs need installclean
+  when migrating away from the previous prebuilt installation path.
+- Host checks: 62 Python cases, with five signed AVB integration cases explicitly
+  skipped on the local host, source privacy audit and eight Java suites passed.
+  These checks do not prove hardware behavior or image redistribution rights.
+- Private no-Google candidate ZIP assembled from the preserved base plus the
+  landscape correction. Extracted filesystem comparison found only the intended
+  XML difference; the coherent five-image AVB set passed offline verification.
+  The exact combined candidate has not been hardware tested and has no installer.
+- The separate Google apps input is pinned in manifests/gapps-input.json. The
+  original upstream ZIP is privately staged, but redistribution permission is
+  unverified. Public delivery is its exact upstream URL and checksum; ordinary
+  recovery sideload into these EROFS images is not supported.
+- Private release keys were generated and an encrypted off-host backup restored
+  in memory, with all 204 archived files verified against the backup manifest.
+  The unlock secret is held separately in the owner's vault. No private key is
+  included in this repository. Production keys have not signed a candidate or
+  been accepted by the hardware; existing-data migration remains unproven.
+- Built sign_target_files_apks, check_target_files_signatures and apksigner from
+  the pinned Android tree; all three help/runtime checks passed. These are tools
+  available for the next signing step, not evidence that signing is complete.
+- Bazzite was automatically restored after host-tool compilation and remains
+  running. This checkpoint performed no device flash, reboot, wipe or slot change.
