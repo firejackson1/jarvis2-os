@@ -372,3 +372,12 @@ monitored. No automatic reboot, flash or partition change is part of this work.
 - These are source/host results. The active full build predates this patch;
   final adbd APEX, installed property precedence, absence of Updater and runtime
   listener state still need image/hardware verification before release.
+
+- A private signing-pipeline rehearsal used the preserved historical target-files
+  archive. An output APK passed signature verification and its certificate matched
+  the new project release certificate. The pipeline then failed at the first APEX
+  because the input lacks avb_avbtool metadata. The partial archive is not a
+  candidate or release. This establishes one APK key use, not complete package,
+  APEX or image signing, hardware trust or migration compatibility. Key bytes and
+  the verified backup remain unchanged; generation-time inventory flags are not
+  current key-use status. Required metadata preparation is being corrected.
