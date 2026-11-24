@@ -167,3 +167,20 @@ GitHub CI prepares a small fixture-tool layout from the exact pinned standalone
 avbtool.py source and runs these signed-image cases as part of host checks. The
 source SHA-256 is checked before execution; OpenSSL supplies fixture key generation.
 This fixture layout is not a full Android build or evidence of ROM bootability.
+
+## New custom recovery source (separate platform checkout)
+
+The ARM64 LCARS recovery port is source-only on
+[`recovery17-lcars`](https://github.com/firejackson1/jarvis2-os/tree/recovery17-lcars),
+currently pinned at `650217efee5a79b05d923758993fd004d0489334`.
+Its root is a separate recovery device tree intended for
+`device/onn/jarvis2_recovery` in a separate LineageOS 24 / Android 17 checkout.
+It is not the LineageOS 21 ROM device tree or a ready-to-flash image. Keep the
+frozen ROM checkout intact when obtaining it. Follow that source's README and
+upstream pins; a full link, ramdisk audit, AVB integration, Bluetooth backend,
+RAM boot and restoration tests remain release gates.
+
+The corrected f38 stock-recovery engineering trial does not satisfy the owner's
+requirement for a public package containing this custom recovery. Do not publish
+that trial as the final release or reuse its hardware results as proof for a
+future recovery image.
