@@ -35,6 +35,14 @@ failures; it does not make a failing build pass. The exact failed compilations
 passed after their header fixes, followed by the full target. This was a resumed
 build; an independent clean byte-for-byte reproduction has not been performed.
 
+An independent rebuild is now running against the same frozen sources, build
+number and epoch. A private mount namespace binds an empty output directory at
+the original `out` path, including a new Go cache, so original outputs remain
+intact and path names do not change. A fresh audit matched all 1,240 project
+revisions with exactly the five expected patched projects. This is an active
+check, not a successful reproduction result; compare the final artifact before
+claiming byte identity.
+
 ## Output and inspection
 
 | Artifact | Bytes | SHA256 |
@@ -78,8 +86,12 @@ hardware overlay, and has not booted.
 The separate [guarded CPIO assembly](GUARDED_RAMDISK.md) now supplies that overlay
 privately, including verified ordered storage/hardware module inputs and the
 historical complete partition-number manifest. Boot-container packaging is held
-because the larger compressed ramdisk does not fit the prior declared load-address
-spacing. None of these offline results establish a successful device boot.
+because the larger compressed ramdisk exceeds the prior declared load-address
+spacing under a direct-load assumption. The subsequent
+[placement review and actual legacy-v2 packaging](RAM_BOOT_CONTAINER.md) found
+vendor-source relocation and produced a private candidate retaining the proven
+reference fields. This corrects the header-only inference; exact stock behavior
+and a successful device boot remain unverified.
 
 Keep the original artifact and private audit receipts. This fragment is not a
 replacement for the working installed recovery.

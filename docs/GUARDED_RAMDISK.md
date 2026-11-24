@@ -99,9 +99,12 @@ The earlier working legacy-v2 image declares ramdisk address `0x01000000`, DTB
 address `0x01f00000` and kernel address `0x02080000`. Its space before the DTB is
 15,728,640 bytes. This new compressed ramdisk is 20,299,793 bytes, so those
 declared regions overlap if reused unchanged. Do not blindly reuse that layout.
-The bootloader's actual relocation behavior and a suitable nonoverlapping RAM
-layout must be checked before preparing a hardware launch. This is distinct from
-the overall Fastboot download size limit.
+This was a conditional direct-load concern, not a proven stock collision.
+The [subsequent vendor-source and environment review](RAM_BOOT_CONTAINER.md)
+found a legacy-image source-offset reader and LMB relocation. A complete private
+candidate now retains the proven reference fields; exact stock relocation and
+runtime FDT behavior remain unverified. The overall download-size limit is a
+separate check.
 
 Remaining gates include that container layout, the complete effective init/import
 and linker/policy behavior, a current preflight/return plan, authorized RAM boot,

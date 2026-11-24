@@ -182,3 +182,41 @@ Ruling: the earlier legacy-v2 header's declared ramdisk-to-DTB gap is only
 layout into a candidate hardware launch. Check actual bootloader relocation and
 nonoverlapping RAM regions first. A valid CPIO and total download-size check alone
 do not establish a valid boot-container memory layout.
+
+Follow-up ruling from source inspection: the related S7D vendor implementation
+uses `boot/amlimage-android.c`, selected by `CONFIG_AMLOGIC_MODIFY`, rather than
+the generic parser. For legacy images its ramdisk reader returns the source
+offset inside the downloaded image; the header's ramdisk address is printed but
+is not that reader's destination. `boot_ramdisk_high` subsequently uses LMB and
+`initrd_high`. Two CRC-valid saved stock environment records agree on
+`initrd_high=1f800000`. The prior header-only spacing observation is therefore a
+potential overlap under direct loading, not proof of a stock failure. The
+related source is not binary-equivalent proof of the onn's packed stock BL33.
+
+Next offline package step: retain the proven reference image's v2 fields and
+exact kernel/DTB, replace only its ramdisk using pinned AOSP tools, and set
+explicit `rdinit=/ramboot-init panic=0`. Bind all inputs and verify the unpacked
+output and download budget. Do not invent a new fixed destination based on the
+header-only concern. Keep relocation, runtime FDT fixups, startup and hardware
+qualification open in the resulting private candidate report. No boot command
+belongs in this packaging tool.
+
+Executed checkpoint: the private legacy-v2 candidate is 41,138,176 bytes,
+SHA256 `d2fb4d1a5b24685ba8ca1c994ddb83d5e7a47d32387f8af6e03338b772cf198b`.
+Two AOSP packing runs produced identical bytes; extracted kernel/DTB and guarded
+CPIO match exact inputs. The only intentionally changed recognized header field
+is command line (`panic=0`). Five new real-AOSP fixture tests first failed before
+the packer existed, then passed, including rejection and budget cleanup; a report
+regression reproduced an overly broad unchanged-header claim and now explicitly
+identifies the command-line exception. Complete suite: 61 Python tests plus three
+native executables and pinned-header syntax. No device action occurred.
+
+Operational ruling: use the currently freed build memory for an independent
+native recovery rebuild in an empty output directory bound at the same path
+inside a private mount namespace. This avoids changing embedded output-path
+strings and preserves the original output tree. A fresh all-project audit passed
+with exactly the five expected patched projects. Use an owned 8 GiB swap file,
+24 GiB memory-high/28 GiB maximum/16 GiB swap maximum, a 12 GiB filesystem reserve
+and the existing 64 GiB thin-pool reserve. Scope the return watcher to the exact
+build invocation; after it exits, reclaim only this task's verified swap and
+restore Bazzite. This is an active reproduction check, not a completed result.

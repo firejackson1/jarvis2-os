@@ -274,8 +274,10 @@ python3 tools/prepare_ramdisk.py --cpio /private/recovery.cpio \
 The resulting fragment still requires the early guard, its private verified
 inputs and the owned hardware init profile. `tools/assemble_ramdisk.py` now
 assembles that overlay offline; the [guarded ramdisk record](docs/GUARDED_RAMDISK.md)
-documents inputs, artifact hashes, verification and the boot-container memory
-layout hold. Neither CPIO is a launchable boot image.
+documents inputs, artifact hashes and verification. The separate
+[RAM boot-container checkpoint](docs/RAM_BOOT_CONTAINER.md) records the executed
+legacy-v2 packaging and the corrected placement analysis. Neither CPIO alone is
+a launchable boot image; the private complete candidate has not booted.
 
 ## License
 
