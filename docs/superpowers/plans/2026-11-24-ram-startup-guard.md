@@ -101,6 +101,15 @@ dependency closure, diagnostic arguments/fstab and complete ramdisk still need
 binding and inspection. Kernel module loading is not itself time-bounded.
 Task completion and hardware safety remain unproven until those checks pass.
 
+Additional source finding: whole-device BLKROSET is not proof of disk-wide
+protection for a future partition. The guard therefore requires a complete
+preflight partition-number set and refuses incomplete/unexpected discovery
+before any protection call. Three added test cases first reproduced missing,
+partial, malformed, duplicate and symlinked inventory acceptance, then passed
+after the gate was added. The manifest must come from a matching complete
+read-only capture; the retained installer backup inventory covers only a subset
+and must not be promoted into this input by guessing.
+
 ## Task 3: Package and qualify the RAM image
 
 Preparation: the archive inspector now retains original entry payloads and

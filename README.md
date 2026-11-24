@@ -1,8 +1,8 @@
 # Jarvis2 recovery bring-up for Android 17
 
 Separate experimental source tree for LineageOS 24 recovery on the onn Jarvis2
-(S905X5M). This tree has not produced or booted a complete Android 17 recovery.
-It does not change the existing ROM project or device partitions.
+(S905X5M). The first full ARM64 recovery ramdisk now builds. It has not booted
+or been installed. This work does not change device partitions.
 
 ## Approach
 
@@ -107,7 +107,7 @@ The 64-bit Android migration has additional vendor-library requirements, recorde
 in [ARM64 assessment](docs/ARM64.md). A 64-bit recovery does not convert the
 installed Android system by itself.
 
-## Android build checkpoint — not yet validated
+## Android build checkpoint — linked, not boot-tested
 
 Use a **separate** LineageOS 24 checkout and the recorded upstream revisions.
 Do not replace or resync the working LineageOS 21 checkout. Place this tree at
@@ -142,9 +142,10 @@ lunch lineage_jarvis2_recovery trunk_staging userdebug
 m out/target/product/jarvis2_recovery/ramdisk-recovery.img
 ```
 
-The pinned product now passes full Soong analysis and Make rule generation and
-has entered platform compilation. The complete Android 17 link and ramdisk
-artifact remain unverified.
+The pinned product now passes full Soong analysis, Make rule generation and the
+complete requested ramdisk build. See the
+[build checkpoint](docs/BUILD_CHECKPOINT.md) for exact source/artifact hashes,
+actual ELF inspection and the remaining authentication/startup holds.
 No boot/kernel/DTB image is to be installed from this prototype configuration.
 The kernel is intentionally not rebuilt here. The minimal recovery fstab omits
 userdata and formattable entries; storage, encryption and update operations
@@ -187,8 +188,8 @@ normal-boot Android system is included in the recovery ramdisk.
 The pinned recovery's `volume_manager/PublicVolume.cpp` uses `std::replace`
 without its `<algorithm>` header. `recovery-publicvolume-algorithm.patch` adds
 that include against recovery revision `1cdebe4061372e9abb5dc738002ad6c707f7c534`.
-The actual ARM64 recovery compile of that source now passes; the complete image
-still requires the remaining build and verification gates.
+The actual ARM64 recovery compile of that source now passes, followed by the
+full ramdisk target. Image packaging and startup verification gates still apply.
 
 `recovery-volumemanager-vector.patch` likewise makes `VolumeManager.h` include
 the `<vector>` type used in its public declarations. The new libc++ headers
@@ -210,7 +211,7 @@ The tool has no ADB, fastboot, block-device write or slot-switch operation.
 
 ## Remaining gates
 
-- [ ] Full Android 17 compilation and link, including init/adbd and ramdisk policy.
+- [x] Full Android 17 compilation and link, including init/adbd and generated policy.
 - [ ] Inspect the actual ramdisk for dependencies, file contexts and credentials.
 - [ ] Integrate stock hardware input/display requirements; RGBX and DRM are provisional.
 - [ ] Audit startup side effects before a RAM test: ordinary recovery can write
@@ -236,6 +237,14 @@ sequence before the first load. The storage library checks internal MMC, its
 boot devices and partitions, requires read-only readback and rejects a changing
 inventory. Discovery is bounded; any failed gate prevents Android-init handoff.
 The temporary proc/sys mounts must be removed before `/init` starts.
+
+`/ramboot/mmc.partitions` must contain the complete physical partition inventory
+captured read-only from the matching device/GPT: one canonical positive decimal
+partition number per line, with no blanks, comments or duplicates. The guard
+requires exactly that set before attempting protection. A partial list of backed-up
+partitions is insufficient; do not infer missing entries. Bind this file to the
+private image/preflight receipt. Whole-device read-only status alone is not used
+as proof that a partition appearing later is protected.
 
 This prelude is not packaged or hardware-qualified. Its BusyBox/musl closure,
 kernel-release input and hashed stock modules must be supplied privately and

@@ -1,8 +1,9 @@
 # LCARS recovery interface
 
 Owner-selected direction: LCARS / Bridge Commander style, with Bluetooth remote
-pairing requested. This source is an offline diagnostic bring-up, not a linked
-or boot-tested recovery. It has not replaced the recovery on the device.
+pairing requested. The native UI is now linked into the first ARM64 recovery
+ramdisk's extension library. It has not booted or replaced the installed
+recovery, and Bluetooth pairing is not implemented. See `BUILD_CHECKPOINT.md`.
 
 ## Native interface implemented
 

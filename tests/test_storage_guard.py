@@ -22,6 +22,8 @@ class StorageGuardTests(unittest.TestCase):
         for path in (self.sys, self.dev, self.work):
             path.mkdir()
         self.calls = self.root / 'calls'
+        self.expected = self.root / 'mmc.partitions'
+        self.expected.write_text('1\n')
         self.bb = self.root / 'safe commands'
         self.bb.write_text('''#!/bin/sh
 case "$1" in cat|sort|cmp) exec "$@";;
@@ -70,6 +72,7 @@ guard_protect_node() {
         env = dict(os.environ, LC_ALL='C', GUARD_LIBRARY=str(LIB),
                    GUARD_SYSFS=str(self.sys), GUARD_DEVROOT=str(self.dev),
                    GUARD_WORKDIR=str(self.work), GUARD_BB=str(self.bb),
+                   GUARD_EXPECTED_PARTITIONS=str(self.expected),
                    CALLS=str(self.calls), FAIL_NODE=fail,
                    GUARD_MUTATION=mutation)
         result = subprocess.run([SHELL, '-c', script], env=env,
@@ -132,9 +135,43 @@ guard_protect_node() {
         self.mmc()
         result, _ = self.run_guard(mutation='add')
         self.assertNotEqual(result.returncode, 0)
+        self.expected.write_text('1\n2\n')
         result, calls = self.run_guard()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn('mmcblk0p2 179:2', calls)
+
+    def test_all_captured_partitions_must_exist_before_any_protection_call(self):
+        self.mmc()
+        self.expected.write_text('1\n2\n')
+        result, calls = self.run_guard()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+        self.node('mmcblk0p2', '179:2')
+        result, calls = self.run_guard()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('mmcblk0p2 179:2', calls)
+
+    def test_partition_inventory_must_be_nonempty_unique_and_canonical(self):
+        self.mmc()
+        for data in ('', '0\n', '01\n', '1\n1\n', '1 extra\n', '../1\n', '2\n'):
+            with self.subTest(data=data):
+                self.expected.write_text(data)
+                result, calls = self.run_guard()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertEqual(calls, [])
+
+    def test_missing_or_symlinked_inventory_prevents_protection(self):
+        self.mmc()
+        self.expected.unlink()
+        result, calls = self.run_guard()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+        target = self.root / 'other-inventory'
+        target.write_text('1\n')
+        self.expected.symlink_to(target)
+        result, calls = self.run_guard()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
 
     def test_removed_or_renumbered_node_invalidates_the_scan(self):
         for mutation in ('renumber', 'remove'):

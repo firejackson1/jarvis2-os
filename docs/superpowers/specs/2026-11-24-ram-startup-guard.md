@@ -2,7 +2,8 @@
 
 This implements the owner's RAM-only development constraint. It does not
 authorize a reboot, flash, slot change or hardware launch. The new recovery has
-not booted. The complete Android 17 ramdisk is still being built.
+not booted. The complete Android 17 ramdisk has built; its startup review,
+guarded RAM assembly and hardware validation remain pending.
 
 ## Intent and constraints
 
@@ -49,7 +50,10 @@ dependencies before selecting runtime inputs.
 3. Identify internal MMC through sysfs device type and identity. Protect the
    whole device and all visible partitions and boot block devices, verify their
    read-only state, and detect nodes appearing during enumeration. Do not match
-   an unrelated disk merely by a common name prefix.
+   an unrelated disk merely by a common name prefix. Require the complete
+   expected physical partition set from a matching read-only preflight capture,
+   not a subset inferred from backed-up images. Do not assume whole-device
+   BLKROSET protects a partition appearing after the scan.
 4. Missing devices, malformed metadata, module failure, failed read-only
    verification or an incomplete scan must prevent the Android-init handoff.
    A bounded wait is permitted for device discovery. No failure path writes BCB

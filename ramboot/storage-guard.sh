@@ -71,6 +71,30 @@ guard_protect_node() (
     guard_set_readonly "$_path"
 )
 
+guard_validate_partition_inventory() (
+    [ -f "$GUARD_EXPECTED_PARTITIONS" ] && [ ! -L "$GUARD_EXPECTED_PARTITIONS" ] || return 1
+    _numbers= _seen='|'
+    while IFS= read -r _number || [ -n "$_number" ]; do
+        case $_number in ''|0*|*[!0-9]*) return 1;; esac
+        [ "${#_number}" -le 7 ] && [ "$_number" -le 1048575 ] || return 1
+        case $_seen in *"|$_number|"*) return 1;; esac
+        _seen="$_seen$_number|"
+        _numbers="$_numbers $_number"
+    done < "$GUARD_EXPECTED_PARTITIONS"
+    [ -n "$_numbers" ] || return 1
+    # Word splitting is intentional: every word was restricted to decimal digits.
+    _wanted=$(printf '%s\n' $_numbers | "$GUARD_BB" sort) || return 1
+    _observed=$(
+        while read -r _name _major _minor; do
+            case $_name in mmcblk*p[0-9]*) printf '%s\n' "${_name##*p}";; esac
+        done < "$1" | "$GUARD_BB" sort
+    ) || return 1
+    [ "$_wanted" = "$_observed" ] || {
+        echo 'guard: physical partition inventory incomplete or unexpected' >&2
+        return 1
+    }
+)
+
 guard_protect_storage() (
     umask 077
     LC_ALL=C
@@ -83,6 +107,7 @@ guard_protect_storage() (
     _after=$GUARD_WORKDIR/mmc-after
     [ ! -L "$_before" ] && [ ! -L "$_after" ] || return 1
     guard_collect_nodes > "$_before" || return 1
+    guard_validate_partition_inventory "$_before" || return 1
     "$GUARD_BB" sort "$_before" > "$_after" || return 1
     while read -r _name _major _minor; do
         guard_protect_node "$_name" "$_major" "$_minor" || return 1

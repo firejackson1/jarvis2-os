@@ -63,12 +63,32 @@ does not validate the new Android 17 service lifecycle. A block read-only flag
 also is not a security boundary against a privileged process deliberately
 clearing it; the test must contain no such operation.
 
+## Partition discovery completeness
+
+Upstream Linux 5.15's
+[`BLKROSET` handler](https://github.com/torvalds/linux/blob/v5.15/block/ioctl.c#L324)
+sets the addressed block device's read-only flag after an optional driver
+callback. Its
+[`bdev_read_only()` check](https://github.com/torvalds/linux/blob/v5.15/block/genhd.c#L1310)
+combines that device flag with the disk flag. These are different state paths;
+do not infer that setting the whole-device flag protects every future partition.
+The exact vendor driver's behavior remains unqualified by this upstream check.
+
+The RAM guard now requires `/ramboot/mmc.partitions`, a complete physical
+partition-number set from the matching read-only preflight inventory. Missing,
+extra, malformed or duplicate entries prevent protection/handoff. Only after
+the entire expected set appears does it set and verify every current block flag
+and rescan identities. This file must be bound to the private image and capture;
+a partial installer backup is not sufficient evidence of the full GPT layout.
+A complete matching inventory has not yet been obtained for this new image.
+
 ## Remaining verification
 
-The full platform link and generated ramdisk are still pending. Until they exist,
-the complete init/import/fstab/module graph cannot be audited. This document
-records concrete upstream write paths and launch requirements; it is not a
-completed read-only startup qualification or a restore guarantee.
+The full platform link and generated ramdisk now exist; their initial inventory
+is recorded in `BUILD_CHECKPOINT.md`. The complete init/import/fstab/module and
+runtime dependency review remains pending. This document records concrete
+upstream write paths and launch requirements; it is not a completed read-only
+startup qualification or a restore guarantee.
 
 The concrete preparation requirements and staged checks are tracked in the
 [RAM launch spec](superpowers/specs/2026-11-24-ram-startup-guard.md) and
