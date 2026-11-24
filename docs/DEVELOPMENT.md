@@ -329,3 +329,12 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   available for the next signing step, not evidence that signing is complete.
 - Bazzite was automatically restored after host-tool compilation and remains
   running. This checkpoint performed no device flash, reboot, wipe or slot change.
+
+- Signing-metadata preparation now has 14 malformed-input/content-preservation
+  regressions. The real earlier target-files ZIP retained all 6,138 nonmetadata
+  entry content hashes; only the two signing metadata files changed. The pinned
+  Android signing implementation accepted 127 APK and 31 APEX identities. No
+  signature or package image was changed. Full local checks now pass 76 Python
+  cases (five AVB cases skipped without build tools), privacy audit and eight
+  Java suites. A fresh full target-files build is separately in progress under
+  bounded memory/CPU with temporary swap and Bazzite kept running.

@@ -67,3 +67,28 @@ Primary references:
 - https://developer.android.com/tools/apksigner
 - https://android.googlesource.com/platform/frameworks/base/+/refs/heads/android14-release/services/core/java/com/android/server/pm/PackageManagerServiceUtils.java
 - https://android.googlesource.com/platform/system/apex/+/refs/heads/android14-release/apexd/apex_file_repository.cpp
+
+## Prepare shipped-package metadata
+
+```sh
+python3 tools/prepare-signing-metadata.py \
+  --input /outside/source/original-target-files.zip \
+  --output /outside/source/new-prepared-target-files.zip \
+  --deapexer /path/to/android/out/host/linux-x86/bin/deapexer \
+  --debugfs /path/to/android/out/host/linux-x86/bin/debugfs_static \
+  --fsckerofs /path/to/android/out/host/linux-x86/bin/fsck.erofs
+```
+
+This creates a separate ZIP and refuses to overwrite an output. It discovers
+embedded APKs through the pinned native APEX inspection tools and filters only
+META/apkcerts.txt and META/apexkeys.txt. It does not sign, read private keys,
+validate package signatures, rebuild images, or contact a device. An unchanged
+ZIP entry means its uncompressed content is identical; ZIP compression bytes
+can differ. The output is private preparation material, not a public ROM ZIP.
+
+Integration against the preserved earlier target-files archive found 104
+standalone APKs, 23 embedded APKs and 31 APEX packages. All 6,138 nonmetadata
+entries matched their original content hashes. The pinned signing tool accepted
+127 APK metadata identities and 31 APEX metadata entries, including the preserved
+launcher and CTS shim. Repeat this check against every new target-files build;
+these counts do not inventory a future build automatically.
