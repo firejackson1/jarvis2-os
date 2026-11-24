@@ -100,6 +100,8 @@ Do not replace or resync the working LineageOS 21 checkout. Place this tree at
 checkout, and build the ramdisk target:
 
 ```sh
+git -C prebuilts/misc apply \
+  "$PWD/device/onn/jarvis2_recovery/patches/prebuilts-misc-protobuf-namespace.patch"
 source build/envsetup.sh
 export GOCACHE="$PWD/out/recovery-go-cache"
 lunch lineage_jarvis2_recovery trunk_staging userdebug
@@ -119,6 +121,14 @@ ramdisk; enabling those rules does not produce an installable vendor_boot image.
 An isolated Go cache also avoided a stale standard-library index in a cache
 shared with an older platform build. No global Go setting or older checkout was
 changed. Product configuration success is not a completed recovery link.
+
+Apply the patch once after a clean sync. The frozen AOSP `prebuilts/misc`
+revision `be7c3a630b5dc5eb3260035d77a81b2f322754f8` and Lineage compat revision
+`0dec3d5ab188c36125930cdaa9a57a225f298fea` both define the protobuf 21.12 vendor
+compatibility modules. The patch gives only the legacy ARM32 AOSP package its
+own Soong namespace; it preserves both definitions and their license records.
+The ARM64-capable Lineage definitions remain in the global namespace. No binary
+is replaced, and the legacy namespace is not exported to this recovery product.
 
 ## Offline packaging
 
