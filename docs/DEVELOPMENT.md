@@ -549,3 +549,34 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   supported by the pinned Soong frontend, to remove default host/time identity
   variability. Current full host suite: 167 tests, five local AVB skips, privacy
   audit and Java checks passed. Final-image properties must be inspected again.
+
+### Final candidate checkpoint — 2026-11-24
+
+- Source `1ac457e6b28b3138ba9bf1eccdb642fe881bca2b` built with explicit
+  `jarvis2.1ac457e6b28b` identity and source epoch `1795514834`.
+  Signed target-files SHA256:
+  `6329613453164426fe89d19d351677c5222c0f12961ebce3466946bcbe6dbfe5`.
+  Production package verification passed 103 standalone APKs, 31 APEX containers,
+  30 APEX payloads and 23 embedded APKs. The OTA certificate archive contains
+  only the project release certificate, with no signing-host path.
+- All 31 APEX filesystem comparisons passed: 1,018 paths, 765 regular files,
+  13 symlinks and 21 explicitly expected embedded-APK changes, no unexpected
+  metadata changes. Timestamps, inode flags/layout and hardlink topology remain
+  outside this verifier's scope.
+- Actual stock-template AVB assembly passed with FEC enabled, stock boot
+  references and project image key. Independent comparison matched all nine
+  payload-derived properties in leaves and owning parents, all verification flags
+  zero. Assembly report SHA256:
+  `b22c863c26e1637a8356e8284d66567b85699afc790176d8a42123c46840a7f6`.
+  Replaced historical userspace bytes are not authenticated by this mode;
+  unchanged stock references and the complete resulting graph are verified.
+- Fresh extracted-image privacy scan covered 6,119 regular files, 31 APEX,
+  50,502 ZIP entries and 67 decoded streams with zero coverage gaps. Reviewed
+  matches are upstream public constants and bodyless PEM-format markers;
+  the neutral launcher contains its declared public build workspace URI.
+  No open privacy finding. Native intent comparison found only 137 approved
+  signing/package/trust changes with all 6,030 native paths' metadata preserved.
+- Source repository made public after exact-commit CI and full-history privacy
+  audit. No image is published or installed by this checkpoint. Hardware key
+  acceptance, clean setup, full feature tests, installation and actual recovery
+  remain open. Matching GApps composition is local-only and still in progress.

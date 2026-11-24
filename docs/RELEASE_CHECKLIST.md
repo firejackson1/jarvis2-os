@@ -40,7 +40,7 @@ publication by this policy decision alone.
 - [ ] Identify every feature supplied by app updates/RAM patches rather than the booted ROM.
 - [ ] Map installed features to source, dependencies, licenses and reproducible build commands.
 - [ ] Preserve a coherent baseline and rollback artifacts on the build host; verify backups by hash.
-- [x] Choose the public source repository and exclude private/runtime/build artifacts before any publication. Private `firejackson1/jarvis2-os` is created; working tree/index/history audits pass. Repository visibility and binary publication remain pending.
+- [x] Choose the public source repository and exclude private/runtime/build artifacts before any publication. `firejackson1/jarvis2-os` is public after clean working tree, full-history privacy audit and passing CI at `1ac457e`. Binary publication remains pending hardware and recovery qualification.
 - [ ] Complete reboot/default-switch/stability testing for optional launchers on Jarvis2 (ARM32 compatibility, cold launch, D-pad/Home, Settings integration, stability). Prefer an existing open-source base over extending the proprietary launcher; retain current home until a replacement passes testing.
   References: https://gitlab.com/flauncher/flauncher and https://github.com/leanbitlab-org/LtvLauncher . LTvLauncher advertises GPL-3.0, widgets and an OLED-friendly screensaver; this is research, not a hardware compatibility claim.
 
@@ -155,7 +155,8 @@ publication by this policy decision alone.
   expected additions against the tested private candidate.
 - [ ] Finish the deterministic local Google-app composer and coherent AVB rebuild
   against the final published base, using separately obtained upstream inputs.
-- [ ] Complete the current bounded target-files build and then integrate the
-  controlled launcher pin incrementally; do not mutate a running build's inputs.
-- [ ] Re-run all final-image privacy, content, metadata, size and AVB checks on the
-  exact signed deliverables; old rehearsals are not final-image evidence.
+- [x] Complete the bounded target-files build and integrate the neutral controlled
+  launcher pin at source `1ac457e`; verify the exact signed launcher survives.
+- [x] Re-run final base-image privacy, content, metadata, size and AVB checks on
+  the exact signed `1ac457e` candidate; see DEVELOPMENT.md for scope and limits.
+  GApps composition and final packaged ZIP checks remain separate.
