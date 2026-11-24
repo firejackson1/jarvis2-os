@@ -196,7 +196,35 @@ publication by this policy decision alone.
   candidate and seven-target transition: all targets classified old, no writes
   requested, protected physical/prefix hashes unchanged, Android A returned.
   This does not qualify persistent execution or replacement recovery.
-- [ ] Obtain approval for the exact candidate transition, including its stock
-  init_boot/vendor_boot foundation and shared-data signing-key migration plan.
+- [x] Obtain approval for the exact seven-target slot A transition and shared
+  data factory reset; install and fully read back the corrected f38 image set.
+  Owner confirmed the reset reached Android setup; setup completion and input
+  checks remain pending.
 - [ ] Complete installation, clean setup, recovery and rollback tests of the exact
   production-key candidate before publishing binaries. Preserve slot B throughout.
+
+
+## Normal-user installation rehearsal — owner request, 2026-11-24
+
+- [ ] Provide a supported installation route using published downloads and a
+  standard computer, with exact prerequisites and clear supported-device/firmware
+  limits. The current raw-image ZIP is not a sideload OTA.
+- [ ] Make backup, target selection, verification and rollback reproducible from
+  the published instructions without private server access, private scripts,
+  manually authored trust booleans or an AI operator.
+- [ ] Rehearse that exact public route and record device state, every write,
+  protected slot/metadata checks, fresh setup and recovery results. The private
+  developer trial is not a substitute for this acceptance test.
+
+
+## Custom recovery required for the public build
+
+- [ ] Include the new compatible LCARS recovery and its source/build provenance
+  in the final package and coherent AVB chain. Do not treat the stock-recovery
+  engineering trial as the final product.
+- [ ] Verify HDMI, box-button operation, USB keyboard and remote input in RAM
+  before considering another recovery write.
+- [ ] Implement and verify recovery-owned Bluetooth discovery/pairing/HID input
+  for the onn remote; Android pairing and an input-only UI are insufficient.
+- [ ] Recheck installer, recovery, Android return and rollback against the exact
+  package containing that custom recovery.

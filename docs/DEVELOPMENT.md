@@ -739,3 +739,34 @@ and the boot-control CRC validates.
   The adbd executable is identical. Therefore native dry-run success in the
   development recovery does not establish replacement-stock root ADB or restore
   availability. No stock recovery hardware boot or device change was performed.
+
+### First production-key hardware installation, 2026-11-24
+
+- After explicit owner approval, wrote and fully read back the exact corrected
+  f38 seven-image slot A set: system, system_ext, product, init_boot, vendor_boot,
+  vbmeta_system and vbmeta. The journal recorded every before-write and verified
+  event followed by completion. No LP writer, snapshot cancel or slot switch ran.
+- All non-target physical hashes and the protected super prefix remained
+  identical at post-install verification. The driver then requested Recovery,
+  which enumerated over USB. Its pulled default-properties file matched stock.
+- Stock Recovery's ADB shell attempt failed while setting a subprocess SELinux
+  context. This is an observed restoration-transport issue, not successful root
+  Recovery qualification. No repeated shell-crash tests were performed.
+- The owner completed the approved shared-data reset and reported Android setup
+  appearing. Setup completion, remote pairing and device-side build checks remain
+  unverified; USB detection currently fails before an ADB connection. This does
+  not establish rollback, interruption recovery or public readiness.
+- The next installation rehearsal must follow the published normal-user process
+  on a standard computer. Private host scripts/captures, access to our servers,
+  manually authored trust assertions or an AI operator cannot be prerequisites.
+
+
+### Recovery product direction, 2026-11-24
+
+The owner requires the public ROM to include a compatible custom recovery rather
+than replace it with stock Recovery. The stock-recovery f38 installation remains
+an engineering trial, not the final release package. The owner selected an LCARS
+interface and requested onn Bluetooth remote pairing/navigation. A separate
+recovery-only project is implementing that interface offline; no replacement
+recovery has been flashed. The public installation rehearsal must still work
+without private scripts, server access or an AI operator.
