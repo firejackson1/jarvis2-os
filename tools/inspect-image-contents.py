@@ -7,7 +7,8 @@ ROOT=Path(__file__).resolve().parents[1]
 PARTS=('system','system_ext','product')
 REQUIRED=('Jarvis2RemoteSettings.apk','Jarvis2TvControlsOverlay.apk',
           'TvSettingsTwoPanel.apk','Jarvis2LtvLauncher.apk','com.android.btservices.apex')
-FORBIDDEN={'TVLauncherNoGMS.apk':'unlicensed Google launcher',
+FORBIDDEN={'Updater.apk':'unsupported official OTA client',
+           'TVLauncherNoGMS.apk':'unlicensed Google launcher',
            'TVRecommendationsNoGMS.apk':'unlicensed Google recommendations',
            'Settings.apk':'handset Settings','SystemUI.apk':'handset SystemUI'}
 def sha(path):

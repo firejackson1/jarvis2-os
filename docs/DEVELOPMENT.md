@@ -480,3 +480,10 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   certificate. No recovery trust archive exists in that input; full target-files
   signing/final-image/recovery trust remain unproved. Explicit mapping of the
   extra recovery identity is required in the final signing plan.
+
+- Final extracted-image policy now explicitly rejects the unsupported official
+  Updater APK, supplementing its source-level package exclusion. A fixture that
+  retained it failed before this guard and passes after the correction. Full
+  working-tree suite passed 153 tests with five local AVB skips, including seven
+  in-progress composer tests not yet part of this commit; privacy/Java passed.
+  Actual final-image package absence remains a separate required check.

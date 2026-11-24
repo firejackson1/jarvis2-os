@@ -34,3 +34,11 @@ class ImageContentsTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);self.fixture(root)
    self.assertEqual([],module.inspect_trees(root,{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()}))
+
+ def test_official_updater_is_forbidden_in_release_image(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);self.fixture(root)
+   path=root/'system_ext/priv-app/Updater/Updater.apk'
+   path.parent.mkdir(parents=True);path.write_bytes(b'updater fixture')
+   errors=module.inspect_trees(root,{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()})
+   self.assertTrue(any('official OTA client' in error for error in errors))
