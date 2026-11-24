@@ -47,3 +47,34 @@ The captured root key is existing development trust, not a production release ke
 
 The known baseline capture is complete. Candidate verification, interruption
 recovery and actual restoration remain open release gates.
+
+## Exact stock-based candidate checkpoint — 2026-11-24
+
+The offline `1ac457e` candidate uses stock `init_boot` and `vendor_boot` references,
+not the custom development bootstrap captured on the owner's slot A. Matching
+its verified chain on that development device therefore requires seven target
+partition changes: `system_a`, `system_ext_a`, `product_a`, `init_boot_a`,
+`vendor_boot_a`, `vbmeta_system_a` and `vbmeta_a`. This is a dependency inventory,
+not an executable write order or permission to install. The five-image offline
+archive deliberately excludes stock firmware; users must obtain the exact pinned
+stock foundation separately.
+
+All sixteen saved development restore files have been independently rehashed
+again; all seven proposed candidate partition lengths match the saved lengths.
+These checks do not establish current device freshness or a working restore
+transport. The stock bootstrap would replace slot A's custom recovery. Slot B
+has not been established as a complete bootable fallback.
+
+There is no atomic commit across these seven partitions. Writing parent AVB
+metadata last reduces one inconsistent intermediate state, but does not make
+power loss safe: old metadata can reject newly written leaves, and recovery can
+fail before its USB interface is available. A full raw backup cannot fix that
+without an independently reachable flashing interface. Do not turn this inventory
+into a script until the live transport, snapshot state and interrupted-update
+recovery path have been verified.
+
+The package/APEX signing identity also changes from development keys. Existing
+userdata compatibility is unproven; any clean-data test needs a separately
+approved data plan because both slots share userdata. No wipe, slot switch,
+resize, snapshot cancellation or shared metadata modification follows from
+successful offline checks.
