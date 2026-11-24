@@ -23,6 +23,7 @@ apply independently.
 - [ ] Label release pages, filenames/release metadata and build identity clearly as unofficial and LineageOS-based; do not imply LineageOS endorsement or official support.
 - [ ] Preserve applicable copyright, license and NOTICE files, credits and modification notices.
 - [ ] Provide the exact corresponding source/build material required by each distributed copyleft component, including the kernel; do not assume publishing only our patches is sufficient.
+- [x] Match the retained core kernel byte-for-byte to Google's GKI build 14657224 and pin its 20-project manifest; see KERNEL_SOURCE_PROVENANCE.md. Vendor-module correspondence and complete required source/build delivery remain open.
 - [ ] Review redistribution rights for proprietary firmware, vendor blobs, codecs, Google apps and bundled launchers before packaging them. Existing device installation is not evidence of redistribution permission.
 - [ ] Keep Google applications out of public ROM bundles unless distribution is properly licensed; document separately installed optional components.
 - [ ] Use our own private signing keys and update channel; document known issues, tested hardware and our own support/bug-report destination.
@@ -124,7 +125,7 @@ publication by this policy decision alone.
 - [x] User verified remote navigation/select, Settings tap/hold, and widget double-press on the development device.
 - [x] User verified AirPods removal pause and reinsertion resume after the duplicate-pause fix.
 - [x] User verified custom boot animation visually; it must not delay boot.
-- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 193 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
+- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 194 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
 - [x] Main Settings categories and the native Remotes & Accessories AirPods link were inspected live; link opens pause/resume and Back returns correctly.
 - [x] Smart Home provider configuration/shortcut UI installed; no provider account or voice conversation verified yet.
 - [x] Built-in microphone produced a one-second 16 kHz capture; samples discarded, not saved or transmitted.

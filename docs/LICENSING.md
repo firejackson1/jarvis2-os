@@ -11,7 +11,7 @@ The assembled ROM is not covered by a single replacement license.
 |---|---|---|
 | Original app/configuration/tooling | Local project source, Android API use | Preserve Apache-2.0, NOTICE and upstream resource headers |
 | LineageOS / AOSP | Multiple licenses, predominantly Apache-2.0 | Preserve component licenses/notices and exact source provenance |
-| Linux kernel / kernel modules | GPL-2.0 obligations apply to stock prebuilts too | No public stock kernel image until exact corresponding source/build material is established |
+| Linux kernel / kernel modules | The core payload matches Google's exact GKI release; vendor-module correspondence remains open | See KERNEL_SOURCE_PROVENANCE.md. Complete required source/build delivery and module review before public images |
 | Stock firmware, vendor/ODM/HAL binaries | Redistribution rights not established by a local backup | Keep out of Git and release assets pending review; require users' local stock inputs where needed |
 | Experimental DTS replacement | Pinned upstream has no explicit grant for this file | Excluded; do not distribute copied/derived source or compiled replacement |
 | FLauncher 0.18.0 | GPL-3.0-only | Pin and provide corresponding source/build material/notices before bundling its APK |
@@ -40,6 +40,11 @@ for a complete public audio implementation. No third-party DTS source is include
 
 Audit performed 2026-11-23. This records the evidence and unresolved obligations;
 it is not a certification that a future artifact is legally distributable.
+
+The 2026-11-24 [GKI provenance check](KERNEL_SOURCE_PROVENANCE.md) found an exact
+Google kernel-payload match and its pinned 20-project CI manifest. It narrows
+the core-kernel source question but does not establish vendor-module source,
+complete corresponding-source delivery or whole-ROM distribution clearance.
 
 ## Additional launcher inventory
 

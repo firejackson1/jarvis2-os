@@ -896,3 +896,27 @@ without private scripts, server access or an AI operator.
   executed tests and eight Java suites passed. Source privacy audit and diff
   checks passed. A separate read-only reviewer found no actionable code issue
   and confirmed the callback regression's framework-testing limits.
+
+### Exact public GKI core source origin, 2026-11-24
+
+- Google's January 2026 Android 14 GKI release record and annotated tag identify
+  kernel common revision `3d26c188ef7e87e52ea1fa0092db760a55e2ae4c`, build
+  14657224, version 5.15.196. Downloaded its official certified LZ4 ZIP and
+  unpacked its sole boot image with the existing AOSP tool.
+- The 20,749,256-byte compressed kernel payload independently matches the
+  retained ROM/recovery kernel byte-for-byte: SHA256
+  `d9ef1096d33fe9f431f4d0cb54f5604a57f5f2fd41b2b86e7c9d499b1571dbae`.
+  This is a payload comparison, not a claim that Google's boot container is the
+  onn's partition image. No downloaded image was booted or installed.
+- Preserved the unmodified 20-project CI manifest and scoped public provenance
+  receipt. All 20 exact project commit metadata endpoints resolved. The initial
+  JDK response was truncated locally; a bounded retry verified its full response.
+  No complete source checkout or local kernel rebuild is claimed.
+- See KERNEL_SOURCE_PROVENANCE.md for exact archive/manifest identities and the
+  failed/non-manifest URL checks. Vendor-module source correspondence, device
+  tree/firmware rights and complete required source delivery remain unresolved;
+  the full binary release is still gated.
+- Validation: exact manifest SHA and all 20 pinned project revisions checked;
+  host suite ran 194 tests with five local AVB-tool skips, all executed tests
+  and eight Java suites passed. Source privacy audit and diff checks passed.
+  No product source or ROM image changed.
