@@ -68,3 +68,33 @@ way back to Android. The host should expose a CDC ACM serial port; opening that
 port should produce the generic startup log and boot-mode flags. No serial
 keystroke is a supported command. A missing port or log is a failed diagnostic
 test, not permission to flash or disable the normal recovery guard.
+
+## Executed offline evidence, 2026-11-24
+
+Source `c99f07ffbb158d78077c7abcd357747076bf26cd` was cloned from a verified Git
+bundle into a fresh private native build directory. The source stayed clean.
+Two separate assemblies and deterministic gzip outputs were byte-identical:
+
+| Artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| Diagnostic CPIO | 38,305,944 | `538a02f93ff66650222e503c89fa7114f9975d25ed94a6f8238cc0429fdbb676` |
+| Gzip ramdisk | 14,682,765 | `79ea82a183fdf69aef0709fec470749b1f6fc14547551f82fc7900f5cc2784e7` |
+| Unsigned legacy-v2 RAM image | 35,520,512 | `dadf373afe1f285c5c032d283bc0a414f7bf1fca93bd5970c64566e4c4d45c95` |
+
+Round-trip packaging verified unchanged kernel/DTB bytes and the 128 MiB offline
+download budget. A current device-reported budget is still a launch preflight.
+The previous full recovery image and guarded CPIO hashes remained unchanged.
+The bounded job finished successfully in 13.6 seconds; the desktop VM remained
+running. No image was signed, booted or flashed.
+
+Local host tests: 74 tests ran with six missing-native-tool skips. On the native
+build host all 74 ran without skips. Three C++ behavior suites and recovery-header
+syntax checks also passed. Actual ARM64 BusyBox shell checks passed 39 tests with
+privileged operations substituted. A test-owned PTY separately verified the
+actual ARM64 stty clears echo, canonical input and output postprocessing.
+
+Independent source review identified an idle reconnect gap in tail-follow mode.
+The exact BusyBox binary reproduced it after its output reader closed without
+new log data. Failing idle-reopen/private-null tests were then made green by
+finite snapshots and explicit child stdin. This review and these fixtures do
+not qualify the real UDC, USB reconnect or normal recovery boot.

@@ -100,3 +100,13 @@ and a successful device boot remain unverified.
 
 Keep the original artifact and private audit receipts. This fragment is not a
 replacement for the working installed recovery.
+
+## USB RAM-only diagnostics, 2026-11-24
+
+Source c99f07ffbb158d78077c7abcd357747076bf26cd produced the separate USB log-only image documented in RAM_USB_LOG.md. Exact kernel embedded ACM/configfs options verified; two CPIO/gzip assemblies match, unchanged kernel/DTB roundtrip and previous-candidate preservation pass. Native full host suite74 tests/no skips, local74/six native-tool skips,39 actual ARM64 safe-substitute tests pass. No image launch, signing or installation.
+
+Independent review found an idle tail-follow reconnect flaw; exact BusyBox reproduction and new failing regressions preceded finite-snapshot/private-null fixes. No other actionable review findings. The logger may still fail before USB is available; no complete early-boot diagnosis is claimed.
+
+Operational export correction: the first commit attempt lacked an author identity, but a following shell export still produced a stale base-only bundle. This was noticed before any build. A successful commit using the existing project author and a fresh bundle were then HEAD/clean-tree verified by the native build. The stale bundle was retained privately as failed input and never built. Dependent export/build steps must use checked control flow.
+
+The native app worktree request never returned a handle or created a checkout during observation; its waiting execution cell was terminated. Work stayed on a separate local codex/ram-usb-log branch from the clean d109934 base. Existing experiment commits/artifacts were preserved.
