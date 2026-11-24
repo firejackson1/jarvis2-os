@@ -727,3 +727,15 @@ and the boot-control CRC validates.
 - This qualifies this dry-run and existing Recovery transport only. Persistent
   installation, replacement stock recovery, data/signing-key migration, rollback
   and interruption restoration remain untested; no installation approval follows.
+
+
+### Replacement recovery transport review, 2026-11-24
+
+- Inspected stock vendor_boot ramdisks offline without extracting or executing
+  their programs. Compared default properties, init service launch configuration
+  and executable hashes to the existing development recovery.
+- Stock sets secure/authenticated ADB and non-debuggable properties; development
+  recovery enables debugging and uses an adbd rather than su root launch label.
+  The adbd executable is identical. Therefore native dry-run success in the
+  development recovery does not establish replacement-stock root ADB or restore
+  availability. No stock recovery hardware boot or device change was performed.
