@@ -69,3 +69,7 @@ The full platform link and generated ramdisk are still pending. Until they exist
 the complete init/import/fstab/module graph cannot be audited. This document
 records concrete upstream write paths and launch requirements; it is not a
 completed read-only startup qualification or a restore guarantee.
+
+The concrete preparation requirements and staged checks are tracked in the
+[RAM launch spec](superpowers/specs/2026-11-24-ram-startup-guard.md) and
+[implementation plan](superpowers/plans/2026-11-24-ram-startup-guard.md).
