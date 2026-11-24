@@ -64,6 +64,19 @@ source evidence for the separate vendor-service approach; it does not establish
 service registration, ABI compatibility, SELinux permission or controller startup
 in Recovery.
 
+The current API also differs from the older headless example: lifecycle entry
+points are standalone `bluetooth_init()`, `bluetooth_enable()`,
+`bluetooth_disable()` and `bluetooth_cleanup()` functions. Initialization takes
+OS callouts, the HCI instance name and an autonomous-repairing flag. Copying the
+old interface-table initializer would not implement that lifecycle.
+
+On Android, the current `ParameterProvider` has no config/snoop path override.
+It uses `/data/misc/bluedroid/bt_config.conf` for the default HCI instance and
+`/data/misc/bluetooth/logs` for snoop logs. Recovery must supply these directories
+from verified RAM-backed storage before stack startup; mounting Android userdata
+there to satisfy the paths would violate the initial bring-up design. The old
+Android 14 override methods above are reference evidence only.
+
 Continue this path in the Android 17 checkout:
 
 1. Port a native host lifecycle against the current Bluetooth interfaces and
