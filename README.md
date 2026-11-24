@@ -156,6 +156,13 @@ Lineage's DNG SDK also needs vendor variants of `xmp_toolkit_sdk` and its privat
 `45acb237cd13c19708f963247c732250cd43a4a5`. The remaining direct dependencies
 in this image-library chain already declare vendor availability.
 
+The recovery product also includes `lineage_sdk_common.mk`, as Lineage's own
+common product does. The inherited media product places `org.lineageos.platform`
+on the system-server classpath; omitting its matching packages causes the Make
+dexpreopt consistency check to fail before the requested ramdisk can compile.
+The check remains enabled. These product dependencies do not mean that a full
+normal-boot Android system is included in the recovery ramdisk.
+
 ## Offline packaging
 
 ```sh

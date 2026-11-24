@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
+# Lineage's media product puts this SDK jar on the system-server classpath.
+# Install its matching packages so the product's dexpreopt graph is complete.
+include vendor/lineage/config/lineage_sdk_common.mk
 PRODUCT_NAME := lineage_jarvis2_recovery
 PRODUCT_DEVICE := jarvis2_recovery
 PRODUCT_BRAND := onn
