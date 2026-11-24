@@ -14,7 +14,8 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MULTILIB := 32
 LOCAL_DEX_PREOPT := false
 LOCAL_OPTIONAL_USES_LIBRARIES := androidx.window.extensions androidx.window.sidecar
-LOCAL_OVERRIDES_PACKAGES := TVLauncherNoGMS TVRecommendationsNoGMS
+# Mandatory release launcher also excludes the unsupported official OTA client.
+LOCAL_OVERRIDES_PACKAGES := TVLauncherNoGMS TVRecommendationsNoGMS Updater
 # Preserve upstream APK bytes/signature. prepare-launcher.py independently checks
 # hash, signer, ZIP alignment and ARM32 JNI libraries before staging these inputs.
 LOCAL_REPLACE_PREBUILT_APK_INSTALLED := $(LOCAL_PATH)/prebuilts/LTvLauncher.apk

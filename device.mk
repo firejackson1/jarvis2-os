@@ -10,6 +10,8 @@ PRODUCT_PACKAGES += com.android.vndk.v34 jarvis2_vndk_manifest
 
 # Enable authenticated USB debugging on a fresh LineageOS install.
 PRODUCT_SYSTEM_PROPERTIES += persist.sys.usb.config=mtp,adb
+# Product properties load after stock vendor; network debugging requires opt-in.
+PRODUCT_PRODUCT_PROPERTIES += service.adb.tcp.port=-1
 
 
 # Android TV launchers use the TV input framework content provider.

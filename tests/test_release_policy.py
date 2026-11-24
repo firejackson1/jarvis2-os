@@ -1,5 +1,6 @@
 """Public tree must not grant the developer's existing ADB identity access."""
 import pathlib
+import re
 import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 class ReleasePolicyTests(unittest.TestCase):
@@ -11,5 +12,6 @@ class ReleasePolicyTests(unittest.TestCase):
     def test_public_product_requires_adb_authorization(self):
         product = (ROOT / 'device.mk').read_text()
         self.assertNotIn('ro.adb.secure=0', product)
-        self.assertNotIn('service.adb.tcp.port=', product)
+        self.assertEqual(re.findall(r'(?<![\w.])service\.adb\.tcp\.port=([^\s\\]+)', product), ['-1'])
+        self.assertRegex(product, r'(?m)^PRODUCT_PRODUCT_PROPERTIES \+= service\.adb\.tcp\.port=-1$')
         self.assertNotIn('persist.adb.tcp.port=', product)

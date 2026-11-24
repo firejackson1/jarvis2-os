@@ -46,7 +46,12 @@ platform signing configuration. They must agree for system privileges to work.
 3. Provide verified stock inputs locally using stage-stock.py; no stock firmware
    is distributed here. See stock-inputs.sha256. Distribution of any resulting
    stock kernel/vendor binaries requires an independently verified license route.
-4. Apply both `patches/TvSettings/series` and `patches/Bluetooth/series` in their listed order to the pinned projects, then build `TvSettingsTwoPanel` and `com.android.btservices`.
+4. Apply `patches/TvSettings/series`, `patches/Bluetooth/series` and
+   `patches/Adb/series` in their listed order to their pinned projects, then
+   build `TvSettingsTwoPanel`, `com.android.btservices` and `com.android.adbd`.
+   The ADB patch is required with the product negative-port default: unpatched
+   adbd can otherwise fall back to network listening when USB is absent. See
+   patches/Adb/README.md for scope and the mandatory launcher Updater exclusion.
 5. Prepare the pinned LTvLauncher inputs as documented in LAUNCHERS.md.
 6. lineage_jarvis2.mk inherits tv-controls.mk. Soong builds the Settings overlay
    directly from source with `TvSettingsTwoPanel` as its resource dependency;

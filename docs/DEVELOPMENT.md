@@ -351,3 +351,24 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   No preauthorized-key filenames or private-key headers were found in the scoped
   text scan, but binary privacy and vendor/ODM coverage were not established.
   Release signing and network-ADB/updater default policy remain open work.
+
+## Public network-debugging and updater policy — source verification
+
+- Stock vendor input enables network ADB. Product's explicit negative port loads
+  after vendor properties, but upstream adbd still falls back to TCP when USB is
+  absent. A pinned source patch now respects explicit disabled Android ports,
+  preserves positive-port parsing and leaves host behavior unchanged.
+- The actual patched helper passed 11 cases each for Android and host policy;
+  the original negative-port/no-USB behavior failed before the fix. Its new host
+  GTest source passed three tests against the pinned GoogleTest source. Patch
+  application and reversal checked against the pinned original adb files.
+- Product source sets service.adb.tcp.port=-1 while retaining authenticated USB
+  debugging. Existing owner-device settings were not changed. Explicit listen
+  addresses and user-enabled wireless debugging remain separate paths.
+- The mandatory launcher now uses Android's existing module override mechanism
+  to exclude stock Updater, removing its automatic and manual official-channel
+  surface. OTA trust replacement remains a later signing step; recovery is not
+  changed. If launcher packaging changes, preserve the Updater exclusion.
+- These are source/host results. The active full build predates this patch;
+  final adbd APEX, installed property precedence, absence of Updater and runtime
+  listener state still need image/hardware verification before release.
