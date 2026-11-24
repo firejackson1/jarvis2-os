@@ -121,7 +121,7 @@ publication by this policy decision alone.
 - [x] User verified remote navigation/select, Settings tap/hold, and widget double-press on the development device.
 - [x] User verified AirPods removal pause and reinsertion resume after the duplicate-pause fix.
 - [x] User verified custom boot animation visually; it must not delay boot.
-- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 167 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
+- [x] Eight Java host suites passed for button gestures, AirPods parsing/state, sync math, HDMI caps, server URI validation and native replay flags; the current local suite has 193 Python cases (five signed AVB cases skipped without build tools); CI runs the signed fixtures separately.
 - [x] Main Settings categories and the native Remotes & Accessories AirPods link were inspected live; link opens pause/resume and Back returns correctly.
 - [x] Smart Home provider configuration/shortcut UI installed; no provider account or voice conversation verified yet.
 - [x] Built-in microphone produced a one-second 16 kHz capture; samples discarded, not saved or transmitted.
@@ -161,3 +161,37 @@ publication by this policy decision alone.
 - [x] Re-run final base-image privacy, content, metadata, size and AVB checks on
   the exact signed `1ac457e` candidate; see DEVELOPMENT.md for scope and limits.
   GApps composition and final packaged ZIP checks remain separate.
+
+
+## Corrected f38 candidate checkpoint — 2026-11-24
+
+- [x] Complete the corrected candidate at frozen product source
+  `f38da52af274a0e50c92a10cf279e62f44125358`, including the loadable remote
+  permissions XML with all three requested grants. Historical `1ac457e` evidence
+  above does not replace this candidate's checks.
+- [x] Recheck production package/APEX signatures, OTA trust replacement, native
+  metadata intent, image privacy/notices and stock-template AVB on this exact
+  candidate. Independent audit SHA256:
+  `774a819f5b13f6634bab41f603b610be72bc65e8a63b53262f08c4007de3f1a5`.
+- [x] Verify the vanilla ZIP by complete member readback and independently repeat
+  local Google composition with identical five-image outputs. Google-containing
+  outputs remain private; no redistribution authorization is inferred.
+- [x] Audit all 1,430 project revisions and reconstruct eleven modified/new files
+  across five projects. Publish the missing SetupWizard source supplement at
+  `225a2828d025ea9967d27ed2d0ee6455d555d395`; frozen product source requires that
+  companion. See FROZEN_F38_REPRODUCTION.md for exact source/build identity.
+- [x] Reproduce launcher/native-library/notices and animation staging in a sparse
+  workspace using pinned SDK/JDK inputs. This does not prove a clean whole-ROM
+  rebuild or reproducible private signatures.
+- [x] Capture a fresh private sixteen-partition current-device restore baseline,
+  matching live hashes before/after capture; verify its AVB consistency. Actual
+  restoration and external hardware trust remain untested.
+- [x] Complete the authorized read-only Android A → Recovery → fastbootd → Android A
+  roundtrip over USB. This verifies the existing installed development recovery,
+  not the candidate's stock bootstrap or production signing key acceptance.
+- [ ] Qualify the recovery RAM helper, read-only metadata setup and raw-writer
+  dry-run against actual hardware. File-backed tests alone do not qualify them.
+- [ ] Obtain approval for the exact candidate transition, including its stock
+  init_boot/vendor_boot foundation and shared-data signing-key migration plan.
+- [ ] Complete installation, clean setup, recovery and rollback tests of the exact
+  production-key candidate before publishing binaries. Preserve slot B throughout.
