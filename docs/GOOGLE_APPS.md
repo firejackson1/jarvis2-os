@@ -120,5 +120,7 @@ ownership/mode and detected changed SELinux labels and capabilities.
 
 This metadata stage does not rebuild or sign an image, verify regular-file byte
 equality, prove deterministic composition, or establish hardware key acceptance.
-The profile deliberately reports `composition_ready: false`; the complete local
-composer and final-base validation remain release work.
+The profile deliberately reports `composition_ready: false`. The separate
+[local composer](GAPPS_COMPOSITION.md) has passed two deterministic native
+rehearsals with synthetic base images and temporary keys; validation against
+the authenticated final signed ROM remains release work.

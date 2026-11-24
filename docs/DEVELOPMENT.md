@@ -487,3 +487,14 @@ monitored. No automatic reboot, flash or partition change is part of this work.
   working-tree suite passed 153 tests with five local AVB skips, including seven
   in-progress composer tests not yet part of this commit; privacy/Java passed.
   Actual final-image package absence remains a separate required check.
+
+- Added the local Google composer and ten regressions. Root review corrections
+  enforce 4KiB AVB geometry, rehash all five baseline inputs and fail on prefix
+  EOF. Actual native rehearsals used the exact upstream Google ZIP, synthetic
+  EROFS/AVB references and disposable keys: 27 files/16 APK signatures, unchanged
+  existing bytes/links/ownership/modes/raw labels/caps, full baseline/final AVB
+  and deterministic five-image outputs passed. Independent readback rehashed
+  all ten actual outputs and confirmed equality. No project private key, owner
+  firmware, device or slot was used. Full checks passed 156 tests, five local
+  AVB skips, source audit and eight Java suites. Final signed-ROM composition,
+  hardware trust, installation and restoration remain open.

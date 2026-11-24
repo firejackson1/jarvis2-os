@@ -30,6 +30,7 @@ Brotli decoder library (`libbrotli1` on Debian/Ubuntu). Read
 [Release checklist](docs/RELEASE_CHECKLIST.md),
 [Slot installation status](docs/SLOT_INSTALLATION.md),
 [Optional Google apps](docs/GOOGLE_APPS.md),
+[Local GApps composition](docs/GAPPS_COMPOSITION.md),
 [Release signing](docs/RELEASE_SIGNING.md),
 [Known issues and validation limits](docs/KNOWN_ISSUES.md) and
 [Development ledger](docs/DEVELOPMENT.md) before assembling images.
