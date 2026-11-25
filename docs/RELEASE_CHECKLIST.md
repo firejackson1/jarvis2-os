@@ -45,6 +45,10 @@ apply independently.
 - [ ] Finish the ARM32 WebView build, reconcile the prebuilt's icon density
   difference and test an FFmpeg source relink.
 - [ ] Review redistribution rights for proprietary firmware, vendor blobs, codecs, Google apps and bundled launchers before packaging them. Existing device installation is not evidence of redistribution permission.
+- [x] Compare the exact neutral r2 ROM with the pinned stock bootloader,
+  kernel, vendor/ODM/OEM files, module files and ramdisks. Trace the three
+  whole-file matches to platform source and the newline placeholder.
+  [Stock-file boundary](LICENSING.md#stock-file-boundary-in-neutral-r2)
 - [ ] Keep Google applications out of public ROM bundles unless distribution is properly licensed; document separately installed optional components.
 - [ ] Use our own private signing keys and update channel; document known issues, tested hardware and our own support/bug-report destination.
 - [ ] Keep official LineageOS branding/endorsement claims out of promotional material; review any upstream artwork/marks before release.

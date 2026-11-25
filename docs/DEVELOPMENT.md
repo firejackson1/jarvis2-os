@@ -1558,6 +1558,25 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Exact neutral r2 stock-file boundary — 2026-11-25
+
+- Compared 14 pinned stock partition images, 996 regular files from seven
+  stock filesystems, 312 stock ramdisk files, the GKI kernel and boot metadata
+  against the exact r2 ROM. Independently read all 30 files from the two
+  ext-family stock inputs by native inode and verified the extracted bytes.
+- Bound the check to each of the five released image hashes and all 31 APEX
+  archive hashes. Read 22 ROM ZIP members, 5,354 regular userspace files,
+  765 APEX files and 49,278 nested ZIP members. The scan found three
+  whole-file matches with stock and classified all three.
+- Compared the two configuration matches with pinned Git source. The third
+  match was a single newline shared by generated VNDK metadata and an ODM
+  placeholder. The actual OEM Dolby library and firmware had no whole-file
+  match. See the [scoped receipt](../manifests/neutral-r2-stock-boundary.json).
+- Host checks passed with AVB fixtures (221 Python and eight Java suites).
+  The audit ran without device access and left the ROM ZIP unchanged.
+  Remaining userspace source and distribution review is tracked in
+  [Licensing](LICENSING.md#stock-file-boundary-in-neutral-r2).
+
 ### Latest staged r2 release audit and recipient preflight — 2026-11-25
 
 - Replayed all eight ROM patches with the current source and the captured

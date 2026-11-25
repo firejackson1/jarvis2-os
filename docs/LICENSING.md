@@ -20,6 +20,35 @@ The assembled ROM is not covered by a single replacement license.
 | Bridge Console TV | Owner-controlled original app; public repository hosts releases, not full development source | Audit development dependencies and preserve font/third-party notices; do not label it open source without a license |
 | Google applications / Android TV Home | Proprietary, not granted by LineageOS source access | Do not bundle in public ROM without a verified redistribution license |
 
+## Stock-file boundary in neutral r2
+
+The [r2 boundary receipt](../manifests/neutral-r2-stock-boundary.json) binds the
+five packaged images to the reviewed release ZIP. The comparison used 14
+partition images from the pinned stock OTA, including its bootloader, and
+checked 996 regular files from seven stock filesystems and 312 entries from
+three stock ramdisks. It compared whole-file bytes across the 22 ROM ZIP
+members, 5,354 installed userspace files, all 31 APEX filesystems and 49,278
+nested ZIP members.
+
+Three nonempty payloads match stock bytes. `snapuserd.rc` and `mke2fs.conf`
+match pinned platform source files. The third match is one newline in the
+generated `vndkcorevariant.libraries.txt`. A stock placeholder with a Dolby
+library filename contains that same newline. The actual OEM Dolby library
+and Dolby Vision firmware have different hashes and were absent from the
+compared files, as were exact stock bootloader, kernel, module and vendor HAL
+payloads.
+
+Recovery reconstruction continues to use the recipient's stock inputs. The
+packaged AVB files retain the stock graph and bind the locally reconstructed
+Recovery image. The comparison covers whole files from the specified inputs.
+Review of transformed code, replaced stock userspace, companion assets and
+complete distribution rights remains open.
+[Stock foundation](STOCK_FOUNDATION.md) ·
+[Pinned snapshot init source](https://github.com/LineageOS/android_system_core/blob/ec299bf6da55702b7b9675d60a0faf2815f0dc6d/fs_mgr/libsnapshot/snapuserd/snapuserd.rc) ·
+[Pinned filesystem configuration](https://github.com/LineageOS/android_system_extras/blob/994315964c73b871ae882fcbc3f1d0ae57084647/ext4_utils/mke2fs.conf)
+
+## Component-specific exclusions
+
 The lossless upstream kernel helper has a GPL-2.0 declaration, but that does not
 license the rest of its repository. Public visibility or credit is not a general
 permission grant. Independent patch tooling in components is experimental and

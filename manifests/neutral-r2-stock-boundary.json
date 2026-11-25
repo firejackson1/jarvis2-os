@@ -1,0 +1,134 @@
+{
+  "format": 1,
+  "scope": "Nonempty whole-file matches to pinned stock partition images, listed partition files, kernel/DTB/bootconfig and stock CPIO members, including r2 ZIP members, regular userspace and APEX files, and nested ZIP members.",
+  "rom_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+  "images": {
+    "product.img": {
+      "bytes": 541949952,
+      "sha256": "541d4c89120b66f57a26021bf1c2fd5942189d47f13ec1b5a53ad9cd854ec16c"
+    },
+    "system.img": {
+      "bytes": 483131392,
+      "sha256": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42"
+    },
+    "system_ext.img": {
+      "bytes": 96161792,
+      "sha256": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b"
+    },
+    "vbmeta.img": {
+      "bytes": 2097152,
+      "sha256": "e366df78ed9ebd716462568f191b7e8dca7def06e240d178d73e6ec892d796c5"
+    },
+    "vbmeta_system.img": {
+      "bytes": 2097152,
+      "sha256": "cf1c7da1d484c3a016736c39456e701cb4d6ac92bba64a6fcd687100b118e105"
+    }
+  },
+  "counts": {
+    "apex_payloads": 31,
+    "apex_regular_files": 765,
+    "nested_zip_members": 49278,
+    "outer_rom_zip_members": 22,
+    "regular_userspace_files": 5354,
+    "stock_files_odm": 14,
+    "stock_files_odm_dlkm": 4,
+    "stock_files_odm_ext": 13,
+    "stock_files_oem": 17,
+    "stock_files_system_dlkm": 34,
+    "stock_files_vendor": 796,
+    "stock_files_vendor_dlkm": 118,
+    "stock_partition_inputs": 14,
+    "stock_ramdisk_regular_files": 312,
+    "stock_ramdisks": 3
+  },
+  "stock_unique_nonempty_contents": 1253,
+  "matches": [
+    {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "stock": [
+        "odm/etc/ms12/libdolbyms12.so"
+      ],
+      "r2": [
+        "system/etc/vndkcorevariant.libraries.txt"
+      ],
+      "r2_origin": {
+        "kind": "one-byte newline collision",
+        "project": "packages/modules/vndk",
+        "revision": "03e0fca0588ea1111226bcb36b79d678fde6bdf6",
+        "build_file": "Android.bp",
+        "soong_module": "vndkcorevariant.libraries.txt",
+        "matched_build_output": true
+      }
+    },
+    {
+      "bytes": 537,
+      "sha256": "3a6966f87823b2726a231e7244adf78ad91d581bf4e8b1580630ebb82cc6c498",
+      "stock": [
+        "unpack-init_boot/ramdisk!/system/etc/init/snapuserd.rc",
+        "unpack-vendor_boot/vendor_ramdisk01!/system/etc/init/snapuserd.rc"
+      ],
+      "r2": [
+        "system/etc/init/snapuserd.rc"
+      ],
+      "r2_origin": {
+        "kind": "pinned source file",
+        "project": "system/core",
+        "revision": "ec299bf6da55702b7b9675d60a0faf2815f0dc6d",
+        "source": "fs_mgr/libsnapshot/snapuserd/snapuserd.rc",
+        "matched_source_bytes": true
+      }
+    },
+    {
+      "bytes": 1157,
+      "sha256": "ad58a58dcdd24d85055814ca9cac67db89d4e67c434e96774bdce0d0a007d067",
+      "stock": [
+        "unpack-vendor_boot/vendor_ramdisk01!/system/etc/mke2fs.conf"
+      ],
+      "r2": [
+        "system/etc/mke2fs.conf"
+      ],
+      "r2_origin": {
+        "kind": "pinned source file",
+        "project": "system/extras",
+        "revision": "994315964c73b871ae882fcbc3f1d0ae57084647",
+        "source": "ext4_utils/mke2fs.conf",
+        "matched_source_bytes": true,
+        "matched_build_output": true
+      }
+    }
+  ],
+  "device_contacted": false,
+  "distribution_rights_verified": false,
+  "stock_ota_sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+  "stock_partition_images_checked": [
+    "boot",
+    "bootloader",
+    "dtbo",
+    "init_boot",
+    "odm",
+    "odm_dlkm",
+    "odm_ext",
+    "oem",
+    "system_dlkm",
+    "vbmeta",
+    "vbmeta_system",
+    "vendor",
+    "vendor_boot",
+    "vendor_dlkm"
+  ],
+  "stock_bootloader": {
+    "bytes": 4100096,
+    "sha256": "365b2d645bf6326dd54b278297e5311dd7bc4579215803879a3f5233c68de731"
+  },
+  "stock_partition_regular_files": 996,
+  "native_ext_regular_files_verified": 30,
+  "unclassified_matches": 0,
+  "detailed_scan_sha256": "362bf6fa3e609b61e1b10a7e2e71959d4336921f8207f84ee0dfc55aa8f48c1d",
+  "excluded_from_comparison": [
+    "Replaced stock system, system_ext and product filesystems",
+    "Byte ranges and transformed files",
+    "Other archive formats nested inside ZIP members",
+    "Separately staged companion artifacts"
+  ]
+}
