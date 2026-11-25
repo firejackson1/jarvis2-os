@@ -122,6 +122,12 @@ produced identical files. The [preflight receipt](../manifests/neutral-r2-recipi
 records the seven prepared image hashes, Recovery notices and both verification
 reports. The procedure requires no connected device or Android source tree.
 
+The same staged downloads also passed on Debian 12 x86-64 with the distro's
+Python 3.11, glibc 2.36, Git 2.39, OpenSSL 3.0 and LZ4 1.9.4. This run extracted
+the stock OTA afresh, verified the portable layout reader and reproduced the
+Debian 13 AVB and saved-fit reports byte for byte. The incomplete saved slot B
+layout was refused. [Debian 12 preflight receipt](../manifests/neutral-r2-bookworm-preflight.json)
+
 ### Check a saved layout and restore files
 
 Add these options to the same local preflight command:
@@ -157,7 +163,9 @@ Extract the verified archive into a fresh directory. Keep `bin/` beside
 from the extraction directory. Give the preflight the absolute path to
 `bin/lpdump` and the executable digest from the receipt. The linker loads the
 included Android libraries from `lib64/` and uses the host's glibc and
-`libgcc_s`. Linux x86-64 with glibc 2.41 was tested.
+`libgcc_s`. Debian 12 and 13 x86-64 were tested. If running in a minimal
+chroot or container, provide a normal `/proc` mount so the Debian 12 loader
+can resolve the executable-relative library path.
 
 To compile a local copy, use the [pinned Android source setup](CURRENT_REPRODUCTION.md#source-and-inputs)
 and build `lpdump-host` after `lunch lineage_jarvis2-ap2a-userdebug`. The Linux

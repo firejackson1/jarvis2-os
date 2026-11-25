@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "scope": "Network- and device-isolated recipient preflight with distro tools and a saved layout",
+  "host": {
+    "distribution": "Debian 12 (bookworm)",
+    "architecture": "x86-64",
+    "package_versions": {
+      "libc6:amd64": "2.36-9+deb12u14",
+      "libgcc-s1:amd64": "12.2.0-14+deb12u1",
+      "python3": "3.11.2-1+b1",
+      "python3.11": "3.11.2-6+deb12u8",
+      "git": "1:2.39.5-0+deb12u3",
+      "openssl": "3.0.20-1~deb12u2",
+      "lz4": "1.9.4-1"
+    },
+    "package_inventory_sha256": "3d7b13b6f5bb0a1a66fb87e3a9ea9f9f1e81b1824376dc8335946bd6de3c77ab",
+    "procfs_available": true
+  },
+  "delivery_receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
+  "delivery_members_verified": 18,
+  "rom_archive_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+  "operator_archive_sha256": "43445aaff6c177487d0063ccf085726b4c7c5344c6a4e161b1bc305d5169097f",
+  "tool_archive_sha256": "40998068112a78062adcb0548206581fde71f557dbf4464d2bd42e9a0aeabf8f",
+  "tool_archive_inner_checksums_verified": 33,
+  "lpdump_sha256": "9f49ac0a597c91eaa23541486e5de10f5e555755b18fb37e4a4ae522903f39e5",
+  "stock_full_ota_sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+  "stock_ota_images_extracted_and_verified": 13,
+  "padded_avb_templates_verified": 2,
+  "saved_slot_a_candidate_images_fit": 7,
+  "saved_slot_a_restore_files_verified": 7,
+  "untargeted_stock_references_verified": 9,
+  "saved_unallocated_b_rejected": true,
+  "verified_avb_bindings": 13,
+  "outputs": {
+    "prepared_image_sha256": {
+      "images/product.img": "541d4c89120b66f57a26021bf1c2fd5942189d47f13ec1b5a53ad9cd854ec16c",
+      "images/system.img": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42",
+      "images/system_ext.img": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b",
+      "images/vbmeta.img": "e366df78ed9ebd716462568f191b7e8dca7def06e240d178d73e6ec892d796c5",
+      "images/vbmeta_system.img": "cf1c7da1d484c3a016736c39456e701cb4d6ac92bba64a6fcd687100b118e105",
+      "transition-images/init_boot.img": "2bda4f31dd2fae6afef022e845c3e0ac0ac99a0dbccba78a00735b1a3986bf30",
+      "transition-images/vendor_boot.img": "c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e"
+    },
+    "preflight_report_sha256": "541a3c68fe0d2b5f08d3a108b2fd3cc58705aace94e8cde7f35fe4364185d426",
+    "avb_report_sha256": "ce68d7ddeb3f4dd40460a9029953b4801ad6c14ab04c65f2c6ffa47c7b74c33b"
+  },
+  "matches_debian_13_reports_byte_for_byte": true,
+  "lpdump_loader_requires_procfs_on_tested_debian_12": true,
+  "live_device_verified": false,
+  "installation_authorized": false
+}

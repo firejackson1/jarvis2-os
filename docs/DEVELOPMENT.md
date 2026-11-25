@@ -1946,3 +1946,19 @@ without private scripts, server access or an AI operator.
   payload. [Companion review](../manifests/neutral-r2-companion-privacy.json)
   This was a local artifact review. Bazzite stayed running and Jarvis2
   was untouched. Review the hosted files after release staging.
+
+### Neutral r2 recipient preflight on Debian 12 — 2026-11-25
+
+- Bootstrapped Debian 12 x86-64 from the signed Debian archive. In an
+  isolated, offline environment, verified all 18 staged downloads and 33
+  layout-reader companion checksums. Extracted 13 stock OTA inputs on that
+  host and reproduced the two zero-padded AVB templates.
+- The native layout reader initially failed to resolve `libbase.so` in the
+  bare chroot. A controlled comparison reproduced the failure before mounting
+  `/proc`. With only that mount added, the same binary and libraries reproduced
+  the saved layout output exactly.
+- Repeated the complete recipient preflight from fresh output directories.
+  All seven candidate and restore checks and 13 AVB bindings passed. The
+  incomplete saved slot B foundation was refused before staging. The Debian
+  12 reports matched Debian 13 byte for byte. No device was accessed and
+  Bazzite stayed running. [Debian 12 receipt](../manifests/neutral-r2-bookworm-preflight.json)

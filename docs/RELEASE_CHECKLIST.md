@@ -338,6 +338,9 @@ publication by this policy decision alone.
   stock extracts and a newly prepared tool kit. Both tested LZ4 versions
   produced the same seven image hashes and 13 verified AVB bindings.
   [Recipient preflight receipt](../manifests/neutral-r2-recipient-preflight.json)
+- [x] Rehearse the same workflow on Debian 12 x86-64 with distro tools.
+  Compare both reports with the Debian 13 run and repeat the saved-layout
+  acceptance and refusal cases. [Debian 12 receipt](../manifests/neutral-r2-bookworm-preflight.json)
 - [ ] Provide a supported installation route using published downloads and a
   standard computer, with exact prerequisites and clear supported-device/firmware
   limits. The current raw-image ZIP is not a sideload OTA.
