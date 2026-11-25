@@ -335,3 +335,10 @@ VNDK binary outside the original GNU build ID. All 1,332,927,819 bytes in
 the revised set passed full readback. The receipt SHA-256 is
 `2156ec7bbd474c0842dfb8f96505bef4553a6eb9ef2b3cfe8001dd49ca951bc2`.
 [Rebuild and staging evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libexif-library)
+
+The 21-file private staging set adds `libnl-7523b7d9f2c3-source.tar.gz`
+and `libxml2-9ec1e3881001-source.tar.gz`. Both source archives reproduce
+their VNDK libraries outside the original build IDs. All 1,337,793,537 bytes
+passed full readback. The new receipt SHA-256 is
+`cc4b7aaba041c4b4f457af47c387513c72243edd65ec189300de4b48553d564b`.
+[Rebuild and staging evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libnl-and-libxml2-libraries)

@@ -168,8 +168,8 @@ one of their 4,739 Git entries matched the original blob and mode. To
 recreate an archive, clone the pinned project and use its commit from
 the receipt with `git archive --prefix=<project>-<short-commit>/ <commit> | gzip -n`.
 Use the first 12 characters of the commit in the archive prefix.
-The original CI manifests, exact binary rebuilds and full distribution
-review remain open.
+The following replays match all three libraries outside their original GNU
+build IDs. The exact CI manifests and broader distribution review remain open.
 [Android VNDK snapshot source documentation](https://source.android.com/docs/core/architecture/vndk/snapshot-generate#snapshot-files)
 
 ### Reproducing the VNDK libexif library
@@ -177,8 +177,7 @@ review remain open.
 The pinned `libexif` source archive reproduced every byte of the signed r2
 VNDK ELF outside its 16-byte GNU build ID. This includes the code, read-only
 data, relocation tables and embedded mini debug data. Two fresh extractions
-produced identical rebuilt files. The other two libraries and the exact
-historical CI manifest still require verification.
+produced identical rebuilt files. The exact historical CI manifest remains open.
 [Rebuild and staging receipt](../manifests/neutral-r2-vndk-libexif-rebuild.json)
 
 Use the r2 Android build tree and its ARMv7 system `libexif` Soong plan as
@@ -206,6 +205,34 @@ validated GNU note descriptor for comparing the two files.
 The new 19-file private staging set includes the verified source archive
 with its `COPYING` and `NOTICE` files. All prior payloads, including the
 ROM, retained their original hashes.
+
+### Reproducing the VNDK libnl and libxml2 libraries
+
+The older source archives reproduce both stripped VNDK libraries outside
+their 16-byte GNU build IDs. Each replay was repeated from a fresh
+extraction and produced the same complete file. The retained Soong plan
+also reproduced both current system libraries as controls.
+[Rebuild and staging receipt](../manifests/neutral-r2-vndk-libnl-libxml2-rebuild.json)
+
+Use Ninja's `-t commands -s` on every compilation target from the two
+retained link response files, both unstripped link targets, and the two
+final strip targets. Apply the same Clang 17, response-file, prefix-map,
+shrink-wrap and link-layout changes as for [libexif](#reproducing-the-vndk-libexif-library).
+Point the compiler's package-specific include paths at the extracted sources.
+Preserve the original response-file link order for retained objects.
+
+- **libnl** compiles the 36 C files from its original Android.bp.
+  Remove the newer `lib/route/addr.c` entry and use the pinned Android 14
+  Bionic `libc` include paths instead of the newer ones. The older headers
+  affect two function sizes. [Pinned Bionic source](https://android.googlesource.com/platform/bionic/+/e4df46f213d8d363017dce7ded5d1f2159614425)
+- **libxml2** compiles the 39 C files from its original Android.bp.
+  Set `-DLIBXML_THREAD_ENABLED=1` and `-D__ANDROID_VNDK__`. The VNDK
+  definition disables ICU in the historical header. Exclude the current
+  system variant's `libandroidicu.so` from the link response file.
+
+The 21-file private staging set includes both source archives and their
+original licensing files. The ROM and previously staged payloads retain
+their hashes.
 
 ### VNDK modules using the snapshot default
 

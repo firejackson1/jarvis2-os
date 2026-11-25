@@ -2180,3 +2180,16 @@ without private scripts, server access or an AI operator.
   source archive to an independent 19-file private staging set and verified
   every download byte against its receipt.
   [Rebuild receipt](../manifests/neutral-r2-vndk-libexif-rebuild.json)
+
+### VNDK libnl and libxml2 replay — 2026-11-25
+
+- Reproduced both modern system ELF controls from the retained Soong plans.
+  Rebuilt the historical VNDK variants with Clang 17 and the same 64 KiB
+  layout and shrink-wrap settings used for libexif. The libnl replay needed
+  the older Bionic headers and 36 historical inputs. The libxml2 replay
+  needed the VNDK variant flag and 39 historical inputs.
+- Compared the complete stripped libraries. Only the 16-byte GNU build ID
+  per library differs. Repeated builds from fresh source extractions and
+  matched both output files. Added the exact source archives to the
+  independent private staging set and verified all 21 files.
+  [Rebuild receipt](../manifests/neutral-r2-vndk-libnl-libxml2-rebuild.json)
