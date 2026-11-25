@@ -230,6 +230,9 @@ publication by this policy decision alone.
   all 13 AVB bindings, prepare the seven images and confirm fit and restore
   hashes against the saved slot-A trial. Fresh capture, signed release inputs
   and hardware verification remain open. [Local preflight](CANDIDATE_INSTALLATION.md#prepare-a-verified-lcars-zip-locally)
+- [x] Repeat the layout and rollback-file check using the public preflight and
+  pinned native `lpdump`, with a matching saved A result and a refused saved B.
+  [Saved fit check](CANDIDATE_INSTALLATION.md#check-a-saved-layout-and-restore-files)
 - [ ] Provide a supported installation route using published downloads and a
   standard computer, with exact prerequisites and clear supported-device/firmware
   limits. The current raw-image ZIP is not a sideload OTA.

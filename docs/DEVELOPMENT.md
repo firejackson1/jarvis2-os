@@ -1336,3 +1336,19 @@ without private scripts, server access or an AI operator.
 - All 199 Python tests and eight Java suites passed. The exact new product
   build still needs its own signed archive and final-image binding. Device
   state was untouched and Bazzite stayed online.
+
+## 2026-11-25 — Portable saved-layout and rollback-file verification
+
+- LCARS preflight can now check a private saved capture using pinned native
+  `lpdump`. The same offline operation verifies both LP views, fits the seven
+  candidate files, checks the matching restore bytes and compares all untouched
+  stock references. The receipt records the capture, prefix and tool hashes.
+- Re-ran format 3 preflight against the exact saved slot-A trial. Both native
+  LP views matched, seven candidate sizes and seven restore files matched,
+  and all nine untouched stock references matched. Asking for B against the
+  same saved capture failed for an incomplete logical foundation before preparing
+  output. The private slot-A receipt SHA-256 is
+  `1be60bb24087fcf04357592543a69e750204db02ebdafae93127fd6d389cc345`.
+- All 200 Python tests and eight Java suites passed. The saved evidence covers
+  offline fit and exact restore files. Recovery transport, fresh live state
+  and actual restoration still need separate qualification. Bazzite stayed online.

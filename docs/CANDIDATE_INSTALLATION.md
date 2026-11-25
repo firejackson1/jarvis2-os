@@ -51,6 +51,30 @@ establish the current slot, layout, rollback backups or device authorization.
 Obtain a fresh verified capture and exact restore set before preparing any
 writer proof or performing an authorized device trial.
 
+### Check a saved layout and restore files
+
+Add these options to the same local preflight command:
+
+```sh
+--fit-slot a \
+--fit-inputs /private/saved-capture \
+--fit-capture-sha256 <trusted-capture-json-sha256> \
+--fit-lpdump /tools/host/bin/lpdump \
+--fit-lpdump-sha256 <trusted-lpdump-executable-sha256>
+```
+
+Keep `capture.json`, `super-prefix.img` and the seven files in `old-images/`
+inside the private capture directory. Use the reviewed native `lpdump` with
+its matching shared libraries. For the explicit target slot, preflight checks
+both saved LP views, the allocated layout, each candidate and restore size,
+each saved restore hash and every untouched stock-reference hash. It also checks
+that the target extents start beyond the captured metadata prefix. A mismatch
+stops preflight before it stages output.
+
+The `saved_capture_fit` record binds the results to the capture, metadata and
+tool hashes. This is an offline receipt for the saved state. Recovery transport,
+capture freshness and device authorization are separate checks.
+
 ## Supported contract and prerequisites
 
 A separate operator must qualify recovery transport and stage a reviewed native

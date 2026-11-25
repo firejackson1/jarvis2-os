@@ -195,8 +195,88 @@ def verify_chain(work, tool_kit, stock, root_pin, profile):
     return {**chain, 'verified_image_bindings': bindings}
 
 
+def review_fit(slot, candidate, capture, views, profile):
+    planner = load_tool('lcars_slot_plan', ROOT / 'tools/slot-install-plan.py')
+    rom = {name: candidate['images/' + name] for name in PACK.IMAGE_NAMES}
+    bootstrap = {name: candidate['transition-images/' + name]
+                 for name in ('init_boot.img', 'vendor_boot.img')}
+    plan = planner.plan(slot, {'avb_offline_verified': True, 'files': rom}, views)
+    layout = views[0]['layout']
+    if layout['block_devices'][0]['size'] != capture['super']['bytes']:
+        raise ValueError('Native super capacity differs from the saved capture')
+    suffix = '_' + slot
+    prefix_bytes = capture['metadata_prefix']['bytes']
+
+    def captured_record(partition):
+        physical = capture['physical'].get(partition)
+        if physical is not None:
+            return {key: physical[key] for key in ('bytes', 'sha256')}
+        return {'bytes': views[0]['sizes'].get(partition),
+                'sha256': capture['logical_sha256'].get(partition)}
+
+    images = {**rom, **bootstrap}
+    old = capture['old_files']
+    if set(old) != set(images):
+        raise ValueError('The saved capture must provide all seven restore files')
+    for name, image in images.items():
+        partition = name[:-4] + suffix
+        if old[name] != captured_record(partition) or old[name]['bytes'] != image['bytes']:
+            raise ValueError(partition + ' restore image differs from the captured hash or exact size')
+        if any(extent['target_data'] * planner.SECTOR_SIZE < prefix_bytes
+               for extent in layout['partitions'].get(partition, ())):
+            raise ValueError(partition + ' extent overlaps the captured metadata prefix')
+
+    untouched = []
+    for part, expected in profile['references'].items():
+        if part + '.img' in images:
+            continue
+        partition = part + suffix
+        if captured_record(partition) != expected:
+            raise ValueError(partition + ' differs from the pinned stock foundation')
+        untouched.append(part)
+    return {'target_slot': slot, 'matched_shared_metadata_views': True,
+            'restore_images_verified': len(old), 'candidate_images_fit': len(images),
+            'untargeted_stock_references_verified': sorted(untouched),
+            'other_slot_foundation_allocated': plan['other_slot_foundation_allocated'],
+            'live_device_verified': False, 'installation_authorized': False}
+
+
+def verify_saved_fit(candidate, profile, *, slot, inputs, capture_sha256, lpdump, lpdump_sha256):
+    writer = load_tool('lcars_restore_checks', ROOT / 'tools/install-candidate.py')
+    capture_path = PACK.regular(inputs / 'capture.json')
+    metadata = PACK.regular(inputs / 'super-prefix.img')
+    lpdump = PACK.regular(lpdump)
+    PACK.sha256_value(lpdump_sha256)
+    if PACK.digest(lpdump) != lpdump_sha256:
+        raise ValueError('Native lpdump differs from its reviewed SHA-256')
+    capture = writer.pinned(capture_path, capture_sha256)
+    if (not isinstance(capture, dict) or type(capture.get('format')) is not int or
+        capture['format'] != 1 or any(not isinstance(capture.get(key), dict) for key in
+        ('physical', 'logical_sha256', 'metadata_prefix', 'old_files', 'super')) or
+        set(capture['physical']) != set(writer.REQUIRED_PHYSICAL)):
+        raise ValueError('Invalid saved capture or incomplete physical inventory')
+    writer.device(capture['super'], hashed=False)
+    for item in capture['physical'].values():
+        writer.device(item)
+    prefix = capture['metadata_prefix']
+    writer.record(prefix)
+    if (prefix['bytes'] % writer.PLAN.SECTOR_SIZE or prefix['bytes'] > 16 * 1024 * 1024 or
+        prefix['bytes'] > capture['super']['bytes'] or metadata.stat().st_size != prefix['bytes'] or
+        PACK.digest(metadata) != prefix['sha256']):
+        raise ValueError('Saved super metadata prefix differs from the pinned capture')
+    sizes = {name: capture['physical'][name]['bytes'] for name in writer.PLAN.PHYSICAL}
+    views = writer.PLAN.load_views(str(lpdump), str(metadata), sizes)
+    report = review_fit(slot, candidate, capture, views, profile)
+    writer.image_files(inputs / 'old-images', capture['old_files'])
+    if (PACK.digest(lpdump) != lpdump_sha256 or PACK.digest(metadata) != prefix['sha256'] or
+        PACK.digest(capture_path) != capture_sha256):
+        raise ValueError('Saved fit inputs changed during inspection')
+    return {**report, 'capture_sha256': capture_sha256, 'super_prefix_sha256': prefix['sha256'],
+            'lpdump_sha256': lpdump_sha256}
+
+
 def prepare(archive, archive_sha256, stock_images, recovery_source, tool_kit, root_pin,
-            output, *, allow_rehearsal=False):
+            output, *, allow_rehearsal=False, fit=None):
     PACK.sha256_value(archive_sha256)
     PACK.sha256_value(root_pin)
     archive = PACK.regular(archive)
@@ -253,6 +333,8 @@ def prepare(archive, archive_sha256, stock_images, recovery_source, tool_kit, ro
                        'sha256': PACK.digest(path)} for directory in (work / 'images', transition)
                        for path in sorted(directory.iterdir())},
         }
+        if fit is not None:
+            receipt['saved_capture_fit'] = verify_saved_fit(receipt['files'], profile, **fit)
         output.mkdir(mode=0o700)
         for name in ('images', 'transition-images'):
             (work / name).rename(output / name)
@@ -273,11 +355,21 @@ if __name__ == '__main__':
     parser.add_argument('--archive-sha256', required=True)
     parser.add_argument('--root-public-key-sha256', required=True)
     parser.add_argument('--allow-offline-rehearsal', action='store_true')
+    parser.add_argument('--fit-slot', choices=('a', 'b'))
+    parser.add_argument('--fit-inputs', type=Path)
+    parser.add_argument('--fit-capture-sha256')
+    parser.add_argument('--fit-lpdump', type=Path)
+    parser.add_argument('--fit-lpdump-sha256')
     args = parser.parse_args()
+    fit = {'slot': args.fit_slot, 'inputs': args.fit_inputs, 'capture_sha256': args.fit_capture_sha256,
+           'lpdump': args.fit_lpdump, 'lpdump_sha256': args.fit_lpdump_sha256}
+    if any(value is not None for value in fit.values()) and any(value is None for value in fit.values()):
+        parser.error('The saved capture fit check requires all five --fit options')
     try:
         result = prepare(args.archive, args.archive_sha256, args.stock_images, args.recovery_source,
                          args.tool_kit, args.root_public_key_sha256, args.output,
-                         allow_rehearsal=args.allow_offline_rehearsal)
+                         allow_rehearsal=args.allow_offline_rehearsal,
+                         fit=fit if args.fit_inputs is not None else None)
     except (OSError, ValueError, subprocess.CalledProcessError, tarfile.TarError, zipfile.BadZipFile) as error:
         parser.exit(1, f'LCARS preflight failed: {error}\n')
     print(json.dumps(result, indent=2))

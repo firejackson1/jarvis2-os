@@ -88,3 +88,9 @@ restore files matched their full recorded physical and logical hashes. That
 saved capture had no complete allocated slot-B foundation. A new device trial
 still requires a fresh capture, an independently reachable restore transport,
 and approval for the actual candidate. [Host preflight](CANDIDATE_INSTALLATION.md#prepare-a-verified-lcars-zip-locally)
+
+The portable preflight can repeat the saved fit check with a pinned native
+`lpdump`, the captured super prefix and the original seven restore files. It
+records the exact input hashes and fails if any target overlaps the captured
+metadata prefix or if the untouched stock foundation differs.
+[Saved layout and restore-file check](CANDIDATE_INSTALLATION.md#check-a-saved-layout-and-restore-files)

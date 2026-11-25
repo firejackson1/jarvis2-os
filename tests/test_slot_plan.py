@@ -39,6 +39,40 @@ class SlotPlanTests(unittest.TestCase):
   manifest,views=self.fixtures()
   for slot in ['all','current','',None]:
    with self.subTest(slot=slot),self.assertRaises(ValueError):module.plan(slot,manifest,views)
+ def test_lcars_fit_checks_restore_hashes_and_untouched_stock_references(self):
+  spec = importlib.util.spec_from_file_location('lcars_fit', ROOT/'tools/prepare-lcars-install.py')
+  preflight = importlib.util.module_from_spec(spec)
+  spec.loader.exec_module(preflight)
+  manifest, views = self.fixtures()
+  candidate = {f'images/{name}': record for name, record in manifest['files'].items()}
+  for partition in ('init_boot', 'vendor_boot'):
+   candidate[f'transition-images/{partition}.img'] = {'sha256': 'c'*64, 'bytes': 4096}
+  old = {Path(name).name: dict(record, sha256='b'*64) for name, record in candidate.items()}
+  physical = {name[:-4]+'_a': record for name, record in old.items()
+              if name.startswith(('vbmeta', 'init_boot', 'vendor_boot'))}
+  physical['boot_a'] = {'bytes': 4096, 'sha256': 'd'*64}
+  logical = {part+'_a': 'b'*64 for part in ('system', 'system_ext', 'product')}
+  logical['vendor_a'] = 'e'*64
+  capture = {'physical': physical, 'logical_sha256': logical, 'old_files': old,
+             'super': {'bytes': 2097152}, 'metadata_prefix': {'bytes': 524288}}
+  profile = {'references': {'boot': {'bytes': 4096, 'sha256': 'd'*64},
+                            'vendor': {'bytes': 4096, 'sha256': 'e'*64},
+                            'vendor_boot': {'bytes': 4096, 'sha256': 'f'*64}}}
+  report = preflight.review_fit('a', candidate, capture, views, profile)
+  self.assertEqual(report['restore_images_verified'], 7)
+  self.assertEqual(report['untargeted_stock_references_verified'], ['boot', 'vendor'])
+  self.assertFalse(report['installation_authorized'])
+  logical['vendor_a'] = 'f'*64
+  with self.assertRaisesRegex(ValueError, 'vendor_a.*stock foundation'):
+   preflight.review_fit('a', candidate, capture, views, profile)
+  logical['vendor_a'] = 'e'*64
+  logical['product_a'] = 'f'*64
+  with self.assertRaisesRegex(ValueError, 'product_a.*restore image'):
+   preflight.review_fit('a', candidate, capture, views, profile)
+  logical['product_a'] = 'b'*64
+  capture['metadata_prefix']['bytes'] = 1052672
+  with self.assertRaisesRegex(ValueError, 'captured metadata prefix'):
+   preflight.review_fit('a', candidate, capture, views, profile)
  def test_active_b_layout_with_empty_a_is_supported_without_claiming_backup(self):
   manifest,views=self.fixtures()
   for v in views:
