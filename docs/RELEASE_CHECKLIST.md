@@ -330,6 +330,8 @@ publication by this policy decision alone.
   input and confirm that all 16 tracked-source projects have staged archives.
 - [x] Trace the 78 planned objects in the six directly linked static
   libraries to five staged source trees and one generated Dart version input.
+- [x] Read back all six compiled Flutter static libraries and verify the
+  names, order and bytes of all 78 members against the linked objects.
 - [x] Trace all 53 generated source paths to their Ninja rules and verify
   the declared tracked inputs against the 12 pinned project trees.
 - [x] Replay the generated Dart version file with two independent reflogs

@@ -2286,3 +2286,9 @@ without private scripts, server access or an AI operator.
   blob from the staged source companion and from the reference ELF.
   Compiled archive readback expanded to four archives and 50 members,
   including libjpeg and libsimd. Final library and two archives remain open.
+
+- Completed archive readback after FreeType and the precompiled Dart
+  runtime finished. All 78 members across six libraries matched the
+  names and order in the Ninja graph and the exact compiled object bytes.
+  Recorded archive digests in the native preflight manifest. The final
+  linked engine and compiler-discovered headers still need verification.

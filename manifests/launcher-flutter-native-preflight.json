@@ -899,9 +899,13 @@
       }
     },
     "static_archive_readback": {
-      "built_archive_count": 4,
-      "verified_archive_members": 50,
+      "built_archive_count": 6,
+      "verified_archive_members": 78,
       "archives": {
+        "obj/flutter/third_party/freetype2/libfreetype2.a": {
+          "sha256": "a21b43402f6b71a099f544101616706e0953e6f01ab21b189634d35eb37dea9f",
+          "member_count": 24
+        },
         "obj/flutter/third_party/expat/libexpat.a": {
           "sha256": "4f47aa79d4470008bac268ada411b2be2b8d18672abb14c95d674558889de529",
           "member_count": 3
@@ -917,11 +921,15 @@
         "obj/flutter/skia/modules/skcms/libskcms.a": {
           "sha256": "100277b60d452bf1a5bae8f265928b25ffd36e2c05e3c92f5d121cfc787d0d59",
           "member_count": 2
+        },
+        "obj/flutter/third_party/dart/runtime/libdart_precompiled_runtime.a": {
+          "sha256": "28e40cafa6097c6e722bbd5635a56dcaef7a3cf1c8caceee640ed0d39a24b698",
+          "member_count": 4
         }
       },
       "actual_member_order_and_bytes_verified": true,
-      "complete_archive_readback": false,
-      "host_report_sha256": "9de01ab3b51e66d5c75239e94f0d274fb9953385b1e40c30020439619d983fa4"
+      "complete_archive_readback": true,
+      "host_report_sha256": "48b536cbb3807abdfcc6eeb66899ea9cc4fa867a52c92630a17cca79a7dd8648"
     }
   }
 }

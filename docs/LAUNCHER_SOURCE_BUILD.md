@@ -375,9 +375,8 @@ Use `ninja -t query` on the six static libraries named by the link.
 Their archive rule passes the explicit input list to `llvm-ar`. All
 78 planned members matched compile database commands. Of those, 77
 map to tracked files in five pinned projects with staged archives.
-The Dart version member is generated. Actual archive members, generated
-inputs, compiler-discovered headers and the resulting ELF still need
-complete readback.
+The Dart version member is generated. The generated inputs,
+compiler-discovered headers and final ELF still need complete readback.
 
 Query the 53 generated source paths with `ninja -t query` and
 `ninja -t inputs`. Their rules generate 51 shader sources, one ICU data
@@ -388,10 +387,10 @@ the exact live build bytes from two isolated reflogs at the pinned revision
 with the original shallow boundary preserved. The compiler-generated
 header dependency log remains a separate input to the final audit.
 
-Four completed static libraries passed exact `llvm-ar` member name,
-ordering and byte comparisons against all 50 planned objects. These cover
-Expat, skcms and both libjpeg-turbo archives. Freetype, the Dart archive
-and the final ELF still need readback.
+All six compiled static libraries passed exact `llvm-ar` member name,
+order and byte comparisons against the 78 compiled objects listed in the
+Ninja graph. This covers FreeType, Expat, skcms, both libjpeg-turbo
+archives and the precompiled Dart runtime.
 
 The staged ICU source archive contains the exact 778,864-byte data blob.
 It matches the bytes in the pinned reference ELF's `.rodata`, followed
