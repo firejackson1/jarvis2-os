@@ -187,6 +187,8 @@ publication by this policy decision alone.
 - [ ] Verify recovery entry, USB ADB/fastbootd, Android reboot and stock restoration paths.
 - [x] Document the exact verified-boot failures between writes and what
   remains unverified before Recovery. [Intermediate states](RESTORE_PLAN.md#verified-boot-between-writes)
+- [ ] Verify and document which recovery entry points remain reachable if a
+  failure happens before Recovery starts.
 - [ ] Test rollback and repeat installation from the published instructions.
 
 ## 8. Public developer preview
