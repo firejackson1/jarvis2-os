@@ -111,6 +111,26 @@ def compile_extension(android, aosp, work, cpio):
     return library
 
 
+def unpack_stock_recovery(host, stock, work, lz4):
+    raw = subprocess.check_output([host / 'unpack_bootimg', '--boot_img', stock, '--out',
+                                   work / 'stock', '--format', 'mkbootimg', '-0'])
+    if not raw.endswith(b'\0'):
+        raise ValueError('Unexpected unpack_bootimg output')
+    fragment = recovery_fragment(raw[:-1].decode().split('\0'))
+    return subprocess.check_output([lz4, '-q', '-d', '-c', fragment])
+
+
+def compress_replacement(cpio, plugin, work, lz4):
+    updated, untouched = add_extension(cpio, plugin)
+    archive = work / 'stock-lcars.cpio'
+    archive.write_bytes(updated)
+    fragment = work / 'stock-lcars.cpio.lz4'
+    subprocess.run([lz4, '-q', '-l', '-12', archive, fragment], check=True)
+    if subprocess.check_output([lz4, '-q', '-d', '-c', fragment]) != updated:
+        raise ValueError('Compressed recovery archive failed readback')
+    return fragment, untouched
+
+
 def build(android, aosp, stock, output):
     android, aosp, stock, output = (path.resolve() for path in (android, aosp, stock, output))
     if output.exists() or any(output.is_relative_to(root) for root in (android, aosp, ROOT)):
@@ -124,20 +144,10 @@ def build(android, aosp, stock, output):
     host = android / 'out/host/linux-x86/bin'
     with TemporaryDirectory(prefix='jarvis2-stock-lcars-') as scratch:
         work = Path(scratch)
-        raw = subprocess.check_output([host / 'unpack_bootimg', '--boot_img', stock, '--out',
-                                       work / 'stock', '--format', 'mkbootimg', '-0'])
-        if not raw.endswith(b'\0'):
-            raise ValueError('Unexpected unpack_bootimg output')
-        stock_fragment = recovery_fragment(raw[:-1].decode().split('\0'))
-        cpio = subprocess.check_output([host / 'lz4', '-q', '-d', '-c', stock_fragment])
+        lz4 = host / 'lz4'
+        cpio = unpack_stock_recovery(host, stock, work, lz4)
         plugin = compile_extension(android, aosp, work, cpio)
-        updated, untouched = add_extension(cpio, plugin.read_bytes())
-        archive = work / 'stock-lcars.cpio'
-        archive.write_bytes(updated)
-        fragment = work / 'stock-lcars.cpio.lz4'
-        subprocess.run([host / 'lz4', '-q', '-l', '-12', archive, fragment], check=True)
-        if subprocess.check_output([host / 'lz4', '-q', '-d', '-c', fragment]) != updated:
-            raise ValueError('Compressed recovery archive failed readback')
+        fragment, untouched = compress_replacement(cpio, plugin.read_bytes(), work, lz4)
         if digest(stock) != STOCK_VENDOR_BOOT:
             raise ValueError('Stock vendor_boot changed during the build')
         report = repack(android, stock, fragment, output, 67108864)

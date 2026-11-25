@@ -43,3 +43,30 @@ The prior isolated ARM emulator test loaded both factories and compared the
 four stock menu labels and seven key codes with both visibility states. The
 prototype still needs a hardware boot, HDMI and input checks, authenticated
 USB, Fastbootd, Bluetooth pairing, AVB integration and rollback verification.
+
+## Recreate the Recovery image from a plug-in
+
+On Linux with Python 3.11 or later and `lz4` installed, the source-only tool
+kit can be prepared separately. It downloads four pinned scripts and verifies
+their hashes before writing the kit. No Android checkout is needed for this
+route. Supply the local stock `vendor_boot`, the reviewed plug-in and the two
+SHA-256 values from the trusted distribution manifest.
+
+```sh
+python3 tools/prepare_stock_lcars_kit.py /path/to/fresh/tool-kit
+python3 tools/materialize_stock_lcars.py \
+    --tool-kit /path/to/tool-kit \
+    --stock-vendor-boot /path/to/stock/vendor_boot.img \
+    --plugin /path/to/recovery/librecovery_ui_ext.so \
+    --plugin-sha256 <reviewed-plugin-sha256> \
+    --expected-image-sha256 <reviewed-vendor-boot-sha256> \
+    --output /path/to/fresh/private-output
+```
+
+The tool rebuilds the stock-format AVB hash footer and checks the resulting
+64 MiB file against the exact manifest digest. It verifies the leaf's hash.
+The matching signed parent `vbmeta` must be checked separately before any
+hardware use. With the reviewed prototype plug-in, the portable tool kit and
+Linux `lz4` 1.10.0 reproduced the private footer-wrapped image with SHA-256
+`c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e`.
+The temporary root key from that AVB rehearsal is for offline testing only.
