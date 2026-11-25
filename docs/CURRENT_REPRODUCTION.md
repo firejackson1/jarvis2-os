@@ -30,6 +30,9 @@ archive, image, and Recovery digests. These instructions cover offline builds.
    hashes in the candidate receipt. Omitting the custom animation uses the
    upstream default and changes the image. The chosen animation remains a
    private input pending redistribution review.
+   For a separate preview without the branded artwork, use the
+   [original neutral animation](BOOT_ANIMATION.md#original-neutral-animation)
+   and verify the resulting product image and AVB chain against its own receipt.
 
 From the Android root, apply the six series to fresh projects. The current
 device commit includes the SetupWizard and Music patches in-tree.
