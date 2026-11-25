@@ -158,6 +158,11 @@ publication by this policy decision alone.
 - [x] Rehash and scan the 18 neutral r2 staged downloads. Match the key-pattern
   findings and undecoded upstream test fixtures to the pinned source inputs.
   Hosted asset review remains open. [Companion review](../manifests/neutral-r2-companion-privacy.json)
+- [x] Verify the new 22-file set against the prior 16 payloads and scan all
+  four added source archives plus the refreshed receipt and checksum list.
+  Confirm the Bionic development keys match AOSP and differ from every
+  key in the public release signing export.
+  [Expanded staging review](../manifests/neutral-r2-companion-privacy.json)
 - [ ] Use private release signing keys with a tested backup process; do not publish keys or ship development keys unknowingly.
 - [x] Generate the private key set and verify an encrypted off-host backup, including archive identity and all 204 archived files. Keys have been used in private package/APEX and launcher signing rehearsals; final image signing and hardware acceptance remain open.
 - [ ] Make root debugging and unauthenticated network ADB opt-in in public builds; retain normal USB authorization by default.

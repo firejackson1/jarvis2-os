@@ -2202,3 +2202,19 @@ without private scripts, server access or an AI operator.
   and confirmed all 19 previous payloads still match their receipts. Host
   verification passed 222 Python tests with the pinned AVB fixture and all
   eight Java suites.
+
+### Expanded source delivery privacy review — 2026-11-25
+
+- Rehashed all 22 private staged files. All 16 payloads covered by the
+  earlier recursive scan matched their previous hashes. Scanned the four
+  added source archives and refreshed metadata. The scan read 8,273 files
+  and 20 link targets and found no owner-specific values or decode gaps
+  in the additions.
+- Both new key findings came from the public AOSP Bionic tree. The runtime
+  APEX development payload key matches its upstream AVB public key, and the
+  container key matches its upstream certificate. Neither public key
+  matched any of the 78 keys in the release signing export. The broader
+  scan retains the 52 earlier upstream fixture limitations.
+  [Companion review](../manifests/neutral-r2-companion-privacy.json)
+- Host verification passed 222 Python tests with the pinned AVB fixture
+  and all eight Java suites.

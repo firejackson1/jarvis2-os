@@ -99,5 +99,113 @@
   "prior_rom_userspace_scan_manifest_sha256": "87ec9715dabd02c5868c52ed19e4eb193e91664f4be94bd714a85ad2db2c8a55",
   "matched_values_recorded": false,
   "public_asset_download_recheck_done": false,
-  "hardware_tested": false
+  "hardware_tested": false,
+  "expanded_staging": {
+    "format": 1,
+    "current_receipt_sha256": "8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec",
+    "current_staged_file_count": 22,
+    "current_staged_bytes": 1343929128,
+    "previous_receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
+    "previous_recursive_scan_sha256": "dc915a2e9b20a0d67bb0abe4daa6d42dea3998d79c11d3e32ff3a5e4c83389f7",
+    "prior_payloads_reverified_byte_identical": 16,
+    "scanner_revision_sha256": "7971c1732a0f0bff8e7832c68ed1533330b2452041234705d4ac3403f8459dae",
+    "newly_scanned_files": {
+      "bionic-e4df46f213d8-source.tar.gz": {
+        "bytes": 6135254,
+        "sha256": "0de8f6cee475c4c48434a5049610e140b1d74c8452ac7d2c4e50a04bf1cc8213",
+        "scan_counts": {
+          "tar_containers": 1,
+          "tar_links": 16,
+          "archive_files": 3538,
+          "member_bytes_read": 57736741
+        }
+      },
+      "libexif-c6eff752051d-source.tar.gz": {
+        "bytes": 2052093,
+        "sha256": "b241376eebddd5be6a6481658f42a9527f1615d33006bc99c15a59c024b76a4e",
+        "scan_counts": {
+          "tar_containers": 1,
+          "archive_files": 191,
+          "member_bytes_read": 8906973,
+          "compressed_streams": 1
+        }
+      },
+      "libnl-7523b7d9f2c3-source.tar.gz": {
+        "bytes": 1090378,
+        "sha256": "4197daee9ef19eca5ec1700437c9f3e66068cc506b174a3f9687207064e075d5",
+        "scan_counts": {
+          "tar_containers": 1,
+          "tar_links": 1,
+          "archive_files": 571,
+          "member_bytes_read": 3798570
+        }
+      },
+      "libxml2-9ec1e3881001-source.tar.gz": {
+        "bytes": 3774698,
+        "sha256": "dfbd182aba9457c971bbea0c8edec97578caa5226dbc0a032c0bf0fab1cbc4a8",
+        "scan_counts": {
+          "tar_containers": 1,
+          "tar_links": 3,
+          "archive_files": 3973,
+          "member_bytes_read": 27369726
+        }
+      },
+      "SHA256SUMS.txt": {
+        "bytes": 2268,
+        "sha256": "1ed9285ca56c7d63fc7a6052788b1d9d20a9e2bd4028c28a3955b4024fa13a4c",
+        "scan_counts": {
+          "member_bytes_read": 2268
+        }
+      },
+      "release-asset-receipt.json": {
+        "bytes": 6590,
+        "sha256": "8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec",
+        "scan_counts": {
+          "member_bytes_read": 6590
+        }
+      }
+    },
+    "additional_recursive_scan_counts": {
+      "tar_containers": 4,
+      "tar_links": 20,
+      "archive_files": 8273,
+      "member_bytes_read": 97820868,
+      "compressed_streams": 1
+    },
+    "matched_rows_by_category": {
+      "complete-private-key-pem": 1,
+      "private-key-block": 1,
+      "private-key-header": 1,
+      "sensitive-key-container-filename": 1
+    },
+    "decode_gaps_by_category": {},
+    "raw_private_values_recorded": false,
+    "summary_sha256": "ba3960da33f47c56bd5a28965bd7f3cc66d39245cd1068364b304774dc460447",
+    "upstream_development_key_review": {
+      "aosp_bionic_revision": "e4df46f213d8d363017dce7ded5d1f2159614425",
+      "aosp_blob_ids": {
+        "Android.bp": "6201ad12f54f721936f1c7c4b22b17ade1e8df2b",
+        "com.android.runtime.avbpubkey": "b0ffc9b11fe0f09a6c27d2560a8b952c559a7f20",
+        "com.android.runtime.pem": "4c7ce4b30b4c04d9cf93a80c7cece9e4b9eafa18",
+        "com.android.runtime.pk8": "de96219a8b188696c79487d8f967a69381a1ca81",
+        "com.android.runtime.x509.pem": "890ae9f2116e87413d67623f787d43c045ed3601"
+      },
+      "archive_members_match_public_aosp_tree": true,
+      "upstream_payload_public_key_sha256": "157d9a7a4d3511407f63fcd33c34b9bc2062daffe9b067c6fda03e3ace2acc2b",
+      "upstream_container_public_key_sha256": "9e70e60186740c0b9b5fc7ce29305fca9cc86eba68ed76a2b9ce64b733d14e96",
+      "upstream_payload_matches_aosp_avb_public_key_modulus": true,
+      "upstream_container_matches_aosp_certificate": true,
+      "release_payload_public_key_sha256": "e686def3eba6228ff24b51907fac302f64e8db3b2bd17ce55d8f316c24a2f094",
+      "release_container_public_key_sha256": "97fd393a82bcbb020013f324d3590163e1312f5ca0af46eec050541d77b338a0",
+      "public_signing_export_sha256": "5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8",
+      "release_export_keys_compared": 78,
+      "matches_to_release_export_keys": 0,
+      "project_private_keys_accessed": false,
+      "review_sha256": "da4e827dc2e958e0924aafdc2d9971e07bafe51c8329c4290ef6664459a5ddd2"
+    },
+    "owner_specific_value_matches": 0,
+    "previous_opaque_or_bounded_upstream_fixture_entries": 52,
+    "public_asset_download_recheck_done": false,
+    "hardware_tested": false
+  }
 }
