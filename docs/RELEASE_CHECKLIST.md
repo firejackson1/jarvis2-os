@@ -44,6 +44,9 @@ apply independently.
   verify their staged source archives. Exact CI source correspondence and
   rebuilt library byte equality remain open.
   [VNDK source candidates](USERSPACE_NOTICES.md#source-candidates-for-three-vndk-libraries)
+- [x] Trace the 11 VNDK libraries that use the snapshot's default license
+  rule back to their source declarations and check their delivered Apache
+  notice attachments. [VNDK module attribution](USERSPACE_NOTICES.md#vndk-modules-using-the-snapshot-default)
 - [x] Check out Chromium at the pinned r2 commit, replay every documented
   WebView patch against its exact inputs, and compare the prebuilt with the
   staged r2 APK. [WebView rebuild evidence](WEBVIEW_REBUILD.md)

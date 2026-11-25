@@ -172,6 +172,44 @@ The original CI manifests, exact binary rebuilds and full distribution
 review remain open.
 [Android VNDK snapshot source documentation](https://source.android.com/docs/core/architecture/vndk/snapshot-generate#snapshot-files)
 
+### VNDK modules using the snapshot default
+
+The [module attribution receipt](../manifests/neutral-r2-vndk-default-license-sources.json)
+maps all 11 default-rule libraries to their original module paths. The paths
+agree in the Android build 10185551 import and the r2 snapshot. Each ARM ELF
+also matches the exact signed r2 APEX filesystem inventory.
+
+Ten of the libraries are versioned AIDL NDK modules. The Android 14 r1
+candidates reproduce the latest frozen API hash in all ten directories using
+the pinned AOSP hash script. The 119 generated C++ paths match the frozen
+AIDL paths. All 119 C++ files and 357 exported headers have identical Git
+blobs across both snapshot commits.
+Six signed libraries also contain the expected interface hash string. The
+four modules without an exported interface-hash method are checked through
+the frozen source and snapshot file paths.
+[AOSP Stable AIDL](https://source.android.com/docs/core/architecture/aidl/stable-aidl)
+
+Nine frozen API directories also match the currently pinned ROM source.
+The graphics common V4 directory differs in `BufferUsage.aidl` and its
+hash list. The older AOSP source and both snapshot exports use
+`VENDOR_MASK = -268435456`. The ROM's pinned source uses `4026531840`.
+That difference identifies the older definition in r2's exported header.
+
+Four AIDL declarations use the Android Apache 2.0 rule. The six hardware AIDL
+declarations use the `hardware_interfaces_license` rule, which lists Apache
+2.0 and NCSA in the project Blueprint. Both rules point to byte-identical
+Apache 2.0 license text. Every one of the 11 paths links to that exact text
+in the staged VNDK notice XML.
+
+For `libstagefright_bufferqueue_helper.so`, all three exported headers match
+the Android 14 r1 tree by Git blob and mode. Its two direct C++ source
+candidates and the three headers carry Apache 2.0 headers. The candidate
+Blueprint also references `libgui_bufferqueue_static` for the vendor
+build. The r2 ELF defines BufferQueueProducer and GraphicBufferSource symbols
+and has no shared dependency on `libgui.so`. The complete static
+dependency license review, original CI manifest and exact binary rebuilds
+remain open.
+
 ### APEX notice companion
 
 The three installed partition notice archives contain 174 of the 229

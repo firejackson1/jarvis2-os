@@ -2038,3 +2038,22 @@ without private scripts, server access or an AI operator.
   the new archive's 21 feature paths, three image members and three build
   identities. A 21-path fixture passed, and the same check rejected a stale
   product identity. Actual rebuilt and signed image checks remain open.
+
+### Source attribution for the 11 default-rule VNDK modules — 2026-11-25
+
+- Matched all 11 ARM ELF digests and sizes to the signed r2 APEX inventory.
+  Their public module paths agree between the 10185551 import and r2. The
+  AOSP Android 14 r1 source reproduces all ten frozen AIDL API hashes. It
+  accounts for 119 generated C++ paths and 357 headers. Six binary stubs
+  carry the expected interface hash. Four modules expose no such method.
+- Compared the later pinned ROM source. Nine complete frozen API trees
+  match the r1 candidates. Graphics common V4 changes the sign of
+  `VENDOR_MASK` and appends a second API hash. Both snapshot exports
+  contain the older value.
+- Matched the bufferqueue helper's three exported headers to the r1 Git
+  source. The binary defines BufferQueueProducer and GraphicBufferSource
+  symbols. The vendor Blueprint declares a static GUI dependency.
+- Verified the published-source Apache 2.0 license text in the staged VNDK
+  XML and its attachment to every one of the 11 library paths. Exact CI
+  inputs, binary rebuilds and complete dependency license scope remain
+  open. [Module attribution receipt](../manifests/neutral-r2-vndk-default-license-sources.json)

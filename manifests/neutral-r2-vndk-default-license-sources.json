@@ -1,0 +1,614 @@
+{
+  "format": 1,
+  "scope": "Source attribution and checks for the eleven libraries carrying the VNDK v34 snapshot package default notice",
+  "historical_snapshot_import": "d9d6c32b19b2fc50fb952e8c44d8186a51f22a25",
+  "r2_snapshot_commit": "912e0c51bc2557a8d4b396bad1b6e39fe4c0b358",
+  "r2_signed_apex_sha256": "26d8daa284b4eb457ab8c067b1ca417814a9aa2cf593a03624dbd618f0083ebe",
+  "r2_signed_filesystem_sha256": "121f0ac15a1ef0b80f7a48a49f3f27d2261bb8ae9a26af7c2194cf11ff349750",
+  "candidate_tag": "android-14.0.0_r1",
+  "projects": {
+    "frameworks/hardware/interfaces": {
+      "source_url": "https://android.googlesource.com/platform/frameworks/hardware/interfaces",
+      "aosp_commit": "b4f96631f81fa8db554093b51810c43e6c43526b",
+      "aosp_tree": "17efbfdf7029d2d63d910c0f81f6a409a4636567",
+      "release_manifest_revision": "1d551924c84ce1d69e573b7bb32f681dab97c0e3"
+    },
+    "frameworks/av": {
+      "source_url": "https://android.googlesource.com/platform/frameworks/av",
+      "aosp_commit": "402dbe885fd58af75e4c1d7e790fbf4bb22f29f9",
+      "aosp_tree": "47afb7c267e8b538f3811db3ab273163e85e662b",
+      "release_manifest_revision": "12ad72ed9cb8caeb16fc93069921ef2078f45fa8"
+    },
+    "frameworks/native": {
+      "source_url": "https://android.googlesource.com/platform/frameworks/native",
+      "aosp_commit": "bfcf75076e562945bae131a4929f29a90d0d2481",
+      "aosp_tree": "c62535b156aa8b8ee2f521fd8dae0bb27fc90c91",
+      "release_manifest_revision": "9cb036fcafd5cf46ccafbb642f967993ad39393c"
+    },
+    "hardware/interfaces": {
+      "source_url": "https://android.googlesource.com/platform/hardware/interfaces",
+      "aosp_commit": "40e9f1537e308ed49e3b561ce333e3f2bb64f31e",
+      "aosp_tree": "9dfd1977891260461b238ee8f03673fca8b8e6b1",
+      "release_manifest_revision": "3ba9400807f759bb405b2292766bb3aff0c8d27c"
+    },
+    "system/hardware/interfaces": {
+      "source_url": "https://android.googlesource.com/platform/system/hardware/interfaces",
+      "aosp_commit": "fc2ed9adc55d8a412abba7ebe1620d366b4bd75b",
+      "aosp_tree": "995dae9931b717ba018c262732501b1bee51522f",
+      "release_manifest_revision": "edfb92377e997db719e94e13848b417253736356"
+    },
+    "system/tools/aidl": {
+      "source_url": "https://android.googlesource.com/platform/system/tools/aidl",
+      "aosp_commit": "23976e002584bf67d90cd1298c6cde31d7e76068",
+      "aosp_tree": "e9960dc8e48561a9682449724898f83451fcd717",
+      "release_manifest_revision": "de1052c28d821a7f9263b986e9200c4ca4971276"
+    },
+    "build/soong": {
+      "source_url": "https://android.googlesource.com/platform/build/soong",
+      "aosp_commit": "9387734632ba3bf381bd57a638ac1216108c59f4",
+      "aosp_tree": "aed98f88ab88cd15c3ea7852d3c68e44f7403fbc",
+      "release_manifest_revision": "7e2be266cfde19c5e0cbc8e4ed016d5572abd4fb"
+    }
+  },
+  "aosp_aidl_hash_script_sha256": "e06724bf1e17a0bd6c2ef0754f034c875db6661c512029095235bd5490bf2308",
+  "aosp_soong_license_resolution_sha256": "1f5b77b1b63c7a153690b946184e397f9a04d5b91b6de6d6f479334f8cbee5d2",
+  "source_license_rules": {
+    "Android-Apache-2.0": {
+      "project": "build/soong",
+      "blueprint_path": "licenses/Android.bp",
+      "blueprint_sha256": "279bb46cb650f718ebea8eab4f888e5ee382d78311bf61f6d92c82c7a6985dd1",
+      "license_kinds": [
+        "SPDX-license-identifier-Apache-2.0"
+      ],
+      "notice_path": "licenses/LICENSE",
+      "notice_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "hardware_interfaces_license": {
+      "project": "hardware/interfaces",
+      "blueprint_path": "Android.bp",
+      "blueprint_sha256": "ee1ff7afc45b3a8e19ef08869b754c4ef4ab09c14c330e1494c7d2877d39fc37",
+      "license_kinds": [
+        "SPDX-license-identifier-Apache-2.0",
+        "SPDX-license-identifier-NCSA"
+      ],
+      "notice_path": "NOTICE",
+      "notice_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  },
+  "members": {
+    "lib/android.frameworks.cameraservice.common-V1-ndk.so": {
+      "sha256": "891cc2aa6b88022e52df2fab825804b4fbfd8d6f28321c83bb54372a9d4b8a98",
+      "bytes": 9348,
+      "elf_build_id": "2f140ed39fd9accfb1812dc83d1617a8",
+      "needed": [
+        "libbinder_ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "frameworks/hardware/interfaces",
+      "snapshot_module_path": "frameworks/hardware/interfaces/cameraservice/common/aidl",
+      "aosp_blueprint_path": "cameraservice/common/aidl/Android.bp",
+      "aosp_blueprint_sha256": "2fffb930c57d37386133617b0dc38cc92041ab943e9f67a1f8bd829966d8c913",
+      "upstream_package_default_license_rules": [
+        "Android-Apache-2.0"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "cameraservice/common/aidl/aidl_api/android.frameworks.cameraservice.common/1",
+        "frozen_aidl_files": 6,
+        "blueprint_module_sha256": "0b3d5c8fd35fc12c3bc5b64df614a49115131b76fa74703880de76131b6194ca",
+        "frozen_git_tree": "a14ab1db1cbaca7c62001440cc77edc58866b94a",
+        "declared_hashes": [
+          "4866f510363316b02a311bd8fa256f1fd073bc1d"
+        ],
+        "recomputed_latest_hash": "4866f510363316b02a311bd8fa256f1fd073bc1d",
+        "generated_cpp_files_matched_by_path": 6,
+        "generated_header_files": 18,
+        "export_manifest_sha256": "0000af7d9692312c3f0361170b1dd2cf0b03b4be67a847aeda8d236932dfb58c",
+        "elf_exports_interface_hash_method": false,
+        "hash_found_in_elf": []
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "2fffb930c57d37386133617b0dc38cc92041ab943e9f67a1f8bd829966d8c913",
+        "frozen_aidl_tree": "a14ab1db1cbaca7c62001440cc77edc58866b94a",
+        "blueprint_matches_candidate": true,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.frameworks.cameraservice.device-V1-ndk.so": {
+      "sha256": "841e4a8cb769c23098cfe418b8e47ce940b95134d16bdb33255bc602550c4019",
+      "bytes": 68668,
+      "elf_build_id": "5c5557b2b436ee52fe977facfefac39a",
+      "needed": [
+        "libbinder_ndk.so",
+        "android.frameworks.cameraservice.common-V1-ndk.so",
+        "android.hardware.common.fmq-V1-ndk.so",
+        "android.hardware.common-V2-ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "frameworks/hardware/interfaces",
+      "snapshot_module_path": "frameworks/hardware/interfaces/cameraservice/device/aidl",
+      "aosp_blueprint_path": "cameraservice/device/aidl/Android.bp",
+      "aosp_blueprint_sha256": "a9fb508bf11e1abaf644c176544c365947259c965ec8555fc65d7950a326ff5f",
+      "upstream_package_default_license_rules": [
+        "Android-Apache-2.0"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "cameraservice/device/aidl/aidl_api/android.frameworks.cameraservice.device/1",
+        "frozen_aidl_files": 15,
+        "blueprint_module_sha256": "55e01894530bf678344fc0f00f12b7058abf2c693eccf4cf0f21b4c91dd9d478",
+        "frozen_git_tree": "8eac36576dafe7f0fabb97314bbde104c4a50b47",
+        "declared_hashes": [
+          "acf6819da94dc452c4fa1e831c96f324a2be805a"
+        ],
+        "recomputed_latest_hash": "acf6819da94dc452c4fa1e831c96f324a2be805a",
+        "generated_cpp_files_matched_by_path": 15,
+        "generated_header_files": 45,
+        "export_manifest_sha256": "2b59a140151471f1bb1857a6f8ac7a54f2f2ef1c43e6fb55e0be38d80eb930ed",
+        "elf_exports_interface_hash_method": true,
+        "hash_found_in_elf": [
+          "acf6819da94dc452c4fa1e831c96f324a2be805a"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "6476f48aa9be3a5852d58b70c3b49a884e9b6fadc96b54c2a02c8e8ddff85c35",
+        "frozen_aidl_tree": "8eac36576dafe7f0fabb97314bbde104c4a50b47",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.frameworks.cameraservice.service-V1-ndk.so": {
+      "sha256": "afc68be748e87564b426cf5f2358081417ea3cb153bccf2b47d30388333e4a11",
+      "bytes": 42952,
+      "elf_build_id": "9ddba3233a626cff3eb78609cf2ae38c",
+      "needed": [
+        "libbinder_ndk.so",
+        "android.frameworks.cameraservice.common-V1-ndk.so",
+        "android.frameworks.cameraservice.device-V1-ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "frameworks/hardware/interfaces",
+      "snapshot_module_path": "frameworks/hardware/interfaces/cameraservice/service/aidl",
+      "aosp_blueprint_path": "cameraservice/service/aidl/Android.bp",
+      "aosp_blueprint_sha256": "f2978b53a9c0a43c5dc05180c56b5e920371ec8411ddfcfa760fd263b6e230b9",
+      "upstream_package_default_license_rules": [
+        "Android-Apache-2.0"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "cameraservice/service/aidl/aidl_api/android.frameworks.cameraservice.service/1",
+        "frozen_aidl_files": 4,
+        "blueprint_module_sha256": "98c86d2cfb8e0783d61ac28ae72cd96615326f052be8de7c852614f80f981743",
+        "frozen_git_tree": "af1a31ae998863967074d3874cabe691417f4c3e",
+        "declared_hashes": [
+          "9af5caea9ed28139c7005ead2e2c851351a4caa1"
+        ],
+        "recomputed_latest_hash": "9af5caea9ed28139c7005ead2e2c851351a4caa1",
+        "generated_cpp_files_matched_by_path": 4,
+        "generated_header_files": 12,
+        "export_manifest_sha256": "abef7dee28fa0c369b1bc530c766655837eb45f8c61d70df99776c77ca536944",
+        "elf_exports_interface_hash_method": true,
+        "hash_found_in_elf": [
+          "9af5caea9ed28139c7005ead2e2c851351a4caa1"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "8173978df9cf7a64050bcc170d3c04310e3baad5310f04e84cf3dbfe7a2be51c",
+        "frozen_aidl_tree": "af1a31ae998863967074d3874cabe691417f4c3e",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.hardware.common-V2-ndk.so": {
+      "sha256": "02243a813fe37e8cd9eef809aaf2cc24c58a8fa0402b238d741257b80dc08079",
+      "bytes": 8288,
+      "elf_build_id": "c07c67f1561817027e448197b7f57698",
+      "needed": [
+        "libbinder_ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "hardware/interfaces",
+      "snapshot_module_path": "hardware/interfaces/common/aidl",
+      "aosp_blueprint_path": "common/aidl/Android.bp",
+      "aosp_blueprint_sha256": "ca74d4b10c5d25ed9ccd01c59bb06156fda53d3af49294bae2b2b27c296fa56b",
+      "upstream_package_default_license_rules": [
+        "hardware_interfaces_license"
+      ],
+      "aidl": {
+        "version": 2,
+        "frozen_source_path": "common/aidl/aidl_api/android.hardware.common/2",
+        "frozen_aidl_files": 3,
+        "blueprint_module_sha256": "a4aefe6e235bcb54f24daaece53607c58b5d15d85291b7786624db2f1c1b612b",
+        "frozen_git_tree": "ecfba56b33c12db5547366d2d3e223bb8c70faca",
+        "declared_hashes": [
+          "c32ddfdeb69c6e4a8a45519e6f9a39c4b66fd99f"
+        ],
+        "recomputed_latest_hash": "c32ddfdeb69c6e4a8a45519e6f9a39c4b66fd99f",
+        "generated_cpp_files_matched_by_path": 3,
+        "generated_header_files": 9,
+        "export_manifest_sha256": "0ed1c9597c9cf0e9de1d4f8c56f4d679261a29e06e878a5b8e5dac367877e35c",
+        "elf_exports_interface_hash_method": false,
+        "hash_found_in_elf": []
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "5436e2ddcf119a9e494d8c045351f11c3e8df0cff74732ecfb2c38420b261727",
+        "frozen_aidl_tree": "ecfba56b33c12db5547366d2d3e223bb8c70faca",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.hardware.common.fmq-V1-ndk.so": {
+      "sha256": "11cbff6e0a160578b600412b29d134dd4b59b67606e1c65be8599b52a79b3182",
+      "bytes": 3924,
+      "elf_build_id": "a416ee2a7e552e2c17ac2226a457b434",
+      "needed": [
+        "libbinder_ndk.so",
+        "android.hardware.common-V2-ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "hardware/interfaces",
+      "snapshot_module_path": "hardware/interfaces/common/fmq/aidl",
+      "aosp_blueprint_path": "common/fmq/aidl/Android.bp",
+      "aosp_blueprint_sha256": "78c9c8dda09c61ce8633aa0c42318f65b400d287f0c264bffa31ba6be3018c3b",
+      "upstream_package_default_license_rules": [
+        "hardware_interfaces_license"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "common/fmq/aidl/aidl_api/android.hardware.common.fmq/1",
+        "frozen_aidl_files": 4,
+        "blueprint_module_sha256": "213fcd84b919ec91ef03c3261f63c8343c614f48729a8130bb71a02b9a717051",
+        "frozen_git_tree": "6af9287cad44b8c265cd1888a63b45984f442722",
+        "declared_hashes": [
+          "12cf0ce8614557cc0efe73bdf011f5193f7a8653",
+          "6a780550f6e6965d6969fd7964c3ca81b6b0ccdf"
+        ],
+        "recomputed_latest_hash": "6a780550f6e6965d6969fd7964c3ca81b6b0ccdf",
+        "generated_cpp_files_matched_by_path": 4,
+        "generated_header_files": 12,
+        "export_manifest_sha256": "ac52dc63b22bcad0f9fa91c1f9381c97c6be80f4e784a408d276e2aa9add7f5f",
+        "elf_exports_interface_hash_method": false,
+        "hash_found_in_elf": []
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "4f86345db1895de3b9f49715d3d4e2f338e014fdb5ade0f1a28496b19129e36d",
+        "frozen_aidl_tree": "6af9287cad44b8c265cd1888a63b45984f442722",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.hardware.graphics.allocator-V2-ndk.so": {
+      "sha256": "f487ce4f109e11a70f3180d71f8f39c1db078226eb0f9f26ebe17adce1533ad1",
+      "bytes": 29364,
+      "elf_build_id": "1e61277c82c871b8b3da91a02c1b6a86",
+      "needed": [
+        "libbinder_ndk.so",
+        "android.hardware.common-V2-ndk.so",
+        "android.hardware.graphics.common-V4-ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "hardware/interfaces",
+      "snapshot_module_path": "hardware/interfaces/graphics/allocator/aidl",
+      "aosp_blueprint_path": "graphics/allocator/aidl/Android.bp",
+      "aosp_blueprint_sha256": "75be95f512f0ae9ed05898c2f9dfc9a7e3c0a20c24b6b62cd9a8bf4714230d07",
+      "upstream_package_default_license_rules": [
+        "hardware_interfaces_license"
+      ],
+      "aidl": {
+        "version": 2,
+        "frozen_source_path": "graphics/allocator/aidl/aidl_api/android.hardware.graphics.allocator/2",
+        "frozen_aidl_files": 4,
+        "blueprint_module_sha256": "a941e3d7d50bdbd67b0869ea5e6c9bc0c932c42d409af71b6d0814af85e6661b",
+        "frozen_git_tree": "1b9d2dace35f27bbc2437c3d8a7aabab7b2a9dc1",
+        "declared_hashes": [
+          "9499fec09c544e9de5be3c87125721600f8ade66"
+        ],
+        "recomputed_latest_hash": "9499fec09c544e9de5be3c87125721600f8ade66",
+        "generated_cpp_files_matched_by_path": 4,
+        "generated_header_files": 12,
+        "export_manifest_sha256": "7797068a46deec8da6f4f411f46ee073634527220d07d107b2ccd2d5a4698b0d",
+        "elf_exports_interface_hash_method": true,
+        "hash_found_in_elf": [
+          "9499fec09c544e9de5be3c87125721600f8ade66"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "0bc2c664804ffd40036787a58a6d4bb5b12e3c52259e31cffdff4929c8840476",
+        "frozen_aidl_tree": "1b9d2dace35f27bbc2437c3d8a7aabab7b2a9dc1",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.hardware.graphics.common-V4-ndk.so": {
+      "sha256": "69f3439bab452a8a658253782c8bab1ac892e3745057ccb2d0d02ca80dedc9a9",
+      "bytes": 18160,
+      "elf_build_id": "8e75f77455a8620813f37010dff46779",
+      "needed": [
+        "libbinder_ndk.so",
+        "android.hardware.common-V2-ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "hardware/interfaces",
+      "snapshot_module_path": "hardware/interfaces/graphics/common/aidl",
+      "aosp_blueprint_path": "graphics/common/aidl/Android.bp",
+      "aosp_blueprint_sha256": "55e49c5601fdf962e1b1b97394cac15738ff66422d7767df77ff9d5fdcb6a431",
+      "upstream_package_default_license_rules": [
+        "hardware_interfaces_license"
+      ],
+      "aidl": {
+        "version": 4,
+        "frozen_source_path": "graphics/common/aidl/aidl_api/android.hardware.graphics.common/4",
+        "frozen_aidl_files": 27,
+        "blueprint_module_sha256": "7bc4dd645337df6fca2cd1186480d2c1552c1a23247e3c6c9e68af02af9b7fd6",
+        "frozen_git_tree": "4a77249471c14076b3a0030c862bc132da6cd6c7",
+        "declared_hashes": [
+          "9bcf4b83485ce912dc39108201504f77b8c96cef"
+        ],
+        "recomputed_latest_hash": "9bcf4b83485ce912dc39108201504f77b8c96cef",
+        "generated_cpp_files_matched_by_path": 27,
+        "generated_header_files": 81,
+        "export_manifest_sha256": "033b5756dcc1ec311c276d3e6bc8f2030dfc0b5292a874273e7de8d83db7544e",
+        "elf_exports_interface_hash_method": false,
+        "hash_found_in_elf": []
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "4b7968c6e9f1a3dd1a8ff05219af5fcf8e5ba4f6df1a9ee445a51f8013b74c15",
+        "frozen_aidl_tree": "1373d613444ec18e9dbe49f2f3db8b9d8c006609",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": false,
+        "buffer_usage_difference": {
+          "frozen_aidl_relative_path": "android/hardware/graphics/common/BufferUsage.aidl",
+          "aosp_aidl_sha256": "df5d25aa991de34c6685effbfad04372f2b3879d61b31e210428854bd6a1cd80",
+          "rom_aidl_sha256": "cae3fa66ee695a65306bdd54e41fafe221a859d1d1916c935946af7d8bab12c2",
+          "aosp_vendor_mask": -268435456,
+          "rom_vendor_mask": 4026531840,
+          "rom_declared_hashes": [
+            "9bcf4b83485ce912dc39108201504f77b8c96cef",
+            "adb71c34ba271f87c6431845b310777c1e611ebf"
+          ],
+          "snapshot_exported_header": "arm/include/generated-headers/hardware/interfaces/graphics/common/aidl/android.hardware.graphics.common-V4-ndk-source/gen/include/aidl/android/hardware/graphics/common/BufferUsage.h",
+          "snapshot_exported_header_sha256": "e724cec4ef66a2376e492754c83804c3f354844edd8596f3ba309080371f5c9d",
+          "snapshot_vendor_mask": -268435456
+        }
+      }
+    },
+    "lib/android.hardware.graphics.composer3-V1-ndk.so": {
+      "sha256": "97877dfe8c841d0017770a53d8575fc603d64c39e14e9447bbc14cee32571553",
+      "bytes": 133064,
+      "elf_build_id": "8b7394e3b4c2f63c207972d5364147e6",
+      "needed": [
+        "libbinder_ndk.so",
+        "android.hardware.graphics.common-V4-ndk.so",
+        "android.hardware.common-V2-ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "hardware/interfaces",
+      "snapshot_module_path": "hardware/interfaces/graphics/composer/aidl",
+      "aosp_blueprint_path": "graphics/composer/aidl/Android.bp",
+      "aosp_blueprint_sha256": "6875721849a3eef40c627fe6b283ae3eadc8f407c145885a3e9c3e060606fd67",
+      "upstream_package_default_license_rules": [
+        "hardware_interfaces_license"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "graphics/composer/aidl/aidl_api/android.hardware.graphics.composer3/1",
+        "frozen_aidl_files": 49,
+        "blueprint_module_sha256": "22301445d46ff6a920a4dbd1fbec8af960bac840d3b8fbe422f0f10e69140f34",
+        "frozen_git_tree": "dd1c52a1a5bdf62a73422cea3fc2498d594ba995",
+        "declared_hashes": [
+          "6e0e98f955d0bf3e7502a30fac0465e56cc98e75"
+        ],
+        "recomputed_latest_hash": "6e0e98f955d0bf3e7502a30fac0465e56cc98e75",
+        "generated_cpp_files_matched_by_path": 49,
+        "generated_header_files": 147,
+        "export_manifest_sha256": "ca129e5dbddbc0d4fad9a22fef36f95e5aa03a2b9e11646896257e0be461a987",
+        "elf_exports_interface_hash_method": true,
+        "hash_found_in_elf": [
+          "6e0e98f955d0bf3e7502a30fac0465e56cc98e75"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "9fb9fb818265dbb0cacdd515f8d30b08fe6288b8036cbd3e883349b19fbde013",
+        "frozen_aidl_tree": "dd1c52a1a5bdf62a73422cea3fc2498d594ba995",
+        "blueprint_matches_candidate": false,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.hardware.memtrack-V1-ndk.so": {
+      "sha256": "f9df7a7e256ea85f58781b3c8e63ade704eb9e1eeaa0b18c8e27ac438d6872a7",
+      "bytes": 23724,
+      "elf_build_id": "2f04fc04861144ba90e1856b8c7828a0",
+      "needed": [
+        "libbinder_ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "hardware/interfaces",
+      "snapshot_module_path": "hardware/interfaces/memtrack/aidl",
+      "aosp_blueprint_path": "memtrack/aidl/Android.bp",
+      "aosp_blueprint_sha256": "d2c1ed5d807814a1ffd65f27e84b74f51ad34af50a852d853c34aaba3f5c8c91",
+      "upstream_package_default_license_rules": [
+        "hardware_interfaces_license"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "memtrack/aidl/aidl_api/android.hardware.memtrack/1",
+        "frozen_aidl_files": 4,
+        "blueprint_module_sha256": "0640a60696cd5d344872a84291093d8b4eec4bd5111e9a521ede08a40937b64e",
+        "frozen_git_tree": "141127b627a65ed10eeb1bd29221e58f2769111b",
+        "declared_hashes": [
+          "25438132a462bf5b6f4334d966c95b70824e66c0"
+        ],
+        "recomputed_latest_hash": "25438132a462bf5b6f4334d966c95b70824e66c0",
+        "generated_cpp_files_matched_by_path": 4,
+        "generated_header_files": 12,
+        "export_manifest_sha256": "a215b047c38585ae1e0c6c0e362e41c7222b8fb52b507b5a942461ee8dd5e610",
+        "elf_exports_interface_hash_method": true,
+        "hash_found_in_elf": [
+          "25438132a462bf5b6f4334d966c95b70824e66c0"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "d2c1ed5d807814a1ffd65f27e84b74f51ad34af50a852d853c34aaba3f5c8c91",
+        "frozen_aidl_tree": "141127b627a65ed10eeb1bd29221e58f2769111b",
+        "blueprint_matches_candidate": true,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/android.system.suspend-V1-ndk.so": {
+      "sha256": "299127e90496a701e477fa23489f07ce524a027018add70e598552e0e8f6e462",
+      "bytes": 27440,
+      "elf_build_id": "a000808020e96be6fbad996185db124c",
+      "needed": [
+        "libbinder_ndk.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "system/hardware/interfaces",
+      "snapshot_module_path": "system/hardware/interfaces/suspend/aidl",
+      "aosp_blueprint_path": "suspend/aidl/Android.bp",
+      "aosp_blueprint_sha256": "f348b94381387474106ed29ea368037bde1108538b4eaa056aeacebd23905671",
+      "upstream_package_default_license_rules": [
+        "Android-Apache-2.0"
+      ],
+      "aidl": {
+        "version": 1,
+        "frozen_source_path": "suspend/aidl/aidl_api/android.system.suspend/1",
+        "frozen_aidl_files": 3,
+        "blueprint_module_sha256": "c21082331b78d80e27748880d93666689820e7ff8b066c0fd1353260f8d2b11a",
+        "frozen_git_tree": "ac5472635a569363efc549af9f5e31cb8960f7c8",
+        "declared_hashes": [
+          "082a58c2505b703702f34ab8abcb1d1b5e890be4"
+        ],
+        "recomputed_latest_hash": "082a58c2505b703702f34ab8abcb1d1b5e890be4",
+        "generated_cpp_files_matched_by_path": 3,
+        "generated_header_files": 9,
+        "export_manifest_sha256": "0b392a33d3061b18ac646d3fb69530a2b0e0124fb525b890d8573578445830db",
+        "elf_exports_interface_hash_method": true,
+        "hash_found_in_elf": [
+          "082a58c2505b703702f34ab8abcb1d1b5e890be4"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "f348b94381387474106ed29ea368037bde1108538b4eaa056aeacebd23905671",
+        "frozen_aidl_tree": "ac5472635a569363efc549af9f5e31cb8960f7c8",
+        "blueprint_matches_candidate": true,
+        "frozen_aidl_tree_matches_candidate": true
+      }
+    },
+    "lib/libstagefright_bufferqueue_helper.so": {
+      "sha256": "96a5ccc2e1a3856437df445963769c6537f03fb67c5135f1679d3d903ffa5a85",
+      "bytes": 210388,
+      "elf_build_id": "4d583fbd56cf8a9581949c0c5361d68a",
+      "needed": [
+        "libbase.so",
+        "libcutils.so",
+        "libhidlbase.so",
+        "libhidlmemory.so",
+        "liblog.so",
+        "libstagefright_foundation.so",
+        "libui.so",
+        "libutils.so",
+        "android.hardware.graphics.bufferqueue@1.0.so",
+        "android.hardware.graphics.bufferqueue@2.0.so",
+        "android.hidl.token@1.0-utils.so",
+        "libEGL.so",
+        "libnativewindow.so",
+        "libvndksupport.so",
+        "libc++.so",
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "project": "frameworks/av",
+      "snapshot_module_path": "frameworks/av/media/module/bqhelper",
+      "aosp_blueprint_path": "media/module/bqhelper/Android.bp",
+      "aosp_blueprint_sha256": "8f18f20ff9dabdbf5f3ac5d8eee268775c27cbca23f968e5d22ff38b679feb16",
+      "upstream_package_default_license_rules": [],
+      "native": {
+        "module_blueprint_sha256": "59084f5e91f024bd27f4b3f3ae547a005cb4d1f04bdcb05219e27a98ecda7703",
+        "defaults_blueprint_sha256": "b8c3b030e9ba8d7df82f148f92f2274ec014bf308718ee579eaea382e4927d30",
+        "explicit_license_on_module_or_defaults": false,
+        "apache_2_headers_on_direct_source_candidates": {
+          "media/module/bqhelper/FrameDropper.cpp": "faa88fc8c2191511ee9ef035079b1c9b742c6edb2b940ecb6b6b866b7e67e4ca",
+          "media/module/bqhelper/GraphicBufferSource.cpp": "48294e3fb3c24fd026ef258741956a6d556c7eff7f0b86c0f07d2572cca5f3e7",
+          "media/module/bqhelper/include/media/stagefright/bqhelper/ComponentWrapper.h": "5c2c9e34580085edd304c547d2c3a296745bef8fc1144fc146380b3f0939c109",
+          "media/module/bqhelper/include/media/stagefright/bqhelper/FrameDropper.h": "3fb6a99e298a50f9f2e3dda86c0bba149c97ab2e106f1358f4ae978ee555d685",
+          "media/module/bqhelper/include/media/stagefright/bqhelper/GraphicBufferSource.h": "a0fa881460fb6210c213bf234126cc9df1bceff1d03cb484a8842e9c09abef94"
+        },
+        "exported_headers_matching_aosp_and_both_snapshot_commits": {
+          "media/module/bqhelper/include/media/stagefright/bqhelper/ComponentWrapper.h": [
+            "100644",
+            "e27829b32f0c45bb0eff933266956c6d24600504"
+          ],
+          "media/module/bqhelper/include/media/stagefright/bqhelper/FrameDropper.h": [
+            "100644",
+            "7e2909a9d2af434d8f6d2cd9313fe64df79bea57"
+          ],
+          "media/module/bqhelper/include/media/stagefright/bqhelper/GraphicBufferSource.h": [
+            "100644",
+            "4e4fbfdc626868241bcb62d6b05387d498ae1195"
+          ]
+        },
+        "static_link_candidate": {
+          "project": "frameworks/native",
+          "blueprint_path": "libs/gui/Android.bp",
+          "blueprint_sha256": "49b0fee00bd6bb8f05cd0fcb3cc5ae36837f5df8cd2a4b93afb249a225fa70bc",
+          "static_library": "libgui_bufferqueue_static",
+          "static_library_rule_sha256": "ca11afb9d8c26cf33c89c39f78255c0846327b54ea0420c770cf4445e09f5b97",
+          "frame_event_filegroup_rule_sha256": "0b6e82c373453b4e93504360655432f8a0316d8ee9b73930ef883767937b3329",
+          "bufferqueue_filegroup_rule_sha256": "ada221b371a652356d21d6c43f475a0a7ef83bc203516249d1af61b363c8a4a9",
+          "explicit_gui_input_count": 19
+        },
+        "defined_elf_symbols": [
+          "_ZNK7android19BufferQueueProducer15getConsumerNameEv",
+          "_ZN7android19GraphicBufferSource21discardBufferInSlot_lEi"
+        ]
+      },
+      "pinned_rom_source_comparison": {
+        "blueprint_sha256": "8f18f20ff9dabdbf5f3ac5d8eee268775c27cbca23f968e5d22ff38b679feb16",
+        "blueprint_matches_candidate": true
+      }
+    }
+  },
+  "original_ci_source_manifest_recovered": false,
+  "binary_rebuild_verified": false,
+  "complete_dependency_license_review": false,
+  "companion_notice_readback": {
+    "archive_sha256": "257dd3295a5254a3991b44e01992c24a49619c8f61b5105b92274d31659a3117",
+    "xml_member": "vndk-v34/NOTICE.xml",
+    "xml_sha256": "7dec1c75d2495913b0475034f2e75504a1552f0d4a43df14868e82eb1b15cfc3",
+    "content_id": "3b83ef96387f14655fc854ddc3c6bd57",
+    "text_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "text_bytes": 11358,
+    "paths_with_exact_text": 11
+  }
+}
