@@ -1366,3 +1366,21 @@ without private scripts, server access or an AI operator.
   `aa86fb67481c0af005c94171e3612d8ba5298983ab7c8b639c4f3560a5d5c271`.
 - All 203 Python tests and eight Java suites passed. The older release remains
   a draft. The current candidate still needs its own audit and download check.
+
+## 2026-11-25 — Current ROM target-files build completed
+
+- The pinned product source `cb9334ee26ccd80d9f5e5d9276905440b93eaeba` finished
+  all 218 native build steps in 58 minutes 30 seconds. All eight patches were
+  present across six series and twelve checked files. The original wrapper
+  looked for a versioned filename after the native build emitted the fixed
+  `lineage_jarvis2-target_files.zip` name. Verified that archive independently.
+- The fresh archive is 1,244,895,746 bytes with 6,131 entries. Archive SHA-256
+  `802dfa5a8795499f87ae183cfc6fb6480d31849cb6b912884f9bb90a0cd9b428`.
+  Whole-archive CRC, embedded build identity and source epoch, Controls 1.1,
+  Music APK plus odex/vdex, TV Settings, SetupWizard, Bluetooth/ADB APEX entries,
+  and pinned launcher and animation checks passed. Private readback receipt
+  SHA-256 `38633a06724b8759daa92c1882c6d0bf4c31f7aec2a49b782ad7f4e92971ad1c`.
+- The unused fallback stayed idle and the temporary build swap was removed.
+  Signing metadata preparation started on the verified archive. Production
+  signatures, final AVB, hardware and public release remain pending. Bazzite
+  stayed online.

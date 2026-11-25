@@ -21,7 +21,10 @@ The current product build is pinned at
 source verifier for all eight patches across six series and twelve affected
 files. The pin includes Controls 1.1, the Music service cleanup, TV pairing and
 Settings changes, the AACP fallback, the ADB reconnect change and the OTA
-key-tooling patch. The fresh target-files archive is pending. The older f38
+key-tooling patch. The native build produced the fresh `jarvis2.cb9334ee26cc`
+target-files archive. Verified its embedded build identity and Controls 1.1,
+the rebuilt Music APK and ART files, and the pinned launcher and animation.
+Production signing and final-image verification are next. The older f38
 artifact and private rehearsals carry their own evidence and version pins.
 
 Before packaging, bind the patch report, product commit, signed target-files
