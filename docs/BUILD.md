@@ -159,7 +159,8 @@ archive and its trusted digest as well:
 python3 tools/inspect-image-contents.py /path/to/final-images \
   /outside/source/new-release-inspection /path/to/host/bin/fsck.erofs \
   --signed-target-files /path/to/signed-target-files.zip \
-  --signed-target-files-sha256 <trusted-signed-archive-sha256>
+  --signed-target-files-sha256 <trusted-signed-archive-sha256> \
+  --expected-build-number "$BUILD_NUMBER" --expected-build-epoch "$BUILD_DATETIME"
 ```
 
 The report records the archive hash and the complete EROFS byte range and digest
@@ -168,6 +169,14 @@ members byte for byte within that range, including filesystem metadata. AVB
 footers can differ, and the final chain and APK/APEX signatures still need
 their independent audits. Keep this receipt with the release patch and
 signing reports.
+
+Take the expected number and UTC epoch from the trusted build invocation.
+The build identity check rejects stale, missing or repeated values in the
+canonical partition properties and verifies the build-number component of
+each fingerprint. Apply it to the freshly built images and repeat it after
+signing. Neutral r2 fails this check for `system_ext` and `product`. Use a
+fresh output tree to generate all three properties for the replacement.
+[Neutral r2 identity findings](../manifests/neutral-r2-build-identity.json)
 
 ## Audit a complete AVB image set
 

@@ -101,6 +101,10 @@ publication by this policy decision alone.
 - [ ] Integrate verified USB/ADB defaults, remote keylayout, animation and TV UI changes; distinguish experiments from production fixes.
 - [ ] Fix launcher/lock-screen/notification behavior in product configuration rather than relying on leftover device state.
 - [ ] Rebuild the complete slot A candidate; compare all partition budgets, EROFS metadata, AVB descriptors, keys and rollback indexes offline.
+- [ ] Verify the fresh build number, UTC build epoch and fingerprint component
+  in all three generated and signed userspace filesystems. The existing r2
+  artifact holds older generated identities in `system_ext` and `product`.
+  [Identity receipt](../manifests/neutral-r2-build-identity.json)
 - [x] Record the artifact hashes and [feature-to-image inventory](PERSISTENT_FEATURES.md#release-candidate-inclusion)
   for neutral r2. Compare the exact staged ZIP and private GApps rehearsal
   against all 21 tracked feature files. Recheck coverage after each rebuild.

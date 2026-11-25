@@ -60,6 +60,38 @@ class ImageContentsTests(unittest.TestCase):
    errors=module.inspect_trees(root,{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()})
    self.assertTrue(any('official OTA client' in error for error in errors))
 
+ def test_expected_release_identity_checks_every_partition(self):
+  with tempfile.TemporaryDirectory() as directory:
+   root = Path(directory)
+   self.fixture(root)
+   policy = {'launcher_sha256': hashlib.sha256(b'fixture apk').hexdigest(),
+             'expected_build_number': 'jarvis2.current', 'expected_build_epoch': '1795575971'}
+   paths = {'system': root/'system/system/build.prop',
+            'system_ext': root/'system_ext/etc/build.prop',
+            'product': root/'product/etc/build.prop'}
+   for part, path in paths.items():
+    path.parent.mkdir(parents=True, exist_ok=True)
+    prefix = f'ro.{part}.build'
+    path.write_text(f'{prefix}.version.incremental=jarvis2.current\n'
+                    f'{prefix}.date.utc=1795575971\n'
+                    f'{prefix}.fingerprint=onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/'
+                    'jarvis2.current:userdebug/release-keys\n')
+   self.assertEqual([], module.inspect_trees(root, policy))
+
+   for part in ('system_ext', 'product'):
+    path = paths[part]
+    path.write_text(path.read_text().replace('jarvis2.current', 'jarvis2.old')
+                                    .replace('1795575971', '1795517392'))
+   errors = module.inspect_trees(root, policy)
+   for part in ('system_ext', 'product'):
+    self.assertTrue(any(f'ro.{part}.build.version.incremental' in error for error in errors), errors)
+    self.assertTrue(any(f'ro.{part}.build.date.utc' in error for error in errors), errors)
+    self.assertTrue(any(f'ro.{part}.build.fingerprint' in error for error in errors), errors)
+
+   system = paths['system']
+   system.write_text(system.read_text() + 'ro.system.build.date.utc=1795575971\n')
+   self.assertTrue(any('ro.system.build.date.utc' in error for error in module.inspect_trees(root, policy)))
+
  def test_signed_archive_binding_covers_all_three_complete_filesystems(self):
   with tempfile.TemporaryDirectory() as temporary:
    root = Path(temporary)

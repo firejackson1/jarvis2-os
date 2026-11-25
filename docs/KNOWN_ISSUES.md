@@ -5,6 +5,11 @@ The current neutral developer-preview candidate targets the unlocked 2026 onn
 64-bit stock kernel. The binary candidate remains private while installation,
 recovery, rollback and distribution checks are pending.
 
+The private r2 archive also retains older build-number and date properties
+in `system_ext` and `product`. The updated payload files and AVB signatures
+passed their offline checks. The build identity must come from a fresh output
+tree before publication. [Identity audit](../manifests/neutral-r2-build-identity.json)
+
 ## Included in the candidate
 
 | Area | Offline-verified content | Hardware work still required |
@@ -43,6 +48,11 @@ The ZIP is a raw-image package for offline validation. The LCARS image must be
 reconstructed locally from the matching stock OTA. Signer continuity and a
 file-backed install/rollback rehearsal passed. Key acceptance and restoration on
 physical hardware still need verification for this exact payload.
+
+The ROM has no LineageOS Updater client or sideload OTA payload. The r2 system
+declares the 2026-11-01 Android security patch level. The required stock
+foundation declares 2026-06-01. These are the declarations read from the
+reviewed files. The audits did not verify the individual security fixes.
 
 The saved slot A layout fit all seven target and restore images. A saved slot B
 view had no allocated logical foundation, so it cannot serve as a verified

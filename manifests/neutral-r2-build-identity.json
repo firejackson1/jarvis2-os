@@ -1,0 +1,102 @@
+{
+  "format": 1,
+  "scope": "Build identity from exact r2 images, unsigned native build and AVB descriptors.",
+  "candidate_zip_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+  "signed_target_files_sha256": "1887ac3f4a6045cecaff229106a8b465885f72c01de8a8fb2ac5471ffe43cd3e",
+  "expected_build": {
+    "number": "jarvis2.cb9334ee26cc",
+    "epoch_utc": 1795575971
+  },
+  "system_android_security_patch_declared": "2026-11-01",
+  "stock_foundation_security_patch_declared": "2026-06-01",
+  "platform_abi32": [
+    "armeabi-v7a",
+    "armeabi"
+  ],
+  "platform_abi64": [],
+  "signed_and_packaged_partitions": {
+    "system": {
+      "sha256": "84349dbfd1ae0ea7476550c4aa09e001451661a1d3b2ba4fb2b822e6d5707457",
+      "properties": {
+        "version.incremental": "jarvis2.cb9334ee26cc",
+        "date.utc": "1795575971",
+        "fingerprint": "onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/jarvis2.cb9334ee26cc:userdebug/release-keys"
+      },
+      "android_release": "14",
+      "android_sdk": "34",
+      "avb_leaf_and_parent_properties_match": true
+    },
+    "system_ext": {
+      "sha256": "7856094d126b68b662ccd00f3032bb35f563144e2cecf42353b0e806ee33b21d",
+      "properties": {
+        "version.incremental": "jarvis2.f38da52af274",
+        "date.utc": "1795517392",
+        "fingerprint": "onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/jarvis2.f38da52af274:userdebug/release-keys"
+      },
+      "android_release": "14",
+      "android_sdk": "34",
+      "avb_leaf_and_parent_properties_match": true
+    },
+    "product": {
+      "sha256": "230b77d187bb1e9699fa2374aff1cb872c30d627f2f29acd4dd4bfc3472275d5",
+      "properties": {
+        "version.incremental": "jarvis2.f38da52af274",
+        "date.utc": "1795517392",
+        "fingerprint": "onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/jarvis2.f38da52af274:userdebug/release-keys"
+      },
+      "android_release": "14",
+      "android_sdk": "34",
+      "avb_leaf_and_parent_properties_match": true
+    }
+  },
+  "unsigned_origin": {
+    "unsigned_source_archive_sha256": "802dfa5a8795499f87ae183cfc6fb6480d31849cb6b912884f9bb90a0cd9b428",
+    "unsigned_partitions": {
+      "system": {
+        "member": "SYSTEM/build.prop",
+        "sha256": "5a4ee3375529ffb9a79e0a93ec205490b7ab220b4cdf2f8b4190b975895e4604",
+        "properties": {
+          "version.incremental": "jarvis2.cb9334ee26cc",
+          "date.utc": "1795575971",
+          "fingerprint": "onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/jarvis2.cb9334ee26cc:userdebug/test-keys"
+        }
+      },
+      "system_ext": {
+        "member": "SYSTEM_EXT/etc/build.prop",
+        "sha256": "e77d47693bac6b53649fd252f427019b90a69435b8f73fbf8b19b43818d0d324",
+        "properties": {
+          "version.incremental": "jarvis2.f38da52af274",
+          "date.utc": "1795517392",
+          "fingerprint": "onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/jarvis2.f38da52af274:userdebug/test-keys"
+        }
+      },
+      "product": {
+        "member": "PRODUCT/etc/build.prop",
+        "sha256": "65f52b2e4239225d0ea0c64b99515f8ec0dfd9e6c33e6865f7dba1fc4378410b",
+        "properties": {
+          "version.incremental": "jarvis2.f38da52af274",
+          "date.utc": "1795517392",
+          "fingerprint": "onn/lineage_jarvis2/jarvis2:14/AP2A.240905.003/jarvis2.f38da52af274:userdebug/test-keys"
+        }
+      }
+    },
+    "ninja_rule_has_build_number_dependency": {
+      "system_buildinfo": true,
+      "system_ext": false,
+      "product": false
+    },
+    "ninja_rule_names_build_epoch": {
+      "system_buildinfo": true,
+      "system_ext": false,
+      "product": false
+    }
+  },
+  "release_identity_match": false,
+  "strict_image_inspector_mismatches": 6,
+  "coherent_archived_f38_control_passed": true,
+  "signed_target_files_ab_partition_list_present": false,
+  "ota_payload_in_bundle": false,
+  "lineageos_updater_package_present": false,
+  "security_patch_contents_independently_verified": false,
+  "device_contacted": false
+}

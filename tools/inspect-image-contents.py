@@ -72,6 +72,37 @@ def verify_archive_filesystems(images, target_files, target_files_sha256):
     return {'target_files_sha256': target_files_sha256, 'filesystems': filesystems}
 
 
+def inspect_build_identity(work, build_number, build_epoch):
+    errors = []
+    expected_fingerprint = re.compile(
+        r'[^:/\s]+/[^:/\s]+/[^:/\s]+:[^:/\s]+/[^:/\s]+/'
+        + re.escape(build_number) + r':[^:/\s]+/[^:/\s]+'
+    )
+    for part in PARTS:
+        relative = Path(part) / ('system' if part == 'system' else 'etc') / 'build.prop'
+        path = work / relative
+        prefix = f'ro.{part}.build'
+        keys = (f'{prefix}.version.incremental', f'{prefix}.date.utc', f'{prefix}.fingerprint')
+        properties = {key: [] for key in keys}
+        try:
+            if path.resolve() != work.resolve() / relative or not path.is_file():
+                raise ValueError('missing or linked canonical build.prop')
+            for line in path.read_text(encoding='utf-8').splitlines():
+                key, _, value = line.partition('=')
+                if key.strip() in properties:
+                    properties[key.strip()].append(value)
+        except (OSError, ValueError):
+            errors.append(f'Missing or invalid canonical build properties: {relative}')
+            continue
+        for key, expected in zip(keys[:2], (build_number, build_epoch)):
+            if properties[key] != [expected]:
+                errors.append(f'{relative}: {key} differs from expected {expected} or is missing or repeated')
+        fingerprints = properties[keys[2]]
+        if len(fingerprints) != 1 or not expected_fingerprint.fullmatch(fingerprints[0]):
+            errors.append(f'{relative}: {keys[2]} does not identify build {build_number} exactly once')
+    return errors
+
+
 def inspect_trees(work,policy):
     errors=[];found={name:[] for name in REQUIRED}
     for part in PARTS:
@@ -102,15 +133,26 @@ def inspect_trees(work,policy):
         if xml.tag!='permissions' or not required<=grants:raise ValueError('missing grants')
     except (OSError,ET.ParseError,ValueError):
         errors.append('Missing or invalid remote privilege allowlist XML')
+    if 'expected_build_number' in policy:
+        errors.extend(inspect_build_identity(work, policy['expected_build_number'],
+                                             policy['expected_build_epoch']))
     return errors
 
-def inspect_images(images,work,fsck,*,target_files=None,target_files_sha256=None):
+def inspect_images(images,work,fsck,*,target_files=None,target_files_sha256=None,
+                   expected_build_number=None,expected_build_epoch=None):
     images=images.resolve();work=work.resolve()
     if any(work==base or base in work.parents for base in (images,ROOT.resolve())):
         raise ValueError('Extraction output must be outside input directories')
     if work.exists():raise ValueError('Extraction output must be fresh')
     if (target_files is None) != (target_files_sha256 is None):
         raise ValueError('Both signed target-files archive and its SHA-256 pin are required')
+    if (expected_build_number is None) != (expected_build_epoch is None):
+        raise ValueError('Both the expected build number and UTC epoch are required')
+    if expected_build_number is not None and (
+        not re.fullmatch(r'[A-Za-z0-9._-]+', expected_build_number)
+        or not re.fullmatch(r'[1-9][0-9]*', expected_build_epoch)
+    ):
+        raise ValueError('Invalid expected build number or UTC epoch')
     files={}
     for part in PARTS:
         image=images/(part+'.img')
@@ -133,12 +175,18 @@ def inspect_images(images,work,fsck,*,target_files=None,target_files_sha256=None
             raise ValueError('Input image changed during inspection: '+name)
     if binding is not None and sha(target_files) != target_files_sha256:
         raise ValueError('Signed target-files archive changed during image inspection')
-    errors=inspect_trees(work,{'launcher_sha256':expected})
+    policy = {'launcher_sha256': expected}
+    if expected_build_number is not None:
+        policy.update(expected_build_number=expected_build_number, expected_build_epoch=expected_build_epoch)
+    errors=inspect_trees(work,policy)
     report={'format':1,'unofficial':True,'image_files':files,'errors':errors,
             'scope':'EROFS integrity, required/forbidden package filenames, launcher payload hash, debug trust filenames, remote privilege allowlist XML',
             'avb_chain_verified':False,'boot_tested':False,'complete_privacy_audit':False,'flashed':False}
     if binding is not None:
         report['signed_target_files_filesystem_binding'] = binding
+    if expected_build_number is not None:
+        report['expected_userspace_build'] = {'number': expected_build_number, 'epoch_utc': expected_build_epoch,
+                                              'partitions_checked': list(PARTS)}
     (work/'image-content-report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
     if errors:raise SystemExit(1)
@@ -148,6 +196,9 @@ if __name__=='__main__':
     p.add_argument('images',type=Path);p.add_argument('output',type=Path);p.add_argument('fsck_erofs',type=Path)
     p.add_argument('--signed-target-files',type=Path)
     p.add_argument('--signed-target-files-sha256')
+    p.add_argument('--expected-build-number')
+    p.add_argument('--expected-build-epoch')
     a=p.parse_args()
     inspect_images(a.images,a.output,a.fsck_erofs.resolve(),target_files=a.signed_target_files,
-                   target_files_sha256=a.signed_target_files_sha256)
+                   target_files_sha256=a.signed_target_files_sha256,
+                   expected_build_number=a.expected_build_number,expected_build_epoch=a.expected_build_epoch)

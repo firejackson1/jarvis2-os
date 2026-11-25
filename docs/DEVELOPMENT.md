@@ -1947,6 +1947,23 @@ without private scripts, server access or an AI operator.
   This was a local artifact review. Bazzite stayed running and Jarvis2
   was untouched. Review the hosted files after release staging.
 
+### Neutral r2 build identity — 2026-11-25
+
+- Traced mixed userspace identities to the original incremental target-files
+  archive. The saved Ninja graph tracks the build-number file for system
+  buildinfo. The product and system extension build-property rules read the
+  same number and date but omit both file dependencies. Their generated files
+  in r2 still identify `f38da52`. The target-files signing step and AVB
+  descriptors preserve that identity.
+- Added an expected-build check to the extracted-image inspector. The
+  regression reproduced the false pass before the change. The real staged r2
+  images now fail on six properties, and the archived coherent f38 control
+  passes using its own expected build. This scopes the release hold to a
+  replacement rebuilt with verified identities. [Identity receipt](../manifests/neutral-r2-build-identity.json)
+- Verified the exact APK inventory lacks LineageOS Updater and the r2 ZIP
+  lacks an OTA payload. Read the declared system and stock patch levels.
+  No device contact or signing changes.
+
 ### Neutral r2 recipient preflight on Debian 12 — 2026-11-25
 
 - Bootstrapped Debian 12 x86-64 from the signed Debian archive. In an

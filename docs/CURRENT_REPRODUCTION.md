@@ -118,8 +118,11 @@ python3 "$device/tools/verify-release-patches.py" "$PWD" > /outside/tree/patch-c
 
 ## Build, sign, and package
 
-Use Bash from the Android root. The recorded native build used an incremental
-output overlay and two jobs. Choose concurrency for the host's available memory.
+Use Bash from the Android root with a fresh output tree. The recorded native
+r2 build used an incremental overlay that retained earlier `product` and
+`system_ext` build properties. The clean build must generate all three
+userspace partitions with the intended identity. Choose concurrency for the
+host's available memory.
 
 ```bash
 export BUILD_NUMBER=jarvis2.cb9334ee26cc
@@ -131,9 +134,13 @@ m -j2 sign_target_files_apks target-files-package
 ```
 
 Read the actual `out/target/product/jarvis2/obj/PACKAGING/target_files_intermediates/lineage_jarvis2-target_files.zip`.
-Check its embedded source identity and archive integrity. The original verifier
-looked for a versioned name and reported a failure after a successful native
-build. The recorded archive uses the fixed name above.
+Check archive integrity and the expected build number, UTC epoch and fingerprint
+in `SYSTEM/build.prop`, `SYSTEM_EXT/etc/build.prop` and
+`PRODUCT/etc/build.prop`. Use the [image inspector](BUILD.md#inspect-the-generated-images-themselves)
+with both expected identity arguments for the generated images and again
+after signing. The original verifier looked only at the system identity.
+The legacy r2 asset is retained for offline evidence and must be replaced
+before release. [Identity receipt](../manifests/neutral-r2-build-identity.json)
 
 Follow [release signing](RELEASE_SIGNING.md) for package and OTA trust,
 [AVB image assembly](AVB_IMAGE_ASSEMBLY.md) for the final chain, and
