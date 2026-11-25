@@ -1558,6 +1558,21 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Exact r2 verified-boot states during install and restore — 2026-11-25
+
+- Rehashed the fixed r2 and saved restore inputs. Independently verified four
+  authenticated metadata nodes and 13 leaf bindings per state using the
+  pinned avbtool. The complete saved and r2 endpoints passed. All 126 mixed
+  combinations of whole images failed.
+- The ordered install and restore traces failed at the same steps. Userspace
+  mismatch begins with the first write. The root's bootstrap checks fail after
+  changing `init_boot_a` and then `vendor_boot_a`. Before the final root write,
+  the previous root also rejects the replacement `vbmeta_system_a` key.
+- The [state receipt](../manifests/neutral-r2-avb-intermediate-states.json) and
+  [test target](DEVICE.md#developer-preview-test-target) document those
+  boundaries. Whether the actual bootloader still reaches Recovery or
+  Fastboot after an interruption remains unverified.
+
 ### Exact r2 interruption and Recovery helper check — 2026-11-25
 
 - Ran the extracted staged operator installer against exact r2 and historical

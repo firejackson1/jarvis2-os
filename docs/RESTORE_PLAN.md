@@ -159,3 +159,35 @@ stayed within the target A ranges. The saved metadata prefix, 16 protected
 physical fixtures and five untouched logical extents stayed byte-identical.
 Re-entry to Recovery after an actual power loss, live USB availability and
 physical restoration remain separate hardware gates.
+
+### Verified boot between writes
+
+An offline audit combined every possible set of whole r2 images with the
+remaining saved images. Only the two complete sets passed all 13 leaf
+checks, four metadata signatures and parent key bindings. All 126 mixed
+combinations failed. This rules out preserving a fully valid chain between
+writes by changing the order of these seven images. The child and root
+metadata keys differ between the two endpoints.
+
+The staged installer uses the same target order in both directions. The
+failures below matched when installing r2 and when restoring the saved set.
+
+| Last completed write | Leaf checks that fail | Parent key check |
+| --- | --- | --- |
+| None | None | Pass |
+| `system_a` | `system` | Pass |
+| `system_ext_a` | `system`, `system_ext` | Pass |
+| `product_a` | `system`, `system_ext`, `product` | Pass |
+| `init_boot_a` | Previous three plus `init_boot` | Pass |
+| `vendor_boot_a` | Previous four plus `vendor_boot` | Pass |
+| `vbmeta_system_a` | `init_boot`, `product`, `vendor_boot` | `vbmeta` rejects the child key |
+| `vbmeta_a` | None | Pass |
+
+At the `vendor_boot_a` step, the old root's Recovery image hash already
+disagrees with the new bytes. During rollback, the same disagreement occurs
+with the roles reversed. Even before that step, the mixed set fails full-chain
+verification. These are offline checks of whole images. They leave open
+whether this unlocked bootloader can still reach Recovery or Fastboot
+after either a completed write or a torn write. An independent recovery
+transport therefore remains an installation prerequisite.
+[AVB intermediate-state receipt](../manifests/neutral-r2-avb-intermediate-states.json)

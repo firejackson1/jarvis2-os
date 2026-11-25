@@ -153,7 +153,8 @@ publication by this policy decision alone.
 
 ## 7. Installation and recovery — requires a separately authorized device test
 
-- [ ] Document exact model, firmware base, bootloader requirements and supported partition layout.
+- [x] Document the exact model, firmware base, bootloader prerequisites and
+  supported partition layout. [Developer-preview test target](DEVICE.md#developer-preview-test-target)
 - [x] Download the exact [stock OTA](STOCK_FOUNDATION.md), verify all thirteen
   extracted inputs against the pinned stock profile, and repeat the neutral
   LCARS preflight with those files.
@@ -184,7 +185,8 @@ publication by this policy decision alone.
 - [ ] Obtain authorization for the exact slot A installation plan; never infer permission to modify slot B.
 - [ ] Test first boot/clean setup and upgrades using a suitable test device/data plan; do not wipe the owner's device automatically.
 - [ ] Verify recovery entry, USB ADB/fastbootd, Android reboot and stock restoration paths.
-- [ ] Document what remains recoverable if failure occurs before recovery; do not promise an unproven unbrick path.
+- [x] Document the exact verified-boot failures between writes and what
+  remains unverified before Recovery. [Intermediate states](RESTORE_PLAN.md#verified-boot-between-writes)
 - [ ] Test rollback and repeat installation from the published instructions.
 
 ## 8. Public developer preview

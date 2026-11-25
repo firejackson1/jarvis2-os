@@ -1,0 +1,172 @@
+{
+  "format": 1,
+  "scope": "Offline authenticated AVB descriptors on exact all-old, all-r2 and whole-write-prefix combinations for the staged operator order. Child leaves are inspected diagnostically even if a parent binding fails.",
+  "candidate_archive_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+  "saved_fit_preflight_sha256": "541a3c68fe0d2b5f08d3a108b2fd3cc58705aace94e8cde7f35fe4364185d426",
+  "saved_restore_chain_receipt_sha256": "cc3dd64273ab9a98dbf7abdc114f95a2152fde0868a558acf46cff48026f00f0",
+  "file_backed_rollback_matrix_sha256": "ee6a7be97f842433e68295dc61f874afd2b3b1338930a0c78d0fa1855be6d6ca",
+  "upstream_avbtool_sha256": "f8e82d9eb64093972cc2e04fbcec5c86a10cb2cac9f871c7a55490bb3b6f48eb",
+  "unchanged_public_key_bytes": {
+    "boot": true,
+    "oem": true,
+    "vbmeta": false,
+    "vbmeta_system": false
+  },
+  "unique_leaf_descriptor_input_pairs": 34,
+  "hardware_contacted": false,
+  "hardware_root_key_acceptance_verified": false,
+  "recovery_usb_or_fastboot_reentry_verified": false,
+  "all_complete_image_subsets": {
+    "combinations": 128,
+    "mixed_combinations_rejected": 126,
+    "verified_endpoint_masks": [
+      "all_saved",
+      "all_r2"
+    ],
+    "combinations_with_parent_key_mismatch": 64,
+    "combinations_with_vendor_boot_leaf_mismatch": 64,
+    "any_mixed_combination_full_chain_passed": false
+  },
+  "signature_nodes_checked_each_state": [
+    "boot",
+    "oem",
+    "vbmeta",
+    "vbmeta_system"
+  ],
+  "data_bindings_checked_each_state": 13,
+  "install_and_restore_failures_matched_step_for_step": true,
+  "ordered_step_comparison": [
+    {
+      "last_completed_write": null,
+      "failed_leaf_bindings": [],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": true
+    },
+    {
+      "last_completed_write": "system_a",
+      "failed_leaf_bindings": [
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system"
+        }
+      ],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": false
+    },
+    {
+      "last_completed_write": "system_ext_a",
+      "failed_leaf_bindings": [
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system_ext"
+        }
+      ],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": false
+    },
+    {
+      "last_completed_write": "product_a",
+      "failed_leaf_bindings": [
+        {
+          "metadata": "vbmeta",
+          "partition": "product"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system_ext"
+        }
+      ],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": false
+    },
+    {
+      "last_completed_write": "init_boot_a",
+      "failed_leaf_bindings": [
+        {
+          "metadata": "vbmeta",
+          "partition": "init_boot"
+        },
+        {
+          "metadata": "vbmeta",
+          "partition": "product"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system_ext"
+        }
+      ],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": false
+    },
+    {
+      "last_completed_write": "vendor_boot_a",
+      "failed_leaf_bindings": [
+        {
+          "metadata": "vbmeta",
+          "partition": "init_boot"
+        },
+        {
+          "metadata": "vbmeta",
+          "partition": "product"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system"
+        },
+        {
+          "metadata": "vbmeta_system",
+          "partition": "system_ext"
+        },
+        {
+          "metadata": "vbmeta",
+          "partition": "vendor_boot"
+        }
+      ],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": false
+    },
+    {
+      "last_completed_write": "vbmeta_system_a",
+      "failed_leaf_bindings": [
+        {
+          "metadata": "vbmeta",
+          "partition": "init_boot"
+        },
+        {
+          "metadata": "vbmeta",
+          "partition": "product"
+        },
+        {
+          "metadata": "vbmeta",
+          "partition": "vendor_boot"
+        }
+      ],
+      "failed_parent_child_keys": [
+        {
+          "parent": "vbmeta",
+          "child": "vbmeta_system"
+        }
+      ],
+      "full_chain_passed": false
+    },
+    {
+      "last_completed_write": "vbmeta_a",
+      "failed_leaf_bindings": [],
+      "failed_parent_child_keys": [],
+      "full_chain_passed": true
+    }
+  ],
+  "execution_report_sha256": "cb9ba84b2c978f3afc24de7ccb208f428318b05cb0b59a49216313cbad65f117"
+}
