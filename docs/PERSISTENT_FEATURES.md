@@ -55,6 +55,12 @@ also reproduced all seven prepared image hashes, including LCARS Recovery, from
 the staged ROM and the matching stock OTA. Repeat the patch replay and binary
 readback against the exact ZIP whenever the product build is refreshed.
 
+The successor uses the same ROM feature source and adds the numbered-build
+dependency fix. All nine patches passed the pinned-source replay. The full
+rebuild is queued to verify the three partition identities and recheck all
+21 tracked feature paths before signing. The r2 source archive contains eight
+patches. [Successor build pin](CURRENT_REPRODUCTION.md#build-sign-and-package)
+
 | Release change | Where to find it in neutral r2 |
 | --- | --- |
 | Settings tap and hold, left widget panel, button editor, Home chooser and Smart Home provider settings | Controls 1.1 in `system_ext`. The TV Settings overlay exposes the settings entries. Shortcut handling requires Accessibility consent. |

@@ -125,10 +125,15 @@ userspace partitions with the intended identity. Choose concurrency for the
 host's available memory.
 
 The eight patches at the revision above reproduce the original r2 build
-inputs. The current tree has a ninth patch for incremental builds. It
-refreshes build properties when the numbered build's identity files change.
-The clean build already in progress uses the original eight-patch pin.
-[Release build patches](../patches/ReleaseTools/README.md)
+inputs. The clean baseline uses that exact pin. The successor build is queued
+at product revision `148a63dfe989245d725b7a56e660e35faa5c9998`, with build
+number `jarvis2.148a63dfe989` and UTC epoch `1795601128`. Its upstream
+manifest is identical. It adds the ninth patch, which refreshes all partition
+build properties when a numbered build's identity inputs change. The queued
+rebuild preserves a verified copy of the baseline archive before it changes
+the build number and date, so the real build exercises the incremental fix.
+For a fresh build of that revision, substitute those three pins in the checkout,
+patch and build commands. [Release build patches](../patches/ReleaseTools/README.md)
 
 ```bash
 export BUILD_NUMBER=jarvis2.cb9334ee26cc

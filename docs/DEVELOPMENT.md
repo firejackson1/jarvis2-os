@@ -2022,3 +2022,19 @@ without private scripts, server access or an AI operator.
 - Reproduced three source archives, checked all 4,739 Git entries and verified
   the private staging copy. The original CI inputs and exact binary rebuilds
   remain open. [Source candidate receipt](../manifests/neutral-r2-vndk-source-candidates.json)
+
+### Successor patch and payload coverage — 2026-11-25
+
+- Revalidated all 18 staged r2 files, the eight archived source patches and
+  the 21 tracked feature files in both ZIPs. The vanilla filesystems match
+  all three signed target-files filesystem digests, and the private GApps
+  rehearsal retains the same feature files and Recovery binding.
+- Ran the nine-patch verifier again against six pinned projects and 13
+  modified source files. The report matched the recorded SHA-256, and
+  native Kati and Ninja passed the numbered-build regression checks.
+- Queued the full rebuild at the [nine-patch product pin](CURRENT_REPRODUCTION.md#build-sign-and-package)
+  after the initial clean build and archive check. It preserves the baseline
+  archive, verifies the ninth patch before the Android build, and reads back
+  the new archive's 21 feature paths, three image members and three build
+  identities. A 21-path fixture passed, and the same check rejected a stale
+  product identity. Actual rebuilt and signed image checks remain open.
