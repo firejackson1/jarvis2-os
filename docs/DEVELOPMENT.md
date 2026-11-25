@@ -2346,3 +2346,9 @@ without private scripts, server access or an AI operator.
   commits at the exact pinned tree. Restoring that history regenerated
   the correct version and narrowed the native difference to the 20-byte
   GNU build ID. All other 641 payloads match the pinned LineageOS APK.
+
+- Reverified all 23 files in the consolidated private r2 delivery.
+  The 20 previously reviewed payloads matched their hashes. The
+  privacy scan of the GoogleTest supplement and both updated metadata
+  files read all 245 archived source files with zero pattern matches
+  and no decode gaps. The receipt preserves the scope of earlier scans.

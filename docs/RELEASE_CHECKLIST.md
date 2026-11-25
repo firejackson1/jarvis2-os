@@ -269,6 +269,9 @@ publication by this policy decision alone.
 - [x] Verify all 23 files in the consolidated private r2 delivery, including
   the GoogleTest supplement and all prior source and notice companions.
   [Release receipt](../manifests/current-neutral-artwork.json)
+- [x] Reverify the 20 previously scanned payloads and scan the three new
+  or updated files in the consolidated private r2 set.
+  [Privacy receipt](../manifests/neutral-r2-companion-privacy.json)
 - [x] Rebuild the exact r2 ZIP, manifest and packaging receipt from the
   pinned source metadata and reviewed signed inputs.
   [Exact ZIP reproduction](CANDIDATE_PACKAGING.md#reproduce-the-staged-neutral-r2-zip)

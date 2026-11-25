@@ -136,6 +136,12 @@ resolved by independently decoding the gzip asset and scanning its contents.
 The prior [ROM image scan](../manifests/neutral-r2-privacy-scan.json) covers
 the three excluded EROFS image files. The two remaining image members are
 the signed [AVB metadata](../manifests/neutral-r2-recipient-preflight.json).
+The latest private r2 set has 23 verified files. All 20 previously scanned
+payloads matched their reviewed hashes. Scanning the new GoogleTest source
+archive and both updated metadata files read all 245 archived source files
+with zero pattern matches or decode gaps. The receipt binds this delta to
+the previous review and the exact consolidated staging set.
+
 This review is scoped to the staged bytes and named patterns. Review the
 actual hosted downloads again before publication.
 

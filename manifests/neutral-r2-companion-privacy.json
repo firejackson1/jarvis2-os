@@ -207,5 +207,45 @@
     "previous_opaque_or_bounded_upstream_fixture_entries": 52,
     "public_asset_download_recheck_done": false,
     "hardware_tested": false
+  },
+  "consolidated_delivery_privacy_recheck": {
+    "format": 1,
+    "previous_review_sha256": "ba3960da33f47c56bd5a28965bd7f3cc66d39245cd1068364b304774dc460447",
+    "previous_receipt_sha256": "8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec",
+    "current_receipt_sha256": "313fb8e2cbba82784a767d492d5f72486a4b67116e1bda24332620d7c591bf6b",
+    "current_file_count": 23,
+    "current_total_bytes": 1344799742,
+    "previous_payloads_reverified_byte_identical": 20,
+    "delta_scan": {
+      "googletest-7f036c5563af7d0329f20e8bb42effb04629f0c0.tar.gz": {
+        "bytes": 869706,
+        "sha256": "a888ce3e5b5f174415c3cf99c9364489fd386c3d4ed672a94c528a6cf6b160ed",
+        "scan_counts": {
+          "tar_containers": 1,
+          "archive_files": 245,
+          "member_bytes_read": 3996819
+        }
+      },
+      "SHA256SUMS.txt": {
+        "bytes": 2393,
+        "sha256": "41414ba3a103f1d69894f5da171de91f164792c3afe6a9e54e3d7d55814c0c04",
+        "scan_counts": {
+          "member_bytes_read": 2393
+        }
+      },
+      "release-asset-receipt.json": {
+        "bytes": 7373,
+        "sha256": "313fb8e2cbba82784a767d492d5f72486a4b67116e1bda24332620d7c591bf6b",
+        "scan_counts": {
+          "member_bytes_read": 7373
+        }
+      }
+    },
+    "scanner_sha256": "7971c1732a0f0bff8e7832c68ed1533330b2452041234705d4ac3403f8459dae",
+    "delta_matches_by_category": {},
+    "delta_decode_gaps_by_category": {},
+    "raw_private_values_recorded": false,
+    "summary_sha256": "7ca058420c7e9d02c5021d29116026bde210bef65d39253dfde30badfc8e222c",
+    "hosted_download_recheck_done": false
   }
 }
