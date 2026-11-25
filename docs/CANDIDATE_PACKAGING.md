@@ -342,3 +342,8 @@ their VNDK libraries outside the original build IDs. All 1,337,793,537 bytes
 passed full readback. The new receipt SHA-256 is
 `cc4b7aaba041c4b4f457af47c387513c72243edd65ec189300de4b48553d564b`.
 [Rebuild and staging evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libnl-and-libxml2-libraries)
+
+The 22-file private staging set adds the pinned
+`bionic-e4df46f213d8-source.tar.gz` used by the `libnl` replay. All
+1,343,929,128 bytes passed full readback. The receipt SHA-256 is
+`8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec`.

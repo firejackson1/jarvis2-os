@@ -2193,3 +2193,12 @@ without private scripts, server access or an AI operator.
   matched both output files. Added the exact source archives to the
   independent private staging set and verified all 21 files.
   [Rebuild receipt](../manifests/neutral-r2-vndk-libnl-libxml2-rebuild.json)
+
+- Added the exact Android 14 Bionic tree used by the `libnl` replay. Two
+  independent Git exports produced the same gzip archive. Verified every
+  tracked blob and mode, then recompiled the 36 files with includes from
+  the extracted archive. The result matched both earlier `libnl` libraries
+  outside the 16-byte GNU build ID. Reverified the new 22-file staging set
+  and confirmed all 19 previous payloads still match their receipts. Host
+  verification passed 222 Python tests with the pinned AVB fixture and all
+  eight Java suites.

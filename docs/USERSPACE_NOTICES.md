@@ -230,9 +230,14 @@ Preserve the original response-file link order for retained objects.
   definition disables ICU in the historical header. Exclude the current
   system variant's `libandroidicu.so` from the link response file.
 
-The 21-file private staging set includes both source archives and their
-original licensing files. The ROM and previously staged payloads retain
-their hashes.
+The 22-file private staging set includes both library source archives and
+`bionic-e4df46f213d8-source.tar.gz`, with their original notice and license
+files. The Bionic archive matched all 3,554 tracked Git blobs and modes,
+including 12 NOTICE files. Use the extracted `bionic-e4df46f213d8/libc`
+tree for the historical include paths. Replaying `libnl` from that archive
+and a fresh extraction of the library sources matched all 167,184 bytes
+outside the GNU build ID in both the earlier replay and the r2 binary.
+The ROM and the other 18 previously staged payloads retain their hashes.
 
 ### VNDK modules using the snapshot default
 

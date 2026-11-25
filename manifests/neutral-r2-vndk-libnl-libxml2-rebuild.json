@@ -33,6 +33,17 @@
       "newer_source_excluded": "lib/route/addr.c",
       "bionic_headers_commit": "e4df46f213d8d363017dce7ded5d1f2159614425",
       "bionic_headers_project_tree": "7f0387af5681fb69ea2ba014bc07e3ec08179070",
+      "bionic_source_archive": {
+        "file": "bionic-e4df46f213d8-source.tar.gz",
+        "bytes": 6135254,
+        "sha256": "0de8f6cee475c4c48434a5049610e140b1d74c8452ac7d2c4e50a04bf1cc8213",
+        "tracked_blobs_and_modes_verified": 3554,
+        "notice_files_verified": 12,
+        "archive_replay_matches_outside_gnu_build_id": true,
+        "rebuilt_elf_sha256": "0a2e97c83e20f7e2904f4501321dee1009367781da27415a1b518a1ae344dffc",
+        "rebuilt_elf_gnu_build_id": "47b1892892561fda32bff09bad80116b",
+        "matching_bytes_outside_descriptor": 167184
+      },
       "elf_bytes": 167200,
       "matching_bytes_outside_descriptor": 167184,
       "matching_named_exported_functions": 686,
@@ -73,6 +84,14 @@
     "full_download_readback_files": 21,
     "full_download_readback_bytes": 1337793537,
     "rom_bytes_changed": false,
+    "public_assets_uploaded": false
+  },
+  "staging_with_bionic": {
+    "previous_receipt_sha256": "cc4b7aaba041c4b4f457af47c387513c72243edd65ec189300de4b48553d564b",
+    "receipt_sha256": "8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec",
+    "previous_payloads_unchanged": 19,
+    "full_download_readback_files": 22,
+    "full_download_readback_bytes": 1343929128,
     "public_assets_uploaded": false
   }
 }

@@ -50,7 +50,8 @@ apply independently.
   [VNDK libexif evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libexif-library)
 - [x] Reproduce VNDK `libnl` and `libxml2` from their staged sources
   outside their original GNU build IDs. Repeat both from fresh extractions
-  and add their source archives to the private delivery.
+  and add their source archives and the pinned Bionic headers to the
+  private delivery. Verify the `libnl` replay from the staged Bionic archive.
   [VNDK libnl and libxml2 evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libnl-and-libxml2-libraries)
 - [x] Trace the 11 VNDK libraries that use the snapshot's default license
   rule back to their source declarations and check their delivered Apache
