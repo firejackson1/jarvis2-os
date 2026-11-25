@@ -1,0 +1,96 @@
+{
+  "chromium_commit": "4b3d0dabb8250b6f152d2d85d79e7706e309d087",
+  "chromium_tree": "1390557da6bf6cb630528eac294f338b887ad81a",
+  "verified_chromium_deps_sha256": "70f36c59069488921a7d83b5ad0dfb3d221211be2be966f28ed84ef6ceeb8daa",
+  "depot_tools_commit": "96b9c092c0cdaa9f1ec87b0af777ec85977dee91",
+  "prebuilt_lineage_arm_commit": "1c11dffe87310d3c81e2ad93b9f0a7e8c09adfc0",
+  "lineage_source_patch_commit": "544b12e3d42a02b4337f31819f6ba917187dcccf",
+  "pinned_original_paths_compared_to_git": 147,
+  "pinned_existing_preimages_compared": 100,
+  "patches_replayed": 13,
+  "patch_replay_sha256": "e2cfa049ee646210e8dab468654446f47e864239a0c8425ed5323bca40de8550",
+  "apk_payload_comparison": {
+    "prebuilt_apk_sha256": "f7ccf01cf3ec8555fd4500ddc7512430cb2cd3cadd1806a166be2092d25c7298",
+    "r2_apk_sha256": "43464815af31ddd44d9d899ab842b2d165bf05f799e7f47b96abc660663b7bf5",
+    "prebuilt_payloads": 642,
+    "r2_payloads": 641,
+    "payload_differences": [
+      "lib/armeabi-v7a/libcrashpad_handler_trampoline.so"
+    ],
+    "native": {
+      "bytes": 83822388,
+      "sha256": "d1c0f80c22e1d417e7ef0e908312a1222fdef1cb62403034ac6ebcf2e5436214"
+    },
+    "stock_release": false
+  },
+  "apk_payload_comparison_sha256": "7d0c699fbe297a470fa45a4825b34fef72618f86a8a63950100798e542bf9bd9",
+  "source_icons": {
+    "mdpi": {
+      "upstream": "chrome/android/java/res_chromium_base/mipmap-mdpi/app_icon.png",
+      "build_destination": "android_webview/nonembedded/java/res_icon/drawable-mdpi/icon_webview.png",
+      "source_sha256": "1bc10140ad5aea08f62c1e4d1d2a6028d5c279ed8b6d1adfe1b7098202210d36",
+      "size": [
+        48,
+        48
+      ],
+      "normalized_pixels_sha256": "61db1c2cc06c9fdf2846084c4cf5df31dafee836c5d3dd06a5c170ee67f61753",
+      "matching_r2_entries": [
+        "res/Jj"
+      ]
+    },
+    "hdpi": {
+      "upstream": "chrome/android/java/res_chromium_base/mipmap-hdpi/app_icon.png",
+      "build_destination": "android_webview/nonembedded/java/res_icon/drawable-hdpi/icon_webview.png",
+      "source_sha256": "bde30be3e4ae36d5d068e8f3e6737b4d53ee3c0ef4825d0c9ffc5f5361ee7731",
+      "size": [
+        72,
+        72
+      ],
+      "normalized_pixels_sha256": "4206c98ff647053a757a47b8ca6ec0f976c98d6bc886a63a894c72a9faa25a0c",
+      "matching_r2_entries": [
+        "res/w7"
+      ]
+    },
+    "xhdpi": {
+      "upstream": "chrome/android/java/res_chromium_base/mipmap-xhdpi/app_icon.png",
+      "build_destination": "android_webview/nonembedded/java/res_icon/drawable-xhdpi/icon_webview.png",
+      "source_sha256": "42fd3e07cea062332bea87d9b0dd315efb4013133b0f7fd3f637923087c0ef06",
+      "size": [
+        96,
+        96
+      ],
+      "normalized_pixels_sha256": "aca9e68630e693001c88b9a3862954970cbb2ca429057b34797596b8a401b861",
+      "matching_r2_entries": [
+        "res/mB"
+      ]
+    },
+    "xxhdpi": {
+      "upstream": "chrome/android/java/res_chromium_base/mipmap-xxhdpi/app_icon.png",
+      "build_destination": "android_webview/nonembedded/java/res_icon/drawable-xxhdpi/icon_webview.png",
+      "source_sha256": "098e8f3cca5cfe83ec6720c132308339eafa5b416d03a6c8a53db064262ad6e0",
+      "size": [
+        144,
+        144
+      ],
+      "normalized_pixels_sha256": "2508edae824f8d46c41213829b9b3ba3e593517ff6c011b7ad07a67066420d64",
+      "matching_r2_entries": [
+        "res/9M"
+      ]
+    },
+    "xxxhdpi": {
+      "upstream": "chrome/android/java/res_chromium_base/mipmap-xxxhdpi/app_icon.png",
+      "build_destination": "android_webview/nonembedded/java/res_icon/drawable-xxxhdpi/icon_webview.png",
+      "source_sha256": "dffc9b779d5e9a8a5a157cf7924f3ecb244120b57b4680755a4bb935f9fcef27",
+      "size": [
+        192,
+        192
+      ],
+      "normalized_pixels_sha256": "3c9cb113a22c3f18a8b370350b1b2f90dc5027969b159cc6af2b535028789966",
+      "matching_r2_entries": []
+    }
+  },
+  "observed_640dpi_prebuilt_icon_entry": false,
+  "all_patches_proven_used_in_the_existing_prebuilt": false,
+  "arm32_webview_rebuild_completed": false,
+  "modified_ffmpeg_relink_completed": false
+}

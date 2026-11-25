@@ -1625,3 +1625,22 @@ without private scripts, server access or an AI operator.
   set. The [neutral receipt](../manifests/current-neutral-artwork.json) pins
   the result. A full WebView rebuild and relink, remaining dependency source
   coverage and stock-input rights remain open.
+
+### ARM32 WebView build preparation — 2026-11-25
+
+- Checked out the full Chromium source at the pinned 157.0.8103.78 commit
+  and matched its Git tree and DEPS digest. Fetched the DEPS-pinned
+  depot_tools and started the Android dependency sync with hooks disabled.
+  The [WebView rebuild record](WEBVIEW_REBUILD.md) describes the exact inputs.
+- Replayed the 13 LineageOS patches using pinned Chromium source bytes.
+  Compared all 100 original text files and 47 paths absent upstream to the
+  checked-out Git tree. Found the five Chromium icon source paths and checked
+  every destination against the patched GN file. The historical README uses
+  outdated icon directories and an enable_nacl argument absent from this tree.
+- Compared the complete prebuilt and staged r2 APK payloads. The only
+  non-signature difference is the omitted Crashpad trampoline. The main ARM32
+  WebView library and all other 641 payloads match. Four exact Chromium icon
+  densities reproduce the prebuilt pixel data. The fifth referenced by patch
+  0002 is absent from the prebuilt's icon table, so the documented patch series
+  does not establish the exact original build steps. Full dependency sync,
+  ARM32 rebuild and modified-FFmpeg relink remain open.

@@ -63,3 +63,8 @@ remain unverified. The selected source map neither covers the remaining
 Android or APEX dependencies nor grants rights to stock inputs. The neutral r2
 ZIP carries five userspace/AVB images and the LCARS plug-in. The stock kernel
 and vendor partitions are local inputs outside that delivery archive.
+
+The [WebView rebuild record](WEBVIEW_REBUILD.md) pins the Chromium checkout and
+depot_tools and verifies the patch replay and ARM32 APK readback. It also
+documents the corrected icon paths and the density difference between the
+documented build and the shipped prebuilt.
