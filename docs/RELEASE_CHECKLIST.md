@@ -113,6 +113,11 @@ publication by this policy decision alone.
 ## 7. Installation and recovery — requires a separately authorized device test
 
 - [ ] Document exact model, firmware base, bootloader requirements and supported partition layout.
+- [x] Download the exact [stock OTA](STOCK_FOUNDATION.md), verify all thirteen
+  extracted inputs against the pinned stock profile, and repeat the neutral
+  LCARS preflight with those files.
+- [x] Reconstruct the seven [stock rollback inputs](RESTORE_PLAN.md#stock-rollback-input-rehearsal)
+  and verify the entire stock AVB chain and saved slot-A fit offline.
 - [ ] Validate candidate against read-only live partition metadata and snapshot status before installation.
 - [ ] Preserve and verify stock restore files, current recovery and necessary signing information.
 - [ ] Test a RAM candidate where possible before requesting persistent installation.
@@ -290,7 +295,7 @@ publication by this policy decision alone.
   engineering trial as the final product.
 - [x] Recompose optional Google apps privately against the exact current LCARS
   candidate. Recheck both complete outputs, all 21 tracked unchanged members,
-  and the `vendor_boot` binding with temporary keys.
+  and the `vendor_boot` binding with temporary keys. Repeat for neutral artwork.
   [Offline rehearsal](GAPPS_COMPOSITION.md#lcars-integration-rehearsal)
 - [ ] Verify HDMI, box-button operation, USB keyboard and remote input in RAM
   before considering another recovery write.

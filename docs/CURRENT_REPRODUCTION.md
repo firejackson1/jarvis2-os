@@ -16,8 +16,9 @@ archive, image, and Recovery digests. These instructions cover offline builds.
    device commit above. The current build audit matched all 1,430 upstream
    project revisions and saw only the twelve expected changed source paths
    across the six patched projects.
-2. Stage the eleven local stock images against the exact `stock-inputs.sha256`
-   file. With an EROFS-capable `fsck.erofs` on `PATH`, run
+2. [Download and extract the exact stock OTA](STOCK_FOUNDATION.md). Stage its
+   eleven local stock images against `stock-inputs.sha256`. With an
+   EROFS-capable `fsck.erofs` on `PATH`, run
    `python3 device/onn/jarvis2/stage-stock.py /path/to/stock-images "$PWD"`
    from the Android root. The command verifies the input hashes, extracts the
    kernel from `boot.img`, and stages stock inputs in the fresh tree. Keep the

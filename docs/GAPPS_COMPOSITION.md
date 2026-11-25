@@ -160,6 +160,12 @@ private rehearsal. Its SHA-256 is
 `03ea7a4483979122615963e308f2d369dd90a18d7f2b3e247783a312f07872cd`.
 Hardware acceptance and a public redistribution grant remain unverified.
 
+Two more runs used the exact [neutral artwork candidate](../manifests/current-neutral-artwork.json).
+All five output images matched. Independent checks verified the 27 additions,
+16 APK signatures, 21 unchanged feature files including the neutral animation,
+and 13 AVB bindings including LCARS. The nine-entry private rehearsal ZIP has
+SHA-256 `d4e5cf6cd212902114b38cc3f930f7486f7902257736d8de6833f50f3304b769`.
+
 ## Native rehearsal scope
 
 The reviewed composer completed two bounded Linux rehearsals using the pinned

@@ -70,5 +70,33 @@
   },
   "hardware_tested": false,
   "device_modified": false,
-  "public_release_ready": false
+  "public_release_ready": false,
+  "local_stock_ota": {
+    "build_incremental": "15640252",
+    "bytes": 911005562,
+    "sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+    "files_verified": 13,
+    "receipt_sha256": "2812e06a0b9146168e84edad0d26ca4e204e47a7d0ce0bf6e940f4f9db3f05aa",
+    "preflight_matches_prior": true,
+    "stock_rollback": {
+      "seven_images_fit_saved_slot_a": true,
+      "avb_bindings_verified": 13,
+      "receipt_sha256": "233639b2a21a0f47d855bbf4acc4b3fe6bf85a81b4d7d5079757759a45ca8fc9",
+      "actual_restore_tested": false
+    }
+  },
+  "private_google_rehearsal": {
+    "five_output_images_identical": true,
+    "temporary_signing_keys": true,
+    "google_files_verified": 27,
+    "google_apk_signatures_verified": 16,
+    "unchanged_feature_members_verified": 21,
+    "avb_bindings_verified": 13,
+    "archive_members_verified": 9,
+    "archive_bytes": 765220299,
+    "archive_sha256": "d4e5cf6cd212902114b38cc3f930f7486f7902257736d8de6833f50f3304b769",
+    "manifest_sha256": "908405402257d2a416e7becfc6784e0aa0acbc5002f80482312391dd156070a0",
+    "hardware_tested": false,
+    "published": false
+  }
 }

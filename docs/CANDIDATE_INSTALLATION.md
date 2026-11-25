@@ -22,7 +22,8 @@ expected AVB root public-key-blob SHA-256 from trusted release evidence. Use
 Linux with Python 3.11 or later, Git, OpenSSL and `lz4`. Supply locally obtained
 stock reference images from the pinned 15640252 profile, a Git checkout
 containing the archive's Recovery source commit, and the prepared portable
-tool kit. [Portable LCARS kit](https://github.com/firejackson1/jarvis2-os/blob/708e088ed57eb83805753d9213717965a3c61e2c/docs/STOCK_LCARS.md#recreate-the-recovery-image-from-a-plug-in)
+tool kit. [Stock OTA extraction](STOCK_FOUNDATION.md) ·
+[Portable LCARS kit](https://github.com/firejackson1/jarvis2-os/blob/708e088ed57eb83805753d9213717965a3c61e2c/docs/STOCK_LCARS.md#recreate-the-recovery-image-from-a-plug-in)
 
 ```sh
 python3 tools/prepare-lcars-install.py \

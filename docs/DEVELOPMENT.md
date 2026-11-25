@@ -1451,3 +1451,27 @@ without private scripts, server access or an AI operator.
   sizes, seven restore files, and the ten-file private delivery set. The
   [neutral receipt](../manifests/current-neutral-artwork.json) records the
   hashes. No live hardware checks took place. Bazzite stayed running.
+
+## 2026-11-25 — Stock download and current USB baseline
+
+- Downloaded the full Google-hosted `15640252` OTA and verified the archive,
+  embedded payload hash, device and target build. The extractor reproduced
+  the eleven stock references and the two `vbmeta` template inputs. The
+  template copies match after the documented zero-padding step. Repeated
+  the documented extraction in a fresh directory.
+- Reconstructed LCARS and checked all 13 AVB bindings from the neutral ZIP
+  using the downloaded stock files. It produced the same preflight receipt
+  as the prior offline test, including the seven historical target sizes and
+  restore files. [Stock input workflow](STOCK_FOUNDATION.md)
+- Private neutral GApps composition reproduced all five images twice with
+  disposable keys. Verified all 27 additions, 16 APK signatures, 21 unchanged
+  feature files, and 13 AVB bindings. All nine private ZIP entries matched on
+  readback.
+- Read the currently booted Android over existing USB ADB. The box reported
+  slot A, completed boot, enforcing SELinux, and the earlier `f38da52` ROM.
+  Four of six selected installed packages already match the candidate. The
+  Controls and Music APKs are the older builds. The neutral candidate still
+  awaits a fresh device test. Bazzite stayed running.
+- Reconstructed the seven-image stock rollback set from the same OTA. The
+  full stock AVB chain and seven target sizes passed the saved slot-A check.
+  Live recovery access and restoration remain untested for this candidate.

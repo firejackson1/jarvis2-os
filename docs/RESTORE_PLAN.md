@@ -1,6 +1,6 @@
 # Restore evidence and remaining tests
 
-Updated 2026-11-23. No installer or flash command is authorized by this document.
+Updated 2026-11-25. No installer or flash command is authorized by this document.
 Do not change slot B, slot selection, userdata, bootloader or environment.
 
 ## Verified current development baseline
@@ -94,3 +94,19 @@ The portable preflight can repeat the saved fit check with a pinned native
 records the exact input hashes and fails if any target overlaps the captured
 metadata prefix or if the untouched stock foundation differs.
 [Saved layout and restore-file check](CANDIDATE_INSTALLATION.md#check-a-saved-layout-and-restore-files)
+
+## Stock rollback input rehearsal
+
+The [Google-hosted full OTA](STOCK_FOUNDATION.md) can reproduce the stock
+rollback inputs without a private capture. In addition to the reference files
+and normalized templates in that guide, extract `system`, `system_ext`, and
+`product` with full payload verification. The seven-image stock set consists
+of those three images, `init_boot`, `vendor_boot`, `vbmeta_system`, and
+`vbmeta`. Keep all other reference images for the AVB audit.
+
+The exact extracted stock set passed all 13 AVB bindings and fit the seven
+target sizes in the historical slot-A capture. The stock `vendor_boot`
+contains stock Recovery. To return to a prior custom installation, retain
+and verify the backup made from that specific device before writing. A live
+capture, a working restore transport, and an authorized physical restore test
+are still required.
