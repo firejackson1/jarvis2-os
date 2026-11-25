@@ -343,7 +343,20 @@ Use a fresh `output_dir` for each run.
 Two offline runs against the saved kernel and a third run against the
 newly generated kernel reproduced the exact `libapp.so` from the unsigned
 and signed launcher APKs. The r2 product image carries those same bytes.
-A native Flutter engine rebuild remains open.
+A native Flutter engine rebuild remains open. The
+[native build preflight](../manifests/launcher-flutter-native-preflight.json)
+records the Linux-host checkout and compares its declared dependencies with
+the staged source companion. All 43 native archives match selected
+checkout revisions and passed checksum readback. The same checkout selects
+78 additional Git repositories and 14 CIPD packages. The receipt records
+the immutable IDs resolved for those packages.
+
+The upstream ARMv7 builder uses the `ci/android_release` configuration.
+For the local build, use its GN arguments with `--no-rbe` to avoid Google's
+remote build service. The reference release ELF is ARM EABI and identifies
+Android API 21, NDK r26b, Clang 17.0.2 and Fuchsia LLD 18.0.0. Comparing the
+generated link graph and rebuilt ELF remains necessary to identify which
+checkout sources actually go into the library. [Pinned Flutter builder](https://github.com/flutter-team-archive/engine/blob/a18df97ca57a249df5d8d68cd0820600223ce262/ci/builders/linux_android_aot_engine.json)
 [Pinned Flutter AOT command construction](https://github.com/flutter/flutter/blob/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668/packages/flutter_tools/lib/src/base/build.dart)
 
 ## Unsigned ARMv7 release and recipient signing

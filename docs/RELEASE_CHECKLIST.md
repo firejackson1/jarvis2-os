@@ -298,6 +298,11 @@ publication by this policy decision alone.
 - [x] Compile and relocate DataStore's protobuf dependency from the staged
   Java sources and reproduce the complete JAR used to build the launcher.
   [Protobuf recipe and evidence](LAUNCHER_SOURCE_BUILD.md#reproducing-the-datastore-protobuf-jar)
+- [x] Verify the launcher companion's 43 native source archives against the
+  pinned Flutter checkout and resolve its 14 CIPD package instances.
+  [Native build preflight](../manifests/launcher-flutter-native-preflight.json)
+- [ ] Verify the Flutter native ARMv7 link inputs and compare the rebuilt
+  library with the pinned release ELF. Complete any missing source delivery.
 - [x] Verify production-key package/APEX signing in the private rehearsal with
   pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
   Whole-image AVB, OTA trust and hardware acceptance remain separate gates.

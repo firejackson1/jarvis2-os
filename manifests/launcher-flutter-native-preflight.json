@@ -1,0 +1,500 @@
+{
+  "format": 1,
+  "scope": "ARMv7 release-engine checkout inputs and staged source coverage before GN or compilation. Dependency selection includes tools and tests beyond the native link.",
+  "engine_revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+  "engine_deps_sha256": "ae9f2300acd2d6e733b5171e0566cae9fdfe126147ed92988835862bf53fe642",
+  "vulkan_deps_sha256": "bb6ebb1a4fd5621ced278ed8566be91146e6156784b334801f03203aa4f096c2",
+  "upstream_builder_sha256": "d8592ff933879272a418aba6997dd696b700525eec6324ca8fd034f3902c781d",
+  "depot_tools_revision": "96b9c092c0cdaa9f1ec87b0af777ec85977dee91",
+  "configuration": {
+    "host": {
+      "os": "linux",
+      "cpu": "x64"
+    },
+    "custom_vars": {
+      "download_emsdk": false,
+      "download_esbuild": false,
+      "download_fuchsia_deps": false,
+      "setup_githooks": false,
+      "use_rbe": false
+    },
+    "upstream_gn_args": [
+      "--target-dir",
+      "ci/android_release",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu",
+      "arm",
+      "--rbe",
+      "--no-goma"
+    ],
+    "local_gn_args": [
+      "--target-dir",
+      "ci/android_release",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu",
+      "arm",
+      "--no-rbe",
+      "--no-goma"
+    ],
+    "native_ninja_target": "lib.stripped/libflutter.so"
+  },
+  "input_counts": {
+    "selected_git_repositories": 121,
+    "git_repositories_with_verified_staged_archives": 43,
+    "git_repositories_without_staged_archives": 78,
+    "resolved_cipd_instances": 14
+  },
+  "source_companion": {
+    "sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+    "verified_native_archive_bytes": 392207488,
+    "native_archive_placements": [
+      {
+        "checkout_path": "src",
+        "revision": "e265c359126b24351f534080fb22edaa159f2215",
+        "destination": "sources/native/buildroot-e265c359126b24351f534080fb22edaa159f2215.tar.gz",
+        "sha256": "6424ec5f6faa5989d566e6a8a51dc31663cb2ded196db843c7d481a45c6f2c38",
+        "bytes": 125099,
+        "url": "https://codeload.github.com/flutter/buildroot/tar.gz/e265c359126b24351f534080fb22edaa159f2215"
+      },
+      {
+        "checkout_path": "src/flutter",
+        "revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+        "destination": "sources/native/flutter-engine-a18df97ca57a249df5d8d68cd0820600223ce262.tar.gz",
+        "sha256": "99cc3ef570b02ec5597b7c6218ee5aff87f9dc583b1d8385131da88b2065365b",
+        "bytes": 45099958,
+        "url": "https://codeload.github.com/flutter/engine/tar.gz/a18df97ca57a249df5d8d68cd0820600223ce262"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/abseil-cpp",
+        "revision": "ff6504dc527b25fef0f3c531e7dba0ed6b69c162",
+        "destination": "sources/native/abseil-cpp-ff6504dc527b25fef0f3c531e7dba0ed6b69c162.tar.gz",
+        "sha256": "89817e5a30b133b6dc3c17a7ed7faf312dbebd848d028728f19d14f7028305c9",
+        "bytes": 2491966,
+        "url": "https://flutter.googlesource.com/third_party/abseil-cpp.git/+archive/ff6504dc527b25fef0f3c531e7dba0ed6b69c162.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/angle",
+        "revision": "6a09e41ce6ea8c93524faae1a925eb01562f53b1",
+        "destination": "sources/native/angle-6a09e41ce6ea8c93524faae1a925eb01562f53b1.tar.gz",
+        "sha256": "0cdd1cc91fbafd2968a496510ed6d91f2763e53cc2fc7c3af16002998f535057",
+        "bytes": 11293344,
+        "url": "https://chromium.googlesource.com/angle/angle.git/+archive/6a09e41ce6ea8c93524faae1a925eb01562f53b1.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/boringssl",
+        "revision": "9c7294fd58261a79794f5afaa26598cf1442ad20",
+        "destination": "sources/native/boringssl-9c7294fd58261a79794f5afaa26598cf1442ad20.tar.gz",
+        "sha256": "f92f5b21952b0e199133ecdfaf1bd8621f044d36200496fb03f409abe1ad12fc",
+        "bytes": 13768944,
+        "url": "https://dart.googlesource.com/boringssl_gen.git/+archive/9c7294fd58261a79794f5afaa26598cf1442ad20.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/boringssl/src",
+        "revision": "d24a38200fef19150eef00cad35b138936c08767",
+        "destination": "sources/native/boringssl-src-d24a38200fef19150eef00cad35b138936c08767.tar.gz",
+        "sha256": "3a7ab1ee8fc27e4cb6cb68b2ba66ab74fe83851df03ac5ae7089e5c42718aa44",
+        "bytes": 35955551,
+        "url": "https://boringssl.googlesource.com/boringssl.git/+archive/d24a38200fef19150eef00cad35b138936c08767.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/cpu_features/src",
+        "revision": "936b9ab5515dead115606559502e3864958f7f6e",
+        "destination": "sources/native/cpu_features-src-936b9ab5515dead115606559502e3864958f7f6e.tar.gz",
+        "sha256": "ca3295be5e2867b59418d878b3a387762c61e2d64a7f3c29ad0c95e84d8623fd",
+        "bytes": 106093,
+        "url": "https://chromium.googlesource.com/external/github.com/google/cpu_features.git/+archive/936b9ab5515dead115606559502e3864958f7f6e.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/dart",
+        "revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+        "destination": "sources/native/dart-sdk-88c9758ef131d430d8ce595c6bfb4c90574d3ddd.tar.gz",
+        "sha256": "fc29fb346312961c21a8fb05ce170256000f32977dc9037c0ea8164d0b62b71d",
+        "bytes": 34574261,
+        "url": "https://codeload.github.com/dart-lang/sdk/tar.gz/88c9758ef131d430d8ce595c6bfb4c90574d3ddd"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/expat",
+        "revision": "654d2de0da85662fcc7644a7acd7c2dd2cfb21f0",
+        "destination": "sources/native/expat-654d2de0da85662fcc7644a7acd7c2dd2cfb21f0.tar.gz",
+        "sha256": "09bb8d0a6133506ff01b35a4e6d7d5c51028e49bd6b349816a881525dd17a750",
+        "bytes": 8308823,
+        "url": "https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git/+archive/654d2de0da85662fcc7644a7acd7c2dd2cfb21f0.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/flatbuffers",
+        "revision": "0a80646371179f8a7a5c1f42c31ee1d44dcf6709",
+        "destination": "sources/native/flatbuffers-0a80646371179f8a7a5c1f42c31ee1d44dcf6709.tar.gz",
+        "sha256": "bd841c5653cad7b2e32e51f76299f79ba8ea1d3f4de341854493eaf1d275a268",
+        "bytes": 2000355,
+        "url": "https://chromium.googlesource.com/external/github.com/google/flatbuffers/+archive/0a80646371179f8a7a5c1f42c31ee1d44dcf6709.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/freetype2",
+        "revision": "bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a",
+        "destination": "sources/native/freetype2-bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a.tar.gz",
+        "sha256": "4a87978d108b81d505ac5343d14788c9acff450128006485ae678695b4ca0403",
+        "bytes": 2307728,
+        "url": "https://flutter.googlesource.com/third_party/freetype2/+archive/bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/harfbuzz",
+        "revision": "ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2",
+        "destination": "sources/native/harfbuzz-ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2.tar.gz",
+        "sha256": "8fb450da0e18d0d298969b64e857545d07a1ad3c7b3ebccbc9782ec792c9d7c7",
+        "bytes": 35994581,
+        "url": "https://flutter.googlesource.com/third_party/harfbuzz/+archive/ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/icu",
+        "revision": "43953f57b037778a1b8005564afabe214834f7bd",
+        "destination": "sources/native/icu-43953f57b037778a1b8005564afabe214834f7bd.tar.gz",
+        "sha256": "1719c9b8e5499b39be86dcad9a2f520e9888a53fdbba9fa61955fb9ef12bb0a5",
+        "bytes": 51754121,
+        "url": "https://chromium.googlesource.com/chromium/deps/icu.git/+archive/43953f57b037778a1b8005564afabe214834f7bd.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/imgui",
+        "revision": "3ea0fad204e994d669f79ed29dcaf61cd5cb571d",
+        "destination": "sources/native/imgui-3ea0fad204e994d669f79ed29dcaf61cd5cb571d.tar.gz",
+        "sha256": "ac468666a259088ca0a7aa62e61e85ce87febd44802c28d7fc12c481b4fd4cd5",
+        "bytes": 1700096,
+        "url": "https://flutter.googlesource.com/third_party/imgui.git/+archive/3ea0fad204e994d669f79ed29dcaf61cd5cb571d.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/inja",
+        "revision": "88bd6112575a80d004e551c98cf956f88ff4d445",
+        "destination": "sources/native/inja-88bd6112575a80d004e551c98cf956f88ff4d445.tar.gz",
+        "sha256": "d9e74bba58974580ec4628d7b7d9707b416a16f70e052ee921ad68dab20ecc43",
+        "bytes": 394983,
+        "url": "https://flutter.googlesource.com/third_party/inja/+archive/88bd6112575a80d004e551c98cf956f88ff4d445.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/json",
+        "revision": "17d9eacd248f58b73f4d1be518ef649fe2295642",
+        "destination": "sources/native/json-17d9eacd248f58b73f4d1be518ef649fe2295642.tar.gz",
+        "sha256": "bd9ff89b382dffef9447c9ef70f9745df191d2e4d9a6e5fed546f649bcbc0abe",
+        "bytes": 8074813,
+        "url": "https://flutter.googlesource.com/third_party/json.git/+archive/17d9eacd248f58b73f4d1be518ef649fe2295642.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libcxx",
+        "revision": "44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0",
+        "destination": "sources/native/libcxx-44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0.tar.gz",
+        "sha256": "5bb91bc2186f88d7ae367e34ec6bc1ebe978d8dde586add8bd99b1e7043a0f1e",
+        "bytes": 5805943,
+        "url": "https://llvm.googlesource.com/llvm-project/libcxx/+archive/44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libcxxabi",
+        "revision": "2ce528fb5e0f92e57c97ec3ff53b75359d33af12",
+        "destination": "sources/native/libcxxabi-2ce528fb5e0f92e57c97ec3ff53b75359d33af12.tar.gz",
+        "sha256": "e7277d6c16488be756cdbfdf13e224ef7c621191248e07dce833a26482779358",
+        "bytes": 781106,
+        "url": "https://llvm.googlesource.com/llvm-project/libcxxabi/+archive/2ce528fb5e0f92e57c97ec3ff53b75359d33af12.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libjpeg-turbo/src",
+        "revision": "0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f",
+        "destination": "sources/native/libjpeg-turbo-src-0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f.tar.gz",
+        "sha256": "e809073decbd2e8e8887cc347bd3dcf3e5897a9bdeab2ee4749256daebd3c7dc",
+        "bytes": 794778,
+        "url": "https://flutter.googlesource.com/third_party/libjpeg-turbo/+archive/0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libpng",
+        "revision": "de36b892e921c684ef718fec24739ae9bb49c977",
+        "destination": "sources/native/libpng-de36b892e921c684ef718fec24739ae9bb49c977.tar.gz",
+        "sha256": "680788bd0e41a1f40e20f1abde514799b9f1497d9b6cc72672adda61386293bd",
+        "bytes": 1573171,
+        "url": "https://flutter.googlesource.com/third_party/libpng/+archive/de36b892e921c684ef718fec24739ae9bb49c977.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libtess2",
+        "revision": "725e5e08ec8751477565f1d603fd7eb9058c277c",
+        "destination": "sources/native/libtess2-725e5e08ec8751477565f1d603fd7eb9058c277c.tar.gz",
+        "sha256": "41fbc36ed65c2f61480018ef25bc0cbe6d8b6401ebd4f71217a56560ed4c6dfd",
+        "bytes": 60810,
+        "url": "https://flutter.googlesource.com/third_party/libtess2/+archive/725e5e08ec8751477565f1d603fd7eb9058c277c.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libwebp",
+        "revision": "ca332209cb5567c9b249c86788cb2dbf8847e760",
+        "destination": "sources/native/libwebp-ca332209cb5567c9b249c86788cb2dbf8847e760.tar.gz",
+        "sha256": "b89e11cb832d8375c15e2c3780b51e8cc3392794390b07d0e355dd96823f8c50",
+        "bytes": 3698338,
+        "url": "https://chromium.googlesource.com/webm/libwebp.git/+archive/ca332209cb5567c9b249c86788cb2dbf8847e760.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/perfetto",
+        "revision": "13ce0c9e13b0940d2476cd0cff2301708a9a2e2b",
+        "destination": "sources/native/src-flutter-third_party-perfetto-13ce0c9e13b0940d2476cd0cff2301708a9a2e2b.tar.gz",
+        "sha256": "81136c35526dd45ab4eedb57ecdd9c0440485d8bd411eab46b7862e3b6523ebc",
+        "bytes": 20212853,
+        "url": "https://flutter.googlesource.com/third_party/perfetto/+archive/13ce0c9e13b0940d2476cd0cff2301708a9a2e2b.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/protobuf",
+        "revision": "24487dd1045c7f3d64a21f38a3f0c06cc4cf2edb",
+        "destination": "sources/native/src-flutter-third_party-protobuf-24487dd1045c7f3d64a21f38a3f0c06cc4cf2edb.tar.gz",
+        "sha256": "e4e2ed9aa07c565b9a4f382080f57b2b21684189e18b3f086107d5e27e79c8da",
+        "bytes": 5224561,
+        "url": "https://flutter.googlesource.com/third_party/protobuf/+archive/24487dd1045c7f3d64a21f38a3f0c06cc4cf2edb.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/rapidjson",
+        "revision": "ef3564c5c8824989393b87df25355baf35ff544b",
+        "destination": "sources/native/rapidjson-ef3564c5c8824989393b87df25355baf35ff544b.tar.gz",
+        "sha256": "f2068d6ea893fc1170d199530ef303dfea82ede96636c2135f494de90ca1cb33",
+        "bytes": 869356,
+        "url": "https://flutter.googlesource.com/third_party/rapidjson/+archive/ef3564c5c8824989393b87df25355baf35ff544b.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/shaderc",
+        "revision": "37e25539ce199ecaf19fb7f7d27818716d36686d",
+        "destination": "sources/native/src-flutter-third_party-shaderc-37e25539ce199ecaf19fb7f7d27818716d36686d.tar.gz",
+        "sha256": "2376c5cbc827cd1e6e49e8f42d75557b7d10e6b27f990fca25103400aad85e00",
+        "bytes": 236983,
+        "url": "https://chromium.googlesource.com/external/github.com/google/shaderc/+archive/37e25539ce199ecaf19fb7f7d27818716d36686d.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/skia",
+        "revision": "93461bed7394e3c554125b0c50b00fb81eea42c6",
+        "destination": "sources/native/skia-93461bed7394e3c554125b0c50b00fb81eea42c6.tar.gz",
+        "sha256": "8f910245a33296ecf7b2460337f4da2b5f7acd89abb4bffbcf1ce238fd3eb4a6",
+        "bytes": 67721207,
+        "url": "https://codeload.github.com/google/skia/tar.gz/93461bed7394e3c554125b0c50b00fb81eea42c6"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/sqlite",
+        "revision": "0f61bd2023ba94423b4e4c8cfb1a23de1fe6a21c",
+        "destination": "sources/native/sqlite-0f61bd2023ba94423b4e4c8cfb1a23de1fe6a21c.tar.gz",
+        "sha256": "2e75700e58003909e038f82ea56a86cd02e5cc076ab870f19af3423ca8b0637d",
+        "bytes": 2320353,
+        "url": "https://flutter.googlesource.com/third_party/sqlite/+archive/0f61bd2023ba94423b4e4c8cfb1a23de1fe6a21c.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/stb",
+        "revision": "5736b15f7ea0ffb08dd38af21067c314d6a3aae9",
+        "destination": "sources/native/stb-5736b15f7ea0ffb08dd38af21067c314d6a3aae9.tar.gz",
+        "sha256": "a09382107b8d911e7f7eaaf3e9d7e718d64ec1d5a7a570d2ce4a177d35d50a99",
+        "bytes": 1409801,
+        "url": "https://flutter.googlesource.com/third_party/stb.git/+archive/5736b15f7ea0ffb08dd38af21067c314d6a3aae9.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/tinygltf",
+        "revision": "9bb5806df4055ac973b970ba5b3e27ce27d98148",
+        "destination": "sources/native/tinygltf-9bb5806df4055ac973b970ba5b3e27ce27d98148.tar.gz",
+        "sha256": "f604303a8601c7ab7d3b5e3f8875f0dde4e79b808a39e35ad50ffc8887394bbe",
+        "bytes": 5889315,
+        "url": "https://codeload.github.com/syoyo/tinygltf/tar.gz/9bb5806df4055ac973b970ba5b3e27ce27d98148"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps",
+        "revision": "014f44e134a1de387791bffacc32ff9d8db71176",
+        "destination": "sources/native/vulkan-deps-014f44e134a1de387791bffacc32ff9d8db71176.tar.gz",
+        "sha256": "c86c45991dfe2d1e5c27ff28e121ee29a8bf12994de860bde977f7c394ccb265",
+        "bytes": 12814,
+        "url": "https://chromium.googlesource.com/vulkan-deps/+archive/014f44e134a1de387791bffacc32ff9d8db71176.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/glslang/src",
+        "revision": "b1f7affe94ea108de7e38ee764f855a2130da398",
+        "destination": "sources/native/vulkan-deps-glslang-src-b1f7affe94ea108de7e38ee764f855a2130da398.tar.gz",
+        "sha256": "5bb3901ac5798be53a562b2b419954cba02abb5c9b43eae170d7a869e1f25d2b",
+        "bytes": 3900388,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/glslang/+archive/b1f7affe94ea108de7e38ee764f855a2130da398.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/spirv-cross/src",
+        "revision": "b8fcf307f1f347089e3c46eb4451d27f32ebc8d3",
+        "destination": "sources/native/vulkan-deps-spirv-cross-src-b8fcf307f1f347089e3c46eb4451d27f32ebc8d3.tar.gz",
+        "sha256": "d56c53d10f4871082e064d50279622751c7759a4c7b0282ee01819781b292d05",
+        "bytes": 1923867,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Cross/+archive/b8fcf307f1f347089e3c46eb4451d27f32ebc8d3.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/spirv-headers/src",
+        "revision": "e77d03080b90c5d361663a67834c57bb1fddaec2",
+        "destination": "sources/native/vulkan-deps-spirv-headers-src-e77d03080b90c5d361663a67834c57bb1fddaec2.tar.gz",
+        "sha256": "5fa1633d22dc88a1313ddf6d4546b4638117672b75498d291ab05d05f4c9be85",
+        "bytes": 482803,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Headers/+archive/e77d03080b90c5d361663a67834c57bb1fddaec2.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/spirv-tools/src",
+        "revision": "80926d97aba8d1b1162448713ca4825d4c816226",
+        "destination": "sources/native/vulkan-deps-spirv-tools-src-80926d97aba8d1b1162448713ca4825d4c816226.tar.gz",
+        "sha256": "b5d1a547023c2da0778d032fcc7d6a47e239ea27fa599ed451712e6ae05e004c",
+        "bytes": 3239506,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Tools/+archive/80926d97aba8d1b1162448713ca4825d4c816226.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/vulkan-headers/src",
+        "revision": "5a5c9a643484d888873e32c5d7d484fae8e71d3d",
+        "destination": "sources/native/vulkan-deps-vulkan-headers-src-5a5c9a643484d888873e32c5d7d484fae8e71d3d.tar.gz",
+        "sha256": "9de7fb0a8e7b2c72c5d0e7fa9642c04fafb3cb66345d149b84f0a27681e05073",
+        "bytes": 2239536,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Headers/+archive/5a5c9a643484d888873e32c5d7d484fae8e71d3d.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/vulkan-loader/src",
+        "revision": "e0d594e05b194597bacda68e9a9279d12905f89b",
+        "destination": "sources/native/vulkan-deps-vulkan-loader-src-e0d594e05b194597bacda68e9a9279d12905f89b.tar.gz",
+        "sha256": "1d31c104b870d45a5399493e42dec4cf000af7e9cb33897d529b794bfe257002",
+        "bytes": 1715361,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Loader/+archive/e0d594e05b194597bacda68e9a9279d12905f89b.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/vulkan-tools/src",
+        "revision": "f24bab1ea1c521cd77991260cad1b11384eec5f0",
+        "destination": "sources/native/vulkan-deps-vulkan-tools-src-f24bab1ea1c521cd77991260cad1b11384eec5f0.tar.gz",
+        "sha256": "aa1f300c57c4cc3bba5fd9aa141888355c3d416b478d7bd73517f6eeb3684d1f",
+        "bytes": 759098,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Tools/+archive/f24bab1ea1c521cd77991260cad1b11384eec5f0.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/vulkan-utility-libraries/src",
+        "revision": "86de0a0a9dc09520644bfb6b2f49e919134fe86d",
+        "destination": "sources/native/vulkan-deps-vulkan-utility-libraries-src-86de0a0a9dc09520644bfb6b2f49e919134fe86d.tar.gz",
+        "sha256": "8d90cb2fb7a442f471e919781146f5da66c71d210183331176ffb2b759dc53b8",
+        "bytes": 169959,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Utility-Libraries/+archive/86de0a0a9dc09520644bfb6b2f49e919134fe86d.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan-deps/vulkan-validation-layers/src",
+        "revision": "7266a470cfab228a98d238d7c53367640034546d",
+        "destination": "sources/native/vulkan-deps-vulkan-validation-layers-src-7266a470cfab228a98d238d7c53367640034546d.tar.gz",
+        "sha256": "011009ca2b903dfeabbbc35527450ba2ee1a6757a5ded10edf3d2c00788488e6",
+        "bytes": 5442777,
+        "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-ValidationLayers/+archive/7266a470cfab228a98d238d7c53367640034546d.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/vulkan_memory_allocator",
+        "revision": "7de5cc00de50e71a3aab22dea52fbb7ff4efceb6",
+        "destination": "sources/native/vulkan_memory_allocator-7de5cc00de50e71a3aab22dea52fbb7ff4efceb6.tar.gz",
+        "sha256": "a027d654477f103b90a662482f410220cdfb9867a8f50824d9e59be73b791df5",
+        "bytes": 885211,
+        "url": "https://chromium.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/+archive/7de5cc00de50e71a3aab22dea52fbb7ff4efceb6.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/wuffs",
+        "revision": "600cd96cf47788ee3a74b40a6028b035c9fd6a61",
+        "destination": "sources/native/wuffs-600cd96cf47788ee3a74b40a6028b035c9fd6a61.tar.gz",
+        "sha256": "028459db633e0c039dd8a92f0409fadd7339acb2d31b467a78f0ad8c5d8952d5",
+        "bytes": 289923,
+        "url": "https://skia.googlesource.com/external/github.com/google/wuffs-mirror-release-c.git/+archive/600cd96cf47788ee3a74b40a6028b035c9fd6a61.tar.gz"
+      },
+      {
+        "checkout_path": "src/flutter/third_party/zlib",
+        "revision": "7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df",
+        "destination": "sources/native/zlib-7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df.tar.gz",
+        "sha256": "9402e497a41042911a98910507f7d603350038e73afbfa78efa2cfd7dccecd60",
+        "bytes": 596954,
+        "url": "https://chromium.googlesource.com/chromium/src/third_party/zlib.git/+archive/7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df.tar.gz"
+      }
+    ]
+  },
+  "reference_elf": {
+    "apk_sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+    "apk_member": "lib/armeabi-v7a/libflutter.so",
+    "sha256": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
+    "gnu_build_id": "b355766da0f31bf8881a1c7f1e9748c4f49bf94e",
+    "abi": "armeabi-v7a",
+    "android_api": 21,
+    "android_ndk": "26.1.10909125",
+    "android_clang": "17.0.2",
+    "android_clang_revision": "d9f89f4d16663d5012e5c09495f3b30ece3d2362",
+    "linker_comment": "Fuchsia LLD 18.0.0"
+  },
+  "cipd_packages": [
+    {
+      "path": "src/flutter/buildtools/linux-x64/clang",
+      "package": "fuchsia/third_party/clang/linux-amd64",
+      "version": "git_revision:725656bdd885483c39f482a01ea25d67acf39c46",
+      "instance_id": "0W11iNLWzzp3mqEU00vxEjMJEjtSHkHf1l8UW0oRfV4C"
+    },
+    {
+      "path": "src/flutter/prebuilts/linux-arm64/dart-sdk",
+      "package": "flutter/dart-sdk/linux-arm64",
+      "version": "git_revision:88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+      "instance_id": "-a-oIExFqC0VGplNVCJOAxhtLOLYvLJ0kLR0fudPWvgC"
+    },
+    {
+      "path": "src/flutter/prebuilts/linux-x64/dart-sdk",
+      "package": "flutter/dart-sdk/linux-amd64",
+      "version": "git_revision:88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+      "instance_id": "B5WSS5bwpWq3fwmcUQuud8CVSfOcPqDBMT2-rZUU_nkC"
+    },
+    {
+      "path": "src/flutter/third_party/android_tools",
+      "package": "flutter/android/sdk/all/linux-amd64",
+      "version": "version:34v7",
+      "instance_id": "8_-Wq6iXtvhrfPDaRCnr1N9Co80rbbRY23E1Nc0FVjkC"
+    },
+    {
+      "path": "src/flutter/third_party/android_tools/google-java-format",
+      "package": "flutter/android/google-java-format",
+      "version": "version:1.7-1",
+      "instance_id": "iblFvvZRGmzx3F8dvL6YlCXN5BIZRbHUHb7oEeJJZGQC"
+    },
+    {
+      "path": "src/flutter/third_party/android_tools/trace_to_text",
+      "package": "perfetto/trace_to_text/linux-amd64",
+      "version": "git_tag:v25.0",
+      "instance_id": "XVmnBHYWG_ZdDB0bzgDn7q4GQNHvB7D3hMF1wXAn1QMC"
+    },
+    {
+      "path": "src/flutter/third_party/dart/third_party/devtools",
+      "package": "dart/third_party/flutter/devtools",
+      "version": "git_revision:70375f6c6d81faa8f3069aa6dcf2a98c69445455",
+      "instance_id": "MHauv1-VcVwM4R9kNqyu-G70nHDUSC5UiXEzPrSZrygC"
+    },
+    {
+      "path": "src/flutter/third_party/dart/tools/sdks/dart-sdk",
+      "package": "dart/dart-sdk/linux-amd64",
+      "version": "version:3.5.0-278.0.dev",
+      "instance_id": "QC3hFqBevgPAU0l_IafOUa4X8A5xGeAOO0iEehEs5bAC"
+    },
+    {
+      "path": "src/flutter/third_party/gn",
+      "package": "gn/gn/linux-amd64",
+      "version": "git_revision:b79031308cc878488202beb99883ec1f2efd9a6d",
+      "instance_id": "Z7Dj0KXE3WMCDDH6kLenEdjXPwNfRsaZ6B6UGf5aPZgC"
+    },
+    {
+      "path": "src/flutter/third_party/google_fonts_for_unit_tests",
+      "package": "flutter/flutter_font_fallbacks",
+      "version": "c81f5a2b369b48df3728d2b247a27901bb76bbce0c40b343fe1cc924a36b36ea",
+      "instance_id": "VSx5G-M9goQBh-Lg5YfZWG90xVKGuEfErYs0fjUwL2gC"
+    },
+    {
+      "path": "src/flutter/third_party/gradle",
+      "package": "flutter/gradle",
+      "version": "version:8.3",
+      "instance_id": "iqSnWYpe07EtBq5Fs31C01OXSSO7-040QRsuzO6-bqUC"
+    },
+    {
+      "path": "src/flutter/third_party/ninja",
+      "package": "infra/3pp/tools/ninja/linux-amd64",
+      "version": "version:2@1.11.1.chromium.4",
+      "instance_id": "VYM9k6u1EPkIsjRyNRFnF7ELpuyhnkJqAeama4w8_YYC"
+    },
+    {
+      "path": "src/third_party/android_embedding_dependencies",
+      "package": "flutter/android/embedding_bundle",
+      "version": "last_updated:2024-06-18T12:13:41-0700",
+      "instance_id": "1Ha21vq9AHJNjq8iYuErr4DlnawFt5iwBAjTpVnOOwMC"
+    },
+    {
+      "path": "src/third_party/java/openjdk",
+      "package": "flutter/java/openjdk/linux-amd64",
+      "version": "version:17",
+      "instance_id": "3HlEfp1nbzGbtJ4K3UQ1BM4nHieyCNc0enqBMsSRN7IC"
+    }
+  ],
+  "native_link_input_coverage_verified": false
+}

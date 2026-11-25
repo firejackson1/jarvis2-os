@@ -2153,3 +2153,17 @@ without private scripts, server access or an AI operator.
   complete JAR matched the launcher dependency byte for byte. The commands
   from the published recipe repeated the match in a second fresh directory.
   [Rebuild receipt](../manifests/launcher-protobuf-rebuild.json)
+
+### Flutter ARMv7 native build preflight — 2026-11-25
+
+- Verified the exact engine revision's `DEPS` and Linux ARMv7 release builder.
+  Expanded the Linux/Android checkout with gclient and the nested Vulkan
+  dependencies. All 43 staged native archives map to selected revisions.
+  Rehashed every archive from the staged source companion.
+- Resolved immutable package IDs for all 14 enabled CIPD downloads. Read the
+  original r2 launcher's ELF header, NDK note and compiler/linker comments as
+  a reference for the planned build comparison.
+- Started the pinned dependency checkout. The graph generation and offline
+  native build wait for checkout verification. The selected checkout includes
+  test and tool inputs, so its coverage is distinct from the final link.
+  [Preflight receipt](../manifests/launcher-flutter-native-preflight.json)

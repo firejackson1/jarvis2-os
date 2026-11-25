@@ -9,7 +9,8 @@
     "archive_sha256": "99cc3ef570b02ec5597b7c6218ee5aff87f9dc583b1d8385131da88b2065365b",
     "dart_revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
     "skia_revision": "93461bed7394e3c554125b0c50b00fb81eea42c6",
-    "deps_checkout_collected": false
+    "deps_checkout_collected": false,
+    "native_rebuild_preflight": "manifests/launcher-flutter-native-preflight.json"
   },
   "sqlite": {
     "maven_coordinate": "eu.simonbinder:sqlite3-native-library:3.50.3",
