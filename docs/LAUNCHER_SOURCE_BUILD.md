@@ -203,6 +203,36 @@ provided in `build-records/generated-codegen-source.tar.gz`. No original source
 file was modified. Compare regeneration with that archive; generated paths and
 local.properties are environment-specific and are not application source edits.
 
+## ARMv7 Flutter engine and Dart AOT
+
+The packaged `libflutter.so` matches the official Flutter Maven artifact
+for engine `a18df97ca57a249df5d8d68cd0820600223ce262`. The Maven JAR and
+the Linux x86-64 `gen_snapshot` binary also match the original build cache.
+Both the APK members and the extracted JNI files in r2 have those same
+hashes. [Flutter binary and AOT receipt](../manifests/launcher-flutter-aot-replay.json)
+
+The saved Flutter kernel compiler record names 1,588 Dart inputs. The
+launcher companion contains 1,587 matching files from the application,
+Flutter framework and pinned Pub source archives. The generated plug-in
+registrant also matches its saved cache hash. All 1,588 file-cache hashes
+were replayed with the pinned Flutter implementation.
+
+To replay the AOT step, provide the ARM release `gen_snapshot` binary
+from the receipt and the `app.dill` intermediate emitted by Flutter.
+Use a fresh `output_dir` for each run.
+
+~~~sh
+"$gen_snapshot" --deterministic --snapshot_kind=app-aot-elf \
+  --elf="$output_dir/libapp.so" --strip \
+  --no-sim-use-hardfp --no-use-integer-division "$app_dill"
+~~~
+
+Two offline runs against the saved kernel intermediate reproduced the exact
+`libapp.so` from the unsigned and signed launcher APKs. The r2 product
+image carries those same bytes. The Dart front end and native Flutter
+engine still require their own independent source rebuilds.
+[Pinned Flutter AOT command construction](https://github.com/flutter/flutter/blob/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668/packages/flutter_tools/lib/src/base/build.dart)
+
 ## Unsigned ARMv7 release and recipient signing
 
 Use an isolated environment without existing signing configuration. Set

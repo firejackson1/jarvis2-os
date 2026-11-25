@@ -2107,3 +2107,21 @@ without private scripts, server access or an AI operator.
   hashes, then compares the files extracted from the images. Actual
   successor output remains pending.
   [Readback controls](../manifests/successor-image-readback-controls.json)
+
+### Flutter engine and launcher Dart AOT replay — 2026-11-25
+
+- Fetched the two official engine-addressed artifacts. The ARMv7 runtime
+  JAR and Linux `gen_snapshot` match the preserved controlled-build tools.
+  The official runtime matches the packaged and extracted r2 `libflutter.so`.
+- Replayed the exact Flutter 3.24.5 ARMv7 AOT flags twice on Beercan with
+  the preserved kernel input. Both outputs match the complete `libapp.so`
+  in the unsigned and signed APKs and r2's extracted JNI library.
+- Compared the compiler depfile to the build stamp and the saved Flutter
+  file cache. All 1,588 Dart cache hashes matched when recomputed with
+  the pinned Flutter code. Standard MD5 disagreed on 207 files whose final
+  block contained 56–63 bytes. The reproducer uses Flutter's routine.
+- Matched 1,587 source files across 65 pinned archives in the r2 launcher
+  companion. The remaining input is the generated plug-in registrant,
+  whose hash matched the cache. Both saved kernel intermediates are
+  identical. An independent Dart frontend run and a native engine rebuild
+  remain open. [Flutter replay receipt](../manifests/launcher-flutter-aot-replay.json)

@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "scope": "Launcher ARMv7 engine binary identity, replay of Dart AOT from the preserved compiled kernel, and readback of its recorded source inputs",
+  "flutter_framework_revision": "dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668",
+  "flutter_engine_revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+  "dart_version": "3.5.4",
+  "gen_snapshot_source_url": "https://storage.googleapis.com/flutter_infra_release/flutter/a18df97ca57a249df5d8d68cd0820600223ce262/android-arm-release/linux-x64.zip",
+  "gen_snapshot_archive_sha256": "ade7f07f6c30523fffccc0479b5ea7b39ec125bddfcb36be353ba2a5725cb6dd",
+  "gen_snapshot_binary_sha256": "7b346ca25377c8565223f68bf72ab4a440f323418113b7fe921abd7e0f1b8e2e",
+  "gen_snapshot_linux_x64_build_id": "abcc5fbc77561cf7de132ccdaad1857e400b2590",
+  "gen_snapshot_matches_preserved_build_tool": true,
+  "official_runtime_url": "https://storage.googleapis.com/download.flutter.io/io/flutter/armeabi_v7a_release/1.0.0-a18df97ca57a249df5d8d68cd0820600223ce262/armeabi_v7a_release-1.0.0-a18df97ca57a249df5d8d68cd0820600223ce262.jar",
+  "runtime_jar_sha256": "674943944c50f0b3bfd21299256d623d1d0876a330cfc97eb540f7f784039fb3",
+  "runtime_matches_preserved_gradle_jar": true,
+  "archive_sha256": {
+    "signed": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+    "unsigned": "8d68a7b83a56a5759ef3bf9a06b026e6b153795ad2fb9c1750bd75b36c102e25"
+  },
+  "libflutter": {
+    "sha256": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
+    "bytes": 7534416,
+    "build_id": "b355766da0f31bf8881a1c7f1e9748c4f49bf94e",
+    "abi": "armeabi-v7a"
+  },
+  "libapp": {
+    "sha256": "2bdc01995f17c7c86864b4a543dc697968ebef491b647932ef08c28106c1e5cb",
+    "bytes": 8061524,
+    "build_id": "dfa70741b64d8e80f5e3f4e6b682f862",
+    "abi": "armeabi-v7a"
+  },
+  "preserved_kernel_dill_sha256": "aa0b3c5b43f213ce7286a522aa8b36101b71efeb8b82b66e462829e37766fa5e",
+  "aot_arguments": [
+    "--deterministic",
+    "--snapshot_kind=app-aot-elf",
+    "--elf=<output>",
+    "--strip",
+    "--no-sim-use-hardfp",
+    "--no-use-integer-division",
+    "app.dill"
+  ],
+  "independent_offline_aot_runs": 2,
+  "aot_matched_controlled_apks": true,
+  "engine_rebuilt_from_cpp_source": false,
+  "r2_installed_launcher_and_jni_match": true,
+  "recorded_kernel_inputs": {
+    "source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+    "program_and_app_dill_sha256": "aa0b3c5b43f213ce7286a522aa8b36101b71efeb8b82b66e462829e37766fa5e",
+    "compiler_depfile_sha256": "020a315a0a04d989a4ac6ad23e6701e8df94cf98bc8592e381f27eada24fd657",
+    "compiler_stamp_sha256": "1d88b9ce3c029a46b2f0b44b79ec7ed545cd6aa9c6ac4ab5c8eb35ee83cd9ccc",
+    "flutter_filecache_sha256": "59199371a49b9aafc0f93a8d910266d66c2eca7e124c2b63b49d491315baa5fd",
+    "checked_dart_files": 1588,
+    "filecache_verified_dart_files": 1588,
+    "input_counts": {
+      "generated_plugin_registrant": 1,
+      "application_dart": 101,
+      "flutter_framework_dart": 645,
+      "locked_pub_dart": 841
+    },
+    "generated_plugin_registrant": {
+      "sha256": "ac3cedac0ff94427b115eabc81c825458d40206e836cc769cc7dec048ce1c44a",
+      "flutter_filecache_hash": "c3404d337d3649e37702b5b07421b08a"
+    },
+    "source_companion_matched_files": 1587,
+    "source_companion_matched_archives": 65,
+    "source_companion_archive_evidence_sha256": "0eebe96d5712f7360ce78600c88dd5146a4ea1197e972bf452da7c90081a6cd6",
+    "dart_frontend_regenerated_in_replay": false
+  }
+}
