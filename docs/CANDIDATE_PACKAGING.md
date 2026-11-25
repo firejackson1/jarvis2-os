@@ -252,3 +252,11 @@ It packages the native executable, 11 shared libraries, Soong notices and
 exact source pins. Use the 14-file delivery receipt with SHA-256
 `74e8ad9c14543d12c6853a8871a09bb022a0ed67ae20294f6e91ace307195f6f`.
 The ROM ZIP still has the same r2 hash.
+
+The refreshed 14-file set supplies
+`jarvis2-lcars-operator-tools-19b7c97.tar.gz` as the source companion for
+inspection, preflight and writer review. The extracted source reproduced the
+[read-only Recovery inspection](CANDIDATE_INSTALLATION.md#inspect-an-existing-recovery-session)
+against the saved layout fixture and independently generated the same offline
+r2 writer inputs. The exact staging receipt SHA-256 is
+`a8b108b549a9094bb1030b38e2e45496453fc42ea952e79f50f9aaffd04625c3`.

@@ -1575,3 +1575,9 @@ without private scripts, server access or an AI operator.
   unprivileged session read zero partition bytes. The truncated case left no
   report. Live Recovery transport still requires separate authorization and
   verification.
+- The refreshed operator source archive includes the inspector, writer and
+  preflight code and their tests. All 29 extracted-companion tests passed.
+  Its CLI matched the expected observations on five simulated transport
+  cases with the actual saved native layout and reproduced the same r2
+  offline writer inputs. Verified all 14 staged files. The full host suite
+  passed 216 Python tests and eight Java suites.

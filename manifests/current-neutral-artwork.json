@@ -182,5 +182,21 @@
     "receipt_sha256": "74e8ad9c14543d12c6853a8871a09bb022a0ed67ae20294f6e91ace307195f6f",
     "hosted_download_verified": false,
     "device_contacted": false
+  },
+  "private_r2_delivery_with_recovery_inspector": {
+    "operator_source_revision": "19b7c97c081f94ae9a77f76311fb8ca10559ff17",
+    "operator_source_archive": {
+      "file": "jarvis2-lcars-operator-tools-19b7c97.tar.gz",
+      "bytes": 56017,
+      "sha256": "56164c3e42b81c156b8f9bcbe179d7136d74a2485f80ea80780444783b7b2348"
+    },
+    "inspection_fixture_receipt_sha256": "58fee793d0aac72604c9a2df0aa9e256647650bdcd4d2b220aaa23541170aa97",
+    "reproduced_historical_r2_writer_inputs_sha256": "985763d4d40cacc4addafafff6d570b1dab17a8a01e9e6f000cfda081c3c2a6d",
+    "operator_source_tests_passed": 29,
+    "files_verified": 14,
+    "total_bytes": 1046427347,
+    "receipt_sha256": "a8b108b549a9094bb1030b38e2e45496453fc42ea952e79f50f9aaffd04625c3",
+    "hosted_download_verified": false,
+    "device_contacted": false
   }
 }
