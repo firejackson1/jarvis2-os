@@ -29,8 +29,8 @@ or qualification of every listed feature.
 | Remote Power/Mic customization | App routing works with live F11/F10 keylayout aliases | Framework-native fail-safe required before persisting aliases |
 | Sleep/wake | Earlier workaround prevented clicking but genuine wake failed. The clean trial had a 60-second idle timeout; a later live keep-awake setting prevents automatic sleep while powered | The live setting is not baked into f38 and does not fix intentional suspend. True suspend, box-button/remote wake and repeated-cycle validation remain open |
 | Lock screen and notifications | Product TV SystemUI, default lock-screen property | Clean-user behavior, no handset SystemUI and remote Settings behavior |
-| Recovery, installation and rollback | f38 retained stock bootstrap recovery. The separate ARM64 LCARS ramdisk rebuilt byte-identically; its first RAM launch stalled at the logo and Android returned after power-cycle | No new recovery was installed. Successful RAM operation, recovery-owned Bluetooth, complete AVB integration and normal-user install/restore tests remain required |
-| Music session cleanup | Current f38 APK has a one-instruction, empty onDestroy; later source patch and a signed standalone candidate are available, with [offline evidence](../manifests/music-cleanup-candidate.json) | Integrate the cleanup in a new image, then test Android lifecycle, Bluetooth browsing and playback |
+| Recovery, installation and rollback | f38 retained stock bootstrap recovery. A later ARM64 RAM build showed the custom menu on HDMI. The owner confirmed the box button moves focus, Reboot system now returns to Android, and Boot Linux from USB starts the SanDisk desktop | Installed Recovery still needs authenticated ADB, Fastbootd and boot-control integration, AVB and a normal-user install/restore test. See [installed Recovery audit](#installed-recovery-audit) |
+| Music session cleanup | Frozen f38 Music has an empty `onDestroy`. The source patch and [signed cleanup APK](../manifests/music-cleanup-candidate.json) were included and independently verified in the [private image rehearsal](../manifests/f38-app-integration-rehearsal.json) | Rebuild from source and test Android lifecycle, Bluetooth browsing and playback |
 
 ## Clean-install remote-service activation gap
 
@@ -79,6 +79,34 @@ matching ART precompilation. This rehearsal leaves the frozen release artifact
 and its installation evidence separate. Normal-user Controls activation, Music
 lifecycle and playback, production recovery integration and final hardware
 qualification remain open.
+
+## Installed Recovery audit
+
+The five-option menu was tested through a RAM boot. The owner confirmed the
+Linux desktop after selecting Boot Linux from USB with the SanDisk directly
+attached. That build included a permissive SELinux domain for the USB Linux
+experiment and stopped recovery ADB to hand the USB controller to Linux. Keep
+those RAM-specific settings out of the installed preview until a production
+policy and USB handoff have been verified.
+
+The offline installed-image experiment used the earlier reproducible ARM64
+ramdisk as a baseline. Replacing the named recovery fragment preserved the
+stock platform ramdisk, device tree and boot configuration. The unsigned
+26,707,968-byte result fits the 67,108,864-byte reference partition. The modeled
+boot layout keeps the stock 32-bit first-stage `init`. Stock Recovery contains
+32-bit `recovery`, `adbd` and `fastbootd`. The replacement supplies 64-bit
+`recovery`, `adbd` and their linker. Its init configuration declares Fastbootd,
+but the baseline archive lacks the executable.
+
+The pinned Fastbootd implementation needs a usable boot-control HAL for A/B
+slot variables. Stock Recovery declares both the boot-control and vendor
+Fastboot HALs as AIDL services. In the stock archive their ELF dependencies
+resolve to 21 and 30 ARM32 paths respectively, including their executables and
+linker. All those paths are absent from the ARM64 repack. This offline check
+establishes file coverage. Working Binder registration, linker namespaces,
+USB enumeration, recovery-owned remote support, return to Android and stock
+restoration still require verification. The repack was unsigned and remained
+off-device.
 
 ## Remote alias blocker
 

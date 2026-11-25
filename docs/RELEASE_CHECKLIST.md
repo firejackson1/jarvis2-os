@@ -48,6 +48,7 @@ publication by this policy decision alone.
 ## 2. Integrate the complete candidate offline
 
 - [ ] Consolidate device-tree/product configuration and persistent fixes in source.
+- [ ] Run [the full patch check](BUILD.md#verify-source-patches-without-modifying-the-android-tree) on the exact release build checkout and retain its report with the image manifest.
 - [ ] Include current TV controls app, Settings overlay and native Bluetooth Settings hook.
 - [x] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; source patch and rebuilt TvSettingsTwoPanel compile passed. Fresh-image behavior remains a separate test.
 - [ ] Include the required audio policy libraries, checked HAL/DTS/codec changes and Bluetooth compatibility patch.
@@ -106,6 +107,9 @@ publication by this policy decision alone.
 - [ ] Validate candidate against read-only live partition metadata and snapshot status before installation.
 - [ ] Preserve and verify stock restore files, current recovery and necessary signing information.
 - [ ] Test a RAM candidate where possible before requesting persistent installation.
+- [x] Confirm the custom RAM menu on HDMI, physical-button navigation, Reboot
+  system now back into Android, and Boot Linux from USB to the SanDisk desktop.
+  Installed Recovery remains a separate gate. See the [layout and Fastbootd audit](PERSISTENT_FEATURES.md#installed-recovery-audit).
 - [ ] Obtain authorization for the exact slot A installation plan; never infer permission to modify slot B.
 - [ ] Test first boot/clean setup and upgrades using a suitable test device/data plan; do not wipe the owner's device automatically.
 - [ ] Verify recovery entry, USB ADB/fastbootd, Android reboot and stock restoration paths.

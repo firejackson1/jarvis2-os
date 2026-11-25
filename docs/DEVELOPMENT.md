@@ -1090,3 +1090,42 @@ without private scripts, server access or an AI operator.
   Fresh full-source target-files, matching release ART precompilation, normal
   setup, Recovery, rollback and live feature validation remain required.
   Bazzite stayed running. No device writes or slot changes occurred.
+
+## 2026-11-24 — Installed Recovery layout audit
+
+- Matched the retained USB-Linux RAM image to its packaging report and UART
+  trace. The owner confirmed physical-button navigation and Android reboot in
+  the earlier RAM menu, then confirmed the SanDisk desktop from the updated
+  menu. The USB-Linux RAM profile stops recovery ADB and uses a permissive
+  domain for this experiment. Its hardware results are recorded independently
+  of the installed-image work.
+- Repacked the stock vendor-boot container offline with the independently
+  reproduced ARM64 Recovery ramdisk. The repack retained the stock platform
+  fragment, boot configuration and device tree. The unsigned result occupies
+  26,707,968 bytes against a 67,108,864-byte reference limit. The stock generic
+  archive contains two `dev` directory entries with equal metadata. The layout
+  comparison collapsed the duplicate in memory and preserved the input bytes.
+- The modeled replacement keeps stock first-stage ARM32 init and switches
+  Recovery and ADB to ARM64. Both modeled vendor fragment orders resolve the
+  Fastbootd init declaration but lack its executable. The pinned Fastbootd
+  code also needs the boot-control service for A/B slot data. Stock declares
+  that service and the vendor Fastboot HAL via AIDL. Following their ELF
+  interpreters and transitive `DT_NEEDED` links within the stock ramdisk located
+  21 and 30 ARM32 paths respectively. All are absent from the modeled ARM64
+  replacement. Namespace, Binder and SELinux compatibility remain open, along
+  with verified boot, USB authorization, hardware startup and restoration.
+  No device changes were made.
+
+## 2026-11-24 — Release patch coverage check
+
+- Added `tools/verify-release-patches.py` to replay every tracked series in
+  scratch against pinned project revisions. It checks the exact resulting
+  files and executable bits in the proposed build tree. Unlisted patches,
+  incorrect revisions and mismatched files fail the check.
+- The frozen build tree failed with one expected mismatch in Music. A private
+  checkout that applied the Music patch and referenced the same five other
+  projects passed all six series, eight patches and twelve files. This verifies
+  source coverage. The full build and final image audit are separate.
+- The ROM host suite passed all 194 cases with the pinned AVB tool and all
+  eight Java suites. Recovery's checkout passed its C++ checks and ran 86
+  Python tests with seven AOSP-tool cases skipped on this host.

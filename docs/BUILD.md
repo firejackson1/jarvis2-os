@@ -110,6 +110,18 @@ and security rollback counters separate from the new userspace build identity.
 
 ## Verify source patches without modifying the Android tree
 
+Before the release build, verify that every tracked patch has been applied to
+the pinned build checkout:
+
+```sh
+python3 tools/verify-release-patches.py /path/to/android
+```
+
+The check replays the six series in temporary directories and compares the
+resulting files with the working tree. A nonzero exit means a patch result is
+missing, differs, or cannot be verified. Run this as the Android build-tree
+owner. The check covers source files. Verify the rebuilt images separately.
+
 ```sh
 python3 tools/verify-patches.py /path/to/built/android /outside/source/new-patch-check
 ```
