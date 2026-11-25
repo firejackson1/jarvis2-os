@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "scope": "Native Kati/Ninja property generation with the original Android date formatting rule.",
+  "epoch_utc": 1795575971,
+  "normalized_environment": {
+    "LC_ALL": "C",
+    "TZ": "UTC"
+  },
+  "caller_environments": [
+    {
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    {
+      "LC_ALL": "C.UTF-8",
+      "TZ": "Pacific/Honolulu"
+    }
+  ],
+  "ambient_fixture_property_hashes": {
+    "system": {
+      "UTC": "5139f4e762804efa79e7f79df1913da440bc1d13eb07fa6449cb7659e407b7d3",
+      "HST": "3e915f693704e51f1441d4109c9d69d744ed761f2be3c201d8a4a671e5dc9edd"
+    },
+    "system_ext": {
+      "UTC": "2364b6838ae75b6e0431f6d5c8e583a4863a75f22c5d9e68178e0f3e0e64d5d9",
+      "HST": "c4daa35dcd34beea6f99a1833540324e66014f1d092c13f6262369a8f856da7f"
+    },
+    "product": {
+      "UTC": "6764fdf464f8ce90534cd094e0a381ae370ad1f46666d11a10e4b752a65143d2",
+      "HST": "0c43c982725b84792d578f891c5007b8ae8b1572b70dd446a2d54ac37e5ba8ca"
+    }
+  },
+  "ambient_display_date_differences": {
+    "ro.system.build.date": {
+      "UTC": "Wed Nov 25 03:06:11 UTC 2026",
+      "HST": "Tue Nov 24 17:06:11 HST 2026"
+    },
+    "ro.build.date": {
+      "UTC": "Wed Nov 25 03:06:11 UTC 2026",
+      "HST": "Tue Nov 24 17:06:11 HST 2026"
+    },
+    "ro.system_ext.build.date": {
+      "UTC": "Wed Nov 25 03:06:11 UTC 2026",
+      "HST": "Tue Nov 24 17:06:11 HST 2026"
+    },
+    "ro.product.build.date": {
+      "UTC": "Wed Nov 25 03:06:11 UTC 2026",
+      "HST": "Tue Nov 24 17:06:11 HST 2026"
+    }
+  },
+  "normalized_property_hashes_from_both_callers": {
+    "system": "5139f4e762804efa79e7f79df1913da440bc1d13eb07fa6449cb7659e407b7d3",
+    "system_ext": "2364b6838ae75b6e0431f6d5c8e583a4863a75f22c5d9e68178e0f3e0e64d5d9",
+    "product": "6764fdf464f8ce90534cd094e0a381ae370ad1f46666d11a10e4b752a65143d2"
+  },
+  "normalized_partitions_byte_identical": true,
+  "normalized_suite_logs_byte_identical": true,
+  "clean_root_configured_timezone": "Etc/UTC",
+  "archived_f38_display_timezone": "HST",
+  "verification_tool_sha256": "b1150157ebddb469e331fdbf6fe18d402508667cf9995785d0a64caa1406f66b",
+  "patched_make_rules_sha256": "5bcb816519e3f67478426dc045c75f5202e1fc81e2ce0a2706a8204e3ebff09e",
+  "native_replay_log_sha256": "a32a95c29215a063e93d6c8e6e799d2e4fc264c88dcd7b2c029b514b217bb945",
+  "whole_rom_reproducibility_verified": false,
+  "device_contacted": false
+}

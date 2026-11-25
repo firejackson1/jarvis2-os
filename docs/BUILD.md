@@ -100,18 +100,22 @@ export BUILD_NUMBER="jarvis2.${release_revision:0:12}"
 export BUILD_DATETIME=$(git -C device/onn/jarvis2 show -s --format=%ct "$release_revision")
 export SOURCE_DATE_EPOCH="$BUILD_DATETIME"
 export BUILD_USERNAME=jarvis2 BUILD_HOSTNAME=builder LINEAGE_BUILDTYPE=UNOFFICIAL
+export LC_ALL=C TZ=UTC
 source build/envsetup.sh
 lunch lineage_jarvis2-ap2a-userdebug
 m -j4 sign_target_files_apks target-files-package
 ```
 
 The pinned Soong frontend reads BUILD_NUMBER and BUILD_DATETIME explicitly.
+The Make rules also format the epoch into four date strings using the shell's
+time zone and locale. Pin both before loading the build environment.
+[Date-format replay](../manifests/release-build-environment-replay.json)
+
 Record these values, tool revisions and exact staged input hashes with the
-artifact. Stable identity removes known host/time variability; it does not alone
-prove byte-identical whole-ROM output. Inspect the resulting build.prop files,
-and derive AVB userspace properties from those exact final payloads rather than
-retaining stock or earlier-development fingerprints. Keep firmware properties
-and security rollback counters separate from the new userspace build identity.
+artifact. Whole-ROM byte equality requires a separate build comparison.
+Inspect the resulting build.prop files and derive AVB userspace properties
+from those exact final payloads. Keep firmware properties and security rollback
+counters separate from the new userspace build identity.
 
 ## Verify source patches without modifying the Android tree
 

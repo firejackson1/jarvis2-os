@@ -1995,3 +1995,15 @@ without private scripts, server access or an AI operator.
   mismatch. The existing clean ROM run retains its original eight-patch pin
   and has a separate output identity check. The new patch has native fixture
   evidence and awaits a full build. [Replay receipt](../manifests/release-build-property-replay.json)
+
+### Reproducible build dates — 2026-11-25
+
+- Replayed the real Android date-formatting rules at the same epoch with
+  UTC and Hawaii time. The native outputs differed in exactly four
+  human-readable date properties. The UTC epoch and build identities agreed.
+- Pinned UTC and the C locale in the release recipe and native verifier.
+  The full property files matched byte for byte across the two caller
+  environments with those settings. The running clean build uses a Debian
+  root configured for UTC and the default C locale. The historical f38
+  recipe keeps its observed HST date format. This is property-level
+  reproducibility evidence. [Environment receipt](../manifests/release-build-environment-replay.json)

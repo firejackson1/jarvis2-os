@@ -4,6 +4,7 @@
 
 import argparse
 import hashlib
+import os
 from pathlib import Path
 import re
 import shutil
@@ -15,7 +16,7 @@ MAKEFILE = """\
 BUILD_NUMBER_FILE := build_number.txt
 BUILD_DATETIME_FILE := build_date.txt
 BUILD_NUMBER_FROM_FILE := $$(cat $(BUILD_NUMBER_FILE))
-DATE_FROM_FILE := date -u -d @$$(cat $(BUILD_DATETIME_FILE))
+DATE_FROM_FILE := date -d @$$(cat $(BUILD_DATETIME_FILE))
 BUILD_FINGERPRINT_FROM_FILE := $$(cat build_fingerprint.txt)
 BUILDINFO_SH := buildinfo.sh
 API_FINGERPRINT := api_fingerprint.txt
@@ -55,6 +56,7 @@ def build_properties_rules(source):
 
 def replay(build_make, host_bin, numbered):
     rules = build_properties_rules((build_make / 'core/sysprop.mk').read_text())
+    environment = dict(os.environ, LC_ALL='C', TZ='UTC')
     with tempfile.TemporaryDirectory(prefix='jarvis2-build-props-') as directory:
         work = Path(directory)
         (work / 'Makefile').write_text(MAKEFILE + f'HAS_BUILD_NUMBER := {str(numbered).lower()}\n'
@@ -65,7 +67,7 @@ def replay(build_make, host_bin, numbered):
 
         def build():
             subprocess.run([host_bin / 'ninja', '-f', 'build.ninja', 'all'],
-                           cwd=work, stdout=subprocess.PIPE, check=True)
+                           cwd=work, env=environment, stdout=subprocess.PIPE, check=True)
 
         def set_build_number(number):
             (work / 'build_number.txt').write_text(number + '\n')
@@ -95,7 +97,7 @@ def replay(build_make, host_bin, numbered):
         date = work / 'build_date.txt'
         date.write_text('1795517392\n')
         subprocess.run([host_bin / 'ckati', '--ninja', '-f', 'Makefile', 'all'],
-                       cwd=work, stdout=subprocess.PIPE, check=True)
+                       cwd=work, env=environment, stdout=subprocess.PIPE, check=True)
         build()
         assert_identity('jarvis2.first', '1795517392')
         outputs = [work / part / 'build.prop' for part in ('system', 'system_ext', 'product')]

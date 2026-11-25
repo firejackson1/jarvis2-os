@@ -134,10 +134,15 @@ The clean build already in progress uses the original eight-patch pin.
 export BUILD_NUMBER=jarvis2.cb9334ee26cc
 export BUILD_DATETIME=1795575971 SOURCE_DATE_EPOCH=1795575971
 export BUILD_USERNAME=jarvis2 BUILD_HOSTNAME=builder LINEAGE_BUILDTYPE=UNOFFICIAL
+export LC_ALL=C TZ=UTC
 source build/envsetup.sh
 lunch lineage_jarvis2-ap2a-userdebug
 m -j2 sign_target_files_apks target-files-package
 ```
+
+UTC is the clean build convention. The archived r2 properties used HST in
+their displayed dates. The [byte-exact archive repack](CANDIDATE_PACKAGING.md#reproduce-the-staged-neutral-r2-zip)
+uses the preserved signed images, including their original properties.
 
 Read the actual `out/target/product/jarvis2/obj/PACKAGING/target_files_intermediates/lineage_jarvis2-target_files.zip`.
 Check archive integrity and the expected build number, UTC epoch and fingerprint

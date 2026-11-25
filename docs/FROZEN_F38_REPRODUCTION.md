@@ -138,10 +138,14 @@ test "$(git -C device/onn/jarvis2 rev-parse HEAD)" = f38da52af274a0e50c92a10cf27
 export BUILD_NUMBER=jarvis2.f38da52af274
 export BUILD_DATETIME=1795517392 SOURCE_DATE_EPOCH=1795517392
 export BUILD_USERNAME=jarvis2 BUILD_HOSTNAME=builder LINEAGE_BUILDTYPE=UNOFFICIAL
+export LC_ALL=C TZ=Pacific/Honolulu
 source build/envsetup.sh
 lunch lineage_jarvis2-ap2a-userdebug
 m -j4 sign_target_files_apks target-files-package
 ```
+
+The frozen f38 properties display their build date in HST. The time-zone
+setting reproduces that date string. Subsequent release builds use UTC.
 
 The source supplement closes the source-state discrepancy; it does not prove a
 byte-identical whole-ROM rebuild. Original release signatures require the original
