@@ -2328,3 +2328,11 @@ without private scripts, server access or an AI operator.
 - Ran the public recipient verifier against the private 14-file r2
   delivery. It accepted the reviewed set and rejected the same receipt
   and checksum list with the GoogleTest source archive omitted.
+
+- Consolidated launcher source delivery with the fuller neutral r2 set.
+  All 20 previously verified payloads matched their pins. Added the
+  pinned GoogleTest archive and verified the exact 23-file set using
+  both the checksum list and the recipient verifier.
+- Matched all 254 object members of the FFmpeg archive passed to the
+  live WebView linker to pinned Git inputs. All 247 C and seven assembly
+  files also matched the copies in the staged userspace source companion.

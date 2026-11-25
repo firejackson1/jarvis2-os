@@ -119,5 +119,25 @@
     }
   },
   "arm32_webview_rebuild_completed": false,
-  "modified_ffmpeg_relink_completed": false
+  "modified_ffmpeg_relink_completed": false,
+  "arm32_live_link_ffmpeg_source_readback": {
+    "ffmpeg_revision": "5c85ff666b3434d9323b83437f910ad8431ab7c9",
+    "ffmpeg_tree": "6284d04ef60c1145cc4dd97d9da60113a0485ae6",
+    "archive_members_verified": 254,
+    "actual_source_paths_verified": 254,
+    "compile_rules": {
+      "cc": 247,
+      "asm": 7
+    },
+    "reviewed_delivery_receipt": "8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec",
+    "outer_companion_sha256": "5d1cf88e242d2f502eeba649d4566e55ecb3b5b8e9492e63563a54458b6830ab",
+    "ffmpeg_inner_source_archive_sha256": "331e7c6a78c6031c9acf2ce58e23b9c8485127dc15b5e73e05ae39a10195d044",
+    "ninja_ffmpeg_graph_sha256": "b6bba6f4b63beda978b1a682e9c60db7db62c80df1eb0f0463d4484b09a6d5d6",
+    "live_link_response_sha256": "e1deea3c49df5e7a10aa3a4622bd64825e0eea71070c21a9896d3c860a026635",
+    "live_link_archive_argument": "obj/third_party/ffmpeg/libffmpeg_internal.a",
+    "live_link_archive_sha256": "7ddedf666488548b2e5e62dfb9b72828b42a00e169f4fb4e55b490e54077b54f",
+    "live_link_argument_count": 12207,
+    "linked_ffmpeg_objects_report_sha256": "3a544dc157a193c305cab39d4e83753e4c79864ebc9a01b347f488eb4e561849",
+    "compiled_ffmpeg_source_report_sha256": "755e35e5265a6d137a7bdd4d639d42d5647f709a8b18824d911ec54e02715d79"
+  }
 }

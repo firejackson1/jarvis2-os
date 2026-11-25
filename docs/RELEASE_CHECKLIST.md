@@ -265,6 +265,9 @@ publication by this policy decision alone.
 - [x] Stage and verify the [neutral artwork variant](../manifests/current-neutral-artwork.json)
   with its original generator, a complete AVB audit and a saved slot-A fit.
   Hardware verification and hosted asset checks remain open.
+- [x] Verify all 23 files in the consolidated private r2 delivery, including
+  the GoogleTest supplement and all prior source and notice companions.
+  [Release receipt](../manifests/current-neutral-artwork.json)
 - [x] Rebuild the exact r2 ZIP, manifest and packaging receipt from the
   pinned source metadata and reviewed signed inputs.
   [Exact ZIP reproduction](CANDIDATE_PACKAGING.md#reproduce-the-staged-neutral-r2-zip)

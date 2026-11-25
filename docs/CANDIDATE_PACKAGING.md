@@ -221,9 +221,10 @@ future developer preview; the ROM archive alone is incomplete delivery.
 | `supplemental-userspace-notices.tar.gz` | 904561 | `d59e01f2ca73a72e7eefeb23fb24a8f4f0fd03f2335b9eb7372f61d2e4d69878` |
 | `jarvis2-release-v1-public-signing-materials.zip` | 183211 | `5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8` |
 
-The 14-file private r2 delivery includes the GoogleTest source supplement
-and rechecks all companion and receipt hashes. Deliver it with the main
-launcher source companion. [Launcher sources](LAUNCHER_SOURCE_BUILD.md)
+The consolidated private r2 delivery includes the GoogleTest source
+supplement beside the main launcher source companion. It also retains the
+recovery tools, native userspace and WebView source, APEX notices, Cronet
+source, VNDK source and Bionic headers. [Launcher sources](LAUNCHER_SOURCE_BUILD.md)
 
 The LCARS notice archive travels inside format 3 packages. Use the separately
 reviewed notice companion with earlier format 2 packages. Two private builds
@@ -252,14 +253,18 @@ python3 tools/verify-release-assets.py /path/to/downloaded-assets \
 The verifier checks the exact set, sizes, and hashes. The checksum list must
 cover each payload and the receipt. The JSON result can be compared with the
 hosting service's asset records to catch an incomplete or stale draft upload.
-On the private r2 delivery this check accepted all 14 files with the
-reviewed receipt. With the same receipt and checksum list it rejected a
-copy missing only the GoogleTest source supplement. The full native Flutter
-rebuild matched the engine member in the signed launcher from that delivery.
+The recipient verifier accepted all 23 files in the consolidated
+private neutral r2 set, totaling 1,344,799,742 bytes. Its receipt SHA-256
+is `313fb8e2cbba82784a767d492d5f72486a4b67116e1bda24332620d7c591bf6b`.
+This set retains all 20 payloads from the prior full staging receipt and
+adds the GoogleTest source supplement. An earlier control with the same
+receipt and checksum list as its complete test set rejected a copy that
+omitted only that archive.
+[Consolidated delivery receipt](../manifests/current-neutral-artwork.json)
 Keep license review, signature trust and device qualification as separate
 release checks.
 
-The current private staging set contains eight payloads plus the receipt and
+The earlier branded staging set contains eight payloads plus the receipt and
 checksum list. Full readback matched all 1,059,914,133 bytes. The receipt
 SHA-256 is `32ae470f944d2b7fc41053acc18846fdb06729d6560bc72a3f4125bc3001d117`.
 It identifies the exact vanilla LCARS ZIP, product and tooling source archives,

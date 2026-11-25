@@ -289,5 +289,21 @@
     "archive_manifest_and_receipt_byte_equal": true,
     "images_supplied_from_existing_signed_build": true,
     "device_contacted": false
+  },
+  "private_r2_consolidated_delivery": {
+    "base_delivery_receipt_sha256": "8b5729ad8d2a1d56f9578fde8c5490d5b7acc0d751ec1f9fa4ad339328dfcfec",
+    "receipt_sha256": "313fb8e2cbba82784a767d492d5f72486a4b67116e1bda24332620d7c591bf6b",
+    "recipient_readback_sha256": "01573fc2989c9c0e1b290f9becbba6530a26f8ec4b3cc5d97a48c7418b8d6263",
+    "previous_payloads_verified_without_changes": 20,
+    "files_verified": 23,
+    "total_bytes": 1344799742,
+    "added_companion": {
+      "file": "googletest-7f036c5563af7d0329f20e8bb42effb04629f0c0.tar.gz",
+      "bytes": 869706,
+      "sha256": "a888ce3e5b5f174415c3cf99c9364489fd386c3d4ed672a94c528a6cf6b160ed",
+      "role": "launcher-googletest-corresponding-source"
+    },
+    "hardware_qualified": false,
+    "public_binary_release_ready": false
   }
 }

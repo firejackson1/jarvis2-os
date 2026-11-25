@@ -147,6 +147,12 @@ checks the rebuilt package manifest and compares each APK payload to r2
 before running the diagnostic FFmpeg relink. The full source build and relink
 results are pending.
 
+The ARM32 linker response includes `libffmpeg_internal.a`. The archive
+contains 254 compiled objects, with a direct input from the pinned
+FFmpeg tree for each. Readback from the staged userspace source companion
+matched all 247 C inputs and seven assembly inputs to the build checkout
+and Git blobs, including file modes.
+
 Capture the APK, ELF architecture/build ID and the full GN arguments and
 dependency record when the target builds. Then repeat with a distinct
 local FFmpeg source marker and check that the rebuilt ARM WebView library
