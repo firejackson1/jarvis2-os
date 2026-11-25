@@ -1,0 +1,105 @@
+{
+  "format": 1,
+  "target": "linux-x86_64",
+  "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+  "lineage_manifest_sha256": "5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7",
+  "source_projects": {
+    "build/make": {
+      "repository": "https://github.com/LineageOS/android_build",
+      "revision": "bc95152efc6a43f3b103b1848c946e9bf8d4e493"
+    },
+    "build/soong": {
+      "repository": "https://github.com/LineageOS/android_build_soong",
+      "revision": "7e2be266cfde19c5e0cbc8e4ed016d5572abd4fb"
+    },
+    "external/boringssl": {
+      "repository": "https://android.googlesource.com/platform/external/boringssl",
+      "revision": "f21377c0f019f12fcaf024983ca2ad603667282f"
+    },
+    "external/fmtlib": {
+      "repository": "https://android.googlesource.com/platform/external/fmtlib",
+      "revision": "5ddb263616bf56e4f09213fdf9d0dd64aa2e3e63"
+    },
+    "external/libcxx": {
+      "repository": "https://github.com/LineageOS/android_external_libcxx",
+      "revision": "106fdb332fcd4cab59bf694cf8272e71a67e7845"
+    },
+    "external/libcxxabi": {
+      "repository": "https://android.googlesource.com/platform/external/libcxxabi",
+      "revision": "d2b8f4ce121df59e4f5b8e9d0e1c11948be73bff"
+    },
+    "external/protobuf": {
+      "repository": "https://android.googlesource.com/platform/external/protobuf",
+      "revision": "fece1c3e7124f940e00502a5431726ec2cd3b17a"
+    },
+    "external/zlib": {
+      "repository": "https://android.googlesource.com/platform/external/zlib",
+      "revision": "bad63664301d80463fde8fb48ca81534b43c219c"
+    },
+    "prebuilts/build-tools": {
+      "repository": "https://android.googlesource.com/platform/prebuilts/build-tools",
+      "revision": "84d04c76b72691cf1f4639c12bda519930229e09"
+    },
+    "prebuilts/clang/host/linux-x86": {
+      "repository": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86",
+      "revision": "7154d3eddcb62ff7909a6ae2bf0c03e445e65bc4"
+    },
+    "prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8": {
+      "repository": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8",
+      "revision": "dffeb4ad9064b1fab4e7a32360cc29abf4118072"
+    },
+    "prebuilts/runtime": {
+      "repository": "https://android.googlesource.com/platform/prebuilts/runtime",
+      "revision": "294d3e90029fa685c743c07a5b71c95e7761b2aa"
+    },
+    "system/core": {
+      "repository": "https://github.com/LineageOS/android_system_core",
+      "revision": "ec299bf6da55702b7b9675d60a0faf2815f0dc6d"
+    },
+    "system/extras": {
+      "repository": "https://github.com/LineageOS/android_system_extras",
+      "revision": "994315964c73b871ae882fcbc3f1d0ae57084647"
+    },
+    "system/libbase": {
+      "repository": "https://android.googlesource.com/platform/system/libbase",
+      "revision": "2427e370cf5016d9c36d3ff2840d7f1e5bd0e157"
+    },
+    "system/logging": {
+      "repository": "https://github.com/LineageOS/android_system_logging",
+      "revision": "6ee74f7fc9b399fae4acf0dd394a7cfed2811a5d"
+    }
+  },
+  "soong_license_nodes": 36,
+  "pinned_notice_inputs": [
+    "build/soong/licenses/LICENSE",
+    "external/boringssl/NOTICE",
+    "external/fmtlib/LICENSE",
+    "external/fmtlib/NOTICE",
+    "external/libcxx/LICENSE.TXT",
+    "external/libcxxabi/LICENSE.TXT",
+    "external/libcxxabi/NOTICE",
+    "external/protobuf/LICENSE",
+    "external/zlib/LICENSE",
+    "prebuilts/clang/host/linux-x86/clang-r510928/NOTICE",
+    "prebuilts/clang/host/linux-x86/clang-r510928/clang_source_info.md",
+    "prebuilts/runtime/mainline/platform/sdk/licenses/system/logging/liblog/NOTICE",
+    "system/core/libcutils/NOTICE",
+    "system/extras/ext4_utils/NOTICE",
+    "system/libbase/NOTICE",
+    "system/logging/liblog/NOTICE"
+  ],
+  "compiled_elfs": [
+    "bin/lpdump",
+    "lib64/libbase.so",
+    "lib64/libc++.so",
+    "lib64/libcrypto-host.so",
+    "lib64/libcrypto_utils.so",
+    "lib64/libext4_utils.so",
+    "lib64/liblog.so",
+    "lib64/liblp.so",
+    "lib64/liblpdump.so",
+    "lib64/libprotobuf-cpp-full.so",
+    "lib64/libsparse-host.so",
+    "lib64/libz-host.so"
+  ]
+}

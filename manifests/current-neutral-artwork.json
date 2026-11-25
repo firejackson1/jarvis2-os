@@ -163,5 +163,24 @@
     "total_bytes": 1034007898,
     "receipt_sha256": "32fb9a2d94c4de28c733c2d992de49830542e38efee1b40b478bc34d04385c3c",
     "hosted_download_verified": false
+  },
+  "private_delivery_r2_with_host_reader": {
+    "native_layout_reader": {
+      "file": "jarvis2-host-lpdump-linux-x86_64.tar.gz",
+      "bytes": 12406238,
+      "sha256": "40998068112a78062adcb0548206581fde71f557dbf4464d2bd42e9a0aeabf8f",
+      "executable_sha256": "9f49ac0a597c91eaa23541486e5de10f5e555755b18fb37e4a4ae522903f39e5",
+      "source_manifest_sha256": "8d6273455f2f9e848a009617bb787622e80823dcabfb886013d06255c1109285",
+      "soong_notice_sha256": "cdae600f94720d8b9f0ff69954a5212efd312ba9870a2982033dc1a5262f36ba",
+      "soong_license_graph_sha256": "102ad27829aa4945b1d31323fd349ef9bb8e5734b9b20327ece30deaa87fcfd0",
+      "archive_reproduced": true,
+      "saved_layout_views_equal": 2
+    },
+    "matched_saved_fit_sha256": "541a3c68fe0d2b5f08d3a108b2fd3cc58705aace94e8cde7f35fe4364185d426",
+    "files_verified": 14,
+    "total_bytes": 1046414699,
+    "receipt_sha256": "74e8ad9c14543d12c6853a8871a09bb022a0ed67ae20294f6e91ace307195f6f",
+    "hosted_download_verified": false,
+    "device_contacted": false
   }
 }

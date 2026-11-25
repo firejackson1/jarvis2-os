@@ -1534,3 +1534,26 @@ without private scripts, server access or an AI operator.
   The [neutral delivery receipt](../manifests/current-neutral-artwork.json)
   records the matching private staging hash. Hardware installation, data
   migration, physical rollback and distribution review remain open.
+
+### Portable native partition-layout reader — 2026-11-25
+
+- Matched the installed Linux x86-64 lpdump and its 11 Android shared libraries
+  byte for byte to the pinned Android host build. Verified the ELF dependency
+  closure and the host's glibc and libgcc dependencies. The runtime uses the
+  adjacent lib64 directory.
+- Replayed 36 Soong license metadata nodes for the 12 ELF outputs. Bundled
+  the generated Notice and bill of materials, 16 tracked notice or source
+  attribution inputs including the Clang runtime notices, and
+  [16 pinned checkout revisions](../manifests/lpdump-host-source.json).
+- Two archives of the reviewed files matched byte for byte. The extracted
+  archive passed all 33 internal checksums on Linux x86-64 with glibc 2.41.
+  Both saved metadata views produced the same JSON and text as the reviewed
+  original. With an empty environment and no custom library path, the
+  extracted tool reproduced the exact neutral r2 preflight receipt.
+- Verified all 14 files in the new private delivery. The
+  [neutral receipt](../manifests/current-neutral-artwork.json) pins the
+  host archive, executable and notice graph. The ROM ZIP hash stays the same.
+  The check used saved metadata and contacted no device. Production device
+  installation, actual recovery transport and rollback remain separate gates.
+- The project host suite passed 209 Python checks with AVB fixtures and eight
+  Java suites.

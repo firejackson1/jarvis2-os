@@ -264,6 +264,9 @@ publication by this policy decision alone.
 - [x] Repeat the layout and rollback-file check using the public preflight and
   pinned native `lpdump`, with a matching saved A result and a refused saved B.
   [Saved fit check](CANDIDATE_INSTALLATION.md#check-a-saved-layout-and-restore-files)
+- [x] Verify the staged Linux x86-64 native layout-reader archive and reproduce
+  the exact neutral r2 preflight from an extracted copy without the Android tree.
+  [Host tool companion](CANDIDATE_INSTALLATION.md#native-layout-reader-for-linux-x86-64)
 - [ ] Provide a supported installation route using published downloads and a
   standard computer, with exact prerequisites and clear supported-device/firmware
   limits. The current raw-image ZIP is not a sideload OTA.

@@ -245,3 +245,10 @@ and its archive-bound writer proofs identify the earlier archive hash. The
 r2 download set has 13 files including its private receipt and checksum list.
 The trusted receipt SHA-256 is
 `32fb9a2d94c4de28c733c2d992de49830542e38efee1b40b478bc34d04385c3c`.
+
+The latest private neutral r2 delivery also includes the
+[Linux x86-64 layout-reader companion](CANDIDATE_INSTALLATION.md#native-layout-reader-for-linux-x86-64).
+It packages the native executable, 11 shared libraries, Soong notices and
+exact source pins. Use the 14-file delivery receipt with SHA-256
+`74e8ad9c14543d12c6853a8871a09bb022a0ed67ae20294f6e91ace307195f6f`.
+The ROM ZIP still has the same r2 hash.

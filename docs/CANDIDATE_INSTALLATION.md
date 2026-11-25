@@ -67,7 +67,9 @@ Add these options to the same local preflight command:
 
 Keep `capture.json`, `super-prefix.img` and the seven files in `old-images/`
 inside the private capture directory. Use the reviewed native `lpdump` with
-its matching shared libraries. For the explicit target slot, preflight checks
+its matching shared libraries. The
+[Linux x86-64 host tool companion](#native-layout-reader-for-linux-x86-64)
+provides that executable and its Android libraries. For the explicit target slot, preflight checks
 both saved LP views, the allocated layout, each candidate and restore size,
 each saved restore hash and every untouched stock-reference hash. It also checks
 that the target extents start beyond the captured metadata prefix. A mismatch
@@ -76,6 +78,24 @@ stops preflight before it stages output.
 The `saved_capture_fit` record binds the results to the capture, metadata and
 tool hashes. This is an offline receipt for the saved state. Recovery transport,
 capture freshness and device authorization are separate checks.
+
+### Native layout reader for Linux x86-64
+
+Use `jarvis2-host-lpdump-linux-x86_64.tar.gz` from the verified download set,
+identified by the [neutral r2 receipt](../manifests/current-neutral-artwork.json).
+Extract the verified archive into a fresh directory. Keep `bin/` beside
+`lib64/` and verify the complete contents with `sha256sum -c --strict SHA256SUMS.txt`
+from the extraction directory. Give the preflight the absolute path to
+`bin/lpdump` and the executable digest from the receipt. The linker loads the
+included Android libraries from `lib64/` and uses the host's glibc and
+`libgcc_s`. Linux x86-64 with glibc 2.41 was tested.
+
+To compile a local copy, use the [pinned Android source setup](CURRENT_REPRODUCTION.md#source-and-inputs)
+and build `lpdump-host` after `lunch lineage_jarvis2-ap2a-userdebug`. The Linux
+host executable is `out/host/linux-x86/bin/lpdump`. The supplied tool's
+[source inventory](../manifests/lpdump-host-source.json) identifies its exact
+Soong inputs, installed files and notices. A local build requires its own tool
+hash and validation. The preflight receipt records the hash of the tool used.
 
 ## Supported contract and prerequisites
 
