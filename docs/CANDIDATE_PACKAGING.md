@@ -260,3 +260,10 @@ inspection, preflight and writer review. The extracted source reproduced the
 against the saved layout fixture and independently generated the same offline
 r2 writer inputs. The exact staging receipt SHA-256 is
 `a8b108b549a9094bb1030b38e2e45496453fc42ea952e79f50f9aaffd04625c3`.
+
+The latest 14-file set supplies `jarvis2-lcars-operator-tools-98de404.tar.gz`.
+It adds the [read-only backup command](CANDIDATE_INSTALLATION.md#back-up-an-existing-qualified-recovery-session)
+alongside inspection, offline verification and writer tools. The saved-layout
+rehearsal matched the seven historical rollback images byte for byte and
+passed the r2 preflight. The updated staging receipt SHA-256 is
+`1fc678e64b9f7b58fa144075850b9179f19881788da285375e875e2a1a897e31`.

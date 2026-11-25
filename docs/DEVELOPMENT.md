@@ -1602,3 +1602,7 @@ without private scripts, server access or an AI operator.
   unchanged stock references and 13 AVB bindings. An offline fixture review
   then produced paired writer inputs with zero partition write requests.
   File model only. Live capture, hardware installation and rollback remain open.
+- The operator companion now includes the exact backup command. All 34 tests
+  passed from its extracted source. Verified all 14 staged delivery files.
+  See the private delivery record in the
+  [neutral receipt](../manifests/current-neutral-artwork.json).
