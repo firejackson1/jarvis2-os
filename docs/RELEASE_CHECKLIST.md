@@ -259,6 +259,10 @@ publication by this policy decision alone.
 - [x] Package the matching notices with the plug-in and independently
   verify the format 3 rehearsal ZIP through local `vendor_boot` reconstruction.
   [Candidate packaging](CANDIDATE_PACKAGING.md#include-locally-assembled-lcars-recovery)
+- [x] Assemble the LCARS root binding directly from verified stock templates
+  and a local Recovery image. Reproduce the five rehearsal ROM images and
+  verify that the completed chain rejects stock Recovery substituted for LCARS.
+  [LCARS AVB assembly](AVB_IMAGE_ASSEMBLY.md#bind-a-locally-reconstructed-lcars-recovery)
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.

@@ -150,9 +150,70 @@ def verify_stock_templates(images,templates,profile,avbtool,avb,root_pin):
  return {'template_signatures_verified':True,'parent_child_public_keys_match':True,'unchanged_reference_descriptors_verified':True,'avb_covered_references':sorted(used),'pinned_but_not_avb_covered_references':sorted(unbound),'full_reference_file_pins_verified':sorted(profile['references']),'operator_root_key_pin_checked':True,'replaced_baseline_leaf_bytes_verified':False,'hardware_root_trust_verified':False,'nodes':sorted(checked)}
 
 
+def recovery_hash_for_root(avbtool, root_descriptors, stock, recovery, recovery_pin):
+ """Check a locally reconstructed Recovery leaf before using its root binding."""
+ PROFILE.sha256_value(recovery_pin)
+ if recovery.stat().st_size != stock.stat().st_size or PROFILE.digest(recovery) != recovery_pin:
+  raise ValueError('LCARS vendor_boot differs from the caller pin or stock partition size')
+ root_hashes = [desc for desc in root_descriptors
+                if isinstance(desc, avbtool.AvbHashDescriptor) and desc.partition_name == 'vendor_boot']
+ if len(root_hashes) != 1:
+  raise ValueError('Expected one root vendor_boot hash binding')
+
+ avb = avbtool.Avb()
+
+ def leaf(path):
+  image = avbtool.ImageHandler(str(path), read_only=True)
+  try:
+   footer, header, descriptors, _ = avb._parse_image(image)
+  finally:
+   image._image.close()
+  hashes = [desc for desc in descriptors if isinstance(desc, avbtool.AvbHashDescriptor)]
+  if (footer is None or header.algorithm_type or header.flags or header.public_key_metadata_size or
+      len(hashes) != 1 or hashes[0].partition_name != 'vendor_boot' or
+      not 0 < footer.original_image_size == hashes[0].image_size <= footer.vbmeta_offset < path.stat().st_size or
+      any(not isinstance(desc, avbtool.AvbPropertyDescriptor)
+          for desc in descriptors if desc is not hashes[0])):
+   raise ValueError('Unexpected vendor_boot footer, hash descriptor or security flags')
+  properties = [desc.encode() for desc in descriptors if desc is not hashes[0]]
+  security = (header.rollback_index, header.rollback_index_location, header.release_string,
+              header.required_libavb_version_major, header.required_libavb_version_minor)
+  return hashes[0], properties, security
+
+ old_hash, old_props, old_security = leaf(stock)
+ new_hash, new_props, new_security = leaf(recovery)
+ if old_hash.encode() != root_hashes[0].encode():
+  raise ValueError('Stock vendor_boot footer differs from the root hash binding')
+ if old_props != new_props or old_security != new_security:
+  raise ValueError('LCARS vendor_boot changed stock AVB properties or rollback policy')
+ if (new_hash.hash_algorithm not in ('sha256', 'sha512') or not new_hash.digest or
+     new_hash.digest == old_hash.digest or
+     (new_hash.hash_algorithm, new_hash.salt, new_hash.flags) !=
+     (old_hash.hash_algorithm, old_hash.salt, old_hash.flags)):
+  raise ValueError('LCARS vendor_boot differs from the stock hash policy or repeats the stock digest')
+ payload = hashlib.new(new_hash.hash_algorithm, new_hash.salt)
+ with recovery.open('rb') as stream:
+  remaining = new_hash.image_size
+  while remaining:
+   data = stream.read(min(remaining, 1048576))
+   if not data:
+    raise ValueError('Unexpected EOF while checking LCARS vendor_boot payload hash')
+   payload.update(data)
+   remaining -= len(data)
+ if payload.digest() != new_hash.digest:
+  raise ValueError('LCARS vendor_boot payload hash differs from its footer')
+ return new_hash
+
+
 def assemble(args):
  for pin in [args.baseline_root_sha256,args.output_root_sha256,args.avbtool_source_sha256]:PROFILE.sha256_value(pin)
  stock_mode=getattr(args,'stock_templates',None) is not None
+ recovery_path=getattr(args,'lcars_vendor_boot',None)
+ recovery_pin=getattr(args,'lcars_vendor_boot_sha256',None)
+ if (recovery_path is None) != (recovery_pin is None) or (recovery_path is not None and not stock_mode):
+  raise ValueError('LCARS vendor_boot and its SHA256 pin are both required in stock-template mode')
+ if recovery_path is not None:
+  recovery_path=strict_file(recovery_path)
  policy_path=getattr(args,'userspace_policy',None);policy_pin=getattr(args,'userspace_policy_sha256',None)
  if bool(policy_path)!=bool(policy_pin):raise ValueError('Userspace policy and SHA256 pin are both required')
  if stock_mode and not policy_path:raise ValueError('Stock-template mode requires explicit dynamic userspace policy')
@@ -246,9 +307,22 @@ def assemble(args):
     tree=next(d for d in templates[parent][1] if isinstance(d,avbtool.AvbHashtreeDescriptor) and d.partition_name==part);C.require_tree_geometry(tree)
     if tree.flags or tree.hash_algorithm not in ('sha256','sha512'):raise ValueError('Unsupported stock replacement hashtree policy')
     leaves[part]=(SimpleNamespace(algorithm_type=0,flags=0,rollback_index=0,rollback_index_location=0,release_string=stock_profile['leaf_release_string']),tree,[])
- distinct_files({str(i):p for i,p in enumerate([*images.values(),*payloads.values()])})
+ recovery_hash=None
+ if recovery_path is not None:
+  if 'vendor_boot' not in images:
+   raise ValueError('Stock profile lacks the vendor_boot reference')
+  recovery_hash=recovery_hash_for_root(avbtool,templates['vbmeta'][1],
+                                      images['vendor_boot'],recovery_path,recovery_pin)
+ input_files=[*images.values(),*payloads.values()]
+ if recovery_path is not None:
+  input_files.append(recovery_path)
+ distinct_files({str(i):path for i,path in enumerate(input_files)})
  output.mkdir(mode=0o700);(output/'images').mkdir();(output/'logs').mkdir()
  report={'status':'running','format':1,'mode':'stock-templates' if stock_mode else 'coherent-baseline','replaced_baseline_leaf_bytes_verified':not stock_mode,'userspace_property_policy_sha256':policy_pin,'stock_profile_sha256':getattr(args,'stock_profile_sha256',None),'device_modified':False,'hardware_root_trust_verified':False,'restore_tested':False,'ota_installer':False,'full_target_files_complete':False,'payload_content_intent_verified':False,'payload_metadata_intent_verified':False,'baseline_root_sha256':args.baseline_root_sha256,'output_root_sha256':args.output_root_sha256,'root_key_changed':args.baseline_root_sha256!=args.output_root_sha256,'baseline_image_sha256':baseline_hashes,'unchanged_reference_image_sha256':reference_hashes,'payload_image_sha256':payload_hashes,'partitions':{},'files':{},'tool_hashes':{name:PROFILE.digest(path) for name,path in dict(required,avbtool_python=source).items()},'limitations':['Caller must independently authenticate baseline, references, payloads and tools.','EROFS structure is checked; intended changed content and metadata are caller responsibilities.','Output root pin is not hardware trust, OTA or installation qualification.']}
+ if recovery_path is not None:
+  report['unchanged_reference_image_sha256']={name:sha for name,sha in reference_hashes.items() if name!='vendor_boot'}
+  report['lcars_vendor_boot']={'bytes':recovery_path.stat().st_size,'sha256':recovery_pin,
+                              'stock_sha256':reference_hashes['vendor_boot']}
  redactions={str(keys[0]):'<user-root-key>',str(keys[1]):'<user-system-key>'}
  def redact(text):
   for path,label in redactions.items():text=text.replace(path,label)
@@ -306,6 +380,9 @@ def assemble(args):
    for descriptor in descs:
     value=copy.deepcopy(descriptor)
     if isinstance(value,avbtool.AvbHashtreeDescriptor) and value.partition_name in changed:value=next(d for d in parse(output/'images'/(value.partition_name+'.img'))[2] if isinstance(d,avbtool.AvbHashtreeDescriptor))
+    if (part=='vbmeta' and recovery_hash is not None and
+        isinstance(value,avbtool.AvbHashDescriptor) and value.partition_name=='vendor_boot'):
+     value=recovery_hash
     if part=='vbmeta' and isinstance(value,avbtool.AvbChainPartitionDescriptor) and value.partition_name=='vbmeta_system':value.public_key=child_public
     new.append(value)
    blob=avb._generate_vbmeta_blob(algorithm_name=algorithm(header),key_path=str(key),public_key_metadata_path=None,descriptors=new,chain_partitions_use_ab=None,chain_partitions_do_not_use_ab=None,rollback_index=header.rollback_index,flags=header.flags,rollback_index_location=header.rollback_index_location,props=None,props_from_file=None,kernel_cmdlines=None,setup_rootfs_from_kernel=None,ht_desc_to_setup=None,include_descriptors_from_image=None,signing_helper=None,signing_helper_with_files=None,release_string=header.release_string,append_to_release_string=None,required_libavb_version_minor=header.required_libavb_version_minor)
@@ -314,11 +391,15 @@ def assemble(args):
    target=output/'images'/(part+'.img');target.write_bytes(blob+b'\0'*(size-len(blob)));_,actual,actual_descs,_=parse(target)
    if (actual.flags,actual.rollback_index,actual.rollback_index_location,actual.algorithm_type,actual.required_libavb_version_minor,actual.release_string)!=(header.flags,header.rollback_index,header.rollback_index_location,header.algorithm_type,header.required_libavb_version_minor,header.release_string) or [d.encode() for d in actual_descs]!=[d.encode() for d in new]:raise ValueError('Signed descriptor/rollback/flag preservation failed')
   final=output/'final-reference-tree';final.mkdir()
-  for part in set(images)|set(PARTS):
-   (final/(part+'.img')).symlink_to((output/'images'/(part+'.img')) if part in (*PARTS,'vbmeta','vbmeta_system') else images[part])
+  final_images={**images,**{part:output/'images'/(part+'.img') for part in (*PARTS,'vbmeta','vbmeta_system')}}
+  if recovery_path is not None:
+   final_images['vendor_boot']=recovery_path
+  for part,path in final_images.items():(final/(part+'.img')).symlink_to(path)
   report['final_audit']=audit(final,output/'final-audit',args.output_root_sha256)
   C.verify_input_hashes(images,dict(baseline_hashes,**reference_hashes))
   C.verify_input_hashes(payloads,payload_hashes)
+  if recovery_path is not None:
+   C.verify_input_hashes({'vendor_boot':recovery_path},{'vendor_boot':recovery_pin})
   if policy_path:C.pinned_json(strict_file(policy_path),policy_pin)
   if stock_mode:C.pinned_json(strict_file(args.stock_profile),args.stock_profile_sha256)
   report['files']={p.name:{'bytes':p.stat().st_size,'sha256':PROFILE.digest(p)} for p in sorted((output/'images').glob('*.img'))};report['status']='passed';save();return report
@@ -331,8 +412,8 @@ def main():
  group=parser.add_mutually_exclusive_group(required=True);group.add_argument('--base-images',type=Path);group.add_argument('--stock-templates',type=Path)
  for flag in ['payloads','references','tool-tree','root-key','system-key','output']:parser.add_argument('--'+flag,type=Path,required=True)
  for flag in ['baseline-root-sha256','output-root-sha256','avbtool-source-sha256']:parser.add_argument('--'+flag,required=True)
- for flag in ['stock-profile','userspace-policy']:parser.add_argument('--'+flag,type=Path)
- for flag in ['stock-profile-sha256','userspace-policy-sha256']:parser.add_argument('--'+flag)
+ for flag in ['stock-profile','userspace-policy','lcars-vendor-boot']:parser.add_argument('--'+flag,type=Path)
+ for flag in ['stock-profile-sha256','userspace-policy-sha256','lcars-vendor-boot-sha256']:parser.add_argument('--'+flag)
  parser.add_argument('--allow-root-key-change',action='store_true');args=parser.parse_args();result=assemble(args);print(json.dumps({'status':result['status'],'files':result['files'],'hardware_root_trust_verified':False},indent=2))
 
 if __name__=='__main__':main()

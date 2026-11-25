@@ -142,6 +142,27 @@ leaf header/bytes are assumed. Parent security headers, rollback and chain
 locations, stock bootstrap properties and unchanged descriptor/key bytes remain
 unchanged. The final full AVB auditor checks the complete newly assembled graph.
 
+## Bind a locally reconstructed LCARS Recovery
+
+To include LCARS in a stock-template assembly, add both options below to the
+same command. Keep the original stock `vendor_boot.img` in `--references`
+for the baseline verification.
+
+```sh
+--lcars-vendor-boot /work/reconstructed/vendor_boot.img \
+--lcars-vendor-boot-sha256 <trusted-complete-lcars-image-sha256>
+```
+
+Use the 64 MiB image with its AVB hash footer from the pinned local Recovery
+recipe. The assembler checks the complete-image pin, payload hash, and stock
+salt, algorithm, flags, properties and rollback policy. It first verifies the
+original stock chain and then changes the root `vendor_boot` binding alongside
+the usual userspace assembly. The final audit uses the reconstructed Recovery
+bytes. The `lcars_vendor_boot` record in `assembly.json` identifies both
+inputs. Only the five ROM images go in `images/`. Keep the approved plug-in and
+notice archive with the packaging proof so recipients can recreate the same
+Recovery image from their local stock inputs.
+
 ## Dynamic userspace properties
 
 Stock mode requires the pinned `avb-userspace-property-policy.json`. Coherent

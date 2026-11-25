@@ -1302,3 +1302,21 @@ without private scripts, server access or an AI operator.
   format 3, mismatched notice bytes and a notice pin paired with the wrong
   plug-in. The archive remains a private temporary-key rehearsal. Hardware and
   final-image qualification remain open. Bazzite stayed online.
+
+## 2026-11-25 — Reproducible LCARS AVB assembly
+
+- The public AVB assembler now accepts the independently pinned LCARS image
+  alongside the verified stock templates. It verifies the original chain,
+  checks the reconstructed leaf against the stock footer policy and binds
+  the new hash in root `vbmeta`. The final audit checks the complete signed
+  chain. The stock reference and local Recovery image remain separate inputs.
+- Two native runs with the same f38 rehearsal payloads and disposable keys
+  produced five matching ROM images. An independent readback matched all ten
+  complete files and found all 13 expected AVB image bindings. Verification
+  rejected substituting stock Recovery for LCARS with a `vendor_boot` digest
+  mismatch. The private audit receipt SHA-256 is
+  `3d07696945a01b1110bfb20879420c7756b1407c440473b81532b895a5e21600`.
+- Passed all 198 Python tests and eight Java suites. The Recovery binding
+  fixture rejects the wrong pin, missing root descriptor, changed salt and
+  corrupt payload. Final release images, device trust and installation still
+  require their own checks. Bazzite stayed online.

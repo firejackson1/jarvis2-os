@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-import importlib.util,struct,tempfile,unittest
+import hashlib,importlib.util,os,struct,subprocess,tempfile,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 s=importlib.util.spec_from_file_location('assembler',ROOT/'tools/assemble-avb-images.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
@@ -72,5 +72,50 @@ class StockPolicyTests(unittest.TestCase):
   new=m.rewrite_properties(original,values,{'system'},avb);self.assertEqual(b'unchanged',new[0].value);self.assertEqual(b'new',new[1].value);self.assertEqual(b'old',original[1].value);self.assertEqual(4,len(new))
   with self.assertRaises(ValueError):m.rewrite_properties(original+[original[1]],values,{'system'},avb)
   with self.assertRaises(ValueError):m.rewrite_properties(original,values,{'product'},avb)
+
+
+@unittest.skipUnless(os.environ.get('JARVIS2_ANDROID_SOURCE'), 'requires pinned Android avbtool')
+class RecoveryBindingTests(unittest.TestCase):
+ def test_recovery_leaf_replaces_only_matching_stock_root_hash(self):
+  android = Path(os.environ['JARVIS2_ANDROID_SOURCE'])
+  avbtool = m.C.load_module('assembler_fixture_avb', android/'external/avb/avbtool.py')
+  tool = android/'out/host/linux-x86/bin/avbtool'
+
+  def make_leaf(path, payload, salt='aabb'):
+   path.write_bytes(payload.ljust(4096, b'\0'))
+   subprocess.run([tool, 'add_hash_footer', '--image', path, '--partition_name', 'vendor_boot',
+                   '--partition_size', '131072', '--hash_algorithm', 'sha256', '--salt', salt,
+                   '--prop', 'com.android.build.vendor_boot.fingerprint:stock',
+                   '--algorithm', 'NONE'], check=True, capture_output=True)
+
+  with tempfile.TemporaryDirectory() as temporary:
+   root = Path(temporary)
+   stock, replacement = root/'stock.img', root/'replacement.img'
+   make_leaf(stock, b'original recovery')
+   make_leaf(replacement, b'local LCARS recovery')
+   image = avbtool.ImageHandler(str(stock), read_only=True)
+   try:
+    original = next(d for d in avbtool.Avb()._parse_image(image)[2]
+                    if isinstance(d, avbtool.AvbHashDescriptor))
+   finally:
+    image._image.close()
+   digest = m.PROFILE.digest(replacement)
+   descriptor = m.recovery_hash_for_root(avbtool, [original], stock, replacement, digest)
+   self.assertEqual(descriptor.partition_name, 'vendor_boot')
+   expected_payload = b'local LCARS recovery'.ljust(4096, b'\0')
+   self.assertEqual(descriptor.digest, hashlib.sha256(bytes.fromhex('aabb') + expected_payload).digest())
+   self.assertNotEqual(descriptor.digest, original.digest)
+   with self.assertRaisesRegex(ValueError, 'pin'):
+    m.recovery_hash_for_root(avbtool, [original], stock, replacement, '0'*64)
+   with self.assertRaisesRegex(ValueError, 'root'):
+    m.recovery_hash_for_root(avbtool, [], stock, replacement, digest)
+   make_leaf(replacement, b'local LCARS recovery', salt='ccdd')
+   with self.assertRaisesRegex(ValueError, 'hash policy'):
+    m.recovery_hash_for_root(avbtool, [original], stock, replacement, m.PROFILE.digest(replacement))
+   make_leaf(replacement, b'local LCARS recovery')
+   with replacement.open('r+b') as stream:
+    stream.write(b'X')
+   with self.assertRaisesRegex(ValueError, 'payload hash'):
+    m.recovery_hash_for_root(avbtool, [original], stock, replacement, m.PROFILE.digest(replacement))
 
 if __name__=='__main__':unittest.main()
