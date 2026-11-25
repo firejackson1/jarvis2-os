@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "delivery_receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
+  "scan_sha256": "dc915a2e9b20a0d67bb0abe4daa6d42dea3998d79c11d3e32ff3a5e4c83389f7",
+  "top_level_assets_verified": 18,
+  "recursive_scan_counts": {
+    "zip_containers": 122,
+    "archive_files": 234153,
+    "member_bytes_read": 6850613570,
+    "compressed_streams": 616,
+    "tar_containers": 238,
+    "tar_links": 28,
+    "rom_images_bound_to_prior_scan": 5
+  },
+  "matched_rows_by_pattern": {
+    "complete-private-key-pem": 851,
+    "private-key-block": 851,
+    "private-key-header": 918,
+    "sensitive-key-container-filename": 71
+  },
+  "flagged_sources": {
+    "LTvLauncher-2026.11.23-code8117-neutral-corresponding-sources.tar.gz": {
+      "matches": 929,
+      "decode_limits": 39,
+      "matched_locked_upstream_carriers": {
+        "sources/flutter/Flutter-3.24.5-source.tar.gz": {
+          "bytes": 14196706,
+          "sha256": "28d3569ab71ebec3dfc5e764cc8a87af8204a0d31570fa7216d3cadeb86808dc"
+        },
+        "sources/native/boringssl-src-d24a38200fef19150eef00cad35b138936c08767.tar.gz": {
+          "bytes": 35955551,
+          "sha256": "3a7ab1ee8fc27e4cb6cb68b2ba66ab74fe83851df03ac5ae7089e5c42718aa44"
+        },
+        "sources/native/dart-sdk-88c9758ef131d430d8ce595c6bfb4c90574d3ddd.tar.gz": {
+          "bytes": 34574261,
+          "sha256": "fc29fb346312961c21a8fb05ce170256000f32977dc9037c0ea8164d0b62b71d"
+        },
+        "sources/native/flutter-engine-a18df97ca57a249df5d8d68cd0820600223ce262.tar.gz": {
+          "bytes": 45099958,
+          "sha256": "99cc3ef570b02ec5597b7c6218ee5aff87f9dc583b1d8385131da88b2065365b"
+        },
+        "sources/native/zlib-7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df.tar.gz": {
+          "bytes": 596954,
+          "sha256": "9402e497a41042911a98910507f7d603350038e73afbfa78efa2cfd7dccecd60"
+        },
+        "sources/pub/http_multi_server-3.2.2.tar.gz": {
+          "bytes": 11690,
+          "sha256": "aa6199f908078bb1c5efb8d8638d4ae191aac11b311132c3ef48ce352fb52ef8"
+        },
+        "sources/pub/shelf-1.4.1.tar.gz": {
+          "bytes": 46618,
+          "sha256": "ad29c505aee705f41a4d8963641f91ac4cee3c8fad5947e033390a7bd8180fa4"
+        }
+      }
+    },
+    "cronet-6ec34305bbf8-source.tar.gz": {
+      "matches": 1761,
+      "decode_limits": 2,
+      "matches_pin_from_apex_source_review": true,
+      "source_archive_sha256": "b74ebce20557e1f9b4d19113b1cf21ebb5e52f73a25156af6c0d21130f2da7c7",
+      "git_source_tree": "3e5d89e76096fa451e510cd98146a645c2530478"
+    },
+    "jarvis2-r2-native-userspace-source.tar.gz": {
+      "matches": 1,
+      "decode_limits": 11,
+      "matched_indexed_source_carriers": {
+        "chromium-ffmpeg-5c85ff666b34-gitiles.tar.gz": {
+          "bytes": 19166589,
+          "sha256": "331e7c6a78c6031c9acf2ce58e23b9c8485127dc15b5e73e05ae39a10195d044"
+        },
+        "e2fsprogs-d37e9f0ddce5.tar.gz": {
+          "bytes": 9721828,
+          "sha256": "e5011d67bd78819f88c17ee079aea1f03b78e6f3fe268ce65e3cded85df487bf"
+        },
+        "exfatprogs-2cfc96f871bd.tar.gz": {
+          "bytes": 166343,
+          "sha256": "53aabca92a7c1e378538bf23401ae6018925e1e40eac10f836446a923793862f"
+        },
+        "zstd-fc80ff3c3d0e-git-blobs.tar.gz": {
+          "bytes": 2365732,
+          "sha256": "7e428e65bdae7ad4a088fa2bd196b601ba38d5311fb32e8d5e510f3767907e5a"
+        }
+      }
+    }
+  },
+  "opaque_or_bounded_upstream_fixture_entries": 52,
+  "independent_launcher_notice_decode": {
+    "apk_sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+    "member": "assets/flutter_assets/NOTICES.Z",
+    "compressed_sha256": "06c5e360f57ec377fde421efb50bebfd087152420e83246427e8399868434465",
+    "encoding": "gzip",
+    "expanded_sha256": "cf8a94018b718b563d2ffed39dfb4e3b60634e475419fa8568ccd928802bdaeb",
+    "expanded_bytes": 1855708,
+    "pattern_categories": [],
+    "matches": 0
+  },
+  "owner_path_domain_device_id_and_selected_token_matches": 0,
+  "key_material_flags_occur_only_in_pinned_source_companions": true,
+  "prior_rom_userspace_scan_manifest_sha256": "87ec9715dabd02c5868c52ed19e4eb193e91664f4be94bd714a85ad2db2c8a55",
+  "matched_values_recorded": false,
+  "public_asset_download_recheck_done": false,
+  "hardware_tested": false
+}

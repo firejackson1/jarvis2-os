@@ -1932,3 +1932,17 @@ without private scripts, server access or an AI operator.
   the 31 AVB blobs with the pinned tool and matched the r2 root fingerprint.
   The 157 ZIP members exactly matched the expected inventory, with no extra
   files. [Public export receipt](../manifests/neutral-r2-public-signing-export.json)
+
+### Neutral r2 staged download review — 2026-11-25
+
+- Rehashed all 18 assets against the independently pinned receipt and read
+  234,153 inner archive entries. The owner path, domain, device ID and
+  selected credential token patterns had no matches. Key-pattern matches
+  appeared only in the pinned launcher, Cronet and native source companions.
+  Rehashed the launcher and native carrier archives against their independent
+  source inventories and matched the Cronet archive to its Git tree receipt.
+- Recorded 52 bounded or unreadable upstream fixture entries with source
+  identities. Independently decoded and scanned the gzip Flutter notice
+  payload. [Companion review](../manifests/neutral-r2-companion-privacy.json)
+  This was a local artifact review. Bazzite stayed running and Jarvis2
+  was untouched. Review the hosted files after release staging.

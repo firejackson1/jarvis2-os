@@ -81,6 +81,27 @@ including the ROM's independently recorded root key. ZIP membership matched
 the inventory exactly. This validates the contents of the public export.
 Bootloader acceptance remains a device test.
 
+### Privacy review of the staged downloads
+
+The [companion review](../manifests/neutral-r2-companion-privacy.json) rehashed
+all 18 staged files and checked the source, notice, tooling, launcher and
+non-image ROM archive contents for owner paths and domains, device identifiers,
+common credential tokens and key material. No owner or selected token pattern
+matched. Key patterns matched only files within the pinned launcher, Cronet
+and native source companions. They include public test keys and PEM format
+strings. The matching files stayed in their original source archives.
+
+The scan reached 234,153 archive entries. It recorded 52 entries from pinned
+upstream test fixtures that exceed decode limits or exercise encryption or
+malformed archive handling. Their enclosing archives matched the source
+inventories by hash. The initial decode finding for Flutter notices was
+resolved by independently decoding the gzip asset and scanning its contents.
+The prior [ROM image scan](../manifests/neutral-r2-privacy-scan.json) covers
+the three excluded EROFS image files. The two remaining image members are
+the signed [AVB metadata](../manifests/neutral-r2-recipient-preflight.json).
+This review is scoped to the staged bytes and named patterns. Review the
+actual hosted downloads again before publication.
+
 ## Existing-data migration
 
 A build signed with unrelated release keys is not a supported dirty upgrade from

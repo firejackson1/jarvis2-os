@@ -121,6 +121,9 @@ publication by this policy decision alone.
 - [x] Verify the exact staged public signing export against the signed package
   audit. Parse every public key and certificate, re-encode every AVB blob,
   and reject unexpected ZIP members. [Public export receipt](../manifests/neutral-r2-public-signing-export.json)
+- [x] Rehash and scan the 18 neutral r2 staged downloads. Match the key-pattern
+  findings and undecoded upstream test fixtures to the pinned source inputs.
+  Hosted asset review remains open. [Companion review](../manifests/neutral-r2-companion-privacy.json)
 - [ ] Use private release signing keys with a tested backup process; do not publish keys or ship development keys unknowingly.
 - [x] Generate the private key set and verify an encrypted off-host backup, including archive identity and all 204 archived files. Keys have been used in private package/APEX and launcher signing rehearsals; final image signing and hardware acceptance remain open.
 - [ ] Make root debugging and unauthenticated network ADB opt-in in public builds; retain normal USB authorization by default.
