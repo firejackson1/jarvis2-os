@@ -1923,3 +1923,12 @@ without private scripts, server access or an AI operator.
   This recheck used existing artifacts and did not access Jarvis2.
 - The source host suite passed 221 Python tests, eight Java suites and the
   repository privacy audit.
+
+### Neutral r2 public signing companion — 2026-11-25
+
+- Parsed each of 78 public keys and 47 X.509 certificates from the staged
+  public signing export. Matched the certificate fingerprints, public keys
+  and package roles to the independently pinned signing inventory. Re-encoded
+  the 31 AVB blobs with the pinned tool and matched the r2 root fingerprint.
+  The 157 ZIP members exactly matched the expected inventory, with no extra
+  files. [Public export receipt](../manifests/neutral-r2-public-signing-export.json)

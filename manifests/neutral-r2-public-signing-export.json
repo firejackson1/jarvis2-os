@@ -1,0 +1,18 @@
+{
+  "public_bundle_sha256": "5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8",
+  "public_inventory_sha256": "045d814089a724256f788e01cd524d0ebbdcb8badb20c087d8bd2a3450319fb5",
+  "exact_inventory_entries": 157,
+  "public_key_roles": {
+    "apex-payload": 30,
+    "apex-container": 30,
+    "image-avb": 1,
+    "apk": 17
+  },
+  "pem_public_keys_verified": 78,
+  "x509_certificates_verified": 47,
+  "avb_public_key_blobs_reencoded": 31,
+  "rom_avb_root_public_key_sha256": "82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df",
+  "unexpected_files": 0,
+  "private_keys_used": false,
+  "hardware_trust_verified": false
+}

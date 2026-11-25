@@ -69,6 +69,18 @@ the earlier reviewed upstream examples, constants and PEM format strings.
 All 14 files carrying those matches had the same reviewed bytes. The scan
 reported zero gaps within its scope and recorded only paths and counts.
 
+### Verify the public-key companion
+
+The [public export receipt](../manifests/neutral-r2-public-signing-export.json)
+pins the exact 157-member ZIP staged with neutral r2. Its inventory hash
+matches the input independently recorded by the signed APK and APEX audit.
+OpenSSL parsed all 78 public PEM keys and 47 X.509 certificates. Each
+certificate fingerprint and its public key matched the pinned inventory.
+The pinned AVB tool re-encoded all 31 AVB key blobs and matched their bytes,
+including the ROM's independently recorded root key. ZIP membership matched
+the inventory exactly. This validates the contents of the public export.
+Bootloader acceptance remains a device test.
+
 ## Existing-data migration
 
 A build signed with unrelated release keys is not a supported dirty upgrade from
