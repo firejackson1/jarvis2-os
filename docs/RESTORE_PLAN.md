@@ -110,3 +110,26 @@ contains stock Recovery. To return to a prior custom installation, retain
 and verify the backup made from that specific device before writing. A live
 capture, a working restore transport, and an authorized physical restore test
 are still required.
+
+## Exact neutral candidate rollback rehearsal
+
+The [neutral candidate](../manifests/current-neutral-artwork.json) was tested
+with the installer, native `lpdump`, the 4 MiB saved `super` metadata prefix,
+and all seven historical restore files. The model used real content for the
+target images and the saved logical extents. It supplied simulated physical
+geometry, Recovery transport, and private protected partition bytes.
+
+The dry run matched all seven captured targets and issued zero writes. The
+model then stopped halfway through a `product_a` write. The actual installer
+journal recorded a pending write, and the installer refused rollback while a
+writer was still active. After the model reported the writer had stopped, the
+installer restored the old files without completing the interrupted install.
+A separate complete install and restore also passed full hash readback.
+
+The saved `super` metadata prefix, 16 protected physical files and five
+untargeted logical extents matched across the rehearsal. The recorded layout
+had no allocated slot-B logical extents. A separate AVB audit reconstructed
+all 13 bindings using the seven saved restore files and nine unchanged stock
+references. These tests cover file-backed write boundaries and old-image
+consistency. Physical recovery entry, USB availability after interruption,
+eMMC power loss and an actual restore remain open.

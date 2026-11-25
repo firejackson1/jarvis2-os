@@ -1,9 +1,10 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Recovery raw writer — offline development only
 
-`tools/install-candidate.py` is **unqualified development code**. It has been
-exercised only with file-backed fake ADB devices. Do not run it against hardware
-without a separate reviewed qualification and explicit installation approval.
+`tools/install-candidate.py` is **unqualified development code**. Write and
+restore operations have been exercised on file-backed devices. An earlier
+development recovery passed a native dry run. Hardware writes require a separate
+reviewed qualification and explicit installation approval.
 No installation, slot change, wipe, recovery entry or publication is authorized
 by this document. Public candidate packaging does not establish installation safety.
 

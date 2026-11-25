@@ -98,5 +98,31 @@
     "manifest_sha256": "908405402257d2a416e7becfc6784e0aa0acbc5002f80482312391dd156070a0",
     "hardware_tested": false,
     "published": false
+  },
+  "file_backed_rollback": {
+    "dry_run_targets": 7,
+    "direct_restore_after_product_interruption": true,
+    "writer_present_refused": true,
+    "complete_install_and_restore": true,
+    "protected_physical_fixture_files": 16,
+    "protected_logical_extents": 5,
+    "super_prefix_byte_equal": true,
+    "file_model_receipt_sha256": "d446ea0b5fefdc89dcc52f8b87a7748e1116d882810facb7151d9ea3fb784b63",
+    "saved_restore_avb_bindings": 13,
+    "saved_restore_chain_receipt_sha256": "cc3dd64273ab9a98dbf7abdc114f95a2152fde0868a558acf46cff48026f00f0",
+    "actual_hardware_restore_tested": false
+  },
+  "signed_f38_package_continuity": {
+    "standalone_apk_signers_match": 103,
+    "embedded_apk_signers_match": 23,
+    "apex_container_signers_match": 31,
+    "verified_apex_payload_keys_match": 30,
+    "same_system_ota_certificate": true,
+    "changed_packages": [
+      "app.jarvis2.remote",
+      "com.android.music"
+    ],
+    "report_sha256": "b15438583df91d9a2b66e514a6be80a8bb1da03a1bef6c4cd1bc16eb31ce2503",
+    "userdata_compatibility_tested": false
   }
 }

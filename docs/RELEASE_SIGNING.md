@@ -60,6 +60,20 @@ preview as requiring fresh data and preserved-data upgrades as unsupported. A
 fresh-data hardware test still requires a separately authorized device/data
 plan; do not use the owner's current installation as disposable test data.
 
+### Signer continuity from signed f38
+
+The exact project-signed `f38da52` and neutral `cb9334` candidates used the same
+certificate sets for 103 standalone and 23 embedded APKs, the same 31 APEX
+container signers, and the same 30 independently verified APEX payload keys.
+The preserved shim and system OTA trust archive matched byte for byte. Across
+the compared package inventory, only Controls and Music changed bytes.
+Controls moved from version code 1 to 2, and Music retained code 34.
+
+This comparison addresses package-signing continuity for those two exact
+archives. Android's handling of existing settings, updated apps in userdata,
+optional Google packages, and a preserved-data boot still requires a device
+test. Development-key builds follow the separate key-migration rules above.
+
 Primary references:
 
 - https://source.android.com/docs/core/ota/sign_builds

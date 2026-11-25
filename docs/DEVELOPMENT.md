@@ -1475,3 +1475,18 @@ without private scripts, server access or an AI operator.
 - Reconstructed the seven-image stock rollback set from the same OTA. The
   full stock AVB chain and seven target sizes passed the saved slot-A check.
   Live recovery access and restoration remain untested for this candidate.
+
+## 2026-11-25 — File-backed rollback and signer continuity
+
+- Used the exact neutral ZIP inputs, seven saved restore files and native LP
+  parser in the file-backed installer rehearsal. It restored the exact saved
+  images after both an interrupted product write and a complete installation.
+  It refused rollback while a writer was simulated as active. The protected
+  metadata and partition fixture hashes matched throughout.
+- Separately rebuilt and verified all 13 AVB bindings for the saved restore
+  chain. The [rollback report](RESTORE_PLAN.md#exact-neutral-candidate-rollback-rehearsal)
+  states what was simulated and which hardware checks remain.
+- Compared the verified signatures on signed f38 and neutral cb9334. The
+  126 APK signer sets, 31 APEX container signer sets, 30 verified APEX
+  payload keys and system OTA certificate matched. Runtime userdata
+  compatibility remains open. Bazzite stayed running.

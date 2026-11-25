@@ -118,6 +118,10 @@ publication by this policy decision alone.
   LCARS preflight with those files.
 - [x] Reconstruct the seven [stock rollback inputs](RESTORE_PLAN.md#stock-rollback-input-rehearsal)
   and verify the entire stock AVB chain and saved slot-A fit offline.
+- [x] Exercise the exact neutral candidate's dry run, interrupted-write restore
+  and complete install/restore in a
+  [file-backed rehearsal](RESTORE_PLAN.md#exact-neutral-candidate-rollback-rehearsal).
+  Recovery transport and physical rollback remain separate hardware checks.
 - [ ] Validate candidate against read-only live partition metadata and snapshot status before installation.
 - [ ] Preserve and verify stock restore files, current recovery and necessary signing information.
 - [ ] Test a RAM candidate where possible before requesting persistent installation.
