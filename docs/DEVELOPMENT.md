@@ -1174,3 +1174,27 @@ without private scripts, server access or an AI operator.
   AVB/rollback remain open. No Jarvis2 state changed. Bazzite stayed online.
 - The ROM host suite passed 194 cases with the pinned AVB fixture and all eight
   Java suites. The source privacy and whitespace checks passed.
+
+## 2026-11-24 — Publish the ARM32 Recovery prototype recipe
+
+- Added the LCARS adapter and local stock image build recipe at Recovery
+  source commit `1409c21924d1040024c9521749248e05d7f78315` on `recovery17-lcars`.
+  The recipe verifies the original stock image and all four AOSP headers. It
+  reuses the recovery archive readback and protected-fragment repacker.
+- An initial CPIO mismatch was isolated to the inserted alias's inode. The
+  corrected recipe includes the stock trailer's inode when allocating the
+  alias. The regression test checks that case and exact metadata retention.
+  All 84 Recovery Python tests, C++ tests and pinned packing fixtures passed.
+- A fresh export of the committed source reproduced the exact plug-in and
+  unsigned `30625d39` image. An unpinned stock input was rejected before
+  creating output. Recovery CI passed. The image remains private and off-device.
+- Added the stock-format `vendor_boot` hash footer and rehearsed the binding
+  against the verified private f38 image set with an ephemeral root key.
+  The protected leaf is 67,108,864 bytes, SHA-256
+  `c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e`.
+  The new root binds the prototype and retains the other 28 descriptors and
+  the baseline flags and rollback policy. Full signature, child-key and leaf
+  checks passed. Substituting stock `vendor_boot` failed the new hash binding.
+  The production key was unused and hardware acceptance remains open.
+- The ROM host suite passed its 194 cases with pinned AVB and all eight Java
+  suites. Bazzite stayed running. Both release ZIPs are still drafts.

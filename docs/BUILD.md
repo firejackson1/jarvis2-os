@@ -183,11 +183,18 @@ avbtool.py source and runs these signed-image cases as part of host checks. The
 source SHA-256 is checked before execution; OpenSSL supplies fixture key generation.
 This fixture layout is not a full Android build or evidence of ROM bootability.
 
-## New custom recovery source (separate platform checkout)
+## Custom Recovery source
+
+The stock-compatible ARM32 LCARS prototype builds from a separate source
+checkout pinned at `1409c21924d1040024c9521749248e05d7f78315`. Its offline recipe
+uses the local LineageOS 21 tools, pinned AOSP Android 14 headers and the
+original stock `vendor_boot`. It reproduced the prototype image and keeps the
+stock Recovery and Fastbootd services. Signing and hardware qualification
+remain separate. [Stock-compatible LCARS recipe](https://github.com/firejackson1/jarvis2-os/blob/1409c21924d1040024c9521749248e05d7f78315/docs/STOCK_LCARS.md)
 
 The ARM64 LCARS recovery port is source-only on
 [`recovery17-lcars`](https://github.com/firejackson1/jarvis2-os/tree/recovery17-lcars),
-currently pinned at `650217efee5a79b05d923758993fd004d0489334`.
+with the earlier ARM64 source checkpoint at `650217efee5a79b05d923758993fd004d0489334`.
 Its root is a separate recovery device tree intended for
 `device/onn/jarvis2_recovery` in a separate LineageOS 24 / Android 17 checkout.
 It is not the LineageOS 21 ROM device tree or a ready-to-flash image. Keep the
