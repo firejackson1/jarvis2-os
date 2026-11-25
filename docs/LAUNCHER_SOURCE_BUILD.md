@@ -343,10 +343,10 @@ Use a fresh `output_dir` for each run.
 Two offline runs against the saved kernel and a third run against the
 newly generated kernel reproduced the exact `libapp.so` from the unsigned
 and signed launcher APKs. The r2 product image carries those same bytes.
-A native Flutter engine rebuild remains open. The
-[native build preflight](../manifests/launcher-flutter-native-preflight.json)
-records the Linux-host checkout and compares its declared dependencies with
-the staged source companion. All 43 native archives match selected
+The native Flutter rebuild also reproduced the exact ARMv7 `libflutter.so`
+shipped in the signed launcher. The
+[native build receipt](../manifests/launcher-flutter-native-preflight.json)
+records the pinned Linux-host checkout and source-companion coverage. All 43 native archives match selected
 checkout revisions and passed checksum readback. The same checkout selects
 78 additional Git repositories and 14 CIPD packages. The receipt records
 the immutable IDs resolved for those packages.
@@ -354,9 +354,19 @@ the immutable IDs resolved for those packages.
 The upstream ARMv7 builder uses the `ci/android_release` configuration.
 For the local build, use its GN arguments with `--no-rbe` to avoid Google's
 remote build service. The reference release ELF is ARM EABI and identifies
-Android API 21, NDK r26b, Clang 17.0.2 and Fuchsia LLD 18.0.0. Comparing the
-generated link graph and rebuilt ELF remains necessary to identify which
-checkout sources actually go into the library. [Pinned Flutter builder](https://github.com/flutter-team-archive/engine/blob/a18df97ca57a249df5d8d68cd0820600223ce262/ci/builders/linux_android_aot_engine.json)
+Android API 21, NDK r26b, Clang 17.0.2 and Fuchsia LLD 18.0.0. Run
+the following from the pinned engine source workspace with its resolved
+toolchain, `depot_tools` and host `pkg-config` available.
+
+```bash
+./flutter/tools/gn --target-dir ci/android_release --runtime-mode release \
+  --android --android-cpu arm --no-rbe --no-goma
+./flutter/third_party/ninja/ninja -C out/ci/android_release -j2 \
+  lib.stripped/libflutter.so
+sha256sum out/ci/android_release/lib.stripped/libflutter.so
+```
+
+[Pinned Flutter builder](https://github.com/flutter-team-archive/engine/blob/a18df97ca57a249df5d8d68cd0820600223ce262/ci/builders/linux_android_aot_engine.json)
 [Pinned Flutter AOT command construction](https://github.com/flutter/flutter/blob/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668/packages/flutter_tools/lib/src/base/build.dart)
 
 GN generated the Android API 21 ARMv7 link graph with LTO and NDK r26b.
@@ -437,8 +447,13 @@ git archive --format=tar --prefix="googletest-$revision/" "$revision" |
   gzip -n > "googletest-$revision.tar.gz"
 ```
 
-The final linked library comparison remains pending.
-[Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
+The rebuilt library is 7,534,416 bytes with SHA-256
+`efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61`.
+It matches both the pinned reference ELF and the signed launcher's ARMv7
+APK member. The independent readback confirmed all 27 named ELF sections,
+the GNU build ID, and the ICU data and size. The compiler dependency snapshot
+also matched the completed build's Ninja database.
+[Completed native build receipt](../manifests/launcher-flutter-native-preflight.json)
 
 ## Unsigned ARMv7 release and recipient signing
 

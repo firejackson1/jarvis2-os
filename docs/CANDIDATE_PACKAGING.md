@@ -252,6 +252,10 @@ python3 tools/verify-release-assets.py /path/to/downloaded-assets \
 The verifier checks the exact set, sizes, and hashes. The checksum list must
 cover each payload and the receipt. The JSON result can be compared with the
 hosting service's asset records to catch an incomplete or stale draft upload.
+On the private r2 delivery this check accepted all 14 files with the
+reviewed receipt. With the same receipt and checksum list it rejected a
+copy missing only the GoogleTest source supplement. The full native Flutter
+rebuild matched the engine member in the signed launcher from that delivery.
 Keep license review, signature trust and device qualification as separate
 release checks.
 

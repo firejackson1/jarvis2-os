@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "scope": "ARMv7 release-engine checkout inputs and staged source coverage before GN or compilation. Dependency selection includes tools and tests beyond the native link.",
+  "scope": "ARMv7 release-engine checkout, compiled inputs, corresponding-source coverage and final ELF replay. Dependency selection includes tools and tests beyond the native link.",
   "engine_revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
   "engine_deps_sha256": "ae9f2300acd2d6e733b5171e0566cae9fdfe126147ed92988835862bf53fe642",
   "vulkan_deps_sha256": "bb6ebb1a4fd5621ced278ed8566be91146e6156784b334801f03203aa4f096c2",
@@ -496,7 +496,7 @@
       "instance_id": "3HlEfp1nbzGbtJ4K3UQ1BM4nHieyCNc0enqBMsSRN7IC"
     }
   ],
-  "native_link_input_coverage_verified": false,
+  "native_link_input_coverage_verified": true,
   "generated_link_graph": {
     "format": 1,
     "scope": "Generated Flutter ARMv7 link and compile graph. Direct objects only. Archive internals, compiler-discovered includes, generated sources and resulting ELF require separate verification.",
@@ -875,7 +875,7 @@
       "assembly_match_running_build": true,
       "object_compared_with_running_build": true,
       "readonly_data_equals_exact_icu_blob_and_le32_size": true,
-      "final_elf_embedded_blob_verified": false,
+      "final_elf_embedded_blob_verified": true,
       "host_replay_sha256": "49c918bfd1317ef7167e5e9596e430f5eaa8a3c3613cae85d1fbca3684de068f",
       "reference_embedded_data": {
         "reference_elf_sha256": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
@@ -1167,5 +1167,63 @@
     "primary_launcher_source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
     "private_delivery_file_count": 14,
     "private_delivery_receipt_sha256": "494ba5714707bce48b1c2551fbe443f78fcd23d3d0e02ef248376e7749dde788"
+  },
+  "completed_native_rebuild": {
+    "flutter_revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+    "gn_configuration": "ci/android_release",
+    "gn_command_arguments": [
+      "--target-dir",
+      "ci/android_release",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu",
+      "arm",
+      "--no-rbe",
+      "--no-goma"
+    ],
+    "ninja_target": "lib.stripped/libflutter.so",
+    "build_completed_utc": "2026-11-25T14:17:51Z",
+    "reference_and_rebuilt_sha256": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
+    "reference_and_rebuilt_bytes": 7534416,
+    "gnu_build_id": "b355766da0f31bf8881a1c7f1e9748c4f49bf94e",
+    "exact_complete_elf_match": true,
+    "matching_named_section_count": 27,
+    "matching_import_count": 486,
+    "matching_export_count": 46,
+    "matching_needed_shared_libraries": [
+      "libc.so",
+      "libdl.so",
+      "libm.so",
+      "libandroid.so",
+      "libEGL.so",
+      "libGLESv2.so",
+      "liblog.so",
+      "libjnigraphics.so"
+    ],
+    "icu_data_file_offset": 509248,
+    "icu_following_le32_size_matches": true,
+    "apk_engine_member_readback": {
+      "signed_launcher_apk": "LTvLauncher-2026.11.23-code8117-neutral-armeabi-v7a.apk",
+      "signed_launcher_apk_sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+      "engine_member": "lib/armeabi-v7a/libflutter.so",
+      "engine_bytes": 7534416,
+      "engine_sha256": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
+      "exact_apk_engine_reference_and_rebuild_match": true,
+      "host_report_sha256": "4c26d0960578101c17791dd7bb0ff52fab00d3376c36529d49f7ab601946b7ec"
+    },
+    "independent_elf_readback_sha256": "b58fb9ab94b532f6d6afce41f399cfdafa0f70b285fe638069912e21e12efcc4",
+    "final_build_readback_hashlist_sha256": "b09ae20d6a690b61c0f17496714a7e75aadb552adb0a2558bb6ad24bc7d7f7b8",
+    "declared_input_lines": 8141,
+    "build_command_lines": 4496,
+    "compiler_dependency_log_lines": 1441544,
+    "compiled_dependency_snapshot_matches_final_build": true,
+    "recipient_delivery_readback": {
+      "files_verified": 14,
+      "staging_receipt_sha256": "494ba5714707bce48b1c2551fbe443f78fcd23d3d0e02ef248376e7749dde788",
+      "verified_download_report_sha256": "4c5955c293972d5c1900448622d6b81debec4eb735e790d850890b2d4b6e68ba",
+      "source_supplement_omission_rejected": true,
+      "omission_control_log_sha256": "0e732776272f30ce92356b30c3b1ebd4e3be03180e3c2acdd700bb574dfd95ad"
+    }
   }
 }

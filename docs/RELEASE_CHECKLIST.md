@@ -345,8 +345,10 @@ publication by this policy decision alone.
 - [x] Verify the actual ARMv7 link response and all 3,124 compiler
   dependency records. Stage and verify the pinned GoogleTest supplement
   alongside the existing launcher source companion.
-- [ ] Compare the rebuilt Flutter ARMv7 library with the pinned release
-  ELF and resolve any differences.
+- [x] Reproduce the complete Flutter ARMv7 library byte for byte against
+  both the pinned release ELF and the signed launcher APK member.
+- [x] Verify the private r2 download set with the recipient verifier and
+  reject a copy with the GoogleTest source supplement omitted.
 - [x] Verify production-key package/APEX signing in the private rehearsal with
   pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
   Whole-image AVB, OTA trust and hardware acceptance remain separate gates.

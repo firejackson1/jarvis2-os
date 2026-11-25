@@ -2319,3 +2319,12 @@ without private scripts, server access or an AI operator.
   source archive twice and checked all 245 contents and modes against
   Git. Staged the archive beside the matching launcher source companion
   in a new private 14-file delivery and reran every asset checksum.
+
+- Built the complete Flutter ARMv7 release library from the pinned
+  checkout. Whole-file comparison matched the upstream reference and
+  the engine member in the signed launcher. All 27 named ELF sections
+  and the GNU build ID matched. The separate final readback verified
+  the link inputs and the completed compiler-dependency database.
+- Ran the public recipient verifier against the private 14-file r2
+  delivery. It accepted the reviewed set and rejected the same receipt
+  and checksum list with the GoogleTest source archive omitted.
