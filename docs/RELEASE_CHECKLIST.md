@@ -295,6 +295,9 @@ publication by this policy decision alone.
   companion, regenerate the plug-in registrant and Dart kernel, and
   reproduce the shipped ARMv7 AOT library from the new kernel.
   [Source-to-kernel receipt](../manifests/launcher-flutter-frontend-rebuild.json)
+- [x] Compile and relocate DataStore's protobuf dependency from the staged
+  Java sources and reproduce the complete JAR used to build the launcher.
+  [Protobuf recipe and evidence](LAUNCHER_SOURCE_BUILD.md#reproducing-the-datastore-protobuf-jar)
 - [x] Verify production-key package/APEX signing in the private rehearsal with
   pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
   Whole-image AVB, OTA trust and hardware acceptance remain separate gates.

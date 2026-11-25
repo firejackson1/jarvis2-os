@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "scope": "Rebuild the launcher's AndroidX DataStore protobuf dependency from the staged Java sources",
+  "source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+  "protobuf": {
+    "coordinate": "com.google.protobuf:protobuf-javalite:4.28.2",
+    "release": "https://github.com/protocolbuffers/protobuf/releases/tag/v28.2",
+    "sources_jar_sha256": "2460a92938259e4441826e57638193d0bde9cb5cdd0dafd5367aacb833f9a971",
+    "maven_binary_jar_sha256": "dcbac0ae7a6ff7a751ca426bc49008f80c7a5d4ecde9d84750ca86dd2f614db3",
+    "compiled_java_files": 159,
+    "compiled_class_files": 523
+  },
+  "androidx": {
+    "coordinate": "androidx.datastore:datastore-preferences-external-protobuf:1.1.3",
+    "source_revision": "ae63f655454c1548483e3f34d8f47d98ae21119b",
+    "repackage_plugin_source_sha256": "729c094e60ee179bbc0dda2d2689daef1c3ceac85ac6107d097f1200adc1f886",
+    "relocation_from": "com.google.protobuf",
+    "relocation_to": "androidx.datastore.preferences.protobuf",
+    "dropped_resource_suffixes": [".proto", ".proto.bin"],
+    "online_google_maven_matches_launcher_cache": true
+  },
+  "tools": {
+    "java_compiler": "Eclipse Temurin 11.0.25+9",
+    "java_compiler_archive_sha256": "191baa2e052627614022171400a917d28f0987dc54da48aaf07b06f552bb9884",
+    "javac_flags": ["-source", "8", "-target", "8", "-g", "-parameters"],
+    "gradle_jvm": "OpenJDK 21.0.13.1",
+    "gradle": "8.7-rc-1",
+    "gradle_distribution_sha256": "4354bc6c46d1f1e1e37cb371b7c31556a4427eb3f57d03c23e5aae8aa606aedb",
+    "shadow": "8.1.1",
+    "shadow_jar_sha256": "084197555590a53bb21b59508a3330559f536ddb448eafd1ec675f5462036fcf",
+    "gradle_verification_file": "manifests/launcher-protobuf-gradle-verification.xml",
+    "gradle_verification_sha256": "db9134cce204b975083341bebf452b776f90755c07b85f3e87850207b6cdaefa",
+    "gradle_verification_artifacts": 51
+  },
+  "comparison": {
+    "expected_jar_bytes": 1048830,
+    "expected_jar_sha256": "fcb3f373cf743426c85ebb0d3cc644aefaf26f39b7fa55bb90238d41b689eca7",
+    "archive_members": 529,
+    "binary_relocation_matches_byte_for_byte": true,
+    "source_compilation_and_relocation_match_byte_for_byte": true,
+    "fresh_documented_recipe_matches_byte_for_byte": true,
+    "source_only_input": true
+  }
+}

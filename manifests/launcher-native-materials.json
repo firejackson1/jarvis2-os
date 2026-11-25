@@ -58,6 +58,7 @@
     "relocation_to": "androidx.datastore.preferences.protobuf",
     "shadow_version": "8.1.1",
     "declared_release_recipe_verified": true,
-    "binary_rebuild_performed": false
+    "binary_rebuild_performed": true,
+    "binary_rebuild_evidence": "manifests/launcher-protobuf-rebuild.json"
   }
 }

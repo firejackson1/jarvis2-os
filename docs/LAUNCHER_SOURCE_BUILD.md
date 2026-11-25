@@ -48,7 +48,8 @@ zero-class compatibility placeholders, native SQLite, native Flutter, and the
 AndroidX relocated protobuf supplement. Empty source classifiers are retained
 as evidence and are not substituted for the supplemental actual source.
 The AndroidX 1.1.3 release recipe pins protobuf 4.28.2 and its namespace
-relocation; full protobuf source and BSD license are supplied. SQLite 3.50.3
+relocation. The supplied sources rebuild the exact published binary with the
+[relocation recipe below](#reproducing-the-datastore-protobuf-jar). SQLite 3.50.3
 source and the exact native build recipe are supplied separately.
 
 `build-records/` contains sanitized actual dependency locks, strict verification
@@ -97,6 +98,95 @@ The shipped library copies in Maven, the r2 APK and its extracted JNI
 directory are identical. All four local builds match those shipped bytes
 outside the 20-byte GNU build-ID descriptor. The original Maven build ID
 differs. [SQLite replay receipt](../manifests/launcher-sqlite-rebuild.json)
+
+## Reproducing the DataStore protobuf JAR
+
+Verify `sources/maven/protobuf-javalite-4.28.2-sources.jar` from the staged
+source companion. Set `PROTOBUF_SOURCES` to the absolute path to that file,
+`PROTOBUF_JAVAC` to the Temurin **11.0.25+9** `javac`, and `GRADLE` to the
+Gradle **8.7-rc-1** executable. Run Gradle itself with OpenJDK **21.0.13.1**.
+The release's wrapper identifies that Gradle distribution, and the AndroidX
+recipe uses Shadow **8.1.1**. [AndroidX release recipe](https://android.googlesource.com/platform/frameworks/support/+/ae63f655454c1548483e3f34d8f47d98ae21119b/datastore/datastore-preferences-external-protobuf/build.gradle)
+
+In a fresh directory, put the pinned
+[Gradle dependency checksums](../manifests/launcher-protobuf-gradle-verification.xml)
+at `gradle/verification-metadata.xml`. Save the following as `settings.gradle`:
+
+```groovy
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+rootProject.name = 'protobuf-relocation-replay'
+```
+
+Save this as `build.gradle`:
+
+```groovy
+plugins {
+    id 'java-library'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+configurations {
+    protobufInput
+}
+
+dependencies {
+    protobufInput files('protobuf-input.jar')
+}
+
+tasks.register('replay', com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+    from(sourceSets.main.output)
+    configurations = [project.configurations.protobufInput]
+    relocate 'com.google.protobuf', 'androidx.datastore.preferences.protobuf'
+    archiveFileName = 'protobuf-relocated.jar'
+    destinationDirectory = layout.buildDirectory.dir('relocated')
+    exclude '**/*.proto', '**/*.proto.bin'
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    manifest.attributes('Manifest-Version': '1.0')
+}
+```
+
+Compile and relocate the classes:
+
+```sh
+set -eu
+export LC_ALL=C TZ=UTC
+printf '%s  %s\n' 2460a92938259e4441826e57638193d0bde9cb5cdd0dafd5367aacb833f9a971 \
+  "$PROTOBUF_SOURCES" | sha256sum -c
+mkdir source classes
+(
+  cd source
+  jar xf "$PROTOBUF_SOURCES"
+  find com -name '*.java' -print | sort > ../sources.args
+  "$PROTOBUF_JAVAC" -J-Xmx384m -source 8 -target 8 -g -parameters \
+    -d ../classes @../sources.args
+)
+python3 - <<'PY'
+from pathlib import Path
+from zipfile import ZipFile
+
+classes = Path('classes')
+with ZipFile('protobuf-input.jar', 'x') as archive:
+    for path in sorted(classes.rglob('*.class')):
+        archive.writestr(path.relative_to(classes).as_posix(), path.read_bytes())
+PY
+"$GRADLE" -Dorg.gradle.jvmargs=-Xmx512m --no-daemon --max-workers=1 \
+  --console=plain --offline replay
+printf '%s  %s\n' fcb3f373cf743426c85ebb0d3cc644aefaf26f39b7fa55bb90238d41b689eca7 \
+  build/relocated/protobuf-relocated.jar | sha256sum -c
+```
+
+Use a cache populated from the official Gradle Plugin Portal and Maven Central.
+Gradle may need an initial online run with the same strict verification metadata
+to populate an empty cache. The verified offline replay compiled 159 source files
+to 523 classes. The complete 529-member output matched the Google Maven JAR and
+the launcher dependency lock. Separately, the same relocation of the pinned Maven
+`protobuf-javalite` binary reproduced the same output. [Rebuild receipt](../manifests/launcher-protobuf-rebuild.json)
 
 ## Recipient tools
 

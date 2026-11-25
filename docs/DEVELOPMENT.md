@@ -2141,3 +2141,15 @@ without private scripts, server access or an AI operator.
   offline ARMv7 AOT compiler. The result matches the complete shipped
   `libapp.so` byte for byte. The native engine remains a pinned upstream
   artifact. [Frontend rebuild receipt](../manifests/launcher-flutter-frontend-rebuild.json)
+
+### Launcher DataStore protobuf rebuild — 2026-11-25
+
+- Verified the published Maven binaries against the exact raw protobuf input
+  and the selected launcher runtime dependency. Replaying the AndroidX
+  relocation on the raw binary matched the entire published 1.1.3 JAR.
+- Compiled all 159 Java files from the pinned source companion with Temurin
+  11.0.25+9. Shadow 8.1.1 under Gradle 8.7-rc-1 relocated the 523 compiled
+  classes in an isolated offline workspace. All 529 archive entries and the
+  complete JAR matched the launcher dependency byte for byte. The commands
+  from the published recipe repeated the match in a second fresh directory.
+  [Rebuild receipt](../manifests/launcher-protobuf-rebuild.json)
