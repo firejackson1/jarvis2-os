@@ -2303,3 +2303,9 @@ without private scripts, server access or an AI operator.
   shared libraries, two startup files, one builtins archive and the pinned
   Flutter export script. All input digests matched and the scratch ELF
   reproduced byte for byte. Complete link and dependency audits are pending.
+
+- Replayed 86 Impeller shader compile actions, seven archive builds and
+  seven C++ embedding steps using the actual host tools and pinned
+  Ninja commands. All 451 compared generated files matched, including
+  all 51 shader translation units that feed the ARMv7 engine. The final
+  library comparison and compiled-object dependency audit remain pending.

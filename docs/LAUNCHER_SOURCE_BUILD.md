@@ -375,8 +375,7 @@ Use `ninja -t query` on the six static libraries named by the link.
 Their archive rule passes the explicit input list to `llvm-ar`. All
 78 planned members matched compile database commands. Of those, 77
 map to tracked files in five pinned projects with staged archives.
-The Dart version member is generated. The generated inputs,
-compiler-discovered headers and final ELF still need complete readback.
+The Dart version member is generated.
 
 Query the 53 generated source paths with `ninja -t query` and
 `ninja -t inputs`. Their rules generate 51 shader sources, one ICU data
@@ -384,8 +383,16 @@ assembly file and one Dart version source. The transitive query includes
 987 paths verified in 12 pinned Git trees with staged archives, 1,295
 intermediate build paths and Dart's Git reflog. The Dart generator produced
 the exact live build bytes from two isolated reflogs at the pinned revision
-with the original shallow boundary preserved. The compiler-generated
-header dependency log remains a separate input to the final audit.
+with the original shallow boundary preserved.
+
+Replay the Impeller generator graph using the built host `impellerc`
+and `shader_archiver`, with the original Ninja commands captured using
+`ninja -t commands -s`. Follow the archive inputs to include the shader
+compilation steps that do not supply a linked translation unit directly.
+Running 86 shader compilations, seven archive actions and seven C++
+embedding actions in a scratch directory matched 451 generated build
+files byte for byte. These include all 51 shader translation units
+in the native link, plus reflection data, bytecode and archives.
 
 All six compiled static libraries passed exact `llvm-ar` member name,
 order and byte comparisons against the 78 compiled objects listed in the
@@ -397,15 +404,14 @@ It matches the bytes in the pinned reference ELF's `.rodata`, followed
 by the matching 32-bit size. Replaying Dart's assembly generator matched
 the live build's source. Compiling that source in a scratch directory
 with the original flags produced an ARM object whose read-only section
-contains the same blob and size. The main build's final ELF remains pending.
+contains the same blob and size.
 
 The pinned Clang driver invoked its bundled LLD. A scratch link using
 the release flags resolved two Android API 21 startup objects, eight
 NDK shared libraries and one compiler builtins archive. LLD's reproduction
 archive contains those eleven files and the pinned Flutter export script.
 All twelve digests matched their source files. Running LLD with only the
-archive contents reproduced the exact scratch ELF32 ARM output. The probe
-covers toolchain resolution. The complete Flutter engine link is pending.
+archive contents reproduced the exact scratch ELF32 ARM output.
 
 Ninja records compiler dependencies for all 3,124 scoped link and archive
 objects. The first 2,649 records matched the compiled object timestamps

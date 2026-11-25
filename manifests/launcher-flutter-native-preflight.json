@@ -1055,5 +1055,46 @@
     "full_dependency_readback": false,
     "host_report_sha256": "350a41f499f67e5ba219b12207acf2fd0b523bc51d6b86e5e309a21ec8fdfe0f",
     "rule_inventory_sha256": "74d048a11cf9f84a2af260af1813f057a2d2437ce943bf5d1c0d6629369ff69a"
+  },
+  "shader_generator_replay": {
+    "action_counts": {
+      "impellerc": 86,
+      "xxd": 7,
+      "shader_archiver": 7
+    },
+    "build_action_sha256": "8ecf2391304191c48c3d80a97383f7bbd6f7a9570624a88140c51a280a35e1d0",
+    "tools": {
+      "src/out/ci/android_release/clang_x64/impellerc": {
+        "bytes": 7592064,
+        "sha256": "7aa3ecc73236e4d6c836d8b6ec9d850407cd85cef3c2a1a4c7a3b87adf5fa32b"
+      },
+      "src/out/ci/android_release/clang_x64/shader_archiver": {
+        "bytes": 264608,
+        "sha256": "2b39cd557d2c7e8c118b8f818f4d1006b674a17697106e964572b254548caa8b"
+      },
+      "src/build/gn_run_binary.py": {
+        "bytes": 823,
+        "sha256": "703903babcbc4cbce6dcf701862a35f40996a1e50bae13ce78049e23ffc44193"
+      },
+      "src/flutter/impeller/tools/xxd.py": {
+        "bytes": 2543,
+        "sha256": "1f7d66e8c75789064bdc592699ca15da128d7d6088cc8bafc96efb309af8a1ec"
+      }
+    },
+    "exact_generated_translation_units": 51,
+    "matched_generated_outputs": 451,
+    "replayed_dependency_file_bytes": false,
+    "replay_uses_compiled_tools_from_armv7_build": true,
+    "matched_outputs_by_suffix": {
+      ".cc": 93,
+      ".gles": 42,
+      ".h": 93,
+      ".json": 86,
+      ".shar": 7,
+      ".spirv": 86,
+      ".vkspv": 44
+    },
+    "host_report_sha256": "f251a6ee15202004217095af43f528dd82f9dd7d77b288e52efeb63323813a09",
+    "scope": "Replayed C++ shader generation, bytecode compilation, shader archiving and embedding against the matching Flutter ARMv7 build outputs"
   }
 }

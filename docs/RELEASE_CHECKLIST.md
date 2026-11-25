@@ -338,6 +338,8 @@ publication by this policy decision alone.
   and match the exact build output.
 - [x] Verify the staged ICU data against the reference engine ELF and
   reproduce its generated assembly and ARM object.
+- [x] Reproduce all 51 linked Impeller shader sources byte for byte by
+  replaying their compilation, archiving and embedding rules offline.
 - [x] Verify the pinned Flutter ARMv7 linker/NDK inputs and reproduce the
   scratch link from its captured files. The complete engine link is separate.
 - [ ] Verify the Flutter native ARMv7 link inputs and compare the rebuilt
