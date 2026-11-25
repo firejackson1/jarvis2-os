@@ -155,5 +155,88 @@
     "platform_policy_revision": "83bf38d56eac5d44b59bad9b497521274734ee34",
     "lineage_policy_revision": "126b2bdd0f6fdc815999e44b9e134c7ae6c39d8c",
     "full_user_variant_built": false
+  },
+  "user_variant_replay": {
+    "format": 1,
+    "policy_source_report": {
+      "pinned_host_graph_rule_sha256": {
+        "plat_sepolicy.cil": "7fe39b6f219138ef2ecd6ab0ffb70c9f76c04fc4285e56148531b4b91ae257fc",
+        "plat_sepolicy.conf": "e6669595ee87b4c35e00cd4a3cb3f4d128cac6f2807418c2e486cfb66b015320",
+        "product_sepolicy.cil": "7328b9f1ad8ccdeda21ce23b3f01d7486000ce8c48e3feac7d688a5af4d4d40a",
+        "product_sepolicy.conf": "77ff8d856dde93a16f87451fa7632b77806c5e163d3666130183d963199574ca",
+        "system_ext_sepolicy.cil": "dc202f08b93559f0e022981c98e2ffcf1ad879fef3059c8c764fc20f3bd6c370",
+        "system_ext_sepolicy.conf": "da4a6add4e5954b28525b0b0173fc79c8665becc9e335598c8118468d1f12978"
+      },
+      "generated_policy": {
+        "userdebug": {
+          "plat_sepolicy.cil": {
+            "bytes": 2302144,
+            "sha256": "da5f03ff09ecb2779fbc96db84cb24dcc2d3c63e850eab2dedf23c41efb1d0d9",
+            "permissive_types": [
+              "su"
+            ]
+          },
+          "system_ext_sepolicy.cil": {
+            "bytes": 96986,
+            "sha256": "95a22e6135148b34658d914354dbbb262afea140ac3844f95ec3ee4a8db69344",
+            "permissive_types": [
+              "backuptool"
+            ]
+          },
+          "product_sepolicy.cil": {
+            "bytes": 129,
+            "sha256": "89eeff5cbabfb592996bf45fe3d8a12206a9b1091d9dc5ab2ffd8e35b24c5292",
+            "permissive_types": []
+          }
+        },
+        "user": {
+          "plat_sepolicy.cil": {
+            "bytes": 2210887,
+            "sha256": "6425e30da75e3595543d189037b9332104386a3c45cf44561512aef2f1e96c52",
+            "permissive_types": []
+          },
+          "system_ext_sepolicy.cil": {
+            "bytes": 96505,
+            "sha256": "7e531a3f6134198e5fd7f9fd99bab542938eb6be60e4ea749af1a4a28beebdd5",
+            "permissive_types": []
+          },
+          "product_sepolicy.cil": {
+            "bytes": 129,
+            "sha256": "89eeff5cbabfb592996bf45fe3d8a12206a9b1091d9dc5ab2ffd8e35b24c5292",
+            "permissive_types": []
+          }
+        }
+      },
+      "userdebug_control_matches_r2_images": true,
+      "user_m4_variant_is_only_command_flag_change": true,
+      "full_user_rom_built": false
+    },
+    "r2_policy_replay_sha256": "fab6bf5b0e180fee223aaf514f3b5d6110e1357fa39a5d8b775f90140cbf7a5d",
+    "init_flags": [
+      "-m",
+      "-M",
+      "true",
+      "-G",
+      "-N",
+      "-c",
+      "30"
+    ],
+    "combined_user_policy": {
+      "sha256": "86dd6e7b4aacdd76397d602ca83fb51156ef1091f9d9d29207ac4fca9880e29b",
+      "bytes": 784198
+    },
+    "identical_repeat": true,
+    "permissive_types": [],
+    "strict_compiler_exit_code": 255,
+    "strict_failed_assertions": 25,
+    "strict_failed_assertion_origins_in_retained_images": {
+      "vendor": 12
+    },
+    "strict_assertions_from_generated_variant_files": 13,
+    "strict_compiler_log_sha256": "522e3a57addcb399e1e50cb6c0415df3ca1411b20a7e7ee47baa860d67e7dea8",
+    "r2_strict_failed_assertion_comparison": 53,
+    "device_contacted": false,
+    "complete_user_rom_built": false,
+    "report_sha256": "900b31f58984be9a43b1644879ea5d473da7c454d1c64ad9fe487c9d99020216"
   }
 }

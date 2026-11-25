@@ -78,6 +78,16 @@ The complete `user` build, strict compatibility review, and on-device
 enforcement remain open.
 [Android split policy documentation](https://source.android.com/docs/security/features/selinux/build#precompiled-selinux-policy)
 
+The variant replay ran the retained Soong rules for platform, system extension
+and product policy. The `userdebug` control matched all three r2 files byte
+for byte. Setting `target_build_variant=user` in the three policy generation
+commands produced new platform and system extension policies. The product
+policy stayed byte-identical. Combining the regenerated files with the
+reviewed stock policy twice produced identical binaries with zero permissive
+domains. The strict compiler still reported 25 assertion failures, down
+from 53. These results cover the policy inputs and compilation. The full
+`user` ROM, runtime enforcement and strict compatibility review remain open.
+
 The [privacy scan receipt](../manifests/neutral-r2-privacy-scan.json) covers
 6,119 regular files in the exact r2 userspace images, including 765 files
 inside the 31 APEX payloads. The scan also searched supported compressed

@@ -2233,3 +2233,11 @@ without private scripts, server access or an AI operator.
   53 assertion failures. The exact candidate has yet to boot for runtime
   enforcement and the complete `user` variant is unbuilt.
   [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
+
+- Replayed six Soong commands for `system`, `system_ext` and `product`
+  policy under both variant values. The three `userdebug` outputs exactly
+  match the r2 filesystems. Replacing those three files with the `user`
+  outputs in the separate boot-policy replay produced identical binaries
+  on two runs, both with zero permissive domains. The same strict mode
+  that reported 53 assertions in r2 still reports 25. These are host
+  policy checks. The full variant and hardware checks remain open.

@@ -170,6 +170,9 @@ publication by this policy decision alone.
 - [x] Replay the r2 split policy with stock vendor and ODM offline. Identify
   both permissive domains and record strict compiler results.
   [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
+- [x] Regenerate the three `user` policy files from the retained build rules.
+  Verify zero permissive domains after combining them with stock inputs
+  and record the 25 remaining strict assertion failures.
 - [ ] Evaluate the full `user` variant, repeat the policy check on its exact
   images and review the strict assertion failures before hardware validation.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
