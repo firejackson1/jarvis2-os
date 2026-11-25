@@ -11,19 +11,29 @@ prepare source and build inputs for a neutral build with locally supplied keys.
 ## Source and inputs
 
 Initialize Repo in a new Android source directory. This uses the manifest from
-the exact product revision and Repo v2.73.
+the exact product revision and Repo v2.73. Put Git LFS on `PATH` before
+syncing. Git LFS 3.6.1 was tested. Repo's skip-smudge checkout still calls
+the Git LFS executable, and the ARM WebView prebuilt needs a separate pull.
 
 ```bash
 set -euo pipefail
 repository=https://github.com/firejackson1/jarvis2-os.git
 revision=cb9334ee26ccd80d9f5e5d9276905440b93eaeba
+git lfs version
 repo init -u "$repository" -b "$revision" -m manifests/lineage21-pinned.xml \
   --repo-url https://gerrit.googlesource.com/git-repo --repo-rev v2.73 --no-clone-bundle
 test "$(git -C .repo/manifests rev-parse HEAD)" = "$revision"
 printf '%s  %s\n' \
   5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7 \
   .repo/manifests/manifests/lineage21-pinned.xml | sha256sum -c -
-repo sync -c -j4 --no-tags --fail-fast
+repo sync -c -j4 --no-interleaved --no-manifest-update --no-tags --fail-fast
+webview=external/chromium-webview/prebuilt/arm
+test "$(git -C "$webview" rev-parse HEAD)" = 1c11dffe87310d3c81e2ad93b9f0a7e8c09adfc0
+git -C "$webview" lfs install --local --skip-repo --skip-smudge
+git -C "$webview" lfs pull --include=webview.apk --exclude=
+test "$(stat -c %s "$webview/webview.apk")" -eq 98528166
+printf '%s  %s\n' f7ccf01cf3ec8555fd4500ddc7512430cb2cd3cadd1806a166be2092d25c7298 \
+  "$webview/webview.apk" | sha256sum -c -
 git clone --no-checkout "$repository" device/onn/jarvis2
 git -C device/onn/jarvis2 checkout --detach "$revision"
 ```
@@ -32,6 +42,10 @@ The [builder preflight](../manifests/neutral-r2-builder-preflight.json) verifies
 the public initialization and all 1,430 listed paths. The rehearsal synced
 Lineage's vendor source and Music against their exact pins. The earlier native
 build audit checked all 1,430 project revisions and the twelve patched files.
+One clean sync stopped while initializing the ARM WebView worktree when Git
+LFS was missing. Adding the executable let the same checkout finish at the
+pinned commit. Pulling through the repository-local filter replaced the
+133-byte pointer with the APK at the SHA-256 above.
 
 1. [Download and extract the exact stock OTA](STOCK_FOUNDATION.md). With an
    EROFS-capable `fsck.erofs` on `PATH`, stage the extracted images from the

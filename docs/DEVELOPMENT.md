@@ -1558,6 +1558,23 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Clean WebView prebuilt checkout — 2026-11-25
+
+- Reproduced the initial clean ROM sync failure in the ARM WebView prebuilt
+  project alone. Repo had installed a local skip-smudge filter that invokes
+  Git LFS. The host lacked that executable.
+- Extracted the verified Debian Git LFS 3.6.1 package into the isolated job
+  workspace. The same local sync then checked out WebView Git revision
+  `1c11dffe87310d3c81e2ad93b9f0a7e8c09adfc0`. A repository-local LFS
+  install and pull resolved the 133-byte pointer to the 98,528,166-byte APK,
+  matching SHA-256 `f7ccf01cf3ec8555fd4500ddc7512430cb2cd3cadd1806a166be2092d25c7298`.
+- The interrupted sync also left five empty Git metadata directories across
+  the ARM64 and x86 WebView projects. Preserved those incomplete directories
+  outside the checkout and verified all three repaired project revisions.
+  Resumed the original workspace with the existing objects and separate
+  fetch and checkout phases. The queued compiler requires the verified
+  WebView APK receipt. The full clean compile remains open.
+
 ### Exact neutral r2 stock-file boundary — 2026-11-25
 
 - Compared 14 pinned stock partition images, 996 regular files from seven
