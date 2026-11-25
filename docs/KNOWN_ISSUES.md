@@ -54,6 +54,11 @@ declares the 2026-11-01 Android security patch level. The required stock
 foundation declares 2026-06-01. These are the declarations read from the
 reviewed files. The audits did not verify the individual security fixes.
 
+The r2 `userdebug` policy keeps `su` and `backuptool` permissive. The
+offline merge with stock vendor and ODM compiles with Android's boot flags.
+Strict policy compatibility and runtime SELinux enforcement are still under
+review. [SELinux replay](../manifests/neutral-r2-selinux-replay.json)
+
 The saved slot A layout fit all seven target and restore images. A saved slot B
 view had no allocated logical foundation, so it cannot serve as a verified
 fallback. Both slots share userdata and logical partition metadata. A read-only

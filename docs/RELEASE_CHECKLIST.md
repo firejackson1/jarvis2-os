@@ -167,6 +167,11 @@ publication by this policy decision alone.
 - [x] Generate the private key set and verify an encrypted off-host backup, including archive identity and all 204 archived files. Keys have been used in private package/APEX and launcher signing rehearsals; final image signing and hardware acceptance remain open.
 - [ ] Make root debugging and unauthenticated network ADB opt-in in public builds; retain normal USB authorization by default.
 - [ ] Verify enforcing SELinux, app privilege allowlists, exported components and microphone permissions.
+- [x] Replay the r2 split policy with stock vendor and ODM offline. Identify
+  both permissive domains and record strict compiler results.
+  [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
+- [ ] Evaluate the full `user` variant, repeat the policy check on its exact
+  images and review the strict assertion failures before hardware validation.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
 - [ ] Add and test remote-shortcut service activation in first-run/Settings without ADB or an AI. The clean f38 trial included the app but left its accessibility service disabled; owner-verified side panels returned after enabling it. Never bake in an owner's service list.
 - [x] Add exact-service status and Enable/Manage activation entry to controller-settings source; compile and verify the private signed 1.1 app. This does not complete the preceding installation and normal-user UI test.

@@ -2218,3 +2218,18 @@ without private scripts, server access or an AI operator.
   [Companion review](../manifests/neutral-r2-companion-privacy.json)
 - Host verification passed 222 Python tests with the pinned AVB fixture
   and all eight Java suites.
+
+### Neutral r2 split SELinux policy replay — 2026-11-25
+
+- Rehashed and re-extracted `system`, `system_ext`, `product` and the
+  pinned stock `vendor` and `odm` images. All three policy identifiers
+  differ from the stock precompiled image. Replayed the pinned init
+  compiler command with vendor mapping 34.0 and verified three matching
+  outputs. The host policy reader requires its pinned libc++ and MLS mode.
+- The binary analysis found `su` and `backuptool` permissive in r2 and zero
+  permissive domains in the stock policy. Expanded the original policy
+  macro with both variant values. The two declarations are present in
+  `userdebug` and absent in `user`. Separate strict compilation reported
+  53 assertion failures. The exact candidate has yet to boot for runtime
+  enforcement and the complete `user` variant is unbuilt.
+  [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)

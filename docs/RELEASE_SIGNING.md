@@ -61,6 +61,23 @@ the exact three package-specific privileged allowlist entries. Fresh-boot
 USB authorization, network and root debugging behavior, and SELinux mode
 still require runtime checks on this candidate.
 
+The [split SELinux replay](../manifests/neutral-r2-selinux-replay.json)
+rehashed and re-extracted all five relevant images. All three r2 policy
+identifiers differ from the stock ODM precompiled identifiers, so Android
+init is expected to compile the split inputs on boot. The host replay used
+the same eight policy files, vendor mapping 34.0, and policy compiler flags
+as pinned init. Three compiles produced the same binary.
+
+The resulting policy has two permissive domains, `su` and `backuptool`.
+The stock precompiled policy has zero. The pinned source macro emits both
+declarations for `userdebug` and omits them for `user`. A separate strict
+compile reported 53 `neverallow` assertion failures in the mixed policy.
+Init's normal on-boot compiler uses `-N` to skip those build-time
+assertions. The replay verifies compilation and the per-domain flags.
+The complete `user` build, strict compatibility review, and on-device
+enforcement remain open.
+[Android split policy documentation](https://source.android.com/docs/security/features/selinux/build#precompiled-selinux-policy)
+
 The [privacy scan receipt](../manifests/neutral-r2-privacy-scan.json) covers
 6,119 regular files in the exact r2 userspace images, including 765 files
 inside the 31 APEX payloads. The scan also searched supported compressed

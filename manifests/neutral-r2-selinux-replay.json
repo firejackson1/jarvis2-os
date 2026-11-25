@@ -1,0 +1,159 @@
+{
+  "format": 1,
+  "scope": "Host replay of split SELinux policy selection and exact CIL inputs from neutral r2 and pinned US stock vendor and ODM",
+  "rom_zip_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+  "stock_firmware_build": "15640252",
+  "inputs": {
+    "system": {
+      "bytes": 483131392,
+      "sha256": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42"
+    },
+    "system_ext": {
+      "bytes": 96161792,
+      "sha256": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b"
+    },
+    "product": {
+      "bytes": 541949952,
+      "sha256": "541d4c89120b66f57a26021bf1c2fd5942189d47f13ec1b5a53ad9cd854ec16c"
+    },
+    "vendor": {
+      "bytes": 81158144,
+      "sha256": "852f34c0aafaf28b4d56c39f715fa553bdd9a05ad487446c9e38d9e9318f0562"
+    },
+    "odm": {
+      "bytes": 512000,
+      "sha256": "94cdfd27e14f3662f96217f127206e0bb44ec8f3e33e4a7943916c6a8c91712f"
+    }
+  },
+  "platform_policy_mapping_version": "34.0",
+  "binary_policy_version_requested": 30,
+  "init_source_revision": "ec299bf6da55702b7b9675d60a0faf2815f0dc6d",
+  "selinux_tool_source_revision": "c13ae2c6572b0e295630f44d6727aa3a567b392d",
+  "host_tools": {
+    "secilc": {
+      "bytes": 1319168,
+      "sha256": "5d765568ed6dd73bc03a9baa433348a6d4fe980ef54e5c9d2635e349b7b0e181"
+    },
+    "checkpolicy": {
+      "bytes": 1157880,
+      "sha256": "9fe8688ca9a8d22b21fc34ea00bb1503d3f51698358b4ab95c4962d021d16780"
+    },
+    "checkpolicy_libcxx": {
+      "bytes": 2201088,
+      "sha256": "feea415e5f80fd034edc01c80a83deab4b1ecb99ad2432fc98007c2aaa855025"
+    }
+  },
+  "matched_ids_for_stock_precompiled": {
+    "plat": {
+      "r2": "5a28f0473a801c9f1adfe7e3e73b7325eea9d57965863146e866e02bd3f64e0d",
+      "odm_precompiled": "1037b57430a2c84eb050572baf95b558fe265a8b68e6b0adf05d932488c53cb1",
+      "match": false
+    },
+    "system_ext": {
+      "r2": "5ea2c809b3ae546cc540e4d34738f99e410eba0f04ad225d2b7b0bdeb217964f",
+      "odm_precompiled": "84d84a9e1c2e30e84afa28360a2275a9a22ff4778554fe96d9ed8e1a3554a1dc",
+      "match": false
+    },
+    "product": {
+      "r2": "56ddb4bf8c4097ee26b4ac91d01b2c1d97c48bedc36e39eae40f8114f2b9900d",
+      "odm_precompiled": "69ccccafde88d94211eeddc7c6e56fd44bd2a1317652e598261349c5396e07e3",
+      "match": false
+    }
+  },
+  "init_expected_to_recompile": true,
+  "init_compiler_flags": [
+    "-m",
+    "-M",
+    "true",
+    "-G",
+    "-N",
+    "-c",
+    "30"
+  ],
+  "loaded_split_inputs_in_order": {
+    "system/system/etc/selinux/plat_sepolicy.cil": {
+      "bytes": 2302144,
+      "sha256": "da5f03ff09ecb2779fbc96db84cb24dcc2d3c63e850eab2dedf23c41efb1d0d9"
+    },
+    "system/system/etc/selinux/mapping/34.0.cil": {
+      "bytes": 156200,
+      "sha256": "988b6aa579718fad8eaffb366c93e36f41d9f76cce431ef76fd6d7c45cdae3b6"
+    },
+    "system/system/etc/selinux/mapping/34.0.compat.cil": {
+      "bytes": 156,
+      "sha256": "1cb1bee70a89479ef053fb3f4c496cf1cb2dbb740f97c8ba794931e317e3cc8f"
+    },
+    "system_ext/etc/selinux/system_ext_sepolicy.cil": {
+      "bytes": 96986,
+      "sha256": "95a22e6135148b34658d914354dbbb262afea140ac3844f95ec3ee4a8db69344"
+    },
+    "system_ext/etc/selinux/mapping/34.0.compat.cil": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "product/etc/selinux/product_sepolicy.cil": {
+      "bytes": 129,
+      "sha256": "89eeff5cbabfb592996bf45fe3d8a12206a9b1091d9dc5ab2ffd8e35b24c5292"
+    },
+    "vendor/etc/selinux/plat_pub_versioned.cil": {
+      "bytes": 959174,
+      "sha256": "d83432557d92f845a285fd1f10adb0aa3f831eb1f1b5d18f0999e060e8b45955"
+    },
+    "vendor/etc/selinux/vendor_sepolicy.cil": {
+      "bytes": 436472,
+      "sha256": "45b8590e8b2b75ea6a6a109c7d4714c715eaeedcb76f182695cd7a09222e4ab4"
+    }
+  },
+  "compiled": {
+    "bytes": 819438,
+    "sha256": "3ddb313a5dc5a893a929466f014e8541cbf983e69ac4ccc59bcba640c5b7caa3"
+  },
+  "repeat_match": true,
+  "stock_precompiled": {
+    "bytes": 742133,
+    "sha256": "6946d8469c51b26c03661c96bcfa12ea934ee1a92957a9155be40cdf741fde9c"
+  },
+  "init_policy_analysis": {
+    "types": 2255,
+    "allow_rules": 41247,
+    "permissive_types": [
+      "backuptool",
+      "su"
+    ]
+  },
+  "stock_policy_analysis": {
+    "types": 2154,
+    "allow_rules": 36549,
+    "permissive_types": []
+  },
+  "strict_neverallow_check_passed": false,
+  "strict_neverallow_log_sha256": "5775dfb50fd725d460fe383ad8be5d843aef3e2c4b87fc01943a9eabc11cd3d5",
+  "strict_neverallow_failed_assertions": 53,
+  "device_contacted": false,
+  "runtime_enforcement_verified": false,
+  "host_replay_report_sha256": "fab6bf5b0e180fee223aaf514f3b5d6110e1357fa39a5d8b775f90140cbf7a5d",
+  "strict_assertion_origins": {
+    "vendor": 40,
+    "system": 13
+  },
+  "permissive_domain_source_check": {
+    "macro_sha256": "a099c30ad36ede647a9434550b0f2f80652b217cccc2bcc57cd14b3df633c0bf",
+    "source_sha256": {
+      "system/sepolicy/private/su.te": "64854abebd412bba493758163ab2b76aa3635e7c57738a44e254e90473f709aa",
+      "device/lineage/sepolicy/common/private/backuptool.te": "6ca72b5bf144227a2fd7088013ca34fb4369f51148f2e22a584186b2854a4133"
+    },
+    "permissive_declarations_after_macro_expansion": {
+      "userdebug": {
+        "su": true,
+        "backuptool": true
+      },
+      "user": {
+        "su": false,
+        "backuptool": false
+      }
+    },
+    "platform_policy_revision": "83bf38d56eac5d44b59bad9b497521274734ee34",
+    "lineage_policy_revision": "126b2bdd0f6fdc815999e44b9e134c7ae6c39d8c",
+    "full_user_variant_built": false
+  }
+}
