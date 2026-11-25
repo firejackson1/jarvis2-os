@@ -98,6 +98,9 @@ publication by this policy decision alone.
 ## 3. Release security and privacy
 
 - [ ] Audit source and final extracted images for owner-specific values and unintended secrets.
+- [x] Scan the exact neutral r2 userspace images and all 31 APEX payloads.
+  Match each finding to an earlier reviewed, byte-identical file.
+  [Privacy scan receipt](../manifests/neutral-r2-privacy-scan.json)
 - [x] Read back the r2 userspace debugging and trust properties, the sole
   OTA public certificate, and the Controls manifest and privilege allowlist.
   [Static security receipt](../manifests/neutral-r2-static-security.json)

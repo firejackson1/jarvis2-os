@@ -1,0 +1,24 @@
+{
+  "scope": "Scoped scan of the three neutral r2 extracted userspace filesystems and nested APEX archives.",
+  "r2_image_readback_sha256": "a5ad38cf059c076212355b5a307b3a981da8731b0701b5514bed34166b265c04",
+  "privacy_scan_sha256": "98b6b6dff6ad6f666980e7383b80887d1f302ebf6f122bb8c4bd428014d46713",
+  "prior_scan_sha256": "acb5d80fb0212aaa2b0371b718d266f9b45eba30009602640b9832e89fb2bb58",
+  "prior_context_review_sha256": "d31a1bc3a5883d1e473ea1cf550269c07609178e83e3351927f88457fa5690b6",
+  "matched_carrier_files_sha256": "b02d3aa7e94c9992abceba6cafd012b6be0f44c4a8f5f666501bf4435ade7e30",
+  "counts": {
+    "regular_files": 6119,
+    "symlinks": 263,
+    "zip_containers": 266,
+    "zip_entries": 49278,
+    "apex_payloads": 31,
+    "apex_regular_files": 765,
+    "bytes_examined": 2415773066,
+    "decoded_streams": 67
+  },
+  "findings": 30,
+  "new_or_changed_findings": 0,
+  "prior_findings_absent_or_changed": 0,
+  "scan_gaps": 0,
+  "matching_values_recorded": false,
+  "hardware_tested": false
+}

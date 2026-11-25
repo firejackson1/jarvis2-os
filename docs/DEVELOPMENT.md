@@ -1760,3 +1760,16 @@ without private scripts, server access or an AI operator.
 - The [static receipt](../manifests/neutral-r2-static-security.json) binds
   these checks to the earlier exact r2 image readback. Fresh-boot behavior,
   SELinux enforcement and user activation remain device tests.
+
+### Neutral r2 image privacy readback — 2026-11-25
+
+- Repeated the bounded scan on the exact three neutral r2 userspace
+  filesystems. Verified each of the 31 APEX package hashes before scanning
+  native payload bytes and symlinks. Scanned 6,119 regular files,
+  49,278 ZIP entries and supported compressed resources with zero scan gaps.
+- The 30 matches had the same categories, counts and paths as the earlier
+  reviewed build. Independently rehashed all 14 enclosing files across
+  both variants. Their bytes matched, including the contexts for the
+  network examples and key-format strings. The
+  [receipt](../manifests/neutral-r2-privacy-scan.json) carries no matched
+  values. Final hosted asset review remains open.

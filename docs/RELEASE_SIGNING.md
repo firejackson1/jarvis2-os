@@ -61,6 +61,14 @@ the exact three package-specific privileged allowlist entries. Fresh-boot
 USB authorization, network and root debugging behavior, and SELinux mode
 still require runtime checks on this candidate.
 
+The [privacy scan receipt](../manifests/neutral-r2-privacy-scan.json) covers
+6,119 regular files in the exact r2 userspace images, including 765 files
+inside the 31 APEX payloads. The scan also searched supported compressed
+content and symlink targets. The 30 pattern matches were identical to
+the earlier reviewed upstream examples, constants and PEM format strings.
+All 14 files carrying those matches had the same reviewed bytes. The scan
+reported zero gaps within its scope and recorded only paths and counts.
+
 ## Existing-data migration
 
 A build signed with unrelated release keys is not a supported dirty upgrade from
