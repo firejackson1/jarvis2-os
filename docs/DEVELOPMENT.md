@@ -1558,6 +1558,25 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Exact r2 interruption and Recovery helper check — 2026-11-25
+
+- Ran the extracted staged operator installer against exact r2 and historical
+  restore images, native LP metadata and a host-only backing model. After
+  a dry run with zero writes, interrupted each target once during its write,
+  including the boot and verified-boot images. Each of the seven cases
+  exercised a genuinely mixed image, refused an active writer and directly
+  restored the full old set once quiescent. All 56 model write requests stayed
+  in A, with the protected prefix and the 16 physical and five logical
+  fixtures unchanged.
+- Freshly extracted ARM32 `dmctl` from the r2 system image and matched its
+  exact digest to the previous development Recovery run. Verified the linker,
+  six direct library paths and all 117 required dynamic symbols against
+  the reconstructed LCARS Recovery payload. This was a static check.
+- The [matrix and helper receipt](../manifests/neutral-r2-rollback-matrix.json)
+  records the inputs and results. Host tests passed with AVB fixtures
+  (221 Python and eight Java suites). Physical power interruption, re-entry
+  and restoration remain open.
+
 ### Exact r2 VNDK import history — 2026-11-25
 
 - Fetched the complete eight-commit history of the original Google snapshot

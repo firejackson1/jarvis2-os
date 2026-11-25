@@ -139,3 +139,23 @@ all 13 bindings using the seven saved restore files and nine unchanged stock
 references. These tests cover file-backed write boundaries and old-image
 consistency. Physical recovery entry, USB availability after interruption,
 eMMC power loss and an actual restore remain open.
+
+### Interrupted writes on all seven r2 targets
+
+The [r2 matrix receipt](../manifests/neutral-r2-rollback-matrix.json) covers the
+exact staged operator installer, the updated r2 ZIP and the same saved slot-A
+layout and restore files. After a dry run with zero persistent requests, the
+fixture simulated a disconnect at a different target on each run. All three
+userspace partitions, `init_boot_a`, `vendor_boot_a`, `vbmeta_system_a`, and
+`vbmeta_a` were interrupted once. The chosen prefix in every case produced
+a hash distinct from both complete images. The child verified-boot image
+needed a 512-byte-aligned cut to create that mixed state.
+
+The writer's journal showed completed earlier targets and a pending write for
+the interrupted target. Later targets retained their original hashes. Each
+restore attempt refused while a simulated `dd` was active, then restored all
+seven original hashes directly after quiescence. All 56 modeled write requests
+stayed within the target A ranges. The saved metadata prefix, 16 protected
+physical fixtures and five untouched logical extents stayed byte-identical.
+Re-entry to Recovery after an actual power loss, live USB availability and
+physical restoration remain separate hardware gates.

@@ -163,6 +163,9 @@ publication by this policy decision alone.
   and complete install/restore in a
   [file-backed rehearsal](RESTORE_PLAN.md#exact-neutral-candidate-rollback-rehearsal).
   Recovery transport and physical rollback remain separate hardware checks.
+- [x] Interrupt all seven r2 target writes individually and directly restore
+  the saved file-backed state. Verify the protected ranges in every case.
+  [r2 interruption matrix](RESTORE_PLAN.md#interrupted-writes-on-all-seven-r2-targets)
 - [x] Generate the paired writer proofs from a
   [pinned transition review](CANDIDATE_INSTALLATION.md#stage-writer-inputs-from-a-pinned-review)
   and consume them in the exact candidate's file-backed dry run.

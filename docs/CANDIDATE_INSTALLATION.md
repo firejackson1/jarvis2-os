@@ -168,6 +168,31 @@ hash and validation. The preflight receipt records the hash of the tool used.
 
 ## Supported contract and prerequisites
 
+### Obtain the exact r2 Recovery helper
+
+Use the verified `system.img` from the r2 host preflight. With `fsck.erofs`
+on the Linux host, extract the ARM32 `dmctl` and check its digest. Set
+`preflight` to the prepared output directory.
+
+```bash
+set -euo pipefail
+preflight=/path/to/r2-preflight
+work=$(mktemp -d)
+printf '%s  %s\n' 7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42 \
+  "$preflight/images/system.img" | sha256sum -c -
+fsck.erofs --no-preserve --extract="$work/files" "$preflight/images/system.img"
+helper="$work/files/system/bin/dmctl"
+printf '%s  %s\n' ae2a55597be5ec41737e9e0c89153dbc24a43b8a8b580c37303a76b65017c56e \
+  "$helper" | sha256sum -c -
+printf 'Verified host copy at %s\n' "$helper"
+```
+
+The exact binary ran in the earlier development Recovery. In the locally
+reconstructed r2 LCARS ramdisk, the ARM32 linker and six direct shared
+dependencies export all 117 required dynamic symbols. Actual execution
+and device-mapper behavior in LCARS still require hardware qualification.
+[Exact helper and rollback receipt](../manifests/neutral-r2-rollback-matrix.json)
+
 A separate operator must qualify recovery transport and stage a reviewed native
 `dmctl` executable in recovery RAM or a supported existing location. Its exact
 path/hash is pinned by the capture. The writer does not stage that executable,
