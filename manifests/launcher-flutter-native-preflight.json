@@ -496,5 +496,145 @@
       "instance_id": "3HlEfp1nbzGbtJ4K3UQ1BM4nHieyCNc0enqBMsSRN7IC"
     }
   ],
-  "native_link_input_coverage_verified": false
+  "native_link_input_coverage_verified": false,
+  "generated_link_graph": {
+    "format": 1,
+    "scope": "Generated Flutter ARMv7 link and compile graph. Direct objects only. Archive internals, compiler-discovered includes, generated sources and resulting ELF require separate verification.",
+    "ninja_target": "lib.stripped/libflutter.so",
+    "toolchain": "//build/toolchain/android:clang_arm",
+    "android_target": "arm-linux-androideabi21",
+    "march": "armv7-a",
+    "ndk_revision": "26.1.10909125",
+    "lto_enabled": true,
+    "input_receipts": {
+      "link_query_sha256": "c96cf358eb2bdd3fda2c249086e34f915984db68b4c8638c017fe8e26779fac8",
+      "compile_commands_sha256": "be0d50a21c92763110eabaf7d477825bad278c09228e356891b036169008c684",
+      "gn_target_sha256": "5afdb7e91151aa829f6fb6e9b8aa1be3ad60ecded2bfcf82f01ed5c50c9e5f75",
+      "verified_checkout_sha256": "808c196e952407916e41daf6c61e2d8fd29d2c7d71da482693104cd87ce5d013"
+    },
+    "direct_link_object_count": 3046,
+    "direct_compilations_with_git_source": 2994,
+    "unique_tracked_source_paths": 2994,
+    "direct_compilations_with_generated_source": 52,
+    "assembly_actions_from_ninja": 139,
+    "unmapped_direct_objects": 0,
+    "supplemental_ninja_commands_sha256": "f30fdd54ebc5232892bd36d09a77366047eb127dd267b4296aa6b0e0274934e0",
+    "direct_link_archive_count": 6,
+    "source_projects": [
+      {
+        "checkout_path": "src/flutter",
+        "revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+        "direct_compilations": 587,
+        "tracked_source_paths": 587,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/boringssl",
+        "revision": "9c7294fd58261a79794f5afaa26598cf1442ad20",
+        "direct_compilations": 132,
+        "tracked_source_paths": 132,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/boringssl/src",
+        "revision": "d24a38200fef19150eef00cad35b138936c08767",
+        "direct_compilations": 268,
+        "tracked_source_paths": 268,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/cpu_features/src",
+        "revision": "936b9ab5515dead115606559502e3864958f7f6e",
+        "direct_compilations": 6,
+        "tracked_source_paths": 6,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/dart",
+        "revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+        "direct_compilations": 371,
+        "tracked_source_paths": 371,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/flatbuffers",
+        "revision": "0a80646371179f8a7a5c1f42c31ee1d44dcf6709",
+        "direct_compilations": 4,
+        "tracked_source_paths": 4,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/harfbuzz",
+        "revision": "ea8f97c615f0ba17dc25013ef67dbd6bfaaa76f2",
+        "direct_compilations": 53,
+        "tracked_source_paths": 53,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/icu",
+        "revision": "43953f57b037778a1b8005564afabe214834f7bd",
+        "direct_compilations": 445,
+        "tracked_source_paths": 445,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libcxx",
+        "revision": "44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0",
+        "direct_compilations": 40,
+        "tracked_source_paths": 40,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libcxxabi",
+        "revision": "2ce528fb5e0f92e57c97ec3ff53b75359d33af12",
+        "direct_compilations": 16,
+        "tracked_source_paths": 16,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libpng",
+        "revision": "de36b892e921c684ef718fec24739ae9bb49c977",
+        "direct_compilations": 19,
+        "tracked_source_paths": 19,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/libwebp",
+        "revision": "ca332209cb5567c9b249c86788cb2dbf8847e760",
+        "direct_compilations": 122,
+        "tracked_source_paths": 122,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/perfetto",
+        "revision": "13ce0c9e13b0940d2476cd0cff2301708a9a2e2b",
+        "direct_compilations": 42,
+        "tracked_source_paths": 42,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/skia",
+        "revision": "93461bed7394e3c554125b0c50b00fb81eea42c6",
+        "direct_compilations": 869,
+        "tracked_source_paths": 869,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/wuffs",
+        "revision": "600cd96cf47788ee3a74b40a6028b035c9fd6a61",
+        "direct_compilations": 1,
+        "tracked_source_paths": 1,
+        "staged_archive_present": true
+      },
+      {
+        "checkout_path": "src/flutter/third_party/zlib",
+        "revision": "7d77fb7fd66d8a5640618ad32c71fdeb7d3e02df",
+        "direct_compilations": 19,
+        "tracked_source_paths": 19,
+        "staged_archive_present": true
+      }
+    ],
+    "elf_rebuild_confirmed": false,
+    "host_report_sha256": "ce383d7a4498d4c76c51c920e39f2e18cd61914b96ec12fb4a97613784963a50"
+  }
 }

@@ -2250,3 +2250,15 @@ without private scripts, server access or an AI operator.
   precompiled policy. The replay shares 45,550 decoded statement lines
   with that binary. The shipped binary contains one additional allow
   statement. [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
+
+### Flutter ARMv7 link graph — 2026-11-25
+
+- GN completed with the same local ARMv7 release arguments after staging
+  pinned Debian pkgconf 1.8.1 for the host sysroot queries. The target uses
+  NDK r26b, Android API 21 and LTO. Ninja is compiling the library.
+- Mapped the 3,046 direct object inputs using GN's compile database and
+  Ninja's additional assembly commands. Verified 2,994 unique source paths
+  against their pinned Git trees across 16 staged source projects. The
+  other 52 inputs are generated. Static archive and generated-source
+  readback, discovered header coverage and the ELF comparison remain open.
+  [Graph receipt](../manifests/launcher-flutter-native-preflight.json)

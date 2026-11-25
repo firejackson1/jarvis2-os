@@ -359,6 +359,20 @@ generated link graph and rebuilt ELF remains necessary to identify which
 checkout sources actually go into the library. [Pinned Flutter builder](https://github.com/flutter-team-archive/engine/blob/a18df97ca57a249df5d8d68cd0820600223ce262/ci/builders/linux_android_aot_engine.json)
 [Pinned Flutter AOT command construction](https://github.com/flutter/flutter/blob/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668/packages/flutter_tools/lib/src/base/build.dart)
 
+GN generated the Android API 21 ARMv7 link graph with LTO and NDK r26b.
+The compile database and 139 additional assembly actions from Ninja cover
+all 3,046 direct object inputs. Of these, 2,994 map to unique source paths
+in the exact Git trees of 16 projects. All 16 are in the verified source
+companion. The other 52 objects use generated inputs.
+
+To reproduce the input inventory, query `lib.stripped/libflutter.so` with
+`ninja -t query` and match the direct object paths to `-o` outputs in
+GN's `compile_commands.json`. Retrieve missing assembly actions with
+`ninja -t commands -s` and verify the named source files at each pinned
+Git revision. The six direct static archives, generated inputs, headers
+from Ninja's dependency log and resulting ELF still need readback.
+[Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
+
 ## Unsigned ARMv7 release and recipient signing
 
 Use an isolated environment without existing signing configuration. Set
