@@ -57,8 +57,8 @@ platform signing configuration. They must agree for system privileges to work.
    The ADB patch is required with the product negative-port default: unpatched
    adbd can otherwise fall back to network listening when USB is absent. See
    patches/Adb/README.md for scope and the mandatory launcher Updater exclusion.
-   Release signing additionally requires `patches/ReleaseTools/series` on the
-   pinned `build/make` project; rebuild `sign_target_files_apks` afterward.
+   Apply `patches/ReleaseTools/series` to the pinned `build/make` project for
+   build identity and OTA trust, then rebuild `sign_target_files_apks`.
 5. Prepare the pinned LTvLauncher inputs as documented in LAUNCHERS.md.
 6. lineage_jarvis2.mk inherits tv-controls.mk. Soong builds the Settings overlay
    directly from source with `TvSettingsTwoPanel` as its resource dependency;
@@ -83,8 +83,10 @@ To reproduce the frozen `f38da52` source state, use
 supplement must stay outside that candidate's device checkout so its original
 commit and build identity remain intact.
 
-For the current candidate, follow the [exact reproduction recipe](CURRENT_REPRODUCTION.md)
-with the eight in-tree patches, pinned build inputs, and recorded build identity.
+For the archived r2 build, follow the [exact reproduction recipe](CURRENT_REPRODUCTION.md)
+with its eight pinned patches, build inputs, and recorded build identity.
+The current source tree adds the [incremental identity fix](../patches/ReleaseTools/README.md)
+for subsequent builds.
 
 ## Pin release build identity
 

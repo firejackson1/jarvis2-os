@@ -1,0 +1,43 @@
+{
+  "format": 1,
+  "scope": "Native Make rule regression and exact source patch replay.",
+  "make_revision": "bc95152efc6a43f3b103b1848c946e9bf8d4e493",
+  "build_tools_revision": "84d04c76b72691cf1f4639c12bda519930229e09",
+  "source_inputs_sha256": {
+    "core/sysprop.mk": "22ce879f0990b4f916c16c3419aa28e3d6eaa175eeeb7b3283d8acecf8a7e25c",
+    "tools/buildinfo.sh": "5cd92e50829b1b589d2f9da62f6d34648765dc005fdfed7380116966acc3323f"
+  },
+  "native_tools_sha256": {
+    "ckati": "7465a42b8e310d423915c09038822c14ca4e74c529d157f3ed002bf60f044a2c",
+    "ninja": "698f1370123092d9101d1599418a2920f505b606c0ad93bcfdd0f0b2bc66d3ca",
+    "lib64/libc++.so": "8f611d1c3f9f92925806cd35d49c08a7d36371b440f96814cab0dbd042a9ba6b",
+    "lib64/libjemalloc5.so": "b862e477c8015936ff61ccc3b857a8a9f63102d4330b65f98a3ba99cd22b71fc"
+  },
+  "patch_sha256": "52a174c23f34a98078550cd2c9b4ac13eebeb9c5c1769b9daebba9241f652a53",
+  "patched_sysprop_sha256": "5bcb816519e3f67478426dc045c75f5202e1fc81e2ce0a2706a8204e3ebff09e",
+  "native_replay_tool_sha256": "6d768d728c3462e00aa13d8644ba66633ea3ebee679e6c6a884688b55e280840",
+  "original_fresh_fixture_property_hashes": {
+    "system": "4d03edb914a90fb33c69a530a50a2e6921cff5b3d41db425b1e8df511ed504f0",
+    "system_ext": "5db6e43141662e4ef0d0ee041ddabae346b72abd9946a2aed17d5323eee9f2e7",
+    "product": "b4b2ce114079532c71be94e70108d3781d7f48ad8d01157756b6d56a8be32f32"
+  },
+  "fresh_fixture_properties_unchanged_by_patch": true,
+  "original_incremental_number_reproduced_stale_partitions": [
+    "system_ext",
+    "product"
+  ],
+  "patched_number_only_and_date_only_regenerate_identity": true,
+  "patched_unchanged_identity_reuses_outputs": true,
+  "patched_unnumbered_incremental_policy_preserved": true,
+  "source_patch_replay": {
+    "series": 6,
+    "patches": 9,
+    "files_checked": 13,
+    "verification_sha256": "b67c1cbd9734c1a3ad7fde89e2ee19b4381fb6939ed86b4f3ef9d7eb399532af",
+    "omitted_new_patch_rejected": true,
+    "negative_report_sha256": "27c59b5142987a5639e19c42c03aab44d51654bea8a9636663417a1f4bde206f"
+  },
+  "active_clean_build_incorporates_new_patch": false,
+  "patched_full_rom_built": false,
+  "device_contacted": false
+}

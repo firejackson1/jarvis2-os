@@ -1979,3 +1979,19 @@ without private scripts, server access or an AI operator.
   incomplete saved slot B foundation was refused before staging. The Debian
   12 reports matched Debian 13 byte for byte. No device was accessed and
   Bazzite stayed running. [Debian 12 receipt](../manifests/neutral-r2-bookworm-preflight.json)
+
+### Numbered-build dependency fix — 2026-11-25
+
+- Ran the pinned Android Make rules with native Kati and Ninja. On the
+  original rules, changing the build number refreshed system buildinfo and
+  left the system extension and product identities stale.
+- Added the number and date prerequisites for numbered builds. The replay
+  now updates all three properties when the number changes and when the date
+  alone changes. Fresh fixture output matched the original byte for byte.
+  An unchanged numbered build had no work, and the existing unnumbered
+  incremental policy was preserved.
+- Replayed all nine patches against six pinned projects and compared 13
+  affected files. Omitting the new patch raised the expected `core/sysprop.mk`
+  mismatch. The existing clean ROM run retains its original eight-patch pin
+  and has a separate output identity check. The new patch has native fixture
+  evidence and awaits a full build. [Replay receipt](../manifests/release-build-property-replay.json)

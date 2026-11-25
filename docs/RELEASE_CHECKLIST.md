@@ -105,6 +105,9 @@ publication by this policy decision alone.
   in all three generated and signed userspace filesystems. The existing r2
   artifact holds older generated identities in `system_ext` and `product`.
   [Identity receipt](../manifests/neutral-r2-build-identity.json)
+- [x] Trace the missing dependencies and verify the incremental build-property
+  fix with the pinned native Kati and Ninja. Fresh release image verification
+  remains required. [Build-property patch](../patches/ReleaseTools/README.md)
 - [x] Record the artifact hashes and [feature-to-image inventory](PERSISTENT_FEATURES.md#release-candidate-inclusion)
   for neutral r2. Compare the exact staged ZIP and private GApps rehearsal
   against all 21 tracked feature files. Recheck coverage after each rebuild.

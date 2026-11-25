@@ -124,6 +124,12 @@ r2 build used an incremental overlay that retained earlier `product` and
 userspace partitions with the intended identity. Choose concurrency for the
 host's available memory.
 
+The eight patches at the revision above reproduce the original r2 build
+inputs. The current tree has a ninth patch for incremental builds. It
+refreshes build properties when the numbered build's identity files change.
+The clean build already in progress uses the original eight-patch pin.
+[Release build patches](../patches/ReleaseTools/README.md)
+
 ```bash
 export BUILD_NUMBER=jarvis2.cb9334ee26cc
 export BUILD_DATETIME=1795575971 SOURCE_DATE_EPOCH=1795575971

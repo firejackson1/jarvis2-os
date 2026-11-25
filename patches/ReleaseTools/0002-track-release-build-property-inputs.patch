@@ -1,0 +1,33 @@
+diff --git a/core/sysprop.mk b/core/sysprop.mk
+index 0fcc92c..d79c471 100644
+--- a/core/sysprop.mk
++++ b/core/sysprop.mk
+@@ -124,6 +124,14 @@ $(if $(filter true,$(BUILD_BROKEN_DUP_SYSPROP)),\
+     $(eval _option := --allow-dup)\
+ )
+ 
++# For numbered builds, refresh common partition properties when Soong changes
++# the identity files read by the recipe.
++ifeq ($(strip $(HAS_BUILD_NUMBER)),true)
++ifneq ($(strip $(7)),true)
++$(2): $(BUILD_NUMBER_FILE) $(BUILD_DATETIME_FILE)
++endif
++endif
++
+ $(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(3) $(6) $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC)
+ 	$(hide) echo Building $$@
+ 	$(hide) mkdir -p $$(dir $$@)
+@@ -275,9 +283,11 @@ endef
+ gen_from_buildinfo_sh := $(call intermediates-dir-for,PACKAGING,system_build_prop)/buildinfo.prop
+ 
+ ifeq ($(strip $(HAS_BUILD_NUMBER)),true)
+-$(gen_from_buildinfo_sh): $(BUILD_NUMBER_FILE)
++$(gen_from_buildinfo_sh): $(BUILD_NUMBER_FILE) $(BUILD_DATETIME_FILE)
++else
++$(gen_from_buildinfo_sh): | $(BUILD_DATETIME_FILE)
+ endif
+-$(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(BUILD_HOSTNAME_FILE) | $(BUILD_DATETIME_FILE)
++$(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(BUILD_HOSTNAME_FILE)
+ 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
+ 	        TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
+ 	        TARGET_DEVICE="$(TARGET_DEVICE)" \
