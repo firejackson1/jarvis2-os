@@ -15,6 +15,40 @@ a filesystem mount, reboot, slot activation or wipe. It never provisions an empt
 slot. Existing complete foundations for an explicit `--slot a` or `--slot b` are
 required; an allocated other slot is not described as a verified bootable fallback.
 
+## Prepare a verified LCARS ZIP locally
+
+The host preflight takes the LCARS archive, the archive SHA-256 and the
+expected AVB root public-key-blob SHA-256 from trusted release evidence. Use
+Linux with Python 3.11 or later, Git, OpenSSL and `lz4`. Supply locally obtained
+stock reference images from the pinned 15640252 profile, a Git checkout
+containing the archive's Recovery source commit, and the prepared portable
+tool kit. [Portable LCARS kit](https://github.com/firejackson1/jarvis2-os/blob/708e088ed57eb83805753d9213717965a3c61e2c/docs/STOCK_LCARS.md#recreate-the-recovery-image-from-a-plug-in)
+
+```sh
+python3 tools/prepare-lcars-install.py \
+  --archive /private/download/candidate.zip \
+  --archive-sha256 <trusted-archive-sha256> \
+  --root-public-key-sha256 <trusted-AVB-root-public-key-blob-sha256> \
+  --stock-images /private/extracted-stock/images \
+  --recovery-source /path/to/recovery-git-checkout \
+  --tool-kit /private/prepared-tool-kit \
+  --output /private/fresh-preflight
+```
+
+The preflight checks all archive members and the stock hashes, then exports
+the pinned recipe from Git. It rebuilds `vendor_boot.img`, stages the matching
+stock `init_boot.img`, and verifies the exact stock AVB graph, zero flags,
+parent and child keys, and all required image bindings. The root must explicitly
+bind the locally rebuilt Recovery file. Only after these checks does the tool
+save the five `images/` members, the two `transition-images/` members and
+verification reports. The tool defaults to rejecting temporary-key archives.
+`--allow-offline-rehearsal` allows host testing and retains its rehearsal label.
+
+These files are inputs to the capture-bound procedure below. They do not
+establish the current slot, layout, rollback backups or device authorization.
+Obtain a fresh verified capture and exact restore set before preparing any
+writer proof or performing an authorized device trial.
+
 ## Supported contract and prerequisites
 
 A separate operator must qualify recovery transport and stage a reviewed native

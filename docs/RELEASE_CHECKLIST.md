@@ -222,6 +222,10 @@ publication by this policy decision alone.
 
 ## Normal-user installation rehearsal — owner request, 2026-11-24
 
+- [x] Verify the actual LCARS archive with the portable host preflight. Check
+  all 13 AVB bindings, prepare the seven images and confirm fit and restore
+  hashes against the saved slot-A trial. Fresh capture, signed release inputs
+  and hardware verification remain open. [Local preflight](CANDIDATE_INSTALLATION.md#prepare-a-verified-lcars-zip-locally)
 - [ ] Provide a supported installation route using published downloads and a
   standard computer, with exact prerequisites and clear supported-device/firmware
   limits. The current raw-image ZIP is not a sideload OTA.

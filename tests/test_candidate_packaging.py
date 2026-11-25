@@ -86,6 +86,16 @@ class CandidatePackagingTests(unittest.TestCase):
     self.assertEqual(manifest['format'], 2)
     self.assertEqual(manifest['recovery'], {**recovery, 'plugin_member': m.RECOVERY_PLUGIN})
     self.assertIn(b'OFFLINE AVB REHEARSAL', archive.read('README.txt'))
+    spec = importlib.util.spec_from_file_location('intake', ROOT/'tools/prepare-lcars-install.py')
+    intake = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(intake)
+    with self.assertRaisesRegex(ValueError, 'Temporary-key archive'):
+     intake.read_manifest(archive, False)
+    self.assertEqual(intake.read_manifest(archive, True), manifest)
+    extracted = root/'extracted'
+    intake.process_members(archive, manifest, extracted)
+    self.assertEqual((extracted/m.RECOVERY_PLUGIN).read_bytes(), plugin.read_bytes())
+    self.assertFalse((extracted/'images/vendor_boot.img').exists())
    plugin.write_bytes(b'wrong plugin')
    with self.assertRaisesRegex(ValueError, 'Recovery plug-in differs'):
     m.package(images, metadata, proof, m.digest(proof), REV, root/'bad')

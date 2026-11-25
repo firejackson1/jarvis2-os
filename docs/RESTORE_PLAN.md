@@ -78,3 +78,13 @@ userdata compatibility is unproven; any clean-data test needs a separately
 approved data plan because both slots share userdata. No wipe, slot switch,
 resize, snapshot cancellation or shared metadata modification follows from
 successful offline checks.
+
+## LCARS archive and historical rollback fit
+
+The local LCARS preflight produced all seven image inputs from the temporary-key
+rehearsal archive and the pinned stock image set. The prepared image sizes and
+the planned slot-A extents matched both saved LP views. The seven previous
+restore files matched their full recorded physical and logical hashes. That
+saved capture had no complete allocated slot-B foundation. A new device trial
+still requires a fresh capture, an independently reachable restore transport,
+and approval for the actual candidate. [Host preflight](CANDIDATE_INSTALLATION.md#prepare-a-verified-lcars-zip-locally)

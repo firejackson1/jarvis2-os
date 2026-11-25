@@ -1222,3 +1222,24 @@ without private scripts, server access or an AI operator.
   private app rehearsal and temporary root key. Fresh production signing,
   installer qualification, hardware boot and redistribution review remain open.
   The native ROM source build is still running. Bazzite stayed online.
+
+## 2026-11-24 — LCARS archive intake and saved rollback fit
+
+- Added `tools/prepare-lcars-install.py`. It verifies the authenticated format
+  2 ZIP, all member hashes, exact stock profile, pinned Git recipe and local
+  Recovery reconstruction. It prepares five ROM inputs and two bootstrap
+  inputs. The host check verifies four signed nodes, their parent/child keys,
+  zero flags and 13 distinct image bindings, including the root `vendor_boot`
+  hash. The tool exports no live authorization or capture-based approval.
+- Ran the tool against the exact 560,063,183-byte LCARS archive. The normal
+  path rejects the temporary-key archive. The explicit offline rehearsal
+  produced all seven inputs, with both bootstrap images byte-identical to
+  their reviewed references. The wrong-root pin was rejected before output.
+  A targeted parser test verified that a missing root Recovery hash is refused.
+- The existing slot planner accepted the saved matching slot-A LP views and
+  exact sizes. Verified all seven historical rollback files against the pinned
+  capture, and all untargeted stock reference hashes matched that capture.
+  Slot B lacked a complete logical foundation in the saved data. The result
+  covers offline fit and saved rollback bytes only. The 17 file-backed raw
+  writer tests also passed. Jarvis2 was untouched and Bazzite stayed online.
+- The ROM host suite passed 195 cases with pinned AVB and all eight Java tests.
