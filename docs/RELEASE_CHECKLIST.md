@@ -328,6 +328,8 @@ publication by this policy decision alone.
   [Native build preflight](../manifests/launcher-flutter-native-preflight.json)
 - [x] Map every planned direct ARMv7 link object to a tracked or generated
   input and confirm that all 16 tracked-source projects have staged archives.
+- [x] Trace the 78 planned objects in the six directly linked static
+  libraries to five staged source trees and one generated Dart version input.
 - [ ] Verify the Flutter native ARMv7 link inputs and compare the rebuilt
   library with the pinned release ELF. Complete any missing source delivery.
 - [x] Verify production-key package/APEX signing in the private rehearsal with

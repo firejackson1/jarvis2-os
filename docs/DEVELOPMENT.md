@@ -2262,3 +2262,10 @@ without private scripts, server access or an AI operator.
   other 52 inputs are generated. Static archive and generated-source
   readback, discovered header coverage and the ELF comparison remain open.
   [Graph receipt](../manifests/launcher-flutter-native-preflight.json)
+
+- Queried the six static libraries with pinned Ninja and verified the
+  archive rule uses explicit inputs. All 78 planned archive members match
+  compile database outputs. Verified 77 source paths in the exact Git
+  trees of the five projects, all with staged archives. The remaining
+  member uses a generated Dart version source. Archive bytes and the
+  complete library are still building.

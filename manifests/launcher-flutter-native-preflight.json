@@ -636,5 +636,92 @@
     ],
     "elf_rebuild_confirmed": false,
     "host_report_sha256": "ce383d7a4498d4c76c51c920e39f2e18cd61914b96ec12fb4a97613784963a50"
+  },
+  "static_archive_graph": {
+    "format": 1,
+    "scope": "Planned members of all six static libraries directly linked into the generated Flutter ARMv7 target",
+    "direct_link_report_sha256": "ce383d7a4498d4c76c51c920e39f2e18cd61914b96ec12fb4a97613784963a50",
+    "compile_commands_sha256": "be0d50a21c92763110eabaf7d477825bad278c09228e356891b036169008c684",
+    "static_archive_query_sha256": "35b5794eaf7ed8a5b07b496815cb232de11c69bef620e4301edf7067aa382072",
+    "static_archive_count": 6,
+    "static_archive_unique_object_count": 78,
+    "static_archive_object_slots": 78,
+    "unmapped_archive_objects": 0,
+    "supplemental_command_count": 0,
+    "supplemental_command_sha256": null,
+    "archives": {
+      "obj/flutter/third_party/freetype2/libfreetype2.a": {
+        "object_count": 24,
+        "source_projects": {
+          "src/flutter/third_party/freetype2": 24
+        },
+        "generated_source_object_count": 0
+      },
+      "obj/flutter/third_party/expat/libexpat.a": {
+        "object_count": 3,
+        "source_projects": {
+          "src/flutter/third_party/expat": 3
+        },
+        "generated_source_object_count": 0
+      },
+      "obj/flutter/third_party/libjpeg-turbo/libjpeg.a": {
+        "object_count": 44,
+        "source_projects": {
+          "src/flutter/third_party/libjpeg-turbo/src": 44
+        },
+        "generated_source_object_count": 0
+      },
+      "obj/flutter/third_party/libjpeg-turbo/libsimd.a": {
+        "object_count": 1,
+        "source_projects": {
+          "src/flutter/third_party/libjpeg-turbo/src": 1
+        },
+        "generated_source_object_count": 0
+      },
+      "obj/flutter/skia/modules/skcms/libskcms.a": {
+        "object_count": 2,
+        "source_projects": {
+          "src/flutter/third_party/skia": 2
+        },
+        "generated_source_object_count": 0
+      },
+      "obj/flutter/third_party/dart/runtime/libdart_precompiled_runtime.a": {
+        "object_count": 4,
+        "source_projects": {
+          "src/flutter/third_party/dart": 3
+        },
+        "generated_source_object_count": 1
+      }
+    },
+    "source_projects": {
+      "src/flutter/third_party/dart": {
+        "revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+        "unique_tracked_source_paths": 3,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/expat": {
+        "revision": "654d2de0da85662fcc7644a7acd7c2dd2cfb21f0",
+        "unique_tracked_source_paths": 3,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/freetype2": {
+        "revision": "bfc3453fdc85d87b45c896f68bf2e49ebdaeef0a",
+        "unique_tracked_source_paths": 24,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/libjpeg-turbo/src": {
+        "revision": "0fb821f3b2e570b2783a94ccd9a2fb1f4916ae9f",
+        "unique_tracked_source_paths": 45,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/skia": {
+        "revision": "93461bed7394e3c554125b0c50b00fb81eea42c6",
+        "unique_tracked_source_paths": 2,
+        "staged_archive_present": true
+      }
+    },
+    "static_archive_bytes_read_back": false,
+    "elf_rebuild_confirmed": false,
+    "host_report_sha256": "c4d8cde33093c0017f0d76351fdcac653559fd765ae1965fadd5d78212f9682d"
   }
 }

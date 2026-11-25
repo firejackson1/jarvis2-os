@@ -369,8 +369,15 @@ To reproduce the input inventory, query `lib.stripped/libflutter.so` with
 `ninja -t query` and match the direct object paths to `-o` outputs in
 GN's `compile_commands.json`. Retrieve missing assembly actions with
 `ninja -t commands -s` and verify the named source files at each pinned
-Git revision. The six direct static archives, generated inputs, headers
-from Ninja's dependency log and resulting ELF still need readback.
+Git revision.
+
+Use `ninja -t query` on the six static libraries named by the link.
+Their archive rule passes the explicit input list to `llvm-ar`. All
+78 planned members matched compile database commands. Of those, 77
+map to tracked files in five pinned projects with staged archives.
+The Dart version member is generated. Actual archive members, generated
+inputs, compiler-discovered headers and the resulting ELF still need
+readback.
 [Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
 
 ## Unsigned ARMv7 release and recipient signing
