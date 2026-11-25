@@ -2167,3 +2167,16 @@ without private scripts, server access or an AI operator.
   native build wait for checkout verification. The selected checkout includes
   test and tool inputs, so its coverage is distinct from the final link.
   [Preflight receipt](../manifests/launcher-flutter-native-preflight.json)
+
+### VNDK libexif replay — 2026-11-25
+
+- The retained Soong plan reproduced the modern system `libexif.so` as a
+  control. It uses the same 12 C files as the staged Android 14 source
+  archive. Two isolated Clang 17 builds from separate extractions reproduced
+  the VNDK library outside its 16-byte GNU build ID, after restoring the
+  historical link layout and shrink wrapping.
+- Matched all 97,116 bytes outside the GNU note descriptor, including
+  the 115 named exports and 64 named mini debug functions. Added the exact
+  source archive to an independent 19-file private staging set and verified
+  every download byte against its receipt.
+  [Rebuild receipt](../manifests/neutral-r2-vndk-libexif-rebuild.json)

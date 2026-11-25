@@ -172,6 +172,41 @@ The original CI manifests, exact binary rebuilds and full distribution
 review remain open.
 [Android VNDK snapshot source documentation](https://source.android.com/docs/core/architecture/vndk/snapshot-generate#snapshot-files)
 
+### Reproducing the VNDK libexif library
+
+The pinned `libexif` source archive reproduced every byte of the signed r2
+VNDK ELF outside its 16-byte GNU build ID. This includes the code, read-only
+data, relocation tables and embedded mini debug data. Two fresh extractions
+produced identical rebuilt files. The other two libraries and the exact
+historical CI manifest still require verification.
+[Rebuild and staging receipt](../manifests/neutral-r2-vndk-libexif-rebuild.json)
+
+Use the r2 Android build tree and its ARMv7 system `libexif` Soong plan as
+a starting point. Preserve the generated linker response file. Obtain the
+compile command for `exif-byte-order.o`, the unstripped library link command
+and the final strip command with Ninja's `-t commands -s`. Check the command
+and response digests against the receipt. First replay them with the current
+compiler as a control against the pinned system library. It reproduced that
+complete system ELF.
+
+For the VNDK replay, use the 12 C files listed in the checked response file
+from the extracted source archive. Map its prefix to `external/libexif`
+with `-ffile-prefix-map`. Redirect every object, dependency and library
+output to a fresh build directory. Use Clang and LLD from `clang-r487747c`
+and its Clang 17 runtime archives. Suppress warnings for newer warning
+options the older compiler does not recognize. Keep the other linker
+inputs from the reference plan, remove `crt_pad_segment.o` and add
+`-Wl,-z,max-page-size=65536`. Remove the
+`-mllvm -enable-shrink-wrap=false` compile pair and its linker counterpart.
+Preserve the mini debug info when stripping. The rebuilt SHA-256 starts
+`2c7794c3`. The separate masked digest in the receipt zeroes just the
+validated GNU note descriptor for comparing the two files.
+[Android 14 Soong compiler pin](https://android.googlesource.com/platform/build/soong/+/9387734632ba3bf381bd57a638ac1216108c59f4/cc/config/global.go)
+
+The new 19-file private staging set includes the verified source archive
+with its `COPYING` and `NOTICE` files. All prior payloads, including the
+ROM, retained their original hashes.
+
 ### VNDK modules using the snapshot default
 
 The [module attribution receipt](../manifests/neutral-r2-vndk-default-license-sources.json)

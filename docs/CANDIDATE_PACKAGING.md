@@ -328,3 +328,10 @@ The 18-file private set also includes
 [APEX and VNDK notices](USERSPACE_NOTICES.md#apex-notice-companion).
 The archive and all earlier assets passed readback. The private receipt
 SHA-256 is `c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0`.
+
+The 19-file private staging set adds
+`libexif-c6eff752051d-source.tar.gz`. Its source reproduced the packaged
+VNDK binary outside the original GNU build ID. All 1,332,927,819 bytes in
+the revised set passed full readback. The receipt SHA-256 is
+`2156ec7bbd474c0842dfb8f96505bef4553a6eb9ef2b3cfe8001dd49ca951bc2`.
+[Rebuild and staging evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libexif-library)

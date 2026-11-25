@@ -44,6 +44,10 @@ apply independently.
   verify their staged source archives. Exact CI source correspondence and
   rebuilt library byte equality remain open.
   [VNDK source candidates](USERSPACE_NOTICES.md#source-candidates-for-three-vndk-libraries)
+- [x] Reproduce VNDK `libexif` from its staged sources outside the original
+  GNU build ID. Repeat from a fresh extraction and stage the verified source
+  alongside the ROM. `libnl` and `libxml2` binary replays remain open.
+  [VNDK libexif evidence](USERSPACE_NOTICES.md#reproducing-the-vndk-libexif-library)
 - [x] Trace the 11 VNDK libraries that use the snapshot's default license
   rule back to their source declarations and check their delivered Apache
   notice attachments. [VNDK module attribution](USERSPACE_NOTICES.md#vndk-modules-using-the-snapshot-default)

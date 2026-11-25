@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "scope": "Rebuild the libexif source candidate and compare the stripped ARM ELF in the signed neutral r2 VNDK v34 APEX",
+  "source": {
+    "project": "https://android.googlesource.com/platform/external/libexif",
+    "revision": "c6eff752051d8b32c0c68e6107452949caa9d744",
+    "tree": "461601f4c596a17e03ff3e631888c27ff2777184",
+    "archive": "libexif-c6eff752051d-source.tar.gz",
+    "archive_sha256": "b241376eebddd5be6a6481658f42a9527f1615d33006bc99c15a59c024b76a4e",
+    "archive_bytes": 2052093,
+    "translation_units": 12,
+    "license_files": ["COPYING", "NOTICE"]
+  },
+  "reference_build": {
+    "recipe_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+    "soong_commands_sha256": "39c8e17e90e518581792a741886a104c459ead4bb7325f5979bf0df90d33d567",
+    "soong_link_response_sha256": "d43e480f728d3f333fb337403a909f60d40a7852d89bcab96e90206b7f36df1b",
+    "system_library_control_sha256": "51c8ce5e802d8a8faec7cc514e425b789e842454025b84a31668f30f695fe442",
+    "system_library_control_reproduced": true
+  },
+  "historical_replay": {
+    "android_14_soong_revision": "9387734632ba3bf381bd57a638ac1216108c59f4",
+    "compiler": "clang-r487747c",
+    "compiler_build": "Android 10087095, Clang 17.0.2",
+    "compiler_revision": "d9f89f4d16663d5012e5c09495f3b30ece3d2362",
+    "compiler_driver_sha256": "6b0fedc031f936640c058fe19096b7c76ea0504fca1e2434999868d7fe0e968a",
+    "linker_sha256": "b72afef32ed53f4864ab453b4ee51fa5d1dea9e3af1e08a36077c03868f20bc8",
+    "source_prefix_map": "external/libexif",
+    "link_max_page_size": 65536,
+    "link_crt_pad_segment_excluded": true,
+    "shrink_wrap_override_removed": true,
+    "stripped_sha256": "2c7794c36bd8fc30bba2db5213cc9cd3be8d402dee6794ec9c0c65ab8e1b0705",
+    "fresh_extraction_repeat_matches": true
+  },
+  "comparison": {
+    "apex_sha256": "26d8daa284b4eb457ab8c067b1ca417814a9aa2cf593a03624dbd618f0083ebe",
+    "apex_member": "lib/libexif.so",
+    "historical_binary_sha256": "592a53c616b43a467f8a59303045b758df91b49d13d8087c195da1ada7c489d1",
+    "historical_gnu_build_id": "7c9d05bd09fa89cfa8ac7def57788ec2",
+    "rebuilt_gnu_build_id": "a749691251e00f17609c61a5def583c7",
+    "gnu_build_id_descriptor_offset": 380,
+    "gnu_build_id_descriptor_bytes": 16,
+    "elf_bytes": 97132,
+    "matching_bytes_outside_descriptor": 97116,
+    "elf_sha256_with_zeroed_build_id_descriptor": "86d5b0fdaef7d2d5493f41e1ed4cf8097ead713040bcd33ef3c6b160273fe686",
+    "matching_named_exported_functions": 115,
+    "matching_named_minidebug_functions": 64,
+    "original_ci_manifest_recovered": false
+  },
+  "staging": {
+    "previous_receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
+    "receipt_sha256": "2156ec7bbd474c0842dfb8f96505bef4553a6eb9ef2b3cfe8001dd49ca951bc2",
+    "full_download_readback_files": 19,
+    "full_download_readback_bytes": 1332927819,
+    "rom_bytes_changed": false,
+    "public_assets_uploaded": false
+  }
+}
