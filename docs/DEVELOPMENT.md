@@ -1606,3 +1606,22 @@ without private scripts, server access or an AI operator.
   passed from its extracted source. Verified all 14 staged delivery files.
   See the private delivery record in the
   [neutral receipt](../manifests/current-neutral-artwork.json).
+
+### Native userspace source companion — 2026-11-25
+
+- Read the exact build's Android module-installed inventory for 18 selected
+  native source projects. Their 1,112 installed paths matched the staged r2
+  filesystem copies, including symlink targets. Matched all 16,085 archive
+  members to the pinned Git blob bytes and executable/symlink modes. Exported
+  zstd's stored blobs directly to preserve bytes where Git export applies CRLF
+  conversion.
+- Re-read the r2 NOTICE files, WebView APK and native library and extracted
+  the exact embedded Credits. The Chromium FFmpeg archive independently
+  reconstructed the pinned Git tree with 11,351 files and its matching
+  CREDITS.chromium. The LineageOS WebView patch snapshot matched all 13
+  expected patches and its build README.
+- Two outer source companions reproduced byte for byte. Verified all 24
+  members including 20 source archives, and all 15 files in the new staging
+  set. The [neutral receipt](../manifests/current-neutral-artwork.json) pins
+  the result. A full WebView rebuild and relink, remaining dependency source
+  coverage and stock-input rights remain open.

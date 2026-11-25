@@ -212,5 +212,29 @@
     "receipt_sha256": "1fc678e64b9f7b58fa144075850b9179f19881788da285375e875e2a1a897e31",
     "hosted_download_verified": false,
     "device_contacted": false
+  },
+  "private_r2_delivery_with_selected_userspace_sources": {
+    "companion": {
+      "file": "jarvis2-r2-native-userspace-source.tar.gz",
+      "bytes": 60686997,
+      "sha256": "5d1cf88e242d2f502eeba649d4566e55ecb3b5b8e9492e63563a54458b6830ab"
+    },
+    "source_index_sha256": "01209719e336566f7d8c4ca35ce5ab3ca10d075b72188e5a512a030f658918e6",
+    "source_archives_verified": 20,
+    "source_companion_files_verified": 24,
+    "native_projects": 18,
+    "matched_native_file_paths": 1112,
+    "native_tracked_source_files": 16085,
+    "chromium_ffmpeg_tree": "6284d04ef60c1145cc4dd97d9da60113a0485ae6",
+    "chromium_ffmpeg_source_files": 11351,
+    "webview_lineage_patches_verified": 13,
+    "rom_stock_boot_payload_included": false,
+    "webview_relink_verified": false,
+    "complete_rom_corresponding_source_verified": false,
+    "files_verified": 15,
+    "total_bytes": 1107118821,
+    "receipt_sha256": "7f59bc13693175b309b440bd39723f500fbb4630fc6731efec0d410c59b16560",
+    "hosted_download_verified": false,
+    "device_contacted": false
   }
 }

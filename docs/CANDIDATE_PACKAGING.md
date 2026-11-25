@@ -267,3 +267,10 @@ alongside inspection, offline verification and writer tools. The saved-layout
 rehearsal matched the seven historical rollback images byte for byte and
 passed the r2 preflight. The updated staging receipt SHA-256 is
 `1fc678e64b9f7b58fa144075850b9179f19881788da285375e875e2a1a897e31`.
+
+The private r2 set now contains 15 files, including
+`jarvis2-r2-native-userspace-source.tar.gz`. The archive carries the exact
+[18 selected native source trees and the two WebView inputs](USERSPACE_NOTICES.md#selected-native-source-materials-for-neutral-r2).
+All 24 archive members passed readback. The ROM ZIP and earlier source
+companions retain their hashes. The staging receipt SHA-256 is
+`7f59bc13693175b309b440bd39723f500fbb4630fc6731efec0d410c59b16560`.

@@ -24,6 +24,9 @@ apply independently.
 - [ ] Preserve applicable copyright, license and NOTICE files, credits and modification notices.
 - [ ] Provide the exact corresponding source/build material required by each distributed copyleft component, including the kernel; do not assume publishing only our patches is sufficient.
 - [x] Match the retained core kernel byte-for-byte to Google's GKI build 14657224 and pin its 20-project manifest; see KERNEL_SOURCE_PROVENANCE.md. Vendor-module correspondence and complete required source/build delivery remain open.
+- [x] Verify and stage the 18 selected native source trees and the two WebView
+  source inputs against r2. The rest of the ROM source and rights review stays
+  open. [Userspace source review](USERSPACE_NOTICES.md#selected-native-source-materials-for-neutral-r2)
 - [ ] Review redistribution rights for proprietary firmware, vendor blobs, codecs, Google apps and bundled launchers before packaging them. Existing device installation is not evidence of redistribution permission.
 - [ ] Keep Google applications out of public ROM bundles unless distribution is properly licensed; document separately installed optional components.
 - [ ] Use our own private signing keys and update channel; document known issues, tested hardware and our own support/bug-report destination.

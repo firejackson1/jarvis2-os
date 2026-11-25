@@ -76,6 +76,12 @@ contents before publication. Kernel/vendor exclusion alone is not a userspace
 license audit; historical broad collection flags do not substitute for this
 component-level evidence or final-artifact review.
 
+The [neutral r2 selected source review](USERSPACE_NOTICES.md#selected-native-source-materials-for-neutral-r2)
+adds exact source snapshots and a tested installed-file inventory for 18 native
+projects, plus the pinned WebView FFmpeg source and LineageOS build patches.
+Independent release checks remain for the rest of Android and APEX dependencies,
+the complete WebView rebuild/relink route and stock-input rights.
+
 Modified Settings XML now retains its original notices and explicitly records
 local modification and the pinned upstream file/revision. This does not change
 upstream ownership or the license of bundled application payloads.

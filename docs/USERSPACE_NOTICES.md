@@ -36,3 +36,30 @@ The index also identifies the Chromium tag, FFmpeg dependency revision, relevant
 build flags and pinned WebView patches. Preserve these source/build references
 when distributing the userspace images; do not describe a prebuilt-only source
 repository as the complete preferred source of its native components.
+
+## Selected native source materials for neutral r2
+
+The additional staged source archive contains the exact trees of 18 native
+Android projects and two WebView inputs. It groups filesystem tools such as
+e2fsprogs, F2FS and NTFS, networking tools including iproute2, iptables, dnsmasq
+and rsync, and other directly mapped components such as strace, nano and Vim.
+The source index records each pinned commit, tree, source archive, build and
+license file index, and files identified by Android's module inventory.
+
+Each of the 16,085 native project archive members matches its Git blob and
+mode. The 1,112 matched installed paths were read back from the neutral r2
+filesystems. The r2 image NOTICE files and the embedded WebView Credits also
+match their earlier pinned hashes. The raw zstd Git blobs preserve the original
+source bytes for files whose archive export applies line-ending conversion.
+
+The official Chromium FFmpeg source archive matches all 11,351 files in the
+Git tree pinned by WebView's DEPS. The companion carries the verified FFmpeg
+license files, 13 Lineage WebView patches and the WebView build recipe. See the
+[Chromium FFmpeg source](https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/5c85ff666b3434d9323b83437f910ad8431ab7c9)
+and [LineageOS WebView build sources](https://github.com/LineageOS/android_external_chromium-webview_patches/tree/544b12e3d42a02b4337f31819f6ba917187dcccf).
+
+Full Chromium dependency sync, a WebView rebuild and a modified-FFmpeg relink
+remain unverified. The selected source map neither covers the remaining
+Android or APEX dependencies nor grants rights to stock inputs. The neutral r2
+ZIP carries five userspace/AVB images and the LCARS plug-in. The stock kernel
+and vendor partitions are local inputs outside that delivery archive.
