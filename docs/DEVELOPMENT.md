@@ -1320,3 +1320,19 @@ without private scripts, server access or an AI operator.
   fixture rejects the wrong pin, missing root descriptor, changed salt and
   corrupt payload. Final release images, device trust and installation still
   require their own checks. Bazzite stayed online.
+
+## 2026-11-25 — Bind final filesystems to signed target files
+
+- The image inspector now optionally verifies the trusted signed target-files
+  digest and byte-compares the complete EROFS prefixes of `system`,
+  `system_ext` and `product` against the archive's embedded images. The receipt
+  also retains the whole final-image hashes, which include the AVB data.
+- The real f38 signed archive and its assembled final candidate matched across
+  625,442,816 filesystem bytes. The same inspection refused the private LCARS
+  rehearsal composed with different Controls and Music APKs when checked
+  against that f38 archive. It stopped before creating an inspection output.
+  Positive image-content receipt SHA-256 is
+  `4cfc997235967dec92963962325e39ebba1745cf6e184105625470c29c49199b`.
+- All 199 Python tests and eight Java suites passed. The exact new product
+  build still needs its own signed archive and final-image binding. Device
+  state was untouched and Bazzite stayed online.

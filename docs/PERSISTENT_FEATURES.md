@@ -25,7 +25,9 @@ key-tooling patch. The fresh target-files archive is pending. The older f38
 artifact and private rehearsals carry their own evidence and version pins.
 
 Before packaging, bind the patch report, product commit, signed target-files
-archive and final image hashes in the same release receipt. Read back the
+archive and final image hashes in the same release receipt. Check that all three
+[complete EROFS filesystems match the signed archive](BUILD.md#inspect-the-generated-images-themselves).
+Read back the
 Controls, Music, TV Settings and SetupWizard APKs and the Bluetooth and ADB
 APEX payloads from the final images. Exercise the OTA key-tooling change during
 signing, where it runs. Verify the launcher, boot animation, audio policy

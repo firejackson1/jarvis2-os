@@ -1,4 +1,4 @@
-import hashlib,importlib.util,tempfile,unittest
+import hashlib,importlib.util,struct,tempfile,unittest,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('image_contents',ROOT/'tools/inspect-image-contents.py')
@@ -59,3 +59,34 @@ class ImageContentsTests(unittest.TestCase):
    path.parent.mkdir(parents=True);path.write_bytes(b'updater fixture')
    errors=module.inspect_trees(root,{'launcher_sha256':hashlib.sha256(b'fixture apk').hexdigest()})
    self.assertTrue(any('official OTA client' in error for error in errors))
+
+ def test_signed_archive_binding_covers_all_three_complete_filesystems(self):
+  with tempfile.TemporaryDirectory() as temporary:
+   root = Path(temporary)
+   images = root/'images'
+   images.mkdir()
+   archive = root/'target-files.zip'
+   expected = {}
+   with zipfile.ZipFile(archive, 'w') as out:
+    for partition in ('system', 'system_ext', 'product'):
+     payload = bytearray(8192)
+     struct.pack_into('<I', payload, 1024, 0xe0f5e1e2)
+     payload[1036] = 12
+     struct.pack_into('<I', payload, 1060, 2)
+     payload[4096:4096+len(partition)] = partition.encode()
+     name = partition+'.img'
+     (images/name).write_bytes(payload + b'new release AVB footer')
+     member = 'IMAGES/'+name
+     out.writestr(member, payload + b'original AVB footer')
+     expected[name] = {'member': member, 'filesystem_bytes': 8192,
+                       'filesystem_sha256': hashlib.sha256(payload).hexdigest()}
+   pin = hashlib.sha256(archive.read_bytes()).hexdigest()
+   report = module.verify_archive_filesystems(images, archive, pin)
+   self.assertEqual(report, {'target_files_sha256': pin, 'filesystems': expected})
+   with self.assertRaisesRegex(ValueError, 'archive SHA-256'):
+    module.verify_archive_filesystems(images, archive, '0'*64)
+   with (images/'product.img').open('r+b') as product:
+    product.seek(7000)
+    product.write(b'X')
+   with self.assertRaisesRegex(ValueError, 'product.img.*filesystem bytes'):
+    module.verify_archive_filesystems(images, archive, pin)

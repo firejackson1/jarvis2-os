@@ -149,6 +149,23 @@ states this limited scope explicitly. It does not prove package behavior, native
 patch contents, a complete privacy audit, release signatures or the AVB chain.
 Run it after each image change; a staging-tree check cannot replace extraction.
 
+For release evidence, pass the independently authenticated signed target-files
+archive and its trusted digest as well:
+
+```sh
+python3 tools/inspect-image-contents.py /path/to/final-images \
+  /outside/source/new-release-inspection /path/to/host/bin/fsck.erofs \
+  --signed-target-files /path/to/signed-target-files.zip \
+  --signed-target-files-sha256 <trusted-signed-archive-sha256>
+```
+
+The report records the archive hash and the complete EROFS byte range and digest
+for each image. `system`, `system_ext` and `product` must match their archive
+members byte for byte within that range, including filesystem metadata. AVB
+footers can differ, and the final chain and APK/APEX signatures still need
+their independent audits. Keep this receipt with the release patch and
+signing reports.
+
 ## Audit a complete AVB image set
 
 All referenced image files must be present in one directory, named by the
