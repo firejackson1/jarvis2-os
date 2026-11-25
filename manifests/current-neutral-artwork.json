@@ -132,5 +132,15 @@
     "dry_run_targets": 7,
     "persistent_write_requests": 0,
     "hardware_device_contacted": false
+  },
+  "private_delivery_with_writer_tools": {
+    "payloads": 9,
+    "files_verified": 11,
+    "total_bytes": 1033849275,
+    "receipt_sha256": "a9969aeb354d7316b31f6dba53859ea292e745f5520c5600bc587999a648d0ad",
+    "writer_tools_source_revision": "c24806ba89a351e052c92f75fe7b9eb68c523918",
+    "writer_tools_source_archive_sha256": "ed67b90fe0b8f1b9d8cc6a36793b2c12a84420615b5b24309794a980e91c8cd7",
+    "native_handoff_reproduced_from_extracted_source": true,
+    "hosted_download_verified": false
   }
 }

@@ -1503,3 +1503,7 @@ without private scripts, server access or an AI operator.
   zero write requests. The offline confirmation uses simulated authorization
   evidence solely for the file-backed fixture. Live Recovery remains untested
   for the candidate. Bazzite stayed running.
+- Repacked the operator tools as a source-only companion. Ran the extracted
+  companion's tests and repeated the exact native handoff with identical proof
+  files. Verified the refreshed private neutral delivery set with nine
+  payloads and two metadata files.

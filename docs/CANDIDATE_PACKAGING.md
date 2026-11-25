@@ -224,3 +224,9 @@ It replaces the custom animation in the ROM and omits its standalone archive.
 The product image and root `vbmeta` have distinct hashes. The other three
 delivery images and locally reconstructed LCARS Recovery match the branded
 candidate exactly. The offline checks do not establish device acceptance.
+
+The refreshed neutral staging set adds the LCARS operator tools source archive
+from `c24806ba89a351e052c92f75fe7b9eb68c523918`. An extracted copy of this
+archive reproduced the two writer proof files and passed its host tests. All
+eleven delivery files matched the refreshed receipt. Its SHA-256 is
+`a9969aeb354d7316b31f6dba53859ea292e745f5520c5600bc587999a648d0ad`.
