@@ -12,8 +12,10 @@ with its standard zlib support is required.
 The older `1ac457e` candidate is held because of a privilege allowlist bug.
 The current candidate is `cb9334ee26cc` with a verified allowlist, production-key
 AVB and an exact LCARS binding. The [candidate receipt](../manifests/current-cb9334-inclusion.json)
-records its image hashes. Artifact review, hardware checks and release packaging
-are still pending.
+records its image hashes and verified private ZIP. The offline preflight
+verified all 22 members, rebuilt `vendor_boot` and checked the seven target
+sizes and seven restore files against a saved slot-A capture. Hardware checks
+and redistribution review remain open.
 
 ## Authenticate and stage inputs
 

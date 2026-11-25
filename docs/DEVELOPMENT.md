@@ -1402,3 +1402,14 @@ without private scripts, server access or an AI operator.
   private images remain off-device. Hardware trust, installation, clean setup,
   recovery transport, rollback, artifact review and release packaging remain open.
   Bazzite stayed running.
+
+- Packaged the private format 3 LCARS ZIP. An independent preflight read all
+  22 entries, rebuilt the exact `vendor_boot`, verified all 13 AVB bindings
+  and checked seven candidate sizes, seven restore files and nine untouched
+  stock references against a saved slot-A capture. See the candidate receipt
+  for the ZIP and preflight hashes. The capture is historical.
+- Repeated the scoped userspace privacy scan on the three final filesystems,
+  including 6,119 regular files and the 31 APEX payloads. All address matches
+  were traced to upstream constants or examples. The three PEM header matches
+  were format strings with no key body. No remaining findings in this scan.
+  The ZIP remains private while licensing and hardware checks are open.

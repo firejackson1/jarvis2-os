@@ -157,8 +157,22 @@
     "package_report_sha256": "94d0f35d9c262f065d55327bc9f292ceb426e694dc77030dbb8b39ae97137bd6",
     "apex_filesystems_report_sha256": "99ee7f27cd4848839686cd8e69dcef5ce0d3972e6a22c8e6c3d024adbb89e99d",
     "avb_assembly_report_sha256": "18a4f91dfb6907a2729854d78cef98ce5dbd133bac08305daa45dc0d4fa6925c",
-    "image_contents_report_sha256": "1c7960d80f5c5c25c0ed5cd88dd614d403c68e340577451ce0fe8140a0944fd9"
+    "image_contents_report_sha256": "1c7960d80f5c5c25c0ed5cd88dd614d403c68e340577451ce0fe8140a0944fd9",
+    "userspace_privacy_scan_sha256": "acb5d80fb0212aaa2b0371b718d266f9b45eba30009602640b9832e89fb2bb58",
+    "userspace_privacy_context_sha256": "d31a1bc3a5883d1e473ea1cf550269c07609178e83e3351927f88457fa5690b6"
   },
   "hardware_tested": false,
-  "public_release_ready": false
+  "public_release_ready": false,
+  "private_candidate_zip": {
+    "filename": "jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate.zip",
+    "bytes": 560104419,
+    "sha256": "06139ac9f952d9ce3342f59ee6a3c46a4b70a00813d40d563a672ed200a8b3bf",
+    "members": 22,
+    "manifest_format": 3,
+    "portable_preflight_sha256": "7771f0ae5e46e78c3bb702f9aefa4f27dcfff3d921a10c7b7829257a0a388647",
+    "saved_slot_a_candidate_sizes_verified": 7,
+    "saved_slot_a_restore_files_verified": 7,
+    "untargeted_stock_references_verified": 9,
+    "published": false
+  }
 }
