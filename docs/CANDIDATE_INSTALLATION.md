@@ -81,6 +81,47 @@ establish the current slot, layout, rollback backups or device authorization.
 Obtain a fresh verified capture and exact restore set before preparing any
 writer proof or performing an authorized device trial.
 
+### Reproduce the neutral r2 host preflight from downloads
+
+Verify the full [18-file staging receipt](CANDIDATE_PACKAGING.md#verify-the-complete-download-set)
+with `tools/verify-release-assets.py`. Prepare the `raw` image directory from the
+[matching stock OTA](STOCK_FOUNDATION.md). Set the two paths below to those
+directories. The example uses the verified operator archive from staging.
+
+```bash
+set -euo pipefail
+downloads=/path/to/verified-downloads
+stock=/path/to/extracted-stock/raw
+work=$(mktemp -d)
+rom=jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate-neutral-artwork-r2.zip
+operator=jarvis2-lcars-operator-tools-98de404.tar.gz
+(
+  cd "$downloads"
+  sha256sum -c <<'JARVIS2_PREFLIGHT_HASHES'
+8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9  jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate-neutral-artwork-r2.zip
+43445aaff6c177487d0063ccf085726b4c7c5344c6a4e161b1bc305d5169097f  jarvis2-lcars-operator-tools-98de404.tar.gz
+JARVIS2_PREFLIGHT_HASHES
+)
+mkdir "$work/operator"
+tar -xzf "$downloads/$operator" -C "$work/operator" --strip-components=1
+git clone --branch recovery17-lcars --single-branch \
+  https://github.com/firejackson1/jarvis2-os.git "$work/recovery"
+git -C "$work/recovery" checkout --detach 708e088ed57eb83805753d9213717965a3c61e2c
+python3 "$work/recovery/tools/prepare_stock_lcars_kit.py" "$work/kit"
+python3 "$work/operator/tools/prepare-lcars-install.py" \
+  --archive "$downloads/$rom" \
+  --archive-sha256 8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9 \
+  --root-public-key-sha256 82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df \
+  --stock-images "$stock" --recovery-source "$work/recovery" --tool-kit "$work/kit" \
+  --output "$work/prepared"
+```
+
+The clone and tool-kit preparation fetch sources. The final command ran offline
+on Linux x86-64 with Python 3.13, Git 2.47 and OpenSSL 3.5. LZ4 1.10.0 and 1.9.4
+produced identical files. The [preflight receipt](../manifests/neutral-r2-recipient-preflight.json)
+records the seven prepared image hashes, Recovery notices and both verification
+reports. The procedure requires no connected device or Android source tree.
+
 ### Check a saved layout and restore files
 
 Add these options to the same local preflight command:

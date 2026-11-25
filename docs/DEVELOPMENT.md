@@ -1558,6 +1558,27 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Latest staged r2 release audit and recipient preflight — 2026-11-25
+
+- Replayed all eight ROM patches with the current source and the captured
+  build inputs, and reproduced the exact 12-file patch report. The patch,
+  app, overlay, keylayout and product configuration still match the r2
+  product revision.
+- Verified the current 18-file private delivery and compared all 200 product
+  source files and 69 Recovery source files with their pinned commits.
+  Rechecked all 22 ROM archive entries, the three signed filesystem bindings
+  and all 21 tracked feature files. The nine-entry private GApps rehearsal
+  still contains the same tracked feature files and LCARS payload.
+- Extracted the verified operator archive and verified 13 stock inputs from
+  the pinned OTA. Fetched the pinned LCARS source and four host scripts in a
+  fresh workspace. LZ4 1.10.0 and 1.9.4 reproduced the same seven images,
+  notices and reports with all 13 AVB bindings passing both times.
+  [Recipient preflight](../manifests/neutral-r2-recipient-preflight.json)
+  matches the prepared images from the earlier saved-layout rehearsal.
+- Host checks passed with AVB fixtures (221 Python and eight Java suites).
+  All steps ran on build hosts. Physical installation, first boot and
+  rollback of this ZIP remain open.
+
 ### Portable native partition-layout reader — 2026-11-25
 
 - Matched the installed Linux x86-64 lpdump and its 11 Android shared libraries

@@ -304,6 +304,10 @@ publication by this policy decision alone.
 - [x] Verify the staged Linux x86-64 native layout-reader archive and reproduce
   the exact neutral r2 preflight from an extracted copy without the Android tree.
   [Host tool companion](CANDIDATE_INSTALLATION.md#native-layout-reader-for-linux-x86-64)
+- [x] Reproduce the neutral r2 archive preflight from staged downloads, fresh
+  stock extracts and a newly prepared tool kit. Both tested LZ4 versions
+  produced the same seven image hashes and 13 verified AVB bindings.
+  [Recipient preflight receipt](../manifests/neutral-r2-recipient-preflight.json)
 - [ ] Provide a supported installation route using published downloads and a
   standard computer, with exact prerequisites and clear supported-device/firmware
   limits. The current raw-image ZIP is not a sideload OTA.

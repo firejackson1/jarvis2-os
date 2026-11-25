@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "scope": "Offline host preflight from staged downloads and a fresh Recovery tool kit",
+  "inputs": {
+    "archive_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+    "root_public_key_sha256": "82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df",
+    "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+    "recovery_source_revision": "708e088ed57eb83805753d9213717965a3c61e2c",
+    "stock_ota_sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+    "stock_profile_sha256": "181bbbb4b9e8f7541c574dcc2e461e071f8d61fefa3d9f2f3f544d17688b53e0",
+    "operator_source_archive": {
+      "file": "jarvis2-lcars-operator-tools-98de404.tar.gz",
+      "sha256": "43445aaff6c177487d0063ccf085726b4c7c5344c6a4e161b1bc305d5169097f"
+    },
+    "recovery_tool_kit": {
+      "external/avb/avbtool.py": "f8e82d9eb64093972cc2e04fbcec5c86a10cb2cac9f871c7a55490bb3b6f48eb",
+      "out/host/linux-x86/bin/gki/generate_gki_certificate.py": "6ee0b2e3c3323ae8fccf326bf9a526451eac977005efabf7d129b3063bcfb945",
+      "out/host/linux-x86/bin/mkbootimg": "021f2d960b2d3158a9df2ff6255f1140cebb09bc09f4886373438f2919559cd9",
+      "out/host/linux-x86/bin/unpack_bootimg": "a9d260978a63bd06a24b6347e7dee8a28ff96639793caea15dff6aa491316308"
+    },
+    "lz4": [
+      {
+        "version": "1.10.0",
+        "source_revision": "ebb370ca83af193212df4dcbadcc5d87bc0de2f0"
+      },
+      {
+        "version": "1.9.4",
+        "executable_sha256": "a8b8235f93eb99378f013ab62e070235399344a58a4f97e89d2db90a447033a0"
+      }
+    ]
+  },
+  "outputs": {
+    "images": {
+      "images/product.img": {
+        "bytes": 541949952,
+        "sha256": "541d4c89120b66f57a26021bf1c2fd5942189d47f13ec1b5a53ad9cd854ec16c"
+      },
+      "images/system.img": {
+        "bytes": 483131392,
+        "sha256": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42"
+      },
+      "images/system_ext.img": {
+        "bytes": 96161792,
+        "sha256": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b"
+      },
+      "images/vbmeta.img": {
+        "bytes": 2097152,
+        "sha256": "e366df78ed9ebd716462568f191b7e8dca7def06e240d178d73e6ec892d796c5"
+      },
+      "images/vbmeta_system.img": {
+        "bytes": 2097152,
+        "sha256": "cf1c7da1d484c3a016736c39456e701cb4d6ac92bba64a6fcd687100b118e105"
+      },
+      "transition-images/init_boot.img": {
+        "bytes": 8388608,
+        "sha256": "2bda4f31dd2fae6afef022e845c3e0ac0ac99a0dbccba78a00735b1a3986bf30"
+      },
+      "transition-images/vendor_boot.img": {
+        "bytes": 67108864,
+        "sha256": "c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e"
+      }
+    },
+    "verified_avb_bindings": 13,
+    "verification_report_sha256": "7f49311cad79b8942350fdefe67e5995b66e3e577746363ec918fb7d11cb12c4",
+    "avb_report_sha256": "ce68d7ddeb3f4dd40460a9029953b4801ad6c14ab04c65f2c6ffa47c7b74c33b",
+    "recovery_notices_sha256": "5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30"
+  },
+  "both_lz4_runs_byte_identical": true,
+  "prepared_images_match_prior_saved_layout_rehearsal": true,
+  "saved_layout_rechecked": false,
+  "device_contacted": false,
+  "hardware_root_trust_verified": false,
+  "installation_authorized": false
+}

@@ -44,6 +44,13 @@ updates the embedded [Known Issues page](KNOWN_ISSUES.md) and preserves all five
 images, the LCARS plug-in and its notices byte for byte. The inventory
 accompanies the private download set.
 
+A fresh audit of the latest 18-file staging set reproduced the patch report
+and read back all 21 tracked feature files in both ZIPs. The
+[host preflight](CANDIDATE_INSTALLATION.md#reproduce-the-neutral-r2-host-preflight-from-downloads)
+also reproduced all seven prepared image hashes, including LCARS Recovery, from
+the staged ROM and the matching stock OTA. Repeat the patch replay and binary
+readback against the exact ZIP whenever the product build is refreshed.
+
 | Release change | Where to find it in neutral r2 |
 | --- | --- |
 | Settings tap and hold, left widget panel, button editor, Home chooser and Smart Home provider settings | Controls 1.1 in `system_ext`. The TV Settings overlay exposes the settings entries. Shortcut handling requires Accessibility consent. |
