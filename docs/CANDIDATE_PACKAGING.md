@@ -160,6 +160,47 @@ The packager always leaves hardware readiness, OTA/installability, source
 correspondence and release approval unverified/false. A successful receipt is a
 packaging check, not a substitute for the independent image audits.
 
+### Reproduce the staged neutral r2 ZIP
+
+Start with the reviewed five signed images and the exact LCARS plug-in and
+notice archive. Use the [original image-proof JSON](../manifests/neutral-r2-packaging-proof.json)
+with the SHA-256 below. Preserve the file bytes, including spacing and the
+trailing newline, because its digest appears inside the ROM ZIP.
+
+Use the packager at `00d6300ed7a42d7153b6ca85e74b7766154fc8d0` and stage
+the regular metadata from product commit
+`cb9334ee26ccd80d9f5e5d9276905440b93eaeba`. Generate the canonical LCARS
+README as above. For r2, replace just `docs/KNOWN_ISSUES.md` in the metadata
+staging directory with the Git blob shown below. Set the five paths to your
+repository, prepared inputs, and fresh output parent.
+
+```bash
+set -euo pipefail
+repo=/path/to/jarvis2-os
+tool_checkout=/path/to/packaging-tools-00d6300
+images=/path/to/exact-signed-images
+metadata=/path/to/prepared-lcars-metadata
+output_parent=/path/to/output
+git -C "$repo" show 152b5da6098ba6b3e34cf7800937282d4206211b:docs/KNOWN_ISSUES.md \
+  > "$metadata/docs/KNOWN_ISSUES.md"
+python3 "$tool_checkout/tools/package-candidate.py" \
+  --images "$images" --metadata "$metadata" \
+  --proof "$repo/manifests/neutral-r2-packaging-proof.json" \
+  --proof-sha256 093ef19bf88c07c58676ff80017e1167b5fb3fdfe561546fabff5c98e5089528 \
+  --source-revision cb9334ee26ccd80d9f5e5d9276905440b93eaeba \
+  --output "$output_parent/r2-package"
+printf '%s  %s\n' 8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9 \
+  "$output_parent/r2-package/jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate.zip" | sha256sum -c -
+```
+
+An independent run from the staged product and tooling source companions
+with Python 3.13.5 and zlib 1.3.1 reproduced the full 22-member ZIP, manifest
+and packaging receipt byte for byte. The archive's external filename has the
+`-neutral-artwork-r2` suffix. The [reproduction record](../manifests/current-neutral-artwork.json)
+pins the source companions and outputs. This rehearsal verifies packaging of
+the signed image inputs. The clean ROM compile and hardware qualification are
+tracked separately.
+
 ## Separate companion assets
 
 The ROM ZIP does not include the launcher's corresponding source archive,

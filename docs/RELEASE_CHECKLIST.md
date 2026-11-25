@@ -202,6 +202,9 @@ publication by this policy decision alone.
 - [x] Stage and verify the [neutral artwork variant](../manifests/current-neutral-artwork.json)
   with its original generator, a complete AVB audit and a saved slot-A fit.
   Hardware verification and hosted asset checks remain open.
+- [x] Rebuild the exact r2 ZIP, manifest and packaging receipt from the
+  pinned source metadata and reviewed signed inputs.
+  [Exact ZIP reproduction](CANDIDATE_PACKAGING.md#reproduce-the-staged-neutral-r2-zip)
 - [x] Download and verify the complete older f38 draft, including its source
   supplement, public signing materials and two release metadata files. Repeat
   the [complete download check](CANDIDATE_PACKAGING.md#verify-the-complete-download-set)

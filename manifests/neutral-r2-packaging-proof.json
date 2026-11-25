@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "google_payload_included": false,
+  "rehearsal_only": false,
+  "files": {
+    "product.img": {
+      "bytes": 541949952,
+      "sha256": "541d4c89120b66f57a26021bf1c2fd5942189d47f13ec1b5a53ad9cd854ec16c"
+    },
+    "system.img": {
+      "bytes": 483131392,
+      "sha256": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42"
+    },
+    "system_ext.img": {
+      "bytes": 96161792,
+      "sha256": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b"
+    },
+    "vbmeta.img": {
+      "bytes": 2097152,
+      "sha256": "e366df78ed9ebd716462568f191b7e8dca7def06e240d178d73e6ec892d796c5"
+    },
+    "vbmeta_system.img": {
+      "bytes": 2097152,
+      "sha256": "cf1c7da1d484c3a016736c39456e701cb4d6ac92bba64a6fcd687100b118e105"
+    }
+  },
+  "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+  "artwork": {
+    "bytes": 695585,
+    "sha256": "ea74502097a5e61134f25e92ac313f2154f80aea4972bae5cec1d4252bb2b375"
+  },
+  "artwork_variant": "neutral",
+  "artwork_payload_proof_sha256": "eaee48fd5201a2cd054ff7ab98a1c27965e448e055aeeab5c6d5956819413d69",
+  "assembly_report_sha256": "eb8f6a431e23874e251945e177e4262157747ec04f9ded882338af7c26ad2582",
+  "recovery": {
+    "source_revision": "708e088ed57eb83805753d9213717965a3c61e2c",
+    "plugin_sha256": "8d14f4ea2d191fce4424eab196690dc646080f82484d107bd89f77e340ca3f3c",
+    "stock_vendor_boot_sha256": "c017791c8e52678595a03b902237dcb15a4e8adeb3d35fdb2232838750e4233a",
+    "vendor_boot_sha256": "c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e",
+    "notices_sha256": "5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30"
+  },
+  "hardware_tested": false,
+  "public_release_ready": false
+}

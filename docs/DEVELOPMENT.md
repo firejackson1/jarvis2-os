@@ -1558,6 +1558,21 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Exact r2 package reproduction — 2026-11-25
+
+- Recovered the original [image-proof bytes](../manifests/neutral-r2-packaging-proof.json)
+  bound by the r2 ZIP. Verified the archived product source and packaging tool
+  hashes and extracted them into a fresh workspace. Used the committed
+  `152b5da` Known Issues blob, the reviewed LCARS inputs and the standalone
+  signed images. The staged release ZIP was used only for output comparison.
+- The independently staged run reproduced the 547,469,604-byte archive with
+  all 22 entries. The ZIP, manifest and verification receipt matched the
+  original bytes using Python 3.13.5 and zlib 1.3.1.
+  [Packaging recipe](CANDIDATE_PACKAGING.md#reproduce-the-staged-neutral-r2-zip)
+- Host checks passed with AVB fixtures (221 Python and eight Java suites).
+  This rehearsal fixes a missing packaging input in the published source
+  record. Clean image compilation and hardware tests remain open.
+
 ### Exact r2 verified-boot states during install and restore — 2026-11-25
 
 - Rehashed the fixed r2 and saved restore inputs. Independently verified four

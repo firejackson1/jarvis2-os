@@ -268,5 +268,26 @@
     "receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
     "hosted_download_verified": false,
     "device_contacted": false
+  },
+  "r2_packaging_reproduction": {
+    "packaging_tool_revision": "00d6300ed7a42d7153b6ca85e74b7766154fc8d0",
+    "packaging_tool_sha256": "dd343027810928e950cc36827632bd8277f82957d720a90e197b0d706835eedd",
+    "packaging_tool_source_archive_sha256": "dc1c7e0f86800ef668f9cd888f2347c3e6250edd31a7236c3b15d2f2134e07d2",
+    "product_metadata_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+    "product_source_archive_sha256": "90b105cf6cd42e942ee2c6f07480c92c09953f242182ff20abe8b54d2032908d",
+    "known_issues_revision": "152b5da6098ba6b3e34cf7800937282d4206211b",
+    "known_issues_sha256": "fb30d88ba22d449744dad04f5dc59d01a73184dc22967555e695f49e74c74bad",
+    "packaging_proof_file": "manifests/neutral-r2-packaging-proof.json",
+    "packaging_proof_sha256": "093ef19bf88c07c58676ff80017e1167b5fb3fdfe561546fabff5c98e5089528",
+    "zip_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+    "zip_bytes": 547469604,
+    "zip_member_count": 22,
+    "zip_manifest_sha256": "24668c356a5ea00f05cce4e93005b995bbad63adb5d975f9628177820f0398f1",
+    "packaging_verification_sha256": "6f93fe6cea08d87d6d5b609541d0cd1a3ab7c7240245a8fd8953d388ed40f2b3",
+    "python_version": "3.13.5",
+    "zlib_runtime_version": "1.3.1",
+    "archive_manifest_and_receipt_byte_equal": true,
+    "images_supplied_from_existing_signed_build": true,
+    "device_contacted": false
   }
 }

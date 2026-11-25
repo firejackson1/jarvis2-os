@@ -7,6 +7,8 @@ used for the candidate are pinned separately at
 [neutral r2 receipt](../manifests/current-neutral-artwork.json) records the
 release-candidate archive, image, and Recovery digests. These instructions
 prepare source and build inputs for a neutral build with locally supplied keys.
+The exact staged ZIP can be reproduced separately from the already signed
+images and [pinned packaging inputs](CANDIDATE_PACKAGING.md#reproduce-the-staged-neutral-r2-zip).
 
 ## Source and inputs
 
