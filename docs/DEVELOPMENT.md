@@ -1900,3 +1900,26 @@ without private scripts, server access or an AI operator.
   network examples and key-format strings. The
   [receipt](../manifests/neutral-r2-privacy-scan.json) carries no matched
   values. Final hosted asset review remains open.
+
+### Neutral r2 patch and feature recheck — 2026-11-25
+
+- Reverified all 18 staged files, the 200-file product archive and 69-file
+  LCARS source archive. Matched the archived patch hashes to all eight tracked
+  patches and the six replayed series. Independently checked the contents
+  of the 22-entry vanilla and nine-entry private ZIPs, including all 21
+  tracked feature files per variant and the LCARS binding.
+- Read back the landscape capability and Controls 1.1 code, including
+  Accessibility setup, input replay, AirPods wear state, audio routing,
+  widgets and Smart Home. Compared the legacy Controls project with the ROM
+  source. Its Java files are either identical or superseded by the release
+  code for input replay and shortcut setup.
+- Verified 126 vanilla APK package IDs across the three filesystems and 31
+  APEX containers. The private composition added exactly its 27 pinned
+  files and 15 parent directories. None of its 16 APK digests or IDs matched
+  vanilla. Traced the two Google-prefixed IDs already in vanilla to code-free
+  LineageOS compatibility overlays. [Inclusion recheck](../manifests/neutral-r2-inclusion-recheck.json)
+- The ARM64 USB Linux menu, temporary suspend workaround and early UART
+  diagnostics retain their development status. Bazzite stayed running.
+  This recheck used existing artifacts and did not access Jarvis2.
+- The source host suite passed 221 Python tests, eight Java suites and the
+  repository privacy audit.

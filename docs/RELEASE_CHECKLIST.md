@@ -53,6 +53,9 @@ apply independently.
   whole-file matches to platform source and the newline placeholder.
   [Stock-file boundary](LICENSING.md#stock-file-boundary-in-neutral-r2)
 - [ ] Keep Google applications out of public ROM bundles unless distribution is properly licensed; document separately installed optional components.
+- [x] Verify that the exact vanilla r2 images exclude all 27 MindTheGapps
+  additions, including the 16 APKs, by comparing extracted files and package
+  IDs. [Package boundary](GOOGLE_APPS.md#neutral-r2-package-boundary)
 - [ ] Use our own private signing keys and update channel; document known issues, tested hardware and our own support/bug-report destination.
 - [ ] Keep official LineageOS branding/endorsement claims out of promotional material; review any upstream artwork/marks before release.
 
@@ -80,6 +83,10 @@ publication by this policy decision alone.
 - [x] Recheck every shipped patch and the 21 tracked payload files from the
   staged neutral ZIP, add the matching LCARS source archive and correct the
   embedded release notes. See the [r2 coverage inventory](../manifests/neutral-r2-release-coverage.json).
+- [x] Rehash every patch in the staged product source tarball and confirm all
+  21 tracked payloads in both the vanilla r2 ZIP and the private GApps rehearsal.
+  Check the landscape declaration and Controls 1.1 onboarding in the actual
+  packaged files. [Inclusion recheck](../manifests/neutral-r2-inclusion-recheck.json)
 - [x] Check the 1,430 upstream project pins, the twelve modified source files
   and the exact local build inputs. Record the
   [current reproduction procedure](CURRENT_REPRODUCTION.md).

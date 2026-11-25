@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+  "release_coverage_sha256": "c85bd69182e1f379fd51bcbc1e894bb3c9fa2c9cc772016187c24d4b9112da92",
+  "verified_delivery_receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
+  "staged_assets_verified": 18,
+  "source_patch_verification_sha256": "a26cb736826c379589538a3156aa8b122a1511f8fd8cbcb99df6284556a39da2",
+  "patch_source_sha256": {
+    "patches/Adb/0001-explicit-port-disables-android-network-fallback.patch": "86d2d3dbac17d44e5b67e673eec0a9f9f067af4dcb289a67d3a8c9f51d06de2f",
+    "patches/Bluetooth/0001-aacp-basic-mode-fallback.patch": "2570f6b1f3c7cd97c68e01152181f52d1728a9beb85ad8e5bd2735cf0ba61489",
+    "patches/Music/0001-release-media-session-on-destroy.patch": "7987a702175bffbec5c4f17b5a27b792ff65f0457c68bea2873448aa445a4911",
+    "patches/ReleaseTools/0001-python3-ota-key-replacement.patch": "04c3aacf1eadf98be759ad318e75a559e2b0b2f6b058e9d63ebb60082126f212",
+    "patches/SetupWizard/0001-request-bluetooth-connect-permission.patch": "21996f9a3a26ad18d18b6c831eb4894aa9f17561701d176b466935e5b7e9559f",
+    "patches/TvSettings/0001-jarvis2-pairing-instructions.patch": "c77441bc0d2f51ac50bff66277b074977c63d8418a3cbda0286e3b03f3e11a20",
+    "patches/TvSettings/0002-jarvis2-airpods-shortcut.patch": "36764a186308c14b374a78a40056e712610e220e479acbd92a1e7f205d95856a",
+    "patches/TvSettings/0003-tv-settings-replaces-handheld.patch": "d8acf1f31403c4cebcd3c50e586c3af4978262d4687c66a45e5b63c1fb97167c"
+  },
+  "release_feature_members_verified_per_variant": 21,
+  "package_and_feature_readback": {
+    "format": 1,
+    "scope": "Actual package IDs from standalone and APEX-embedded APK manifests, and full regular path/link content comparison to the private MindTheGapps control",
+    "vanilla_archive_sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+    "private_control_archive_sha256": "d4e5cf6cd212902114b38cc3f930f7486f7902257736d8de6833f50f3304b769",
+    "upstream_google_bundle_sha256": "e36bc0dbbf8e0b592cd09ed52893712819616398307045dd5cf6fb8dfb62a652",
+    "gapps_recipe_sha256": "73b4e1e464bc4cf3cb63a65ad84e09790dfcef0765f24c9b7c11ec59a6b179b4",
+    "aapt2_sha256": "62a0505dfe02ede6256580590cb64f81f0e45006a3c242330f0db303a504506b",
+    "vanilla_filesystem_rows_preserved": 5981,
+    "vanilla_regular_files_preserved": 5354,
+    "vanilla_symlinks_preserved": 263,
+    "private_control_new_directories": 15,
+    "vanilla_standalone_apks_read": 103,
+    "vanilla_apex_packages_checked": 31,
+    "vanilla_embedded_apks_read": 23,
+    "vanilla_distinct_package_ids": 126,
+    "vanilla_apk_inventory_sha256": "bf22136901cc4f8bb19d73667457f916f2c4f4b91f1cf69458021fff6d45587b",
+    "private_google_payload_files": 27,
+    "private_google_apks": 16,
+    "private_google_distinct_package_ids": 16,
+    "private_google_package_ids": [
+      "com.android.vending",
+      "com.google.android.apps.mediashell",
+      "com.google.android.backdrop",
+      "com.google.android.ext.shared",
+      "com.google.android.feedback",
+      "com.google.android.gms",
+      "com.google.android.gsf",
+      "com.google.android.katniss",
+      "com.google.android.marvin.talkback",
+      "com.google.android.onetimeinitializer",
+      "com.google.android.syncadapters.calendar",
+      "com.google.android.tts",
+      "com.google.android.tungsten.setupwraith",
+      "com.google.android.tv.dfuservice",
+      "com.google.android.tv.remote.service",
+      "com.mtg.atvoverlay"
+    ],
+    "private_google_ids_found_in_vanilla": [],
+    "private_google_apk_hashes_found_in_vanilla": [],
+    "vanilla_com_google_android_ids": [
+      "com.google.android.tungsten.setupwraith.lineageoverlay",
+      "com.google.android.tungsten.setupwraith.pairing.lineageoverlay"
+    ],
+    "lineage_overlay_source_revision": "a85571a4aa9135577912444a4274310466a111ad",
+    "vanilla_compatibility_overlays": {
+      "product/overlay/LineageGoogleSetupWraithOverlay/LineageGoogleSetupWraithOverlay.apk": {
+        "package": "com.google.android.tungsten.setupwraith.lineageoverlay",
+        "target": "com.google.android.tungsten.setupwraith",
+        "apk_sha256": "135b3d7d89c4556f7ca7b579d15549cb9ba8be2f6c4a70b3be6679b74fb94690",
+        "source_manifest_sha256": "e87e98f2a06ba4edaed6b82e527d8785b17e2658b0a54aa3f2e78b48a103b8b6"
+      },
+      "product/overlay/LineageGoogleSetupWraithPairingOverlay/LineageGoogleSetupWraithPairingOverlay.apk": {
+        "package": "com.google.android.tungsten.setupwraith.pairing.lineageoverlay",
+        "target": "com.google.android.tungsten.setupwraith",
+        "apk_sha256": "8a6c17d74e9a8a1ceeedc20eae7f6a1169674689f2871129c5d247ea2aa9ff0b",
+        "source_manifest_sha256": "dfdf84246141189f561f51953417160f3a9fe8626afa0d7abf1c757c67526c7c"
+      }
+    },
+    "verified_landscape_declaration": {
+      "path": "system/etc/permissions/android.software.leanback.xml",
+      "sha256": "304d11ff8dd07f49f613db8e7b3e728e556eaad59b8c4dbd5f70d099752d4605"
+    },
+    "verified_controls_code": {
+      "path": "system_ext/priv-app/Jarvis2RemoteSettings/Jarvis2RemoteSettings.apk",
+      "sha256": "bf1095343e624ca9d363b360b9e24b8dbfbc1ba8fdf24224e356a820b91c50ec",
+      "version_name": "1.1",
+      "version_code": 2,
+      "dex_markers": "Accessibility onboarding, key replay, AirPods wear state, audio routing, widgets, Smart Home and lossless status UI"
+    },
+    "hardware_tested": false,
+    "private_google_payload_published": false
+  },
+  "package_and_feature_readback_sha256": "3bf57f1fd0d00e970fc37d1127641c3d83209c92a86ea0098ce283f0a5ef2d92"
+}

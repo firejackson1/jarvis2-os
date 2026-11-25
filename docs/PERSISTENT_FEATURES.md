@@ -44,8 +44,12 @@ updates the embedded [Known Issues page](KNOWN_ISSUES.md) and preserves all five
 images, the LCARS plug-in and its notices byte for byte. The inventory
 accompanies the private download set.
 
-A fresh audit of the latest 18-file staging set reproduced the patch report
-and read back all 21 tracked feature files in both ZIPs. The
+A fresh audit of the 18-file staging set rehashed all eight patch files in
+the source tarball and read back all 21 tracked feature files in both ZIPs.
+The [inclusion recheck](../manifests/neutral-r2-inclusion-recheck.json) also
+records the exact Controls 1.1 APK, confirms its setup and feature markers
+in compiled DEX, and verifies the landscape declaration in the installed
+permissions XML. The
 [host preflight](CANDIDATE_INSTALLATION.md#reproduce-the-neutral-r2-host-preflight-from-downloads)
 also reproduced all seven prepared image hashes, including LCARS Recovery, from
 the staged ROM and the matching stock OTA. Repeat the patch replay and binary
@@ -57,13 +61,16 @@ readback against the exact ZIP whenever the product build is refreshed.
 | Onn remote pairing, remotes and accessories, native AirPods entry | Patched TV Settings and SetupWizard in `system_ext`. The onn keylayout is present in `system` and `product`. |
 | AirPods pause/resume, Bluetooth and sound panels, HDMI plus Bluetooth routing, automatic delay estimate and manual adjustment | Controls 1.1 in `system_ext`, AACP compatibility in the Bluetooth APEX and four audio policy libraries in `system`. The 50 ms AirPods calibration from testing is a per-device preference. |
 | TV Home, lock-screen default and notification UI | LTvLauncher in `product`, TV SystemUI in `system_ext`, and `ro.lockscreen.disable.default=true` in `system`. The Home chooser discovers additional launchers after installation. |
+| Landscape compatibility for apps such as VLC and YouTube for Android TV | `android.hardware.screen.landscape` is in the permissions XML in `system`. Play catalog and certification depend on the separate Google setup. |
 | Authenticated USB ADB and explicit network port behavior | `ro.adb.secure=1`, `persist.sys.usb.config=mtp,adb` and the rebuilt ADB APEX in `system`. Network debugging is opt-in. |
 | Music cleanup, neutral boot animation and OTA trust | Rebuilt Music APK and matching ART files and the neutral boot animation in `product`. The updated OTA certificate bundle is in `system`. |
 | LCARS Recovery | ARM32 plug-in, notices and a pinned source archive. The host preflight reconstructs `vendor_boot` locally from the matching stock OTA. Installed HDMI, USB ADB, Fastbootd and physical rollback await hardware tests. |
 
 The private Google-app rehearsal preserves the same 21 tracked feature files
 and LCARS plug-in. It uses disposable AVB keys for offline testing. The
-vanilla r2 package is the public-preview candidate.
+vanilla r2 package is the public-preview candidate. The [package boundary
+audit](GOOGLE_APPS.md#neutral-r2-package-boundary) verifies that the optional
+composition's 27 files are separate from the vanilla userspace.
 
 ### Features still in development
 
@@ -73,10 +80,13 @@ vanilla r2 package is the public-preview candidate.
   from USB at power-on remain open.
 - **Suspend and power:** The speaker-click traces and temporary workaround
   are recorded in the suspend investigation. Genuine wake and native Power
-  and Assistant/Mic remapping still need a fail-safe and device tests.
+  and Assistant/Mic remapping still need a fail-safe and device tests. The
+  slot-A early UART diagnostic is a separate troubleshooting image.
 - **Audio and Smart Home:** TrueHD/DTS passthrough, simultaneous Bluetooth
   headsets, remote microphone capture, voice satellite operation and
-  Matter/Thread commissioning remain open.
+  Matter/Thread commissioning remain open. Controls includes a receiver
+  capability and mode UI. Receiver tests and a redistributable implementation
+  are required for a passthrough release claim.
 - **Optional apps and artwork:** FLauncher and Bridge Console TV were
   development-device installs. The public-preview animation is the neutral
   four-dot design. The branded animation remains in the private variant.

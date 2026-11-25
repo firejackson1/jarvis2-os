@@ -33,6 +33,24 @@ Separate delivery also needs an EROFS-compatible, verified composition/install
 procedure against the published base ROM and its AVB chain. The successful
 private repack is evidence for that candidate, not support for arbitrary sideload.
 
+## Neutral r2 package boundary
+
+Verified the exact vanilla ZIP and private Google rehearsal, then independently
+extracted the three EROFS filesystems from each. All 5,981 existing paths matched
+by type, regular-file content or symbolic-link target. The private rehearsal
+added the 27 files pinned by the composition recipe and 15 parent directories.
+Its 16 APK package IDs and byte hashes had no matches among the 103 standalone
+and 23 APEX-embedded APKs in vanilla r2. This includes Play Store, Play services
+and Services Framework. [Inclusion recheck](../manifests/neutral-r2-inclusion-recheck.json)
+
+The two vanilla overlays with Google-prefixed package IDs are LineageOS
+SetupWraith compatibility resources. Their package IDs and targets matched
+the pinned LineageOS manifests, both declare `hasCode=false`, and neither
+archive contains DEX or native libraries. The SetupWraith target APK is present
+only in the private composition. This audit covers the two exact ROM packages.
+The redistribution and on-device installation checks above still apply.
+[Pinned LineageOS overlay sources](https://github.com/LineageOS/android_device_lineage_atv/tree/a85571a4aa9135577912444a4274310466a111ad/rro)
+
 ## EROFS and upgrade limits
 
 The upstream recovery installer expects writable system/product/system_ext
