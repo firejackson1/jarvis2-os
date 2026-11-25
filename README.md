@@ -22,6 +22,11 @@ No signing key, owner ADB identity, OEM image or firmware is stored in Git.
 Upstream recovery ADB and SELinux policies remain in effect; the Android 14
 permissive policy patch is not blindly copied forward.
 
+The separate [stock-compatible LCARS recipe](docs/STOCK_LCARS.md) builds an
+ARM32 UI extension for the current Android 14 firmware. It keeps the stock
+Recovery core and Fastbootd services and assembles an unsigned prototype
+with locally supplied stock files.
+
 ## What is implemented
 
 - Recovery-only device configuration, intended at `device/onn/jarvis2_recovery`.
