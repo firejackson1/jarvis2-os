@@ -723,5 +723,146 @@
     "static_archive_bytes_read_back": false,
     "elf_rebuild_confirmed": false,
     "host_report_sha256": "c4d8cde33093c0017f0d76351fdcac653559fd765ae1965fadd5d78212f9682d"
+  },
+  "generated_source_graph": {
+    "format": 1,
+    "scope": "Planned generator inputs within the native Flutter ARMv7 link graph, including transitive Ninja inputs for generator tools",
+    "generated_compiler_input_count": 53,
+    "generator_rule_target_counts": {
+      "__flutter_impeller_entity_gen_blob_embed_gles_entity_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_entity_gen_blob_embed_gles_framebuffer_blend_entity_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_entity_gen_blob_embed_gles_modern_entity_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_entity_gen_blob_embed_vk_entity_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_entity_gen_blob_embed_vk_framebuffer_blend_entity_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_entity_gen_blob_embed_vk_modern_entity_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_entity_impellerc_vk_entity_shaders___build_toolchain_android_clang_arm__rule": 36,
+      "__flutter_impeller_entity_impellerc_vk_framebuffer_blend_entity_shaders___build_toolchain_android_clang_arm__rule": 2,
+      "__flutter_impeller_entity_impellerc_vk_modern_entity_shaders___build_toolchain_android_clang_arm__rule": 4,
+      "__flutter_impeller_renderer_gen_blob_embed_vk_compute_shaders___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_impeller_renderer_impellerc_vk_compute_shaders___build_toolchain_android_clang_arm__rule": 2,
+      "__flutter_shell_platform_android_icudtl_asm___build_toolchain_android_clang_arm__rule": 1,
+      "__flutter_third_party_dart_runtime_generate_version_cc_file___build_toolchain_android_clang_arm__rule": 1
+    },
+    "ninja_declared_input_count": 2283,
+    "generated_intermediate_input_count": 1295,
+    "tracked_input_path_count": 987,
+    "git_projects": {
+      "src": {
+        "revision": "e265c359126b24351f534080fb22edaa159f2215",
+        "tracked_input_paths": 1,
+        "staged_archive_present": true
+      },
+      "src/flutter": {
+        "revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+        "tracked_input_paths": 174,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/dart": {
+        "revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+        "tracked_input_paths": 6,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/flatbuffers": {
+        "revision": "0a80646371179f8a7a5c1f42c31ee1d44dcf6709",
+        "tracked_input_paths": 32,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/icu": {
+        "revision": "43953f57b037778a1b8005564afabe214834f7bd",
+        "tracked_input_paths": 447,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/libcxx": {
+        "revision": "44079a4cc04cdeffb9cfe8067bfb3c276fb2bab0",
+        "tracked_input_paths": 40,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/libcxxabi": {
+        "revision": "2ce528fb5e0f92e57c97ec3ff53b75359d33af12",
+        "tracked_input_paths": 16,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/shaderc": {
+        "revision": "37e25539ce199ecaf19fb7f7d27818716d36686d",
+        "tracked_input_paths": 9,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/vulkan-deps/glslang/src": {
+        "revision": "b1f7affe94ea108de7e38ee764f855a2130da398",
+        "tracked_input_paths": 50,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/vulkan-deps/spirv-cross/src": {
+        "revision": "b8fcf307f1f347089e3c46eb4451d27f32ebc8d3",
+        "tracked_input_paths": 9,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/vulkan-deps/spirv-headers/src": {
+        "revision": "e77d03080b90c5d361663a67834c57bb1fddaec2",
+        "tracked_input_paths": 13,
+        "staged_archive_present": true
+      },
+      "src/flutter/third_party/vulkan-deps/spirv-tools/src": {
+        "revision": "80926d97aba8d1b1162448713ca4825d4c816226",
+        "tracked_input_paths": 190,
+        "staged_archive_present": true
+      }
+    },
+    "cipd_inputs": {},
+    "checkout_paths_outside_pinned_roots": 0,
+    "host_paths_outside_workspace": 0,
+    "inputs_not_tracked_at_pinned_git_revisions": 1,
+    "generated_objects_manifest_sha256": "c0cb3ec5c5072ff5891951b9ddea0916dd35d6c6431aeffeaf0a3e6b6192727c",
+    "ninja_query_sha256": "95aa345797ed06166a575a6bd08964e1b93cb7c0c559c6f06c68b4a5dac32eac",
+    "ninja_inputs_sha256": "c0ada4e3a7253345ff08fe77de33645dc5ea82313c83f41328515d368bae6f25",
+    "complete_generated_payload_readback": false,
+    "host_report_sha256": "88308f8c4861d9aa7d8e676a1d4ebe01222f830d6fa5819328545fb2dc7417e6",
+    "dart_version_replay": {
+      "revision": "88c9758ef131d430d8ce595c6bfb4c90574d3ddd",
+      "reflog_is_only_declared_non_tree_dependency": "src/flutter/third_party/dart/.git/logs/HEAD",
+      "output_sha256": "e31fb269838aa34a6ec6a84b8084be6829291c2a5a7c075e5bd9a174ad817f39",
+      "output_bytes": 1018,
+      "different_reflogs_same_pinned_commit": true,
+      "uses_original_shallow_boundary": true,
+      "exact_match_to_live_build_generated_source": true
+    },
+    "partial_static_archive_readback": {
+      "requested_archive_count": 6,
+      "completed_archives": {
+        "obj/flutter/third_party/expat/libexpat.a": {
+          "sha256": "4f47aa79d4470008bac268ada411b2be2b8d18672abb14c95d674558889de529",
+          "members_in_order": {
+            "libexpat.xmlparse.o": {
+              "sha256": "95273df9d22ff9471c0ca2a7506ee06e3f1cc18fd3cf5072e83d17de2b6902db",
+              "bytes": 337128
+            },
+            "libexpat.xmlrole.o": {
+              "sha256": "3a0323f2ca290937d0012a4f9df761c5237bfff5ae2ec7f971a62bed4c2906fb",
+              "bytes": 49520
+            },
+            "libexpat.xmltok.o": {
+              "sha256": "2fa67fb4bf791bb174b938833f19354c750374c0d6c5e18189f07d63ad3d6299",
+              "bytes": 245128
+            }
+          }
+        },
+        "obj/flutter/skia/modules/skcms/libskcms.a": {
+          "sha256": "100277b60d452bf1a5bae8f265928b25ffd36e2c05e3c92f5d121cfc787d0d59",
+          "members_in_order": {
+            "libskcms.skcms.o": {
+              "sha256": "742d10472982dda7bb3f42fbef600185e53dbd2ae09363c0173ef5e06abf3840",
+              "bytes": 169172
+            },
+            "libskcms.skcms_TransformBaseline.o": {
+              "sha256": "86d42a4e4f8ec277bc98938cab9906057760c824d672e98dc176fd9589fcf88d",
+              "bytes": 455160
+            }
+          }
+        }
+      },
+      "complete_archive_readback": false,
+      "elf_rebuild_confirmed": false,
+      "host_report_sha256": "d1bf43833cfa4c6e5597132c790d8ed1f0a9d10e9a6efd3bdf940f6895d0d345"
+    }
   }
 }

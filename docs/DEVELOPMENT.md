@@ -2269,3 +2269,13 @@ without private scripts, server access or an AI operator.
   trees of the five projects, all with staged archives. The remaining
   member uses a generated Dart version source. Archive bytes and the
   complete library are still building.
+
+- Matched 53 generated inputs to their Ninja rules and verified all 987
+  declared source paths in 12 staged Git projects. Dart's checkout reflog
+  is the only declared input outside those trees and the build output.
+  Two isolated reflogs at the pinned Dart revision and shallow boundary
+  reproduce the build's exact 1,018-byte version source.
+- Read back the first completed Expat and skcms archives. Their five
+  member names, order and contents match the pinned Ninja graph and the
+  compiled objects. The other archives, generated payloads and final
+  library still need complete readback.

@@ -377,7 +377,20 @@ Their archive rule passes the explicit input list to `llvm-ar`. All
 map to tracked files in five pinned projects with staged archives.
 The Dart version member is generated. Actual archive members, generated
 inputs, compiler-discovered headers and the resulting ELF still need
-readback.
+complete readback.
+
+Query the 53 generated source paths with `ninja -t query` and
+`ninja -t inputs`. Their rules generate 51 shader sources, one ICU data
+assembly file and one Dart version source. The transitive query includes
+987 paths verified in 12 pinned Git trees with staged archives, 1,295
+intermediate build paths and Dart's Git reflog. The Dart generator produced
+the exact live build bytes from two isolated reflogs at the pinned revision
+with the original shallow boundary preserved. The compiler-generated
+header dependency log remains a separate input to the final audit.
+
+The first two completed static libraries, Expat and skcms, passed exact
+`llvm-ar` member name, ordering and byte comparisons against their five
+planned objects. The remaining archives and the final ELF are still building.
 [Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
 
 ## Unsigned ARMv7 release and recipient signing
