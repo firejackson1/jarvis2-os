@@ -873,7 +873,7 @@
       "regenerated_assembly_sha256": "267de5c32a491843f58c6fe28a969e166c8c3565bd466a54bd744a5e6b5b5e9c",
       "rebuilt_arm_object_sha256": "e0f5517de0d21ed786b08d8b3a5f0a2bddfce8255dd6ad6428a9e26b89e503d6",
       "assembly_match_running_build": true,
-      "object_compared_with_running_build": false,
+      "object_compared_with_running_build": true,
       "readonly_data_equals_exact_icu_blob_and_le32_size": true,
       "final_elf_embedded_blob_verified": false,
       "host_replay_sha256": "49c918bfd1317ef7167e5e9596e430f5eaa8a3c3613cae85d1fbca3684de068f",
@@ -1096,5 +1096,76 @@
     },
     "host_report_sha256": "f251a6ee15202004217095af43f528dd82f9dd7d77b288e52efeb63323813a09",
     "scope": "Replayed C++ shader generation, bytecode compilation, shader archiving and embedding against the matching Flutter ARMv7 build outputs"
+  },
+  "compiler_dependency_readback": {
+    "ninja_dependency_database_sha256": "f60154228c1e4d86bc940ec294c94de44ac37f48177597ad0f6600932597163a",
+    "objects_with_verified_dependency_records": 3124,
+    "tracked_paths": 7219,
+    "generated_paths": 109,
+    "unique_recorded_paths": 7328,
+    "generated_source_object_count": 53,
+    "generated_object_formats": {
+      "LLVM-bitcode": 52,
+      "ELF32-ARM-relocatable": 1
+    },
+    "git_projects_in_primary_source_archive": 22,
+    "git_projects_in_source_supplement": 1,
+    "unmapped_recorded_paths": 0,
+    "compiler_record_digest": "888cce1c0afd02a16394633b2a5939a2427c9e9dfb7d76e5ac1c5b5f5e08916a",
+    "host_coverage_report_sha256": "191a23f2fd29dfc228fffa4d07f7b470e598edcef4f214a81862c235cd9d2f0b",
+    "host_generated_object_report_sha256": "83831a0a324993881c64aac3570c08bbf1ad964b63c3e2f2f78dc203a68d5d29"
+  },
+  "live_link_response_readback": {
+    "ninja_response_sha256": "e4764537d2ff78dfc670ffbe302ac3c365d4ae4e777be72a9c52e28c4dab628c",
+    "lld_response_sha256": "c36cd5732938ac0ff4bb4442a348cff8985dcd977b907ffc5810f3e3eea6ecbe",
+    "live_argv_sha256": "20c1fd872378f5520ca18185521aa6b44010dc954467d1949ece6259ebb21ef9",
+    "direct_objects_in_exact_graph_order": 3046,
+    "archives_in_exact_graph_order": 6,
+    "ndk_startup_objects_in_live_response": [
+      "crtbegin_so.o",
+      "crtend_so.o"
+    ],
+    "ndk_library_arguments_in_live_response": [
+      "c",
+      "dl",
+      "m",
+      "clang_rt.builtins-arm-android",
+      "android",
+      "EGL",
+      "GLESv2",
+      "log",
+      "jnigraphics"
+    ],
+    "arm_linker_emulation": "armelf_linux_eabi",
+    "release_soname": "libflutter.so",
+    "host_report_sha256": "db4f9b41e11b619a352bc23572496f9dd5be008a6510e9ce272903c42d60d49e"
+  },
+  "googletest_source_supplement": {
+    "checkout_path": "src/flutter/third_party/googletest",
+    "upstream_git_url": "https://chromium.googlesource.com/external/github.com/google/googletest",
+    "revision": "7f036c5563af7d0329f20e8bb42effb04629f0c0",
+    "tree": "c2859dab1b3bc3e5e1f165a33fb7121e7ce439bc",
+    "archive_filename": "googletest-7f036c5563af7d0329f20e8bb42effb04629f0c0.tar.gz",
+    "archive_bytes": 869706,
+    "archive_sha256": "a888ce3e5b5f174415c3cf99c9364489fd386c3d4ed672a94c528a6cf6b160ed",
+    "exact_git_entries_verified": 245,
+    "entry_modes": {
+      "100644": 222,
+      "100755": 23
+    },
+    "compiler_recorded_path": "googletest/include/gtest/gtest_prod.h",
+    "compiler_header": {
+      "bytes": 2502,
+      "sha256": "3c6301ef533db8686e474dd5a0de4d98a31cbb630e2273f712472d1be25aa261"
+    },
+    "license": {
+      "bytes": 1475,
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    "archive_repeated_byte_identically": true,
+    "archive_readback_sha256": "9ec326ec47b2b9f85e0ab36fd5cce75555562c238b313fa060c80085ea994882",
+    "primary_launcher_source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+    "private_delivery_file_count": 14,
+    "private_delivery_receipt_sha256": "494ba5714707bce48b1c2551fbe443f78fcd23d3d0e02ef248376e7749dde788"
   }
 }

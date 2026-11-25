@@ -413,12 +413,31 @@ archive contains those eleven files and the pinned Flutter export script.
 All twelve digests matched their source files. Running LLD with only the
 archive contents reproduced the exact scratch ELF32 ARM output.
 
-Ninja records compiler dependencies for all 3,124 scoped link and archive
-objects. The first 2,649 records matched the compiled object timestamps
-and named 6,299 tracked paths from 21 staged Git projects and five generated
-inputs. These `-MMD` records omit compiler-designated system headers. The
-toolchain and NDK are pinned separately, and the complete dependency
-readback is pending.
+The live Ninja and LLD responses match the graph in exact order for all
+3,046 direct objects and six static archives. They pass the expected two NDK
+startup files and nine library arguments. All 53 generated inputs map to
+compiled object files, and the live ICU object matches the scratch replay.
+
+All 3,124 compiler records for the direct objects and archive members
+matched their compiled-object timestamps. They name 7,219 tracked paths
+in 23 pinned Git projects and 109 generated paths. These `-MMD` records
+omit compiler-designated system headers. The toolchain and NDK are pinned
+separately.
+
+One path, `googletest/include/gtest/gtest_prod.h`, comes from a pinned
+GoogleTest checkout outside the original source companion. The private
+delivery now includes a separate archive of that exact Git tree, alongside
+the existing 43-archive companion. All 245 file contents and modes match
+Git, including the recorded header and the license. Recreate the supplement
+from the pinned checkout with:
+
+```bash
+revision=7f036c5563af7d0329f20e8bb42effb04629f0c0
+git archive --format=tar --prefix="googletest-$revision/" "$revision" |
+  gzip -n > "googletest-$revision.tar.gz"
+```
+
+The final linked library comparison remains pending.
 [Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
 
 ## Unsigned ARMv7 release and recipient signing

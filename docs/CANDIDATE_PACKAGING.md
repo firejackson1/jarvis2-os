@@ -217,8 +217,13 @@ future developer preview; the ROM archive alone is incomplete delivery.
 | Companion file | Bytes | SHA256 |
 |---|---:|---|
 | `LTvLauncher-2026.11.23-code8117-neutral-corresponding-sources.tar.gz` | 474377768 | `aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966` |
+| `googletest-7f036c5563af7d0329f20e8bb42effb04629f0c0.tar.gz` | 869706 | `a888ce3e5b5f174415c3cf99c9364489fd386c3d4ed672a94c528a6cf6b160ed` |
 | `supplemental-userspace-notices.tar.gz` | 904561 | `d59e01f2ca73a72e7eefeb23fb24a8f4f0fd03f2335b9eb7372f61d2e4d69878` |
 | `jarvis2-release-v1-public-signing-materials.zip` | 183211 | `5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8` |
+
+The 14-file private r2 delivery includes the GoogleTest source supplement
+and rechecks all companion and receipt hashes. Deliver it with the main
+launcher source companion. [Launcher sources](LAUNCHER_SOURCE_BUILD.md)
 
 The LCARS notice archive travels inside format 3 packages. Use the separately
 reviewed notice companion with earlier format 2 packages. Two private builds

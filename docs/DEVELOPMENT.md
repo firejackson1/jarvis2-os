@@ -2309,3 +2309,13 @@ without private scripts, server access or an AI operator.
   Ninja commands. All 451 compared generated files matched, including
   all 51 shader translation units that feed the ARMv7 engine. The final
   library comparison and compiled-object dependency audit remain pending.
+
+- Matched the live Ninja and LLD responses to all 3,046 direct objects
+  and six archives in their exact planned order. The actual generated ICU
+  object matches the independent replay. Verified all 53 generated
+  source/object pairs and all 3,124 compiler records.
+- The recorded paths covered 7,219 tracked files and 109 generated files.
+  The sole missing project archive was pinned GoogleTest. Rebuilt its
+  source archive twice and checked all 245 contents and modes against
+  Git. Staged the archive beside the matching launcher source companion
+  in a new private 14-file delivery and reran every asset checksum.

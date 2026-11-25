@@ -342,8 +342,11 @@ publication by this policy decision alone.
   replaying their compilation, archiving and embedding rules offline.
 - [x] Verify the pinned Flutter ARMv7 linker/NDK inputs and reproduce the
   scratch link from its captured files. The complete engine link is separate.
-- [ ] Verify the Flutter native ARMv7 link inputs and compare the rebuilt
-  library with the pinned release ELF. Complete any missing source delivery.
+- [x] Verify the actual ARMv7 link response and all 3,124 compiler
+  dependency records. Stage and verify the pinned GoogleTest supplement
+  alongside the existing launcher source companion.
+- [ ] Compare the rebuilt Flutter ARMv7 library with the pinned release
+  ELF and resolve any differences.
 - [x] Verify production-key package/APEX signing in the private rehearsal with
   pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
   Whole-image AVB, OTA trust and hardware acceptance remain separate gates.
