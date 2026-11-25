@@ -235,6 +235,10 @@ publication by this policy decision alone.
 
 ## Custom recovery required for the public build
 
+- [x] Build and reproduce a stock-compatible ARM32 LCARS prototype offline.
+  The archive preserves stock Fastbootd and boot-control services. The ARM
+  emulator checks factory loading and menu dispatch. See the
+  [prototype evidence](PERSISTENT_FEATURES.md#stock-compatible-arm32-lcars-prototype).
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.

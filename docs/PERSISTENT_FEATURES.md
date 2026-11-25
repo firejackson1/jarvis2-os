@@ -110,6 +110,33 @@ USB enumeration, recovery-owned remote support, return to Android and stock
 restoration still require verification. The repack was unsigned and remained
 off-device.
 
+### Stock-compatible ARM32 LCARS prototype
+
+Stock Recovery loads a UI extension factory. A separate ARM32 build uses
+that entry point and keeps the stock Recovery binary, Fastbootd, AIDL services
+and initialization scripts. The factory's first prototype used `ResetUI()`.
+An isolated ARM emulator exposed a vendor compatibility issue: Amlogic's
+`GetUI()` reads a different member from the one `ResetUI()` updates. The
+revised extension owns the original device without changing its UI object and
+delegates menu and key handling through a new device adapter.
+
+The revised factory built against pinned AOSP Android 14 headers and the
+exact stock libraries. Its `ScreenRecoveryUI` vtable size and all 69
+comparable symbol slots matched the stock library. In an isolated Bionic
+loader test, both factory libraries loaded separately. The revised adapter
+returned all four stock menu labels and matched seven stock key codes with
+the menu visible and hidden. These are headless construction and dispatch
+checks. HDMI, physical controls, Fastbootd mode, USB authorization, Bluetooth
+pairing and boot/restore still require hardware verification.
+
+The unsigned 27,183,104-byte vendor-boot repack fits the 67,108,864-byte
+partition. It replaces the factory plug-in, adds the original plug-in under a
+separate name and preserves 481 other recovery archive records byte for byte.
+The platform fragment, device tree and boot configuration passed exact
+comparison. A second compile and repack reproduced SHA-256
+`30625d390c1fdd10e4465619bbbd9f66df0ec48652f716ba80371e850fd58862`.
+[Pinned AOSP Recovery source](https://android.googlesource.com/platform/bootable/recovery/+/2e6ff7bc40063d38fc5478389a47c0fafba20bfd/)
+
 ## Remote alias blocker
 
 Do not persist the live keylayout by itself. Native policy consumes POWER and

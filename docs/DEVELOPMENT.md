@@ -1143,3 +1143,34 @@ without private scripts, server access or an AI operator.
   the Back-and-Home resources, and the Bluetooth connect permission in the
   compiled manifest. Handheld Settings is absent from the signed archive.
   Behavior during a fresh installation remains unverified.
+
+## 2026-11-24 — Stock-compatible LCARS and source rebuild
+
+- Started a private source build from `cb9334ee26ccd80d9f5e5d9276905440b93eaeba`.
+  The source overlay contains the exact release device revision and the Music
+  patch. The patch verifier accepted all eight patches in that build's mount
+  namespace. The staged launcher and boot animation match their existing pins.
+  The frozen Android tree and output are read-only inputs. This job uses a
+  separate writable output overlay and a new unofficial build identity.
+- Found the stock ARM32 `make_device` extension hook. The LineageOS 21 header
+  probe produced larger `Device` and `ScreenRecoveryUI` vtables than stock.
+  At AOSP revision `2e6ff7bc40063d38fc5478389a47c0fafba20bfd`, the sizes match
+  stock at 64 and 308 bytes. Four comparable `Device` slots and 69 comparable
+  screen slots also matched. [Pinned Android 14 Recovery source](https://android.googlesource.com/platform/bootable/recovery/+/2e6ff7bc40063d38fc5478389a47c0fafba20bfd/)
+- The first factory activated the stock and custom libraries separately in
+  Bionic, but its `ResetUI()` test failed: the stock Amlogic getter reads a
+  separate member. Replaced that approach with an adapter that owns the
+  original device and delegates stock actions while holding its own LCARS UI.
+  An isolated ARM emulator verified the two factories, four stock menu labels
+  and matching visible/hidden dispatch for seven keys. The fixture had no
+  framebuffer, USB controller, linker configuration or device properties.
+- Built and independently reproduced the ARM32 adapter and its unsigned
+  vendor-boot repack. Both images are 27,183,104 bytes and share SHA-256
+  `30625d390c1fdd10e4465619bbbd9f66df0ec48652f716ba80371e850fd58862`.
+  The stock Recovery binary, Fastbootd, boot-control and vendor Fastboot AIDL
+  services are among 481 byte-identical archive records. The original vendor
+  plug-in is kept under a second path. The stock platform fragment, device tree
+  and boot configuration also matched. Hardware startup, actual Fastbootd and
+  AVB/rollback remain open. No Jarvis2 state changed. Bazzite stayed online.
+- The ROM host suite passed 194 cases with the pinned AVB fixture and all eight
+  Java suites. The source privacy and whitespace checks passed.
