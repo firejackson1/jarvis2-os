@@ -88,6 +88,16 @@ domains. The strict compiler still reported 25 assertion failures, down
 from 53. These results cover the policy inputs and compilation. The full
 `user` ROM, runtime enforcement and strict compatibility review remain open.
 
+The pinned stock OTA provides the strict comparison baseline. Its platform,
+system extension and product policy identifiers match the three ODM
+precompiled identifiers. The host replay with all-stock inputs passed the
+strict compiler with zero assertion failures. The mixed `user` replay has
+25, including 12 in the unchanged vendor CIL. This
+isolates the observed failures to the policy combination. The stock replay
+and shipped ODM binary differ by one decoded `allow` statement across
+45,550 shared statement lines. Runtime policy selection remains a device
+check.
+
 The [privacy scan receipt](../manifests/neutral-r2-privacy-scan.json) covers
 6,119 regular files in the exact r2 userspace images, including 765 files
 inside the 31 APEX payloads. The scan also searched supported compressed

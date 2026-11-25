@@ -2241,3 +2241,12 @@ without private scripts, server access or an AI operator.
   on two runs, both with zero permissive domains. The same strict mode
   that reported 53 assertions in r2 still reports 25. These are host
   policy checks. The full variant and hardware checks remain open.
+
+- Verified and extracted all three stock platform images from the pinned
+  OTA. Replayed the same compiler with seven stock CIL inputs. Stock
+  passed with strict assertions enabled. With the same retained vendor
+  inputs, the mixed `user` replay reports 25 assertions. All three stock
+  identifiers match ODM, consistent with normal stock boot using its
+  precompiled policy. The replay shares 45,550 decoded statement lines
+  with that binary. The shipped binary contains one additional allow
+  statement. [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)

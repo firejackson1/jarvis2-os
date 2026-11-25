@@ -238,5 +238,101 @@
     "device_contacted": false,
     "complete_user_rom_built": false,
     "report_sha256": "900b31f58984be9a43b1644879ea5d473da7c454d1c64ad9fe487c9d99020216"
+  },
+  "stock_strict_baseline": {
+    "format": 1,
+    "scope": "Strict offline SELinux comparison of pinned stock with the separate mixed user-policy replay",
+    "stock_ota_sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+    "stock_ota_images": {
+      "system": {
+        "sha256": "163790252b123680baa8ac6fc3363467e4a27eb1c81ef8dd6108f7e4f90892d0",
+        "bytes": 483131392
+      },
+      "system_ext": {
+        "sha256": "c6e7857eec8fc386cae9ff7b8ce8e1918c34055e60abe051e08d50bf4b0ca38b",
+        "bytes": 96161792
+      },
+      "product": {
+        "sha256": "551d485d1194a6d2687e9c1dcab8ef638fcbcbf39bec74d2cf417666aeca19b4",
+        "bytes": 541949952
+      }
+    },
+    "vendor_mapping_version": "34.0",
+    "stock_policy_identifiers": {
+      "plat": {
+        "platform_id": "1037b57430a2c84eb050572baf95b558fe265a8b68e6b0adf05d932488c53cb1",
+        "odm_id": "1037b57430a2c84eb050572baf95b558fe265a8b68e6b0adf05d932488c53cb1",
+        "match": true
+      },
+      "system_ext": {
+        "platform_id": "84d84a9e1c2e30e84afa28360a2275a9a22ff4778554fe96d9ed8e1a3554a1dc",
+        "odm_id": "84d84a9e1c2e30e84afa28360a2275a9a22ff4778554fe96d9ed8e1a3554a1dc",
+        "match": true
+      },
+      "product": {
+        "platform_id": "69ccccafde88d94211eeddc7c6e56fd44bd2a1317652e598261349c5396e07e3",
+        "odm_id": "69ccccafde88d94211eeddc7c6e56fd44bd2a1317652e598261349c5396e07e3",
+        "match": true
+      }
+    },
+    "stock_boot_expected_to_load_precompiled": true,
+    "stock_cil_inputs_in_order": {
+      "system/system/etc/selinux/plat_sepolicy.cil": {
+        "sha256": "4ef1914e10f9c8751da8560c1ae83ba410d54191898493f8a5a985b5bdd9003b",
+        "bytes": 2135171
+      },
+      "system/system/etc/selinux/mapping/34.0.cil": {
+        "sha256": "cd235de61572c5ac780f62ce34daf1b14906d31655246f8679159721a4c2fd00",
+        "bytes": 209898
+      },
+      "system_ext/etc/selinux/system_ext_sepolicy.cil": {
+        "sha256": "c6488bcd2adf11c66268ba4173327f26b830ef926529a557d5babfb1a7ddaeb4",
+        "bytes": 28590
+      },
+      "system_ext/etc/selinux/mapping/34.0.cil": {
+        "sha256": "39bccdb6d45a23fec2c0f57ec832285456d246f7e1f61a24f4d7609b8a97cb7e",
+        "bytes": 424
+      },
+      "product/etc/selinux/product_sepolicy.cil": {
+        "sha256": "26b4acc6eed83345dedc31bff8500eb85f8c696a71a49f5ebb1c75a6618f8125",
+        "bytes": 24797
+      },
+      "vendor/etc/selinux/plat_pub_versioned.cil": {
+        "sha256": "d83432557d92f845a285fd1f10adb0aa3f831eb1f1b5d18f0999e060e8b45955",
+        "bytes": 959174
+      },
+      "vendor/etc/selinux/vendor_sepolicy.cil": {
+        "sha256": "45b8590e8b2b75ea6a6a109c7d4714c715eaeedcb76f182695cd7a09222e4ab4",
+        "bytes": 436472
+      }
+    },
+    "stock_boot_compiler_replay": {
+      "sha256": "db9c248ff48d77d2f5d7d4539aa3038feb653d734e0fe48e1db9d13ab0154269",
+      "bytes": 742121
+    },
+    "stock_boot_compiler_replay_repeated_identical": true,
+    "matches_stock_precompiled_policy_bytes": false,
+    "permissive_types": [],
+    "stock_strict_exit_code": 0,
+    "stock_strict_assertion_count": 0,
+    "mixed_user_strict_assertion_count": 25,
+    "stock_strict_vendor_assertion_sites": 0,
+    "mixed_user_strict_vendor_assertion_sites": 12,
+    "vendor_assertion_sites_common_to_both": 0,
+    "stock_strict_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runtime_enforcement_tested": false,
+    "device_contacted": false,
+    "host_report_sha256": "e4f122618e9fc58d765d5656b9588f94e17e52fbe96b5cfa3fd248033c6d2c6f",
+    "compiled_cil_comparison": {
+      "precompiled_decoded_cil_sha256": "890cacb8a2a06b4f6a9bddbcc4ffd80961f808732f0837c8ad35bb4388049e66",
+      "replay_decoded_cil_sha256": "655b3eed1a912fa96a9bebf79f43f515ac127406f79d41d8ffe7a192c06efd0d",
+      "common_cil_statement_lines": 45550,
+      "stock_precompiled_only_statement_categories": {
+        "allow": 1
+      },
+      "stock_replay_only_statement_categories": {},
+      "matched_tool_and_cil_output_mode": true,
+      "host_report_sha256": "4bbb9f9b8fe78090254b3bd3a223ee14ebd52d85230b6377714b6858ecf5ab43"
+    }
   }
 }

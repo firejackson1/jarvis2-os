@@ -173,6 +173,9 @@ publication by this policy decision alone.
 - [x] Regenerate the three `user` policy files from the retained build rules.
   Verify zero permissive domains after combining them with stock inputs
   and record the 25 remaining strict assertion failures.
+- [x] Replay the strict compiler on the exact stock OTA policy as a control.
+  Confirm zero stock assertion failures and compare the shipped precompiled
+  policy with the stock replay.
 - [ ] Evaluate the full `user` variant, repeat the policy check on its exact
   images and review the strict assertion failures before hardware validation.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.
