@@ -303,6 +303,19 @@
       "sha256": "a888ce3e5b5f174415c3cf99c9364489fd386c3d4ed672a94c528a6cf6b160ed",
       "role": "launcher-googletest-corresponding-source"
     },
+    "asset_correspondence_readback": {
+      "payloads_verified": 21,
+      "rom_payload_members_verified": 21,
+      "git_archive_revision_headers_verified": 7,
+      "stale_source_revision_control_rejected": true,
+      "launcher_input_matches_packaged_coverage": true,
+      "apex_index_and_cronet_archive_linked": true,
+      "rom_root_key_matches_public_export": true,
+      "rom_root_public_key_sha256": "82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df",
+      "host_report_sha256": "333898415a764c8cb81460a22d25f99673ebda0243ecba4195fa51acc1b13f63",
+      "full_avb_check_performed": false,
+      "device_contacted": false
+    },
     "hardware_qualified": false,
     "public_binary_release_ready": false
   }

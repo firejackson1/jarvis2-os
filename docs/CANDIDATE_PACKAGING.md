@@ -261,6 +261,16 @@ adds the GoogleTest source supplement. An earlier control with the same
 receipt and checksum list as its complete test set rejected a copy that
 omitted only that archive.
 [Consolidated delivery receipt](../manifests/current-neutral-artwork.json)
+
+The r2 correspondence check also rehashed the 21 ROM payload members
+and compared the staging receipt, ROM manifest, and coverage record.
+The seven Git archive revision headers matched their expected source pins.
+The staged launcher matches the APK recorded in the ROM's feature coverage.
+The APEX source index references the staged Cronet archive, and the public
+key export contains the exact key embedded in the ROM's root `vbmeta`.
+A control rejected a valid source archive paired with a different revision
+pin. Repeat these comparisons with the successor delivery.
+
 Keep license review, signature trust and device qualification as separate
 release checks.
 

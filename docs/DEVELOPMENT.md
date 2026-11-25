@@ -2362,3 +2362,11 @@ without private scripts, server access or an AI operator.
   privacy scan of the GoogleTest supplement and both updated metadata
   files read all 245 archived source files with zero pattern matches
   and no decode gaps. The receipt preserves the scope of earlier scans.
+
+- Rehashed the 21 r2 staged payloads and the 21 payload members listed
+  inside the ROM ZIP. Compared the product and recovery source records,
+  seven Git archive headers, launcher APK identity, and APEX/Cronet
+  archive link across the matching receipts. The public export's root
+  AVB key matched the key bytes in the ROM. The source revision control
+  rejected a valid archive under a different revision pin.
+  [Consolidated delivery receipt](../manifests/current-neutral-artwork.json)
