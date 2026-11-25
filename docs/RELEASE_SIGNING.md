@@ -98,6 +98,24 @@ and shipped ODM binary differ by one decoded `allow` statement across
 45,550 shared statement lines. Runtime policy selection remains a device
 check.
 
+The strict substitution matrix retained the stock vendor inputs and varied
+the three platform policy groups, including their mappings. All-stock passed,
+the full mixed user set reproduced 25 assertions, and five substitutions
+stopped earlier during type-attribute resolution. Swapping only the mixed
+product group into the stock platform produced one separate failure. Its
+TV Settings SELinux grant lets `system_app` write `adbd_config_prop`, which the
+stock platform policy prohibits. Removing only that write grant from a
+diagnostic copy cleared the assertion. The full mixed user set reports no
+conflict from the product group.
+
+In the full mixed user set, the stock vendor policy includes `oemfs_34_0` in
+`fs_type`. The platform's 34.0 mapping also includes `bootanim_oem_file` in
+`oemfs_34_0`, giving it both `fs_type` and `file_type` membership. Removing
+that one mapping member from a diagnostic copy cleared the duplicate
+filesystem association assertion in platform and vendor policy. The other
+23 strict assertions remained. These controls used temporary host inputs.
+[SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
+
 The [privacy scan receipt](../manifests/neutral-r2-privacy-scan.json) covers
 6,119 regular files in the exact r2 userspace images, including 765 files
 inside the 31 APEX payloads. The scan also searched supported compressed

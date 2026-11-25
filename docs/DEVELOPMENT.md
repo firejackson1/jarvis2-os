@@ -2251,6 +2251,16 @@ without private scripts, server access or an AI operator.
   with that binary. The shipped binary contains one additional allow
   statement. [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
 
+- Ran eight strict split-policy combinations with stock vendor inputs.
+  The all-stock output matched the preceding replay byte for byte, and the
+  mixed user policy still reported 25 assertion sites. The mixed policy's
+  duplicate filesystem association assertion cleared after removing the
+  `bootanim_oem_file` member from a temporary 34.0 mapping. The strict
+  result retained the other 23 assertions. Another control cleared the
+  isolated stock-platform and mixed-product ADB assertion by removing
+  the TV Settings property write grant. Both controls ran offline.
+  [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
+
 ### Flutter ARMv7 link graph — 2026-11-25
 
 - GN completed with the same local ARMv7 release arguments after staging

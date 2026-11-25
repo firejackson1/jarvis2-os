@@ -177,6 +177,10 @@ publication by this policy decision alone.
 - [x] Replay the strict compiler on the exact stock OTA policy as a control.
   Confirm zero stock assertion failures and compare the shipped precompiled
   policy with the stock replay.
+- [x] Attribute the two filesystem association assertions to the OEM animation
+  type mapping. Verify the separate stock-platform TV Settings ADB conflict
+  with a single-grant diagnostic control.
+  [SELinux receipt](../manifests/neutral-r2-selinux-replay.json)
 - [ ] Evaluate the full `user` variant, repeat the policy check on its exact
   images and review the strict assertion failures before hardware validation.
 - [ ] Ensure first-run setup uses each user's own accounts, Bluetooth devices and Smart Home provider.

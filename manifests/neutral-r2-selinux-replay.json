@@ -334,5 +334,47 @@
       "matched_tool_and_cil_output_mode": true,
       "host_report_sha256": "4bbb9f9b8fe78090254b3bd3a223ee14ebd52d85230b6377714b6858ecf5ab43"
     }
+  },
+  "strict_assertion_attribution": {
+    "group_order": ["system", "system_ext", "product"],
+    "stock_vendor_inputs_retained": true,
+    "strict_compiler_flags": ["-m", "-M", "true", "-G", "-c", "30", "-v"],
+    "stock_strict_binary_matches_previous_replay": true,
+    "matrix": [
+      {"groups": ["stock", "stock", "stock"], "exit_code": 0, "assertions": 0},
+      {"groups": ["stock", "stock", "mixed-user"], "exit_code": 255, "assertions": 1},
+      {"groups": ["stock", "mixed-user", "stock"], "exit_code": 254, "type_attribute_resolution_failed": true},
+      {"groups": ["stock", "mixed-user", "mixed-user"], "exit_code": 254, "type_attribute_resolution_failed": true},
+      {"groups": ["mixed-user", "stock", "stock"], "exit_code": 254, "type_attribute_resolution_failed": true},
+      {"groups": ["mixed-user", "stock", "mixed-user"], "exit_code": 254, "type_attribute_resolution_failed": true},
+      {"groups": ["mixed-user", "mixed-user", "stock"], "exit_code": 254, "type_attribute_resolution_failed": true},
+      {"groups": ["mixed-user", "mixed-user", "mixed-user"], "exit_code": 255, "assertions": 25}
+    ],
+    "mixed_user_distinct_conflicting_allow_sites": {
+      "stock_vendor_public": 15,
+      "stock_vendor_device": 6,
+      "mixed_user_platform": 10,
+      "mixed_user_system_ext": 2
+    },
+    "mixed_oemfs_mapping_control": {
+      "mapping": "system/sepolicy/private/compat/34.0/34.0.cil",
+      "attribute": "oemfs_34_0",
+      "member_removed": "bootanim_oem_file",
+      "assertion_sites_cleared": ["plat_pub_versioned.cil:6678", "public/file.te:651"],
+      "assertions_before": 25,
+      "assertions_after": 23
+    },
+    "stock_platform_mixed_product_adb_control": {
+      "grant_source": "device/lineage/sepolicy/atv/private/system_app.te",
+      "grant_removed": "system_app adbd_config_prop property_service set",
+      "property_read_grant_retained": true,
+      "assertions_before": 1,
+      "assertions_after": 0
+    },
+    "host_matrix_report_sha256": "3355d2b1029955ed646af01aa313808a30a08200e3d9c923fa7f5cc93e9ef13d",
+    "host_controls_report_sha256": "42530d1df1c312352abf7ba100566b1c94aed082b967fea931a41158e7361ca0",
+    "shipping_policy_changed": false,
+    "full_user_rom_tested": false,
+    "device_contacted": false
   }
 }
