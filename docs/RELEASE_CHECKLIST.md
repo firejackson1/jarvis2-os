@@ -50,6 +50,9 @@ publication by this policy decision alone.
 - [ ] Consolidate device-tree/product configuration and persistent fixes in source.
 - [x] Run [the full patch check](BUILD.md#verify-source-patches-without-modifying-the-android-tree) on the current release build checkout. Eight patches across six series and twelve files passed. Keep the report pin in the [candidate receipt](../manifests/current-cb9334-inclusion.json).
 - [x] Match the [release inclusion ledger](PERSISTENT_FEATURES.md#release-candidate-inclusion) to the current signed archive and final images. Record the separately pinned Recovery build and AVB binding.
+- [x] Check the 1,430 upstream project pins, the twelve modified source files
+  and the exact local build inputs. Record the
+  [current reproduction procedure](CURRENT_REPRODUCTION.md).
 - [ ] Qualify experimental and hardware-dependent changes before listing them as release features.
 - [x] Include Controls 1.1, the TV Settings overlay and the native Bluetooth Settings hook in the signed candidate.
 - [x] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; source patch and rebuilt TvSettingsTwoPanel compile passed. Fresh-image behavior remains a separate test.
@@ -127,6 +130,9 @@ publication by this policy decision alone.
 - [ ] Publish buildable source, patch provenance, license notices and any required corresponding source; review redistribution rights for proprietary blobs.
 - [ ] Prepare installation/upgrade/rollback instructions, known issues and tested hardware matrix.
 - [ ] Include versioned artifacts, checksums, signing details and accurate experimental labels.
+- [x] Stage the current candidate's eight private payloads and two metadata
+  files. Verify the exact local set against the independently pinned
+  [receipt](CANDIDATE_PACKAGING.md#verify-the-complete-download-set).
 - [x] Download and verify the complete older f38 draft, including its source
   supplement, public signing materials and two release metadata files. Repeat
   the [complete download check](CANDIDATE_PACKAGING.md#verify-the-complete-download-set)
@@ -279,10 +285,10 @@ publication by this policy decision alone.
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.
-- [ ] Recompose optional Google apps locally against the final LCARS candidate,
-  then recheck the updated APKs and the `vendor_boot` binding. The prior
-  [offline integration rehearsal](GAPPS_COMPOSITION.md#lcars-integration-rehearsal)
-  covers the older f38 rehearsal with temporary signing.
+- [x] Recompose optional Google apps privately against the exact current LCARS
+  candidate. Recheck both complete outputs, all 21 tracked unchanged members,
+  and the `vendor_boot` binding with temporary keys.
+  [Offline rehearsal](GAPPS_COMPOSITION.md#lcars-integration-rehearsal)
 - [ ] Verify HDMI, box-button operation, USB keyboard and remote input in RAM
   before considering another recovery write.
 - [ ] Implement and verify recovery-owned Bluetooth discovery/pairing/HID input

@@ -159,7 +159,9 @@
     "avb_assembly_report_sha256": "18a4f91dfb6907a2729854d78cef98ce5dbd133bac08305daa45dc0d4fa6925c",
     "image_contents_report_sha256": "1c7960d80f5c5c25c0ed5cd88dd614d403c68e340577451ce0fe8140a0944fd9",
     "userspace_privacy_scan_sha256": "acb5d80fb0212aaa2b0371b718d266f9b45eba30009602640b9832e89fb2bb58",
-    "userspace_privacy_context_sha256": "d31a1bc3a5883d1e473ea1cf550269c07609178e83e3351927f88457fa5690b6"
+    "userspace_privacy_context_sha256": "d31a1bc3a5883d1e473ea1cf550269c07609178e83e3351927f88457fa5690b6",
+    "source_closure_sha256": "b508dd19a1f6def37555093c9d137248b0f2d7a63b75c3c30509bb269e437e78",
+    "notice_and_native_metadata_report_sha256": "7ab2e41cf500448173ccac83303f95024063a02bc4388219b2602f10f040e009"
   },
   "hardware_tested": false,
   "public_release_ready": false,
@@ -173,6 +175,27 @@
     "saved_slot_a_candidate_sizes_verified": 7,
     "saved_slot_a_restore_files_verified": 7,
     "untargeted_stock_references_verified": 9,
+    "published": false
+  },
+  "private_delivery": {
+    "payloads": 8,
+    "files_verified": 10,
+    "total_bytes": 1059914133,
+    "receipt_sha256": "32ae470f944d2b7fc41053acc18846fdb06729d6560bc72a3f4125bc3001d117",
+    "hosted_download_verified": false
+  },
+  "private_google_rehearsal": {
+    "five_output_images_identical": true,
+    "temporary_signing_keys": true,
+    "google_files_verified": 27,
+    "google_apk_signatures_verified": 16,
+    "unchanged_feature_members_verified": 21,
+    "avb_bindings_verified": 13,
+    "archive_members_verified": 9,
+    "archive_bytes": 777841517,
+    "archive_sha256": "03ea7a4483979122615963e308f2d369dd90a18d7f2b3e247783a312f07872cd",
+    "manifest_sha256": "84d709526b8f5a614efe8712bedc317c7f5403bcce8d0871d52690c12ada0abc",
+    "hardware_tested": false,
     "published": false
   }
 }

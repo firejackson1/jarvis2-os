@@ -83,6 +83,9 @@ To reproduce the frozen `f38da52` source state, use
 supplement must stay outside that candidate's device checkout so its original
 commit and build identity remain intact.
 
+For the current candidate, follow the [exact reproduction recipe](CURRENT_REPRODUCTION.md)
+with the eight in-tree patches, pinned build inputs, and recorded build identity.
+
 ## Pin release build identity
 
 Run from the Android source root after staging all reviewed inputs. Use the

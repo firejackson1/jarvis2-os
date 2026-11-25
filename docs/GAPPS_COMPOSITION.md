@@ -150,8 +150,15 @@ preflight verifier found all 13 expected image bindings, including the root's
 hash for the same `vendor_boot`. Two runs using the same disposable keys
 produced identical hashes for all five images. The Controls and Music APKs
 matched their expected hashes when extracted from the composed images.
-Repeat the check against the exact final release baseline with independently
-reviewed signing and installer evidence.
+
+The check was repeated on the exact production-key `cb9334ee26cc` vanilla
+baseline. Two runs with the same disposable keys reproduced all five output
+images. Independent readback verified 27 additions, 16 APK signatures and all
+21 selected unchanged feature files. All 13 AVB bindings passed, including
+the original LCARS `vendor_boot` binding. The nine-member output ZIP remains a
+private rehearsal. Its SHA-256 is
+`03ea7a4483979122615963e308f2d369dd90a18d7f2b3e247783a312f07872cd`.
+Hardware acceptance and a public redistribution grant remain unverified.
 
 ## Native rehearsal scope
 

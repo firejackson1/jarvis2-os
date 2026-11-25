@@ -1413,3 +1413,26 @@ without private scripts, server access or an AI operator.
   were traced to upstream constants or examples. The three PEM header matches
   were format strings with no key body. No remaining findings in this scan.
   The ZIP remains private while licensing and hardware checks are open.
+
+- Checked all 1,430 pinned source project HEADs using the selected build inputs.
+  Only the twelve expected paths across the six patched projects had changes.
+  Re-staged the eleven stock images in a fresh directory and matched the
+  kernel bytes and extracted vendor/ODM contents and links. `fsck.erofs`
+  reported timestamp-setting warnings on some links. The check did not compare
+  timestamps or recreate the full ROM.
+- Rechecked native EROFS metadata and found only the 137 approved package,
+  build-tag, and public-trust content changes during signing, with zero
+  unexpected metadata differences. Checked the exact allowlist, secure USB
+  defaults, the launcher source archive's 445 payloads, and notices for the
+  launcher, WebView and native tools. Runtime permissions and complete
+  redistribution review remain open.
+- Staged and independently checked all ten private delivery files. The
+  [artifact receipt](CANDIDATE_PACKAGING.md#verify-the-complete-download-set)
+  binds the matching ROM, source, notices and build inputs to their hashes.
+- Finished the private Google composition against the exact current LCARS
+  baseline. Two runs with temporary keys matched all five image hashes. The
+  independent review verified 27 additions, 16 APK signatures, all 21 tracked
+  unchanged feature files and all 13 AVB bindings. Read back all nine private
+  ZIP entries. The public staging set is Google-free.
+- Sampled the exact private animation and identified onn lettering and the
+  LineageOS emblem. Record those marks in the artwork review before release.

@@ -208,3 +208,11 @@ cover each payload and the receipt. The JSON result can be compared with the
 hosting service's asset records to catch an incomplete or stale draft upload.
 Keep license review, signature trust and device qualification as separate
 release checks.
+
+The current private staging set contains eight payloads plus the receipt and
+checksum list. Full readback matched all 1,059,914,133 bytes. The receipt
+SHA-256 is `32ae470f944d2b7fc41053acc18846fdb06729d6560bc72a3f4125bc3001d117`.
+It identifies the exact vanilla LCARS ZIP, product and tooling source archives,
+launcher source and APK, supplemental notices, public signing materials and
+the pinned local boot animation. Artwork rights, hardware tests, and hosted
+download verification for this exact set remain open.

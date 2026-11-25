@@ -20,3 +20,9 @@ The private `cb9334ee26cc` candidate's signed product image includes the exact
 pinned `media/bootanimation.zip`. See the
 [candidate receipt](../manifests/current-cb9334-inclusion.json). Public
 redistribution review and a boot timing test on this candidate remain open.
+
+A sample of the exact pinned frames shows stylized onn lettering and the
+LineageOS emblem. The custom asset is part of the private candidate. Review
+those marks and the artwork's provenance before promoting a ZIP that contains
+it. Omitting the optional local input selects the upstream animation and
+changes the product image, which requires a fresh hash and AVB audit.
