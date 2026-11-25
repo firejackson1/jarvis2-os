@@ -281,3 +281,9 @@ packages to their build metadata. The existing ROM ZIP and source companions
 retain their hashes. Complete corresponding-source review and hardware
 qualification remain open. The staging receipt SHA-256 is
 `ba116e1d4230ff3ca2322270ec4f35c7348e817ed60189f2d1b60fb8c4d1c5ca`.
+
+The 18-file private set also includes
+`jarvis2-r2-apex-notices.tar.gz` with the
+[APEX and VNDK notices](USERSPACE_NOTICES.md#apex-notice-companion).
+The archive and all earlier assets passed readback. The private receipt
+SHA-256 is `c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0`.

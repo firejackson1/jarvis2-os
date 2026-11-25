@@ -255,5 +255,18 @@
     "receipt_sha256": "ba116e1d4230ff3ca2322270ec4f35c7348e817ed60189f2d1b60fb8c4d1c5ca",
     "hosted_download_verified": false,
     "device_contacted": false
+  },
+  "private_r2_delivery_with_apex_notices": {
+    "notice_receipt_sha256": "3000a6b41c942fedeb749e6a7070da5dc9dbb34ea8f28d53aa57cee7f6ad298c",
+    "notice_archive": {
+      "file": "jarvis2-r2-apex-notices.tar.gz",
+      "bytes": 1520028,
+      "sha256": "257dd3295a5254a3991b44e01992c24a49619c8f61b5105b92274d31659a3117"
+    },
+    "files_verified": 18,
+    "total_bytes": 1330875402,
+    "receipt_sha256": "c5433b7970ba4296fba95246cc1db88724acd0cda8215a4d8a4a042a53f0f7a0",
+    "hosted_download_verified": false,
+    "device_contacted": false
   }
 }

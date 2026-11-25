@@ -1709,3 +1709,19 @@ without private scripts, server access or an AI operator.
   files and checked every archive member's Git blob and mode. Staged the
   verified source archive and the APEX index alongside the private candidate.
   This work used existing build artifacts and source outside the device.
+
+### Neutral r2 APEX notice companion — 2026-11-25
+
+- Generated text and XML notices from the 31 artifact-matched Soong roots
+  and a separate VNDK v34 set. Compared all notice text hashes and path names
+  to the three extracted partition notice archives. The partition XML was
+  missing exact copies of 55 of 229 APEX notice texts and 731 of 734
+  generated paths. The VNDK subset has nine missing exact texts and all
+  120 library paths are absent from the installed XML.
+- Verified all five supplement members. Multiple deterministic packaging
+  passes reproduced the same archive SHA-256. Rehashed the refreshed
+  18-file private staging set. The five ROM images, Recovery plug-in
+  and ROM ZIP had no changes. See the [notice receipt](../manifests/neutral-r2-apex-notices.json).
+- The Android CI raw artifact URL for build 10951026, target `vndk`,
+  returned 404 for the original manifest. The notice comparison and
+  supplement do not establish the exact corresponding VNDK source revisions.

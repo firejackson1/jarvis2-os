@@ -32,6 +32,9 @@ apply independently.
   [APEX source inventory](USERSPACE_NOTICES.md#apex-source-and-license-inventory-for-neutral-r2)
 - [x] Match Cronet in the tethering APEX to its source-built ARM library and
   verify and stage the pinned Cronet source tree.
+- [x] Regenerate, verify and stage the APEX and VNDK notice companion for
+  the missing texts and paths in the r2 partition notice archives.
+  [APEX notices](USERSPACE_NOTICES.md#apex-notice-companion)
 - [ ] Verify the exact source revisions of the historic VNDK v34 build and
   complete the APEX corresponding-source and redistribution review.
 - [x] Check out Chromium at the pinned r2 commit, replay every documented

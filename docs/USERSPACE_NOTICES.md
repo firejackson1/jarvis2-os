@@ -110,3 +110,32 @@ Complete corresponding-source delivery and redistribution review remain
 open. In particular, the VNDK module path indexes identify where to look
 for the original sources. The exact source revisions still depend on the
 historic build manifest.
+
+### APEX notice companion
+
+The three installed partition notice archives contain 174 of the 229
+distinct notice texts emitted by Soong for the 31 matched APEX roots. The
+installed XML has no entry for 731 of the 734 paths in the generated APEX
+index. In the VNDK subset, nine of 54 notice texts and the paths for all
+120 ARM libraries lack exact matches in those partition archives.
+
+The private r2 delivery adds `jarvis2-r2-apex-notices.tar.gz` with the
+combined APEX notices and the VNDK notices as both text and XML. All five
+archive entries matched their source hashes, and repeated packaging
+produced identical bytes. The [notice receipt](../manifests/neutral-r2-apex-notices.json)
+pins the archive and generated notices. Keep the companion alongside the
+ROM ZIP. The installed partition notice files and ROM images retain their
+original hashes.
+
+To regenerate the combined documents, run the built AOSP
+`out/host/linux-x86/bin/xmlnotice` and `textnotice` with
+`-product Jarvis2 -title "Jarvis2 r2 APEX license notices"
+-strip_prefix out/target/product/jarvis2/`. Pass the 31 hash-checked
+`metadata_path` values from the APEX source receipt. For the VNDK-only
+documents, use its single metadata path and title
+`Jarvis2 VNDK v34 license notices`.
+
+The public raw CI endpoint for `manifest_10951026.xml` returned HTTP 404.
+The notice companion fills the observed attribution gap in the staged
+delivery. Exact historical VNDK source and distribution review remain open.
+[Android CI artifact documentation](https://source.android.com/docs/setup/contribute/dashboard)

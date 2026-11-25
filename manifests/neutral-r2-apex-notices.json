@@ -1,0 +1,28 @@
+{
+  "artifact": {
+    "file": "jarvis2-r2-apex-notices.tar.gz",
+    "bytes": 1520028,
+    "sha256": "257dd3295a5254a3991b44e01992c24a49619c8f61b5105b92274d31659a3117"
+  },
+  "source_apexes": 31,
+  "archive_members": {
+    "apex/NOTICE.txt": "90c238420814285f04beb68052550d2ce9295d7c8a28b26a80ffa561c896c92a",
+    "apex/NOTICE.xml": "51e932061e5e150eed9fddafa262ff8544facd208cff35ae9436ffe67f3b5204",
+    "vndk-v34/NOTICE.txt": "f525422279cb9de939b80e4e090c8d149b2192230cbcb299bbb0e48992d93d42",
+    "vndk-v34/NOTICE.xml": "7dec1c75d2495913b0475034f2e75504a1552f0d4a43df14868e82eb1b15cfc3",
+    "vndk-v34/notice-readback.json": "86ebbe9a9c8d6c3f22b17dba0642104a769821b477dd0094598fbb714107c1cf"
+  },
+  "archive_reproducible": true,
+  "generated_apex_unique_notice_texts": 229,
+  "generated_apex_unique_paths": 734,
+  "generated_apex_notice_texts_missing_from_installed_xml": 55,
+  "generated_apex_path_attributions_missing_from_installed_xml": 731,
+  "generated_vndk_unique_texts": 54,
+  "generated_vndk_unique_texts_missing_from_installed_xml": 9,
+  "generated_vndk_library_paths": 120,
+  "vndk_source_manifest_probe": {
+    "public_raw_url": "https://ci.android.com/builds/submitted/10951026/vndk/latest/raw/manifest_10951026.xml",
+    "http_status": 404,
+    "verified": false
+  }
+}
