@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "scope": "Rebuild the ARMv7 SQLite library from the r2 launcher's exact source companion and compare the stripped ELF against the packaged binary",
+  "launcher_source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+  "launcher_apk_sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+  "maven_aar_sha256": "44db490b372aaf76d980efee3a2195cd15435efdde12efb4fda394430de5ec13",
+  "shipped_armv7_elf": {
+    "sha256": "4659622c40e9e1ea5f24fb29f7be1eb85ef21bdf3f7eb1cfe883b037d04e3058",
+    "bytes": 1408548,
+    "gnu_build_id": "d35c7f2c0b11bf3eeca32a4c5ae2bd13112fab16",
+    "gnu_build_id_descriptor_offset": 508,
+    "gnu_build_id_descriptor_bytes": 20,
+    "matches_apk_and_extracted_jni": true
+  },
+  "sqlite_source_id": "2025-07-17 13:25:10 3ce993b8657d6d9deda380a93cdd6404a8c8ba1b185b2bc423703e41ae5f2543",
+  "official_ndk": {
+    "revision": "27.2.12479018",
+    "archive_sha1": "090e8083a715fdb1a3e402d0763c388abb03fb4e",
+    "archive_sha256": "59c2f6dc96743b5daf5d1626684640b20a6bd2b1d85b13156b90333741bad5cc",
+    "compiler_version": "Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)"
+  },
+  "tools": {
+    "cmake": "3.31.6",
+    "ninja": "1.12.1",
+    "strip_flags": [
+      "--strip-unneeded"
+    ],
+    "sha256": {
+      "cmake": "9a2692f4d712265eb29c90c3366bfc40df400ea586b0477edabbcf3bae745dc1",
+      "ninja": "e8e646527e23aa7a66d0f04b86b89f1bb2f25edcc1c5e402a0989e5364c8779b",
+      "clang": "a871130d810536f7bb924c8aeaff57c66de27bed9b13d0ccafba25fdcc8bd02d",
+      "ld.lld": "c4a7473d3b8a99a32335616838af2aa85c6333091abeab423be2a905ff5f288c",
+      "llvm-strip": "31a3cb87fbf7c040aa82e853458cc6dc6dd95526123fc33c88ee8116a0c91c32"
+    }
+  },
+  "cmake": {
+    "abi": "armeabi-v7a",
+    "effective_api": 21,
+    "type": "RelWithDebInfo",
+    "flexible_page_sizes": true,
+    "source_supplier": "FETCHCONTENT_SOURCE_DIR_SQLITE3"
+  },
+  "replays": {
+    "one": {
+      "stripped_sha256": "b23904e2aedc25113b3236ddd3af2240698a2ddd04b740a2ed8a7b398ea87220",
+      "gnu_build_id": "de3df90efb7c72ce3c4ee138adfb1602f122c871",
+      "compared_bytes_outside_build_id": 1408528,
+      "bytes_different_vs_maven": 20
+    },
+    "two": {
+      "stripped_sha256": "6277257c16a4cbbfbde0d9dbb5d8021f82e9ff1782a1587bb97af05ffeddf50e",
+      "gnu_build_id": "610b67fb9b793251128c45fb66ba73aab4aa4b86",
+      "compared_bytes_outside_build_id": 1408528,
+      "bytes_different_vs_maven": 20
+    },
+    "normalized-a": {
+      "stripped_sha256": "3e8cdd54efd4ff6fa267f43a07af2087279593bea0c077c87bfcf2ea7fa98aaa",
+      "gnu_build_id": "3a0db09c930db9805fcb5b066f1c024955d2956b",
+      "compared_bytes_outside_build_id": 1408528,
+      "bytes_different_vs_maven": 20
+    },
+    "normalized-b": {
+      "stripped_sha256": "3e8cdd54efd4ff6fa267f43a07af2087279593bea0c077c87bfcf2ea7fa98aaa",
+      "gnu_build_id": "3a0db09c930db9805fcb5b066f1c024955d2956b",
+      "compared_bytes_outside_build_id": 1408528,
+      "bytes_different_vs_maven": 20
+    }
+  },
+  "all_non_build_id_bytes_match_maven": true,
+  "neutral_debug_paths_reproduce_stripped_output": true,
+  "maven_build_id_reproduced": false
+}

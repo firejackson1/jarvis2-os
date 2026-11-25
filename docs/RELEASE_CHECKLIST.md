@@ -279,6 +279,10 @@ publication by this policy decision alone.
 - [x] Assemble and independently reproduce the controlled launcher's 445-file
   corresponding-source/notice bundle; see LAUNCHER_SOURCE_BUILD.md. This is
   component source delivery, not proof of complete ROM release readiness.
+- [x] Rebuild the launcher's ARMv7 SQLite from the staged corresponding
+  sources and match every byte outside the original GNU build ID. Fixed
+  debug paths yield identical binaries from two fresh build directories.
+  [SQLite recipe and evidence](LAUNCHER_SOURCE_BUILD.md#reproducing-the-armv7-sqlite-library)
 - [x] Verify production-key package/APEX signing in the private rehearsal with
   pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
   Whole-image AVB, OTA trust and hardware acceptance remain separate gates.

@@ -2074,3 +2074,18 @@ without private scripts, server access or an AI operator.
   digests before comparing every APK entry to r2. On the pinned LineageOS
   control it reproduced the one Crashpad trampoline difference and matching
   native WebView payload. The live baseline and relink still await output.
+
+### Launcher ARMv7 SQLite source rebuild — 2026-11-25
+
+- Extracted the recipe and SQLite 3.50.3 amalgamation from the exact r2
+  source companion. Verified the two input hashes, the Android NDK r27c
+  archive and the compiler identity from the shipped ARMv7 ELF. The Maven,
+  signed r2 launcher APK and extracted JNI library bytes match.
+- Rebuilt with CMake and Ninja against NDK r27c and Android API 21.
+  After stripping, all 1,408,528 bytes outside the GNU build-ID
+  descriptor match the published library in all four builds.
+- The two standard builds used fresh source and build paths and
+  produced different IDs. Fixing the debug paths yielded identical
+  stripped and unstripped ELF files across two more independent runs.
+  Maven's original build ID differs. The ROM and source companion were
+  used as read-only references. [SQLite replay receipt](../manifests/launcher-sqlite-rebuild.json)

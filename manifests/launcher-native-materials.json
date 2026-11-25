@@ -24,6 +24,9 @@
     "source_sha256": "ec5496cdffbc2a4adb59317fd2bf0e582bf0e6acd8f4aae7e97bc723ddba7233",
     "ndk_version": "27.2.12479018",
     "build_reproduced": false,
+    "source_build_verified": true,
+    "stripped_elf_matches_outside_gnu_build_id": true,
+    "rebuild_receipt": "manifests/launcher-sqlite-rebuild.json",
     "maven_sources_jar_contains_native_source": false
   },
   "checksum_basis": "Observed pinned primary-source downloads; not independently signed publisher attestations",

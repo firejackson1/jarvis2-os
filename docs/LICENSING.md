@@ -87,15 +87,17 @@ from a grant to label the whole application open source. Available historical
 actual APK hash/signature/notices and review later assets/code before bundling.
 No bundled-default change has been made on the basis of this inventory.
 
-The controlled LTv candidate now has a reproducible 441-file corresponding-source
+The controlled LTv candidate now has a reproducible 445-file corresponding-source
 bundle: original application, 137 locked hosted packages, five framework SDK
 source packages, the resolved 74-coordinate Maven source set and supplements,
 43 native source/header/build-input archives, exact SQLite/protobuf recipes,
 build records and cumulative notices. Material Icons attribution preserves its
 CC BY 4.0 license and identifies APK font subsetting. See LAUNCHER_SOURCE_BUILD.md
-and the exact source-bundle whitelist; no required preferred-source collection
-gap was identified for this controlled component candidate. This does not prove
-whole-ROM clearance or that the controlled APK is already in a built ROM.
+and the exact source-bundle whitelist. The r2 audit verifies this launcher
+APK inside the ROM and checks its SQLite library both in the APK and beside
+it. The library rebuild matches the distributed ELF outside the GNU build
+ID. The full ROM redistribution review is still open.
+[SQLite rebuild evidence](LAUNCHER_SOURCE_BUILD.md#reproducing-the-armv7-sqlite-library)
 
 Userspace review located embedded WebView Credits and existing GNU license texts.
 The supplemental notice packet preserves component-specific license texts,

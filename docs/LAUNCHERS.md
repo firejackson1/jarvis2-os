@@ -99,10 +99,10 @@ Additional pinned native materials are recorded in
 `manifests/launcher-native-materials.json`. The Maven 3.50.3 ARMv7 SQLite library
 matches the shipped APK byte-for-byte. Its sources JAR contains only a manifest;
 the actual native build recipe and SQLite source archive were collected separately.
-The recipe pins NDK 27.2.12479018. This establishes source availability and binary
-identity, not a reproduced build. The exact Flutter engine archive is collected,
-but its Dart/Skia and other DEPS checkouts remain outstanding. Maven declarations
-are not a resolved runtime dependency graph.
+The recipe pins NDK 27.2.12479018. Four rebuilds from the staged source
+companion match the shipped ARMv7 library outside its 20-byte GNU build ID.
+Fixed debug paths also yield an identical rebuilt ELF from fresh directories.
+[SQLite build and readback](LAUNCHER_SOURCE_BUILD.md#reproducing-the-armv7-sqlite-library)
 
 ## Controlled release input — 2026-11-24
 
@@ -112,7 +112,7 @@ asset exists, its URL is deliberately null: provide the verified signed APK
 locally as `LTvLauncher.apk`. Preparation fails before any download if it is
 missing, even with `--download`; it never substitutes the upstream binary.
 See [controlled build instructions](LAUNCHER_SOURCE_BUILD.md) and
-`manifests/launcher-source-bundle.json` for the completed 441-file source delivery,
+`manifests/launcher-source-bundle.json` for the completed 445-file source delivery,
 resolved runtime graph, native sources and cumulative notices. Earlier collection
 checkpoints above describe their original limited scope, not missing materials
 in this controlled source bundle. Recipient-built or differently signed APKs

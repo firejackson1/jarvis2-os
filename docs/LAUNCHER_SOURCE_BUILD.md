@@ -65,6 +65,39 @@ archive. These notices must accompany redistribution; do not discard source
 copyright/license files when modifying or repackaging. This archive assembly is
 not a claim of complete legal clearance for an entire ROM.
 
+## Reproducing the ARMv7 SQLite library
+
+Extract the pinned recipe and SQLite amalgamation from
+`sources/supplements/` into one fresh directory. Verify both archive hashes
+against the source-bundle manifest first. The Maven library's Android ELF
+note identifies NDK r27c and API 21. Use that NDK, CMake 3.31.6 and Ninja
+1.12.1. [Android NDK r27c and download checksums](https://github.com/android/ndk/releases/tag/r27c)
+
+Set `source_root` to the absolute extraction directory, `out` to a fresh
+absolute build directory, and `ndk` to the r27c installation.
+
+~~~sh
+recipe="$source_root/sqlite-native-libraries-91884ccbe1f58edca999d94aa3b8bef33f176ddf"
+amalgamation="$source_root/sqlite-autoconf-3500300"
+flags="-O2 -g -DNDEBUG -fdebug-prefix-map=$source_root=/sqlite-source -fdebug-prefix-map=$out=/sqlite-build"
+LC_ALL=C TZ=UTC cmake -G Ninja -S "$recipe/sqlite3-native-library/cpp" -B "$out" \
+  -DCMAKE_TOOLCHAIN_FILE="$ndk/build/cmake/android.toolchain.cmake" \
+  -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-21 \
+  -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+  -DCMAKE_C_FLAGS_RELWITHDEBINFO="$flags" \
+  -DFETCHCONTENT_FULLY_DISCONNECTED=ON -DFETCHCONTENT_SOURCE_DIR_SQLITE3="$amalgamation"
+LC_ALL=C TZ=UTC cmake --build "$out" --target sqlite3 --parallel 1
+"$ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip" --strip-unneeded \
+  -o "$out/libsqlite3.stripped.so" "$out/libsqlite3.so"
+~~~
+
+Both path-normalized builds produced the same stripped SHA-256,
+`3e8cdd54efd4ff6fa267f43a07af2087279593bea0c077c87bfcf2ea7fa98aaa`.
+The shipped library copies in Maven, the r2 APK and its extracted JNI
+directory are identical. All four local builds match those shipped bytes
+outside the 20-byte GNU build-ID descriptor. The original Maven build ID
+differs. [SQLite replay receipt](../manifests/launcher-sqlite-rebuild.json)
+
 ## Recipient tools
 
 Use your own Linux x86-64 machine and the canonical neutral directory
