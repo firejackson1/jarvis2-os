@@ -59,6 +59,27 @@ same project certificate. A DEX class inventory found no missing application
 classes apart from generated resource classes; the candidate adds one UI lambda.
 These scoped checks support an update test but do not prove it installs or works.
 
+
+## Private image integration rehearsal
+
+The [two-app image receipt](../manifests/f38-app-integration-rehearsal.json)
+records Controls 1.1 and the Music media-session cleanup inside newly assembled
+vanilla images derived from frozen f38. Both APKs carry the expected certificate
+and embedded DEX. The rebuild removes the older APKs' four stale precompiled
+ART files. Every other file payload and native filesystem metadata entry in the
+two rebuilt filesystems matched the baseline. The system image matched byte
+for byte. The full AVB chain passed offline verification, and two assembly runs
+produced identical hashes for all five final images.
+
+All eight tracked patch files across six series apply to their pinned upstream
+revisions. The original f38 source tree matches 11 of the 12 resulting files.
+The Music source change is the one absent from that tree. A clean release build
+must apply the current Music series and compile Controls 1.1 from source with
+matching ART precompilation. This rehearsal leaves the frozen release artifact
+and its installation evidence separate. Normal-user Controls activation, Music
+lifecycle and playback, production recovery integration and final hardware
+qualification remain open.
+
 ## Remote alias blocker
 
 Do not persist the live keylayout by itself. Native policy consumes POWER and

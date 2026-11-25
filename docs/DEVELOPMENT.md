@@ -1068,3 +1068,25 @@ without private scripts, server access or an AI operator.
   tracked cleanup patch hash. JSON parsing, source privacy and whitespace checks
   passed; the prior host-suite result is unchanged because this checkpoint adds
   only documentation and a receipt.
+
+## 2026-11-24 — Verified image integration for Controls and Music
+
+- Compared the frozen signed feature inventory with the current patch series.
+  All eight patch files apply to the pinned revisions. Eleven previously
+  patched source files matched the frozen build tree, with the Music cleanup
+  newly outside that baseline.
+- Replaced Controls 1.0 with the pinned signed 1.1 APK in system_ext and
+  inserted the matching signed Music cleanup APK in product. Verified both
+  package identities, version codes, certificates and embedded DEX. Removed
+  only the two stale ART files for each updated package.
+- Re-extracted both rebuilt EROFS filesystems. All other file bytes, symlink
+  targets and supported metadata matched. Preserved the system filesystem and
+  checked the complete AVB chain with the existing key pins. Two bounded native
+  runs produced the same five final image sizes and SHA-256 digests. Independent
+  readback confirmed all ten files.
+- Recorded the public metadata receipt in
+  `manifests/f38-app-integration-rehearsal.json`. The images retain the frozen
+  build identity and stay private. This is file-level integration evidence.
+  Fresh full-source target-files, matching release ART precompilation, normal
+  setup, Recovery, rollback and live feature validation remain required.
+  Bazzite stayed running. No device writes or slot changes occurred.

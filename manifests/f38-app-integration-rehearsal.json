@@ -1,0 +1,115 @@
+{
+    "format": 1,
+    "scope": "Private two-APK image integration and reproducibility rehearsal on frozen f38",
+    "base_product_source": "f38da52af274a0e50c92a10cf279e62f44125358",
+    "verification_tool_revision": "e39ce405bb61a9a250e1921363e29ed15737097b",
+    "current_source_patch_series": {
+        "Adb": {
+            "pinned_revision": "8f1f33d623ca6cffd6c415b43b317fd274660601",
+            "patches": 1,
+            "files": 4,
+            "files_matching_patched_result_in_existing_f38_tree": 4
+        },
+        "Bluetooth": {
+            "pinned_revision": "68c10e675632ac57b1d4d807c38dbd470b73e49e",
+            "patches": 1,
+            "files": 1,
+            "files_matching_patched_result_in_existing_f38_tree": 1
+        },
+        "Music": {
+            "pinned_revision": "c119d5a52f80289c7f939746ddc31c8bcee2a3ca",
+            "patches": 1,
+            "files": 1,
+            "files_matching_patched_result_in_existing_f38_tree": 0
+        },
+        "ReleaseTools": {
+            "pinned_revision": "bc95152efc6a43f3b103b1848c946e9bf8d4e493",
+            "patches": 1,
+            "files": 1,
+            "files_matching_patched_result_in_existing_f38_tree": 1
+        },
+        "SetupWizard": {
+            "pinned_revision": "e58f07efee4ba3d69d6b4922d5bbf4707da6e033",
+            "patches": 1,
+            "files": 1,
+            "files_matching_patched_result_in_existing_f38_tree": 1
+        },
+        "TvSettings": {
+            "pinned_revision": "26fd224082c96fa32e0bfe60b288093c6e7522f3",
+            "patches": 3,
+            "files": 4,
+            "files_matching_patched_result_in_existing_f38_tree": 4
+        }
+    },
+    "replaced_applications": {
+        "app.jarvis2.remote": {
+            "sha256": "85c4e773a3665cc72f1f4fc0fa9827cf70e94ab6277aec66823f349ceda95da9",
+            "version_code": 2,
+            "release_certificate_sha256": "9af68fa2d543d27eb07d35163916ff898d5712337cb44aa7c30297d8c8cf9038"
+        },
+        "com.android.music": {
+            "sha256": "478c9776d4879ecdc28d5fa9c20404ecca79f1c89028a8bbfcf673a69e678a7b",
+            "version_code": 34,
+            "release_certificate_sha256": "121abf966a99cf77d1fc44ff725fb06cbb39d5e12bccd09d0b576566091bfe46"
+        }
+    },
+    "filesystem_comparison": {
+        "system": {
+            "filesystem_sha256": "15928f53a96b4c23c2f63eaf6cf286f3477a11e101d91f3ab8d26290d0b047e5",
+            "unchanged": true
+        },
+        "system_ext": {
+            "filesystem_bytes": 61980672,
+            "filesystem_sha256": "02e7928e0ca57f78545796a8d9d4b51355b259b1401ddcbc87fd7ef45e9893c5",
+            "metadata_entries_verified": 3235,
+            "content_entries_verified": 3235,
+            "only_replaced_path": "priv-app/Jarvis2RemoteSettings/Jarvis2RemoteSettings.apk",
+            "stale_precompiled_paths_removed": [
+                "priv-app/Jarvis2RemoteSettings/oat/arm/Jarvis2RemoteSettings.odex",
+                "priv-app/Jarvis2RemoteSettings/oat/arm/Jarvis2RemoteSettings.vdex"
+            ]
+        },
+        "product": {
+            "filesystem_bytes": 122609664,
+            "filesystem_sha256": "a83b7496d958e6e7041d8df1e9a62db5213951e2c93e2fed18df5c8cbfeddc81",
+            "metadata_entries_verified": 198,
+            "content_entries_verified": 198,
+            "only_replaced_path": "app/Music/Music.apk",
+            "stale_precompiled_paths_removed": [
+                "app/Music/oat/arm/Music.odex",
+                "app/Music/oat/arm/Music.vdex"
+            ]
+        }
+    },
+    "final_images": {
+        "product.img": {
+            "bytes": 541949952,
+            "sha256": "d5e42c66f964099ba7bfe4e08f46a06971af5cd6eef811ddadb1e15820cc50d2"
+        },
+        "system.img": {
+            "bytes": 483131392,
+            "sha256": "40535133b2cbb2d3f438f3ff2507fdeedf8b0fafeb0591eb54e5a6510218fbd9"
+        },
+        "system_ext.img": {
+            "bytes": 96161792,
+            "sha256": "3227c23a2725dbbdef4cea13daf617c07e777dec4ea53c509853805c0614f742"
+        },
+        "vbmeta.img": {
+            "bytes": 2097152,
+            "sha256": "3326675e62b9d794c869cc14abbce5da51f029dcd25b59007be40aa6611cafde"
+        },
+        "vbmeta_system.img": {
+            "bytes": 2097152,
+            "sha256": "18f4950a0ad3b6664a2bc966b65246652155267c5fddd6848487498a3c4c1d8a"
+        }
+    },
+    "independent_image_assembly_runs": 2,
+    "all_final_image_lengths_and_sha256_match": true,
+    "avb_signature_and_leaf_checks_passed": true,
+    "avb_parent_child_keys_match": true,
+    "google_payload_added": false,
+    "new_complete_source_build": false,
+    "fresh_setup_recovery_or_restore_verified": false,
+    "device_modified": false,
+    "published_binary": false
+}

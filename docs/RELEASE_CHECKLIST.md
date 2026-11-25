@@ -209,6 +209,12 @@ publication by this policy decision alone.
 - [ ] Complete installation, clean setup, recovery and rollback tests of the exact
   production-key candidate before publishing binaries. Preserve slot B throughout.
 
+- [x] Rehearse Controls 1.1 and the Music session cleanup in private vanilla
+  images. Read back both APKs, verify filesystem content and metadata, rebuild
+  AVB, reproduce all five image hashes, and apply-check all eight source patches.
+  See `manifests/f38-app-integration-rehearsal.json`. A clean full-source build
+  and hardware verification of these changes are still required.
+
 
 ## Normal-user installation rehearsal — owner request, 2026-11-24
 
