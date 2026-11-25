@@ -216,3 +216,11 @@ It identifies the exact vanilla LCARS ZIP, product and tooling source archives,
 launcher source and APK, supplemental notices, public signing materials and
 the pinned local boot animation. Artwork rights, hardware tests, and hosted
 download verification for this exact set remain open.
+
+A [separate neutral artwork candidate](../manifests/current-neutral-artwork.json)
+has its own private ten-file delivery set. It includes the original artwork
+generator source and the same open-source launcher, notices, and public keys.
+It replaces the custom animation in the ROM and omits its standalone archive.
+The product image and root `vbmeta` have distinct hashes. The other three
+delivery images and locally reconstructed LCARS Recovery match the branded
+candidate exactly. The offline checks do not establish device acceptance.

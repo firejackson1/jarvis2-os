@@ -1436,3 +1436,18 @@ without private scripts, server access or an AI operator.
   ZIP entries. The public staging set is Google-free.
 - Sampled the exact private animation and identified onn lettering and the
   LineageOS emblem. Record those marks in the artwork review before release.
+
+## 2026-11-25 — Neutral artwork candidate
+
+- Added an original interruptible boot animation to the existing preparation
+  tool. Two host generations matched byte for byte. All 204 Python tests and
+  eight Java suites passed.
+- Derived two identical raw product images from the pinned signed build.
+  Read back all 198 product filesystem metadata entries and all archive
+  entries. The animation was the only product file change. The only final
+  image changes were product and root `vbmeta`. The same AVB release key and
+  LCARS binding passed independent verification.
+- Verified all 22 ZIP entries, all 13 AVB bindings, seven saved slot-A target
+  sizes, seven restore files, and the ten-file private delivery set. The
+  [neutral receipt](../manifests/current-neutral-artwork.json) records the
+  hashes. No live hardware checks took place. Bazzite stayed running.

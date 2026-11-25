@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "scope": "Offline neutral artwork candidate derived from the exact signed cb9334 build. The branded artwork remains in the separate private candidate.",
+  "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+  "artwork_generator_source_revision": "932294a6f92c3091c7b30d8f76748ffc6dea52e7",
+  "artwork_generator_sha256": "5cbe4f30982859fef107abed2195206f5da8f2e45478b08089db8a303f59a617",
+  "bootanimation": {
+    "bytes": 695585,
+    "sha256": "ea74502097a5e61134f25e92ac313f2154f80aea4972bae5cec1d4252bb2b375"
+  },
+  "baseline_signed_target_files_sha256": "1887ac3f4a6045cecaff229106a8b465885f72c01de8a8fb2ac5471ffe43cd3e",
+  "derived_target_files_sha256": "c557f82ef1e82434e41c0f489294ae5c92080cf4161b80853ba6332f24f90214",
+  "only_changed_zip_members": [
+    "IMAGES/product.img",
+    "PRODUCT/media/bootanimation.zip"
+  ],
+  "product_filesystem_metadata_entries_checked": 198,
+  "independent_product_rebuilds_identical": true,
+  "only_changed_final_images": [
+    "product.img",
+    "vbmeta.img"
+  ],
+  "files": {
+    "product.img": {
+      "bytes": 541949952,
+      "sha256": "541d4c89120b66f57a26021bf1c2fd5942189d47f13ec1b5a53ad9cd854ec16c"
+    },
+    "system.img": {
+      "bytes": 483131392,
+      "sha256": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42"
+    },
+    "system_ext.img": {
+      "bytes": 96161792,
+      "sha256": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b"
+    },
+    "vbmeta.img": {
+      "bytes": 2097152,
+      "sha256": "e366df78ed9ebd716462568f191b7e8dca7def06e240d178d73e6ec892d796c5"
+    },
+    "vbmeta_system.img": {
+      "bytes": 2097152,
+      "sha256": "cf1c7da1d484c3a016736c39456e701cb4d6ac92bba64a6fcd687100b118e105"
+    }
+  },
+  "verified_boot_root_public_key_sha256": "82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df",
+  "lcars_vendor_boot_sha256": "c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e",
+  "private_candidate_zip": {
+    "file": "jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate-neutral-artwork.zip",
+    "bytes": 547469660,
+    "sha256": "3036f17977addb79a554babb2ec1e8ae8cd79de79d6e4deaa1476732e153fa54"
+  },
+  "preflight": {
+    "feature_members_checked": 21,
+    "zip_member_count": 22,
+    "avb_bindings": 13,
+    "saved_slot_a_images_fit": 7,
+    "saved_slot_a_restore_files_verified": 7,
+    "receipt_sha256": "68a241197908d8c08820b4a850ada0bf3eec181f1ca91a3a93c41304cd27c18c"
+  },
+  "private_delivery": {
+    "payloads": 8,
+    "files_verified": 10,
+    "total_bytes": 1033805170,
+    "receipt_sha256": "b6229d6eccf72c0de0a3ee4c84f11e6ed4d32a1c4ef942cf10729d9547af8a8e"
+  },
+  "evidence": {
+    "artwork_payload_sha256": "eaee48fd5201a2cd054ff7ab98a1c27965e448e055aeeab5c6d5956819413d69",
+    "release_avb_sha256": "bf45d398bd5594030a7436ae2b78bc58d6a31bb699bee0b078f9b7a5b37fc252",
+    "neutral_candidate_sha256": "db3491f531ed79030951ef1cec4b7244ad4e62bb5e6cfe3d1bbd7c9a94238dda"
+  },
+  "hardware_tested": false,
+  "device_modified": false,
+  "public_release_ready": false
+}

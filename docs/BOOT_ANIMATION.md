@@ -43,4 +43,6 @@ python3 /path/to/current-jarvis2-tools/tools/prepare-boot-animation.py \
 
 The output must be a new file. Its SHA-256 is
 `ea74502097a5e61134f25e92ac313f2154f80aea4972bae5cec1d4252bb2b375`.
-Test HDMI and boot timing on the actual image before release.
+The [neutral candidate receipt](../manifests/current-neutral-artwork.json)
+records the independently rebuilt product image, Verified Boot binding and
+complete private ZIP. HDMI and boot timing still need hardware verification.
