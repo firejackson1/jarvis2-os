@@ -1115,6 +1115,14 @@ without private scripts, server access or an AI operator.
   replacement. Namespace, Binder and SELinux compatibility remain open, along
   with verified boot, USB authorization, hardware startup and restoration.
   No device changes were made.
+- Tried adding the existing Fastbootd module in an isolated native checkout.
+  The Soong graph generator repeatedly stalled on memory within the 4 GiB
+  RAM and 2 GiB swap job limits. The previous successful graph generation
+  peaked near 26 GB RSS. Stopped the private test before it emitted a ramdisk
+  to keep Bazzite online. The original recovery image hash still matches.
+- Retained the no-drive UART trace. It shows a 45-second SanDisk wait ending
+  with Recovery still running. The later image confirmed direct-drive Linux
+  startup with the revised USB role. Neither test covered installed Fastbootd.
 
 ## 2026-11-24 — Release patch coverage check
 
@@ -1129,3 +1137,9 @@ without private scripts, server access or an AI operator.
 - The ROM host suite passed all 194 cases with the pinned AVB tool and all
   eight Java suites. Recovery's checkout passed its C++ checks and ran 86
   Python tests with seven AOSP-tool cases skipped on this host.
+- Rehashed the private rehearsal `system_ext` image and extracted it again.
+  `TvSettingsTwoPanel` and `LineageSetupWizard` matched their signed
+  target-files copies byte for byte. Verified the AirPods update call in DEX,
+  the Back-and-Home resources, and the Bluetooth connect permission in the
+  compiled manifest. Handheld Settings is absent from the signed archive.
+  Behavior during a fresh installation remains unverified.

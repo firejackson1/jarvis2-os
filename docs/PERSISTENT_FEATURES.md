@@ -18,7 +18,8 @@ or qualification of every listed feature.
 | --- | --- | --- |
 | Controls, widgets, button editor, Smart Home shortcuts | Controls 1.0/code 1 APK verified in f38 system_ext and signed archive; live package previously resolved to that privileged path | After clean setup the key service was disabled; enabling it restored owner-verified Bluetooth hold and widget double-press. The 1.1 onboarding candidate is not in f38; normal-user setup and other feature tests remain open |
 | TV Settings categories | Static RRO payload verified in the extracted f38 image and signed archive | Fresh overlay activation and navigation |
-| Native AirPods Settings row | Java source patch compiled in TvSettingsTwoPanel | Rebuilt APK and fresh-install behavior |
+| Native AirPods Settings row | The signed TvSettingsTwoPanel APK in the private rehearsal contains the row and calls its update method from the accessories screen | Clean-user navigation with paired AirPods |
+| Remote pairing during initial setup | The signed TV Settings APK contains the onn Back-and-Home instructions and the signed SetupWizard requests `BLUETOOTH_CONNECT`. Both APKs matched the exact rehearsal image | Fresh setup and remote reconnect on hardware |
 | AACP basic-mode compatibility | Native Bluetooth patch compiled into APEX | Final APEX contents, signing and real reconnect/pause/resume |
 | Open launcher choice | Pinned project-signed GPL launcher APK verified in f38 product and signed archive | Complete native-library/source correspondence, Home-role and clean reboot checks |
 | Custom animation | Exact pinned archive verified in f38 product and signed archive; all descriptor parts use interruptible `p` playback | Repeat visual/boot timing test after further integration; descriptor inspection alone is not a timing measurement |
@@ -87,7 +88,8 @@ Linux desktop after selecting Boot Linux from USB with the SanDisk directly
 attached. That build included a permissive SELinux domain for the USB Linux
 experiment and stopped recovery ADB to hand the USB controller to Linux. Keep
 those RAM-specific settings out of the installed preview until a production
-policy and USB handoff have been verified.
+policy and USB handoff have been verified. An earlier no-drive run logged a
+45-second timeout and kept Recovery running.
 
 The offline installed-image experiment used the earlier reproducible ARM64
 ramdisk as a baseline. Replacing the named recovery fragment preserved the
