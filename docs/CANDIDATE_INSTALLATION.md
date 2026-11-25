@@ -188,9 +188,39 @@ may be recreated writable; all map tables are cross-checked against the planner.
 
 ## Private capture and externally reviewed installation proof
 
-There is deliberately no automatic capture-authoring or approval API. Assemble
-and independently authenticate the evidence in a separate read-only procedure;
-keep real serials and runtime captures private. Capture is JSON with these fields:
+### Back up an existing qualified Recovery session
+
+After separately authorizing and qualifying read-only Recovery access, run the
+capture tool against the explicitly selected complete slot. Use an already
+running authorized USB ADB session and the path and hash of a Recovery
+`dmctl` whose execution has been independently qualified. Use a private host
+filesystem with enough space for all seven full-size restore files.
+
+```sh
+python3 tools/capture-recovery.py \
+  --serial <exact-USB-serial> --slot a \
+  --adb /path/to/adb --adb-sha256 <trusted-adb-sha256> \
+  --lpdump /path/to/bin/lpdump --lpdump-sha256 <trusted-lpdump-sha256> \
+  --dmctl /tmp/<qualified-recovery-helper> --dmctl-sha256 <trusted-dmctl-sha256> \
+  --output /private/fresh-rollback
+```
+
+The tool requires matching native layouts and clear snapshot evidence. It reads
+physical sizes and hashes, streams logical extents from super in logical order,
+and saves only the seven images for the selected slot. It compares the live
+hashes again and rechecks Recovery state, snapshot observations and geometry.
+The capture never mounts storage, runs dmctl, creates mappings or changes a
+device block. It publishes a private host directory only after validation.
+Include no capture files or hashes in public release assets.
+
+Keep the resulting `capture.json`, `super-prefix.img` and `old-images/` together
+for [local fit verification](#check-a-saved-layout-and-restore-files). Review
+the capture and the exact candidate separately before any device install.
+The capture makes no determination of project trust or installation approval.
+
+### Capture and proof records
+
+Capture is JSON with these fields:
 
 | Field | Required content |
 |---|---|

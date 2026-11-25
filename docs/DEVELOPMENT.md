@@ -1581,3 +1581,24 @@ without private scripts, server access or an AI operator.
   cases with the actual saved native layout and reproduced the same r2
   offline writer inputs. Verified all 14 staged files. The full host suite
   passed 216 Python tests and eight Java suites.
+
+### Read-only seven-image rollback backup — 2026-11-25
+
+- Added a host command for an explicitly chosen slot in an already qualified
+  Recovery session. It reuses the Recovery inspector, validates the physical
+  parent disk and ranges, requires the reviewed dmctl hash, and reads the exact
+  native logical extent order directly from super. It saves only the seven
+  target images and hashes the full required physical and allocated logical
+  inventories. Before publishing, it independently reads those hashes again,
+  checks old image sizes and content, and revalidates Recovery and the layout.
+- Host regressions cover logical extent order with reversed physical offsets,
+  short or changed partition reads, overlapping physical geometry, unexpected
+  snapshot state and an invalid dmctl pin. The full suite passed 221 Python
+  checks and eight Java suites.
+- Ran the actual CLI using a file-backed transport, the portable lpdump and
+  the exact saved r2 layout. All seven restore files were byte-identical to
+  the historical rollback originals. Fed the generated capture to the exact
+  r2 preflight and verified all seven target fits, seven restore files, nine
+  unchanged stock references and 13 AVB bindings. An offline fixture review
+  then produced paired writer inputs with zero partition write requests.
+  File model only. Live capture, hardware installation and rollback remain open.

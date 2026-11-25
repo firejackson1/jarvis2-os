@@ -132,6 +132,9 @@ publication by this policy decision alone.
 - [x] Verify the host Recovery inspector against saved native layout data and
   simulated read-only USB responses. The live session test remains pending.
   [Recovery inspection](CANDIDATE_INSTALLATION.md#inspect-an-existing-recovery-session)
+- [x] Rehearse the seven-image Recovery backup and native fit using the
+  file-backed layout. Fresh capture and physical rollback remain open.
+  [Recovery backup](CANDIDATE_INSTALLATION.md#back-up-an-existing-qualified-recovery-session)
 - [ ] Preserve and verify stock restore files, current recovery and necessary signing information.
 - [ ] Test a RAM candidate where possible before requesting persistent installation.
 - [x] Confirm the custom RAM menu on HDMI, physical-button navigation, Reboot

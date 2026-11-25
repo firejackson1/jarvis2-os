@@ -48,6 +48,12 @@ The captured root key is existing development trust, not a production release ke
 The known baseline capture is complete. Candidate verification, interruption
 recovery and actual restoration remain open release gates.
 
+Use the [read-only Recovery capture tool](CANDIDATE_INSTALLATION.md#back-up-an-existing-qualified-recovery-session)
+to reproduce the seven-image backup in a qualified session. It rechecks the
+session and reads the logical extents directly from super, leaving mappings
+and partition contents untouched. A fresh device capture and a reachable
+restore transport are separate requirements.
+
 ## Exact stock-based candidate checkpoint — 2026-11-24
 
 The offline `1ac457e` candidate uses stock `init_boot` and `vendor_boot` references,
