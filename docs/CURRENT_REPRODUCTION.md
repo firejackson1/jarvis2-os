@@ -1,39 +1,81 @@
-# Reproduce the current Jarvis2 developer preview
+# Build the neutral Jarvis2 developer preview
 
 Use device source `cb9334ee26ccd80d9f5e5d9276905440b93eaeba` for the
 `jarvis2.cb9334ee26cc` build. The signing, image assembly, and packaging tools
 used for the candidate are pinned separately at
 `00d6300ed7a42d7153b6ca85e74b7766154fc8d0`. The
-[candidate receipt](../manifests/current-cb9334-inclusion.json) records the
-archive, image, and Recovery digests. These instructions cover offline builds.
+[neutral r2 receipt](../manifests/current-neutral-artwork.json) records the
+release-candidate archive, image, and Recovery digests. These instructions
+prepare source and build inputs for a neutral build with locally supplied keys.
 
 ## Source and inputs
 
-1. Populate a dedicated Android checkout using the device commit's
-   `manifests/lineage21-pinned.xml`. Its SHA-256 is
-   `5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7`.
-   Place the device repository at `device/onn/jarvis2` and select the full
-   device commit above. The current build audit matched all 1,430 upstream
-   project revisions and saw only the twelve expected changed source paths
-   across the six patched projects.
-2. [Download and extract the exact stock OTA](STOCK_FOUNDATION.md). Stage its
-   eleven local stock images against `stock-inputs.sha256`. With an
-   EROFS-capable `fsck.erofs` on `PATH`, run
-   `python3 device/onn/jarvis2/stage-stock.py /path/to/stock-images "$PWD"`
-   from the Android root. The command verifies the input hashes, extracts the
-   kernel from `boot.img`, and stages stock inputs in the fresh tree. Keep the
-   matching [stock AVB templates](AVB_IMAGE_ASSEMBLY.md#public-stock-template-mode)
+Initialize Repo in a new Android source directory. This uses the manifest from
+the exact product revision and Repo v2.73.
+
+```bash
+set -euo pipefail
+repository=https://github.com/firejackson1/jarvis2-os.git
+revision=cb9334ee26ccd80d9f5e5d9276905440b93eaeba
+repo init -u "$repository" -b "$revision" -m manifests/lineage21-pinned.xml \
+  --repo-url https://gerrit.googlesource.com/git-repo --repo-rev v2.73 --no-clone-bundle
+test "$(git -C .repo/manifests rev-parse HEAD)" = "$revision"
+printf '%s  %s\n' \
+  5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7 \
+  .repo/manifests/manifests/lineage21-pinned.xml | sha256sum -c -
+repo sync -c -j4 --no-tags --fail-fast
+git clone --no-checkout "$repository" device/onn/jarvis2
+git -C device/onn/jarvis2 checkout --detach "$revision"
+```
+
+The [builder preflight](../manifests/neutral-r2-builder-preflight.json) verifies
+the public initialization and all 1,430 listed paths. The rehearsal synced
+Lineage's vendor source and Music against their exact pins. The earlier native
+build audit checked all 1,430 project revisions and the twelve patched files.
+
+1. [Download and extract the exact stock OTA](STOCK_FOUNDATION.md). With an
+   EROFS-capable `fsck.erofs` on `PATH`, stage the extracted images from the
+   Android root with
+   `python3 device/onn/jarvis2/stage-stock.py /path/to/stock-raw "$PWD"`.
+   Keep the padded [stock AVB templates](AVB_IMAGE_ASSEMBLY.md#public-stock-template-mode)
    for image assembly.
-3. Stage the exact controlled launcher and custom boot animation. The existing
-   [input staging commands](FROZEN_F38_REPRODUCTION.md#required-local-inputs)
-   apply to the same pins and helpers. The launcher APK SHA-256 starts with
-   `ac585d5a` and the animation SHA-256 starts with `87e2aa9c`. See the full
-   hashes in the candidate receipt. Omitting the custom animation uses the
-   upstream default and changes the image. The chosen animation remains a
-   private input pending redistribution review.
-   For a separate preview without the branded artwork, use the
-   [original neutral animation](BOOT_ANIMATION.md#original-neutral-animation)
-   and verify the resulting product image and AVB chain against its own receipt.
+2. Put the controlled ARM32 launcher APK in a local directory as
+   `LTvLauncher.apk`. Also supply `LTvLauncher-source.tar.gz` from the pinned
+   URL in [launcher-inputs.json](../manifests/launcher-inputs.json). Both input
+   hashes and the certificate are checked by the helper. The exact signed APK
+   is staged in the private release set pending asset publication.
+3. Generate the original neutral animation from verified source. The exact
+   stage commands for the launcher and animation follow.
+
+```bash
+set -euo pipefail
+device="$PWD/device/onn/jarvis2"
+launcher_inputs=/path/to/local/launcher-inputs
+(
+  bootstrap="$PWD/out/host/linux-x86/bin/zipalign"
+  sdk_zipalign="$PWD/prebuilts/sdk/tools/linux/bin/zipalign"
+  test -x "$sdk_zipalign"
+  test ! -e "$bootstrap"
+  test ! -L "$bootstrap"
+  mkdir -p "$(dirname "$bootstrap")"
+  ln -s "$sdk_zipalign" "$bootstrap"
+  trap 'rm -f -- "$bootstrap"' EXIT
+  python3 "$device/tools/prepare-launcher.py" "$launcher_inputs" "$PWD"
+)
+generator_dir=$(mktemp -d)
+git -C "$device" show \
+  932294a6f92c3091c7b30d8f76748ffc6dea52e7:tools/prepare-boot-animation.py \
+  > "$generator_dir/prepare-boot-animation.py"
+mkdir -p "$device/prebuilts"
+python3 "$generator_dir/prepare-boot-animation.py" --neutral "$device/prebuilts/bootanimation.zip"
+printf '%s  %s\n' ea74502097a5e61134f25e92ac313f2154f80aea4972bae5cec1d4252bb2b375 \
+  "$device/prebuilts/bootanimation.zip" | sha256sum -c -
+```
+
+The temporary bootstrap link is removed after staging. When a verified native
+host `zipalign` already exists, invoke the launcher helper directly. Leave
+the SDK's matching `lib64` directory available. The fresh host rehearsal
+matched the launcher and generated animation to the r2 product filesystem.
 
 From the Android root, apply the six series to fresh projects. The current
 device commit includes the SetupWizard and Music patches in-tree.
@@ -81,6 +123,11 @@ Follow [release signing](RELEASE_SIGNING.md) for package and OTA trust,
 [AVB image assembly](AVB_IMAGE_ASSEMBLY.md) for the final chain, and
 [candidate packaging](CANDIDATE_PACKAGING.md) for the verified artifact set.
 Use the matching [ARM32 LCARS source and recipe](https://github.com/firejackson1/jarvis2-os/blob/708e088ed57eb83805753d9213717965a3c61e2c/docs/STOCK_LCARS.md).
-Recipient-signed builds require their own keys and trust checks. The observed
-build and source audit establish this candidate's input identity. A second
-clean full-ROM rebuild and hardware qualification are still open.
+
+The staged r2 package was made by replacing the artwork in the previously
+signed product filesystem, rebuilding EROFS, and reassembling the AVB chain.
+This guide feeds the same neutral artwork into the build from the start.
+Locally signed images need their own AVB, package-signature, filesystem
+and hardware trust checks. The preflight verifies the inputs for this
+route. A clean full-ROM build from those inputs and its hardware tests
+remain open.

@@ -76,6 +76,9 @@ publication by this policy decision alone.
 - [x] Check the 1,430 upstream project pins, the twelve modified source files
   and the exact local build inputs. Record the
   [current reproduction procedure](CURRENT_REPRODUCTION.md).
+- [x] Initialize the exact public manifest in a fresh Repo workspace and
+  rehearse the neutral builder's stock OTA, launcher, and generated animation
+  inputs. [Builder preflight](../manifests/neutral-r2-builder-preflight.json)
 - [ ] Qualify experimental and hardware-dependent changes before listing them as release features.
 - [x] Include Controls 1.1, the TV Settings overlay and the native Bluetooth Settings hook in the signed candidate.
 - [x] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; source patch and rebuilt TvSettingsTwoPanel compile passed. Fresh-image behavior remains a separate test.

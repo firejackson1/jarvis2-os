@@ -1725,3 +1725,23 @@ without private scripts, server access or an AI operator.
 - The Android CI raw artifact URL for build 10951026, target `vndk`,
   returned 404 for the original manifest. The notice comparison and
   supplement do not establish the exact corresponding VNDK source revisions.
+
+### Fresh neutral builder preflight — 2026-11-25
+
+- Initialized a blank Repo workspace directly from the public Jarvis2 source
+  commit and its pinned manifest. Repo v2.73 listed the exact 1,430 paths.
+  Synced Music and Lineage's vendor project from their public remotes,
+  compared both HEADs with the manifest, and verified the Music patch applies.
+- Re-extracted all 13 selected images from the pinned OTA. Verified the
+  eleven staged stock images, padded AVB templates and kernel. Compared
+  content, modes and symlink targets for all 1,065 vendor and ODM entries
+  against the earlier extraction. EROFS reported symlink timestamp warnings,
+  so timestamps are outside this comparison.
+- Ran the frozen launcher helper using the pinned SDK and JDK. Its six
+  outputs include the authenticated launcher APK, three ARM libraries and
+  two notice files. Removed the temporary zipalign bootstrap link.
+  Generated the neutral animation directly from source. Both the APK and
+  animation matched their r2 product copies byte for byte.
+- The updated [neutral build guide](CURRENT_REPRODUCTION.md) describes the
+  public manifest and staging process. The [preflight receipt](../manifests/neutral-r2-builder-preflight.json)
+  pins the evidence. This run did not compile a full ROM or contact hardware.

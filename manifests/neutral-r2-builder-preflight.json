@@ -1,0 +1,59 @@
+{
+  "scope": "Fresh public manifest initialization and selected sync, plus isolated neutral build input staging",
+  "manifest_bootstrap": {
+    "repo_release": "v2.73",
+    "repo_revision": "d7c431b9968d928373fe9b463a51d304d3b2c48a",
+    "repo_launcher_sha256": "05f571deafd6ed6da0d20fa707dde29aa5624dbf35553d697a40dbdd4c8d178a",
+    "product_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+    "source_manifest_sha256": "5260701a7c1d99f297bad23371118b9bac2f03bcabc82d5d3f9d80bebc4a44f7",
+    "projects_resolved": 1430,
+    "fresh_fetches_verified": {
+      "packages/apps/Music": "c119d5a52f80289c7f939746ddc31c8bcee2a3ca",
+      "vendor/lineage": "85fbbf9a6601ca7af759aa0aa06d32f7a9800b36"
+    },
+    "music_patch_check_passed": true
+  },
+  "build_inputs": {
+    "stock_ota_sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+    "stock_extractor_release_archive_sha256": "bbbb53a71955c69272afdef7bc7e83a1bb1770f453d0c21dcaf61a3ba0463c11",
+    "stock_extractor_sha256": "9e0a667a2e5f43fea8074bace4b3ad7aca2e109d28fee6007533110fb5af1a7b",
+    "raw_stock_images": {
+      "boot.img": "3019140bb97cc167d244b72d9d048a21f5b06876ad2a8f39c755198259bf29f2",
+      "dtbo.img": "20c0de71706c4549430d146af81118d39a776e407ea3d7e006965b8df3b55f99",
+      "init_boot.img": "2bda4f31dd2fae6afef022e845c3e0ac0ac99a0dbccba78a00735b1a3986bf30",
+      "odm.img": "94cdfd27e14f3662f96217f127206e0bb44ec8f3e33e4a7943916c6a8c91712f",
+      "odm_dlkm.img": "0080ce969cbc049126ba152bf149a049c72169de7fe52db63c557e9681dcb8ad",
+      "odm_ext.img": "5798508d9d81ce5dc1d9758ad2c322beac1b5cb1aef69544a50e3b26541a49c4",
+      "oem.img": "1b4dfd61d0a6c99ef6ba8514c66a6faee7d56e554f1569050ce9c98e63999823",
+      "system_dlkm.img": "b03ab6a657562aaace24842fd0b9b6c85481e80bf04de102d5862d0350ef3ea7",
+      "vbmeta.img": "71eba217dd33f6c74575b8c794fe4438649b38f9bd1c280e4680779a3c3fd704",
+      "vbmeta_system.img": "ea220f0bbc8985a681e9a6e70aa15dafb2790a753746ef2541a20144617ba5f1",
+      "vendor.img": "852f34c0aafaf28b4d56c39f715fa553bdd9a05ad487446c9e38d9e9318f0562",
+      "vendor_boot.img": "c017791c8e52678595a03b902237dcb15a4e8adeb3d35fdb2232838750e4233a",
+      "vendor_dlkm.img": "0cea6c50a18794ae6aa8c97d84ee73aee90c5d39de5a532879b869bdd5e45f96"
+    },
+    "padded_stock_templates": {
+      "vbmeta.img": "a067d7e55a35d5d517af1e48a364b1b6dd483466fb499c36c1ac2cf5fba35d04",
+      "vbmeta_system.img": "0d307c751d959322557a832471ddac47857c91ab9365d628238cc17a47babe83"
+    },
+    "staged_kernel_sha256": "d9ef1096d33fe9f431f4d0cb54f5604a57f5f2fd41b2b86e7c9d499b1571dbae",
+    "stock_payload_entries_verified": 1065,
+    "stock_extraction_file_content_modes_and_link_targets_match_reference": true,
+    "launcher_source_input_sha256": "7cb65fdcb8b10ef43f909c2de5ba6fc0d1c23fc1a1c43795c750efa129aed17e",
+    "launcher_outputs": {
+      "LICENSE.txt": "1b3782ccad7b8614100cda30d3faf42fc39f2e97932908c543005053b654ca68",
+      "LTvLauncher.apk": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+      "NOTICES.txt": "cf8a94018b718b563d2ffed39dfb4e3b60634e475419fa8568ccd928802bdaeb",
+      "libapp.so": "2bdc01995f17c7c86864b4a543dc697968ebef491b647932ef08c28106c1e5cb",
+      "libflutter.so": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
+      "libsqlite3.so": "4659622c40e9e1ea5f24fb29f7be1eb85ef21bdf3f7eb1cfe883b037d04e3058"
+    },
+    "neutral_animation_generator_sha256": "5cbe4f30982859fef107abed2195206f5da8f2e45478b08089db8a303f59a617",
+    "neutral_animation_sha256": "ea74502097a5e61134f25e92ac313f2154f80aea4972bae5cec1d4252bb2b375",
+    "launcher_and_animation_match_r2_package": true,
+    "temporary_zipalign_removed": true,
+    "branded_artwork_input_used": false,
+    "full_target_files_rebuild_performed": false
+  },
+  "hardware_verified": false
+}
