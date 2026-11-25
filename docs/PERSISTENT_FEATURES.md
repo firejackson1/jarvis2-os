@@ -24,23 +24,21 @@ Settings changes, the AACP fallback, the ADB reconnect change and the OTA
 key-tooling patch. The native build produced the fresh `jarvis2.cb9334ee26cc`
 target-files archive. Verified its embedded build identity and Controls 1.1,
 the rebuilt Music APK and ART files, and the pinned launcher and animation.
-Production signing and final-image verification are next. The older f38
-artifact and private rehearsals carry their own evidence and version pins.
-
-Before packaging, bind the patch report, product commit, signed target-files
-archive and final image hashes in the same release receipt. Check that all three
-[complete EROFS filesystems match the signed archive](BUILD.md#inspect-the-generated-images-themselves).
-Read back the
-Controls, Music, TV Settings and SetupWizard APKs and the Bluetooth and ADB
-APEX payloads from the final images. Exercise the OTA key-tooling change during
-signing, where it runs. Verify the launcher, boot animation, audio policy
-libraries, keylayout and Settings overlay against their reviewed inputs. The
-Recovery extension has a separate revision and digest, which must be recorded
-alongside the derived `vendor_boot` and matching AVB chain.
+The [current candidate receipt](../manifests/current-cb9334-inclusion.json)
+ties the patch report and product commit to the production-key signed archive
+and five final image hashes. All three
+[complete EROFS filesystems match that archive](BUILD.md#inspect-the-generated-images-themselves).
+All 21 selected members matched on readback, including Controls, Music and its
+ART files, TV Settings, SetupWizard, TV SystemUI, Bluetooth and ADB APEX,
+launcher, animation, four audio policy libraries, two keylayouts and the
+privilege allowlist. The signing tool installed the pinned project OTA
+certificate in the archive and final system image. The receipt also pins the
+separately built LCARS plug-in, notices, derived `vendor_boot` and AVB chain.
+Clean-install, recovery transport, rollback and artifact review remain open.
 
 | Change | Current delivery status |
 | --- | --- |
-| Installed LCARS Recovery | Stock-compatible ARM32 plug-in and private AVB/installer rehearsal; on-device menu, USB ADB, Fastbootd and restoration qualification pending |
+| LCARS Recovery | Stock-compatible ARM32 plug-in bound to the current production-key AVB chain; on-device menu, USB ADB, Fastbootd and restoration qualification pending |
 | Boot Linux from USB | SanDisk desktop and missing-drive fallback exercised in ARM64 RAM Recovery; installed integration still needs a validated USB handoff and enforcing policy |
 | Speaker clicking and suspend/wake | Diagnostic traces and temporary workaround; production fix pending |
 | TrueHD/DTS and native Power/Mic remaps | Development work with outstanding redistribution or framework fail-safe requirements; consult the feature rows below before claiming either in release notes |
@@ -49,7 +47,8 @@ alongside the derived `vendor_boot` and matching AVB chain.
 
 | Feature | Reproducible source/build state | Remaining release evidence |
 | --- | --- | --- |
-| Controls, widgets, button editor, Smart Home shortcuts | Controls 1.0/code 1 APK verified in f38 system_ext and signed archive; live package previously resolved to that privileged path | After clean setup the key service was disabled; enabling it restored owner-verified Bluetooth hold and widget double-press. The 1.1 onboarding candidate is not in f38; normal-user setup and other feature tests remain open |
+| Controls, widgets, button editor, Smart Home shortcuts | Controls 1.1/code 2 is in the current signed `system_ext`, with shortcut onboarding and required privileges | Android Accessibility consent is required. On the earlier clean setup, enabling the service restored owner-verified Bluetooth hold and widget double-press. Current-image onboarding, Xbox input and a real Smart Home provider conversation remain open |
+| AirPods, Bluetooth and audio controls | The current Controls APK includes the icon panels, AirPods wear pause/resume, HDMI plus Bluetooth routing, automatic delay estimation and manual per-device calibration | Recheck fresh pairing, pause/resume and audio sync. A prior AirPods calibration is user data. Two simultaneous Bluetooth headsets are unverified |
 | TV Settings categories | Static RRO payload verified in the extracted f38 image and signed archive | Fresh overlay activation and navigation |
 | Native AirPods Settings row | The signed TvSettingsTwoPanel APK in the private rehearsal contains the row and calls its update method from the accessories screen | Clean-user navigation with paired AirPods |
 | Remote pairing during initial setup | The signed TV Settings APK contains the onn Back-and-Home instructions and the signed SetupWizard requests `BLUETOOTH_CONNECT`. Both APKs matched the exact rehearsal image | Fresh setup and remote reconnect on hardware |
@@ -64,7 +63,7 @@ alongside the derived `vendor_boot` and matching AVB chain.
 | Sleep/wake | Earlier workaround prevented clicking but genuine wake failed. The clean trial had a 60-second idle timeout; a later live keep-awake setting prevents automatic sleep while powered | The live setting is not baked into f38 and does not fix intentional suspend. True suspend, box-button/remote wake and repeated-cycle validation remain open |
 | Lock screen and notifications | Product TV SystemUI, default lock-screen property | Clean-user behavior, no handset SystemUI and remote Settings behavior |
 | Recovery, installation and rollback | f38 retained stock bootstrap recovery. A later ARM64 RAM build showed the custom menu on HDMI. The owner confirmed the box button moves focus, Reboot system now returns to Android, and Boot Linux from USB starts the SanDisk desktop | Installed Recovery still needs authenticated ADB, Fastbootd and boot-control integration, AVB and a normal-user install/restore test. See [installed Recovery audit](#installed-recovery-audit) |
-| Music session cleanup | Frozen f38 Music has an empty `onDestroy`. The source patch and [signed cleanup APK](../manifests/music-cleanup-candidate.json) were included and independently verified in the [private image rehearsal](../manifests/f38-app-integration-rehearsal.json) | Rebuild from source and test Android lifecycle, Bluetooth browsing and playback |
+| Music session cleanup | The current source-built APK and both matching ART files are in the final signed product image. The [f38 rehearsal](../manifests/f38-app-integration-rehearsal.json) used a separately built cleanup APK | Verify Android service lifecycle, Bluetooth browsing and playback on the current image |
 
 ## Clean-install remote-service activation gap
 
@@ -86,8 +85,9 @@ Controls version 1.1 (version code 2) now adds enabled/disabled status and an
 Enable/Manage remote shortcuts button to the controller-settings source. It
 matches this app's exact service component, remains visible without a controller,
 refreshes on return and opens Android's own Accessibility page for consent. The
-private signed app build passed; it is not installed or included in the frozen
-f38 image. Visual, disabled-state and normal-user activation tests remain open.
+private signed app build passed. The current signed ROM contains Controls 1.1,
+and the frozen f38 image still contains 1.0. Visual, disabled-state and
+normal-user activation tests remain open.
 Offline signature verification found the 1.1 candidate and frozen app use the
 same project certificate. A DEX class inventory found no missing application
 classes apart from generated resource classes; the candidate adds one UI lambda.

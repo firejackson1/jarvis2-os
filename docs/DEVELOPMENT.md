@@ -1384,3 +1384,21 @@ without private scripts, server access or an AI operator.
   Signing metadata preparation started on the verified archive. Production
   signatures, final AVB, hardware and public release remain pending. Bazzite
   stayed online.
+
+## 2026-11-25 — Current production-key image inclusion
+
+- Signed the exact fresh build with the existing offline project keys.
+  The 1,203,792,431-byte archive is pinned in the
+  [candidate receipt](../manifests/current-cb9334-inclusion.json).
+  Whole-archive CRC and source identity passed. Public-key verification passed
+  for 103 standalone APKs, 31 APEX containers, 30 APEX payload signatures and
+  23 embedded APKs. The preserved shim matched byte for byte. All 31 APEX native
+  filesystem comparisons passed with zero unexpected differences.
+- Built the final five AVB-bound images with the stock-compatible ARM32 LCARS
+  binding. The signed archive and final images matched across all three full
+  EROFS filesystem ranges and 21 selected readback members. The exact project
+  system OTA certificate matched in the signed archive and the final image.
+- The host suite passed all 203 Python tests and eight Java suites. The
+  private images remain off-device. Hardware trust, installation, clean setup,
+  recovery transport, rollback, artifact review and release packaging remain open.
+  Bazzite stayed running.

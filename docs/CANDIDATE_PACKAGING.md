@@ -9,11 +9,11 @@ It never signs, rebuilds, flashes, selects slots, installs or runs payload code.
 It has no private-key inputs or Google-containing packaging mode. Python3.11+
 with its standard zlib support is required.
 
-The older `1ac457e` candidate is **held — do not install** after a privileged-permission allowlist
-bug was found. Its successful historical packaging checks do not make it public
-ready. Replacement product source `f38da52` is being rebuilt; authenticate and
-review its final images independently before packaging. This document authorizes
-no installation, publication or change to a working device.
+The older `1ac457e` candidate is held because of a privilege allowlist bug.
+The current candidate is `cb9334ee26cc` with a verified allowlist, production-key
+AVB and an exact LCARS binding. The [candidate receipt](../manifests/current-cb9334-inclusion.json)
+records its image hashes. Artifact review, hardware checks and release packaging
+are still pending.
 
 ## Authenticate and stage inputs
 

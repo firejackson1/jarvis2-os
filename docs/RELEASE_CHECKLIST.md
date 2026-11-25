@@ -48,11 +48,13 @@ publication by this policy decision alone.
 ## 2. Integrate the complete candidate offline
 
 - [ ] Consolidate device-tree/product configuration and persistent fixes in source.
-- [ ] Run [the full patch check](BUILD.md#verify-source-patches-without-modifying-the-android-tree) on the exact release build checkout and retain its report with the image manifest.
-- [ ] Close the [release inclusion ledger](PERSISTENT_FEATURES.md#release-candidate-inclusion) against the exact signed archive and final images. Record the separately pinned Recovery build and qualify experimental changes before listing them as release features.
-- [ ] Include current TV controls app, Settings overlay and native Bluetooth Settings hook.
+- [x] Run [the full patch check](BUILD.md#verify-source-patches-without-modifying-the-android-tree) on the current release build checkout. Eight patches across six series and twelve files passed. Keep the report pin in the [candidate receipt](../manifests/current-cb9334-inclusion.json).
+- [x] Match the [release inclusion ledger](PERSISTENT_FEATURES.md#release-candidate-inclusion) to the current signed archive and final images. Record the separately pinned Recovery build and AVB binding.
+- [ ] Qualify experimental and hardware-dependent changes before listing them as release features.
+- [x] Include Controls 1.1, the TV Settings overlay and the native Bluetooth Settings hook in the signed candidate.
 - [x] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; source patch and rebuilt TvSettingsTwoPanel compile passed. Fresh-image behavior remains a separate test.
-- [ ] Include the required audio policy libraries, checked HAL/DTS/codec changes and Bluetooth compatibility patch.
+- [x] Include the four required audio policy libraries and the Bluetooth compatibility patch in the signed candidate.
+- [ ] Resolve HAL, DTS and codec integration and redistribution requirements.
 - [ ] Integrate verified USB/ADB defaults, remote keylayout, animation and TV UI changes; distinguish experiments from production fixes.
 - [ ] Fix launcher/lock-screen/notification behavior in product configuration rather than relying on leftover device state.
 - [ ] Rebuild the complete slot A candidate; compare all partition budgets, EROFS metadata, AVB descriptors, keys and rollback indexes offline.
@@ -224,8 +226,9 @@ publication by this policy decision alone.
 - [x] Rehearse Controls 1.1 and the Music session cleanup in private vanilla
   images. Read back both APKs, verify filesystem content and metadata, rebuild
   AVB, reproduce all five image hashes, and apply-check all eight source patches.
-  See `manifests/f38-app-integration-rehearsal.json`. A clean full-source build
-  and hardware verification of these changes are still required.
+  See `manifests/f38-app-integration-rehearsal.json`. Those changes now have a
+  clean full-source build and final-image readback in the current candidate.
+  Hardware verification remains required.
 
 
 ## Normal-user installation rehearsal — owner request, 2026-11-24

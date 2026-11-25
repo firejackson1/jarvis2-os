@@ -16,8 +16,7 @@ Lineage bootanimation module. With no local artwork, the upstream default remain
 The source repository does not contain the artwork or grant redistribution rights
 for embedded marks/artwork. Review those rights before publishing a ROM with it.
 
-This is packaging integration, not a new device boot test. The currently running
-full image build predates this fragment; it must be refreshed before an image can
-be described as containing the chosen animation. Verify the final product image's
-media/bootanimation.zip against the preparation hash and test that Android can
-finish boot without waiting for the animation loop.
+The private `cb9334ee26cc` candidate's signed product image includes the exact
+pinned `media/bootanimation.zip`. See the
+[candidate receipt](../manifests/current-cb9334-inclusion.json). Public
+redistribution review and a boot timing test on this candidate remain open.

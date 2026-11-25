@@ -1,0 +1,164 @@
+{
+  "format": 1,
+  "scope": "Exact production-key offline candidate. Patched source files, signed packages, final EROFS readback, and LCARS Verified Boot binding. Hardware, public redistribution and publication are pending.",
+  "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+  "verification_tools_revision": "00d6300ed7a42d7153b6ca85e74b7766154fc8d0",
+  "build_identity": "jarvis2.cb9334ee26cc",
+  "patch_coverage": {
+    "patches": 8,
+    "series": 6,
+    "files_checked": 12,
+    "report_sha256": "a26cb736826c379589538a3156aa8b122a1511f8fd8cbcb99df6284556a39da2"
+  },
+  "unsigned_target_files_sha256": "802dfa5a8795499f87ae183cfc6fb6480d31849cb6b912884f9bb90a0cd9b428",
+  "signed_target_files": {
+    "bytes": 1203792431,
+    "sha256": "1887ac3f4a6045cecaff229106a8b465885f72c01de8a8fb2ac5471ffe43cd3e"
+  },
+  "ota_system_certificate_sha256": "121abf966a99cf77d1fc44ff725fb06cbb39d5e12bccd09d0b576566091bfe46",
+  "packages": {
+    "public_keys": 78,
+    "standalone_apks": 103,
+    "standalone_resigned": 102,
+    "apexes": 31,
+    "apex_payloads_verified": 30,
+    "embedded_apks": 23,
+    "embedded_resigned": 21,
+    "embedded_shim_preserved": 2
+  },
+  "apex_filesystems": {
+    "apexes": 31,
+    "paths": 1018,
+    "regular_files": 765,
+    "symlinks": 13,
+    "native_xattrs": 1018,
+    "selinux_labeled_paths": 1018,
+    "allowed_apk_changes": 21,
+    "unexpected_differences": 0
+  },
+  "avb_root_public_key_sha256": "82018d6c8ef4c7332a2cf640dfc2aa7233474214ba5372bdcaadc0901154a7df",
+  "files": {
+    "product.img": {
+      "bytes": 541949952,
+      "sha256": "bdf1810bf334b762cc473c141555cef1289cf0f1146f3d1f56caa6282ee93d4f"
+    },
+    "system.img": {
+      "bytes": 483131392,
+      "sha256": "7f70da4e3d00ddce8fe3a4ca166c5e7d2d4ff0ddf98733a72bbd5a95fd5e1d42"
+    },
+    "system_ext.img": {
+      "bytes": 96161792,
+      "sha256": "9ba5d27f6b71b022706dac80736ffaa0e3adad074418df25ee73b1379425213b"
+    },
+    "vbmeta.img": {
+      "bytes": 2097152,
+      "sha256": "33ee9945ab622389b1472412146f7b6df0d991461782a957cfc0f8551e47619c"
+    },
+    "vbmeta_system.img": {
+      "bytes": 2097152,
+      "sha256": "cf1c7da1d484c3a016736c39456e701cb4d6ac92bba64a6fcd687100b118e105"
+    }
+  },
+  "recovery": {
+    "source_revision": "708e088ed57eb83805753d9213717965a3c61e2c",
+    "plugin_sha256": "8d14f4ea2d191fce4424eab196690dc646080f82484d107bd89f77e340ca3f3c",
+    "vendor_boot_sha256": "c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e",
+    "notices_sha256": "5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30"
+  },
+  "matching_feature_members": {
+    "SYSTEM_EXT/priv-app/Jarvis2RemoteSettings/Jarvis2RemoteSettings.apk": {
+      "sha256": "bf1095343e624ca9d363b360b9e24b8dbfbc1ba8fdf24224e356a820b91c50ec",
+      "bytes": 160220
+    },
+    "PRODUCT/app/Music/Music.apk": {
+      "sha256": "4daa60710f0556d46a4f326ccfea7b78a131267a21b61a25de3d92d47d8d2cc7",
+      "bytes": 792406
+    },
+    "PRODUCT/app/Music/oat/arm/Music.odex": {
+      "sha256": "b24160ab9d1a1b304a04a834992e7dbb2e86eab0676680dbeafab3d5c30557a5",
+      "bytes": 17056
+    },
+    "PRODUCT/app/Music/oat/arm/Music.vdex": {
+      "sha256": "b248824433e5c6c925bb4f5aeb89cf752c081f78b25d48113944828138606028",
+      "bytes": 456
+    },
+    "SYSTEM_EXT/priv-app/TvSettingsTwoPanel/TvSettingsTwoPanel.apk": {
+      "sha256": "4e264cc9d09882df995177da98608b3002fdccfd90b3823eae04991c287bc5af",
+      "bytes": 23572321
+    },
+    "SYSTEM_EXT/priv-app/LineageSetupWizard/LineageSetupWizard.apk": {
+      "sha256": "58bc26cec1b8e65ac460a9c63421a7679aab5246dd504c41fd2ffa273f3d12d7",
+      "bytes": 10817184
+    },
+    "SYSTEM/apex/com.android.adbd.capex": {
+      "sha256": "20e2ebb5fc53511be5f41f68c0bb851c73a642c0bcbe3bb86cce26443d6467fc",
+      "bytes": 2503209
+    },
+    "SYSTEM/apex/com.android.btservices.apex": {
+      "sha256": "bf45bc6064eac46d3b6c4ed81363caa565322a34ea778b3190fbce19f097110b",
+      "bytes": 18628608
+    },
+    "PRODUCT/app/Jarvis2LtvLauncher/Jarvis2LtvLauncher.apk": {
+      "sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+      "bytes": 10024443
+    },
+    "PRODUCT/media/bootanimation.zip": {
+      "sha256": "87e2aa9ceda3fc1fdbf787dad06687eedc12efeca6a0046d3a76a68f6d03ad50",
+      "bytes": 13482326
+    },
+    "SYSTEM_EXT/overlay/Jarvis2TvControlsOverlay.apk": {
+      "sha256": "041ebab5c9e4f8aebf8aba23716671764e992344882cc3866d73b4c89485a36c",
+      "bytes": 25277
+    },
+    "SYSTEM_EXT/priv-app/TvSystemUI/TvSystemUI.apk": {
+      "sha256": "3e43e56916482f2483842b6d7392a2b68a9ef4d1c487294bd9c2bea3f98a2e72",
+      "bytes": 21570787
+    },
+    "SYSTEM/usr/keylayout/Vendor_0957_Product_0031.kl": {
+      "sha256": "0dffe1b7134eae27a61daf41a379c70577ab154dbac39738595d8d42b11ca264",
+      "bytes": 2130
+    },
+    "PRODUCT/usr/keylayout/Vendor_0957_Product_0031.kl": {
+      "sha256": "31642edb5566766b0685e34e6cc14e243316ffeb76d6db840ca039dbcbd70d08",
+      "bytes": 852
+    },
+    "SYSTEM/lib/libaudiopolicyengineconfigurable.so": {
+      "sha256": "e92d1deae20e96605c7ad4f7f2027b9972859fe6e6ab56d63409c6ce8396b96b",
+      "bytes": 210456
+    },
+    "SYSTEM/lib/libparameter.so": {
+      "sha256": "7e344c31606e1b2684964775f708ae44f35ef06c88bcf1c8e381715e382f5c1a",
+      "bytes": 518412
+    },
+    "SYSTEM/lib/libpolicy-subsystem.so": {
+      "sha256": "8517d49cae77c81c5bd69ececf490448129ebddcdd259fba4b594820db06ccd2",
+      "bytes": 20980
+    },
+    "SYSTEM/lib/libremote-processor.so": {
+      "sha256": "52bebb1496e8c86b735f90e8ae9eeb3f04215dcd5999f474155cc6dacfa40bba",
+      "bytes": 84232
+    },
+    "SYSTEM/etc/permissions/android.software.leanback.xml": {
+      "sha256": "304d11ff8dd07f49f613db8e7b3e728e556eaad59b8c4dbd5f70d099752d4605",
+      "bytes": 357
+    },
+    "SYSTEM_EXT/etc/permissions/privapp-permissions-jarvis2-remote.xml": {
+      "sha256": "3edf1d3754e2a0dd64428f0f190e21549d8af2bd921e5b1a5a2e990719ae3cac",
+      "bytes": 319
+    },
+    "SYSTEM/etc/security/otacerts.zip": {
+      "sha256": "82b806e48fe1f91679712147eaa5d05604eab48e9c8b464ba27b32da18b34797",
+      "bytes": 2051
+    }
+  },
+  "evidence": {
+    "inclusion_report_sha256": "63cc14e7e2681447529e0c9ec84ee2412296736d97d7f4a09b5fd6333e0f69d4",
+    "signed_archive_report_sha256": "b5d386fa65fb423a0c2eca5f9141b8ab280165eaf210d9c069d36ec6619f466a",
+    "package_report_sha256": "94d0f35d9c262f065d55327bc9f292ceb426e694dc77030dbb8b39ae97137bd6",
+    "apex_filesystems_report_sha256": "99ee7f27cd4848839686cd8e69dcef5ce0d3972e6a22c8e6c3d024adbb89e99d",
+    "avb_assembly_report_sha256": "18a4f91dfb6907a2729854d78cef98ce5dbd133bac08305daa45dc0d4fa6925c",
+    "image_contents_report_sha256": "1c7960d80f5c5c25c0ed5cd88dd614d403c68e340577451ce0fe8140a0944fd9"
+  },
+  "hardware_tested": false,
+  "public_release_ready": false
+}
