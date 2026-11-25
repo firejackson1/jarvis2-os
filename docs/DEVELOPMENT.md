@@ -2279,3 +2279,10 @@ without private scripts, server access or an AI operator.
   member names, order and contents match the pinned Ninja graph and the
   compiled objects. The other archives, generated payloads and final
   library still need complete readback.
+
+- Replayed the exact ICU assembly generation and assembled the output
+  independently with the pinned command. The object data equals the
+  778,864-byte pinned ICU blob and its little-endian size. Read back the
+  blob from the staged source companion and from the reference ELF.
+  Compiled archive readback expanded to four archives and 50 members,
+  including libjpeg and libsimd. Final library and two archives remain open.

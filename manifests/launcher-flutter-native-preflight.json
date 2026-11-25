@@ -864,5 +864,64 @@
       "elf_rebuild_confirmed": false,
       "host_report_sha256": "d1bf43833cfa4c6e5597132c790d8ed1f0a9d10e9a6efd3bdf940f6895d0d345"
     }
+  },
+  "icu_and_archive_readback": {
+    "icu_generated_input": {
+      "icu_source_commit": "43953f57b037778a1b8005564afabe214834f7bd",
+      "icu_pinned_blob_sha256": "c12537022ef818991a7bfed41a76d8d6ae962ffbc0e6511ac762a5d0845e7f7c",
+      "icu_pinned_blob_bytes": 778864,
+      "regenerated_assembly_sha256": "267de5c32a491843f58c6fe28a969e166c8c3565bd466a54bd744a5e6b5b5e9c",
+      "rebuilt_arm_object_sha256": "e0f5517de0d21ed786b08d8b3a5f0a2bddfce8255dd6ad6428a9e26b89e503d6",
+      "assembly_match_running_build": true,
+      "object_compared_with_running_build": false,
+      "readonly_data_equals_exact_icu_blob_and_le32_size": true,
+      "final_elf_embedded_blob_verified": false,
+      "host_replay_sha256": "49c918bfd1317ef7167e5e9596e430f5eaa8a3c3613cae85d1fbca3684de068f",
+      "reference_embedded_data": {
+        "reference_elf_sha256": "efb548110821f57f32e80535d6124f5d5c83de026f4783f30cbe875cea618f61",
+        "rodata_icu_data_match": true,
+        "exact_icu_blob_offset_within_rodata": 0,
+        "exact_icu_blob_file_offset": 509248,
+        "exact_match_count": 1,
+        "following_le32_size_matches": true,
+        "icu_blob_sha256": "c12537022ef818991a7bfed41a76d8d6ae962ffbc0e6511ac762a5d0845e7f7c",
+        "no_code_executed_from_reference": true,
+        "host_report_sha256": "c53e4b412830033ed0dd9e90fa37df188516e84d1c433736135a7e7827892706"
+      },
+      "staged_source_companion": {
+        "launcher_source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+        "icu_archive_sha256": "1719c9b8e5499b39be86dcad9a2f520e9888a53fdbba9fa61955fb9ef12bb0a5",
+        "blob_member": "flutter/icudtl.dat",
+        "blob_sha256": "c12537022ef818991a7bfed41a76d8d6ae962ffbc0e6511ac762a5d0845e7f7c",
+        "blob_bytes": 778864,
+        "matches_reference_elf_data": true,
+        "host_report_sha256": "35ee9c312c55b473d2198641964365fe6f2010cf00f6da65bdf3a72b85956f3b"
+      }
+    },
+    "static_archive_readback": {
+      "built_archive_count": 4,
+      "verified_archive_members": 50,
+      "archives": {
+        "obj/flutter/third_party/expat/libexpat.a": {
+          "sha256": "4f47aa79d4470008bac268ada411b2be2b8d18672abb14c95d674558889de529",
+          "member_count": 3
+        },
+        "obj/flutter/third_party/libjpeg-turbo/libjpeg.a": {
+          "sha256": "9a150bef1b94c8c0f00f9636a7f642630e42f7fb657c9703e941aa11f2fe3124",
+          "member_count": 44
+        },
+        "obj/flutter/third_party/libjpeg-turbo/libsimd.a": {
+          "sha256": "62520f94f756ee6847ac6f688362da9d237a4cdae2f974836c93e71d4f8d3442",
+          "member_count": 1
+        },
+        "obj/flutter/skia/modules/skcms/libskcms.a": {
+          "sha256": "100277b60d452bf1a5bae8f265928b25ffd36e2c05e3c92f5d121cfc787d0d59",
+          "member_count": 2
+        }
+      },
+      "actual_member_order_and_bytes_verified": true,
+      "complete_archive_readback": false,
+      "host_report_sha256": "9de01ab3b51e66d5c75239e94f0d274fb9953385b1e40c30020439619d983fa4"
+    }
   }
 }

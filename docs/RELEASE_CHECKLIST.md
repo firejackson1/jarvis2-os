@@ -334,6 +334,8 @@ publication by this policy decision alone.
   the declared tracked inputs against the 12 pinned project trees.
 - [x] Replay the generated Dart version file with two independent reflogs
   and match the exact build output.
+- [x] Verify the staged ICU data against the reference engine ELF and
+  reproduce its generated assembly and ARM object.
 - [ ] Verify the Flutter native ARMv7 link inputs and compare the rebuilt
   library with the pinned release ELF. Complete any missing source delivery.
 - [x] Verify production-key package/APEX signing in the private rehearsal with

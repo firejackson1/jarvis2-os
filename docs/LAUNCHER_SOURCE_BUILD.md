@@ -388,9 +388,17 @@ the exact live build bytes from two isolated reflogs at the pinned revision
 with the original shallow boundary preserved. The compiler-generated
 header dependency log remains a separate input to the final audit.
 
-The first two completed static libraries, Expat and skcms, passed exact
-`llvm-ar` member name, ordering and byte comparisons against their five
-planned objects. The remaining archives and the final ELF are still building.
+Four completed static libraries passed exact `llvm-ar` member name,
+ordering and byte comparisons against all 50 planned objects. These cover
+Expat, skcms and both libjpeg-turbo archives. Freetype, the Dart archive
+and the final ELF still need readback.
+
+The staged ICU source archive contains the exact 778,864-byte data blob.
+It matches the bytes in the pinned reference ELF's `.rodata`, followed
+by the matching 32-bit size. Replaying Dart's assembly generator matched
+the live build's source. Compiling that source in a scratch directory
+with the original flags produced an ARM object whose read-only section
+contains the same blob and size. The main build's final ELF remains pending.
 [Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
 
 ## Unsigned ARMv7 release and recipient signing
