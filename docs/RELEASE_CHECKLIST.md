@@ -1,6 +1,6 @@
 # Jarvis2 public release checklist
 
-Updated: 2026-11-24. Working checklist for continued development, not a claim of release readiness.
+Updated: 2026-11-25. Working checklist for continued development.
 
 ## Operating rules
 
@@ -49,6 +49,7 @@ publication by this policy decision alone.
 
 - [ ] Consolidate device-tree/product configuration and persistent fixes in source.
 - [ ] Run [the full patch check](BUILD.md#verify-source-patches-without-modifying-the-android-tree) on the exact release build checkout and retain its report with the image manifest.
+- [ ] Close the [release inclusion ledger](PERSISTENT_FEATURES.md#release-candidate-inclusion) against the exact signed archive and final images. Record the separately pinned Recovery build and qualify experimental changes before listing them as release features.
 - [ ] Include current TV controls app, Settings overlay and native Bluetooth Settings hook.
 - [x] Port the AirPods Bluetooth-page hook into Java source for normal ROM builds; source patch and rebuilt TvSettingsTwoPanel compile passed. Fresh-image behavior remains a separate test.
 - [ ] Include the required audio policy libraries, checked HAL/DTS/codec changes and Bluetooth compatibility patch.

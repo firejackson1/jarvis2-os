@@ -1,6 +1,6 @@
 # Persistent integration ledger
 
-Updated 2026-11-24. These are separate evidence levels. A working live RAM patch
+Updated 2026-11-25. These are separate evidence levels. A working live RAM patch
 or installed app update does not establish behavior after a fresh ROM install.
 The installed engineering trial uses frozen product source
 `f38da52af274a0e50c92a10cf279e62f44125358`; its source, signing and image audit
@@ -13,6 +13,34 @@ signed target-files archive. Their extracted filesystem data also matches the
 corresponding prefixes of the final delivery images. This is selected packaging
 evidence, not an installed-device inventory, a fresh complete AVB/privacy audit
 or qualification of every listed feature.
+
+## Release candidate inclusion
+
+The current product build is pinned at
+`cb9334ee26ccd80d9f5e5d9276905440b93eaeba`. Its build namespace passed the
+source verifier for all eight patches across six series and twelve affected
+files. The pin includes Controls 1.1, the Music service cleanup, TV pairing and
+Settings changes, the AACP fallback, the ADB reconnect change and the OTA
+key-tooling patch. The fresh target-files archive is pending. The older f38
+artifact and private rehearsals carry their own evidence and version pins.
+
+Before packaging, bind the patch report, product commit, signed target-files
+archive and final image hashes in the same release receipt. Read back the
+Controls, Music, TV Settings and SetupWizard APKs and the Bluetooth and ADB
+APEX payloads from the final images. Exercise the OTA key-tooling change during
+signing, where it runs. Verify the launcher, boot animation, audio policy
+libraries, keylayout and Settings overlay against their reviewed inputs. The
+Recovery extension has a separate revision and digest, which must be recorded
+alongside the derived `vendor_boot` and matching AVB chain.
+
+| Change | Current delivery status |
+| --- | --- |
+| Installed LCARS Recovery | Stock-compatible ARM32 plug-in and private AVB/installer rehearsal; on-device menu, USB ADB, Fastbootd and restoration qualification pending |
+| Boot Linux from USB | SanDisk desktop and missing-drive fallback exercised in ARM64 RAM Recovery; installed integration still needs a validated USB handoff and enforcing policy |
+| Speaker clicking and suspend/wake | Diagnostic traces and temporary workaround; production fix pending |
+| TrueHD/DTS and native Power/Mic remaps | Development work with outstanding redistribution or framework fail-safe requirements; consult the feature rows below before claiming either in release notes |
+
+## Feature evidence
 
 | Feature | Reproducible source/build state | Remaining release evidence |
 | --- | --- | --- |
