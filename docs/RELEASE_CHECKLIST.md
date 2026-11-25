@@ -30,8 +30,10 @@ apply independently.
 - [x] Check out Chromium at the pinned r2 commit, replay every documented
   WebView patch against its exact inputs, and compare the prebuilt with the
   staged r2 APK. [WebView rebuild evidence](WEBVIEW_REBUILD.md)
-- [ ] Finish the Android dependencies and ARM32 WebView build, reconcile the
-  prebuilt's icon density difference and test an FFmpeg source relink.
+- [x] Finish the Android source and tool sync, fetch the pinned optimization
+  profiles, and validate the ARM32 WebView build graph.
+- [ ] Finish the ARM32 WebView build, reconcile the prebuilt's icon density
+  difference and test an FFmpeg source relink.
 - [ ] Review redistribution rights for proprietary firmware, vendor blobs, codecs, Google apps and bundled launchers before packaging them. Existing device installation is not evidence of redistribution permission.
 - [ ] Keep Google applications out of public ROM bundles unless distribution is properly licensed; document separately installed optional components.
 - [ ] Use our own private signing keys and update channel; document known issues, tested hardware and our own support/bug-report destination.

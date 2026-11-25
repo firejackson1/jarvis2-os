@@ -91,6 +91,33 @@
   },
   "observed_640dpi_prebuilt_icon_entry": false,
   "all_patches_proven_used_in_the_existing_prebuilt": false,
+  "arm32_source_build_inputs": {
+    "dependency_inventory": {
+      "file": "webview-r2-deps.txt",
+      "entries": 304,
+      "sha256": "450281f165c047198ad1c7d042290c001c33f8d697fb4c680b01d9bd315961fd"
+    },
+    "gn_arguments": {
+      "file": "webview-r2.args.gn",
+      "sha256": "848a2907c83d51acf7f52a5c7a20ee194a6f5ae8d4540fcab9c39c7610594618"
+    },
+    "host_os": "Debian 13 linux-x86_64",
+    "host_package_inventory_sha256": "322f1c079a23bf5df61d6d7d1b7600314e9f73a4fb06ab1f1454bc7c22d9ae29",
+    "gn_version": "2595 (0035961837fb)",
+    "siso_version": "v1.6.5",
+    "gn_targets": 66382,
+    "gn_files": 4759,
+    "gn_passed_fail_on_unused_args": true,
+    "checkout_pgo_profiles": true,
+    "android_afdo_profiles_sha256": {
+      "chrome/android/profiles/afdo.prof": "fc3ee2253a81f7c65f82411825187734921ea66b1be12b973978d0efa05f9f40",
+      "chrome/android/profiles/arm.afdo.prof": "86cd48edc64bb95e21ed90f1632ebcc020695ca6d09964c94241ed20c54749c4"
+    },
+    "android_arm32_profdata": {
+      "file": "chrome-android32-main-1791827984-b72a7cf82a36a2e7954cc7858aecced09fb77293-106edaadeecbbcc690ffeac4a85ea4c14e171497.profdata",
+      "sha256": "77005c5948b474dfba88caab3c4bda48a414150b6adc970f8a58c96e0e395504"
+    }
+  },
   "arm32_webview_rebuild_completed": false,
   "modified_ffmpeg_relink_completed": false
 }

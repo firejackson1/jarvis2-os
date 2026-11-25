@@ -48,19 +48,34 @@ solutions = [{
     "url": "https://chromium.googlesource.com/chromium/src.git",
     "managed": False,
     "custom_deps": {},
-    "custom_vars": {},
+    "custom_vars": {"checkout_pgo_profiles": True},
 }]
 target_os = ["android"]
 CONFIG
 gclient sync --nohooks --no-history --jobs=3 --revision "src@$chromium"
+gclient revinfo -a > deps-revisions.txt
 test "$(git -C src/third_party/ffmpeg rev-parse HEAD)" = \
   5c85ff666b3434d9323b83437f910ad8431ab7c9
 ~~~
 
-After dependency sync, install the documented prerequisites in the build
-environment and run `gclient runhooks`. Preserve the synced dependency
-revision record and tool identities. The Android dependency sync and hooks
-must both complete before GN graph validation.
+Compare `deps-revisions.txt` with the
+[304-entry dependency inventory](../manifests/webview-r2-deps.txt) from the
+Linux x86-64 Android sync. It records Git revisions, resolved CIPD instances
+and storage objects. Differences need review before reusing the build
+receipt.
+
+Install the documented host prerequisites in the build environment. The
+verified graph used Debian 13 with Chromium's `build/install-build-deps.py
+--android --no-prompt --no-syms --no-chromeos-fonts`. Debian provides the Linux
+headers as the architecture-independent `linux-libc-dev` package. Verify
+that package and the header files if Chromium's quick check reports only
+`linux-libc-dev:i386` missing. Check the remaining prerequisites normally.
+
+Run `depot_tools/ensure_bootstrap` to initialize the pinned tool wrappers,
+then run `gclient runhooks` at the workspace root. The official build profile
+needs the optimization files fetched by the PGO-enabled hooks, including
+`src/chrome/android/profiles/afdo.prof`. Compare the downloaded files to the
+[profile pins](../manifests/webview-r2-rebuild.json) before starting the build.
 
 ## Patch and icon inputs
 
@@ -107,9 +122,23 @@ graph with `gn gen out/JarvisWebView --fail-on-unused-args` before compiling.
 [Chromium WebView build instructions](https://chromium.googlesource.com/chromium/src/+/main/android_webview/docs/build-instructions.md) ·
 [Pinned LineageOS arguments](https://github.com/LineageOS/android_external_chromium-webview_patches/blob/544b12e3d42a02b4337f31819f6ba917187dcccf/README)
 
+Use the [exact GN arguments](../manifests/webview-r2.args.gn) from the
+validated build graph. With `recipe_dir` set to the absolute path of this
+repository and the shell in the patched Chromium checkout, run:
+
+~~~sh
+mkdir -p out/JarvisWebView
+cp "$recipe_dir/manifests/webview-r2.args.gn" out/JarvisWebView/args.gn
+gn gen out/JarvisWebView --fail-on-unused-args
+autoninja -C out/JarvisWebView -j 4 system_webview_apk
+~~~
+
+The graph passed with GN 2595. The PGO-enabled hook run supplied the profiles,
+and offline Siso compilation started. The source build and its FFmpeg relink
+are still in progress.
+
 Capture the APK, ELF architecture/build ID and the full GN arguments and
 dependency record when the target builds. Then repeat with a distinct
 local FFmpeg source marker and check that the rebuilt ARM WebView library
 carries the marker. Use the unchanged r2 APK and its source companion as
-reference inputs. The original build, modified-FFmpeg relink and hardware
-checks remain open.
+reference inputs.

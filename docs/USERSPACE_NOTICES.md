@@ -58,11 +58,12 @@ license files, 13 Lineage WebView patches and the WebView build recipe. See the
 [Chromium FFmpeg source](https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/5c85ff666b3434d9323b83437f910ad8431ab7c9)
 and [LineageOS WebView build sources](https://github.com/LineageOS/android_external_chromium-webview_patches/tree/544b12e3d42a02b4337f31819f6ba917187dcccf).
 
-Full Chromium dependency sync, a WebView rebuild and a modified-FFmpeg relink
-remain unverified. The selected source map neither covers the remaining
-Android or APEX dependencies nor grants rights to stock inputs. The neutral r2
-ZIP carries five userspace/AVB images and the LCARS plug-in. The stock kernel
-and vendor partitions are local inputs outside that delivery archive.
+The Chromium dependency sync and ARM32 graph validation passed. The full
+WebView build and a modified-FFmpeg relink remain open. Coverage of the
+remaining Android and APEX dependencies and distribution review for stock
+inputs are separate gates. The neutral r2 ZIP carries five userspace/AVB
+images and the LCARS plug-in. The stock kernel and vendor partitions are local
+inputs outside that delivery archive.
 
 The [WebView rebuild record](WEBVIEW_REBUILD.md) pins the Chromium checkout and
 depot_tools and verifies the patch replay and ARM32 APK readback. It also

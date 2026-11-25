@@ -1667,3 +1667,23 @@ without private scripts, server access or an AI operator.
   0002 is absent from the prebuilt's icon table, so the documented patch series
   does not establish the exact original build steps. Full dependency sync,
   ARM32 rebuild and modified-FFmpeg relink remain open.
+
+### ARM32 WebView graph and profile pins — 2026-11-25
+
+- Completed the Chromium Android dependency sync and repeated
+  `gclient revinfo -a` with PGO enabled. All 304 records matched byte for
+  byte. Published the [dependency list](../manifests/webview-r2-deps.txt)
+  and [GN arguments](../manifests/webview-r2.args.gn) used by the build.
+- Installed Chromium's prerequisites inside a separate Debian 13 root.
+  Verified the architecture-independent Linux headers after the installer
+  flagged the i386 alias. Initialized the pinned depot_tools wrappers.
+  GN 2595 verified all arguments and generated 66,382 targets from 4,759
+  files. The PGO-enabled hooks fetched both Android AFDO profiles and the
+  Android ARM32 profile data. Their hashes are in the
+  [rebuild receipt](../manifests/webview-r2-rebuild.json).
+- Confirmed Siso entered offline compilation for the ARM32 WebView APK.
+  Matched an FFmpeg error message in the shipped ARM ELF to the pinned
+  `libavutil/error.c` source and its compile rule. Checked that a one-line
+  diagnostic patch applies to that revision. The diagnostic build is
+  pending the baseline APK and will compare the two ELF payloads. The
+  staged ROM still uses the pinned r2 prebuilt.
