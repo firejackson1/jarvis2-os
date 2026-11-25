@@ -142,5 +142,26 @@
     "writer_tools_source_archive_sha256": "ed67b90fe0b8f1b9d8cc6a36793b2c12a84420615b5b24309794a980e91c8cd7",
     "native_handoff_reproduced_from_extracted_source": true,
     "hosted_download_verified": false
+  },
+  "private_delivery_r2": {
+    "private_candidate_zip": {
+      "file": "jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate-neutral-artwork-r2.zip",
+      "sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+      "bytes": 547469604
+    },
+    "only_changed_payload_member": "docs/KNOWN_ISSUES.md",
+    "unchanged_payload_members": 20,
+    "coverage_manifest_sha256": "c85bd69182e1f379fd51bcbc1e894bb3c9fa2c9cc772016187c24d4b9112da92",
+    "preflight_sha256": "541a3c68fe0d2b5f08d3a108b2fd3cc58705aace94e8cde7f35fe4364185d426",
+    "lcars_source": {
+      "file": "jarvis2-lcars-recovery-708e088-source.tar.gz",
+      "bytes": 149894,
+      "sha256": "30f49da959164d7777610a30394449735b3b4518d7add46b0b9061a0fe456397"
+    },
+    "payloads": 11,
+    "files_verified": 13,
+    "total_bytes": 1034007898,
+    "receipt_sha256": "32fb9a2d94c4de28c733c2d992de49830542e38efee1b40b478bc34d04385c3c",
+    "hosted_download_verified": false
   }
 }

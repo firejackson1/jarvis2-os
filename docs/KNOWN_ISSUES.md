@@ -1,52 +1,55 @@
-# Developer preview validation limits
+# Jarvis2 developer preview contents and validation
 
-No public binary preview is available yet. This is the release-preparation
-matrix, not a promise that every listed feature will work after a clean install.
-The development device has existing data and separately installed Google apps.
+The current neutral developer-preview candidate targets the unlocked 2026 onn
+4K Pro Jarvis2, US stock build 15640252. Android 14 userspace is ARM32 on a
+64-bit stock kernel. The binary candidate remains private while installation,
+recovery, rollback and distribution checks are pending.
 
-| Area | Evidence | Still required |
-|---|---|---|
-| Model/architecture | 2026 onn 4K Pro jarvis2; ARM32 Android 14 on stock ARM64 kernel | Other models and 64-bit Android are unsupported |
-| Home and remote | Owner verified home, focus and Select on a private slot-A build | Fresh pairing/defaults, repeated reboot and alternate-launcher tests |
-| Settings controls | f38 system_ext companion and required grants verified live; enabling its disabled key service restored owner-verified Bluetooth hold and widget double-press after clean setup | First-run activation without ADB/AI, repeated binding/reboot and all custom actions |
-| AirPods | Owner verified removal pause and reinsertion resume | Final-image reconnect, competing sessions and other models |
-| Audio | Private HDMI/Bluetooth and dual-output tests | Receiver-based lossless passthrough proof; multi-headphone support is not established |
-| Bundled Music lifecycle | Offline patch releases the service's owned MediaSession and invokes superclass cleanup; callback regression passes | Future-image integration, live service/browser reconnect and playback; this is not a demonstrated suspend fix |
-| Sleep | Matched-driver traces show unwanted speaker unmute during repeated suspend/resume; temporary mixer mute suppressed it across five cycles and was restored | Audible verification, correct amplifier lifetime, genuine suspend/wake fix and repeated hardware cycles; see [investigation](SLEEP_AUDIO_INVESTIGATION.md) |
-| Networking/USB | Development connections worked; USB detection has been intermittent | Final-image Wi-Fi/Ethernet reconnect, USB host/device and hub matrix |
-| Google apps | Play sign-in worked; VLC and YouTube TV installed after landscape feature correction | Separate supported installation route for EROFS; no certification or app-catalog guarantee |
-| Smart Home | Provider configuration/shortcuts and a brief built-in microphone test | Actual assistant conversation and independent remote microphone validation |
-| Release signing | Encrypted key backup verified; exact corrected `f38da52` package/APEX, system OTA certificate, filesystem and complete stock-template AVB checks passed | Hardware acceptance, stock recovery trust and migration tests |
-| Installation/recovery | Native read-only seven-target dry-run passed for corrected f38; existing recovery helper and Android A roundtrip passed | Replacement stock recovery transport, actual installation/restore and clean setup |
+## Included in the candidate
 
-Slot B is not a proven fallback. Current captured logical partitions for B have
-no allocated foundation; earlier stock-fastboot operations modified shared LP
-metadata. Do not assume a partition suffix isolates the other slot, and do not
-restore old snapshot/COW metadata blindly. User data is shared between slots.
-See [slot installation](SLOT_INSTALLATION.md) and [restore evidence](RESTORE_PLAN.md).
+| Area | Offline-verified content | Hardware work still required |
+| --- | --- | --- |
+| Remote and widgets | Jarvis2 Controls 1.1 includes the button editor, Settings shortcuts and the left widget panel. TV Settings includes the onn Back + Home pairing instructions and the native AirPods entry. | Enable **Jarvis2 Remote Settings** in Android Accessibility to use the shortcuts. Verify onboarding without ADB, reconnects and the Xbox layout on a clean install. |
+| Bluetooth and audio | Bluetooth panel, AirPods removal pause and reinsertion resume, AACP fallback, output selection, HDMI plus Bluetooth routing, automatic delay estimates and manual per-device adjustment. Four stock-compatible audio policy libraries are present. | Recheck output selection, AirPods reconnects and the dual-output delay. Multi-headphone support and lossless HDMI passthrough are unverified. |
+| TV interface and launcher | TV SystemUI, TV Settings controls overlay, TV feature declarations, a default lock-screen disable property, native remote keylayouts and the bundled LTvLauncher. | Verify the lock screen, notifications, default Home and launcher switching after setup. FLauncher and Bridge Console TV were optional development-device installs. |
+| Smart Home | Provider setup and shortcuts in TV Settings. A separate development-device test recorded briefly from the built-in microphone. | Verify a real provider conversation and remote microphone capture. Matter commissioning, Thread routing and voice satellite operation remain open. |
+| USB and ADB | Authenticated USB defaults and a source patch for explicit network-listener port handling. | Verify host/device switching, hub behavior and reconnects. Network ADB is opt-in. |
+| Music and boot artwork | Music releases its media session on destruction. The neutral preview has the original four-dot animation with interruptible playback. | Test Android service teardown and measure boot timing on the packaged preview. |
+| LCARS Recovery | ARM32 UI extension, source and notices. Local reconstruction preserves the stock Fastbootd and boot-control services and verifies the signed binding of the Recovery image. | Verify the installed UI, USB ADB, Fastbootd, return to Android and physical restoration. The five-option Linux menu was tested separately in RAM. |
 
-Production-key preserved-data upgrades from development-key builds are not
-supported. See [release signing](RELEASE_SIGNING.md). No document here authorizes
-a wipe or installation on the owner's development device.
+## Development changes still outside this candidate
 
-After a clean reset, remote side-panel shortcuts require the **Jarvis2 Remote
-Settings** accessibility service to be enabled. The app can already be present
-in the ROM while this service is off; reinstalling the ROM is not the remedy.
-Enable its service in Android Accessibility settings. This normal-user setup
-route still needs a recorded navigation test and clearer onboarding before
-public release. See [the integration ledger](PERSISTENT_FEATURES.md).
+- The speaker-click investigation and temporary keep-awake workaround are
+  recorded. A production suspend/wake fix is still open.
+- The native Power and Assistant/Mic remaps need a framework fallback before
+  enabling them by default. The shipped keylayouts retain native behavior.
+- The RAM Recovery build has booted Linux from the SanDisk. Installed Recovery
+  USB boot, Recovery Bluetooth input and standalone power-on USB boot remain open.
+- The experimental TrueHD/DTS HAL changes still need redistribution and
+  receiver-based validation. The signed preview includes the four audio
+  policy libraries listed above.
+- Google apps are a separate local composition. The vanilla ZIP ships without
+  them and makes no Play certification or catalog guarantee. The branded boot
+  animation remains in a private variant. Personal apps and settings require
+  their own installation or setup.
 
-For reproducible bugs, open an issue in this project's repository using the
-Developer preview bug template. Report the exact build, firmware base, steps and
-redacted evidence. This unofficial project is independent of LineageOS and does
-not provide LineageOS official support. Hardware or fresh-install results not
-recorded above remain unverified.
+The [patch and feature ledger](https://github.com/firejackson1/jarvis2-os/blob/main/docs/PERSISTENT_FEATURES.md)
+links the source patch checks and image readback. Use the ZIP manifest and
+release receipt to identify the exact build.
 
+## Installation and recovery limits
 
-The corrected candidate uses stock init_boot/vendor_boot. Offline inspection of
-its stock recovery shows `ro.secure=1`, `ro.adb.secure=1`, `ro.debuggable=0`;
-the tested development recovery uses the opposite values and a different adbd
-SELinux launch label. Its adbd binary matches stock, but those configuration
-differences mean the successful development-recovery root shell does not qualify
-a root restoration shell in the replacement recovery. Stock recovery runtime
-transport and the before-recovery failure path still require verification.
+The ZIP is a raw-image package for offline validation. The LCARS image must be
+reconstructed locally from the matching stock OTA. Signer continuity and a
+file-backed install/rollback rehearsal passed. Key acceptance and restoration on
+physical hardware still need verification for this exact payload.
+
+The saved slot A layout fit all seven target and restore images. A saved slot B
+view had no allocated logical foundation, so it cannot serve as a verified
+fallback. Both slots share userdata and logical partition metadata. A read-only
+live layout and snapshot check is required before qualifying a write plan.
+Production-key upgrades from development-key builds are unsupported.
+
+Report bugs in the [Jarvis2 project](https://github.com/firejackson1/jarvis2-os/issues)
+with the build, firmware base, steps and redacted logs. This unofficial project
+is independent of LineageOS and uses its own support channel.

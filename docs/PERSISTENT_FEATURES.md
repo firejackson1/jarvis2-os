@@ -36,6 +36,14 @@ certificate in the archive and final system image. The receipt also pins the
 separately built LCARS plug-in, notices, derived `vendor_boot` and AVB chain.
 Clean-install, recovery transport, rollback and artifact review remain open.
 
+The [neutral r2 release inventory](../manifests/neutral-r2-release-coverage.json)
+records the exact eight patch files and their six source series, all 21 tracked
+files read from the ROM ZIP, and the independent LCARS source pin. The staged
+product source archive matches all 200 files in the build commit. The r2 ZIP
+updates the embedded [Known Issues page](KNOWN_ISSUES.md) and preserves all five
+images, the LCARS plug-in and its notices byte for byte. The inventory
+accompanies the private download set.
+
 | Change | Current delivery status |
 | --- | --- |
 | LCARS Recovery | Stock-compatible ARM32 plug-in bound to the current production-key AVB chain; on-device menu, USB ADB, Fastbootd and restoration qualification pending |

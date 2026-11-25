@@ -50,6 +50,9 @@ publication by this policy decision alone.
 - [ ] Consolidate device-tree/product configuration and persistent fixes in source.
 - [x] Run [the full patch check](BUILD.md#verify-source-patches-without-modifying-the-android-tree) on the current release build checkout. Eight patches across six series and twelve files passed. Keep the report pin in the [candidate receipt](../manifests/current-cb9334-inclusion.json).
 - [x] Match the [release inclusion ledger](PERSISTENT_FEATURES.md#release-candidate-inclusion) to the current signed archive and final images. Record the separately pinned Recovery build and AVB binding.
+- [x] Recheck every shipped patch and the 21 tracked payload files from the
+  staged neutral ZIP, add the matching LCARS source archive and correct the
+  embedded release notes. See the [r2 coverage inventory](../manifests/neutral-r2-release-coverage.json).
 - [x] Check the 1,430 upstream project pins, the twelve modified source files
   and the exact local build inputs. Record the
   [current reproduction procedure](CURRENT_REPRODUCTION.md).

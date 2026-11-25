@@ -1,0 +1,205 @@
+{
+  "product_source_revision": "cb9334ee26ccd80d9f5e5d9276905440b93eaeba",
+  "product_source_files_verified": 200,
+  "product_source_archive": {
+    "file": "jarvis2-os-cb9334e-source.tar.gz",
+    "bytes": 404371,
+    "sha256": "90b105cf6cd42e942ee2c6f07480c92c09953f242182ff20abe8b54d2032908d"
+  },
+  "source_patch_verification_sha256": "a26cb736826c379589538a3156aa8b122a1511f8fd8cbcb99df6284556a39da2",
+  "source_patch_series_verified": {
+    "Adb": {
+      "revision": "8f1f33d623ca6cffd6c415b43b317fd274660601",
+      "patches": [
+        "0001-explicit-port-disables-android-network-fallback.patch"
+      ],
+      "files_checked": 4,
+      "mismatches": []
+    },
+    "Bluetooth": {
+      "revision": "68c10e675632ac57b1d4d807c38dbd470b73e49e",
+      "patches": [
+        "0001-aacp-basic-mode-fallback.patch"
+      ],
+      "files_checked": 1,
+      "mismatches": []
+    },
+    "Music": {
+      "revision": "c119d5a52f80289c7f939746ddc31c8bcee2a3ca",
+      "patches": [
+        "0001-release-media-session-on-destroy.patch"
+      ],
+      "files_checked": 1,
+      "mismatches": []
+    },
+    "ReleaseTools": {
+      "revision": "bc95152efc6a43f3b103b1848c946e9bf8d4e493",
+      "patches": [
+        "0001-python3-ota-key-replacement.patch"
+      ],
+      "files_checked": 1,
+      "mismatches": []
+    },
+    "SetupWizard": {
+      "revision": "e58f07efee4ba3d69d6b4922d5bbf4707da6e033",
+      "patches": [
+        "0001-request-bluetooth-connect-permission.patch"
+      ],
+      "files_checked": 1,
+      "mismatches": []
+    },
+    "TvSettings": {
+      "revision": "26fd224082c96fa32e0bfe60b288093c6e7522f3",
+      "patches": [
+        "0001-jarvis2-pairing-instructions.patch",
+        "0002-jarvis2-airpods-shortcut.patch",
+        "0003-tv-settings-replaces-handheld.patch"
+      ],
+      "files_checked": 4,
+      "mismatches": []
+    }
+  },
+  "candidate_zip": {
+    "file": "jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate-neutral-artwork-r2.zip",
+    "sha256": "8a306545618e42859c89b241f9dde7c65a3f186c7da3bd54a018f97f9677c5b9",
+    "bytes": 547469604
+  },
+  "candidate_zip_members_verified": 22,
+  "matched_target_files_filesystems": {
+    "target_files_sha256": "c557f82ef1e82434e41c0f489294ae5c92080cf4161b80853ba6332f24f90214",
+    "filesystems": {
+      "system.img": {
+        "member": "IMAGES/system.img",
+        "filesystem_bytes": 440803328,
+        "filesystem_sha256": "ca2d72aaf1a8ed62c4a2bb7d1dba4ae4e90a5a6510e8923e74b708b091a5535c"
+      },
+      "system_ext.img": {
+        "member": "IMAGES/system_ext.img",
+        "filesystem_bytes": 62009344,
+        "filesystem_sha256": "5524d2cba9458fb47508add2e5575bc02bdb6ca209a428d9b4b8279749066d6b"
+      },
+      "product.img": {
+        "member": "IMAGES/product.img",
+        "filesystem_bytes": 109953024,
+        "filesystem_sha256": "4f6207859dde0a11ee22082c8697a9a92a748a4ecab90ae18b3baf3f1c6d6b1f"
+      }
+    }
+  },
+  "verified_feature_members": {
+    "PRODUCT/app/Jarvis2LtvLauncher/Jarvis2LtvLauncher.apk": {
+      "sha256": "ac585d5a0bb3c13c2ea346d052d1fa5140a6bb35bbe90a20002f776f92c03347",
+      "bytes": 10024443
+    },
+    "PRODUCT/app/Music/Music.apk": {
+      "sha256": "4daa60710f0556d46a4f326ccfea7b78a131267a21b61a25de3d92d47d8d2cc7",
+      "bytes": 792406
+    },
+    "PRODUCT/app/Music/oat/arm/Music.odex": {
+      "sha256": "b24160ab9d1a1b304a04a834992e7dbb2e86eab0676680dbeafab3d5c30557a5",
+      "bytes": 17056
+    },
+    "PRODUCT/app/Music/oat/arm/Music.vdex": {
+      "sha256": "b248824433e5c6c925bb4f5aeb89cf752c081f78b25d48113944828138606028",
+      "bytes": 456
+    },
+    "PRODUCT/media/bootanimation.zip": {
+      "bytes": 695585,
+      "sha256": "ea74502097a5e61134f25e92ac313f2154f80aea4972bae5cec1d4252bb2b375"
+    },
+    "PRODUCT/usr/keylayout/Vendor_0957_Product_0031.kl": {
+      "sha256": "31642edb5566766b0685e34e6cc14e243316ffeb76d6db840ca039dbcbd70d08",
+      "bytes": 852
+    },
+    "SYSTEM/apex/com.android.adbd.capex": {
+      "sha256": "20e2ebb5fc53511be5f41f68c0bb851c73a642c0bcbe3bb86cce26443d6467fc",
+      "bytes": 2503209
+    },
+    "SYSTEM/apex/com.android.btservices.apex": {
+      "sha256": "bf45bc6064eac46d3b6c4ed81363caa565322a34ea778b3190fbce19f097110b",
+      "bytes": 18628608
+    },
+    "SYSTEM/etc/permissions/android.software.leanback.xml": {
+      "sha256": "304d11ff8dd07f49f613db8e7b3e728e556eaad59b8c4dbd5f70d099752d4605",
+      "bytes": 357
+    },
+    "SYSTEM/etc/security/otacerts.zip": {
+      "sha256": "82b806e48fe1f91679712147eaa5d05604eab48e9c8b464ba27b32da18b34797",
+      "bytes": 2051
+    },
+    "SYSTEM/lib/libaudiopolicyengineconfigurable.so": {
+      "sha256": "e92d1deae20e96605c7ad4f7f2027b9972859fe6e6ab56d63409c6ce8396b96b",
+      "bytes": 210456
+    },
+    "SYSTEM/lib/libparameter.so": {
+      "sha256": "7e344c31606e1b2684964775f708ae44f35ef06c88bcf1c8e381715e382f5c1a",
+      "bytes": 518412
+    },
+    "SYSTEM/lib/libpolicy-subsystem.so": {
+      "sha256": "8517d49cae77c81c5bd69ececf490448129ebddcdd259fba4b594820db06ccd2",
+      "bytes": 20980
+    },
+    "SYSTEM/lib/libremote-processor.so": {
+      "sha256": "52bebb1496e8c86b735f90e8ae9eeb3f04215dcd5999f474155cc6dacfa40bba",
+      "bytes": 84232
+    },
+    "SYSTEM/usr/keylayout/Vendor_0957_Product_0031.kl": {
+      "sha256": "0dffe1b7134eae27a61daf41a379c70577ab154dbac39738595d8d42b11ca264",
+      "bytes": 2130
+    },
+    "SYSTEM_EXT/etc/permissions/privapp-permissions-jarvis2-remote.xml": {
+      "sha256": "3edf1d3754e2a0dd64428f0f190e21549d8af2bd921e5b1a5a2e990719ae3cac",
+      "bytes": 319
+    },
+    "SYSTEM_EXT/overlay/Jarvis2TvControlsOverlay.apk": {
+      "sha256": "041ebab5c9e4f8aebf8aba23716671764e992344882cc3866d73b4c89485a36c",
+      "bytes": 25277
+    },
+    "SYSTEM_EXT/priv-app/Jarvis2RemoteSettings/Jarvis2RemoteSettings.apk": {
+      "sha256": "bf1095343e624ca9d363b360b9e24b8dbfbc1ba8fdf24224e356a820b91c50ec",
+      "bytes": 160220
+    },
+    "SYSTEM_EXT/priv-app/LineageSetupWizard/LineageSetupWizard.apk": {
+      "sha256": "58bc26cec1b8e65ac460a9c63421a7679aab5246dd504c41fd2ffa273f3d12d7",
+      "bytes": 10817184
+    },
+    "SYSTEM_EXT/priv-app/TvSettingsTwoPanel/TvSettingsTwoPanel.apk": {
+      "sha256": "4e264cc9d09882df995177da98608b3002fdccfd90b3823eae04991c287bc5af",
+      "bytes": 23572321
+    },
+    "SYSTEM_EXT/priv-app/TvSystemUI/TvSystemUI.apk": {
+      "sha256": "3e43e56916482f2483842b6d7392a2b68a9ef4d1c487294bd9c2bea3f98a2e72",
+      "bytes": 21570787
+    }
+  },
+  "recovery": {
+    "source_revision": "708e088ed57eb83805753d9213717965a3c61e2c",
+    "plugin_sha256": "8d14f4ea2d191fce4424eab196690dc646080f82484d107bd89f77e340ca3f3c",
+    "stock_vendor_boot_sha256": "c017791c8e52678595a03b902237dcb15a4e8adeb3d35fdb2232838750e4233a",
+    "vendor_boot_sha256": "c9cc31121ee165b5cc45adc85af500589d34cf9cbb4a7b6bed499e3212c7d65e",
+    "notices_sha256": "5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30",
+    "plugin_member": "recovery/librecovery_ui_ext.so"
+  },
+  "recovery_source_files_verified": 69,
+  "recovery_source_archive": {
+    "file": "jarvis2-lcars-recovery-708e088-source.tar.gz",
+    "bytes": 149894,
+    "sha256": "30f49da959164d7777610a30394449735b3b4518d7add46b0b9061a0fe456397"
+  },
+  "hardware_verified": false,
+  "metadata_refresh": {
+    "prior_candidate": {
+      "file": "jarvis2-lineage-21-UNOFFICIAL-cb9334e-lcars-offline-candidate-neutral-artwork.zip",
+      "bytes": 547469660,
+      "sha256": "3036f17977addb79a554babb2ec1e8ae8cd79de79d6e4deaa1476732e153fa54"
+    },
+    "only_changed_payload_member": "docs/KNOWN_ISSUES.md",
+    "only_changed_payload_member_record": {
+      "bytes": 4808,
+      "sha256": "fb30d88ba22d449744dad04f5dc59d01a73184dc22967555e695f49e74c74bad"
+    },
+    "unchanged_payload_members": 20,
+    "all_preflight_image_hashes_equal": true,
+    "preflight_sha256": "541a3c68fe0d2b5f08d3a108b2fd3cc58705aace94e8cde7f35fe4364185d426",
+    "verified_avb_bindings": 13
+  }
+}

@@ -230,3 +230,18 @@ from `c24806ba89a351e052c92f75fe7b9eb68c523918`. An extracted copy of this
 archive reproduced the two writer proof files and passed its host tests. All
 eleven delivery files matched the refreshed receipt. Its SHA-256 is
 `a9969aeb354d7316b31f6dba53859ea292e745f5520c5600bc587999a648d0ad`.
+
+The current **neutral r2** staging set includes the corrected Known Issues page,
+the [patch and image coverage inventory](../manifests/neutral-r2-release-coverage.json)
+and `jarvis2-lcars-recovery-708e088-source.tar.gz`. The r2 archive changes only
+the Known Issues payload and its manifest entry. All five images, the LCARS
+plug-in and notices match the previous neutral archive. New verification also
+reconstructed the same seven install inputs from the stock OTA and validated
+all 13 AVB bindings and the saved slot A fit.
+
+Use the r2 ZIP and preflight hashes from the
+[neutral receipt](../manifests/current-neutral-artwork.json). The earlier ZIP
+and its archive-bound writer proofs identify the earlier archive hash. The
+r2 download set has 13 files including its private receipt and checksum list.
+The trusted receipt SHA-256 is
+`32fb9a2d94c4de28c733c2d992de49830542e38efee1b40b478bc34d04385c3c`.

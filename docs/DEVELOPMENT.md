@@ -1507,3 +1507,30 @@ without private scripts, server access or an AI operator.
   companion's tests and repeated the exact native handoff with identical proof
   files. Verified the refreshed private neutral delivery set with nine
   payloads and two metadata files.
+
+### Neutral r2 release coverage — 2026-11-25
+
+- Replayed eight source patches against the exact six-project build view.
+  Twelve modified source files matched, and the output hash matches the
+  original build receipt. Compared all 200 shipped product source files and
+  their executable modes with the pinned Git revision.
+- Read all 22 staged ZIP members. Extracted its three EROFS filesystems, bound
+  their complete filesystem bytes to the derived target-files archive, and
+  matched all 21 tracked payload files. The embedded Known Issues page still
+  described the older stock Recovery trial, so r2 updates that page and its
+  manifest record. All 20 other payload members matched the prior ZIP.
+- Repeated the complete r2 LCARS preflight using the matching stock OTA.
+  All 13 AVB bindings and seven prepared images matched, including the
+  reconstructed LCARS image. Native checks matched the saved A fit and seven
+  restore inputs. The r2 ZIP has a new hash, so archive-bound writer reviews
+  must reference the r2 preflight explicitly.
+- Staged all 69 files from the matching public LCARS source revision in a
+  source archive. Tested an extracted copy with pinned host tools. All 84
+  Python tests and the Recovery C++ host checks passed. The ROM project
+  passed 209 Python checks with AVB fixtures and eight Java suites.
+- Verified the complete 13-file staging set. The
+  [r2 coverage receipt](../manifests/neutral-r2-release-coverage.json)
+  pins the candidate, source coverage, binary readback and Recovery source.
+  The [neutral delivery receipt](../manifests/current-neutral-artwork.json)
+  records the matching private staging hash. Hardware installation, data
+  migration, physical rollback and distribution review remain open.
