@@ -1,0 +1,74 @@
+{
+  "scope": "Offline checks of canonical r2 userspace properties, OTA trust, and Jarvis2 Controls manifest",
+  "image_content_report_sha256": "a5ad38cf059c076212355b5a307b3a981da8731b0701b5514bed34166b265c04",
+  "properties": {
+    "ro.secure": {
+      "partition": "system",
+      "value": "1"
+    },
+    "ro.adb.secure": {
+      "partition": "system",
+      "value": "1"
+    },
+    "ro.debuggable": {
+      "partition": "system",
+      "value": "1"
+    },
+    "ro.lineage.releasetype": {
+      "partition": "system",
+      "value": "UNOFFICIAL"
+    },
+    "ro.build.tags": {
+      "partition": "system",
+      "value": "release-keys"
+    },
+    "ro.control_privapp_permissions": {
+      "partition": "system",
+      "value": "enforce"
+    },
+    "persist.sys.usb.config": {
+      "partition": "system",
+      "value": "mtp,adb"
+    },
+    "service.adb.tcp.port": {
+      "partition": "product",
+      "value": "-1"
+    }
+  },
+  "enabled_persistent_network_or_root_adb_defaults_found": false,
+  "controls_apk_sha256": "bf1095343e624ca9d363b360b9e24b8dbfbc1ba8fdf24224e356a820b91c50ec",
+  "controls_uses_permissions": [
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.BLUETOOTH",
+    "android.permission.BLUETOOTH_ADMIN",
+    "android.permission.BLUETOOTH_PRIVILEGED",
+    "android.permission.INJECT_EVENTS",
+    "android.permission.MANAGE_ROLE_HOLDERS",
+    "android.permission.MEDIA_CONTENT_CONTROL",
+    "android.permission.MODIFY_AUDIO_ROUTING",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.WRITE_SETTINGS"
+  ],
+  "controls_exported_activities": [
+    ".ControllerSettings",
+    ".LauncherSettings",
+    ".Panel",
+    ".RemotePreferences",
+    ".VoiceSettings",
+    ".WidgetPanel"
+  ],
+  "controls_nonexported_activities": [
+    ".ButtonEditor"
+  ],
+  "controls_accessibility_binding_permission": "android.permission.BIND_ACCESSIBILITY_SERVICE",
+  "controls_privileged_allowlist": [
+    "android.permission.BLUETOOTH_PRIVILEGED",
+    "android.permission.MEDIA_CONTENT_CONTROL",
+    "android.permission.MODIFY_AUDIO_ROUTING"
+  ],
+  "controls_record_audio_requested": false,
+  "controls_application_backup_enabled": false,
+  "trusted_ota_certificate_sha256": "121abf966a99cf77d1fc44ff725fb06cbb39d5e12bccd09d0b576566091bfe46",
+  "runtime_adb_and_selinux_tested": false,
+  "device_contacted": false
+}

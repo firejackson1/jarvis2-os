@@ -1745,3 +1745,18 @@ without private scripts, server access or an AI operator.
 - The updated [neutral build guide](CURRENT_REPRODUCTION.md) describes the
   public manifest and staging process. The [preflight receipt](../manifests/neutral-r2-builder-preflight.json)
   pins the evidence. This run did not compile a full ROM or contact hardware.
+
+### Neutral r2 static security defaults — 2026-11-25
+
+- Verified eight canonical userspace properties from r2, including secure USB
+  ADB, default TCP port `-1`, and privilege-allowlist enforcement. Checked
+  the single project OTA certificate and the absence of persistent network
+  and root ADB overrides in those property files.
+- Inspected the exact Controls APK with the pinned SDK aapt2. Requested
+  permissions and activity exports matched source. The accessibility service
+  requires the binding permission, the button editor is private, backup is
+  disabled, and the package does not request microphone access. Verified the
+  three allowlist grants in the extracted system extension.
+- The [static receipt](../manifests/neutral-r2-static-security.json) binds
+  these checks to the earlier exact r2 image readback. Fresh-boot behavior,
+  SELinux enforcement and user activation remain device tests.

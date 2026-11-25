@@ -44,6 +44,23 @@ A successful target-files signing run is not a configured OTA. The existing
 captured archive lacks META/ab_partitions.txt and is not an A/B OTA installer.
 See [SLOT_INSTALLATION.md](SLOT_INSTALLATION.md) for current installation limits.
 
+## Neutral r2 security defaults
+
+The [static security receipt](../manifests/neutral-r2-static-security.json)
+records eight properties read directly from the r2 filesystems. The package
+uses the `userdebug` build, authenticated USB ADB, and a default TCP listener
+port of `-1`. The canonical userspace property files have no persistent
+network ADB port, TLS server enable, or root ADB override. The system OTA
+trust archive contains the single expected project public certificate.
+
+The compiled Controls manifest matches the pinned source permissions and
+activity exports. The accessibility service requires Android's binding
+permission, backup is disabled, the private button editor is unexported,
+and Controls does not request microphone access. The system extension has
+the exact three package-specific privileged allowlist entries. Fresh-boot
+USB authorization, network and root debugging behavior, and SELinux mode
+still require runtime checks on this candidate.
+
 ## Existing-data migration
 
 A build signed with unrelated release keys is not a supported dirty upgrade from
