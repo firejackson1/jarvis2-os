@@ -2292,3 +2292,14 @@ without private scripts, server access or an AI operator.
   names and order in the Ninja graph and the exact compiled object bytes.
   Recorded archive digests in the native preflight manifest. The final
   linked engine and compiler-discovered headers still need verification.
+
+- Scoped actual Ninja compiler dependency records to 3,124 Android ARMv7
+  link and archive objects. The first 2,649 compiled records cover 6,299
+  tracked paths across 21 staged source archives and five generated paths.
+  All scoped assembly, C and C++ rules declare GCC-style dependency files.
+- Replayed the ARMv7 toolchain link without Flutter objects or project
+  archives. The exact compiler, linker, NDK revision and two package
+  instances were checked. The LLD replay archive contained eight NDK
+  shared libraries, two startup files, one builtins archive and the pinned
+  Flutter export script. All input digests matched and the scratch ELF
+  reproduced byte for byte. Complete link and dependency audits are pending.

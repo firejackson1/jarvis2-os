@@ -338,6 +338,8 @@ publication by this policy decision alone.
   and match the exact build output.
 - [x] Verify the staged ICU data against the reference engine ELF and
   reproduce its generated assembly and ARM object.
+- [x] Verify the pinned Flutter ARMv7 linker/NDK inputs and reproduce the
+  scratch link from its captured files. The complete engine link is separate.
 - [ ] Verify the Flutter native ARMv7 link inputs and compare the rebuilt
   library with the pinned release ELF. Complete any missing source delivery.
 - [x] Verify production-key package/APEX signing in the private rehearsal with

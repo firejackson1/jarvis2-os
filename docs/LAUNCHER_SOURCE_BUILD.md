@@ -398,6 +398,21 @@ by the matching 32-bit size. Replaying Dart's assembly generator matched
 the live build's source. Compiling that source in a scratch directory
 with the original flags produced an ARM object whose read-only section
 contains the same blob and size. The main build's final ELF remains pending.
+
+The pinned Clang driver invoked its bundled LLD. A scratch link using
+the release flags resolved two Android API 21 startup objects, eight
+NDK shared libraries and one compiler builtins archive. LLD's reproduction
+archive contains those eleven files and the pinned Flutter export script.
+All twelve digests matched their source files. Running LLD with only the
+archive contents reproduced the exact scratch ELF32 ARM output. The probe
+covers toolchain resolution. The complete Flutter engine link is pending.
+
+Ninja records compiler dependencies for all 3,124 scoped link and archive
+objects. The first 2,649 records matched the compiled object timestamps
+and named 6,299 tracked paths from 21 staged Git projects and five generated
+inputs. These `-MMD` records omit compiler-designated system headers. The
+toolchain and NDK are pinned separately, and the complete dependency
+readback is pending.
 [Generated link graph receipt](../manifests/launcher-flutter-native-preflight.json)
 
 ## Unsigned ARMv7 release and recipient signing

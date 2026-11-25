@@ -931,5 +931,129 @@
       "complete_archive_readback": true,
       "host_report_sha256": "48b536cbb3807abdfcc6eeb66899ea9cc4fa867a52c92630a17cca79a7dd8648"
     }
+  },
+  "linker_toolchain_probe": {
+    "scope": "Linker probe with exact ARMv7 release flags and toolchain arguments, without Flutter objects or project archives",
+    "target": "arm-linux-androideabi21",
+    "toolchain_cipd_pins": {
+      "src/flutter/buildtools/linux-x64/clang": {
+        "path": "src/flutter/buildtools/linux-x64/clang",
+        "package": "fuchsia/third_party/clang/linux-amd64",
+        "version": "git_revision:725656bdd885483c39f482a01ea25d67acf39c46",
+        "instance_id": "0W11iNLWzzp3mqEU00vxEjMJEjtSHkHf1l8UW0oRfV4C"
+      },
+      "src/flutter/third_party/android_tools": {
+        "path": "src/flutter/third_party/android_tools",
+        "package": "flutter/android/sdk/all/linux-amd64",
+        "version": "version:34v7",
+        "instance_id": "8_-Wq6iXtvhrfPDaRCnr1N9Co80rbbRY23E1Nc0FVjkC"
+      }
+    },
+    "resolved_clang": {
+      "src/flutter/buildtools/linux-x64/clang/bin/llvm": {
+        "bytes": 168411432,
+        "sha256": "1b4781e5ba1e4d0f7736489351e4370d5b340ca868320205872c1d3a5cc50ba7"
+      }
+    },
+    "linker_invocation": "src/flutter/buildtools/linux-x64/clang/bin/ld.lld",
+    "resolved_linker": {
+      "src/flutter/buildtools/linux-x64/clang/bin/llvm": {
+        "bytes": 168411432,
+        "sha256": "1b4781e5ba1e4d0f7736489351e4370d5b340ca868320205872c1d3a5cc50ba7"
+      }
+    },
+    "ndk_revision": "26.1.10909125",
+    "resolved_arguments_in_order": [
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtbegin_so.o",
+        "bytes": 2340,
+        "sha256": "9e4dbdf2938e2fcf4b2f0e46ecb2e633a7730d26ecb93350235a0e4ee6fdd021"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libc.so",
+        "bytes": 194484,
+        "sha256": "54a92310d5afc2ee422d1d566239f32b56fcc54b97157a53bd6efbecbb1872dc"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libdl.so",
+        "bytes": 4132,
+        "sha256": "c5f6564cd3084eaa1a477db2a259c26e9cb22894b2d1ace30d8f6c51153fcec1"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libm.so",
+        "bytes": 37288,
+        "sha256": "96b888cbdcb5d75f9dff59e1afdf2b8c3f7dc9d4e0b9637540f3c574a3e06159"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-arm-android.a",
+        "bytes": 224244,
+        "sha256": "986668a71d7e898e34f06df058fa7cd3611f14cb3379dca7aa3cd478644e73b0"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libandroid.so",
+        "bytes": 39628,
+        "sha256": "baca3092e0e702204d2cee2b383334fe50ad2dd9f00239ca865fbe6953d244e2"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libEGL.so",
+        "bytes": 11288,
+        "sha256": "a57eea9caa4942b4e72cec6583b888acc142d8109197a327017ce5747a73a1c4"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libGLESv2.so",
+        "bytes": 40572,
+        "sha256": "86271f6da6fa5852c10cee1a361764d463e06fa575735491a5d0f59c0790c85a"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so",
+        "bytes": 4224,
+        "sha256": "e36536bd3e2681a5cc7409d964c5f8148cdb5fb7336003feb2e9ee5dc6d3f643"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libjnigraphics.so",
+        "bytes": 5640,
+        "sha256": "8826db1a572775daf5fb5c7c0f046fb7e3aa8301dcdac37cca7578560a71599a"
+      },
+      {
+        "path": "src/flutter/third_party/android_tools/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/crtend_so.o",
+        "bytes": 480,
+        "sha256": "d161f2951569046a09fb534f80f7c532d583aab9228b5c9d2ccf6f8c8fd27ec3"
+      }
+    ],
+    "version_script": {
+      "path": "shell/platform/android/android_exports.lst",
+      "git_revision": "a18df97ca57a249df5d8d68cd0820600223ce262",
+      "bytes": 396,
+      "sha256": "b617a868c57d6a740ab1285bb506cc7568a99f2fc180b8f60a48ff5bf1754521"
+    },
+    "probe_elf32_arm": true,
+    "probe_bytes": {
+      "bytes": 3400,
+      "sha256": "9d941191b707f53e5c2829a234a0a85c0d14faa44a466e57fc8b1412f254632b"
+    },
+    "actual_flutter_link_verified_by_probe": false,
+    "installed_cipd_instances_verified": true,
+    "replayed_probe_matches_bytes": true,
+    "replay_verified_input_count": 12,
+    "probe_report_sha256": "ad05e24ae7df8fccb6e8c03ab1bbf7d990f0878a112d719cdd2f91dce17de1fe",
+    "replay_archive_sha256": "181e0aef06ef9562e638e695503d921e1049960ccab6b1fc2cc46034a8f642cd"
+  },
+  "compiler_dependency_snapshot": {
+    "ninja_scope_object_count": 3124,
+    "rules_with_gcc_depfiles": {
+      "asm": 139,
+      "cc": 466,
+      "cxx": 2519
+    },
+    "dependency_flag": "-MMD",
+    "completed_objects_checked": 2649,
+    "unique_recorded_paths": 6304,
+    "tracked_source_paths": 6299,
+    "pinned_git_projects_with_staged_archives": 21,
+    "generated_paths": 5,
+    "unmapped_paths": 0,
+    "full_dependency_readback": false,
+    "host_report_sha256": "350a41f499f67e5ba219b12207acf2fd0b523bc51d6b86e5e309a21ec8fdfe0f",
+    "rule_inventory_sha256": "74d048a11cf9f84a2af260af1813f057a2d2437ce943bf5d1c0d6629369ff69a"
   }
 }
