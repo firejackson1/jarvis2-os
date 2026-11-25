@@ -1198,3 +1198,27 @@ without private scripts, server access or an AI operator.
   The production key was unused and hardware acceptance remains open.
 - The ROM host suite passed its 194 cases with pinned AVB and all eight Java
   suites. Bazzite stayed running. Both release ZIPs are still drafts.
+
+## 2026-11-24 — Portable local Recovery and archive verification
+
+- Recovery source `708e088ed57eb83805753d9213717965a3c61e2c` prepares a
+  four-script, checksum-pinned tool kit. The local materializer takes the
+  user's stock image and the reviewed plug-in. Linux `lz4` 1.10.0 reproduces
+  the same output as the Android checkout's 1.9.4 tool. The complete 64 MiB
+  leaf matched the independently generated AVB rehearsal image. A mismatched
+  output hash produced no staging directory. A new native build from the
+  committed source also reproduced the original plug-in and unsigned image.
+- The packager's LCARS format binds the plug-in, stock input, derived image and
+  recipe revision. Its five-image mode remains available for historical
+  packages. Both private temporary-key rehearsal ZIPs contain 21 members and
+  are 560,063,183 bytes, SHA-256
+  `ad85d522b0e4edfbed2bde16fadb3ce9f40f6b6f55bd879743b752dbdca13384`.
+  The archived plug-in recreated Recovery from local stock. The complete AVB
+  check passed using the extracted ROM images and that reconstructed leaf.
+  The ZIP carries the plug-in and manifest alongside the five ROM images.
+- Recovery host checks passed 84 cases with pinned fixtures and the three
+  native tests. ROM host checks passed 195 cases with pinned AVB and all eight
+  Java suites. CI passed on the Recovery branch. The artifacts use the older
+  private app rehearsal and temporary root key. Fresh production signing,
+  installer qualification, hardware boot and redistribution review remain open.
+  The native ROM source build is still running. Bazzite stayed online.

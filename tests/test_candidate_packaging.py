@@ -63,4 +63,32 @@ class CandidatePackagingTests(unittest.TestCase):
    proof.write_text(data);(meta/'README.txt').write_text(m.candidate_readme('b'*40))
    with self.assertRaises(ValueError):m.package(images,meta,proof,m.digest(proof),REV,root/'out')
 
+ def test_lcars_rehearsal_binds_plugin_and_local_image(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root = Path(temp)
+   images, metadata, proof = self.fixture(root)
+   plugin = metadata / m.RECOVERY_PLUGIN
+   plugin.parent.mkdir()
+   plugin.write_bytes(b'project-owned prototype fixture')
+   recovery = {'source_revision': 'b'*40, 'plugin_sha256': m.digest(plugin),
+               'stock_vendor_boot_sha256': m.STOCK_VENDOR_BOOT, 'vendor_boot_sha256': 'c'*64}
+   reviewed = json.loads(proof.read_text())
+   reviewed.update(recovery=recovery, rehearsal_only=True)
+   proof.write_text(json.dumps(reviewed))
+   (metadata/'README.txt').write_text(m.candidate_readme(REV, recovery, True))
+   receipt = m.package(images, metadata, proof, m.digest(proof), REV, root/'out')
+   self.assertTrue(receipt['rehearsal_only'])
+   self.assertTrue(receipt['archive'].endswith('-lcars-offline-rehearsal.zip'))
+   with zipfile.ZipFile(root/'out'/receipt['archive']) as archive:
+    self.assertEqual(archive.read(m.RECOVERY_PLUGIN), plugin.read_bytes())
+    self.assertNotIn('images/vendor_boot.img', archive.namelist())
+    manifest = json.loads(archive.read('manifest.json'))
+    self.assertEqual(manifest['format'], 2)
+    self.assertEqual(manifest['recovery'], {**recovery, 'plugin_member': m.RECOVERY_PLUGIN})
+    self.assertIn(b'OFFLINE AVB REHEARSAL', archive.read('README.txt'))
+   plugin.write_bytes(b'wrong plugin')
+   with self.assertRaisesRegex(ValueError, 'Recovery plug-in differs'):
+    m.package(images, metadata, proof, m.digest(proof), REV, root/'bad')
+   self.assertFalse((root/'bad').exists())
+
 if __name__=='__main__':unittest.main()

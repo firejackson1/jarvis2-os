@@ -3,6 +3,8 @@
 
 `tools/package-candidate.py` makes a deterministic developer-preview ZIP from
 five independently reviewed vanilla images and a small explicit metadata set.
+It can also carry the project-built LCARS Recovery plug-in and its exact
+local image binding.
 It never signs, rebuilds, flashes, selects slots, installs or runs payload code.
 It has no private-key inputs or Google-containing packaging mode. Python3.11+
 with its standard zlib support is required.
@@ -96,6 +98,25 @@ is created. The tool rejects unknown/missing input files, unexpected directories
 symlinks including ancestor paths, and metadata files larger than8MiB. No source
 correspondence claim is inferred merely from the caller's revision string.
 
+## Include locally assembled LCARS Recovery
+
+For an independently audited LCARS image set, the proof still lists the five
+ROM images in `files`. Its `recovery` object also pins the complete
+`source_revision` of the Recovery recipe, `plugin_sha256`,
+`stock_vendor_boot_sha256` and `vendor_boot_sha256`. The latter is the digest of
+the complete 64 MiB file with the AVB hash footer. Independently verify the
+selected `vbmeta.img` against that derived file and the other images before
+creating the proof. Set `rehearsal_only:true` for a temporary-key rehearsal.
+
+Stage the reviewed plug-in at `recovery/librecovery_ui_ext.so` in the metadata
+directory. Generate the README with
+`candidate_readme(revision, reviewed['recovery'], reviewed.get('rehearsal_only', False))`,
+where `reviewed` is the parsed authenticated proof. The packager checks the
+plug-in's hash and writes the exact Recovery inputs and output hash into
+manifest format 2. The recipient obtains the pinned stock image separately and
+reconstructs `vendor_boot` with the source recipe recorded in the README. The
+packager verifies members and pins. Parent AVB verification is a separate step.
+
 ## Package and check
 
 Keep output fresh, outside the repository/tool checkout and both input trees:
@@ -111,9 +132,10 @@ python3 tools/package-candidate.py \
 ```
 
 A successful output has the ZIP, its generated `manifest.json`, and a separate
-`verification.json` receipt. The ZIP has exactly20 entries: five images,
-14 supplied metadata files, and its manifest. That manifest binds the proof pin
-and actual member hashes/sizes. Existing outputs are never overwritten.
+`verification.json` receipt. The base ZIP has 20 entries. The LCARS variant adds
+one member for the plug-in. The manifest binds the proof pin and actual member
+hashes and sizes. Rehearsal archives use the `offline-rehearsal.zip` suffix and
+an explicit label in the README and manifest. Existing outputs are never overwritten.
 
 ZIP entry names are sorted, timestamps fixed at2026-11-24T00:00:00, Unix modes
 0644, compression DEFLATE level6 and writes streamed with ZIP64 support. All

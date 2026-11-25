@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Package an authenticated vanilla five-image developer preview, offline only.
+"""Package an authenticated vanilla developer preview, offline only.
 
 Caller authenticates the image proof, source revision and metadata independently.
 This tool checks bytes and packaging, not AVB, Google absence, signatures, source
@@ -12,6 +12,8 @@ import argparse,hashlib,json,os,re,stat,sys,zipfile
 from pathlib import Path
 IMAGE_NAMES=tuple(p+'.img' for p in ['product','system','system_ext','vbmeta','vbmeta_system'])
 METADATA_NAMES=('LICENSE','README.txt',*["docs/"+p+'.md' for p in ['BUILD','KNOWN_ISSUES','LAUNCHER_SOURCE_BUILD','LICENSING','RESTORE_PLAN','SLOT_INSTALLATION','USERSPACE_NOTICES']],*["manifests/"+p for p in ['avb-stock-15640252-profile.json','avb-userspace-property-policy.json','launcher-source-bundle.json','lineage21-pinned.xml','userspace-notices.json']])
+RECOVERY_PLUGIN = 'recovery/librecovery_ui_ext.so'
+STOCK_VENDOR_BOOT = 'c017791c8e52678595a03b902237dcb15a4e8adeb3d35fdb2232838750e4233a'
 ROOT=Path(__file__).resolve().parents[1]
 STAMP=(2026,11,24,0,0,0)
 
@@ -53,15 +55,39 @@ def sha256_value(value):
  if not isinstance(value,str) or not re.fullmatch('[0-9a-f]{64}',value):raise ValueError('Invalid SHA256')
 
 
-def candidate_readme(revision):
+def reviewed_recovery(proof):
+ if 'recovery' not in proof:
+  return None
+ recovery = proof['recovery']
+ hash_fields = ('plugin_sha256', 'stock_vendor_boot_sha256', 'vendor_boot_sha256')
+ if not isinstance(recovery, dict) or set(recovery) != {'source_revision', *hash_fields}:
+  raise ValueError('Expected an exact Recovery source and image binding')
+ revision = recovery['source_revision']
+ if not isinstance(revision, str) or not re.fullmatch('[0-9a-f]{40}', revision):
+  raise ValueError('Expected an exact Recovery source revision')
+ for field in hash_fields:
+  sha256_value(recovery[field])
+ if (recovery['stock_vendor_boot_sha256'] != STOCK_VENDOR_BOOT or
+     recovery['vendor_boot_sha256'] == STOCK_VENDOR_BOOT):
+  raise ValueError('Unknown stock foundation or missing custom Recovery binding')
+ return recovery
+
+
+def candidate_readme(revision, recovery=None, rehearsal_only=False):
+ foundation = ('Five candidate images require the exact separately obtained stock foundation\n'
+               'pinned in manifests. Stock bootstrap differs from custom development recovery.\n')
+ if recovery:
+  foundation = f'''The locally built LCARS vendor_boot must match the hash in the manifest.
+Use the included Recovery plug-in, the pinned recipe and your own stock image.
+Recipe at https://github.com/firejackson1/jarvis2-os/blob/{recovery['source_revision']}/docs/STOCK_LCARS.md
+'''
+ rehearsal = 'OFFLINE AVB REHEARSAL. The temporary trust key is for host testing only.\n' if rehearsal_only else ''
  return f'''Jarvis2 unofficial LineageOS-based developer preview: offline candidate
 Source: {revision}
 
-NOT HARDWARE QUALIFIED. No installer is included. This is not an OTA or a
+{rehearsal}NOT HARDWARE QUALIFIED. No installer is included. This is not an OTA or a
 complete firmware/recovery backup. Do not use a generic ZIP installer.
-Five candidate images require the exact separately obtained stock foundation
-pinned in manifests. Stock bootstrap differs from custom development recovery.
-No Google payload or stock firmware foundation is included. The caller must
+{foundation}No Google payload or stock firmware foundation is included. The caller must
 verify the vanilla input identity and the intended image contents separately.
 Hardware key acceptance, boot, migration, recovery and restore remain unverified.
 Shared userdata is not isolated between slots. No installation is authorized.
@@ -83,19 +109,31 @@ def package(images,metadata,proof,proof_sha256,source_revision,output):
  if proof.stat().st_size>1048576 or digest(proof)!=proof_sha256:raise ValueError('Proof SHA256 pin mismatch or proof too large')
  reviewed=json.loads(proof.read_bytes(),object_pairs_hook=unique_object)
  if not isinstance(reviewed,dict) or reviewed.get('passed') is not True or reviewed.get('google_payload_included',False) is not False or not isinstance(reviewed.get('files'),dict) or set(reviewed['files'])!=set(IMAGE_NAMES):raise ValueError('Expected successful vanilla proof with exactly five image records')
- image_files=inventory(images,IMAGE_NAMES);metadata_files=inventory(metadata,METADATA_NAMES)
+ recovery = reviewed_recovery(reviewed)
+ rehearsal_only = reviewed.get('rehearsal_only', False)
+ if type(rehearsal_only) is not bool:
+  raise ValueError('Rehearsal flag must be a boolean')
+ metadata_names = (*METADATA_NAMES, RECOVERY_PLUGIN) if recovery else METADATA_NAMES
+ image_files=inventory(images,IMAGE_NAMES);metadata_files=inventory(metadata,metadata_names)
  for name,path in image_files.items():
   record=reviewed['files'][name]
   if not isinstance(record,dict) or set(record)!={'bytes','sha256'} or type(record['bytes']) is not int or record['bytes']<=0:raise ValueError('Malformed image proof record')
   sha256_value(record['sha256'])
   if path.stat().st_size!=record['bytes'] or digest(path)!=record['sha256']:raise ValueError('Actual image differs from reviewed proof: '+name)
  if any(p.stat().st_size>8*1024*1024 for p in metadata_files.values()):raise ValueError('Metadata exceeds bounded small-file scope')
- if metadata_files['README.txt'].read_text()!=candidate_readme(source_revision):raise ValueError('README must match canonical developer-preview text and source revision')
+ if recovery and digest(metadata_files[RECOVERY_PLUGIN]) != recovery['plugin_sha256']:
+  raise ValueError('Recovery plug-in differs from reviewed proof')
+ if metadata_files['README.txt'].read_text()!=candidate_readme(source_revision,recovery,rehearsal_only):raise ValueError('README must match canonical developer-preview text and source revision')
  files={**{'images/'+n:p for n,p in image_files.items()},**metadata_files}
  records={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in sorted(files.items())}
  manifest={'format':1,'kind':'unofficial-offline-developer-preview','source_revision':source_revision,'image_proof_sha256':proof_sha256,'hardware_tested':False,'installable_ota':False,'installer_included':False,'google_payload_included':False,'stock_firmware_included':False,'source_correspondence_verified':False,'companion_assets_included':False,'files':records}
+ if recovery:
+  manifest.update(format=2, recovery={**recovery, 'plugin_member': RECOVERY_PLUGIN})
+ if recovery or rehearsal_only:
+  manifest['rehearsal_only'] = rehearsal_only
  manifest_bytes=(json.dumps(manifest,indent=2)+'\n').encode();output.mkdir(mode=0o700)
- archive=output/('jarvis2-lineage-21-UNOFFICIAL-'+source_revision[:7]+'-offline-candidate.zip')
+ suffix = '-offline-rehearsal.zip' if rehearsal_only else '-offline-candidate.zip'
+ archive=output/('jarvis2-lineage-21-UNOFFICIAL-'+source_revision[:7]+('-lcars' if recovery else '')+suffix)
  with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
   for name in sorted([*files,'manifest.json']):
    info=zipfile.ZipInfo(name,date_time=STAMP);info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;info.create_system=3
@@ -116,6 +154,8 @@ def package(images,metadata,proof,proof_sha256,source_revision,output):
   if path.stat().st_size!=records[name]['bytes'] or digest(regular(path))!=records[name]['sha256']:raise ValueError('Input changed during packaging')
  if digest(regular(proof))!=proof_sha256:raise ValueError('Proof changed during packaging')
  receipt={'passed':True,'archive':archive.name,'bytes':archive.stat().st_size,'sha256':digest(archive),'all_members_read_back':True,'source_revision':source_revision,'image_proof_sha256':proof_sha256,'hardware_tested':False,'public_release_ready':False,'companion_assets_included':False,'python_version':sys.version.split()[0],'zlib_version':zipfile.zlib.ZLIB_VERSION,'zlib_runtime_version':zipfile.zlib.ZLIB_RUNTIME_VERSION}
+ if recovery or rehearsal_only:
+  receipt['rehearsal_only'] = rehearsal_only
  (output/'manifest.json').write_bytes(manifest_bytes);(output/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n');return receipt
 
 

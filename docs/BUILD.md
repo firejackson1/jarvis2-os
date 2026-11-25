@@ -192,6 +192,12 @@ original stock `vendor_boot`. It reproduced the prototype image and keeps the
 stock Recovery and Fastbootd services. Signing and hardware qualification
 remain separate. [Stock-compatible LCARS recipe](https://github.com/firejackson1/jarvis2-os/blob/1409c21924d1040024c9521749248e05d7f78315/docs/STOCK_LCARS.md)
 
+Recipients can also rebuild the exact expected Recovery image from the
+included LCARS plug-in and their local stock image. This route uses Python,
+`lz4` and four checksum-pinned scripts. The local image hash and matching
+parent `vbmeta` remain part of the release verification.
+[Portable LCARS recipe](https://github.com/firejackson1/jarvis2-os/blob/708e088ed57eb83805753d9213717965a3c61e2c/docs/STOCK_LCARS.md#recreate-the-recovery-image-from-a-plug-in)
+
 The ARM64 LCARS recovery port is source-only on
 [`recovery17-lcars`](https://github.com/firejackson1/jarvis2-os/tree/recovery17-lcars),
 with the earlier ARM64 source checkpoint at `650217efee5a79b05d923758993fd004d0489334`.

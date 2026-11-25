@@ -244,6 +244,10 @@ publication by this policy decision alone.
   [Pinned recipe](https://github.com/firejackson1/jarvis2-os/blob/1409c21924d1040024c9521749248e05d7f78315/docs/STOCK_LCARS.md)
 - [x] Rehearse the prototype's AVB binding offline with an ephemeral root key.
   Verify the whole chain and reject a stock image substituted for the prototype.
+- [x] Reproduce the exact Recovery image using the portable tool kit and a
+  separately supplied stock image. Verify two identical private LCARS ZIPs,
+  local reconstruction from the archived plug-in and the resulting AVB chain.
+  [Candidate packaging](CANDIDATE_PACKAGING.md#include-locally-assembled-lcars-recovery)
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.
