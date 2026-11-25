@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "scope": "Notices and exact compiler input index for the ARM32 LCARS plug-in",
+  "plugin_sha256": "8d14f4ea2d191fce4424eab196690dc646080f82484d107bd89f77e340ca3f3c",
+  "source_revisions": {
+    "jarvis2": "708e088ed57eb83805753d9213717965a3c61e2c",
+    "aosp-recovery": "2e6ff7bc40063d38fc5478389a47c0fafba20bfd",
+    "bionic": "442faf6e7583037dfffdd49425f8659f6a3e3694",
+    "libcxx": "106fdb332fcd4cab59bf694cf8272e71a67e7845",
+    "clang-prebuilts": "7154d3eddcb62ff7909a6ae2bf0c03e445e65bc4"
+  },
+  "files": {
+    "AOSP-Recovery-NOTICE": {
+      "bytes": 10695,
+      "sha256": "38751245389e1e23f73e6f5384b5cbe7fa972cc4410c5adc9c04b082a0b9561a"
+    },
+    "Bionic-libc-NOTICE": {
+      "bytes": 258037,
+      "sha256": "afd048b0be532381b2e071f6361dbd68965620c50acb3a2d592cad5f8e69274a"
+    },
+    "Clang-r510928-NOTICE": {
+      "bytes": 130424,
+      "sha256": "f96f763beb66a7ba7a667647fc64c0226ace875e590c831fdd9579ec1c1d91e1"
+    },
+    "Jarvis2-LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "compiler-inputs.json": {
+      "bytes": 26284,
+      "sha256": "9a19ebebab2204b0be78f88c797046bd384c0b33b29aabdc1a357e2ec496b0ba"
+    },
+    "libcxx-LICENSE.TXT": {
+      "bytes": 3493,
+      "sha256": "c1938c0e9e90639d1e8f5a7f6bebaab83a3642e0ee44295a4c69934686d0bda8"
+    }
+  },
+  "stock_payloads_included": false,
+  "companion_archive": {
+    "archive": "jarvis2-lcars-arm32-notices.tar.gz",
+    "bytes": 31772,
+    "sha256": "5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30",
+    "member_count": 7,
+    "all_members_read_back": true,
+    "independently_reproduced": true
+  },
+  "linkage": {
+    "compiler_runtime_archive_members": 0,
+    "dynamic_stock_dependencies": [
+      "librecovery_ui.so",
+      "libdl.so",
+      "libc++.so",
+      "libc.so"
+    ]
+  },
+  "compiler_input_counts": {
+    "aosp-recovery": 4,
+    "bionic": 83,
+    "clang-prebuilts": 4,
+    "jarvis2": 3,
+    "libcxx": 62
+  }
+}

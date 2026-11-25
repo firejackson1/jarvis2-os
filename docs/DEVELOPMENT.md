@@ -1243,3 +1243,16 @@ without private scripts, server access or an AI operator.
   covers offline fit and saved rollback bytes only. The 17 file-backed raw
   writer tests also passed. Jarvis2 was untouched and Bazzite stayed online.
 - The ROM host suite passed 195 cases with pinned AVB and all eight Java tests.
+
+## 2026-11-24 — LCARS compiler inputs and notices
+
+- An instrumented relink reproduced the exact LCARS plug-in. The archive
+  extraction trace recorded zero compiler-runtime members. The four stock
+  shared libraries remain dynamic references. A dependency-recording compile
+  reproduced the same source object and pinned all 156 inputs across five
+  source revisions.
+- Matched the Bionic, libc++ and Clang notices to the exact build sources,
+  and fetched the AOSP Recovery notice at its verified header revision.
+  Built the seven-member notice companion twice and read back every member.
+  Both archives are 31,772 bytes and match the published notice receipt.
+  The archive remains private pending final release-asset review.

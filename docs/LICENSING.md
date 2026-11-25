@@ -13,6 +13,7 @@ The assembled ROM is not covered by a single replacement license.
 | LineageOS / AOSP | Multiple licenses, predominantly Apache-2.0 | Preserve component licenses/notices and exact source provenance |
 | Linux kernel / kernel modules | The core payload matches Google's exact GKI release; vendor-module correspondence remains open | See KERNEL_SOURCE_PROVENANCE.md. Complete required source/build delivery and module review before public images |
 | Stock firmware, vendor/ODM/HAL binaries | Redistribution rights not established by a local backup | Keep out of Git and release assets pending review; require users' local stock inputs where needed |
+| ARM32 LCARS Recovery plug-in | The exact build links one project object and resolves its four shared libraries from stock Recovery | Include the pinned source and compiler-input notices with this plug-in. Derive `vendor_boot` from the user's local stock image |
 | Experimental DTS replacement | Pinned upstream has no explicit grant for this file | Excluded; do not distribute copied/derived source or compiled replacement |
 | FLauncher 0.18.0 | GPL-3.0-only | Pin and provide corresponding source/build material/notices before bundling its APK |
 | LTvLauncher | GPL-3.0 | Pin exact release, source/dependencies and notices before bundling |
@@ -78,3 +79,21 @@ component-level evidence or final-artifact review.
 Modified Settings XML now retains its original notices and explicitly records
 local modification and the pinned upstream file/revision. This does not change
 upstream ownership or the license of bundled application payloads.
+
+## LCARS Recovery plug-in notices
+
+A diagnostic relink reproduced the published recipe's plug-in exactly. The
+linker's archive extraction log was empty. Its shared dependencies are
+`librecovery_ui.so`, `libdl.so`, `libc++.so` and `libc.so`. An identical-object
+compile captured and hashed 156 source and header inputs. The notice companion
+includes that index, the project license, and the exact notices for the AOSP
+Recovery, Bionic, libc++ and Clang input revisions. Both builds of the notice
+companion matched byte for byte. Its file and member hashes are pinned in
+[the LCARS notice manifest](../manifests/lcars-notice-provenance.json).
+
+The notice companion covers the pinned plug-in. Whole-ROM and proprietary stock
+input reviews remain open.
+[AOSP Recovery notices](https://android.googlesource.com/platform/bootable/recovery/+/2e6ff7bc40063d38fc5478389a47c0fafba20bfd/NOTICE),
+[Bionic notices](https://github.com/LineageOS/android_bionic/blob/442faf6e7583037dfffdd49425f8659f6a3e3694/libc/NOTICE),
+[libc++ license](https://github.com/LineageOS/android_external_libcxx/blob/106fdb332fcd4cab59bf694cf8272e71a67e7845/LICENSE.TXT),
+[Clang prebuilt notices](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/7154d3eddcb62ff7909a6ae2bf0c03e445e65bc4/clang-r510928/NOTICE).

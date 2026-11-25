@@ -252,6 +252,9 @@ publication by this policy decision alone.
   separately supplied stock image. Verify two identical private LCARS ZIPs,
   local reconstruction from the archived plug-in and the resulting AVB chain.
   [Candidate packaging](CANDIDATE_PACKAGING.md#include-locally-assembled-lcars-recovery)
+- [x] Bind the LCARS plug-in's exact compiler inputs to pinned revisions and
+  reproduce its notice companion twice. Include it with the same plug-in in
+  any final artifact review. [LCARS notice manifest](../manifests/lcars-notice-provenance.json)
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.

@@ -169,6 +169,12 @@ future developer preview; the ROM archive alone is incomplete delivery.
 | `supplemental-userspace-notices.tar.gz` | 904561 | `d59e01f2ca73a72e7eefeb23fb24a8f4f0fd03f2335b9eb7372f61d2e4d69878` |
 | `jarvis2-release-v1-public-signing-materials.zip` | 183211 | `5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8` |
 
+The LCARS variant also needs the separate notice companion matching its plug-in.
+Two private builds of `jarvis2-lcars-arm32-notices.tar.gz` produced 31,772 bytes
+with SHA-256 `5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30`.
+Use the plug-in and member hashes from the
+[LCARS notice manifest](../manifests/lcars-notice-provenance.json).
+
 Also record the new ROM ZIP receipt, product-source revision, packaging-tool
 revision/hash, trusted image-proof pin, and any refreshed companion hashes.
 Public verification keys are not private keys and do not establish hardware trust.
