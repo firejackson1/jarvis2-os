@@ -1352,3 +1352,17 @@ without private scripts, server access or an AI operator.
 - All 200 Python tests and eight Java suites passed. The saved evidence covers
   offline fit and exact restore files. Recovery transport, fresh live state
   and actual restoration still need separate qualification. Bazzite stayed online.
+
+## 2026-11-25 — Complete hosted draft asset readback
+
+- Added an offline release-asset verifier for the existing receipt and checksum
+  formats. It requires a trusted receipt hash and rejects extra, missing,
+  changed or duplicate listed files. It reports exact bytes and digests.
+- Downloaded all 11 files from the retained f38 draft and checked all
+  1,059,715,684 bytes against the receipt and GitHub's asset records.
+  Six payloads matched the earlier reviewed receipt. The three later payloads
+  matched their separately recorded source supplement, launcher and animation
+  pins. The private reconciliation receipt SHA-256 is
+  `aa86fb67481c0af005c94171e3612d8ba5298983ab7c8b639c4f3560a5d5c271`.
+- All 203 Python tests and eight Java suites passed. The older release remains
+  a draft. The current candidate still needs its own audit and download check.

@@ -189,3 +189,20 @@ revision/hash, trusted image-proof pin, and any refreshed companion hashes.
 Public verification keys are not private keys and do not establish hardware trust.
 Private local GApps compositions remain separate; never relabel or feed them to
 this vanilla packaging route. No Google redistribution permission is inferred.
+
+## Verify the complete download set
+
+Place every release asset, `release-asset-receipt.json` and `SHA256SUMS.txt`
+in one fresh directory. Obtain the trusted receipt digest from the reviewed
+release record, then run:
+
+```sh
+python3 tools/verify-release-assets.py /path/to/downloaded-assets \
+  --receipt-sha256 <trusted-release-asset-receipt-sha256>
+```
+
+The verifier checks the exact set, sizes, and hashes. The checksum list must
+cover each payload and the receipt. The JSON result can be compared with the
+hosting service's asset records to catch an incomplete or stale draft upload.
+Keep license review, signature trust and device qualification as separate
+release checks.

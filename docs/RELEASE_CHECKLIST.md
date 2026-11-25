@@ -125,6 +125,10 @@ publication by this policy decision alone.
 - [ ] Publish buildable source, patch provenance, license notices and any required corresponding source; review redistribution rights for proprietary blobs.
 - [ ] Prepare installation/upgrade/rollback instructions, known issues and tested hardware matrix.
 - [ ] Include versioned artifacts, checksums, signing details and accurate experimental labels.
+- [x] Download and verify the complete older f38 draft, including its source
+  supplement, public signing materials and two release metadata files. Repeat
+  the [complete download check](CANDIDATE_PACKAGING.md#verify-the-complete-download-set)
+  for the new release after staging.
 - [x] Add bug-report instructions covering firmware/build identity and useful redacted logs. See `.github/ISSUE_TEMPLATE/bug_report.md`; final binary build identity remains a packaging gate.
 - [ ] Review release contents for personal data and keys one last time.
 - [ ] Publish the developer preview under the owner’s existing release authorization after the required installation/recovery, rights and final-artifact gates pass.
