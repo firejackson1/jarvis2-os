@@ -217,6 +217,29 @@ Flutter framework and pinned Pub source archives. The generated plug-in
 registrant also matches its saved cache hash. All 1,588 file-cache hashes
 were replayed with the pinned Flutter implementation.
 
+A fresh workspace unpacked the application, Flutter framework source,
+`sky_engine` and all 137 locked Pub source archives from the companion.
+The Flutter SDK already had its own tool cache, including 69 additional
+host-tool packages. Every application package resolved at its locked
+version offline, and Flutter regenerated the plug-in registrant byte
+for byte. The new package configuration also includes the generated
+`flutter_gen` entry. The compiler read the same 1,588 files and did not use
+that additional entry. [Source-to-kernel receipt](../manifests/launcher-flutter-frontend-rebuild.json)
+
+With the tools and source in the canonical workspace described above,
+run the kernel target in the fresh application directory.
+
+~~~sh
+flutter --no-version-check --suppress-analytics pub get \
+  --offline --enforce-lockfile --no-precompile
+flutter --no-version-check --suppress-analytics assemble --output="$output_dir" \
+  -dTargetPlatform=android -dAndroidArchs=android-arm -dBuildMode=release \
+  -dTargetFile=lib/main.dart -dTrackWidgetCreation=false kernel_snapshot
+~~~
+
+Find `program.dill` under the new `.dart_tool/flutter_build` directory.
+It matches the saved `app.dill` at the SHA-256 in the receipt.
+
 To replay the AOT step, provide the ARM release `gen_snapshot` binary
 from the receipt and the `app.dill` intermediate emitted by Flutter.
 Use a fresh `output_dir` for each run.
@@ -227,10 +250,10 @@ Use a fresh `output_dir` for each run.
   --no-sim-use-hardfp --no-use-integer-division "$app_dill"
 ~~~
 
-Two offline runs against the saved kernel intermediate reproduced the exact
-`libapp.so` from the unsigned and signed launcher APKs. The r2 product
-image carries those same bytes. The Dart front end and native Flutter
-engine still require their own independent source rebuilds.
+Two offline runs against the saved kernel and a third run against the
+newly generated kernel reproduced the exact `libapp.so` from the unsigned
+and signed launcher APKs. The r2 product image carries those same bytes.
+A native Flutter engine rebuild remains open.
 [Pinned Flutter AOT command construction](https://github.com/flutter/flutter/blob/dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668/packages/flutter_tools/lib/src/base/build.dart)
 
 ## Unsigned ARMv7 release and recipient signing

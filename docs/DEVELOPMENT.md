@@ -2125,3 +2125,19 @@ without private scripts, server access or an AI operator.
   whose hash matched the cache. Both saved kernel intermediates are
   identical. An independent Dart frontend run and a native engine rebuild
   remain open. [Flutter replay receipt](../manifests/launcher-flutter-aot-replay.json)
+
+### Launcher source-to-kernel build — 2026-11-25
+
+- Staged 140 checksum-pinned input archives, including all 137 application
+  Pub archives, in a clean canonical workspace. Reused the pinned Flutter
+  SDK and provisioned the 69 extra packages required by its tool cache.
+  Pub resolved the app offline with the original lockfile unchanged.
+- Rebuilt the plug-in registrant and Dart kernel using the Flutter
+  `kernel_snapshot` target. Both match the preserved bytes, and the
+  compiler read the same 1,588 source paths. The 143 original package
+  records match. Flutter emitted one additional and unused synthetic
+  localization entry in the regenerated configuration.
+- Transferred the newly compiled kernel to Beercan and ran the pinned
+  offline ARMv7 AOT compiler. The result matches the complete shipped
+  `libapp.so` byte for byte. The native engine remains a pinned upstream
+  artifact. [Frontend rebuild receipt](../manifests/launcher-flutter-frontend-rebuild.json)

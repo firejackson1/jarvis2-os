@@ -291,6 +291,10 @@ publication by this policy decision alone.
   read back the launcher's 1,588 recorded Dart inputs, and replay the ARMv7
   AOT compiler against the preserved kernel.
   [Flutter evidence](LAUNCHER_SOURCE_BUILD.md#armv7-flutter-engine-and-dart-aot)
+- [x] Resolve the launcher's dependencies offline from the exact source
+  companion, regenerate the plug-in registrant and Dart kernel, and
+  reproduce the shipped ARMv7 AOT library from the new kernel.
+  [Source-to-kernel receipt](../manifests/launcher-flutter-frontend-rebuild.json)
 - [x] Verify production-key package/APEX signing in the private rehearsal with
   pinned public inventory; all 31 APEX filesystem metadata comparisons passed.
   Whole-image AVB, OTA trust and hardware acceptance remain separate gates.

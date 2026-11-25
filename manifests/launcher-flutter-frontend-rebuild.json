@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "scope": "Recreate the launcher's ARMv7 Dart kernel and AOT library from the staged r2 source companion in a clean offline source tree",
+  "source_companion_sha256": "aa26fe3cc3395559730983c7248e3d2d5243847f18e46c730bd9e2e6776b2966",
+  "source_stage": {
+    "pinned_nested_archives": 140,
+    "hosted_pub_archives": 137,
+    "extracted_regular_files": {
+      "application": 298,
+      "flutter_framework": 2160,
+      "sky_engine": 253,
+      "hosted_pub": 10646
+    }
+  },
+  "flutter_tool_bootstrap": {
+    "flutter_framework_revision": "dec2ee5c1f98f8e84a7d5380c05eb8a3d0a81668",
+    "flutter_tools_snapshot_sha256": "36e47ac001f178fca5b733d1d3a301f63fb3b977818fa54b376a4ff8cd0f7adb",
+    "sdk_only_cached_pub_packages": 69,
+    "sdk_only_cache_receipt_sha256": "ad80774fbe87ae978cf686d42637ebd75d33619a2e7a0dcb683a3cb624f3c7f5"
+  },
+  "normalized_source_root": "/build/jarvis2-launcher",
+  "pub_command": [
+    "pub",
+    "get",
+    "--offline",
+    "--enforce-lockfile",
+    "--no-precompile"
+  ],
+  "assemble_target": "kernel_snapshot",
+  "assemble_defines": {
+    "TargetPlatform": "android",
+    "AndroidArchs": "android-arm",
+    "BuildMode": "release",
+    "TargetFile": "lib/main.dart",
+    "TrackWidgetCreation": "false"
+  },
+  "pubspec_lock_sha256": "8e0be9e7916f71937357e2995e6ea003fc8070a86a36da8c132a36b60a03e710",
+  "matching_resolved_package_records": 143,
+  "additional_generated_package": {
+    "name": "flutter_gen",
+    "rootUri": "flutter_gen",
+    "languageVersion": "2.12"
+  },
+  "additional_package_referenced_by_compiler": false,
+  "matched_compiler_dependency_paths": 1588,
+  "matched_dependency_paths_sha256": "df97520d59dcaaf855e78e82ea1c3a2d4211eff58664bf987680f429ecc30935",
+  "regenerated_plugin_registrant_sha256": "ac3cedac0ff94427b115eabc81c825458d40206e836cc769cc7dec048ce1c44a",
+  "regenerated_kernel_sha256": "aa0b3c5b43f213ce7286a522aa8b36101b71efeb8b82b66e462829e37766fa5e",
+  "kernel_bytes": 36222848,
+  "recipient_source_to_kernel_matches_control": true,
+  "frontend_server_sha256": "9eda22c30c2996d441adf2c45c526f8cd80b58006585a0d4af783667f88a9f62",
+  "dartaotruntime_sha256": "51285114fa4867e036e181de5db7c614a557ab9d394a7c8356300efd4ea2eece",
+  "platform_dill_sha256": "cb52dcc6b6766f43e1bc0895e9d530031273695d0a1877bd19bcd1d6f4551221",
+  "aot_replay_from_new_kernel": {
+    "launcher_apk_member": "lib/armeabi-v7a/libapp.so",
+    "libapp_sha256": "2bdc01995f17c7c86864b4a543dc697968ebef491b647932ef08c28106c1e5cb",
+    "bytes_match_shipped_armv7_elf": true
+  },
+  "native_flutter_cpp_rebuilt": false
+}
