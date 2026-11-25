@@ -16,6 +16,34 @@ a filesystem mount, reboot, slot activation or wipe. It never provisions an empt
 slot. Existing complete foundations for an explicit `--slot a` or `--slot b` are
 required; an allocated other slot is not described as a verified bootable fallback.
 
+## Inspect an existing Recovery session
+
+With Jarvis2 already in Recovery and the host ADB server running on a directly
+connected, authorized USB session, run the read-only inspector. Keep the
+output in a private directory outside the source checkout. Use the selected
+ADB executable and the reviewed [Linux layout reader](#native-layout-reader-for-linux-x86-64).
+
+```sh
+python3 tools/inspect-recovery.py \
+  --serial <exact-USB-serial> \
+  --adb /path/to/adb --adb-sha256 <trusted-adb-sha256> \
+  --lpdump /path/to/bin/lpdump --lpdump-sha256 <trusted-lpdump-sha256> \
+  --output /private/fresh-inspection
+```
+
+An idle root Recovery session can provide the first 1 MiB of super, the two
+native layout views and live backing sizes. The tool repeats key observations
+and rejects a truncated or changing prefix. It records clear snapshot evidence
+only when the actual metadata partition is already mounted as verified
+read-only F2FS with rollforward disabled and contains no OTA state. Unmounted
+metadata, active or unknown state, and an unprivileged session are reported as
+unverified. The command takes no actions to obtain root, change the mount, enter
+or leave Recovery, or create device-mapper tables.
+
+The result is diagnostics for a review. Keep the private report and super
+prefix out of shared release assets. The report is separate from the writer's
+capture and does not contain the full partition hash inventory or restore files.
+
 ## Prepare a verified LCARS ZIP locally
 
 The host preflight takes the LCARS archive, the archive SHA-256 and the

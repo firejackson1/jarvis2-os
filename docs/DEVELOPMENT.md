@@ -1557,3 +1557,21 @@ without private scripts, server access or an AI operator.
   installation, actual recovery transport and rollback remain separate gates.
 - The project host suite passed 209 Python checks with AVB fixtures and eight
   Java suites.
+
+### Read-only Recovery inspection command — 2026-11-25
+
+- Added a separate host CLI to inspect an already connected USB Recovery
+  session. It pins ADB and lpdump, checks the selected device and settled
+  Recovery state, reads a bounded 1 MiB super metadata prefix, and repeats the
+  identity, geometry and snapshot observations before writing the report.
+  The inspector does not produce writer proofs, restore files or a capture
+  that can be used to install.
+- The previous saved layout exposed metadata slot count three and first
+  logical sector 2048. Native lpdump reads from the new 1 MiB prefix produced
+  the same two views as the old 4 MiB capture.
+- Exercised the actual CLI with an isolated ADB protocol fixture driven by the
+  saved layout and the portable native lpdump. The matched layout was stable.
+  Unmounted metadata and a persisted OTA entry remained unverified. An
+  unprivileged session read zero partition bytes. The truncated case left no
+  report. Live Recovery transport still requires separate authorization and
+  verification.

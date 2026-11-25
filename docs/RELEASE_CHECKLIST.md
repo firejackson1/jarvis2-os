@@ -129,6 +129,9 @@ publication by this policy decision alone.
   [pinned transition review](CANDIDATE_INSTALLATION.md#stage-writer-inputs-from-a-pinned-review)
   and consume them in the exact candidate's file-backed dry run.
 - [ ] Validate candidate against read-only live partition metadata and snapshot status before installation.
+- [x] Verify the host Recovery inspector against saved native layout data and
+  simulated read-only USB responses. The live session test remains pending.
+  [Recovery inspection](CANDIDATE_INSTALLATION.md#inspect-an-existing-recovery-session)
 - [ ] Preserve and verify stock restore files, current recovery and necessary signing information.
 - [ ] Test a RAM candidate where possible before requesting persistent installation.
 - [x] Confirm the custom RAM menu on HDMI, physical-button navigation, Reboot
