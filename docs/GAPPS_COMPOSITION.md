@@ -62,14 +62,15 @@ external/avb/avbtool.py
 out/host/linux-x86/bin/mkfs.erofs
 out/host/linux-x86/bin/fsck.erofs
 out/host/linux-x86/bin/avbtool
+out/host/linux-x86/bin/fec
 ```
 
 This can be the matching Android checkout or an audited host-tool bundle with
-that layout; a full Android rebuild is not performed by composition. Preserve
-required host runtime dependencies, including FEC support when the baseline uses
-it. Authenticate binaries as well as the AVB Python source; tool hashes are
-recorded for inspection. The source pin for the reviewed AVB module is recorded
-in `manifests/avb-test-tool.json`.
+that layout. For a baseline with FEC, include the executable `fec` beside
+`avbtool` and its matching shared libraries under `lib64/`. The checked stock
+profile uses FEC. `avbtool` starts `fec` through `PATH` when appending a hashtree
+footer. Authenticate binaries as well as the AVB Python source. The source pin
+for the reviewed AVB module is recorded in `manifests/avb-test-tool.json`.
 
 Keep the companion profile, AVB audit, package verification and signing-metadata
 Python tools together in `tools/`. The composer imports those helpers and
@@ -138,6 +139,19 @@ Fresh-user Google defaults, retained-data permission behavior, Google device
 certification and application compatibility require separate tests. No runtime
 permission grants or userdata changes are automated. A synthetic AVB/filesystem
 rehearsal cannot establish compatibility of the final release baseline.
+
+## LCARS integration rehearsal
+
+The optional composition also completed against the private f38 rehearsal with
+Controls 1.1, the Music cleanup and the ARM32 LCARS Recovery binding. The
+composer checked the same 27 additions and 16 APK signatures, preserved existing
+files and metadata, and generated a coherent five-image set. The separate LCARS
+preflight verifier found all 13 expected image bindings, including the root's
+hash for the same `vendor_boot`. Two runs using the same disposable keys
+produced identical hashes for all five images. The Controls and Music APKs
+matched their expected hashes when extracted from the composed images.
+Repeat the check against the exact final release baseline with independently
+reviewed signing and installer evidence.
 
 ## Native rehearsal scope
 

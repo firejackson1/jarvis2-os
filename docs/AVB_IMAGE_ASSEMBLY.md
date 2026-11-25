@@ -44,13 +44,14 @@ AVB Python source in this layout:
 external/avb/avbtool.py
 out/host/linux-x86/bin/fsck.erofs
 out/host/linux-x86/bin/avbtool
+out/host/linux-x86/bin/fec
 ```
 
-Preserve FEC/runtime dependencies if required by the baseline. Authenticate host
-binaries as well as source; hashes are recorded in the result. The reviewed AVB
-source pin is in `manifests/avb-test-tool.json`. Keep the composer and its companion
-profile, audit, package-verifier and signing-metadata helpers beside this tool.
-They are reused without changing composer behavior or running Google assembly.
+For a baseline with FEC, keep `fec` executable and preserve its matching shared
+libraries under `lib64/`. The checked stock profile uses FEC. Authenticate host
+binaries as well as source. The reviewed AVB source pin is in
+`manifests/avb-test-tool.json`. Keep the composer and its companion profile,
+audit, package-verifier and signing-metadata helpers beside this tool.
 Python bytecode writes are disabled while importing the AVB source.
 
 ## Run

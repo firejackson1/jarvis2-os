@@ -1256,3 +1256,30 @@ without private scripts, server access or an AI operator.
   Built the seven-member notice companion twice and read back every member.
   Both archives are 31,772 bytes and match the published notice receipt.
   The archive remains private pending final release-asset review.
+
+## 2026-11-25 — Local Google composition with LCARS
+
+- Exported the metadata profile from the exact f38 two-app rehearsal that
+  includes Controls 1.1, the Music cleanup and the ARM32 LCARS binding. The
+  profile SHA-256 is
+  `cc2b8b86b96ead9fb13a5229d6ff3c9b2a26ff9650b46888b06fb955d30191b5`.
+  Inputs matched the prior signed archive, five-image proof, Google download
+  pin and derived Recovery image hash.
+- The initial portable tool kit lacked `fec`, so assembly stopped on the first
+  hashtree footer. Copied the matching executable and verified its hash. The
+  corrected run passed with the stock FEC policy, 27 Google additions, 16 APK
+  signature verifications, existing file and metadata checks and full offline
+  verified boot. The portable preflight independently checked all 13 image
+  bindings, including the root hash for the same derived `vendor_boot`.
+- Both corrected runs produced five matching image hashes. Independently
+  extracted the Controls and Music APKs from the composed EROFS images and
+  matched both to their existing pins. The root Recovery descriptor is
+  byte-identical to the baseline descriptor.
+- Packed a private 777,819,197-byte rehearsal ZIP and read back all nine
+  members. SHA-256 is
+  `08c89caed4ef93896c49af94b83f702293fda71cca2fcc0cc31c5394ad60272e`.
+  The archive includes the pinned LCARS plug-in and notices. The stock
+  Recovery reference is supplied separately.
+- Ran 195 Python and eight Java host tests. The rehearsal used disposable
+  signing keys. Final-baseline installation, restore, hardware trust and
+  distribution qualification remain open. Bazzite stayed online.

@@ -259,6 +259,10 @@ publication by this policy decision alone.
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.
+- [ ] Recompose optional Google apps locally against the final LCARS candidate,
+  then recheck the updated APKs and the `vendor_boot` binding. The prior
+  [offline integration rehearsal](GAPPS_COMPOSITION.md#lcars-integration-rehearsal)
+  covers the older f38 rehearsal with temporary signing.
 - [ ] Verify HDMI, box-button operation, USB keyboard and remote input in RAM
   before considering another recovery write.
 - [ ] Implement and verify recovery-owned Bluetooth discovery/pairing/HID input
