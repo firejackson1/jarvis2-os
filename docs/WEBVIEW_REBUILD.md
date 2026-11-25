@@ -58,6 +58,36 @@ test "$(git -C src/third_party/ffmpeg rev-parse HEAD)" = \
   5c85ff666b3434d9323b83437f910ad8431ab7c9
 ~~~
 
+ANGLE's version generator counts Git commits reachable from `HEAD`.
+A shallow checkout recorded position 1 while the pinned prebuilt recorded
+29101 at the same commit. Restore the complete commit history for ANGLE
+before generating or building the ARM32 graph. The filtered fetch retains
+the commit history without downloading every historical blob.
+
+~~~sh
+angle=src/third_party/angle
+angle_pin=c56e2a4a9b8cb0040920c995a268be559ba53f1c
+test "$(git -C "$angle" rev-parse HEAD)" = "$angle_pin"
+if test "$(git -C "$angle" rev-parse --is-shallow-repository)" = true; then
+  git -C "$angle" config remote.origin.promisor true
+  git -C "$angle" config remote.origin.partialclonefilter blob:none
+  git -C "$angle" -c protocol.version=2 fetch \
+    --unshallow --no-tags --filter=blob:none origin "$angle_pin"
+fi
+test "$(git -C "$angle" rev-list --count HEAD)" = 29101
+~~~
+
+If reusing an already built tree, point a local branch at the same pinned
+commit and make it `HEAD` so the generated header's dependency changes.
+The tracked source files keep their pinned content.
+
+~~~sh
+git -C "$angle" update-ref refs/heads/jarvis2-pinned-history "$angle_pin"
+git -C "$angle" symbolic-ref HEAD refs/heads/jarvis2-pinned-history
+~~~
+
+[ANGLE commit position generator](https://chromium.googlesource.com/angle/angle/+/c56e2a4a9b8cb0040920c995a268be559ba53f1c/src/commit_id.py)
+
 Compare `deps-revisions.txt` with the
 [304-entry dependency inventory](../manifests/webview-r2-deps.txt) from the
 Linux x86-64 Android sync. It records Git revisions, resolved CIPD instances
@@ -140,21 +170,30 @@ gn gen out/JarvisWebView --fail-on-unused-args
 autoninja -C out/JarvisWebView -j 4 system_webview_apk
 ~~~
 
-The graph passed with GN 2595. The PGO-enabled hook run supplied the profiles,
-and offline Siso compilation started. The dependent relink job waits for a
-successful exit of that build. It verifies the archived baseline hashes,
-checks the rebuilt package manifest and compares each APK payload to r2
-before running the diagnostic FFmpeg relink. The full source build and relink
-results are pending.
+## ARM32 build and readback
 
-The ARM32 linker response includes `libffmpeg_internal.a`. The archive
-contains 254 compiled objects, with a direct input from the pinned
-FFmpeg tree for each. Readback from the staged userspace source companion
-matched all 247 C inputs and seven assembly inputs to the build checkout
-and Git blobs, including file modes.
+The pinned Chromium build completed with GN 2595 and the verified Android
+PGO profiles. The rebuilt package is `com.android.webview` version
+157.0.8103.78, code 810307800, with SDK levels 29 and 36 for minimum and
+target respectively.
 
-Capture the APK, ELF architecture/build ID and the full GN arguments and
-dependency record when the target builds. Then repeat with a distinct
-local FFmpeg source marker and check that the rebuilt ARM WebView library
-carries the marker. Use the unchanged r2 APK and its source companion as
-reference inputs.
+The ARM32 linker used `libffmpeg_internal.a`, with 254 compiled objects.
+All 247 C inputs and seven assembly inputs matched the exact checkout,
+Git blobs and file modes in the staged userspace source companion. A
+diagnostic change in FFmpeg's `libavutil/error.c` changed only its one
+archive object. The resulting ARM library in the built APK contained the
+diagnostic string. Reverting that change and rebuilding reproduced the
+original local APK and library byte for byte.
+
+With complete ANGLE history, all 641 other non-signature APK members
+matched the pinned LineageOS ARM prebuilt exactly. The remaining member,
+`lib/armeabi-v7a/libwebviewchromium.so`, has the same size as the pinned
+library. Its only byte differences are in the 20-byte GNU build ID
+descriptor. The raw APK hashes therefore differ.
+
+The r2 package has the same WebView library as the pinned prebuilt and
+omits the Crashpad trampoline through its ARM import rule. All 640 other
+r2 payloads match the corrected build. The diagnostic APK and the rebuilt
+library were retained privately for verification. The r2 ROM still
+uses its pinned WebView input.
+[ARM32 build evidence](../manifests/webview-r2-rebuild.json)

@@ -64,8 +64,9 @@ apply independently.
 - [x] Reconcile the WebView icon densities by replaying Chromium's real
   filter and linking the filtered and unfiltered icons with pinned AAPT2.
   [Icon filter receipt](../manifests/webview-r2-icon-filter.json)
-- [ ] Finish the ARM32 WebView build, compare the complete APK with r2
-  and verify an FFmpeg source relink.
+- [x] Build ARM32 WebView, compare its APK payloads with r2 and the pinned
+  prebuilt, and verify an FFmpeg source relink. The corrected native ELF
+  differs from the prebuilt only in its GNU build ID.
 - [ ] Review redistribution rights for proprietary firmware, vendor blobs, codecs, Google apps and bundled launchers before packaging them. Existing device installation is not evidence of redistribution permission.
 - [x] Compare the exact neutral r2 ROM with the pinned stock bootloader,
   kernel, vendor/ODM/OEM files, module files and ramdisks. Trace the three

@@ -118,8 +118,8 @@
       "sha256": "77005c5948b474dfba88caab3c4bda48a414150b6adc970f8a58c96e0e395504"
     }
   },
-  "arm32_webview_rebuild_completed": false,
-  "modified_ffmpeg_relink_completed": false,
+  "arm32_webview_rebuild_completed": true,
+  "modified_ffmpeg_relink_completed": true,
   "arm32_live_link_ffmpeg_source_readback": {
     "ffmpeg_revision": "5c85ff666b3434d9323b83437f910ad8431ab7c9",
     "ffmpeg_tree": "6284d04ef60c1145cc4dd97d9da60113a0485ae6",
@@ -139,5 +139,100 @@
     "live_link_argument_count": 12207,
     "linked_ffmpeg_objects_report_sha256": "3a544dc157a193c305cab39d4e83753e4c79864ebc9a01b347f488eb4e561849",
     "compiled_ffmpeg_source_report_sha256": "755e35e5265a6d137a7bdd4d639d42d5647f709a8b18824d911ec54e02715d79"
+  },
+  "completed_arm32_reproduction": {
+    "shallow_checkout_baseline": {
+      "apk_sha256": "4aca9ec9c4edd8b19b4de75eaba82f56faa90fbdbfffb3fd37bc252c5e966899",
+      "native_sha256": "1c47c830af47c6f5aa30a80c737d906a05acd8c0b6beeee612d8c256ad09d4a0",
+      "comparison_sha256": "8d879302278dd6c4047159b8bf601ff47a6e4275d514e1b66fd73954890bc7f0",
+      "verified_build_apk_manifest": {
+        "package": "com.android.webview",
+        "version_name": "157.0.8103.78",
+        "version_code": 810307800,
+        "min_sdk": 29,
+        "target_sdk": 36
+      },
+      "angle_commit_position": 1
+    },
+    "diagnostic_ffmpeg_relink": {
+      "ffmpeg_commit": "5c85ff666b3434d9323b83437f910ad8431ab7c9",
+      "patch_sha256": "61481a490f735d0fbc6a280c7262a70a12c36d51f36ed937d3aab070e72e958a",
+      "gn_arguments_sha256": "848a2907c83d51acf7f52a5c7a20ee194a6f5ae8d4540fcab9c39c7610594618",
+      "baseline_elf_sha256": "1c47c830af47c6f5aa30a80c737d906a05acd8c0b6beeee612d8c256ad09d4a0",
+      "relinked_elf_sha256": "09f8edc9256845f43368d2d6b6e3b57aac6f996123f04a1c39c77695c8cbe554",
+      "baseline_apk_sha256": "4aca9ec9c4edd8b19b4de75eaba82f56faa90fbdbfffb3fd37bc252c5e966899",
+      "relinked_apk_sha256": "ca8b5085556e2241b7af7301dd720fb065dfcd492b0d9a3eab0c4ad2263251f6",
+      "architecture": "ARM ELF32",
+      "modified_message": "Invalid data found when processing input [Jarvis2 FFmpeg relink check]",
+      "diagnostic_only": true,
+      "proof_sha256": "3acef6b7346ed060d6b45238591a766739353def5fdb665c6eae8a363ef33b76",
+      "archive_delta_proof_sha256": "f633be9def7557152c0cfae458cd93e6aaa222c9bc1c5d088b914f0b83ef3d97",
+      "only_ffmpeg_archive_member_changed": "obj/third_party/ffmpeg/ffmpeg_internal/error.o",
+      "archive_objects_checked": 254
+    },
+    "original_ffmpeg_restoration": {
+      "restored_source_revision": "5c85ff666b3434d9323b83437f910ad8431ab7c9",
+      "diagnostic_marker_absent": true,
+      "libwebviewchromium.so": {
+        "baseline_sha256": "1c47c830af47c6f5aa30a80c737d906a05acd8c0b6beeee612d8c256ad09d4a0",
+        "restored_sha256": "1c47c830af47c6f5aa30a80c737d906a05acd8c0b6beeee612d8c256ad09d4a0",
+        "match": true
+      },
+      "SystemWebView.apk": {
+        "baseline_sha256": "4aca9ec9c4edd8b19b4de75eaba82f56faa90fbdbfffb3fd37bc252c5e966899",
+        "restored_sha256": "4aca9ec9c4edd8b19b4de75eaba82f56faa90fbdbfffb3fd37bc252c5e966899",
+        "match": true
+      },
+      "proof_sha256": "623cee5fcfa90074a0b1c6702681e9f216b7b0599b86e14d78126eb6940009bc"
+    },
+    "angle_history": {
+      "revision": "c56e2a4a9b8cb0040920c995a268be559ba53f1c",
+      "tree": "e25639d68c4b88b09302c417c86ab66bb8d7c45e",
+      "reachable_commits": 29101,
+      "source_tree_unchanged": true,
+      "history_list_sha256": "21c0c39c4ab48bfd44fd2bd4c34332dad3620fe4ec4bb0ba37872910d628eb17",
+      "generated_header_sha256": "6ccd2d0a323b0870699616ca8c41bc8d25b85014e51a89563b2b031645f6c75d",
+      "unshallow_recipe_reproduced_commit_list": true
+    },
+    "full_history_arm32_rebuild": {
+      "angle_revision": "c56e2a4a9b8cb0040920c995a268be559ba53f1c",
+      "angle_commit_position": 29101,
+      "angle_header_sha256": "6ccd2d0a323b0870699616ca8c41bc8d25b85014e51a89563b2b031645f6c75d",
+      "native_sha256": "d0359ddcd30b9687914c601ddab2413afabafaf5d5c2b249880cbe274d8a496f",
+      "native_reference_sha256": "d1c0f80c22e1d417e7ef0e908312a1222fdef1cb62403034ac6ebcf2e5436214",
+      "native_byte_match": false,
+      "apk_sha256": "604b45db4729ab7f1cd89401001c3f5a830414e4e33f28c9bc91f76e0f3cb888",
+      "apk_bytes": 98528166,
+      "rebuild_proof_sha256": "be06770b351bb7e8ea86e94ff1dc36c5ffb9c213e13a86123dac2d260b15d69b",
+      "gnu_build_id_only_difference": true,
+      "gnu_build_id_differing_bytes": 20,
+      "gnu_build_id_descriptor_offset": 600,
+      "reference_gnu_build_id": "10601f19c68d32e62be7abf7e9fb51a8b8f8615d",
+      "rebuilt_gnu_build_id": "bcb60afa5c0cd7dcd3c39989592f73432f5afd86",
+      "native_readback_sha256": "a89777a25301aa3db7875744694f8cf4d6a289bf208f20a05fd9e33e0aeaf668",
+      "lineage_apk_comparison": {
+        "local_apk_sha256": "604b45db4729ab7f1cd89401001c3f5a830414e4e33f28c9bc91f76e0f3cb888",
+        "lineage_prebuilt_sha256": "f7ccf01cf3ec8555fd4500ddc7512430cb2cd3cadd1806a166be2092d25c7298",
+        "apk_bytes_match": false,
+        "all_non_signature_members_match": false,
+        "local_payload_count": 642,
+        "lineage_prebuilt_payload_count": 642,
+        "differing_payload_members": [
+          "lib/armeabi-v7a/libwebviewchromium.so"
+        ],
+        "proof_sha256": "efbc3f1e0ba815a2c84961f26bda5d373cc052263f392ffc5fe7d852fb13c3c5"
+      },
+      "r2_apk_comparison": {
+        "r2_apk_sha256": "43464815af31ddd44d9d899ab842b2d165bf05f799e7f47b96abc660663b7bf5",
+        "matching_payload_members": 640,
+        "r2_payload_members": 641,
+        "differing_payload_members": [
+          "lib/armeabi-v7a/libcrashpad_handler_trampoline.so",
+          "lib/armeabi-v7a/libwebviewchromium.so"
+        ],
+        "proof_sha256": "9118ee70d9eb57b2efe86fc1b7f9149dd055b616e9b561dd003f612f4c2424fa"
+      },
+      "elf_sha256_with_build_id_descriptor_zeroed": "92ce460ddde205d0eef37c554b81023bd78214e7ae0c91deaf8d33123e58b447"
+    }
   }
 }

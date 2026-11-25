@@ -2336,3 +2336,13 @@ without private scripts, server access or an AI operator.
 - Matched all 254 object members of the FFmpeg archive passed to the
   live WebView linker to pinned Git inputs. All 247 C and seven assembly
   files also matched the copies in the staged userspace source companion.
+
+- Completed the pinned ARM32 WebView build and the FFmpeg relink. The
+  diagnostic string reached the APK and only `error.o` changed among
+  the 254 FFmpeg archive members. Reverting the diagnostic rebuilt the
+  local baseline APK and ELF byte for byte.
+- Traced the remaining runtime string difference to ANGLE's shallow
+  checkout. Independently fetched and verified all 29,101 reachable
+  commits at the exact pinned tree. Restoring that history regenerated
+  the correct version and narrowed the native difference to the 20-byte
+  GNU build ID. All other 641 payloads match the pinned LineageOS APK.

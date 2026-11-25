@@ -58,10 +58,10 @@ license files, 13 Lineage WebView patches and the WebView build recipe. See the
 [Chromium FFmpeg source](https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/5c85ff666b3434d9323b83437f910ad8431ab7c9)
 and [LineageOS WebView build sources](https://github.com/LineageOS/android_external_chromium-webview_patches/tree/544b12e3d42a02b4337f31819f6ba917187dcccf).
 
-The Chromium dependency sync and ARM32 graph validation passed. The full
-WebView build and a modified-FFmpeg relink remain open. Coverage of the
-remaining Android and APEX dependencies and distribution review for stock
-inputs are separate gates. The neutral r2 ZIP carries five userspace/AVB
+The ARM32 WebView build and the diagnostic FFmpeg relink passed. With
+complete ANGLE history, the rebuilt native library matched the prebuilt
+outside its GNU build ID. Coverage of the remaining Android and APEX
+dependencies and distribution review for stock inputs are separate gates. The neutral r2 ZIP carries five userspace/AVB
 images and the LCARS plug-in. The stock kernel and vendor partitions are local
 inputs outside that delivery archive.
 
