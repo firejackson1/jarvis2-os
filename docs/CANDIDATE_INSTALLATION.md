@@ -200,6 +200,48 @@ using `candidate_proof_sha256`, and literally declare `passed`,
 route changes target-slot recovery; the old custom recovery transport does not
 qualify the replacement stock recovery or its USB restoration route.
 
+### Stage writer inputs from a pinned review
+
+For an exact production LCARS preflight with the saved-fit option, the host
+can derive the paired proof files from an independently reviewed record. The
+approved review identifies the exact preflight, capture and requested slot.
+Reviewers must check the intended content, expected signing keys, device
+identity, recovery transition and restore path before issuing this record.
+
+```json
+{
+  "format": 1,
+  "kind": "jarvis2-reviewed-lcars-transition",
+  "target_slot": "a",
+  "preflight_sha256": "<trusted preflight verification.json digest>",
+  "capture_sha256": "<trusted capture.json digest>"
+}
+```
+
+Save the record outside Git and obtain its file digest through the reviewer.
+Hashing an unreviewed local record does not authenticate it. Given the pinned
+record and capture, run this offline command:
+
+```sh
+python3 tools/stage-lcars-writer-inputs.py \
+  --preflight /private/prepared-lcars \
+  --preflight-sha256 <trusted-preflight-receipt-sha256> \
+  --capture /private/saved-capture \
+  --review /private/reviewed-transition.json \
+  --review-sha256 <trusted-review-sha256> \
+  --lpdump /tools/host/bin/lpdump \
+  --output /private/fresh-writer-inputs
+```
+
+The command rehashes all seven images and reruns the native saved-fit and
+backup checks against the reviewed receipt. A successful result writes
+`candidate-proof.json`, `transition-proof.json` and `writer-inputs.json` to
+the fresh output. The last file supplies both hashes needed by the writer.
+All files and hashes remain bound to the original capture and reviewed slot.
+This host-only handoff cannot obtain installation approval or establish live
+Recovery access. A device trial still needs a fresh capture and separate
+explicit authorization.
+
 ## Command interface for later qualification
 
 Inspect `python3 tools/install-candidate.py --help` locally. Required arguments

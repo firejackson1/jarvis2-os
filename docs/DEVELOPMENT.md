@@ -1490,3 +1490,16 @@ without private scripts, server access or an AI operator.
   126 APK signer sets, 31 APEX container signer sets, 30 verified APEX
   payload keys and system OTA certificate matched. Runtime userdata
   compatibility remains open. Bazzite stayed running.
+
+## 2026-11-25 — Pinned preflight-to-writer handoff
+
+- Added an offline [writer input staging command](CANDIDATE_INSTALLATION.md#stage-writer-inputs-from-a-pinned-review)
+  that binds both proof files to the reviewed preflight, capture and slot.
+  It rehashes all seven image inputs and independently reruns native LP and
+  restore checks. The result records no device contact or installation approval.
+- Exercised the command with the exact neutral candidate and saved capture.
+  A mismatched review digest failed before creating output. Generated proofs
+  also drove the file-backed installer dry run for all seven targets, with
+  zero write requests. The offline confirmation uses simulated authorization
+  evidence solely for the file-backed fixture. Live Recovery remains untested
+  for the candidate. Bazzite stayed running.

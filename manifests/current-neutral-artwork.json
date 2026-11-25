@@ -124,5 +124,13 @@
     ],
     "report_sha256": "b15438583df91d9a2b66e514a6be80a8bb1da03a1bef6c4cd1bc16eb31ce2503",
     "userdata_compatibility_tested": false
+  },
+  "offline_writer_input_handoff": {
+    "receipt_sha256": "bf7d785aee95b15916c7b8d7c4c33a4dd7e5f0e8fb9bc72178151ec3c3ca9025",
+    "wrong_review_pin_refused": true,
+    "generated_proofs_consumed_in_file_model": true,
+    "dry_run_targets": 7,
+    "persistent_write_requests": 0,
+    "hardware_device_contacted": false
   }
 }

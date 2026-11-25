@@ -122,6 +122,9 @@ publication by this policy decision alone.
   and complete install/restore in a
   [file-backed rehearsal](RESTORE_PLAN.md#exact-neutral-candidate-rollback-rehearsal).
   Recovery transport and physical rollback remain separate hardware checks.
+- [x] Generate the paired writer proofs from a
+  [pinned transition review](CANDIDATE_INSTALLATION.md#stage-writer-inputs-from-a-pinned-review)
+  and consume them in the exact candidate's file-backed dry run.
 - [ ] Validate candidate against read-only live partition metadata and snapshot status before installation.
 - [ ] Preserve and verify stock restore files, current recovery and necessary signing information.
 - [ ] Test a RAM candidate where possible before requesting persistent installation.
