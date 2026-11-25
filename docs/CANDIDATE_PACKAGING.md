@@ -274,3 +274,10 @@ The private r2 set now contains 15 files, including
 All 24 archive members passed readback. The ROM ZIP and earlier source
 companions retain their hashes. The staging receipt SHA-256 is
 `7f59bc13693175b309b440bd39723f500fbb4630fc6731efec0d410c59b16560`.
+
+The private 17-file set adds the [APEX source inventory](USERSPACE_NOTICES.md#apex-source-and-license-inventory-for-neutral-r2)
+and the exact pinned Cronet source archive. The inventory connects all 31 r2
+packages to their build metadata. The existing ROM ZIP and source companions
+retain their hashes. Complete corresponding-source review and hardware
+qualification remain open. The staging receipt SHA-256 is
+`ba116e1d4230ff3ca2322270ec4f35c7348e817ed60189f2d1b60fb8c4d1c5ca`.

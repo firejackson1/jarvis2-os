@@ -27,6 +27,13 @@ apply independently.
 - [x] Verify and stage the 18 selected native source trees and the two WebView
   source inputs against r2. The rest of the ROM source and rights review stays
   open. [Userspace source review](USERSPACE_NOTICES.md#selected-native-source-materials-for-neutral-r2)
+- [x] Match all 31 r2 APEX packages to their build license metadata and pin
+  the resolved project list and VNDK v34 prebuilt library origins.
+  [APEX source inventory](USERSPACE_NOTICES.md#apex-source-and-license-inventory-for-neutral-r2)
+- [x] Match Cronet in the tethering APEX to its source-built ARM library and
+  verify and stage the pinned Cronet source tree.
+- [ ] Verify the exact source revisions of the historic VNDK v34 build and
+  complete the APEX corresponding-source and redistribution review.
 - [x] Check out Chromium at the pinned r2 commit, replay every documented
   WebView patch against its exact inputs, and compare the prebuilt with the
   staged r2 APK. [WebView rebuild evidence](WEBVIEW_REBUILD.md)

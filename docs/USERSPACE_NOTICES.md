@@ -69,3 +69,44 @@ The [WebView rebuild record](WEBVIEW_REBUILD.md) pins the Chromium checkout and
 depot_tools and verifies the patch replay and ARM32 APK readback. It also
 documents the corrected icon paths and the density difference between the
 documented build and the shipped prebuilt.
+
+## APEX source and license inventory for neutral r2
+
+The [APEX source receipt](../manifests/neutral-r2-apex-sources.json) binds all
+31 APEX and compressed APEX packages in the r2 filesystems to the signed
+target-files members. For each package, the original build output matched
+the unsigned target-files member byte for byte and selected one Soong
+license metadata root.
+
+Run the built `compliance_listshare` tool from the Android source root with
+the receipt's `metadata_path` for one package. The receipt also records the
+combined `compliance_dumpgraph -label_conditions` output hash and
+`compliance_checkshare` result for all 31 roots. Soong's source-sharing
+resolution returned 260 project paths, all with pins in the published
+Lineage manifest. The dependency graph has direct source-sharing labels in
+28 projects. The rest includes labels propagated through dependencies.
+Some graph edges lead to host tools. Use the package payload and source
+license terms when deciding what to distribute.
+
+The VNDK v34 APEX contains 120 regular ARM shared libraries. Each matched
+the pinned Android prebuilt snapshot byte for byte. The receipt maps them to
+114 source module directories from the snapshot's own indexes. Google's
+original change identifies build **10951026** on `udc-gsi-release`. The
+snapshot tool fetches `manifest_10951026.xml` from the `vndk` target. The
+exact source revisions for that historic build still need independent
+verification. The current Lineage manifest pins the VNDK prebuilt tree.
+[Original VNDK snapshot import](https://android.googlesource.com/platform/prebuilts/vndk/v34/+/912e0c51bc2557a8d4b396bad1b6e39fe4c0b358) ·
+[AOSP snapshot generation](https://source.android.com/docs/core/architecture/vndk/snapshot-generate)
+
+The tethering APEX's ARM Cronet library matched the source-built Soong
+output byte for byte. The private source companion includes all 45,638
+tracked files from the pinned Android Cronet checkout, including its
+license and Soong build definitions. Every file or symlink matched its
+Git object and mode. The library filename reports version 121.0.6103.2.
+The checkout's older version label in `METADATA` does not identify the
+shipped binary. The receipt pins the actual Git tree and library hash.
+
+Complete corresponding-source delivery and redistribution review remain
+open. In particular, the VNDK module path indexes identify where to look
+for the original sources. The exact source revisions still depend on the
+historic build manifest.

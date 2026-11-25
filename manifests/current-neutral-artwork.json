@@ -236,5 +236,24 @@
     "receipt_sha256": "7f59bc13693175b309b440bd39723f500fbb4630fc6731efec0d410c59b16560",
     "hosted_download_verified": false,
     "device_contacted": false
+  },
+  "private_r2_delivery_with_apex_sources": {
+    "apex_source_inventory_sha256": "fed0821cacad3d33a8a2f6bf14286650c5029cafbd5528ae53ef785c8723e244",
+    "verified_apexes": 31,
+    "source_sharing_project_pins": 260,
+    "vndk_v34_matched_prebuilt_libraries": 120,
+    "vndk_v34_original_source_manifest_verified": false,
+    "cronet_source_archive": {
+      "file": "cronet-6ec34305bbf8-source.tar.gz",
+      "bytes": 222026895,
+      "sha256": "b74ebce20557e1f9b4d19113b1cf21ebb5e52f73a25156af6c0d21130f2da7c7"
+    },
+    "cronet_source_files_verified": 45638,
+    "complete_rom_corresponding_source_verified": false,
+    "files_verified": 17,
+    "total_bytes": 1329354953,
+    "receipt_sha256": "ba116e1d4230ff3ca2322270ec4f35c7348e817ed60189f2d1b60fb8c4d1c5ca",
+    "hosted_download_verified": false,
+    "device_contacted": false
   }
 }

@@ -1687,3 +1687,25 @@ without private scripts, server access or an AI operator.
   diagnostic patch applies to that revision. The diagnostic build is
   pending the baseline APK and will compare the two ELF payloads. The
   staged ROM still uses the pinned r2 prebuilt.
+
+### Neutral r2 APEX source provenance — 2026-11-25
+
+- Rehashed the exact original and signed target-files archives. Read all 31
+  APEX and CAPEX members, and matched each original archive member to the
+  binary produced by its Soong license metadata root. Independently
+  rehashed the extracted r2 packages and matched all 31 to the signed bytes.
+- Ran AOSP's `compliance_listshare` on those roots. All 260 resolved source
+  project paths map to pinned revisions. The annotated graph found direct
+  source-sharing conditions on 1,603 modules across 28 projects, including
+  build-time dependencies. The combined Soong consistency check returned
+  `PASS`. The [APEX receipt](../manifests/neutral-r2-apex-sources.json) pins
+  the tools, metadata and package hashes.
+- Matched all 120 regular ARM shared libraries in VNDK v34 to the Android
+  prebuilt tree. Mapped the snapshot indexes to 114 source module paths.
+  The original import names build 10951026 and branch `udc-gsi-release`.
+  The exact historical source manifest remains open.
+- Matched `libmainlinecronet.121.0.6103.2.so` inside the signed tethering APEX
+  to its Soong output from `external/cronet`. Exported all 45,638 tracked
+  files and checked every archive member's Git blob and mode. Staged the
+  verified source archive and the APEX index alongside the private candidate.
+  This work used existing build artifacts and source outside the device.
