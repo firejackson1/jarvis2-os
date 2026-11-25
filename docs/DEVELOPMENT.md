@@ -2089,3 +2089,21 @@ without private scripts, server access or an AI operator.
   stripped and unstripped ELF files across two more independent runs.
   Maven's original build ID differs. The ROM and source companion were
   used as read-only references. [SQLite replay receipt](../manifests/launcher-sqlite-rebuild.json)
+
+### Readback from the generated images before signing — 2026-11-25
+
+- Verified the exact original unsigned cb9334 target-files archive and the
+  signed neutral r2 archive. In each archive all 21 feature files and the
+  three canonical build property files match their extracted EROFS copies.
+  Both artifacts have the same six stale identity fields in system_ext and
+  product, so those values were present before signing.
+- Created a test archive with three real EROFS images containing the
+  tracked package files and coherent test properties. The independent
+  readback passed all 24 file comparisons. A second archive changed the
+  landscape declaration while retaining all three image bytes and was
+  rejected on that file.
+- Queued the readback on PVE behind the exact nine-patch build invocation.
+  It verifies the patch receipt, the archive and all three generated image
+  hashes, then compares the files extracted from the images. Actual
+  successor output remains pending.
+  [Readback controls](../manifests/successor-image-readback-controls.json)

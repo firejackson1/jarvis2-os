@@ -122,6 +122,10 @@ publication by this policy decision alone.
   and the three partition identities in the unsigned archive, and repeat the
   signed-image and ZIP readback before publication.
   [Successor build pin](CURRENT_REPRODUCTION.md#build-sign-and-package)
+- [x] Verify the archive-to-EROFS readback on the older artifacts and
+  exercise it with matching and mismatched test archives. The check is
+  queued for the actual unsigned successor.
+  [Readback controls](../manifests/successor-image-readback-controls.json)
 - [x] Record the artifact hashes and [feature-to-image inventory](PERSISTENT_FEATURES.md#release-candidate-inclusion)
   for neutral r2. Compare the exact staged ZIP and private GApps rehearsal
   against all 21 tracked feature files. Recheck coverage after each rebuild.

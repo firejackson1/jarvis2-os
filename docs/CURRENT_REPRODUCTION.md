@@ -158,6 +158,16 @@ after signing. The original verifier looked only at the system identity.
 The legacy r2 asset is retained for offline evidence and must be replaced
 before release. [Identity receipt](../manifests/neutral-r2-build-identity.json)
 
+Before signing the successor, extract the three `IMAGES/*.img` members from
+its verified target-files archive. Read out the actual EROFS filesystems and
+compare the three canonical build property files and all 21 tracked feature
+files to the archive's `SYSTEM`, `SYSTEM_EXT` and `PRODUCT` entries. The
+scheduled check also compares the feature and image digests to the build
+receipt. A controlled test passed with matching image and archive files and
+rejected a changed landscape declaration in the archive. The old unsigned and signed r2 builds
+contain the same six stale identity fields, so the error was present before
+signing. [Image readback controls](../manifests/successor-image-readback-controls.json)
+
 Follow [release signing](RELEASE_SIGNING.md) for package and OTA trust,
 [AVB image assembly](AVB_IMAGE_ASSEMBLY.md) for the final chain, and
 [candidate packaging](CANDIDATE_PACKAGING.md) for the verified artifact set.

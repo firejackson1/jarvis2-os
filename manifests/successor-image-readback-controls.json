@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "scope": "Archive-to-EROFS review of the two archived builds and two non-bootable verifier fixtures",
+  "successor_source_revision": "148a63dfe989245d725b7a56e660e35faa5c9998",
+  "successor_patch_report_sha256": "b67c1cbd9734c1a3ad7fde89e2ee19b4381fb6939ed86b4f3ef9d7eb399532af",
+  "fsck_erofs_sha256": "843f772efacd981222f393a98a6488ed6699f70307748f52daa572dad51450d2",
+  "image_inspector_sha256": "d31bd446613c5adc126afdf7f3ab9b9f52e97430d00dd875fc97b2fda249ebe6",
+  "readback_script_sha256": "2daa8ab72bcaa42936326e9cbcd85ff70be353ed2db41bfdee151578c209e11f",
+  "controls": {
+    "historical_unsigned": {
+      "archive": {
+        "sha256": "802dfa5a8795499f87ae183cfc6fb6480d31849cb6b912884f9bb90a0cd9b428",
+        "bytes": 1244895746
+      },
+      "generated_image_sha256": {
+        "system.img": "8bcf49d20d70e3fb90ed93a1f748c320cb4b1ea511fe76d96221b769c8130281",
+        "system_ext.img": "6cdbbe84ff74e1ba59fb57bf0e04defe095e620dba2216d6c988d5fdb70d93cb",
+        "product.img": "65315d3fea77aa1a904cdaa406a4dce30f78f3f6102675ff145dff7e7bddcc6d"
+      },
+      "expected_build_number": "jarvis2.cb9334ee26cc",
+      "expected_build_epoch_utc": 1795575971,
+      "matched_feature_members": 21,
+      "matched_build_prop_members": 3,
+      "validated_build_receipt": false,
+      "readback_sha256": "ca0e911c548c6ec9bf9cbaeb07b8926a2611b32103add336fc5df4bad265e080",
+      "errors": [
+        "system_ext/etc/build.prop: ro.system_ext.build.version.incremental differs from expected jarvis2.cb9334ee26cc or is missing or repeated",
+        "system_ext/etc/build.prop: ro.system_ext.build.date.utc differs from expected 1795575971 or is missing or repeated",
+        "system_ext/etc/build.prop: ro.system_ext.build.fingerprint does not identify build jarvis2.cb9334ee26cc exactly once",
+        "product/etc/build.prop: ro.product.build.version.incremental differs from expected jarvis2.cb9334ee26cc or is missing or repeated",
+        "product/etc/build.prop: ro.product.build.date.utc differs from expected 1795575971 or is missing or repeated",
+        "product/etc/build.prop: ro.product.build.fingerprint does not identify build jarvis2.cb9334ee26cc exactly once"
+      ]
+    },
+    "r2_signed": {
+      "archive": {
+        "sha256": "c557f82ef1e82434e41c0f489294ae5c92080cf4161b80853ba6332f24f90214",
+        "bytes": 1178911250
+      },
+      "generated_image_sha256": {
+        "system.img": "ca2d72aaf1a8ed62c4a2bb7d1dba4ae4e90a5a6510e8923e74b708b091a5535c",
+        "system_ext.img": "5524d2cba9458fb47508add2e5575bc02bdb6ca209a428d9b4b8279749066d6b",
+        "product.img": "4f6207859dde0a11ee22082c8697a9a92a748a4ecab90ae18b3baf3f1c6d6b1f"
+      },
+      "expected_build_number": "jarvis2.cb9334ee26cc",
+      "expected_build_epoch_utc": 1795575971,
+      "matched_feature_members": 21,
+      "matched_build_prop_members": 3,
+      "validated_build_receipt": false,
+      "readback_sha256": "7d43d5ce0d5551fd6a1c49f006aa081f12aedce57948a0e759ad710390af74d1",
+      "errors": [
+        "system_ext/etc/build.prop: ro.system_ext.build.version.incremental differs from expected jarvis2.cb9334ee26cc or is missing or repeated",
+        "system_ext/etc/build.prop: ro.system_ext.build.date.utc differs from expected 1795575971 or is missing or repeated",
+        "system_ext/etc/build.prop: ro.system_ext.build.fingerprint does not identify build jarvis2.cb9334ee26cc exactly once",
+        "product/etc/build.prop: ro.product.build.version.incremental differs from expected jarvis2.cb9334ee26cc or is missing or repeated",
+        "product/etc/build.prop: ro.product.build.date.utc differs from expected 1795575971 or is missing or repeated",
+        "product/etc/build.prop: ro.product.build.fingerprint does not identify build jarvis2.cb9334ee26cc exactly once"
+      ]
+    },
+    "matching_fixture": {
+      "archive": {
+        "sha256": "2a5a6634f1be8b70358e1e6f98cddb71f97f4cef16614516768d6b3c1b8f83d7",
+        "bytes": 85829637
+      },
+      "generated_image_sha256": {
+        "system.img": "fdaa62feece8ce16a8c1d8d60278a6269efad001a4d0c213a3c30b45546a8fc9",
+        "system_ext.img": "3f130e8396064f9cd587d5197587b996b8b768ffb9139446530f1df03f87adea",
+        "product.img": "6757ba502a6a4b6bb3843360e095a4333a8d764add7b339bca022ca23899a9f9"
+      },
+      "expected_build_number": "jarvis2.148a63dfe989",
+      "expected_build_epoch_utc": 1795601128,
+      "matched_feature_members": 21,
+      "matched_build_prop_members": 3,
+      "validated_build_receipt": true,
+      "readback_sha256": "2cc1c62da027df3a39abf4b694f077c05520e6c7be968b765e96f69258e57495",
+      "errors": []
+    },
+    "mismatch_fixture": {
+      "archive": {
+        "sha256": "8db275299cb76080c6687527370c590f94754634a537ed746de5175974feb1e1",
+        "bytes": 85829638
+      },
+      "generated_image_sha256": {
+        "system.img": "fdaa62feece8ce16a8c1d8d60278a6269efad001a4d0c213a3c30b45546a8fc9",
+        "system_ext.img": "3f130e8396064f9cd587d5197587b996b8b768ffb9139446530f1df03f87adea",
+        "product.img": "6757ba502a6a4b6bb3843360e095a4333a8d764add7b339bca022ca23899a9f9"
+      },
+      "expected_build_number": "jarvis2.148a63dfe989",
+      "expected_build_epoch_utc": 1795601128,
+      "matched_feature_members": 20,
+      "matched_build_prop_members": 3,
+      "validated_build_receipt": true,
+      "readback_sha256": "771155e439d2c7b44cb19f60aa9fecf8fdaae55c58603267e96f4e117eb734f6",
+      "errors": [
+        "EROFS contents differ from target-files member SYSTEM/etc/permissions/android.software.leanback.xml"
+      ]
+    }
+  },
+  "stale_build_properties_present_before_signing": true,
+  "fixture_features": "Exact r2 package members and synthetic coherent build props in three EROFS images",
+  "successor_build_output_reviewed": false,
+  "device_or_signing_actions": false
+}
