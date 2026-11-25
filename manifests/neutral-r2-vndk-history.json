@@ -1,0 +1,250 @@
+{
+  "format": 1,
+  "scope": "Exact public Git blob history and generated license attachments of every ARM shared library in the neutral r2 VNDK v34 APEX",
+  "current_snapshot_commit": "912e0c51bc2557a8d4b396bad1b6e39fe4c0b358",
+  "current_snapshot_tree": "6fdee4104a5649e703ba63185fecc765f97e0d9d",
+  "snapshot_signed_apex_sha256": "26d8daa284b4eb457ab8c067b1ca417814a9aa2cf593a03624dbd618f0083ebe",
+  "snapshot_signed_filesystem_sha256": "121f0ac15a1ef0b80f7a48a49f3f27d2261bb8ae9a26af7c2194cf11ff349750",
+  "ancestor_commits_checked": 8,
+  "libraries_verified": 120,
+  "import_build_groups": {
+    "10185551": {
+      "libraries": 115,
+      "artifact_import_commits": [
+        "d9d6c32b19b2fc50fb952e8c44d8186a51f22a25"
+      ],
+      "members": [
+        "lib/android.frameworks.cameraservice.common-V1-ndk.so",
+        "lib/android.frameworks.cameraservice.device-V1-ndk.so",
+        "lib/android.frameworks.cameraservice.service-V1-ndk.so",
+        "lib/android.hardware.audio.common@2.0.so",
+        "lib/android.hardware.common-V2-ndk.so",
+        "lib/android.hardware.common.fmq-V1-ndk.so",
+        "lib/android.hardware.configstore-utils.so",
+        "lib/android.hardware.configstore@1.0.so",
+        "lib/android.hardware.configstore@1.1.so",
+        "lib/android.hardware.confirmationui-support-lib.so",
+        "lib/android.hardware.graphics.allocator-V2-ndk.so",
+        "lib/android.hardware.graphics.allocator@2.0.so",
+        "lib/android.hardware.graphics.allocator@3.0.so",
+        "lib/android.hardware.graphics.allocator@4.0.so",
+        "lib/android.hardware.graphics.bufferqueue@1.0.so",
+        "lib/android.hardware.graphics.bufferqueue@2.0.so",
+        "lib/android.hardware.graphics.common-V4-ndk.so",
+        "lib/android.hardware.graphics.common@1.0.so",
+        "lib/android.hardware.graphics.common@1.1.so",
+        "lib/android.hardware.graphics.common@1.2.so",
+        "lib/android.hardware.graphics.composer3-V1-ndk.so",
+        "lib/android.hardware.graphics.mapper@2.0.so",
+        "lib/android.hardware.graphics.mapper@2.1.so",
+        "lib/android.hardware.graphics.mapper@3.0.so",
+        "lib/android.hardware.graphics.mapper@4.0.so",
+        "lib/android.hardware.media.bufferpool@2.0.so",
+        "lib/android.hardware.media.omx@1.0.so",
+        "lib/android.hardware.media@1.0.so",
+        "lib/android.hardware.memtrack-V1-ndk.so",
+        "lib/android.hardware.memtrack@1.0.so",
+        "lib/android.hardware.renderscript@1.0.so",
+        "lib/android.hardware.soundtrigger@2.0-core.so",
+        "lib/android.hardware.soundtrigger@2.0.so",
+        "lib/android.hidl.memory.token@1.0.so",
+        "lib/android.hidl.memory@1.0.so",
+        "lib/android.hidl.safe_union@1.0.so",
+        "lib/android.hidl.token@1.0-utils.so",
+        "lib/android.hidl.token@1.0.so",
+        "lib/android.system.suspend-V1-ndk.so",
+        "lib/android.system.suspend@1.0.so",
+        "lib/hw/android.hidl.memory@1.0-impl.so",
+        "lib/libRSCpuRef.so",
+        "lib/libRSDriver.so",
+        "lib/libRS_internal.so",
+        "lib/libaudioroute.so",
+        "lib/libaudioutils.so",
+        "lib/libbase.so",
+        "lib/libbcinfo.so",
+        "lib/libbinder.so",
+        "lib/libblas.so",
+        "lib/libbufferqueueconverter.so",
+        "lib/libc++.so",
+        "lib/libcamera_metadata.so",
+        "lib/libcap.so",
+        "lib/libclang_rt.ubsan_standalone-arm-android.so",
+        "lib/libcn-cbor.so",
+        "lib/libcodec2.so",
+        "lib/libcompiler_rt.so",
+        "lib/libcrypto.so",
+        "lib/libcrypto_utils.so",
+        "lib/libcurl.so",
+        "lib/libcutils.so",
+        "lib/libdiskconfig.so",
+        "lib/libdmabufheap.so",
+        "lib/libdumpstateutil.so",
+        "lib/libevent.so",
+        "lib/libexif.so",
+        "lib/libexpat.so",
+        "lib/libfmq.so",
+        "lib/libgatekeeper.so",
+        "lib/libgralloctypes.so",
+        "lib/libhardware.so",
+        "lib/libhardware_legacy.so",
+        "lib/libhidlallocatorutils.so",
+        "lib/libhidlbase.so",
+        "lib/libhidlmemory.so",
+        "lib/libion.so",
+        "lib/libjpeg.so",
+        "lib/libjsoncpp.so",
+        "lib/libldacBT_abr.so",
+        "lib/libldacBT_enc.so",
+        "lib/liblz4.so",
+        "lib/liblzma.so",
+        "lib/libmedia_helper.so",
+        "lib/libmedia_omx.so",
+        "lib/libmemtrack.so",
+        "lib/libminijail.so",
+        "lib/libmkbootimg_abi_check.so",
+        "lib/libnetutils.so",
+        "lib/libnl.so",
+        "lib/libpcre2.so",
+        "lib/libpiex.so",
+        "lib/libpng.so",
+        "lib/libpower.so",
+        "lib/libprocinfo.so",
+        "lib/libradio_metadata.so",
+        "lib/libspeexresampler.so",
+        "lib/libsqlite.so",
+        "lib/libssl.so",
+        "lib/libstagefright_bufferpool@2.0.so",
+        "lib/libstagefright_bufferqueue_helper.so",
+        "lib/libstagefright_foundation.so",
+        "lib/libstagefright_omx.so",
+        "lib/libstagefright_omx_utils.so",
+        "lib/libstagefright_xmlparser.so",
+        "lib/libsysutils.so",
+        "lib/libtinyalsa.so",
+        "lib/libtinyxml2.so",
+        "lib/libunwindstack.so",
+        "lib/libusbhost.so",
+        "lib/libutilscallstack.so",
+        "lib/libwifi-system-iface.so",
+        "lib/libxml2.so",
+        "lib/libyuv.so",
+        "lib/libz.so"
+      ]
+    },
+    "10357257": {
+      "libraries": 1,
+      "artifact_import_commits": [
+        "f73fc36823ded93cfca796c64fbe1ff813dc53ff"
+      ],
+      "members": [
+        "lib/libui.so"
+      ]
+    },
+    "10951026": {
+      "libraries": 4,
+      "artifact_import_commits": [
+        "912e0c51bc2557a8d4b396bad1b6e39fe4c0b358"
+      ],
+      "members": [
+        "lib/libgui.so",
+        "lib/libprocessgroup.so",
+        "lib/libutils.so",
+        "lib/libziparchive.so"
+      ]
+    }
+  },
+  "published_module_license_rules": 109,
+  "gpl_family_module_rules": {
+    "lib/libexif.so": {
+      "module_path": "external/libexif",
+      "current_unbroken_build": "10185551",
+      "license_rule_names": [
+        "vndk-v34-libexif-license"
+      ],
+      "gpl_family_kinds": [
+        "SPDX-license-identifier-GPL",
+        "SPDX-license-identifier-LGPL",
+        "SPDX-license-identifier-LGPL-2.1",
+        "SPDX-license-identifier-LGPL-3.0"
+      ]
+    },
+    "lib/libnl.so": {
+      "module_path": "external/libnl",
+      "current_unbroken_build": "10185551",
+      "license_rule_names": [
+        "vndk-v34-libnl-license"
+      ],
+      "gpl_family_kinds": [
+        "SPDX-license-identifier-GPL",
+        "SPDX-license-identifier-GPL-2.0",
+        "SPDX-license-identifier-GPL-3.0",
+        "SPDX-license-identifier-LGPL",
+        "SPDX-license-identifier-LGPL-2.1",
+        "SPDX-license-identifier-LGPL-3.0"
+      ]
+    },
+    "lib/libxml2.so": {
+      "module_path": "external/libxml2",
+      "current_unbroken_build": "10185551",
+      "license_rule_names": [
+        "vndk-v34-libxml2-license"
+      ],
+      "gpl_family_kinds": [
+        "SPDX-license-identifier-GPL",
+        "SPDX-license-identifier-GPL-2.0"
+      ]
+    }
+  },
+  "different_earliest_and_contiguous_imports": [],
+  "original_ci_source_manifests_recovered": false,
+  "binary_reproducibility_verified": false,
+  "package_default_license_members": [
+    "lib/android.frameworks.cameraservice.common-V1-ndk.so",
+    "lib/android.frameworks.cameraservice.device-V1-ndk.so",
+    "lib/android.frameworks.cameraservice.service-V1-ndk.so",
+    "lib/android.hardware.common-V2-ndk.so",
+    "lib/android.hardware.common.fmq-V1-ndk.so",
+    "lib/android.hardware.graphics.allocator-V2-ndk.so",
+    "lib/android.hardware.graphics.common-V4-ndk.so",
+    "lib/android.hardware.graphics.composer3-V1-ndk.so",
+    "lib/android.hardware.memtrack-V1-ndk.so",
+    "lib/android.system.suspend-V1-ndk.so",
+    "lib/libstagefright_bufferqueue_helper.so"
+  ],
+  "detailed_git_history_report_sha256": "e26faecacd7a5db20ee421e5678a4fcce896c009c7b5c9390a518e0597494d3a",
+  "upstream_repo": "https://android.googlesource.com/platform/prebuilts/vndk/v34",
+  "upstream_ci": {
+    "branch": "udc-gsi-release",
+    "target": "vndk",
+    "raw_manifest_http_status": {
+      "10085907": 404,
+      "10185551": 404,
+      "10357257": 404,
+      "10951026": 404
+    }
+  },
+  "stock_ota_comparison": {
+    "full_ota_sha256": "7d8eeb206b0712db71fc0559ce66e1f9b9e97d7cd7dd9b821880c387d9aa70b2",
+    "stock_partition_sha256": {
+      "product": "551d485d1194a6d2687e9c1dcab8ef638fcbcbf39bec74d2cf417666aeca19b4",
+      "system": "163790252b123680baa8ac6fc3363467e4a27eb1c81ef8dd6108f7e4f90892d0",
+      "system_ext": "c6e7857eec8fc386cae9ff7b8ce8e1918c34055e60abe051e08d50bf4b0ca38b"
+    },
+    "stock_apex_member": "system/system/apex/com.android.vndk.current.apex",
+    "stock_apex_sha256": "02fc9f03720deae2e9b9eefed828394bab72fe3466f3c2ca596aeaeb355839d0",
+    "stock_apex_payload_sha256": "a26bd8d151e6fa46f8f690eb5e140b435a8b552ca9f3cfa0cfbb552cc5289c79",
+    "stock_apex_manifest_sha256": "34ae032d114a89476b9c5cd28e1f06fcc261539574682bb7b24f888a931c77ff",
+    "stock_arm32_libraries": 120,
+    "matched_by_path": 120,
+    "identical_members": [
+      "lib/libclang_rt.ubsan_standalone-arm-android.so"
+    ],
+    "r2_members_absent_by_path": [],
+    "stock_only_members": [],
+    "stock_complete_binary_substitution_verified": false,
+    "stock_library_inventory_sha256": "06bf952bd493435ead353635bad0229476d87ea640f61d556e835e1d375809a7",
+    "comparison_report_sha256": "2e4f821a86b885d7afbd0caf5f8b0b5b928da5ec8c4eaa1a0b4cf0944c1a5941",
+    "different_member_count": 119
+  },
+  "hardware_tested": false
+}

@@ -90,11 +90,10 @@ license terms when deciding what to distribute.
 
 The VNDK v34 APEX contains 120 regular ARM shared libraries. Each matched
 the pinned Android prebuilt snapshot byte for byte. The receipt maps them to
-114 source module directories from the snapshot's own indexes. Google's
-original change identifies build **10951026** on `udc-gsi-release`. The
-snapshot tool fetches `manifest_10951026.xml` from the `vndk` target. The
-exact source revisions for that historic build still need independent
-verification. The current Lineage manifest pins the VNDK prebuilt tree.
+114 source module directories from the snapshot's own indexes. The current
+Lineage manifest pins the VNDK prebuilt tree. The
+[import history](#vndk-v34-import-history) identifies which earlier builds
+introduced the library bytes in that tree.
 [Original VNDK snapshot import](https://android.googlesource.com/platform/prebuilts/vndk/v34/+/912e0c51bc2557a8d4b396bad1b6e39fe4c0b358) ·
 [AOSP snapshot generation](https://source.android.com/docs/core/architecture/vndk/snapshot-generate)
 
@@ -106,10 +105,40 @@ Git object and mode. The library filename reports version 121.0.6103.2.
 The checkout's older version label in `METADATA` does not identify the
 shipped binary. The receipt pins the actual Git tree and library hash.
 
-Complete corresponding-source delivery and redistribution review remain
-open. In particular, the VNDK module path indexes identify where to look
-for the original sources. The exact source revisions still depend on the
-historic build manifest.
+Complete corresponding-source delivery and redistribution review remain open.
+
+### VNDK v34 import history
+
+The [library-level receipt](../manifests/neutral-r2-vndk-history.json) matches
+every r2 APEX library to its exact Git blob in Google's published VNDK
+history. The comparison covers all eight commits through the current import,
+including the initial empty tree. The build ID on the latest
+commit applies to the snapshot as a whole. Most library bytes arrived earlier.
+
+| Earliest import with the r2 bytes | ARM libraries | Identification |
+| --- | ---: | --- |
+| 10185551 | 115 | Includes the three libraries with explicit GPL-family metadata |
+| 10357257 | 1 | `libui.so` |
+| 10951026 | 4 | `libgui.so`, `libprocessgroup.so`, `libutils.so`, and `libziparchive.so` |
+
+The generated ARM Blueprint assigns a named module license to 109 libraries.
+`libexif.so`, `libnl.so` and `libxml2.so` have module-level rules that
+include a GPL or LGPL identifier. The other 11 libraries use the snapshot's
+combined default metadata. That combined list does not attribute each
+individual license to a particular part of a library. The public raw CI
+endpoints for all four historical builds, including the earlier 10085907
+import, returned HTTP 404 for their manifests. The earliest published binary
+import identifies the CI build to investigate. Rebuilding these binaries from
+their precise original source revisions remains open.
+[Google's build 10185551 import](https://android.googlesource.com/platform/prebuilts/vndk/v34/+/d9d6c32b19b2fc50fb952e8c44d8186a51f22a25) ·
+[AOSP snapshot and source checks](https://source.android.com/docs/core/architecture/vndk/snapshot-generate#upload-vndk-snapshots)
+
+The official Jarvis2 stock OTA contains `com.android.vndk.current.apex`.
+All 120 library paths match the r2 APEX, including the library below
+`lib/hw`. Only the ARM Clang UBSan runtime matches byte for byte. The other
+119 libraries differ, so locally extracting this stock APEX cannot reproduce
+the current r2 payload. ABI compatibility and installation behavior would
+need separate evidence for any future replacement.
 
 ### APEX notice companion
 
@@ -135,7 +164,7 @@ To regenerate the combined documents, run the built AOSP
 documents, use its single metadata path and title
 `Jarvis2 VNDK v34 license notices`.
 
-The public raw CI endpoint for `manifest_10951026.xml` returned HTTP 404.
 The notice companion fills the observed attribution gap in the staged
-delivery. Exact historical VNDK source and distribution review remain open.
+delivery. The [import history](#vndk-v34-import-history) records the
+historical VNDK source manifest searches and their limits.
 [Android CI artifact documentation](https://source.android.com/docs/setup/contribute/dashboard)

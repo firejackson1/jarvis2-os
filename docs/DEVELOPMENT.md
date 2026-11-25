@@ -1558,6 +1558,27 @@ without private scripts, server access or an AI operator.
 - The host suite passed all 221 Python checks with AVB fixtures and eight
   Java suites. The audit ran on the build hosts without a device session.
 
+### Exact r2 VNDK import history — 2026-11-25
+
+- Fetched the complete eight-commit history of the original Google snapshot
+  and checked the 120 ARM shared libraries against the exact signed r2 APEX
+  readback. The current bytes first appeared in three imports. Build
+  10185551 accounts for 115 libraries, 10357257 for one and 10951026 for four.
+- Matched all 120 installed library paths to generated Blueprint rules.
+  Of the 109 explicit module rules, three carry GPL-family identifiers.
+  Those three libraries match build 10185551. The remaining 11 libraries
+  inherit the snapshot-wide license metadata. Raw CI manifest requests for
+  all four historical VNDK imports returned HTTP 404.
+- Re-extracted system, system_ext and product from the verified official
+  stock OTA. Compared all 120 ARM libraries in stock
+  `com.android.vndk.current.apex` by size and SHA-256, including the nested
+  `lib/hw` path. All relative paths match. The Clang UBSan runtime matches
+  byte for byte. The other 119 differ.
+- The [VNDK history receipt](../manifests/neutral-r2-vndk-history.json)
+  records the public imports, exact matched members and stock APEX identity.
+  The staged r2 ZIP is unchanged. Completing source correspondence and
+  verifying hardware remain open.
+
 ### Clean WebView prebuilt checkout — 2026-11-25
 
 - Reproduced the initial clean ROM sync failure in the ARM WebView prebuilt

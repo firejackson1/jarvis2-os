@@ -35,8 +35,11 @@ apply independently.
 - [x] Regenerate, verify and stage the APEX and VNDK notice companion for
   the missing texts and paths in the r2 partition notice archives.
   [APEX notices](USERSPACE_NOTICES.md#apex-notice-companion)
-- [ ] Verify the exact source revisions of the historic VNDK v34 build and
+- [ ] Verify the exact source revisions of the historic VNDK v34 builds and
   complete the APEX corresponding-source and redistribution review.
+- [x] Trace all 120 r2 VNDK libraries to their byte-identical public snapshot
+  imports, identify the module licensing rules and compare the local stock
+  OTA's VNDK payload. [VNDK import history](USERSPACE_NOTICES.md#vndk-v34-import-history)
 - [x] Check out Chromium at the pinned r2 commit, replay every documented
   WebView patch against its exact inputs, and compare the prebuilt with the
   staged r2 APK. [WebView rebuild evidence](WEBVIEW_REBUILD.md)
