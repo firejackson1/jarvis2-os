@@ -72,7 +72,9 @@ publication by this policy decision alone.
 - [ ] Integrate verified USB/ADB defaults, remote keylayout, animation and TV UI changes; distinguish experiments from production fixes.
 - [ ] Fix launcher/lock-screen/notification behavior in product configuration rather than relying on leftover device state.
 - [ ] Rebuild the complete slot A candidate; compare all partition budgets, EROFS metadata, AVB descriptors, keys and rollback indexes offline.
-- [ ] Produce artifact hashes and a feature-to-image manifest. Older offline image sets do not contain every current app update.
+- [x] Record the artifact hashes and [feature-to-image inventory](PERSISTENT_FEATURES.md#release-candidate-inclusion)
+  for neutral r2. Compare the exact staged ZIP and private GApps rehearsal
+  against all 21 tracked feature files. Recheck coverage after each rebuild.
 - [x] Bind 15 selected frozen-f38 feature payloads to the pinned signed archive and final filesystem data, recording versions and later update gaps in `manifests/frozen-f38-feature-evidence.json`. This receipt covers the older vanilla baseline, not a newly integrated candidate or every release feature.
 - [x] Verify all three complete f38 release filesystems against their signed
   target-files archive and reject the independently mixed image set.

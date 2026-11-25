@@ -44,12 +44,35 @@ updates the embedded [Known Issues page](KNOWN_ISSUES.md) and preserves all five
 images, the LCARS plug-in and its notices byte for byte. The inventory
 accompanies the private download set.
 
-| Change | Current delivery status |
+| Release change | Where to find it in neutral r2 |
 | --- | --- |
-| LCARS Recovery | Stock-compatible ARM32 plug-in bound to the current production-key AVB chain; on-device menu, USB ADB, Fastbootd and restoration qualification pending |
-| Boot Linux from USB | SanDisk desktop and missing-drive fallback exercised in ARM64 RAM Recovery; installed integration still needs a validated USB handoff and enforcing policy |
-| Speaker clicking and suspend/wake | Diagnostic traces and temporary workaround; production fix pending |
-| TrueHD/DTS and native Power/Mic remaps | Development work with outstanding redistribution or framework fail-safe requirements; consult the feature rows below before claiming either in release notes |
+| Settings tap and hold, left widget panel, button editor, Home chooser and Smart Home provider settings | Controls 1.1 in `system_ext`. The TV Settings overlay exposes the settings entries. Shortcut handling requires Accessibility consent. |
+| Onn remote pairing, remotes and accessories, native AirPods entry | Patched TV Settings and SetupWizard in `system_ext`. The onn keylayout is present in `system` and `product`. |
+| AirPods pause/resume, Bluetooth and sound panels, HDMI plus Bluetooth routing, automatic delay estimate and manual adjustment | Controls 1.1 in `system_ext`, AACP compatibility in the Bluetooth APEX and four audio policy libraries in `system`. The 50 ms AirPods calibration from testing is a per-device preference. |
+| TV Home, lock-screen default and notification UI | LTvLauncher in `product`, TV SystemUI in `system_ext`, and `ro.lockscreen.disable.default=true` in `system`. The Home chooser discovers additional launchers after installation. |
+| Authenticated USB ADB and explicit network port behavior | `ro.adb.secure=1`, `persist.sys.usb.config=mtp,adb` and the rebuilt ADB APEX in `system`. Network debugging is opt-in. |
+| Music cleanup, neutral boot animation and OTA trust | Rebuilt Music APK and matching ART files and the neutral boot animation in `product`. The updated OTA certificate bundle is in `system`. |
+| LCARS Recovery | ARM32 plug-in, notices and a pinned source archive. The host preflight reconstructs `vendor_boot` locally from the matching stock OTA. Installed HDMI, USB ADB, Fastbootd and physical rollback await hardware tests. |
+
+The private Google-app rehearsal preserves the same 21 tracked feature files
+and LCARS plug-in. It uses disposable AVB keys for offline testing. The
+vanilla r2 package is the public-preview candidate.
+
+### Features still in development
+
+- **Recovery and bootloader:** The SanDisk desktop and missing-drive fallback
+  worked in the ARM64 RAM Recovery. Installed USB Linux needs a validated USB
+  handoff and enforcing policy. Recovery Bluetooth input and booting straight
+  from USB at power-on remain open.
+- **Suspend and power:** The speaker-click traces and temporary workaround
+  are recorded in the suspend investigation. Genuine wake and native Power
+  and Assistant/Mic remapping still need a fail-safe and device tests.
+- **Audio and Smart Home:** TrueHD/DTS passthrough, simultaneous Bluetooth
+  headsets, remote microphone capture, voice satellite operation and
+  Matter/Thread commissioning remain open.
+- **Optional apps and artwork:** FLauncher and Bridge Console TV were
+  development-device installs. The public-preview animation is the neutral
+  four-dot design. The branded animation remains in the private variant.
 
 ## Feature evidence
 
@@ -60,9 +83,9 @@ accompanies the private download set.
 | TV Settings categories | Static RRO payload verified in the extracted f38 image and signed archive | Fresh overlay activation and navigation |
 | Native AirPods Settings row | The signed TvSettingsTwoPanel APK in the private rehearsal contains the row and calls its update method from the accessories screen | Clean-user navigation with paired AirPods |
 | Remote pairing during initial setup | The signed TV Settings APK contains the onn Back-and-Home instructions and the signed SetupWizard requests `BLUETOOTH_CONNECT`. Both APKs matched the exact rehearsal image | Fresh setup and remote reconnect on hardware |
-| AACP basic-mode compatibility | Native Bluetooth patch compiled into APEX | Final APEX contents, signing and real reconnect/pause/resume |
+| AACP basic-mode compatibility | Native Bluetooth patch compiled into the APEX. The final r2 APEX matched the signed target-files payload. | Real reconnect/pause/resume on the exact r2 build |
 | Open launcher choice | Pinned project-signed GPL launcher APK verified in f38 product and signed archive | Complete native-library/source correspondence, Home-role and clean reboot checks |
-| Custom animation | Exact pinned archive verified in f38 product and signed archive; all descriptor parts use interruptible `p` playback | Repeat visual/boot timing test after further integration; descriptor inspection alone is not a timing measurement |
+| Boot animation | Exact neutral archive verified in r2 product. All descriptor parts use interruptible `p` playback. | Check the neutral artwork on HDMI and measure boot timing |
 | Audio policy engine libraries | All four declared libraries verified in f38 system and signed archive | Matching vendor policy engine and real output behavior |
 | Audio HAL, policy and config | Earlier development used live RAM mounts; private legacy staging tools exist | Do not treat those runtime experiments as inclusion in the clean f38 images. Licensed, reproducible integration and actual audio testing remain required |
 | Lossless/DTS changes | Unlicensed DTS replacement excluded from new Git | Do not bundle or claim this replacement without a verified license route |

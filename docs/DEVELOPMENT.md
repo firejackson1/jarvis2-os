@@ -1535,6 +1535,29 @@ without private scripts, server access or an AI operator.
   records the matching private staging hash. Hardware installation, data
   migration, physical rollback and distribution review remain open.
 
+### Release patch and feature readback — 2026-11-25
+
+- Replayed every ROM patch in the read-only Beercan build view, including the
+  captured Music checkout. All eight patches across six projects matched the
+  twelve resulting source files. The report reproduced SHA-256
+  `a26cb736826c379589538a3156aa8b122a1511f8fd8cbcb99df6284556a39da2`.
+  The current product source and the pinned candidate have the same patch,
+  app, overlay, keylayout and device configuration files.
+- Rehashed all 15 staged delivery files, compared 200 product and 69 LCARS
+  source files with their pinned Git revisions, read all 22 entries in the
+  vanilla ZIP and freshly extracted its three EROFS filesystems. All 21
+  tracked feature files and the three signed target-files filesystem bindings
+  matched. Read all nine entries in the private GApps rehearsal and extracted
+  its corresponding three filesystems. The same 21 feature hashes and LCARS
+  plug-in and notices matched there too.
+- Confirmed the build identity, authenticated ADB and lock-screen default
+  in the extracted properties. Checked the Controls APK's shortcut,
+  button editor, AirPods, audio delay, launcher and Smart Home classes.
+  Updated the [feature inventory](PERSISTENT_FEATURES.md#release-candidate-inclusion)
+  with exact image locations and the remaining development features.
+- The host suite passed all 221 Python checks with AVB fixtures and eight
+  Java suites. The audit ran on the build hosts without a device session.
+
 ### Portable native partition-layout reader — 2026-11-25
 
 - Matched the installed Linux x86-64 lpdump and its 11 Android shared libraries
