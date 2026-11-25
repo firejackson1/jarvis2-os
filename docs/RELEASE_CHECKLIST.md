@@ -40,6 +40,10 @@ apply independently.
 - [x] Trace all 120 r2 VNDK libraries to their byte-identical public snapshot
   imports, identify the module licensing rules and compare the local stock
   OTA's VNDK payload. [VNDK import history](USERSPACE_NOTICES.md#vndk-v34-import-history)
+- [x] Match 281 VNDK headers to three pinned candidate source trees and
+  verify their staged source archives. Exact CI source correspondence and
+  rebuilt library byte equality remain open.
+  [VNDK source candidates](USERSPACE_NOTICES.md#source-candidates-for-three-vndk-libraries)
 - [x] Check out Chromium at the pinned r2 commit, replay every documented
   WebView patch against its exact inputs, and compare the prebuilt with the
   staged r2 APK. [WebView rebuild evidence](WEBVIEW_REBUILD.md)

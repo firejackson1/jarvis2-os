@@ -1,0 +1,155 @@
+{
+  "format": 1,
+  "scope": "Header and ELF provenance for the three GPL-family module rules in VNDK v34.",
+  "vndk_history_receipt_sha256": "f7665b47a3cc70fc613238c04a502ebcd4aa3412098871cf44c83e00e9a445fb",
+  "exact_shipped_vndk_apex_sha256": "26d8daa284b4eb457ab8c067b1ca417814a9aa2cf593a03624dbd618f0083ebe",
+  "first_header_snapshot_commit": "d9d6c32b19b2fc50fb952e8c44d8186a51f22a25",
+  "first_header_snapshot_build": "10185551",
+  "first_header_snapshot_commit_time": "2023-05-24T15:02:50+09:00",
+  "current_shipped_header_snapshot_commit": "912e0c51bc2557a8d4b396bad1b6e39fe4c0b358",
+  "source_candidates": {
+    "libexif": {
+      "repository": "https://android.googlesource.com/platform/external/libexif",
+      "exported_headers": 20,
+      "snapshot_headers_unchanged_from_import": true,
+      "exported_header_blob_index_sha256": "763c81c061432029578996f0c2aca661a90abb2fab3aef687b3e2fc74db22cf3",
+      "candidate_source_tag": "android-14.0.0_r1",
+      "public_refs_compared": {
+        "origin/android14-gsi": {
+          "revision": "32aeb20cdcec4e7ee65824622ef98f136fa7b6b2",
+          "tree": "461601f4c596a17e03ff3e631888c27ff2777184",
+          "committed_utc_epoch": 1680335540,
+          "snapshot_header_matches": 20
+        },
+        "origin/android14-release": {
+          "revision": "c6eff752051d8b32c0c68e6107452949caa9d744",
+          "tree": "461601f4c596a17e03ff3e631888c27ff2777184",
+          "committed_utc_epoch": 1680327947,
+          "snapshot_header_matches": 20
+        },
+        "android-14.0.0_r1": {
+          "revision": "c6eff752051d8b32c0c68e6107452949caa9d744",
+          "tree": "461601f4c596a17e03ff3e631888c27ff2777184",
+          "committed_utc_epoch": 1680327947,
+          "snapshot_header_matches": 20
+        },
+        "android-14.0.0_r67": {
+          "revision": "9597d7410b2573aa7bf6175b8c1978a17d1da4d7",
+          "tree": "461601f4c596a17e03ff3e631888c27ff2777184",
+          "committed_utc_epoch": 1680225969,
+          "snapshot_header_matches": 20
+        }
+      },
+      "pinned_elf": {
+        "sha256": "592a53c616b43a467f8a59303045b758df91b49d13d8087c195da1ada7c489d1",
+        "arm_elf_build_id": "7c9d05bd09fa89cfa8ac7def57788ec2",
+        "android_elf_sdk_note": 34
+      },
+      "candidate_archive": {
+        "file": "libexif-c6eff752051d-source.tar.gz",
+        "bytes": 2052093,
+        "sha256": "b241376eebddd5be6a6481658f42a9527f1615d33006bc99c15a59c024b76a4e",
+        "all_git_entries_verified": 191
+      }
+    },
+    "libnl": {
+      "repository": "https://android.googlesource.com/platform/external/libnl",
+      "exported_headers": 195,
+      "snapshot_headers_unchanged_from_import": true,
+      "exported_header_blob_index_sha256": "7207c2e8ed3a36d598c9bb8e6991cd2b479100aabc3ff7c2011d07f147006438",
+      "candidate_source_tag": "android-14.0.0_r1",
+      "public_refs_compared": {
+        "origin/android14-gsi": {
+          "revision": "7523b7d9f2c3977a400d162670a8c0bc8eaa94b0",
+          "tree": "c3f5bbb44c1db5edd68bb4db506435012b92eeff",
+          "committed_utc_epoch": 1674008108,
+          "snapshot_header_matches": 195
+        },
+        "origin/android14-release": {
+          "revision": "7523b7d9f2c3977a400d162670a8c0bc8eaa94b0",
+          "tree": "c3f5bbb44c1db5edd68bb4db506435012b92eeff",
+          "committed_utc_epoch": 1674008108,
+          "snapshot_header_matches": 195
+        },
+        "android-14.0.0_r1": {
+          "revision": "7523b7d9f2c3977a400d162670a8c0bc8eaa94b0",
+          "tree": "c3f5bbb44c1db5edd68bb4db506435012b92eeff",
+          "committed_utc_epoch": 1674008108,
+          "snapshot_header_matches": 195
+        },
+        "android-14.0.0_r67": {
+          "revision": "f281428b765d372f820b13cc9521ebfbed05207b",
+          "tree": "6d036567eef19e3c3da6066b879d648f4b2d1038",
+          "committed_utc_epoch": 1695100993,
+          "snapshot_header_matches": 195
+        }
+      },
+      "pinned_elf": {
+        "sha256": "4b231786154d69522cd08712157641c44f98b42af686c68e4e19ed068c079950",
+        "arm_elf_build_id": "5ced7a9ec088e2c6f373c3e7c826e945",
+        "android_elf_sdk_note": 34,
+        "rtnl_addr_alloc_exported": false,
+        "rtnl_link_alloc_exported": true
+      },
+      "candidate_archive": {
+        "file": "libnl-7523b7d9f2c3-source.tar.gz",
+        "bytes": 1090378,
+        "sha256": "4197daee9ef19eca5ec1700437c9f3e66068cc506b174a3f9687207064e075d5",
+        "all_git_entries_verified": 572
+      },
+      "r67_bp_adds_route_addr_c": true
+    },
+    "libxml2": {
+      "repository": "https://android.googlesource.com/platform/external/libxml2",
+      "exported_headers": 66,
+      "snapshot_headers_unchanged_from_import": true,
+      "exported_header_blob_index_sha256": "0ac5003142817c8e8ad13828bbfe302ff374fd86cdc6778bf061728e0e605e85",
+      "candidate_source_tag": "android-14.0.0_r1",
+      "public_refs_compared": {
+        "origin/android14-gsi": {
+          "revision": "08dfa6b8050e8c9ca13009abd99d5c05cca9ffa4",
+          "tree": "4dfb9c5e4aac5dcd7e9c0178530d440f785ce54b",
+          "committed_utc_epoch": 1684018056,
+          "snapshot_header_matches": 66
+        },
+        "origin/android14-release": {
+          "revision": "9ec1e3881001ba9ba6da59154553f33a71c5c248",
+          "tree": "4dfb9c5e4aac5dcd7e9c0178530d440f785ce54b",
+          "committed_utc_epoch": 1684012270,
+          "snapshot_header_matches": 66
+        },
+        "android-14.0.0_r1": {
+          "revision": "9ec1e3881001ba9ba6da59154553f33a71c5c248",
+          "tree": "4dfb9c5e4aac5dcd7e9c0178530d440f785ce54b",
+          "committed_utc_epoch": 1684012270,
+          "snapshot_header_matches": 66
+        },
+        "android-14.0.0_r67": {
+          "revision": "b600abc3400fbdefa2ed8f7fcf01176aa676ff08",
+          "tree": "3669947f4b031e38aedd1fb64f9d9112d7cab4ed",
+          "committed_utc_epoch": 1700288156,
+          "snapshot_header_matches": 31
+        }
+      },
+      "pinned_elf": {
+        "sha256": "5cbe1e18643999660db9f05c43e00bc6f81598dde88bb12bff5072c84a788e7e",
+        "arm_elf_build_id": "e2c16a3188df609eec7f15aef0bc904c",
+        "android_elf_sdk_note": 34,
+        "xmlParserVersion": "21100-GITv2.10.0-1216-gfecc7898"
+      },
+      "candidate_archive": {
+        "file": "libxml2-9ec1e3881001-source.tar.gz",
+        "bytes": 3774698,
+        "sha256": "dfbd182aba9457c971bbea0c8edec97578caa5226dbc0a032c0bf0fab1cbc4a8",
+        "all_git_entries_verified": 3976
+      },
+      "version_marker_matches_candidate_and_exported_header": true
+    }
+  },
+  "matched_exported_headers": 281,
+  "source_archive_git_members_checked": 4739,
+  "complete_original_ci_source_manifest_verified": false,
+  "exact_binary_rebuild_verified": false,
+  "whole_rom_redistribution_review_complete": false,
+  "device_contacted": false
+}

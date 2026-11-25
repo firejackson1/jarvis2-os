@@ -140,6 +140,38 @@ All 120 library paths match the r2 APEX, including the library below
 the current r2 payload. ABI compatibility and installation behavior would
 need separate evidence for any future replacement.
 
+### Source candidates for three VNDK libraries
+
+The [source candidate receipt](../manifests/neutral-r2-vndk-source-candidates.json)
+compares the exported headers from the 10185551 import with the ones retained
+in r2. All 281 headers match public Android 14 source trees by Git blob.
+For each project, the Android 14 release, GSI and `android-14.0.0_r1` commits
+share the same full Git tree. The receipt pins those trees, the library
+digests and their ARM ELF build IDs.
+
+| Project | Matching exported headers | Android 14 source commit |
+| --- | ---: | --- |
+| `libexif` | 20 | `c6eff752051d8b32c0c68e6107452949caa9d744` |
+| `libnl` | 195 | `7523b7d9f2c3977a400d162670a8c0bc8eaa94b0` |
+| `libxml2` | 66 | `9ec1e3881001ba9ba6da59154553f33a71c5c248` |
+
+The r2 library's exported `xmlParserVersion` variable matches the combined
+version macros in the candidate `libxml2` header. In comparison, the later
+r67 `libxml2` tree differs in 35 exported headers. All 195 `libnl` headers
+also match r67, where the build rule adds `lib/route/addr.c`. The r2
+`libnl` symbol table lacks `rtnl_addr_alloc`. This is additional evidence
+for reviewing the older source candidate and illustrates why matching
+headers alone cannot identify the build inputs.
+
+Three private candidate source archives reproduced byte for byte. Every
+one of their 4,739 Git entries matched the original blob and mode. To
+recreate an archive, clone the pinned project and use its commit from
+the receipt with `git archive --prefix=<project>-<short-commit>/ <commit> | gzip -n`.
+Use the first 12 characters of the commit in the archive prefix.
+The original CI manifests, exact binary rebuilds and full distribution
+review remain open.
+[Android VNDK snapshot source documentation](https://source.android.com/docs/core/architecture/vndk/snapshot-generate#snapshot-files)
+
 ### APEX notice companion
 
 The three installed partition notice archives contain 174 of the 229

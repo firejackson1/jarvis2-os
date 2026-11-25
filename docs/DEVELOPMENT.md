@@ -2007,3 +2007,18 @@ without private scripts, server access or an AI operator.
   root configured for UTC and the default C locale. The historical f38
   recipe keeps its observed HST date format. This is property-level
   reproducibility evidence. [Environment receipt](../manifests/release-build-environment-replay.json)
+
+### VNDK v34 source candidates — 2026-11-25
+
+- Matched all 281 exported headers for `libexif`, `libnl` and `libxml2` from
+  the original 10185551 import and the current r2 snapshot. Each matched
+  Android 14 r1 source tree is identical to the public release and GSI
+  branch trees for that project. Verified the extracted ELF digests
+  against the exact signed r2 APEX inventory.
+- Read `xmlParserVersion` directly through the ELF symbol and compared it
+  with the source version macros. The later r67 `libxml2` headers differ.
+  The later `libnl` build list adds an address module despite identical
+  headers, and the r2 binary lacks its tested address symbol.
+- Reproduced three source archives, checked all 4,739 Git entries and verified
+  the private staging copy. The original CI inputs and exact binary rebuilds
+  remain open. [Source candidate receipt](../manifests/neutral-r2-vndk-source-candidates.json)
