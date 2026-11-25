@@ -104,11 +104,18 @@ done
 
 The icon paths above replace the obsolete paths in the LineageOS README.
 The first four source images match the r2 APK pixel for pixel after
-normalizing RGB channels of fully transparent pixels. The prebuilt's icon
-resource has four density entries and no 640 dpi variant. The documented
-patch series adds a fifth variant. All five source images exist and match
-the paths expected by patched GN. The density difference remains open when
-reconciling the documented recipe with the exact prebuilt.
+normalizing RGB channels of fully transparent pixels. Keep all five source
+images in place. GN's icon resource ZIP contains every one of them, and
+all five ZIP entries match the pinned PNG bytes.
+
+When linking `system_webview_apk`, Chromium's common resource filter
+drops `drawable-xxxhdpi/icon_webview`. The generated ARM rule takes its
+regular expression and exceptions from `base/android/resource_exclusions.gni`.
+Replaying the generated rule on the icon resource ZIP and linking with the
+pinned AAPT2 produced the same four density entries as the r2 APK. The
+unfiltered control linked with all five. Two runs produced byte-identical
+test APKs. [Icon filter receipt](../manifests/webview-r2-icon-filter.json) ·
+[Pinned Chromium resource filter](https://chromium.googlesource.com/chromium/src/+/4b3d0dabb8250b6f152d2d85d79e7706e309d087/base/android/resource_exclusions.gni)
 
 ## ARM32 build and relink checks
 
@@ -134,8 +141,11 @@ autoninja -C out/JarvisWebView -j 4 system_webview_apk
 ~~~
 
 The graph passed with GN 2595. The PGO-enabled hook run supplied the profiles,
-and offline Siso compilation started. The source build and its FFmpeg relink
-are still in progress.
+and offline Siso compilation started. The dependent relink job waits for a
+successful exit of that build. It verifies the archived baseline hashes,
+checks the rebuilt package manifest and compares each APK payload to r2
+before running the diagnostic FFmpeg relink. The full source build and relink
+results are pending.
 
 Capture the APK, ELF architecture/build ID and the full GN arguments and
 dependency record when the target builds. Then repeat with a distinct

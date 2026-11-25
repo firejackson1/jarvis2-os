@@ -2057,3 +2057,20 @@ without private scripts, server access or an AI operator.
   XML and its attachment to every one of the 11 library paths. Exact CI
   inputs, binary rebuilds and complete dependency license scope remain
   open. [Module attribution receipt](../manifests/neutral-r2-vndk-default-license-sources.json)
+
+### WebView icon filtering and relink handoff — 2026-11-25
+
+- Verified that all five PNGs in the ARM build's icon resource ZIP match the
+  pinned source inputs. Replayed the generated Ninja rule's filter through
+  Chromium's actual resource predicates. It removes exactly the 640 dpi
+  icon from that ZIP.
+- Linked both icon sets with the pinned AAPT2 and the build's SDK 29/36
+  parameters. The filtered link matches the exact r2 APK's four density
+  configurations. The unfiltered control includes the fifth. Two independent
+  runs reproduced both test APKs and the receipt byte for byte.
+  [Icon filter evidence](../manifests/webview-r2-icon-filter.json)
+- Queued the FFmpeg relink behind the exact WebView baseline invocation.
+  The supervisor confirms a successful exit and verifies the saved artifact
+  digests before comparing every APK entry to r2. On the pinned LineageOS
+  control it reproduced the one Crashpad trampoline difference and matching
+  native WebView payload. The live baseline and relink still await output.

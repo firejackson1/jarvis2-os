@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "scope": "Apply the generated ARM system_webview_apk resource filter to its real icon input ZIP and link both test variants with the pinned AAPT2",
+  "chromium_revision": "4b3d0dabb8250b6f152d2d85d79e7706e309d087",
+  "inputs": {
+    "source_files_sha256": {
+      "build/android/gyp/compile_resources.py": "70d20daae2a9ed63126471c401c56e022ba73b6af205e155ffb3544814c48fd3",
+      "build/android/gyp/util/build_utils.py": "85fa07f024015983311695f99a9d77649ae877737869319cb01ddb4633b2e179",
+      "base/android/resource_exclusions.gni": "43c91b9d3cc98894e0ffdeb1b9bc8c71c2f1f9a0dba3d4d1625c7b135874e23e",
+      "android_webview/system_webview_apk_tmpl.gni": "acb354574848ac7be306d4a26bcfb5f9c74f66251ace01ece58129a0be972761"
+    },
+    "r2_apk_sha256": "43464815af31ddd44d9d899ab842b2d165bf05f799e7f47b96abc660663b7bf5",
+    "aapt2_version": "Android Asset Packaging Tool (aapt) 2.20-16409357",
+    "aapt2_sha256": "96f6c38b1d2ac7bac013b553ada62ade93f41f0f378bd5d6699f1cfb530f4ae8",
+    "android_sdk_jar_sha256": "1db2419dbd45457f83b90ef8a7ef41e118174782c9a5c2185b55899df022767f",
+    "icon_resource_zip_sha256": "ceb92b2886fac86be34ba272f4cbe98df54b523baf9904c774b4f1a54c4f1d0a",
+    "icon_zip_entries_sha256": {
+      "drawable-hdpi/icon_webview": "bde30be3e4ae36d5d068e8f3e6737b4d53ee3c0ef4825d0c9ffc5f5361ee7731",
+      "drawable-xhdpi/icon_webview": "42fd3e07cea062332bea87d9b0dd315efb4013133b0f7fd3f637923087c0ef06",
+      "drawable-xxhdpi/icon_webview": "098e8f3cca5cfe83ec6720c132308339eafa5b416d03a6c8a53db064262ad6e0",
+      "drawable-xxxhdpi/icon_webview": "dffc9b779d5e9a8a5a157cf7924f3ecb244120b57b4680755a4bb935f9fcef27",
+      "drawable/icon_webview": "1bc10140ad5aea08f62c1e4d1d2a6028d5c279ed8b6d1adfe1b7098202210d36"
+    }
+  },
+  "ninja_resource_rule": "__android_webview_system_webview_apk__compile_resources___build_toolchain_android_android_clang_arm__rule",
+  "min_sdk": "29",
+  "target_sdk": "36",
+  "ninja_resource_command_sha256": "5ec8b32bbfb9764929ea11b55d920cf00d30a9bb61c55dad4696be2cef401678",
+  "exclusion_regex": "drawable[^/]*-xxxhdpi|-watch\\b|-ldpi\\b|mediarouter.*?drawable-x?hdpi",
+  "exclusion_exceptions": [
+    "*shadow*",
+    "*.9.*",
+    "*ic_group_*"
+  ],
+  "filtered_entry": "drawable-xxxhdpi/icon_webview",
+  "source_variants": {
+    "unfiltered": {
+      "files": {
+        "default": "res/drawable/icon_webview.png",
+        "hdpi": "res/drawable-hdpi-v4/icon_webview.png",
+        "xhdpi": "res/drawable-xhdpi-v4/icon_webview.png",
+        "xxhdpi": "res/drawable-xxhdpi-v4/icon_webview.png",
+        "xxxhdpi": "res/drawable-xxxhdpi-v4/icon_webview.png"
+      },
+      "apk_sha256": "ff975cffa9428b48b5bbeecbeb383d4de53d0cd19bf1a8ec8dbb5c94d76577f7"
+    },
+    "filtered": {
+      "files": {
+        "default": "res/drawable/icon_webview.png",
+        "hdpi": "res/drawable-hdpi-v4/icon_webview.png",
+        "xhdpi": "res/drawable-xhdpi-v4/icon_webview.png",
+        "xxhdpi": "res/drawable-xxhdpi-v4/icon_webview.png"
+      },
+      "apk_sha256": "4d5f351b0e192adb5be25401ed89e1a799a2046942d89d48efd88f3167f406ef"
+    }
+  },
+  "r2_apk_icon_files": {
+    "default": "res/Jj",
+    "hdpi": "res/w7",
+    "xhdpi": "res/mB",
+    "xxhdpi": "res/9M"
+  },
+  "filter_explains_r2_density_set": true,
+  "full_apk_rebuild_byte_equality_verified": false
+}
