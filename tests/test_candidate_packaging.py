@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 import copy,hashlib,importlib.util,json,tempfile,unittest,zipfile
 from pathlib import Path
+from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
 s=importlib.util.spec_from_file_location('candidate_packaging',ROOT/'tools/package-candidate.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 REV='a'*40
@@ -100,5 +101,54 @@ class CandidatePackagingTests(unittest.TestCase):
    with self.assertRaisesRegex(ValueError, 'Recovery plug-in differs'):
     m.package(images, metadata, proof, m.digest(proof), REV, root/'bad')
    self.assertFalse((root/'bad').exists())
+
+ def test_lcars_with_notices_verifies_the_same_pinned_archive(self):
+  spec = importlib.util.spec_from_file_location('intake_notices', ROOT/'tools/prepare-lcars-install.py')
+  intake = importlib.util.module_from_spec(spec)
+  spec.loader.exec_module(intake)
+  with tempfile.TemporaryDirectory() as temp:
+   root = Path(temp)
+   images, metadata, proof = self.fixture(root)
+   plugin = metadata/'recovery/librecovery_ui_ext.so'
+   plugin.parent.mkdir()
+   plugin.write_bytes(b'LCARS fixture')
+   notices = metadata/'recovery/jarvis2-lcars-arm32-notices.tar.gz'
+   notices.write_bytes(b'notice archive fixture')
+   recovery = {'source_revision': 'b'*40, 'plugin_sha256': m.digest(plugin),
+               'stock_vendor_boot_sha256': m.STOCK_VENDOR_BOOT, 'vendor_boot_sha256': 'c'*64,
+               'notices_sha256': m.digest(notices)}
+   files = json.loads(proof.read_text())
+   files['recovery'] = recovery
+   proof.write_text(json.dumps(files))
+   (metadata/'README.txt').write_text(m.candidate_readme(REV, recovery))
+   tool_root = root/'tool-release'
+   (tool_root/'manifests').mkdir(parents=True)
+   provenance = {'plugin_sha256': m.digest(plugin), 'source_revisions': {'jarvis2': 'b'*40},
+                 'companion_archive': {'sha256': m.digest(notices), 'bytes': notices.stat().st_size}}
+   (tool_root/'manifests/lcars-notice-provenance.json').write_text(json.dumps(provenance))
+   with patch.object(m, 'ROOT', tool_root), patch.object(intake.PACK, 'ROOT', tool_root):
+    receipt = m.package(images, metadata, proof, m.digest(proof), REV, root/'out')
+    archive_path = root/'out'/receipt['archive']
+    with zipfile.ZipFile(archive_path) as archive:
+     manifest = intake.read_manifest(archive, False)
+     self.assertEqual(manifest['format'], 3)
+     work = root/'extracted'
+     intake.process_members(archive, manifest, work)
+     self.assertEqual((work/'recovery/jarvis2-lcars-arm32-notices.tar.gz').read_bytes(), notices.read_bytes())
+    notices.write_bytes(b'x'*notices.stat().st_size)
+    with self.assertRaisesRegex(ValueError, 'Recovery notice archive differs'):
+     m.package(images, metadata, proof, m.digest(proof), REV, root/'tampered')
+    self.assertFalse((root/'tampered').exists())
+
+ def test_lcars_notice_pin_must_match_the_reviewed_plugin(self):
+  provenance = json.loads((ROOT/'manifests/lcars-notice-provenance.json').read_text())
+  recovery = {'source_revision': provenance['source_revisions']['jarvis2'],
+              'plugin_sha256': provenance['plugin_sha256'],
+              'stock_vendor_boot_sha256': m.STOCK_VENDOR_BOOT, 'vendor_boot_sha256': 'c'*64,
+              'notices_sha256': provenance['companion_archive']['sha256']}
+  self.assertEqual(m.reviewed_recovery({'recovery': recovery}), recovery)
+  recovery['plugin_sha256'] = 'a'*64
+  with self.assertRaisesRegex(ValueError, 'notice provenance'):
+   m.reviewed_recovery({'recovery': recovery})
 
 if __name__=='__main__':unittest.main()

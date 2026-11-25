@@ -1283,3 +1283,22 @@ without private scripts, server access or an AI operator.
 - Ran 195 Python and eight Java host tests. The rehearsal used disposable
   signing keys. Final-baseline installation, restore, hardware trust and
   distribution qualification remain open. Bazzite stayed online.
+
+## 2026-11-25 — LCARS notices in the candidate ZIP
+
+- LCARS format 3 binds the reviewed compiler-input notice archive to the
+  exact plug-in and Recovery source revision. The packager and local preflight
+  both verify that binding. Preflight preserves the notice archive in the
+  output beside its verification receipt. Format 2 continues to read earlier
+  archives with separate notices.
+- Used the exact private f38 LCARS rehearsal images and matching notice bytes to
+  produce two identical 22-member ZIPs. Each is 560,093,800 bytes with SHA-256
+  `61454a9822fa3905f2e0945cb72551fd2eaebf267a5239529c786fe39f4bd9c7`.
+  Ran portable preflight against the ZIP and locally sourced stock references.
+  It reconstructed the expected Recovery image, prepared seven images,
+  verified all 13 AVB bindings and copied the 31,772-byte notice archive
+  with its pinned hash intact.
+- All 197 Python tests and eight Java suites passed. The new cases exercise
+  format 3, mismatched notice bytes and a notice pin paired with the wrong
+  plug-in. The archive remains a private temporary-key rehearsal. Hardware and
+  final-image qualification remain open. Bazzite stayed online.

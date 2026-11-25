@@ -109,13 +109,20 @@ selected `vbmeta.img` against that derived file and the other images before
 creating the proof. Set `rehearsal_only:true` for a temporary-key rehearsal.
 
 Stage the reviewed plug-in at `recovery/librecovery_ui_ext.so` in the metadata
-directory. Generate the README with
+directory. For the reviewed ARM32 build, pin `notices_sha256` in the same
+proof object and place the archive at
+`recovery/jarvis2-lcars-arm32-notices.tar.gz`. The packager checks the notice
+archive, plug-in and source revision against
+[the notice provenance manifest](../manifests/lcars-notice-provenance.json).
+Generate the README with
 `candidate_readme(revision, reviewed['recovery'], reviewed.get('rehearsal_only', False))`,
 where `reviewed` is the parsed authenticated proof. The packager checks the
-plug-in's hash and writes the exact Recovery inputs and output hash into
-manifest format 2. The recipient obtains the pinned stock image separately and
-reconstructs `vendor_boot` with the source recipe recorded in the README. The
-packager verifies members and pins. Parent AVB verification is a separate step.
+plug-in's hash and writes the exact Recovery inputs and output hash into the
+manifest. Format 3 includes the notice archive. Format 2 covers earlier LCARS
+packages that deliver notices separately. The recipient obtains the pinned
+stock image separately and reconstructs `vendor_boot` with the source recipe
+recorded in the README. The packager verifies members and pins. Parent AVB
+verification is a separate step.
 
 ## Package and check
 
@@ -132,9 +139,10 @@ python3 tools/package-candidate.py \
 ```
 
 A successful output has the ZIP, its generated `manifest.json`, and a separate
-`verification.json` receipt. The base ZIP has 20 entries. The LCARS variant adds
-one member for the plug-in. The manifest binds the proof pin and actual member
-hashes and sizes. Rehearsal archives use the `offline-rehearsal.zip` suffix and
+`verification.json` receipt. The base ZIP has 20 entries. LCARS format 2 adds
+the plug-in. LCARS format 3 adds the plug-in and the notice archive. The manifest
+binds the proof pin and actual member hashes and sizes. Rehearsal archives use
+the `offline-rehearsal.zip` suffix and
 an explicit label in the README and manifest. Existing outputs are never overwritten.
 
 ZIP entry names are sorted, timestamps fixed at2026-11-24T00:00:00, Unix modes
@@ -169,8 +177,9 @@ future developer preview; the ROM archive alone is incomplete delivery.
 | `supplemental-userspace-notices.tar.gz` | 904561 | `d59e01f2ca73a72e7eefeb23fb24a8f4f0fd03f2335b9eb7372f61d2e4d69878` |
 | `jarvis2-release-v1-public-signing-materials.zip` | 183211 | `5909b7d5d9d64856d9558682088349a3d78a19a444f6875edefaa2547900f4c8` |
 
-The LCARS variant also needs the separate notice companion matching its plug-in.
-Two private builds of `jarvis2-lcars-arm32-notices.tar.gz` produced 31,772 bytes
+The LCARS notice archive travels inside format 3 packages. Use the separately
+reviewed notice companion with earlier format 2 packages. Two private builds
+of `jarvis2-lcars-arm32-notices.tar.gz` produced 31,772 bytes
 with SHA-256 `5028c4d642211bfe2e153f4854f34757f474107a28a13eab7c59509ef234de30`.
 Use the plug-in and member hashes from the
 [LCARS notice manifest](../manifests/lcars-notice-provenance.json).

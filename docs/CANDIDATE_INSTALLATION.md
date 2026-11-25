@@ -41,7 +41,9 @@ stock `init_boot.img`, and verifies the exact stock AVB graph, zero flags,
 parent and child keys, and all required image bindings. The root must explicitly
 bind the locally rebuilt Recovery file. Only after these checks does the tool
 save the five `images/` members, the two `transition-images/` members and
-verification reports. The tool defaults to rejecting temporary-key archives.
+verification reports. For LCARS format 3 it also copies the verified Recovery
+notice archive to the output and records its digest. The tool defaults to
+rejecting temporary-key archives.
 `--allow-offline-rehearsal` allows host testing and retains its rehearsal label.
 
 These files are inputs to the capture-bound procedure below. They do not

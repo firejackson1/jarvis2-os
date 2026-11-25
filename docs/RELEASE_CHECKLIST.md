@@ -256,6 +256,9 @@ publication by this policy decision alone.
 - [x] Bind the LCARS plug-in's exact compiler inputs to pinned revisions and
   reproduce its notice companion twice. Include it with the same plug-in in
   any final artifact review. [LCARS notice manifest](../manifests/lcars-notice-provenance.json)
+- [x] Package the matching notices with the plug-in and independently
+  verify the format 3 rehearsal ZIP through local `vendor_boot` reconstruction.
+  [Candidate packaging](CANDIDATE_PACKAGING.md#include-locally-assembled-lcars-recovery)
 - [ ] Include the new compatible LCARS recovery and its source/build provenance
   in the final package and coherent AVB chain. Do not treat the stock-recovery
   engineering trial as the final product.

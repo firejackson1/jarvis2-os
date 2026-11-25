@@ -13,6 +13,7 @@ from pathlib import Path
 IMAGE_NAMES=tuple(p+'.img' for p in ['product','system','system_ext','vbmeta','vbmeta_system'])
 METADATA_NAMES=('LICENSE','README.txt',*["docs/"+p+'.md' for p in ['BUILD','KNOWN_ISSUES','LAUNCHER_SOURCE_BUILD','LICENSING','RESTORE_PLAN','SLOT_INSTALLATION','USERSPACE_NOTICES']],*["manifests/"+p for p in ['avb-stock-15640252-profile.json','avb-userspace-property-policy.json','launcher-source-bundle.json','lineage21-pinned.xml','userspace-notices.json']])
 RECOVERY_PLUGIN = 'recovery/librecovery_ui_ext.so'
+RECOVERY_NOTICES = 'recovery/jarvis2-lcars-arm32-notices.tar.gz'
 STOCK_VENDOR_BOOT = 'c017791c8e52678595a03b902237dcb15a4e8adeb3d35fdb2232838750e4233a'
 ROOT=Path(__file__).resolve().parents[1]
 STAMP=(2026,11,24,0,0,0)
@@ -59,8 +60,9 @@ def reviewed_recovery(proof):
  if 'recovery' not in proof:
   return None
  recovery = proof['recovery']
- hash_fields = ('plugin_sha256', 'stock_vendor_boot_sha256', 'vendor_boot_sha256')
- if not isinstance(recovery, dict) or set(recovery) != {'source_revision', *hash_fields}:
+ hash_fields = {'plugin_sha256', 'stock_vendor_boot_sha256', 'vendor_boot_sha256'}
+ required = {'source_revision', *hash_fields}
+ if not isinstance(recovery, dict) or set(recovery) not in (required, required | {'notices_sha256'}):
   raise ValueError('Expected an exact Recovery source and image binding')
  revision = recovery['source_revision']
  if not isinstance(revision, str) or not re.fullmatch('[0-9a-f]{40}', revision):
@@ -70,6 +72,14 @@ def reviewed_recovery(proof):
  if (recovery['stock_vendor_boot_sha256'] != STOCK_VENDOR_BOOT or
      recovery['vendor_boot_sha256'] == STOCK_VENDOR_BOOT):
   raise ValueError('Unknown stock foundation or missing custom Recovery binding')
+ if 'notices_sha256' in recovery:
+  sha256_value(recovery['notices_sha256'])
+  provenance = json.loads((ROOT / 'manifests/lcars-notice-provenance.json').read_bytes(),
+                          object_pairs_hook=unique_object)
+  if (recovery['plugin_sha256'] != provenance['plugin_sha256'] or
+      revision != provenance['source_revisions']['jarvis2'] or
+      recovery['notices_sha256'] != provenance['companion_archive']['sha256']):
+   raise ValueError('Recovery notice provenance differs from the reviewed plug-in and archive')
  return recovery
 
 
@@ -81,6 +91,8 @@ def candidate_readme(revision, recovery=None, rehearsal_only=False):
 Use the included Recovery plug-in, the pinned recipe and your own stock image.
 Recipe at https://github.com/firejackson1/jarvis2-os/blob/{recovery['source_revision']}/docs/STOCK_LCARS.md
 '''
+  if 'notices_sha256' in recovery:
+   foundation += f'Recovery compiler-input notices are included at {RECOVERY_NOTICES}.\n'
  rehearsal = 'OFFLINE AVB REHEARSAL. The temporary trust key is for host testing only.\n' if rehearsal_only else ''
  return f'''Jarvis2 unofficial LineageOS-based developer preview: offline candidate
 Source: {revision}
@@ -114,21 +126,27 @@ def package(images,metadata,proof,proof_sha256,source_revision,output):
  if type(rehearsal_only) is not bool:
   raise ValueError('Rehearsal flag must be a boolean')
  metadata_names = (*METADATA_NAMES, RECOVERY_PLUGIN) if recovery else METADATA_NAMES
+ has_notices = recovery is not None and 'notices_sha256' in recovery
+ if has_notices:
+  metadata_names += (RECOVERY_NOTICES,)
  image_files=inventory(images,IMAGE_NAMES);metadata_files=inventory(metadata,metadata_names)
- for name,path in image_files.items():
+ if any(p.stat().st_size>8*1024*1024 for p in metadata_files.values()):raise ValueError('Metadata exceeds bounded small-file scope')
+ files={**{'images/'+n:p for n,p in image_files.items()},**metadata_files}
+ records={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in sorted(files.items())}
+ for name in image_files:
   record=reviewed['files'][name]
   if not isinstance(record,dict) or set(record)!={'bytes','sha256'} or type(record['bytes']) is not int or record['bytes']<=0:raise ValueError('Malformed image proof record')
   sha256_value(record['sha256'])
-  if path.stat().st_size!=record['bytes'] or digest(path)!=record['sha256']:raise ValueError('Actual image differs from reviewed proof: '+name)
- if any(p.stat().st_size>8*1024*1024 for p in metadata_files.values()):raise ValueError('Metadata exceeds bounded small-file scope')
- if recovery and digest(metadata_files[RECOVERY_PLUGIN]) != recovery['plugin_sha256']:
+  if records['images/'+name]!=record:raise ValueError('Actual image differs from reviewed proof: '+name)
+ if recovery and records[RECOVERY_PLUGIN]['sha256'] != recovery['plugin_sha256']:
   raise ValueError('Recovery plug-in differs from reviewed proof')
+ if has_notices and records[RECOVERY_NOTICES]['sha256'] != recovery['notices_sha256']:
+  raise ValueError('Recovery notice archive differs from reviewed proof')
  if metadata_files['README.txt'].read_text()!=candidate_readme(source_revision,recovery,rehearsal_only):raise ValueError('README must match canonical developer-preview text and source revision')
- files={**{'images/'+n:p for n,p in image_files.items()},**metadata_files}
- records={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in sorted(files.items())}
  manifest={'format':1,'kind':'unofficial-offline-developer-preview','source_revision':source_revision,'image_proof_sha256':proof_sha256,'hardware_tested':False,'installable_ota':False,'installer_included':False,'google_payload_included':False,'stock_firmware_included':False,'source_correspondence_verified':False,'companion_assets_included':False,'files':records}
  if recovery:
-  manifest.update(format=2, recovery={**recovery, 'plugin_member': RECOVERY_PLUGIN})
+  manifest.update(format=3 if has_notices else 2,
+                  recovery={**recovery, 'plugin_member': RECOVERY_PLUGIN})
  if recovery or rehearsal_only:
   manifest['rehearsal_only'] = rehearsal_only
  manifest_bytes=(json.dumps(manifest,indent=2)+'\n').encode();output.mkdir(mode=0o700)
@@ -156,6 +174,8 @@ def package(images,metadata,proof,proof_sha256,source_revision,output):
  receipt={'passed':True,'archive':archive.name,'bytes':archive.stat().st_size,'sha256':digest(archive),'all_members_read_back':True,'source_revision':source_revision,'image_proof_sha256':proof_sha256,'hardware_tested':False,'public_release_ready':False,'companion_assets_included':False,'python_version':sys.version.split()[0],'zlib_version':zipfile.zlib.ZLIB_VERSION,'zlib_runtime_version':zipfile.zlib.ZLIB_RUNTIME_VERSION}
  if recovery or rehearsal_only:
   receipt['rehearsal_only'] = rehearsal_only
+ if has_notices:
+  receipt['recovery_notices_sha256'] = recovery['notices_sha256']
  (output/'manifest.json').write_bytes(manifest_bytes);(output/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n');return receipt
 
 

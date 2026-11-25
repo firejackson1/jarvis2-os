@@ -43,6 +43,9 @@ def read_manifest(archive, allow_rehearsal):
     members = {info.filename: info for info in infos}
     expected = {*PACK.METADATA_NAMES, PACK.RECOVERY_PLUGIN, 'manifest.json',
                 *('images/' + name for name in PACK.IMAGE_NAMES)}
+    has_notices = PACK.RECOVERY_NOTICES in members
+    if has_notices:
+        expected.add(PACK.RECOVERY_NOTICES)
     if len(infos) != len(expected) or set(members) != expected:
         raise ValueError('Unexpected, duplicate or missing LCARS ZIP entries')
     for info in infos:
@@ -51,8 +54,9 @@ def read_manifest(archive, allow_rehearsal):
     if members['manifest.json'].file_size > 1048576:
         raise ValueError('Archive manifest exceeds its size limit')
     manifest = json.loads(archive.read('manifest.json'), object_pairs_hook=PACK.unique_object)
-    if not isinstance(manifest, dict) or manifest.get('format') != 2:
-        raise ValueError('Expected an LCARS format 2 manifest')
+    if (not isinstance(manifest, dict) or type(manifest.get('format')) is not int or
+        manifest['format'] != (3 if has_notices else 2)):
+        raise ValueError('Expected an LCARS manifest matching its Recovery notice members')
     if (manifest.get('kind') != 'unofficial-offline-developer-preview' or
         any(manifest.get(key) is not False for key in ('google_payload_included',
             'stock_firmware_included', 'installable_ota', 'installer_included'))):
@@ -69,6 +73,8 @@ def read_manifest(archive, allow_rehearsal):
         raise ValueError('Missing LCARS plug-in binding')
     PACK.reviewed_recovery({'recovery': {key: value for key, value in recovery.items()
                                         if key != 'plugin_member'}})
+    if has_notices != ('notices_sha256' in recovery):
+        raise ValueError('Missing or unexpected Recovery notice archive binding')
     PACK.sha256_value(manifest.get('image_proof_sha256'))
     records = manifest.get('files')
     if not isinstance(records, dict) or set(records) != expected - {'manifest.json'}:
@@ -82,11 +88,14 @@ def read_manifest(archive, allow_rehearsal):
         PACK.sha256_value(record['sha256'])
     if records[PACK.RECOVERY_PLUGIN]['sha256'] != recovery['plugin_sha256']:
         raise ValueError('Plug-in record disagrees with the Recovery manifest')
+    if has_notices and records[PACK.RECOVERY_NOTICES]['sha256'] != recovery['notices_sha256']:
+        raise ValueError('Notice archive record disagrees with the Recovery manifest')
     return manifest
 
 
 def process_members(archive, manifest, work):
-    keep = {PACK.RECOVERY_PLUGIN, PROFILE, *('images/' + name for name in PACK.IMAGE_NAMES)}
+    keep = {PACK.RECOVERY_PLUGIN, PACK.RECOVERY_NOTICES, PROFILE,
+            *('images/' + name for name in PACK.IMAGE_NAMES)}
     for name, record in manifest['files'].items():
         hasher = hashlib.sha256()
         with archive.open(name) as source:
@@ -247,6 +256,10 @@ def prepare(archive, archive_sha256, stock_images, recovery_source, tool_kit, ro
         output.mkdir(mode=0o700)
         for name in ('images', 'transition-images'):
             (work / name).rename(output / name)
+        if 'notices_sha256' in recovery:
+            notice = Path(PACK.RECOVERY_NOTICES).name
+            (work / PACK.RECOVERY_NOTICES).rename(output / notice)
+            receipt['recovery_notices_sha256'] = recovery['notices_sha256']
         (output / 'avb-chain-report.json').write_text(json.dumps(chain, indent=2) + '\n')
         (output / 'verification.json').write_text(json.dumps(receipt, indent=2) + '\n')
     return receipt
